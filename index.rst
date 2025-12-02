@@ -18,6 +18,7 @@ Larry Peterson and Bruce Davie
    :maxdepth: 2
    :caption: Table of Contents
 
+   preface.rst
    README.rst
    authors.rst
    latest.rst

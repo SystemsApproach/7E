@@ -38,7 +38,7 @@ release = version
 
 # -- Project information -----------------------------------------------------
 
-project = u'Network Security: A Systems Approach'
+project = u'Computer Networks: A Systems Approach'
 copyright = u'2025, Systems Approach LLC (Publisher)'
 author = u'Larry L. Peterson and Bruce S. Davie'
 
@@ -184,7 +184,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'book.tex', u'Network Security: A Systems Approach',
+    (master_doc, 'book.tex', u'Computer Networks: A Systems Approach',
      u'Larry L. Peterson and Bruce S. Davie', 'manual', True),
 ]
 
@@ -207,7 +207,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Network Security', u'Network Security',
+    (master_doc, 'Computer Networks', u'Computer Networks',
      author, 'The Author List', 'A Systems Approach',
      'Miscellaneous'),
 ]
@@ -215,7 +215,7 @@ texinfo_documents = [
 
 # -- Options for Epub output -------------------------------------------------
 epub_title = project
-epub_description = 'A Systems Approach to Network Security'
+epub_description = 'A Systems Approach to Computer Networks'
 epub_cover = ('_static/cover.jpg', '')
 epub_show_urls = 'False'
 epub_use_index = False
