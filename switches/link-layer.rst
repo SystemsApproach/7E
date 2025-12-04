@@ -16,7 +16,7 @@ depicted in Figure X from Chapter 1.
 Abstractly, then, we can picture network communication as a digital
 signal being passed between nodes, where we can think of this signal
 as corresponding to a “high frequency” and a “low frequency”, to give
-just one example, commonly known as frequency modulation. This brings
+just one example commonly known as *frequency modulation*. This brings
 us to the second challenge, which is encoding digital data (i.e., 1’s
 and 0’s) onto this digital signal. On the surface, this encoding seems
 simple enough—the high signal encodes a 1 and the low signal encodes a
@@ -28,8 +28,8 @@ is one or more bits in length.
 
 At this point, it should be clear that the engineering required to
 transmit and receive digital messages over a physical medium is
-non-trivial. The same is true for the science—known as Information
-Theory—that explains how efficiently that task can be performed. We
+non-trivial. The same is true for the science—known as *Information
+Theory*\ —that explains how efficiently that task can be performed. We
 consider Information Theory out-of-scope for this book, and refer the
 reader to authoritative sources on the topic. For our purposes, we
 pick up the story with the ability to send and receive symbols over a

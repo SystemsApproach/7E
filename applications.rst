@@ -2,8 +2,8 @@ Chapter 10: Network Applications
 ==============================================
 
 The success of the Internet can largely be attributed to the broad
-range of applications it supports. Unlike other historical networks
-that targeted specific use cases—most notably the telephone network’s
+range of applications it supports. Unlike historical networks that
+targeted specific use cases—most notably the telephone network’s
 support for voice and the cable TV network’s support for disseminating
 video—the Internet was designed to be application agnostic. It’s able
 to deliver packets carrying keystrokes, voice, video, images,

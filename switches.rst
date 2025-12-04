@@ -9,9 +9,10 @@ When the inventors of the Internet asked that question in the
 mid-1970s, there weren’t many options. The ARPANET was the assumed
 wide-area network, and the Ethernet had just been invented by
 researchers at Xerox. At the time, large mainframe computers were the
-norm, with DEC’s PDP-11 (a 16-bit minicomputer which would inspire
-Intel’s x86 and Motorola’s 68000 microprocessors) being the most
-influential offering in the “small and affordable” computer market.
+norm, with Digital Equipment Corporation’s PDP-11 (a 16-bit
+minicomputer that would inspire Intel’s x86 and Motorola’s 68000
+microprocessors) being the most influential offering in the “small and
+affordable” computer market.
 
 To set a bit more historical context, the viability of packet
 switching itself—as opposed to circuit switching technology used by

@@ -15,11 +15,11 @@ set of steps:
 
 We emphasize the approach because our goal is to both cover the
 important concepts and practices in networking, and show—by
-example—how computer systems are designed an built in practice. If you
-work in the software industry (or hope to), mastering the latter is
-likely to be an essential requirement for contributing to the design
-process. This is true whether you work on low-level systems or
-high-level applications and services.
+example—how computer systems are designed and built in practice. If
+you work in the software industry (or hope to), mastering the latter
+is likely to be a requirement for participating in the design process.
+This is true whether you work on low-level systems or high-level
+applications and services.
 
 When applying the Systems Approach to networking in earlier editions,
 we started each chapter with the problem to be solved in that chapter.
@@ -138,14 +138,14 @@ Supplemental Content
 In the process of refactoring our coverage of networking, some topics
 receive less attention than in past editions, and some emerging topics
 cannot be covered in as much detail as we would like. To account for
-these gaps, the book includes references to a wealth of supplemental
+these limits, the book includes references to a wealth of supplemental
 material. This includes links to relevant subsections for the 6th
-Edition (which continues to be available online), as well as links to a
-series of monographs we have written since publishing 6E in 2020.
+Edition (which continues to be available online), as well as links to
+a series of monographs we have written since publishing 6E in 2020.
 These monographs cover what we believe to be among the most important
-topics in networking, including SDN, 5G, Congestion Control, Operations,
-and Security (with a book on ML/AI in the works). We reference these
-books for students who want to go deeper on these important topics,
-which allows us to focus on more introductory material (and keep the
-length of this book in check).
+topics over the last few years, including SDN, 5G, Congestion Control,
+Operational Practices, and Security (with a book on ML/AI in the works).
+We reference these books for students who want to go deeper on these
+important topics, which allows us to focus on more introductory
+material (and keep the length of this book in check).
 
