@@ -4,7 +4,7 @@ Chapter 2:  Packet Switches
 We started Chapter 1 by asking one of the first questions any system architect must ask:
 
   *What available technologies will serve as the underlying building blocks?*
-  
+
 When the inventors of the Internet asked that question in the
 mid-1970s, there weren’t many options. The ARPANET was the assumed
 wide-area network, and the Ethernet had just been invented by

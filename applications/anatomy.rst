@@ -95,7 +95,8 @@ every server-to-server path is either two hops (server-leaf-server in
 the intra-rack case) or four hops (server-leaf-spine-leaf-server in
 the inter-rack case).
 
-Figure Y. Example of a leaf-spine switching fabric common to cloud datacenters and other clusters, such as on-premises edge clouds.
+Figure Y. Example of a leaf-spine switching fabric common to cloud
+datacenters and other clusters, such as on-premises edge clouds.
 
 10.1.3 Distributed Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

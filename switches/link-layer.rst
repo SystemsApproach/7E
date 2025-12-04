@@ -1,5 +1,5 @@
 2.1 Link Layer
----------------------------
+---------------------------------
 
 As introduced in Chapter 1, all network communication depends on
 transmitting and receiving electromagnetic signals over some physical
@@ -38,16 +38,24 @@ corresponds to what is usually referred to as the link layer—a term
 originally coined by the ISO reference model presented in Figure Y
 from Chapter 1.
 
-This section introduces the problems addressed by the link layer, and uses Ethernet as its representative example. The Ethernet has undergone significant changes since it was first introduced in the mid-1970s, not the least of which is that it is now possible to transmit Ethernet packets over fiber optic links at bandwidths approaching 1-Tbps, many orders of magnitude greater than the original 2.94-Mbps rate over coaxial cable. We focus on the modern version of Ethernet in the next three subsections, and then fill in some of the historical background in Section 2.1.4.
+This section introduces the problems addressed by the link layer, and
+uses Ethernet as its representative example. The Ethernet has
+undergone significant changes since it was first introduced in the
+mid-1970s, not the least of which is that it is now possible to
+transmit Ethernet packets over fiber optic links at bandwidths
+approaching 1-Tbps, many orders of magnitude greater than the original
+2.94-Mbps rate over coaxial cable. We focus on the modern version of
+Ethernet in the next three subsections, and then fill in some of the
+historical background in Section 2.1.4.
 
 2.1.1 Encoding
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2.1.2 Framing
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2.1.3 Error Detection
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2.1.4 Historical Background
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

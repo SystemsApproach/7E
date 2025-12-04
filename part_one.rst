@@ -1,7 +1,7 @@
 .. role:: pop
 
 :pop:`Part One: Inside the Network`
-===============================
+==============================================
 
 It is estimated that over 22 billion devices are connected to today’s
 Internet. Those devices are widely distributed across the planet (and

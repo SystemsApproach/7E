@@ -1,7 +1,7 @@
 .. role:: pop
 
 :pop:`Part Two:  Edge of the Network`
-=========================================
+=============================================
 
 The edge devices connected to a network like the Internet—whether they
 are servers, laptops, mobile phones, or other consumer appliances—are
