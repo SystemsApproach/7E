@@ -66,4 +66,5 @@ particular framing of the problem space. We call attention to such
 “exceptions to the rule” when they arise, and use them to illustrate
 that every system design requires judgement and makes tradeoffs.
 
+.. include:: introduction/requirements.rst
 .. include:: introduction/architecture.rst
