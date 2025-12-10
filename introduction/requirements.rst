@@ -3,8 +3,8 @@
 
 This chapter establishes the ambitious goal of building a network that
 scales to a global footprint and supports a wide range of
-applications.  Scalability and generality are actually just two—of
-many—requirements our design must address. This section expands on
+applications.  Scalability and generality are actually just two (of
+many) requirements our design must address. This section expands on
 these, and other requirements.  To place the requirements in their
 proper context, it is important to recognize that there are multiple
 stakeholders interested in the outcome.  They include:
@@ -22,88 +22,99 @@ stakeholders interested in the outcome.  They include:
   network and configured correctly, and it is easy to account for
   usage.
 
-* **Network Engineers:** People that assemble networks for a
+* **Network Owners:** People that assemble networks for a
   particular deployment scenario, and likely have to consider
   budgetary limits. This includes, for example, that network resources
   are efficiently utilized and fairly allocated to different users.
 
-It's possible to come up with other more specific stakeholders, but
-this list is inclusive enough to stress our design. And more
-importantly, instead of adopting just one of these as our primary
-perspective, we approach the problem of building a network from the
-perspective of the architect that is responsible for crafting a design
-that takes all stakeholder requirements into account.
+It's possible to come up with other other stakeholders, but this list
+is inclusive enough to stress our design. Importantly, instead of
+adopting just one of these as our primary perspective, we approach the
+problem of building a network from the perspective of the architect
+that is responsible for crafting a design that takes all stakeholder
+requirements into account.
 
-* **Scalability:** When we say a network must scale, we certainly mean
-  it must be able to connect billions of devices (or perhaps even
-  more). Less obviously, we also need to be able to scale the number
-  of stakeholders responsible for different aspects of the
-  network. For example, it would not be practical for a
-  planetary-scale network to limit the number of gatekeepers that
-  decide what applications may be deployed; anyone should be able to
-  stand up a new application. As another example, it would not be
-  practical for a limited number of operations teams to be responsible
-  for fixing every outage reported anywhere on the globe; anyone
-  should be able to own, and then take responsibility for operating, a
-  piece of the network.
+With this in mind, that the network be *scalable* is our first
+requirement.  Scalability does not necessarily mean picking a target
+size, but rather, being aware of factors that might limit how large a
+network can grow.  The original Internet architects were aware that
+using 32-bit addresses for Internet-connected devices implied there
+could be no more than :math:`2^{32}` (over 4 billion) devices. That
+number seemed more than adequate at at the time, but of course we
+now know that it wasn't (and workarounds have been necessary).
 
-* **Generality:** Requiring a network to support a wide-range of
-  applications is another way of saying it must be general-purpose. In
-  practice, this means that the lowest levels of the network that is
-  shared by all applications should be relatively minimal; it should
-  provide a service that is of value to all applications and leave most
-  decisions about functionality to higher layers (with the application
-  at the top of the software stack).  For example, it make no sense for
-  the base communication service provide absolute guarantees about
-  message delivery if not all applications need it. On the other hand,
-  many applications share common requirements about such things as
-  reliability and security, so it is helpful to provide optional
-  capabilities they can employ if they want to. Getting this right is
-  a balancing act, which we revisit at many points throughout the
-  book.
+There are other, less obvious factors that can limit network growth.
+Restricting the number of stakeholders responsible for different
+aspects of the network is an important one. For example, it would not
+be practical for a network hoping to connect every user in the world
+to limit the number of gatekeepers that decide what applications may
+be deployed; anyone should be able to make a new application
+available.  As another example, it would not be practical for a
+limited number of operations teams to be responsible for fixing every
+outage reported anywhere on the globe; anyone should be able to own,
+and then take responsibility for operating, a piece of the global
+network. Avoiding these kinds of limitations may seem obvious, but
+historically, many networks have assumed tight control by a central
+authority rather than the loose federation of cooperating parties, as
+is the case with the Internet.
 
-* **Cost-Effectiveness:** Networks are built using finite
-  resources. They do not have infinite capacity and while there are
-  exceptions, it is not generally practical to provide dedicated
-  connectivity between any two communicating entities. This means
-  networks are fundamentally a shared resource, making the resource
-  allocation mechanism one of the central technical challenges we
-  face. This mechanism should be fair (for some definition of
-  fairness), but also efficient. The latter requirement means that we
-  want to maximize the amount data it delivers on behalf of its users.
-  We expand on this challenge in Section 1.5, with multiple chapters
-  playing a role in the solution.
+The second requirement is that the network be *general-purpose*, that
+is, able to support a wide range of applications. In principle, this
+means avoiding assumptions about how the network will be used. In
+practice, this means that the lowest levels of the network—the base
+that is shared by all applications—should be relatively minimal. It
+should provide a service that is of value to all applications and
+leave most decisions about functionality to higher layers (with the
+application at the top of the software stack).  For example, it make
+no sense for the base service to provide absolute guarantees about
+message delivery if not all applications need it. On the other hand,
+many applications share common requirements about such things as
+reliability and security, so it is helpful to provide optional
+capabilities they can employ if they want to. Getting this right is a
+balancing act, which we revisit at many points throughout the book.
 
-* **High Performance:** Everyone wants the network to be fast, but
-  performance is multi-faceted. Some applications case about response
-  time; how long it takes to send and receive a message. Others care
-  about throughput; how long it takes to download a large file. Still
-  others care that packet delivery is predictable, so that a video
-  stream plays without jarring pauses. All of these metrics, in turn,
-  depend on physical limitations, such as the speed of light, but
-  there is also significant work that a network has to do in order to
-  deliver on the potential. We discuss this challenge in Section 1.6,
-  with multiple chapters playing a role in the solution.
+The third requirement is that the network allow for *cost-effective
+resource sharing*. Networks are built using finite resources; they do
+not have infinite capacity and it is not generally practical to
+provide dedicated connectivity between any two communicating entities.
+This means networks are fundamentally a shared resource, making the
+mechanism that allocates resources to different users one of the
+central technical challenges we face. This mechanism should be fair
+(for some definition of fairness), but also efficient. The latter
+requirement means that we want to maximize the amount data the network
+delivers on behalf of its users, for a given set of network resources.
+We expand on this challenge in Section 1.5.
 
-We highlight the first four requirements because they dominate the
+The fourth requirement is that the network be *high performance.*
+Everyone wants the network to be fast, but performance is
+multi-faceted.  Some applications case about response time; how long
+it takes to send and receive a message. Others care about throughput;
+how long it takes to download a large file. Still others care that
+packet delivery is predictable, so that a video stream plays without
+jarring pauses. All of these metrics depend on physical limitations,
+such as the speed of light, but there is also significant work that a
+network has to do in order to deliver on this potential. We expand
+on this challenge in Section 1.6.
+
+We highlight the these four requirements because they dominate the
 design challenges discussed throughout the book. There are other
-requirements as well, but they largely mirror the requirements one
-would place on any system. Two of the most important are:
+requirements, all of which mirror the requirements one would place on
+any computer system. They include that the network be secure,
+manageable, reliable, usable, available, evolvable, and so on. All of
+these requirements play a role, and we address them throughout the
+book. Keep in mind, though, that it is not possible to design any
+system that treats all requirements as equally "the most important".
+Tradeoffs are inevitable, and they change over time.  Security is a
+great example.  Of course security is important, but it was of lower
+priority during the early days of the Internet, when everyone was
+focused getting it to work in the first place. As the Internet became
+more and more successful, attracting more users and applications,
+security moved up in importance. Today it is one of the topmost
+concern. We address security in multiple places throughout the book,
+with the most detailed discussion in Chapter 12. For a more
+comprehensive look at network security, we recommend a companion book.
 
-* **Managability:** The network should provide mechanisms to observe
-  the behavior of its constituent components, diagnose problems when
-  they are detected, and take corrective action by changing the
-  configuration.  This is the subject of Chapter 8.
+.. admonition:: Further Reading
 
-* **Reliability:** The network should recover from intermittent
-  failures, and remain available in the face of serious outages and
-  attacks.  This is topic that comes up at multiple places throughout
-  the book, but especially in Chapter 11.
-
-* **Security:** The network should protect the confidentiality and
-  integrity of messages exchanged between participants. This is the
-  subject of Chapter 12.
-
-
-
-
+   L. Peterson and B. Davie. `Network Security: A Systems Approach
+      <https://security.systemsapproach.org>`__. 2025.
