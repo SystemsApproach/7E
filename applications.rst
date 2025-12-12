@@ -2,7 +2,7 @@ Chapter 10: Network Applications
 ==============================================
 
 The success of the Internet can largely be attributed to the broad
-range of applications it supports. Unlike historical networks that
+range of applications it supports. Unlike earlier networks that
 targeted specific use cases—most notably the telephone network’s
 support for voice and the cable TV network’s support for disseminating
 video—the Internet was designed to be application agnostic. It’s able
@@ -34,7 +34,8 @@ has changed how we build applications; it has become more a framework
 than an application. Related to this second point, this chapter also
 describes two other applications: Email and Adaptive Streaming. Email
 came before the web, and so illustrates the “old” (pre-HTTP) way to
-build applications. Adaptive Streaming (think Netflix) came after
+build applications. Adaptive streaming, which underpins video
+streaming services like Netflix, came after
 HTTP, and so illustrates the “new” (post-HTTP) way to build
 applications. But before getting to these examples, we first describe
 the basic anatomy of an application.
