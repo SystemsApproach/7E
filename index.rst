@@ -1,3 +1,7 @@
+.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. image:: _static/SystemsApproachLogoURL.png
    :width: 300px
    :align: center

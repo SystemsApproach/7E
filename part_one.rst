@@ -1,3 +1,6 @@
+.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. role:: pop
 
 :pop:`Part One: Inside the Network`
@@ -14,11 +17,18 @@ switches. Each switch has a modest set of communication ports
 connected to some link technology, and its job is to receive data on
 one port and send it out on another port. This means a large and
 distributed collection of switches can be interconnected to form a
-network, as shown in Figure X. That diagram illustrates the idea, but
-keep in mind there are hundreds of millions of such switching devices
-in today’s Internet, making visualizations like the one shown in
-Figure Y more like an abstract piece of art than an engineering
-diagram.
+network, as shown in :numref:`Figure %s <fig-network>`. That diagram
+illustrates the idea, but keep in mind there are hundreds of millions
+of such switching devices in today’s Internet, making visualizations
+like the one shown in :numref:`Figure %s <fig-net-visualization>` more
+like an abstract piece of art than an engineering diagram.
+
+.. _fig-network:
+.. figure:: figures/Slide01.png 
+   :width: 400px 
+   :align: center 
+
+   Schematic of an example packet switch network. 
 
 Throughout the history of computer networks, there have been many
 different kinds of switches. We begin Part One by looking at the
@@ -34,6 +44,14 @@ interconnected network of switches for Part Two. Our goal in Part One
 is to provide logical connectivity between every pair of connected
 edge devices.
 
+.. _fig-net-visualization:
+.. figure:: figures/net-visualization.jpg 
+   :width: 500px 
+   :align: center 
+
+   Visualization of the Internet, based on collected data, with
+   attribution to Barrett Lyon / The Opte Project.
+
 We say “logical connectivity” because it’s obviously the case that
 there is no direct physical connection—say, a fiber optic or copper
 cable—between all of those edge 22 billion devices; nearly all
@@ -43,7 +61,7 @@ from time-to-time—a network’s natural enemy is a backhoe that cuts
 through a cable, but there are many other more subtle failure
 modes—the end-to-end logical connection does not guarantee every sent
 message is actually received. Our goal for Part One is to support what
-is commonly known as best-effort packet delivery, where dealing with
+is commonly known as *best-effort packet delivery*, where dealing with
 this imperfection is one of the factors that makes Part Two
 interesting. In short, you can read Parts One and Two in either order,
 knowing that the “interface” between the two halves is a universal,

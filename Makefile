@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2018 Open Networking Foundation
+# SPDX-FileCopyrightText: 2019 Systems Approach LLC
+# SPDX-FileCopyrightText: 2025 Systems Approach LLC
+# SPDX-License-Identifier: Apache-2.0
+
 # Makefile for ONF documentation created with Sphinx
 
 # use bash for pushd/popd, and to fail quickly. virtualenv's activate

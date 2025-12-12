@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2018 Open Networking Foundation
+# SPDX-FileCopyrightText: 2019 Systems Approach LLC
+# SPDX-FileCopyrightText: 2025 Systems Approach LLC
+# SPDX-License-Identifier: Apache-2.0
+
 Sphinx~=8.2.3
 doc8~=2.0.0
 reuse~=5.0.2

@@ -1,3 +1,6 @@
+.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-License-Identifier: CC-BY-4.0
+
 .. role:: pop
 
 :pop:`Part Two:  Edge of the Network`

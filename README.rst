@@ -1,3 +1,8 @@
+.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-License-Identifier: CC-BY-4.0
+
+
 About This Book
 ===============
 
@@ -8,30 +13,31 @@ About This Book
 
 |
 
-Source for *Computer Networks: A Systems Approach* is available on
-GitHub under terms of the `Creative Commons (CC BY 4.0)
+Source for *Computer Networks: A Systems Approach (7th Edition)* is
+available on GitHub under terms of the `Creative Commons (CC BY 4.0)
 <https://creativecommons.org/licenses/by/4.0>`__ license. The
 community is invited to contribute corrections, improvements, updates,
-and new material under the same terms.  While this license does not
-automatically grant the right to make derivative works, we are keen to
-discuss derivative works (such as translations) with interested
-parties. Please reach out to discuss@systemsapproach.org.
-
-Like many open source software projects, this one has been seeded with
-once restricted content: the 5th edition of *Peterson and Davie*,
-copyrighted by Elsevier. Our hope is that open sourcing this material
-will both make it widely available and serve as an attractor for new
-content: updating what’s already there, expanding it to cover new
-topics, and augmenting the text with additional teaching collateral.
+and new material under the same terms. Please reach out to us at
+discuss@systemsapproach.org with any feedback or suggestions.
 
 If you make use of this work, the attribution should include the
 following information:
 
 |  Title: *Computer Networks: A Systems Approach*
 |  Authors: Larry Peterson and Bruce Davie
+|  Source: https://github.com/SystemsApproach/7E
+|  License: `CC BY  4.0 <https://creativecommons.org/licenses/by/4.0>`__
+
+This book includes content from earlier editions, for which we include
+the following attribution:
+
+|  Title: *Computer Networks: A Systems Approach*
+|  Authors: Larry Peterson and Bruce Davie
 |  Copyright: Elsevier, 2012
 |  Source: https://github.com/SystemsApproach/book
 |  License: `CC BY  4.0 <https://creativecommons.org/licenses/by/4.0>`__
+
+
 
 Read the Book
 -------------
@@ -40,20 +46,21 @@ This book is part of the `Systems Approach Series
 <https://www.systemsapproach.org>`__, with an online version published
 at https://book.systemsapproach.org.
 
-To track progress and receive notices about new versions, you can follow
-the project on
-`Mastodon <https://discuss.systems/@SystemsAppr>`__. To read a running
-commentary on how the Internet is evolving, and for updates on our writing projects, you can sign up for the
-`Systems Approach newsletter <https://systemsapproach.org/newsletter/>`__.
+To track progress and receive notices about new versions, you can
+follow the project on `Mastodon
+<https://discuss.systems/@SystemsAppr>`__. To read a running
+commentary on how the Internet is evolving, and for updates on our
+writing projects, you can sign up for the `Systems Approach newsletter
+<https://systemsapproach.org/newsletter/>`__.
 
 Releases and Editions
 ---------------------
 
 We release ever-changing open source content rather than publish fixed
-books, although you can roughly equate v6.0 with a 6th Edition. Read the
-:ref:`preface` to find out what’s new in this version. Note
-that Morgan Kaufmann (Elsevier)  published the 6th edition of the
-textbook based on a fork of v6.0, but going forward, open source
+books, although you can roughly equate v7.0 with a 7th Edition. Read
+the :ref:`preface` to find out what’s new in this version. Note that
+Morgan Kaufmann (Elsevier) plans to publish the 7th edition of the
+textbook based on a fork of v7.0, but going forward, open source
 releases found here will not necessarily stay in sync with any future
 published editions.
 
@@ -65,9 +72,9 @@ version of the book available at https://book.systemsapproach.org is then
 continuously generated from ``master``, corresponding to a typical
 maintenance release (although we do not bother to tag it as such).
 
-Minor releases (e.g., v6.1) are tagged whenever there is sufficient new
-content to justify the effort. This happens quarterly, give-or-take, and
-is primarily to create a snapshot so that everyone in a course can know
+Minor releases (e.g., v7.1) are tagged whenever there is sufficient
+new content to justify the effort. This happens infrequently, and is
+primarily to create a snapshot so that everyone in a course can know
 they are using the same version.
 
 Build the Book
@@ -80,7 +87,7 @@ source:
 
    $ mkdir ~/systemsapproach
    $ cd ~/systemsapproach
-   $ git clone https://github.com/systemsapproach/book.git
+   $ git clone https://github.com/systemsapproach/7e.git
    $ cd book
 
 The build process is stored in the ``Makefile`` and requires Python be

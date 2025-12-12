@@ -1,3 +1,8 @@
+.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-License-Identifier: Apache-2.0
+
+
 Chapter 2:  Packet Switches
 ==================================
 
