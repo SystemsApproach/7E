@@ -172,10 +172,8 @@ The first operation sends the given ``message`` over the specified
 specified ``socket`` into the given ``buffer``. Both operations take a
 set of ``flags`` that control certain details of the operation.
 
-1.4.2 Example Client/Server
----------------------------
 
-We now show the implementation of a simple client/server program that
+We now show the implementation of a simple client-server program that
 uses the socket interface to send messages over a TCP connection. The
 program also uses other Linux networking utilities, which we introduce as
 we go. Our application allows a user on one machine to type in and send
@@ -222,7 +220,7 @@ sends it over the socket.
      char *host;
      char buf[MAX_LINE];
      int s;
-     int len;
+     size_t len;
 
      if (argc==2) {
        host = argv[1];
@@ -297,7 +295,7 @@ out the characters that arrive on the connection.
    {
      struct sockaddr_in sin;
      char buf[MAX_LINE];
-     int buf_len;
+     ssize_t buf_len;
      socklen_t addr_len;
      int s, new_s;
 
