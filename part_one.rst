@@ -15,13 +15,14 @@ also be highly distributed, and the Internet is just such a
 distributed system. It is built from special devices known as
 switches. Each switch has a modest set of communication ports
 connected to some link technology, and its job is to receive data on
-one port and send it out on another port. This means a large and
-distributed collection of switches can be interconnected to form a
-network, as shown in :numref:`Figure %s <fig-network>`. That diagram
-illustrates the idea, but keep in mind there are hundreds of millions
-of such switching devices in today’s Internet, making visualizations
-like the one shown in :numref:`Figure %s <fig-net-visualization>` more
-like an abstract piece of art than an engineering diagram.
+one port and send it out on another port. This means a distributed
+collection of switches can be interconnected to form a network, as
+shown in :numref:`Figure %s <fig-network>`. That diagram illustrates
+the idea, but keep in mind there are hundreds of millions of such
+switching devices in today’s Internet, making visualizations of data
+collected about actual connectivity—like the one shown in
+:numref:`Figure %s <fig-net-visualization>`\—more an abstract piece of
+art than an engineering diagram.
 
 .. _fig-network:
 .. figure:: figures/Slide01.png 
