@@ -25,11 +25,11 @@ collected about actual connectivity—like the one shown in
 art than an engineering diagram.
 
 .. _fig-network:
-.. figure:: figures/Slide01.png 
-   :width: 400px 
-   :align: center 
+.. figure:: figures/network.png
+   :width: 400px
+   :align: center
 
-   Schematic of an example packet switch network. 
+   Schematic of an example packet switch network.
 
 Throughout the history of computer networks, there have been many
 different kinds of switches. We begin Part One by looking at the
@@ -46,12 +46,12 @@ is to provide logical connectivity between every pair of connected
 edge devices.
 
 .. _fig-net-visualization:
-.. figure:: figures/net-visualization.jpg 
-   :width: 500px 
-   :align: center 
+.. figure:: figures/net-visualization.jpg
+   :width: 500px
+   :align: center
 
-   Visualization of the Internet, based on collected data, with
-   attribution to Barrett Lyon / The Opte Project.
+   Visualization of the Internet connectivity, with attribution to
+   Barrett Lyon / The Opte Project.
 
 We say “logical connectivity” because it’s obviously the case that
 there is no direct physical connection—say, a fiber optic or copper

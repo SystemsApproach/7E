@@ -22,10 +22,10 @@ stakeholders interested in the outcome.  They include:
   network and configured correctly, and it is easy to account for
   usage.
 
-* **Network Owners:** People that assemble networks for a
-  particular deployment scenario, and likely have to consider
-  budgetary limits. This includes, for example, that network resources
-  are efficiently utilized and fairly allocated to different users.
+* **Network Owners:** People that assemble networks for a particular
+  deployment scenario, and likely to take budgetary considerations
+  into account. These stakeholders care that network resources are
+  being efficiently utilized and fairly allocated to different users.
 
 It's possible to come up with other other stakeholders, but this list
 is inclusive enough to stress our design. Importantly, instead of
@@ -39,24 +39,31 @@ requirement.  Scalability does not necessarily mean picking a target
 size, but rather, being aware of factors that might limit how large a
 network can grow.  The original Internet architects were aware that
 using 32-bit addresses for Internet-connected devices implied there
-could be no more than :math:`2^{32}` (over 4 billion) devices. That
-number seemed more than adequate at at the time, but of course we
-now know that it wasn't (and workarounds have been necessary).
+could be no more than :math:`2^{32}` (over 4 billion) devices.\ [#]_
+That number seemed more than adequate at at the time, but of course,
+we now know that it wasn't (and workarounds have been engineered).
+
+.. [#] The Internet refers to connected devices as *hosts* since they
+   "host user programs." The Mobile Cellular Network refers to
+   connected devices as *User Equipment* or *UEs*. We use all
+   three terms—devices, hosts, UEs—but most often say hosts
+   because of the central role the software they run plays in the
+   overall network.
 
 There are other, less obvious factors that can limit network growth.
 Restricting the number of stakeholders responsible for different
-aspects of the network is an important one. For example, it would not
-be practical for a network hoping to connect every user in the world
-to limit the number of gatekeepers that decide what applications may
-be deployed; anyone should be able to make a new application
-available.  As another example, it would not be practical for a
-limited number of operations teams to be responsible for fixing every
-outage reported anywhere on the globe; anyone should be able to own,
-and then take responsibility for operating, a piece of the global
-network. Avoiding these kinds of limitations may seem obvious, but
-historically, many networks have assumed tight control by a central
-authority rather than the loose federation of cooperating parties, as
-is the case with the Internet.
+aspects of the network is an important one. For example, controlling
+who may deploy applications tends to limit the user communities that
+might benefit from the network; anyone should be able deploy a new
+application that serves some community, no matter how niche.  As
+another example, it would not be practical for a limited number of
+operations teams to be responsible for fixing every outage reported
+anywhere on the globe; anyone should be able to own, and then take
+responsibility for operating, a piece of the global network. Avoiding
+these kinds of limitations may seem obvious, but historically, many
+networks have assumed tight control by a central authority rather than
+the loose federation of cooperating parties, as is the case with the
+Internet.
 
 The second requirement is that the network be *general-purpose*, that
 is, able to support a wide range of applications. In principle, this
@@ -65,7 +72,7 @@ practice, this means that the lowest levels of the network—the base
 that is shared by all applications—should be relatively minimal. It
 should provide a service that is of value to all applications and
 leave most decisions about functionality to higher layers (with the
-application at the top of the software stack).  For example, it make
+application at the top of the software stack).  For example, it makes
 no sense for the base service to provide absolute guarantees about
 message delivery if not all applications need it. On the other hand,
 many applications share common requirements about such things as
