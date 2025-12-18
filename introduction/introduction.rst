@@ -74,3 +74,4 @@ that every system design requires judgement and makes tradeoffs.
 .. include:: requirements.rst
 .. include:: architecture.rst
 .. include:: protocols.rst
+.. include:: statmux.rst

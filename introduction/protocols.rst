@@ -306,7 +306,7 @@ headers indicate how long the message is (e.g., the ``Length`` field
 in the IP and UDP headers); how long the header is (e.g., IP's
 ``HLen`` field); the addresses of the sending and receiving hosts
 (e.g., the ``SourceAddr`` and ``DestinationAddr`` fields in IP and
-ETH); and some form of error code used to detect and possiblly correct
+ETH); and some form of error code used to detect and possibly correct
 bit errors (e.g., IP and UDP's ``Checksum`` and ETH's ``CRC``.)  We
 discuss error detection, and explain why ETH does not have a length
 field, in Chapter 2.
