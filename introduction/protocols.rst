@@ -10,7 +10,7 @@ previous section try to do, but before we get into the merits and
 limitations of any particular architecture, let's first consider what
 these "network modules" actually look like.
 
-1.3.1 Interfaces
+1.3.1 Layering
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Abstractions naturally lead to layering, especially in network
@@ -24,15 +24,15 @@ Using the Internet architecture as an example, we can imagine a simple
 design with two layers of abstraction sandwiched between the
 application program and the underlying network hardware, as
 illustrated in :numref:`Figure %s <fig-layers>`. The layer immediately
-above the hardware in this case might provide host-to-host
-connectivity, abstracting away the fact that there may be an
-arbitrarily complex network topology between any two hosts. (This is
-what IP is designed to do in the Internet architecture.) The next
-layer up builds on the available host-to-host message delivery service
-and provides support for process-to-process communication channels,
-abstracting away the possibility that the underlying network
-occasionally loses or reorders messages. (This is what TCP and UDP are
-designed to do in the Internet architecture.)
+above the hardware provides host-to-host connectivity, abstracting
+away the fact that there may be an arbitrarily complex network
+topology between any two hosts. (This is what IP is designed to do in
+the Internet architecture.) The next layer up builds on the available
+host-to-host message delivery service and provides support for
+process-to-process communication channels, abstracting away the
+possibility that the underlying network occasionally loses or reorders
+messages. (This is what TCP and UDP are designed to do in the Internet
+architecture.)
 
 .. _fig-layers:
 .. figure:: figures/layers.png
@@ -57,6 +57,9 @@ low-level abstractions. We saw this in the Internet architecture
 depicted in :numref:`Figure %s <fig-internet>`, where TCP and UDP
 offer two different process-to-process communication services, one
 making reliability guarantees (TCP) and the other not (UDP).
+
+1.3.2 Interfaces
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 With this discussion of layering as a foundation, we are now ready to
 discuss the modularization of a network more precisely. For starters,
@@ -149,7 +152,7 @@ exchange messages. Two or more protocol modules that do accurately
 implement a protocol specification are said to *interoperate* with
 each other.
 
-1.3.2 Encapsulation
+1.3.3 Encapsulation
 ~~~~~~~~~~~~~~~~~~~~
 
 Consider what happens in :numref:`Figure %s <fig-protograph>` when one
@@ -162,28 +165,26 @@ its peer.  However, UDP must communicate control information to its
 peer, instructing it how to handle the message when it is received.
 UDP does this by attaching a *header* to the message.
 
-Generally speaking, a header is a small data structure—from a few
-bytes to a few dozen bytes—that is used among peers to communicate
-with each other. As the name suggests, headers are usually attached to
-the front of a message. In some cases, however, this peer-to-peer
-control information is sent at the end of the message, in which case
-it is called a *trailer*. The exact format for the header attached by
-UDP is defined by its protocol specification. The rest of the
-message—that is, the data being transmitted on behalf of the
-application—is called the message’s *body* or *payload*. We say that
-the application’s data is *encapsulated* in the new message created by
-UDP.
+A header is a small data structure—from a few bytes to a few dozen
+bytes—that is used among peers to communicate with each other. As the
+name suggests, headers are usually attached to the front of a
+message. In some cases, however, this peer-to-peer control information
+is sent at the end of the message, in which case it is called a
+*trailer*. The exact format for the header attached by UDP is defined
+by its protocol specification. The rest of the message—that is, the
+data being transmitted on behalf of the application—is called the
+message’s *body* or *payload*. We say that the application’s data is
+*encapsulated* in the new message created by UDP.
 
 To make the discussion a more concrete, :numref:`Figure %s
 <fig-udphdr>`, :numref:`%s <fig-iphdr>`, and :numref:`%s <fig-ethhdr>`
-depict the header for three protocols we use as running examples in
-this section: UDP, IP, and Ethernet, respectively.  The examples
-include two different (but common) formats for depicting protocol
-headers: as a sequence of fields spread over 32-bit words (UDP and IP)
-and as a sequence of fields of specified bit lengths (ETH). We'll
-explain the meaning of most of these fields in later chapters, but
-there is some commonality in all headers, which we describe in the
-next subsection.
+depict the header for three protocols we use as examples in this
+section: UDP, IP, and Ethernet, respectively.  The examples include
+two different (but common) formats for depicting protocol headers: as
+a sequence of fields spread over 32-bit words (UDP and IP) and as a
+sequence of fields of specified bit lengths (ETH). We'll explain the
+meaning of most of these fields in later chapters, but there is some
+commonality in all headers, which we describe in the next subsection.
 
 .. _fig-udphdr:
 .. figure:: figures/udphdr.png
@@ -206,11 +207,10 @@ next subsection.
 
    Ethernet header specification.
 
-Of course another possible way to document protocol headers is the
-source code that implements the protocol.  For example, the following
-code snippet for the UDP header is taken from the Linux kernel, where
-``__be16`` and ``__sum16`` are kernel-defined types for 16-bit
-unsigned integers.
+Of course another way to document protocol headers is the source code
+that implements the protocol.  For example, the following code snippet
+for the UDP header is taken from the Linux kernel, where ``__be16``
+and ``__sum16`` are kernel-defined types for 16-bit unsigned integers.
 
 .. code-block:: c
 
@@ -228,7 +228,7 @@ message to its peer over some network, then when the message arrives
 at the destination host, it is processed in the opposite order: IP
 first interprets the IP header at the front of the message (i.e.,
 takes whatever action is appropriate given the contents of the header)
-and passes the body of the message (but not the HHP header) up to UDP,
+and passes the body of the message (but not the IP header) up to UDP,
 which takes whatever action is indicated by the UDP header that its
 peer attached and passes the body of the message (but not the UDP
 header) up to the application program. The message passed up from UDP
@@ -257,7 +257,7 @@ entire body of the message, including both the original application’s
 data and all the headers attached to that data by higher-level
 protocols.
 
-1.3.3 Multiplexing and Demultiplexing
+1.3.4 Multiplexing and Demultiplexing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each of the protocols in :numref:`Figure %s <fig-protograph>` is
@@ -265,13 +265,13 @@ potentially asked to send and receive messages on behalf of multiple
 high-level users. (Here, we use the term "user" to mean any
 application or protocol that uses a protocol to deliver messages on
 its behalf.) This means that in the same way we might multiplex
-multiple flows of data over a single physical link, we can also think
-of every protocol as multiplexing multiple user flows over a logical
+multiple data flows over a single physical link, we can also think of
+every protocol as multiplexing multiple user flows over a logical
 connection to its peer on another machine.
 
-Practically speaking, this simply means that the header a given
-protocol attaches to its messages contains an identifier that records
-the user to which the message belongs. We call this identifier a
+Practically speaking, this means that the header a given protocol
+attaches to its messages contains an identifier that records the user
+to which the message belongs. We call this identifier a
 *demultiplexing key*, or *demux key* for short. At the source host, a
 protocol includes the appropriate demux key in its header. When the
 message is delivered to its peer on the destination host, the peer
@@ -289,7 +289,7 @@ communication, while in the latter case, each side uses a different key
 to identify the high-level protocol (or application program) to which
 the message is to be delivered.
 
-Looking back at the headers given in :numref:`Figure %s
+Looking back at the example headers given in :numref:`Figure %s
 <fig-udphdr>`, :numref:`%s <fig-iphdr>`, and :numref:`%s
 <fig-ethhdr>`, IP uses the 8-bit ``Protocol`` field as its demux key,
 with ``0x11`` (decimal 17) indicating the message belongs to UDP and
@@ -298,3 +298,15 @@ Ethernet uses the 16-bit ``Type`` field as its demux key, with
 ``0x0800`` indicating the message belongs to IP.  UDP is an example of
 a protocol that uses a different demux key on each end, corresponding
 to the 16-bit ``SrcPort`` and ``DstPort`` fields.
+
+Other fields in our example headers only make sense when you look at
+what the protocol is trying to do (which we'll do in later chapters),
+but some are typical of protocols in general. For example, many
+headers indicate how long the message is (e.g., the ``Length`` field
+in the IP and UDP headers); how long the header is (e.g., IP's
+``HLen`` field); the addresses of the sending and receiving hosts
+(e.g., the ``SourceAddr`` and ``DestinationAddr`` fields in IP and
+ETH); and some form of error code used to detect and possiblly correct
+bit errors (e.g., IP and UDP's ``Checksum`` and ETH's ``CRC``.)  We
+discuss error detection, and explain why ETH does not have a length
+field, in Chapter 2.

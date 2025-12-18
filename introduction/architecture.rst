@@ -15,31 +15,30 @@ small task.
 To help deal with this complexity, network designers often develop
 blueprints—sometimes called *network architectures*—that guide the
 design and implementation of the network. Network architectures are
-multifaceted—as we'll discover throughout the book—but at its core, an
-architecture defines a particular way to modularize the network; a way
-to break the overall system down into collection of components so as
-to manage complexity. Modularization, in turn, is essentially an
-exercise in defining abstractions—identifying the behavior of some
-important aspect of the system, encapsulating that behavior in an
-object that provides an interface that can be manipulated by other
-components of the system, and hiding the details of how the object is
-implemented from the users of the object.
+multifaceted, but at its core, an architecture defines a particular
+way to modularize the network; managing complexity by breaking the
+overall system down into collection of components. Modularization, in
+turn, is essentially an exercise in defining abstractions—identifying
+the behavior of some important aspect of the system, encapsulating
+that behavior in an object that provides an interface that can be
+manipulated by other components of the system, and hiding the details
+of how the object is implemented from the users of the object.
 
 Architectures are *not* programs. They are abstract representations or
-models (i.e., words and diagrams) of what actually runs in the network.
-Their purpose is to both *prescribe* how the network should be
-implemented (with the goal of guiding engineers in the actual modules
-that get implemented) and *describe* how the network has been
-implemented (with the goal of helping developers and operators
-understand how an existing network behaves).
+models (i.e., words and diagrams) of what actually runs in the
+network.  Their purpose is to both *prescribe* how the network should
+be implemented (with the goal of guiding engineers in the actual code
+that gets written) and *describe* how the network has been implemented
+(with the goal of helping developers and operators understand how the
+existing network behaves).
 
-This section begins to explain what we mean by a network architecture
-by introducing two of the most widely referenced examples—the OSI (or
+This section begins to explain the role of a network architecture by
+introducing two of the most widely referenced examples—the OSI (or
 7-layer) architecture and the Internet architecture. Because we're
 just getting started, the description is intentionally high level, and
-we do not attempt to justify either architecture as "the right answer."
-They are just two examples that illustrate how one might break the a
-problem of building a network into manageable subsystems.
+we do not attempt to justify either architecture as "the right
+answer."  They are just two examples that illustrate how one might
+break the a problem of building a network into manageable subsystems.
 
 
 1.2.1 OSI Model

@@ -72,5 +72,5 @@ particular framing of the problem space. We call attention to such
 that every system design requires judgement and makes tradeoffs.
 
 .. include:: requirements.rst
-.. include:: architecture.rst 
+.. include:: architecture.rst
 .. include:: protocols.rst

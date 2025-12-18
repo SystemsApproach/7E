@@ -9,7 +9,7 @@ these, and other requirements.  To place the requirements in their
 proper context, it is important to recognize that there are multiple
 stakeholders interested in the outcome.  They include:
 
-* **Application Developers:** People that program application care
+* **Application Developers:** People that program applications care
   about the communication services their applications need. This
   includes, for example, a guarantee that each message the application
   sends will be delivered without error within a certain amount of
@@ -23,9 +23,10 @@ stakeholders interested in the outcome.  They include:
   usage.
 
 * **Network Owners:** People that assemble networks for a particular
-  deployment scenario, and likely to take budgetary considerations
-  into account. These stakeholders care that network resources are
-  being efficiently utilized and fairly allocated to different users.
+  use case, such as an enterprise or datacenter, take budgetary
+  considerations into account. These stakeholders care that they get a
+  good return on investment—that network resources are used
+  efficiently.
 
 It's possible to come up with other other stakeholders, but this list
 is inclusive enough to stress our design. Importantly, instead of
@@ -44,11 +45,10 @@ That number seemed more than adequate at at the time, but of course,
 we now know that it wasn't (and workarounds have been engineered).
 
 .. [#] The Internet refers to connected devices as *hosts* since they
-   "host user programs." The Mobile Cellular Network refers to
-   connected devices as *User Equipment* or *UEs*. We use all
-   three terms—devices, hosts, UEs—but most often say hosts
-   because of the central role the software they run plays in the
-   overall network.
+   "host" user programs. The Mobile Cellular Network refers to
+   connected devices as *User Equipment* or *UEs*. We use all three
+   terms—devices, hosts, UEs—but most often say hosts because of the
+   important role the software they run plays in the network's design.
 
 There are other, less obvious factors that can limit network growth.
 Restricting the number of stakeholders responsible for different
@@ -90,18 +90,18 @@ central technical challenges we face. This mechanism should be fair
 (for some definition of fairness), but also efficient. The latter
 requirement means that we want to maximize the amount data the network
 delivers on behalf of its users, for a given set of network resources.
-We expand on this challenge in Section 1.5.
+We expand on this requirement in Section 1.5.
 
 The fourth requirement is that the network be *high performance.*
 Everyone wants the network to be fast, but performance is
-multi-faceted.  Some applications case about response time; how long
+multi-faceted.  Some applications care about response time; how long
 it takes to send and receive a message. Others care about throughput;
 how long it takes to download a large file. Still others care that
 packet delivery is predictable, so that a video stream plays without
 jarring pauses. All of these metrics depend on physical limitations,
 such as the speed of light, but there is also significant work that a
 network has to do in order to deliver on this potential. We expand
-on this challenge in Section 1.6.
+on this requirement in Section 1.6.
 
 We highlight the these four requirements because they dominate the
 design challenges discussed throughout the book. There are other
@@ -117,7 +117,7 @@ priority during the early days of the Internet, when everyone was
 focused getting it to work in the first place. As the Internet became
 more and more successful, attracting more users and applications,
 security moved up in importance. Today it is one of the topmost
-concern. We address security in multiple places throughout the book,
+concerns. We address security in multiple places throughout the book,
 with the most detailed discussion in Chapter 12. For a more
 comprehensive look at network security, we recommend a companion book.
 
