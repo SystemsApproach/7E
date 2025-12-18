@@ -71,7 +71,7 @@ particular framing of the problem space. We call attention to such
 “exceptions to the rule” when they arise, and use them to illustrate
 that every system design requires judgement and makes tradeoffs.
 
-.. include:: requirements.rst
-.. include:: architecture.rst
-.. include:: protocols.rst
-.. include:: statmux.rst
+.. include:: introduction/requirements.rst
+.. include:: introduction/architecture.rst
+.. include:: introduction/protocols.rst
+.. include:: introduction/statmux.rst

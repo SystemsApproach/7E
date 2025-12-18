@@ -23,11 +23,11 @@ Larry Peterson and Bruce Davie
    :caption: Table of Contents
 
    preface.rst
-   introduction/introduction.rst
+   introduction.rst
    part_one.rst
    switches.rst
    part_two.rst
-   applications/applications.rst
+   applications.rst
    README.rst
    authors.rst
    latest.rst

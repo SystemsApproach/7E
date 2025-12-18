@@ -44,4 +44,4 @@ HTTP, and so illustrates the “new” (post-HTTP) way to build
 applications. But before getting to these examples, we first describe
 the basic anatomy of an application.
 
-.. include:: anatomy.rst
+.. include:: applications/anatomy.rst
