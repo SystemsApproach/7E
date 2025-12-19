@@ -36,7 +36,7 @@ host on the left has a large supply of data that it wants to send to
 its counterpart on the right.
 
 .. _fig-mux:
-.. figure:: figures/f01-05-9780123850591.png
+.. figure:: introduction/figures/f01-05-9780123850591.png
    :width: 500px
    :align: center
 
@@ -103,7 +103,7 @@ need to fragment the message into several packets, with the receiver
 reassembling the packets back into the original message.
 
 .. _fig-statmux:
-.. figure:: figures/f01-06-9780123850591.png
+.. figure:: introduction/figures/f01-06-9780123850591.png
    :width: 500px
    :align: center
 
@@ -162,8 +162,7 @@ this state, it is said to be *congested*.
   switch able to schedule the use of the physical links it is
   connected to on a per-packet basis. Fairly allocating link capacity
   to different flows and dealing with congestion when it occurs are
-  the key challenges of statistical multiplexing. :ref:`[Next]
-  <key-semantic-gap>`
+  the key challenges of statistical multiplexing.
 
 1.4.3  Resource Capacity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -55,7 +55,7 @@ no OSI-based networks running today, the terminology it defined is
 still widely used.
 
 .. _fig-osi:
-.. figure:: figures/f01-13-9780123850591.png
+.. figure:: introduction/figures/f01-13-9780123850591.png
    :width: 600px
    :align: center
 
@@ -112,7 +112,7 @@ before the OSI architecture, and the experience gained from building
 them was a major influence on the OSI reference model.
 
 .. _fig-internet:
-.. figure:: figures/internet.png
+.. figure:: introduction/figures/internet.png
    :width: 350px
    :align: center
 

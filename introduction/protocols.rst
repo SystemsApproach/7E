@@ -35,7 +35,7 @@ messages. (This is what TCP and UDP are designed to do in the Internet
 architecture.)
 
 .. _fig-layers:
-.. figure:: figures/layers.png
+.. figure:: introduction/figures/layers.png
    :width: 350px
    :align: center
 
@@ -98,7 +98,7 @@ service (the peer interface). This situation is illustrated in :numref:`Figure
 %s <fig-interfaces>`.
 
 .. _fig-interfaces:
-.. figure:: figures/interfaces.png
+.. figure:: introduction/figures/interfaces.png
    :width: 450px
    :align: center
 
@@ -117,7 +117,7 @@ the edges represent a *depends on* relation. For example,
 our Internet-inspired layered system.
 
 .. _fig-protograph:
-.. figure:: figures/protograph.png
+.. figure:: introduction/figures/protograph.png
    :width: 500px
    :align: center
 
@@ -187,21 +187,21 @@ meaning of most of these fields in later chapters, but there is some
 commonality in all headers, which we describe in the next subsection.
 
 .. _fig-udphdr:
-.. figure:: figures/udphdr.png
+.. figure:: introduction/figures/udphdr.png
    :width: 350px
    :align: center
 
    UDP header specification.
 
 .. _fig-iphdr:
-.. figure:: figures/iphdr.png
+.. figure:: introduction/figures/iphdr.png
    :width: 350px
    :align: center
 
    IP header specification.
 
 .. _fig-ethhdr:
-.. figure:: figures/ethhdr.png
+.. figure:: introduction/figures/ethhdr.png
    :width: 600px
    :align: center
 
@@ -241,7 +241,7 @@ nodes in the network (e.g., switches and routers) may inspect the IP
 header at the front of the message.
 
 .. _fig-encapsulation:
-.. figure:: figures/encapsulation.png
+.. figure:: introduction/figures/encapsulation.png
    :width: 600px
    :align: center
 
