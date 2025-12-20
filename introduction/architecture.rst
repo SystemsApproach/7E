@@ -16,7 +16,7 @@ To help deal with this complexity, network designers often develop a
 blueprint—sometimes called a *network architecture*—that guides the
 design and implementation of the network. One way to think about a
 network architecture is that it specifies a way to modularize the
-network; a particular deconstruction of the overall system into
+network; a particular deconstruction of the overall system into a
 collection of components. Modularization, in turn, is essentially an
 exercise in defining abstractions—identifying the behavior of some
 important aspect of the system, encapsulating that behavior in an
@@ -24,8 +24,8 @@ object that provides an interface that can be manipulated by other
 components of the system, and hiding the details of how the object is
 implemented from the users of the object.
 
-Architectures are *not* programs. They give you a mental model,
-typically expressed in words and diagrams, of what actually runs in
+Architectures are *not* programs. They sketch a mental model
+(typically expressed in words and diagrams), of what actually runs in
 the network.  Their purpose is to both *prescribe* how the network
 should be implemented (with the goal of guiding engineers in the
 actual code that gets written) and *describe* how the network has been
@@ -120,15 +120,15 @@ The Internet architecture is often depicted by a diagram similar to
 the one shown in :numref:`Figure %s <fig-internet>`. The diagram is
 noteworthy because of it's hourglass shape—wide at the top, narrow in
 the middle, and wide at the bottom. This shape actually reflects an
-important design philosophy of the Internet. That is, IP serves as the
+important design philosophy of the Internet. IP serves as the
 focal point for the architecture—it defines a common method for
 exchanging packets among a wide collection of networks. Above IP there
-can be arbitrarily many applilcation programs (which the diagram
+can be arbitrarily many application programs (which the diagram
 denotes as App\ :sub:`A` to App\ :sub:`Z`) and below IP the
 architecture allows for arbitrarily many different network
 technologies (which the diagram denotes as Net\ :sub:`1` to Net\
 :sub:`N`). In practice, the applications can be anything from web
-browing to video streaming, while popular network technologies
+browsing to video streaming, while popular network technologies
 include Ethernet, WiFi, and 5G.
 
 The intermediate layer sitting between IP and the applications, which
@@ -136,8 +136,8 @@ typically includes TCP and UDP but could include other protocols,
 corresponds to the transport protocols that provide useful services to
 application programs. As a rough analogy, you can think of these
 protocols as similar to library programs; applications could run
-directly on top of IP, but they provide useful functionality that
-makes the app developer's job easier.
+directly on top of IP, but these protocols provide useful
+functionality that makes the app developer's job easier.
 
 Most people who work actively in the networking field are familiar
 with both the Internet architecture and the 7-layer OSI architecture,
@@ -150,7 +150,7 @@ below IP correspond to layer 2.
 .. sidebar:: IETF and Standardization
 
    We have informally been talking about the Internet community, but
-   it includes a recognized standardization body, known as the
+   it includes a standardization body, known as the
    Internet Engineering Task Force (IETF), which is responsible for
    the specification of many of the Internet protocols, such as TCP,
    UDP, IP, DNS, and BGP. The Internet architecture also embraces
@@ -241,7 +241,7 @@ connected to some link technology, and its job is to receive data on
 one port and send it out on another port. This means a distributed
 collection of switches can be interconnected to form a network, as
 shown in :numref:`Figure %s <fig-network>`. Of course that diagram is
-a simplification; the Internet is build from hundreds of millions of
+a simplification; the Internet is built from hundreds of millions of
 such switches.
 
 .. _fig-network:

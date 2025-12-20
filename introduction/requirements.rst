@@ -40,7 +40,7 @@ requirement.  Scalability does not necessarily mean picking a target
 size, but rather, being aware of factors that might limit how large a
 network can grow.  The original Internet architects were aware that
 using 32-bit addresses for Internet-connected devices implied there
-could be no more than :math:`2^{32}` (over 4 billion) devices.\ [#]_
+could be no more than 2\ :sup:`32` (over 4 billion) devices.\ [#]_
 That number seemed more than adequate at at the time, but of course,
 we now know that it wasn't (and workarounds have been engineered).
 

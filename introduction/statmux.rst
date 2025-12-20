@@ -164,17 +164,20 @@ this state, it is said to be *congested*.
   to different flows and dealing with congestion when it occurs are
   the key challenges of statistical multiplexing.
 
-1.4.3  Resource Capacity
+1.4.3  Managing Capacity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our high-level description of statistical multiplexing is defined in
 term of links and switches, but we need to be more precise in how we
-talk about individual resources, and their respective capacities.
-They include:
+talk about individual resources, and their respective capacities., and
+Managing capacity, and acquiring more capacity when necessary, goes
+hand-in-hand with allocating existing resources to different users.
 
 * **Link Capacity:** Every link as a fixed bandwidth that limits the
   rate at which it can transmit packets. This capacity is measured in
-  bits-per-second (bps).
+  bits-per-second (bps). Sometimes new cables need to be laid, but
+  more often than not, additional bandwidth can be "turned on". The
+  is known as *traffic engineering*.
 
 * **Forwarding Capacity:** Switches are devices that move data from
   an input port to an output port. This requires an internal forwarding
@@ -187,4 +190,7 @@ They include:
   terms of the fraction of the network's Delay × Bandwidth product
   (as explained in the next section).
 
-* **Compute Capacity:** ???
+* **Compute Capacity:** Briefly discuss idea of performing
+  functionality beyond forwarding, and how this can be in-switch
+  or adjacent-to-switch.
+
