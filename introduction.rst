@@ -38,21 +38,24 @@ pieces of art than an engineering diagram.
    :width: 500px
    :align: center
 
-   Visualization of the Internet connectivity, with attribution to
+   Visualization of Internet connectivity, with attribution to
    Barrett Lyon / The Opte Project.
 
-As impressive as these credentials are, our goal is not to just
-describe the Internet, but to understand the fundamental challenges
-that had to be addressed for the Internet to become the ubiquitous
-system it is today. This includes exploring the design space of
-possible solutions and building intuition about the design decisions
-that eventually won the day. The path from conception to today’s
-reality is not a straight line, nor is today’s Internet the end of the
-process. There have been many false starts and stop-gap solutions,
-followed by years of iterative improvement. This evolution culminates
-in today’s artifacts (a combination of hardware and software
-components), which we describe in detail, keeping in mind that those
-too will likely change over time.
+Understanding a system of this scale and complexity requires more than
+reading a set of specifications. There are just too many details,
+making it impossible to see the forest for the trees. The key is to
+understand the fundamental challenges that had to be addressed for the
+Internet to become the ubiquitous system it is today. This includes
+exploring the design space of possible solutions and building
+intuition about the design decisions that eventually won the day. That
+is the goal of this book.
+
+The path from conception to today’s reality is not a straight line,
+nor is today’s Internet the end of the process. There have been many
+false starts and stop-gap solutions, followed by years of iterative
+improvement. This evolution culminates in today’s artifacts (a
+combination of hardware and software components), which we describe in
+detail, keeping in mind that those too will likely change over time.
 
 .. include:: introduction/requirements.rst
 .. include:: introduction/architecture.rst
