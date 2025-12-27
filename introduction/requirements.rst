@@ -46,7 +46,8 @@ we now know that it wasn't (and workarounds have been engineered).
 
 .. [#] The Internet refers to connected devices as *hosts* since they
    "host" user programs. The Mobile Cellular Network refers to
-   connected devices as *User Equipment* or *UEs*. We use all three
+   connected devices as *User Equipment*, or *UEs*, since they belong
+   to the customer and not the operator.  We use all three
    terms—devices, hosts, UEs—but most often say hosts because of the
    important role the software they run plays in the network's design.
 
@@ -58,7 +59,7 @@ might benefit from the network; anyone should be able deploy a new
 application that serves some community, no matter how niche.  As
 another example, it would not be practical for a limited number of
 operations teams to be responsible for fixing every outage reported
-anywhere on the globe; anyone should be able to own, and then take
+anywhere on the planet; anyone should be able to own, and then take
 responsibility for operating, a piece of the global network. Avoiding
 these kinds of limitations may seem obvious, but historically, many
 networks have assumed tight control by a central authority rather than
@@ -86,11 +87,11 @@ not have infinite capacity and it is not generally practical to
 provide dedicated connectivity between any two communicating entities.
 This means networks are fundamentally a shared resource, making the
 mechanism that allocates resources to different users one of the
-central technical challenges we face. This mechanism should be fair
-(for some definition of fairness), but also efficient. The latter
-requirement means that we want to maximize the amount data the network
-delivers on behalf of its users, for a given set of network resources.
-We expand on this requirement in Section 1.5.
+central technical challenges. This mechanism should be fair (for some
+definition of fairness), but also efficient. The latter requirement
+means that we want to maximize the amount data the network delivers on
+behalf of its users, for a given set of resource capacities.  We
+expand on this requirement in Section 1.5.
 
 The fourth requirement is that the network be *high performance.*
 Everyone wants the network to be fast, but performance is

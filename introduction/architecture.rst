@@ -118,7 +118,7 @@ influence on the OSI reference model.
 
 The Internet architecture is often depicted by a diagram similar to
 the one shown in :numref:`Figure %s <fig-internet>`. The diagram is
-noteworthy because of it's hourglass shape—wide at the top, narrow in
+noteworthy because of its hourglass shape—wide at the top, narrow in
 the middle, and wide at the bottom. This shape actually reflects an
 important design philosophy of the Internet. IP serves as the
 focal point for the architecture—it defines a common method for
@@ -187,13 +187,24 @@ IETF meetings:
    consensus and running code.* **(David Clark)**
 
 
-1.2.3 Book Architecture
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.2.3 Architectural Invariants
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Like an architecture that imposes structure on a complex system, this
-book is organized around a structure that helps us navigate all the
-relevant topics. The structure is inspired by the Internet, and begins
-by breaking the problem into two parts:
+Having seen two example architectures, it is tempting to pick one and
+assume it is both a finished product and fixed for all time. But that
+would not capture the reality of architectures, which like the systems
+they represent, also needing to evolve over time. It also would not be
+consistent with our goal of developing intuition around architectural
+decision making.
+
+Architectures are more than just blueprints. They also try to identify
+invariants that will not change as the system evolves. These "fixed
+points" are the essence of an architecture, and as a consequence,
+baked into every design decision that needs to be made. For the
+purpose of this book, we start with one invariant—established by the
+Internet—and use it to organize the topics we want to cover. The
+invariant is that a network of the scale and generality we want to
+build should be broken into two parts:
 
 * *Part One: Inside the Network*
 * *Part Two: Edge of the Network*
@@ -212,22 +223,19 @@ solution), but most of the time it’s a recipe for failure.
 
 Of course knowing how to break a complex problem into smaller
 subproblems takes experience, but this first cut—inside-vs-edge—has
-proved to be an important factor in the Internet’s success. We’ll
-explain how to draw the line between the two halves in the
-introduction to each Part, with the subsequent chapters tackling the
-set of the issues that arises when building that part of the
-whole. The rest of this introductory chapter introduces some
-network-specific terminology that is used throughout the book. The
-terminology has familiar counterparts in other systems, such as
-Operating Systems, but networking has its own peculiar way of talking
-about certain topics.  Like any deconstruction of a complex system
-into separate parts, this decomposition is not perfect. This
-particular boundary is important to the Internet’s success, and also
-helps us organize the material in this book. But there are important
-challenges that require attention, and yet fall outside this
-particular framing of the problem space. We call attention to such
-“exceptions to the rule” when they arise, and use them to illustrate
-that every system design requires judgement and makes tradeoffs.
+proved to be an important factor in the Internet’s success. We explain
+how to draw the line between the two halves in the rest of this
+section, with the chapters corresponding to each part tackling the set
+of the issues that arises when building that part of the whole.
+
+Like any deconstruction of a complex system into separate parts, this
+decomposition is not perfect. This particular boundary is important to
+the Internet’s success, and also helps us organize the material in
+this book. But there are important challenges that require attention,
+and yet fall outside this particular framing of the problem space. We
+call attention to such “exceptions to the rule” when they arise, and
+use them to illustrate that every system design requires judgement and
+makes tradeoffs.
 
 Inside the Network
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -236,7 +244,7 @@ As reported in the Introduction to this chapter, the Internet connects
 over 22 billion devices. Clearly, any network that connects that many
 devices must itself also be highly distributed, and the Internet is
 just such a distributed system. It is built from special devices known
-as switches. Each switch has a modest set of communication ports
+as *switches*. Each switch has a modest set of communication ports
 connected to some link technology, and its job is to receive data on
 one port and send it out on another port. This means a distributed
 collection of switches can be interconnected to form a network, as

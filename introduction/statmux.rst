@@ -3,14 +3,14 @@
 
 Networks are a shared resource, carrying traffic between different
 pairs of hosts, on behalf of many applications and users. This means
-we need a strategy for *multiplexing* individual resources—e.g.,
-switches and links—among those many traffic flows traversing those
-resources. At an intuitive level, multiplexing can be explained by
-analogy to a timesharing computer system, where a single physical
-processor is shared (multiplexed) among multiple jobs, each of which
-believes it has its own private processor. Similarly, data being sent
-by multiple users can be multiplexed over the physical links that make
-up a network.
+we need a strategy for *multiplexing* network resources—the links and
+switches that make up the network—among those many traffic flows
+traversing those resources. At an intuitive level, multiplexing can be
+explained by analogy to a timesharing computer system, where a single
+physical processor is shared (multiplexed) among multiple jobs, each
+of which believes it has its own private processor. Similarly, data
+being sent by multiple users can be multiplexed over the physical
+links and switches that make up a network.
 
 This section explores the options typically adopted by networks,
 settling on *statsitical multiplexing* as the strategy we will employ
@@ -151,6 +151,21 @@ time, then the switch will eventually run out of buffer space, and
 some packets will have to be dropped. When a switch is operating in
 this state, it is said to be *congested*.
 
+Finally, even though this discussion focuses on a simple network
+topology involving a single switch, statistical multiplexing works
+across an arbitrarily large network. This is because each multiplexing
+decision—i.e., deciding which packet to forward next and which packet
+to drop if the buffer is full—is made on purely local basis. It
+doesn't matter if a given packet has already traversed a dozen
+upstream switches, or just now entered the network.  No global
+coordination is required. This might not always result in a fair
+decision since packets that have already been forwarded around the
+globe intuitively have more "at risk" should they encounter
+congestion, but that's a problem for another day (as we'll see in
+Chapter 14). It turns out this issue is a consequence of our
+architectural decision to separate in-the-network versus
+edge-of-network concerns.
+
 .. _key-stat-mux:
 .. admonition:: Key Takeaway
 
@@ -169,7 +184,7 @@ this state, it is said to be *congested*.
 
 Our high-level description of statistical multiplexing is defined in
 term of links and switches, but we need to be more precise in how we
-talk about individual resources, and their respective capacities., and
+talk about individual resources, and their respective capacities. and
 Managing capacity, and acquiring more capacity when necessary, goes
 hand-in-hand with allocating existing resources to different users.
 

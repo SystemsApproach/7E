@@ -23,15 +23,15 @@ available building materials and then to show how they can be used to
 construct a network from the ground up. Of course the Internet is just
 such a network, and so we use the it as our model.
 
-The Internet connects over 22 billion devices. Those devices are
+Today's Internet connects over 22 billion devices. Those devices are
 widely distributed across the planet (and in low orbit around the
 planet), where any one of them can send and receive messages with one
 or more of the other 22 billion devices. The network itself is a
 massively distributed system, built from hundreds of millions of
 switching devices. The system is so complex that visualizations of
 data collected about Internet connectivity—like the one shown in
-:numref:`Figure %s <fig-net-visualization>`\ —look more abstract
-pieces of art than an engineering diagram.
+:numref:`Figure %s <fig-net-visualization>`\ —look more like
+abstract pieces of art than an engineering diagram.
 
 .. _fig-net-visualization:
 .. figure:: figures/net-visualization.jpg
@@ -50,12 +50,13 @@ exploring the design space of possible solutions and building
 intuition about the design decisions that eventually won the day. That
 is the goal of this book.
 
-The path from conception to today’s reality is not a straight line,
-nor is today’s Internet the end of the process. There have been many
-false starts and stop-gap solutions, followed by years of iterative
-improvement. This evolution culminates in today’s artifacts (a
-combination of hardware and software components), which we describe in
-detail, keeping in mind that those too will likely change over time.
+It's also important to keep in mind that path from conception to
+today’s reality is not a straight line, nor is today’s Internet the
+end of the process. There have been many false starts and stop-gap
+solutions, followed by years of iterative improvement. This evolution
+culminates in today’s artifacts (a combination of hardware and
+software components), which we describe in detail, keeping in mind
+that those too will likely change over time.
 
 .. include:: introduction/requirements.rst
 .. include:: introduction/architecture.rst
