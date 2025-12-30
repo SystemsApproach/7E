@@ -17,19 +17,11 @@ switches. Each switch has a modest set of communication ports
 connected to some link technology, and its job is to receive data on
 one port and send it out on another port. This means a distributed
 collection of switches can be interconnected to form a network, as
-shown in :numref:`Figure %s <fig-network>`. That diagram illustrates
-the idea, but keep in mind there are hundreds of millions of such
-switching devices in today’s Internet, making visualizations of data
-collected about actual connectivity—like the one shown in
-:numref:`Figure %s <fig-net-visualization>`\—more an abstract piece of
-art than an engineering diagram.
-
-.. _fig-network:
-.. figure:: figures/network.png
-   :width: 400px
-   :align: center
-
-   Schematic of an example packet switch network.
+shown in XXX. That diagram illustrates the idea, but keep in mind
+there are hundreds of millions of such switching devices in today’s
+Internet, making visualizations of data collected about actual
+connectivity—like the one shown in YYY—more an abstract piece of art
+than an engineering diagram.
 
 Throughout the history of computer networks, there have been many
 different kinds of switches. We begin Part One by looking at the
@@ -44,14 +36,6 @@ save the challenges of building applications on top of the
 interconnected network of switches for Part Two. Our goal in Part One
 is to provide logical connectivity between every pair of connected
 edge devices.
-
-.. _fig-net-visualization:
-.. figure:: figures/net-visualization.jpg
-   :width: 500px
-   :align: center
-
-   Visualization of the Internet connectivity, with attribution to
-   Barrett Lyon / The Opte Project.
 
 We say “logical connectivity” because it’s obviously the case that
 there is no direct physical connection—say, a fiber optic or copper
