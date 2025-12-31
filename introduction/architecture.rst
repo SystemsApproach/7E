@@ -57,7 +57,7 @@ no OSI-based networks running today, the terminology it defined is
 still widely used.
 
 .. _fig-osi:
-.. figure:: introduction/figures/f01-13-9780123850591.png
+.. figure:: introduction/figures/osi.png
    :width: 600px
    :align: center
 
@@ -114,8 +114,7 @@ OSI stack.
 Note that the cloud icon used in :numref:`Figure %s <fig-osi>` is
 commonly used to represent an abstract network of some unspecified
 type, where we are not concerned with its internal structure or what
-technology it uses; :numref:`Figure %s <fig-network>` depicts one
-example.
+technology it uses.
 
 
 1.2.2 Internet Architecture
@@ -125,8 +124,8 @@ The Internet architecture is more concrete than the OSI architecture
 because it is organized around specific components, namely, the TCP
 and IP protocols. (For now, think of "protocol" as a synonym for
 "component" or "module"; we describe protocols in more detail in the
-next section.) The Internet was just being designed as an extension of
-its predecessor—the ARPANET—when the OSI architecture was defined; the
+next section.) The Internet was being deployed as a way to extend its
+predecessor—the ARPANET—when the OSI architecture was defined; the
 ARPANET had a major influence on the OSI reference model, but the
 Internet was largely viewed as a contemporary competitor.
 
@@ -183,18 +182,20 @@ architecture makes.
 Where the Internet architecture is specific is in its definition of
 the Internet layer, corresponding to IP in :numref:`Figure %s
 <fig-internet>`.  IP supports universal connectivity between every
-pair of edge devices. It does this not by providing a single global
-network—in the sense that the network layer in the OSI model defines
-a switched network—but rather, by interconnecting networks with
-switches that are attached to two or more networks. That is, IP
-supports an *internetwork*, as shown in :numref:`Figure %s
+pair of edge devices: it assigns a global address to every connected
+device and is responsible for forwarding each packet to its
+destination. IP does this not by providing a single global network—in
+the sense that the network layer in the OSI model defines a switched
+network—but rather, by interconnecting networks with switches that are
+attached to two or more networks. That is, IP supports an
+*internetwork*, as shown in :numref:`Figure %s
 <fig-internet-cloud>`. A switch that is connected to two or more
 networks is commonly called a *router* or *gateway*, although it plays
 much the same role as a switch—it forwards messages from one network
 to another.
 
 .. _fig-internet-cloud:
-.. figure:: introduction/figures/f01-04-9780123850591.png
+.. figure:: introduction/figures/internet-cloud.png
    :width: 500px
    :align: center
 
@@ -203,15 +204,15 @@ to another.
 
 In effect, the Internet is a *logical* network running on top of a
 collection of *physical* networks. This is a powerful idea, with
-non-obvious consequences. For example, because a minimal topology
-consisting of exactly one link connecting two switches qualifies as a
-network, it is possible to construct a switched network like the one
-shown in :numref:`Figure %s <fig-network>` with IP playing exactly the
-same role as the network layer in the OSI model. As another example,
-an internet can itself be viewed as a kind of network, which means
-that an internet can be built from a set of internets.  Thus, we can
-recursively build arbitrarily large networks by interconnecting clouds
-to form larger clouds.
+non-obvious consequences. For example, because a minimal network
+consisting of exactly one link connecting two switches still qualifies
+as a network, it is possible to construct a switched network like the
+one shown in :numref:`Figure %s <fig-network>` with IP playing exactly
+the same role as the network layer in the OSI model. As another
+example, an internet can itself be viewed as a kind of network, which
+means that an internet can be built from a set of internets.  Thus, we
+can recursively build arbitrarily large networks by interconnecting
+clouds to form larger clouds.
 
 We take a closer look at how IP achieves this goal in Chapter 5, but
 for now the main take away is that we can define a *network*

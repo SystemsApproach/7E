@@ -14,9 +14,8 @@ links and switches that make up a network.
 
 This section explores the options typically adopted by networks,
 settling on *statsitical multiplexing* as the strategy we will employ
-going forward. *StatMux*, as the approach is sometimes called, has
-proven the most cost-effective for the general-purpose network we want
-to build.
+going forward. It's the approach that has proven the most
+cost-effective for the general-purpose network we want to build.
 
 1.4.1 Multiplexing Challenge
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,7 +35,7 @@ host on the left has a large supply of data that it wants to send to
 its counterpart on the right.
 
 .. _fig-mux:
-.. figure:: introduction/figures/f01-05-9780123850591.png
+.. figure:: introduction/figures/mux.png
    :width: 500px
    :align: center
 
@@ -103,7 +102,7 @@ need to fragment the message into several packets, with the receiver
 reassembling the packets back into the original message.
 
 .. _fig-statmux:
-.. figure:: introduction/figures/f01-06-9780123850591.png
+.. figure:: introduction/figures/statmux.png
    :width: 500px
    :align: center
 
