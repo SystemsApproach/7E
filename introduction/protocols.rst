@@ -61,13 +61,13 @@ making reliability guarantees (TCP) and the other not (UDP).
 1.3.2 Interfaces
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-With this discussion of layering as a foundation, we are now ready to
-discuss the modularization of a network more precisely. For starters,
-the abstract objects that make up the layers of a network system are
-called *protocols*. That is, a protocol provides a communication
-service that higher-level objects (such as application processes, or
-perhaps higher-level protocols) use to exchange messages. TCP, UDP,
-and IP are all examples of Internet protocols.
+With a set of layers as a foundation, we are now ready to discuss the
+modularization of a network more precisely. For starters, the abstract
+objects that make up the layers of a network system are called
+*protocols*. That is, a protocol provides a communication service that
+higher-level objects (such as application processes, or perhaps
+higher-level protocols) use to exchange messages. TCP, UDP, and IP are
+all examples of Internet protocols.
 
 Each protocol defines two different interfaces. First, it defines a
 *service interface* to the other objects on the same computer that
@@ -221,7 +221,7 @@ and ``__sum16`` are kernel-defined types for 16-bit unsigned integers.
         __sum16	check;
    };
 
-This process of encapsulation is then repeated at each level of the
+The process of encapsulation is then repeated at each level of the
 protocol graph; for example, IP encapsulates UDP’s message by
 attaching a header of its own. If we now assume that IP sends the
 message to its peer over some network, then when the message arrives
@@ -251,7 +251,7 @@ Note that when we say a low-level protocol does not interpret the
 message it is given by some high-level protocol, we mean that it does
 not know how to extract any meaning from the data contained in the
 message. It is sometimes the case, however, that the low-level protocol
-applies some simple transformation to the data it is given, such as to
+applies some algorithmic transformation to the data it is given, such as to
 compress or encrypt it. In this case, the protocol is transforming the
 entire body of the message, including both the original application’s
 data and all the headers attached to that data by higher-level
@@ -297,7 +297,8 @@ with ``0x11`` (decimal 17) indicating the message belongs to UDP and
 Ethernet uses the 16-bit ``Type`` field as its demux key, with
 ``0x0800`` indicating the message belongs to IP.  UDP is an example of
 a protocol that uses a different demux key on each end, corresponding
-to the 16-bit ``SrcPort`` and ``DstPort`` fields.
+to the 16-bit ``SrcPort`` and ``DstPort`` fields. These assigned demux
+keys are defined in the respective protocol's specification.
 
 Other fields in our example headers only make sense when you look at
 what the protocol is trying to do (which we'll do in later chapters),

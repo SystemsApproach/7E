@@ -36,7 +36,7 @@ its counterpart on the right.
 
 .. _fig-mux:
 .. figure:: introduction/figures/mux.png
-   :width: 500px
+   :width: 550px
    :align: center
 
    Multiplexing multiple logical flows over a single
@@ -182,29 +182,44 @@ edge-of-network concerns.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our high-level description of statistical multiplexing is defined in
-term of links and switches, but we need to be more precise in how we
-talk about individual resources, and their respective capacities. and
-Managing capacity, and acquiring more capacity when necessary, goes
-hand-in-hand with allocating existing resources to different users.
+term of links and switches, but we need to be more precise about
+individual resources and their capacities. We also need to manage that
+capacity, which includes acquiring more resources when necessary.
+Adding (and removing) capacity is often often referred to as *resource
+provisioning*, and while it sometimes requires installing new hardware
+(or pulling new cables), it is increasingly accomplished by activating
+physical infrastructure that is already in place.
+
+Provisioning resources and scheduling resources go hand-in-hand; they
+both assign resources to some user, but they differ in the time scale
+they operate on. Provisioning new resources can take anywhere from
+seconds or minutes to days or weeks; the former when those resources
+just need to be "turned on" and the latter when new hardware needs to
+be procured and deployed. Scheduling resources happens on much shorter
+time scales, typically measured in microseconds or less. For example,
+statistical multiplexing effectively schedules link resources on a
+packet-by-packet basis.
+
+We revisit both provisioning and scheduling throughout the book,
+but for now, we summarize the key resources:
 
 * **Link Capacity:** Every link as a fixed bandwidth that limits the
   rate at which it can transmit packets. This capacity is measured in
   bits-per-second (bps). Sometimes new cables need to be laid, but
-  more often than not, additional bandwidth can be "turned on". The
-  is known as *traffic engineering*.
+  more often than not, additional bandwidth can be "turned
+  on". Deciding how to do this is known as *traffic engineering*.
 
 * **Forwarding Capacity:** Switches are devices that move data from
   an input port to an output port. This requires an internal forwarding
   mechanism. This capacity is measured in packets-per-second
-  (pps). See Chapter 2 for more details.
+  (pps), with a given switch engineered to support some fixed
+  forwarding rate. (See Chapter 2 for more details.) A new switch has
+  to be deployed when additional forwarding rates are needed.
 
 * **Buffer Capacity:** Switches store packets waiting for their turn
   to be forwarded. This buffer is implemented in a finite amount of
-  memory finite. Capacity is measured in bytes, but also typically in
-  terms of the fraction of the network's Delay × Bandwidth product
-  (as explained in the next section).
-
-* **Compute Capacity:** Briefly discuss idea of performing
-  functionality beyond forwarding, and how this can be in-switch
-  or adjacent-to-switch.
-
+  memory. Capacity is measured in bytes, but also typically as a
+  function of how many bytes can be intransit across the network.
+  (See Section 1.5 for more details.) Memory can be added to an
+  existing switch, but too much memory for buffering, resulting in
+  potentially long buffering delays, can also be problematic.

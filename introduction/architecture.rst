@@ -24,12 +24,12 @@ object that provides an interface that can be manipulated by other
 components of the system, and hiding the details of how the object is
 implemented from the users of the object.
 
-Architectures are *not* programs. They sketch a mental model
-(typically expressed in words and diagrams), of what actually runs in
-the network.  Their purpose is to both *prescribe* how the network
-should be implemented (with the goal of guiding engineers in the
-actual code that gets written) and *describe* how the network has been
-implemented (with the goal of helping developers and operators
+Architectures are *not* programs. They help people build a mental
+model (typically expressed in words and diagrams), of what actually
+runs in the network.  Their purpose is to both *prescribe* how the
+network should be implemented (with the goal of guiding engineers in
+the actual code that gets written) and *describe* how the network has
+been implemented (with the goal of helping developers and operators
 understand how the existing network behaves). As a consequence, one of
 the main values of an architecture is to define terminology.
 
@@ -69,17 +69,18 @@ link* layer then collects a stream of bits into a larger aggregate
 called a *frame*. Network adaptors, along with device drivers running
 in the node operating system, typically implement the data link
 level. This means that frames, not raw bits, are actually delivered to
-hosts. The *network* layer handles routing among nodes within a
-packet-switched network. At this layer, the unit of data exchanged
-among nodes is typically called a *packet* rather than a frame,
-although they are fundamentally the same thing. The lower three layers
-are implemented on all network nodes, including switches within the
-network and hosts connected to the exterior of the network. The
+end hosts. The *network* layer handles routing among nodes within a
+switched network. At this layer, the unit of data exchanged among
+nodes is typically called a *packet* rather than a frame, although
+they are fundamentally the same thing. The lower three layers are
+implemented on all network nodes, including switches within the
+network and hosts connected to the edge of the network. The
 *transport* layer then implements what we sometimes refer to as a
-*process-to-process channel*. Here, the unit of data exchanged is
-commonly called a *message* or a *segment* rather than a packet or a
-frame. The transport layer and higher layers typically run only on the
-end hosts and not on the intermediate switches.
+*process-to-process channel*, an *IPC (Interprocess Communication)*
+mechanism. Here, the unit of data exchanged is commonly called a
+*message* or a *segment* rather than a packet or a frame. The
+transport layer and higher layers typically run only on the end hosts
+and not on the intermediate switches.
 
 Skipping ahead to the top (seventh) layer and working our way back
 down, we find the *application* layer. Application layer protocols
@@ -111,10 +112,11 @@ OSI stack.
 
    Example switched network.
 
-Note that the cloud icon used in :numref:`Figure %s <fig-osi>` is
-commonly used to represent an abstract network of some unspecified
-type, where we are not concerned with its internal structure or what
-technology it uses.
+Note that the cloud icon used in :numref:`Figures %s <fig-osi>` and
+:numref:`%s <fig-osi>` is commonly used to represent an abstract
+network of some unspecified type, where we are not concerned with its
+internal structure or what technology it uses. In the simplest case,
+the network can be implemented by a single point-to-point link.
 
 
 1.2.2 Internet Architecture
@@ -123,11 +125,11 @@ technology it uses.
 The Internet architecture is more concrete than the OSI architecture
 because it is organized around specific components, namely, the TCP
 and IP protocols. (For now, think of "protocol" as a synonym for
-"component" or "module"; we describe protocols in more detail in the
-next section.) The Internet was being deployed as a way to extend its
-predecessor—the ARPANET—when the OSI architecture was defined; the
-ARPANET had a major influence on the OSI reference model, but the
-Internet was largely viewed as a contemporary competitor.
+"module"; we describe protocols in more detail in the next section.)
+The Internet was being deployed as a way to extend its predecessor—the
+ARPANET—when the OSI architecture was defined; the ARPANET had a major
+influence on the OSI reference model, but the Internet was largely
+viewed as a contemporary competitor.
 
 .. _fig-internet:
 .. figure:: introduction/figures/internet.png
@@ -162,11 +164,11 @@ application programs. As a rough analogy, you can think of these
 protocols as similar to library programs; the Internet allows
 applications to run directly on top of IP, but these protocols provide
 useful functionality that makes the app developer's job easier. This
-is the only layer of the two architectures that is well aligned, with
-"transport protocol" being a universal term.
+is the only layer of the two architectures that is perfectly aligned,
+with "transport protocol" being a universal term.
 
-While it is possible to approximately map the other layers between the
-two architectures, understanding how and why they differ is more
+While it is possible to roughly map the other layers between the two
+architectures, understanding how and why they differ is more
 instructive. At the top-end, the Internet does not partition
 applications into sub-layers, corresponding to the OSI's layers 5, 6,
 and 7.  This is because it treats applications as an orthogonal
@@ -182,12 +184,11 @@ architecture makes.
 Where the Internet architecture is specific is in its definition of
 the Internet layer, corresponding to IP in :numref:`Figure %s
 <fig-internet>`.  IP supports universal connectivity between every
-pair of edge devices: it assigns a global address to every connected
-device and is responsible for forwarding each packet to its
-destination. IP does this not by providing a single global network—in
-the sense that the network layer in the OSI model defines a switched
-network—but rather, by interconnecting networks with switches that are
-attached to two or more networks. That is, IP supports an
+pair of edge devices: it assigns a global address to every device and
+forwards packets to their destination based on this address. IP does
+this *not* by implementing a single switched network—in the sense the
+OSI network layer defines a switched network—but rather, by
+interconnecting networks with switches. That is, IP supports an
 *internetwork*, as shown in :numref:`Figure %s
 <fig-internet-cloud>`. A switch that is connected to two or more
 networks is commonly called a *router* or *gateway*, although it plays
@@ -202,17 +203,33 @@ to another.
    Interconnection of networks, which switches (typically called
    routers) forwarding packets from one network to another.
 
-In effect, the Internet is a *logical* network running on top of a
-collection of *physical* networks. This is a powerful idea, with
-non-obvious consequences. For example, because a minimal network
-consisting of exactly one link connecting two switches still qualifies
-as a network, it is possible to construct a switched network like the
-one shown in :numref:`Figure %s <fig-network>` with IP playing exactly
-the same role as the network layer in the OSI model. As another
-example, an internet can itself be viewed as a kind of network, which
-means that an internet can be built from a set of internets.  Thus, we
-can recursively build arbitrarily large networks by interconnecting
-clouds to form larger clouds.
+Because IP depends on other networks, it cannot assume anything about
+how they do their job, for example, whether they implement digital
+circuits (as Telco networks typically do) or unreliable message
+delivery (as wireless networks sometimes do). As a consequence, IP
+establishes a minimal service model, known as *best-effort*. That is,
+IP attempts to deliver every packet from source host to destination
+host, but it makes no guarantees. Implicit in this definition, but
+worth highlighting, is that IP is a *packet-swithced network*, and its
+switches (i.e., routers) are *packet switches*: they receive full
+packets on their input ports, store those packets in memory, and then
+forward complete packets on an output port. Such networks are
+sometimes called *store-and-forward* networks to distinguish them from
+circuit-based networks that pass signals (either electrical or
+optical) directly from input to output without buffering or delay. We
+discuss the importance of this design in Section 1.4.
+
+That the Internet is a *logical* network running on top of a
+collection of *physical* networks is a powerful idea, with non-obvious
+consequences. For example, because a minimal network consisting of
+exactly one link connecting two switches still qualifies as a network,
+it is possible to construct a switched network like the one shown in
+:numref:`Figure %s <fig-network>` with IP playing exactly the same
+role as the network layer in the OSI model. As another example, an
+internet can itself be viewed as a kind of network, which means that
+an internet can be built from a set of internets.  Thus, we can
+recursively build arbitrarily large networks by interconnecting clouds
+to form larger clouds.
 
 We take a closer look at how IP achieves this goal in Chapter 5, but
 for now the main take away is that we can define a *network*
@@ -223,7 +240,7 @@ bottom level, the network is implemented by some physical medium.
 
 .. sidebar:: IETF and Standardization
 
-   We have informally been talking about the Internet community, but
+   *We have informally been talking about the Internet community, but
    it includes a standardization body, known as the
    Internet Engineering Task Force (IETF), which is responsible for
    the specification of many of the Internet protocols, such as TCP,
@@ -231,9 +248,9 @@ bottom level, the network is implemented by some physical medium.
    protocols defined by other organizations, including IEEE's 802.11
    ethernet and Wi-Fi standards, W3C's HTTP/HTML web specifications,
    3GPP's 4G and 5G cellular networks standards, and ITU-T's H.232
-   video encoding standards, to name a few.
+   video encoding standards, to name a few.*
 
-   In addition to defining architectures and specifying protocols,
+   *In addition to defining architectures and specifying protocols,
    there are yet other organizations that support the larger goal of
    interoperability. One example is the IANA (Internet Assigned
    Numbers Authority), which as its name implies, is responsible for
@@ -241,7 +258,7 @@ bottom level, the network is implemented by some physical medium.
    work. IANA, in turn, is a department within the ICANN (Internet
    Corporation for Assigned Names and Numbers), a non-profit
    organization that's responsible for the overall stewardship of the
-   Internet.
+   Internet.*
 
 Finally, it is worth noting that the Internet had been operational for
 well over a decade before anyone started publishing architectural
@@ -252,87 +269,69 @@ hourglass design was not widely acknowledged until it was well
 established as viable, in the same way individual protocols are not
 standardized unless there is at least one (and preferably two)
 representative implementations. This cultural assumption of the IETF
-helps to ensure that the architecture’s protocols can be efficiently
-implemented.  Perhaps the value the Internet culture places on working
-software is best exemplified by a quote on T-shirts commonly worn at
-IETF meetings:
+(see the sidebar) helps to ensure that the architecture’s protocols
+can be efficiently implemented.  Perhaps the value the Internet
+culture places on working software is best exemplified by a quote on
+T-shirts commonly worn at IETF meetings:
 
    *We reject kings, presidents, and voting. We believe in rough
    consensus and running code.* **(David Clark)**
 
+1.2.3 Separation of Concerns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.2.3 Architectural Invariants
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+System design principles are often applied to architectural questions,
+and ultimately shape the resulting blueprint. We highlight several
+design principles throughout the book, but we have already seen
+one—the *separation of concerns*\ —applied to the Internet
+architecture.  As discussed in the previous subsection, the Internet
+is purposely agnostic about the application layer and the network
+layer, focusing instead on how to assemble a collection of networks
+into an internet (the IP layer), and how to deliver useful
+process-to-process communication abstractions to applications (the
+transport layer).
 
-Architectures are more than just blueprints. They also identify
-invariants that will not change as the system evolves. These "fixed
-points" are the essence of an architecture, and as a consequence,
-baked into every design decision that needs to be made. IP's approach
-to providing global connectivity plays this role in the Internet
-architecture, and so we leverage it as a key organizing principle for
-this book. That is, we break the book into the following two parts:
+This isn't to say that applications and network technologies are
+unimportant, but rather, that (1) it is best to not be overly
+prescriptive since we can't know what applications and technologies
+will emerge over time, and (2) it makes the job of architecting the
+the system easier if we keep our focus narrow. In general, the
+separation of concerns principle can be summarized as follows: When
+faced with the design of a complex system, carve out independent
+challenges and address them in isolation, without being overly
+concerned about how you’re going to address the other issues.
+Conflating too many issues and trying to address them all at once is
+often tempting (it’s easy to convince yourself that doing so yields a
+more optimized solution), but most of the time it’s a recipe for
+failure.
 
-* **Part One: Inside the Network:** The IP Internet provides logical
-  connectivity between every pair of connected edge devices, where
-  nearly all communication is indirect through a sequence of one or
-  more switches. Moreover, in the same way a physical connection might
-  fail from time-to-time—a network’s natural enemy is a backhoe that
-  cuts through a cable, but there are many other more subtle failure
-  modes—the end-to-end logical connection does not guarantee every
-  sent message is actually received. Our goal for Part One is to
-  describe how to support what is commonly known as *best-effort
-  packet delivery*, where dealing with this imperfection is one of the
-  factors that makes Part Two interesting.
+This approach to dealing with complexity is so fundamental that we
+leverage it as an organizing principle for this book, which we break
+into two parts:
 
-  We begin Part One in Chapter 2, where we look at the possible design
-  space for switches, but settle on a particular design that plays an
-  important role in today’s Internet: Ethernet. The rest of Part One
-  then builds on top of this foundation, introducing all the
-  challenges that have to be addressed in order to send and receive
-  messages over a global network of interconnected switches inside the
-  network. We assume the 22 billion devices at the edge of the network
-  are trying to communicate with each other, but save the challenges
-  of building applications on top of the interconnected network of
-  switches for Part Two. Our goal in Part One is to show how IP
-  provides logical connectivity between every pair of connected edge
-  devices.
+* **Inside the Network:** Part One describes how to support
+  global-scale best-effort packet delivery. We begin Part One in
+  Chapter 2, where we look at the possible design space for switches,
+  but settle on a particular design that plays an important role in
+  today’s Internet: Ethernet. The rest of Part One then builds on top
+  of this foundation, identifying all the challenges that have to be
+  addressed in order to send and receive messages over a global
+  network of interconnected switches.
 
-* **Part Two: Edge of the Network:** The edge devices connected to a
-  network like the Internet—whether they are servers, laptops, mobile
-  phones, or other consumer appliances—are not managed as part of the
-  network, per se, but they do play a critical role in realizing a
-  global network like today’s Internet. The edge is where applications
-  run, along with a networking software stack that interacts with
-  (connects the device to) the switches running inside the
-  network. Part Two focuses on the applications and this edge software
-  stack.
-
-  We begin Part Two with Chapter 10, where we introduce a
-  representative set of applications, and identify both how they
-  differ and what they have in common. Based on what we know about the
-  underlying network—that it provides the universal, best-effort
-  packet delivery service described in Part One—the subsequent
-  chapters then discuss the key challenges that arise when you try to
-  “fill the gap” between what applications expect and what the
+* **Edge of the Network:** Part Two focuses on the edge software stack
+  that supports applications. We begin Part Two with Chapter 10, where
+  we introduce a representative set of applications, and identify both
+  how they differ and what they have in common. Based on what we know
+  about the underlying network—that it provides the universal,
+  best-effort packet delivery service described in Part One—the
+  subsequent chapters then discuss the key challenges that arise when
+  you try to “fill the gap” between what applications need and the
   underlying packet delivery service provides.
 
-Topics in both parts are central to networking, but making the
-division explicit serves to highlight an important system design
-principle: the *separation of concerns*. Fully appreciating the
-implications of this principle comes with reading the whole book, but
-the gist is straightforward: when faced with the design of a complex
-system, carving out independent challenges and addressing them in
-isolation, without being overly concerned about how you’re going to
-address the other issues, is a proven strategy. Conflating too many
-issues and trying to address them all at once is often tempting (it’s
-easy to convince yourself that doing so yields a more optimized
-solution), but most of the time it’s a recipe for failure.
-
 Like any deconstruction of a complex system into separate parts, this
-decomposition is not perfect. This particular boundary is important to
-the Internet’s success, and also helps us organize the material in
-this book. But there are important challenges that require attention,
-and yet fall outside this particular framing of the problem space. We
-call attention to such “exceptions to the rule” when they arise, and
-use them to illustrate that every system design requires judgement and
-makes tradeoffs.
+decomposition is not perfect. The inside-vs-edge separation is
+important to the Internet’s success, but there are important
+challenges that are not easily addressed by this particular framing.
+We call attention to such “exceptions to the rule” when they arise,
+and use them to illustrate that every system design requires judgement
+and makes tradeoffs.

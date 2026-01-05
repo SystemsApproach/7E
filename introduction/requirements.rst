@@ -74,7 +74,7 @@ that is shared by all applications—should be relatively minimal. It
 should provide a service that is of value to all applications and
 leave most decisions about functionality to higher layers (with the
 application at the top of the software stack).  For example, it makes
-no sense for the base service to provide absolute guarantees about
+little sense for the base service to provide absolute guarantees about
 message delivery if not all applications need it. On the other hand,
 many applications share common requirements about such things as
 reliability and security, so it is helpful to provide optional
@@ -86,12 +86,12 @@ resource sharing*. Networks are built using finite resources; they do
 not have infinite capacity and it is not generally practical to
 provide dedicated connectivity between any two communicating entities.
 This means networks are fundamentally a shared resource, making the
-mechanism that allocates resources to different users one of the
-central technical challenges. This mechanism should be fair (for some
-definition of fairness), but also efficient. The latter requirement
-means that we want to maximize the amount data the network delivers on
-behalf of its users, for a given set of resource capacities.  We
-expand on this requirement in Section 1.5.
+mechanism that allocates resources to different users a key technical
+challenge. This mechanism should be fair (for some definition of
+fairness), but also efficient. The latter requirement means that we
+want to maximize the amount data the network delivers on behalf of its
+users, for a given set of resource capacities.  We expand on this
+requirement in Section 1.5.
 
 The fourth requirement is that the network be *high performance.*
 Everyone wants the network to be fast, but performance is
@@ -104,8 +104,8 @@ such as the speed of light, but there is also significant work that a
 network has to do in order to deliver on this potential. We expand
 on this requirement in Section 1.6.
 
-We highlight the these four requirements because they dominate the
-design challenges discussed throughout the book. There are other
+We highlight these four requirements because they dominate the design
+challenges discussed throughout the book. There are other
 requirements, all of which mirror the requirements one would place on
 any computer system. They include that the network be secure,
 manageable, reliable, usable, available, evolvable, and so on. All of
@@ -113,9 +113,9 @@ these requirements play a role, and we address them throughout the
 book. Keep in mind, though, that it is not possible to design any
 system that treats all requirements as equally "the most important".
 Tradeoffs are inevitable, and they change over time.  Security is a
-great example.  Of course security is important, but it was of lower
-priority during the early days of the Internet, when everyone was
-focused getting it to work in the first place. As the Internet became
+great example.  Everyone agrees security is important, but it was of
+lower priority during the early days of the Internet, when the focus
+was on getting it to work in the first place. As the Internet became
 more and more successful, attracting more users and applications,
 security moved up in importance. Today it is one of the topmost
 concerns. We address security in multiple places throughout the book,
