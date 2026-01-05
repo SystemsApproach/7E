@@ -61,3 +61,4 @@ too will likely change over time.
 .. include:: introduction/architecture.rst
 .. include:: introduction/protocols.rst
 .. include:: introduction/statmux.rst
+.. include:: introduction/performance.rst
