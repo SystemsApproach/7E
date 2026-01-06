@@ -1,15 +1,14 @@
 1.5 Performance
 --------------------------------
 
-Up to this point, we have focused primarily on the functional aspects of
-networks. Like any computer system, however, computer networks are also
-expected to perform well. This is because the effectiveness of
-computations distributed over the network often depends directly on the
-efficiency with which the network delivers the computation’s data. While
-the old programming adage “first get it right and then make it fast”
-remains true, in networking it is often necessary to “design for
-performance.” It is therefore important to understand the various
-factors that impact network performance.
+Like any computer system, computer networks are also expected to
+perform well. This is because the effectiveness of applications
+distributed over the network often depends directly on the efficiency
+with which the network delivers the application’s data. While the old
+programming adage “first get it right and then make it fast” remains
+true, in networking it is often necessary to “design for performance.”
+It is therefore important to understand the various factors that
+impact network performance.
 
 1.5.1 Bandwidth and Latency
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,39 +34,27 @@ range of signals that can be accommodated.
 When we talk about the bandwidth of a communication link, we normally
 refer to the number of bits per second that can be transmitted on the
 link. This is also sometimes called the *data rate.* We might say that
-the bandwidth of an Ethernet link is 100 Mbps. A useful distinction can
+the bandwidth of an Ethernet link is 1 Gbps. A useful distinction can
 also be made, however, between the maximum data rate that is available
-on the link and the number of bits per second that we can actually
-transmit over the link in practice. We tend to use the word *throughput*
-to refer to the *measured performance* of a system. Thus, because of
-various inefficiencies of implementation, a pair of nodes connected by a
-link with a bandwidth of 100 Mbps might achieve a throughput of only
-10 Mbps. This would mean that an application on one host could send data
-to the other host at 10 Mbps.
+on the link and the number of bits per second that we can deliver to
+the receiving process in practice. We tend to use the word
+*throughput* to refer to the *measured performance* of a system. Thus,
+because of various inefficiencies of implementation—most notably, how
+many times a message has to be copied from one memory location—a pair
+of nodes connected by a link with a bandwidth of 1 Gbps might achieve
+end-to-end throughput of only 100 Mbps. This would mean that an
+application on one host could send data to the other host at 100 Mbps.
 
-Finally, we often talk about the bandwidth *requirements* of an
-application. This is the number of bits per second that it needs to
-transmit over the network to perform acceptably. For some applications,
-this might be “whatever I can get”; for others, it might be some fixed
-number (preferably not more than the available link bandwidth); and for
-others, it might be a number that varies with time. We will provide more
-on this topic later in this section.
-
-While you can talk about the bandwidth of the network as a whole,
-sometimes you want to be more precise, focusing, for example, on the
-bandwidth of a single physical link or of a logical process-to-process
-channel. At the physical level, bandwidth is constantly improving, with
-no end in sight. Intuitively, if you think of a second of time as a
-distance you could measure with a ruler and bandwidth as how many bits
-fit in that distance, then you can think of each bit as a pulse of some
-width. For example, each bit on a 1-Mbps link is 1 μs wide, while each
-bit on a 2-Mbps link is 0.5 μs wide, as illustrated in :numref:`Figure
-%s <fig-bit-width>`. The more sophisticated the transmitting and receiving
-technology, the narrower each bit can become and, thus, the higher the
-bandwidth. For logical process-to-process channels, bandwidth is also
-influenced by other factors, including how many times the software that
-implements the channel has to handle, and possibly transform, each bit
-of data.
+Finally, at the physical level, bandwidth is constantly improving due
+to improvements in transmission hardware—the components that send and
+receive signals on the physical medium. Intuitively, if you think of a
+second of time as a distance you could measure with a ruler and
+bandwidth as how many bits fit in that distance, then you can think of
+each bit as a pulse of some width. For example, each bit on a 1-Gbps
+link is 1 nanosecond (ns) wide, while each bit on a 2-Gbps link is 0.5
+ns wide, as illustrated in :numref:`Figure %s <fig-bit-width>`. The
+more sophisticated the transmitting and receiving technology, the
+narrower each bit can become and, thus, the higher the bandwidth.
 
 .. _fig-bit-width:
 .. figure:: introduction/figures/f01-16-9780123850591.png
@@ -75,9 +62,9 @@ of data.
    :align: center
 
    Bits transmitted at a particular bandwidth can be
-   regarded as having some width: (a) bits transmitted at 1 Mbps
-   (each bit is 1 microsecond wide); (b) bits transmitted at 2 Mbps
-   (each bit is 0.5 microseconds wide).
+   regarded as having some width: (a) bits transmitted at 1 Gbps
+   (each bit is 1 nanosecond wide); (b) bits transmitted at 2 Gbps
+   (each bit is 0.5 nanoseconds wide).
 
 
 The second performance metric, latency, corresponds to how long it takes
@@ -91,20 +78,20 @@ which it is more important to know how long it takes to send a message
 from one end of a network to the other and back, rather than the one-way
 latency. We call this the *round-trip time* (RTT) of the network.
 
-We often think of latency as having three components. First, there is
-the speed-of-light propagation delay. This delay occurs because nothing,
-including a bit on a wire, can travel faster than the speed of light. If
-you know the distance between two points, you can calculate the
+Network latency has three components. First, there is the
+speed-of-light propagation delay. This delay occurs because nothing,
+including a bit on a wire, can travel faster than the speed of light.
+If you know the distance between two points, you can calculate the
 speed-of-light latency, although you have to be careful because light
-travels across different media at different speeds: It travels at
-3.0 × 10\ :sup:`8` m/s in a vacuum, 2.3 × 10\ :sup:`8` m/s
-in a copper cable, and 2.0 × 10\ :sup:`8` m/s in an optical fiber.
-Second, there is the amount of time it takes to transmit a unit of data.
-This is a function of the network bandwidth and the size of the packet in
-which the data is carried. Third, there may be queuing delays inside the
-network, since packet switches generally need to store packets for some
-time before forwarding them on an outbound link. So, we could define the
-total latency as
+travels across different media at different speeds: It travels at 3.0
+× 10\ :sup:`8` m/s in a vacuum, 2.3 × 10\ :sup:`8` m/s in a copper
+cable, and 2.0 × 10\ :sup:`8` m/s in an optical fiber.  Second, there
+is the amount of time it takes to transmit a unit of data.  This is a
+function of the network bandwidth and the size of the packet in which
+the data is carried. Third, there may be queuing delays inside the
+network, since packet switches generally need to store packets for
+some time before forwarding them on an outbound link. So, we could
+define the total latency as
 
 ::
 
@@ -133,57 +120,25 @@ insignificant, however, since the former implies that the time to
 transmit a byte (``Transmit``) is 8 μs and the latter implies
 ``Transmit`` = 0.08 μs.
 
-In contrast, consider a digital library program that is being asked to
-fetch a 25-megabyte (MB) image—the more bandwidth that is available, the
-faster it will be able to return the image to the user. Here, the
-bandwidth of the channel dominates performance. To see this, suppose
-that the channel has a bandwidth of 10 Mbps. It will take 20 seconds to
-transmit the image (25 × 10\ :sup:`6` × 8-bits / 10 × 10\ :sup:`6`
-Mbps = 20 seconds), making it relatively unimportant if the image
-is on the other side of a 1-ms channel or a 100-ms channel; the difference
-between a 20.001-second response time and a 20.1-second response time is
+In contrast, consider an application that is being asked to download a
+250-megabyte (MB) file—the more bandwidth that is available, the
+faster it will be able to return the file to the user. Here, network
+bandwidth dominates performance. To see this, suppose that the channel
+has a bandwidth of 100 Mbps. It takes 20 seconds to transmit the file
+(250 × 10\ :sup:`6` × 8-bits / 100 × 10\ :sup:`6` Mbps = 20 seconds),
+making it relatively unimportant if the file is on the other side of a
+1-ms channel or a 100-ms channel; the difference between a
+20.001-second response time and a 20.1-second response time is
 negligible.
 
-.. _fig-latency:
-.. figure:: introduction/figures/f01-17-9780123850591.png
-   :width: 600px
-   :align: center
-
-   Perceived latency (response time) versus round-trip
-   time for various object sizes and link speeds.
-
-:numref:`Figure %s <fig-latency>` gives you a sense of how latency or
-bandwidth can dominate performance in different circumstances. The
-graph shows how long it takes to move objects of various sizes
-(1 byte, 2 KB, 1 MB) across networks with RTTs ranging from 1 to
-100 ms and link speeds of either 1.5 or 10 Mbps. We use logarithmic
-scales to show relative performance. For a 1-byte object (say, a
-keystroke), latency remains almost exactly equal to the RTT, so that
-you cannot distinguish between a 1.5-Mbps network and a 10-Mbps
-network. For a 2-KB object (say, an email message), the link speed
-makes quite a difference on a 1-ms RTT network but a negligible
-difference on a 100-ms RTT network. And for a 1-MB object (say, a
-digital image), the RTT makes no difference—it is the link speed that
-dominates performance across the full range of RTT.
-
-Note that throughout this book we use the terms *latency* and *delay* in
-a generic way to denote how long it takes to perform a particular
-function, such as delivering a message or moving an object. When we are
-referring to the specific amount of time it takes a signal to propagate
-from one end of a link to another, we use the term *propagation delay*.
-Also, we make it clear in the context of the discussion whether we are
-referring to the one-way latency or the round-trip time.
-
-As an aside, computers are becoming so fast that when we connect them to
-networks, it is sometimes useful to think, at least figuratively, in
-terms of *instructions per mile*. Consider what happens when a computer
-that is able to execute 100 billion instructions per second sends a
-message out on a channel with a 100-ms RTT. (To make the math easier,
-assume that the message covers a distance of 5000 miles.) If that
-computer sits idle the full 100 ms waiting for a reply message, then it
-has forfeited the ability to execute 10 billion instructions, or 2
-million instructions per mile. It had better have been worth going over
-the network to justify this waste.
+Note that throughout this book we use the terms *latency* and *delay*
+in a generic way to denote how long it takes to perform a particular
+function, such as delivering a message or moving an object from one
+machine to another. When we are referring to the specific amount of
+time it takes a signal to propagate from one end of a link to another,
+we use the term *propagation delay*.  Also, we make it clear in the
+context of the discussion whether we are referring to the one-way
+latency or the round-trip time.
 
 1.5.2 Delay × Bandwidth Product
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -218,18 +173,18 @@ early 1980s could hold.
 The delay × bandwidth product is important to know when constructing
 high-performance networks because it corresponds to how many bits the
 sender must transmit before the first bit arrives at the receiver. If
-the sender is expecting the receiver to somehow signal that bits are
-starting to arrive, and it takes another channel latency for this signal
-to propagate back to the sender, then the sender can send up one *RTT ×
-bandwidth* worth of data before hearing from the receiver that all is
-well. The bits in the pipe are said to be “in flight,” which means that
-if the receiver tells the sender to stop transmitting it might receive
-up to one RTT × bandwidth’s worth of data before the sender manages to
-respond. In our example above, that amount corresponds to
-5.5 × 10\ :sup:`6` bits (671 KB) of data. On the other hand, if
-the sender does not fill the pipe—i.e., does not send a whole RTT ×
-bandwidth product’s worth of data before it stops to wait for a
-signal—the sender will not fully utilize the network.
+the sender is expecting the receiver to acknowledge that bits are
+starting to arrive, and it takes another channel latency for this
+acknowledgement to propagate back to the sender, then the sender can
+send up one *RTT × bandwidth* worth of data before hearing from the
+receiver that all is well. The bits in the pipe are said to be “in
+flight,” which means that if the receiver tells the sender to stop
+transmitting it might receive up to one RTT × bandwidth’s worth of
+data before the sender manages to respond. In our example above, that
+amount corresponds to 5.5 × 10\ :sup:`6` bits (671 KB) of data. On the
+other hand, if the sender does not fill the pipe—i.e., does not send a
+whole RTT × bandwidth product’s worth of data before it stops to wait
+for an acknowledgement—the sender will not fully utilize the network.
 
 Note that most of the time we are interested in the RTT scenario,
 which we simply refer to as the delay × bandwidth product, without
@@ -254,21 +209,17 @@ some typical network links.
    | Cross-country fiber | 10 Gbps   | 4,000 km         | 40 ms   | 400 Mb          |
    +---------------------+-----------+------------------+---------+-----------------+
 
-1.5.3 High-Speed Networks
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.5.3 Infinite Bandwidth
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The seeming continual increase in bandwidth causes network designers to
-start thinking about what happens in the limit or, stated another way,
-what is the impact on network design of having infinite bandwidth
-available.
-
-Although high-speed networks bring a dramatic change in the bandwidth
-available to applications, in many respects their impact on how we think
-about networking comes in what does *not* change as bandwidth increases:
-the speed of light. To quote Scotty from *Star Trek,* “Ye cannae change
-the laws of physics.” In other words, “high speed” does not mean that
-latency improves at the same rate as bandwidth; the transcontinental RTT
-of a 1-Gbps link is the same 100 ms as it is for a 1-Mbps link.
+The seeming continual increase in bandwidth causes network designers
+to start thinking about what happens in the limit. As a thought
+experiment, we need to ask what impact infinite bandwidth means for
+network design. The key to the answer is what does *not* change as
+bandwidth increases: the speed of light. To quote Scotty from *Star
+Trek,* “Ye cannae change the laws of physics.” In other words, latency
+will not improve at the same rate as bandwidth; the transcontinental
+RTT of a 1-Gbps link is the same 100 ms as it is for a 1-Mbps link.
 
 To appreciate the significance of ever-increasing bandwidth in the face
 of fixed latency, consider what is required to transmit a 1-MB file over
@@ -317,7 +268,7 @@ relationship as
 
 .. centered:: TransferTime = RTT + 1/Bandwidth x TransferSize
 
-We use in this calculation to account for a request message being sent
+We use this calculation to account for a request message being sent
 across the network and the data being sent back. For example, consider a
 situation where a user wants to fetch a 1-MB file across a 1-Gbps with a
 round-trip time of 100 ms. This includes both the transmit time for 1 MB
@@ -337,47 +288,46 @@ for small transfers.
 1.5.4 Application Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The discussion in this section has taken a network-centric view of
+The discussion up to this point takes a network-centric view of
 performance; that is, we have talked in terms of what a given link or
-channel will support. The unstated assumption has been that application
-programs have simple needs—they want as much bandwidth as the network
-can provide. This is certainly true of the aforementioned digital
-library program that is retrieving a 250-MB image; the more bandwidth
-that is available, the faster the program will be able to return the
-image to the user.
+channel supports. The unstated assumption is that application programs
+have simple needs—they want as much throughput as the network can
+provide. This is certainly true of the aforementioned application that
+needs to download a 250-MB file; the more bandwidth that is available,
+the faster the program will be able to complete its task.
 
-However, some applications are able to state an upper limit on how much
-bandwidth they need. Video applications are a prime example. Suppose one
-wants to stream a video that is one quarter the size of a standard TV
-screen; that is, it has a resolution of 352 by 240 pixels. If each pixel
-is represented by 24 bits of information, as would be the case for
-24-bit color, then the size of each frame would be (352 × 240 × 24) /
-8 = 247.5 KB If the application needs to support a frame rate of
-30 frames per second, then it might request a throughput rate of 75
-Mbps. The ability of the network to provide more bandwidth is of no
-interest to such an application because it has only so much data to
-transmit in a given period of time.
+However, some applications are able to state an upper limit on how
+much bandwidth they need. Video applications are a prime
+example. Suppose one wants to stream a video that has a resolution of
+352 by 240 pixels. If each pixel is represented by 24 bits of
+information, as would be the case for 24-bit color, then the size of
+each frame would be (352 × 240 × 24) / 8 = 247.5 KB. If the application
+needs to support a frame rate of 30 frames per second, then it might
+request a throughput rate of 75 Mbps. The ability of the network to
+provide more bandwidth is of no interest to such an application
+because it has only so much data to transmit in a given period of
+time.
 
-Unfortunately, the situation is not as simple as this example suggests.
-Because the difference between any two adjacent frames in a video stream
-is often small, it is possible to compress the video by transmitting
-only the differences between adjacent frames. Each frame can also be
-compressed because not all the detail in a picture is readily perceived
-by a human eye. The compressed video does not flow at a constant rate,
-but varies with time according to factors such as the amount of action
-and detail in the picture and the compression algorithm being used.
-Therefore, it is possible to say what the average bandwidth requirement
-will be, but the instantaneous rate may be more or less.
+The situation is not as simple as this example suggests.  Because the
+difference between any two adjacent frames in a video stream is often
+small, it is possible to compress the video by transmitting only the
+differences between adjacent frames. Each frame can also be compressed
+because not all the detail in a picture is readily perceived by a
+human eye. The compressed video does not flow at a constant rate, but
+varies with time according to factors such as the amount of action and
+detail in the picture and the compression algorithm being used.
+Therefore, it is possible to say what the average bandwidth
+requirement will be, but the instantaneous rate may be more or less.
 
-The key issue is the time interval over which the average is computed.
-Suppose that this example video application can be compressed down to
-the point that it needs only 2 Mbps, on average. If it transmits 1
-megabit in a 1-second interval and 3 megabits in the following 1-second
+The key factor is the time interval over which the average is
+computed.  Suppose our example video can be compressed down to the
+point that it needs only 2 Mbps, on average. If it transmits 1 megabit
+in a 1-second interval and 3 megabits in the following 1-second
 interval, then over the 2-second interval it is transmitting at an
-average rate of 2 Mbps; however, this will be of little consolation to a
-channel that was engineered to support no more than 2 megabits in any
-one second. Clearly, just knowing the average bandwidth needs of an
-application will not always suffice.
+average rate of 2 Mbps; however, this will be of little consolation to
+a channel that was engineered to support no more than 2 megabits in
+any one second. Clearly, just knowing the average bandwidth needs of
+an application will not always suffice.
 
 Generally, however, it is possible to put an upper bound on how large a
 burst an application like this is likely to transmit. A burst might be
