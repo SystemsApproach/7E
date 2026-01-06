@@ -223,22 +223,23 @@ and ``__sum16`` are kernel-defined types for 16-bit unsigned integers.
 
 The process of encapsulation is then repeated at each level of the
 protocol graph; for example, IP encapsulates UDP’s message by
-attaching a header of its own. If we now assume that IP sends the
-message to its peer over some network, then when the message arrives
-at the destination host, it is processed in the opposite order: IP
-first interprets the IP header at the front of the message (i.e.,
-takes whatever action is appropriate given the contents of the header)
-and passes the body of the message (but not the IP header) up to UDP,
-which takes whatever action is indicated by the UDP header that its
-peer attached and passes the body of the message (but not the UDP
-header) up to the application program. The message passed up from UDP
-to the application on host 2 is exactly the same message as the
-application passed down to UDP on host 1; the application does not see
-any of the headers that have been attached to it to implement the
-lower-level communication services. This whole process is illustrated
-in :numref:`Figure %s <fig-encapsulation>`. Note that in this example,
-nodes in the network (e.g., switches and routers) may inspect the IP
-header at the front of the message.
+attaching a header of its own; ETH does the same with the IP
+packet. If we now assume that ETH sends the message to its peer over
+some network, then when the message arrives at the destination host,
+it is processed in the opposite order: ETH first interprets the ETH
+header at the front of the message (i.e., takes whatever action is
+appropriate given the contents of the header) and passes the body of
+the message (but not the ETH header) up to IP, which takes whatever
+action is indicated by the IP header that its peer attached and passes
+the body of the message (but not the IP header) up to UDP, which does
+the same. The message passed up from UDP to the application on host 2
+is exactly the same message as the application passed down to UDP on
+host 1; the application does not see any of the headers that have been
+attached to it to implement the lower-level communication services.
+This whole process is illustrated in :numref:`Figure %s
+<fig-encapsulation>`. Note that in a multi-hop network, intermediate
+nodes (e.g., switches and routers) may inspect their header to determine
+how to forward the message on towards its destination.
 
 .. _fig-encapsulation:
 .. figure:: introduction/figures/encapsulation.png

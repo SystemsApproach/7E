@@ -1,4 +1,4 @@
-1.4 Cost-Effective Resource Sharing
+1.4 Resource Sharing
 ----------------------------------------------
 
 Networks are a shared resource, carrying traffic between different
@@ -191,14 +191,14 @@ provisioning*, and while it sometimes requires installing new hardware
 physical infrastructure that is already in place.
 
 Provisioning resources and scheduling resources go hand-in-hand; they
-both assign resources to some user, but they differ in the time scale
-they operate on. Provisioning new resources can take anywhere from
-seconds or minutes to days or weeks; the former when those resources
-just need to be "turned on" and the latter when new hardware needs to
-be procured and deployed. Scheduling resources happens on much shorter
-time scales, typically measured in microseconds or less. For example,
-statistical multiplexing effectively schedules link resources on a
-packet-by-packet basis.
+both assign resources to some user (or class of users), but they
+differ in the time scale they operate on. Provisioning new resources
+can take anywhere from seconds or minutes to days or weeks; the former
+when those resources just need to be "turned on" and the latter when
+new hardware needs to be procured and deployed. Scheduling resources
+happens on much shorter time scales, typically measured in
+microseconds or less. For example, statistical multiplexing
+effectively schedules link resources on a packet-by-packet basis.
 
 We revisit both provisioning and scheduling throughout the book,
 but for now, we summarize the key resources:
@@ -214,12 +214,13 @@ but for now, we summarize the key resources:
   mechanism. This capacity is measured in packets-per-second
   (pps), with a given switch engineered to support some fixed
   forwarding rate. (See Chapter 2 for more details.) A new switch has
-  to be deployed when additional forwarding rates are needed.
+  to be deployed when additional forwarding capacity is needed.
 
-* **Buffer Capacity:** Switches store packets waiting for their turn
-  to be forwarded. This buffer is implemented in a finite amount of
-  memory. Capacity is measured in bytes, but also typically as a
-  function of how many bytes can be intransit across the network.
-  (See Section 1.5 for more details.) Memory can be added to an
-  existing switch, but too much memory for buffering, resulting in
-  potentially long buffering delays, can also be problematic.
+* **Buffer Capacity:** Switches store packets in a buffer, where they
+  wait their turn to be transmitted. This buffer is implemented in a
+  finite amount of memory, with capacity is measured in bytes.  Memory
+  is easily added to an existing switch, but too much memory for
+  buffering results in potentially long buffering delays. This can be
+  problematic, and so buffer capacity is often defined as a function
+  of how many bytes can be in transit across the network (a concept
+  explained in the next section).
