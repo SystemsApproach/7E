@@ -112,8 +112,8 @@ OSI stack.
 
    Example switched network.
 
-Note that the cloud icon used in :numref:`Figures %s <fig-osi>` and
-:numref:`%s <fig-osi>` is commonly used to represent an abstract
+Note that the cloud icon in :numref:`Figures %s <fig-osi>` and
+:numref:`%s <fig-network>` is commonly used to represent an abstract
 network of some unspecified type, where we are not concerned with its
 internal structure or what technology it uses. In the simplest case,
 the network can be implemented by a single point-to-point link.

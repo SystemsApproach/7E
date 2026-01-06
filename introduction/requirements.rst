@@ -57,14 +57,13 @@ aspects of the network is an important one. For example, controlling
 who may deploy applications tends to limit the user communities that
 might benefit from the network; anyone should be able deploy a new
 application that serves some community, no matter how niche.  As
-another example, it would not be practical for a limited number of
-operations teams to be responsible for fixing every outage reported
-anywhere on the planet; anyone should be able to own, and then take
-responsibility for operating, a piece of the global network. Avoiding
-these kinds of limitations may seem obvious, but historically, many
-networks have assumed tight control by a central authority rather than
-the loose federation of cooperating parties, as is the case with the
-Internet.
+another example, it would not be practical for a limited operations
+team to be responsible for fixing every outage reported anywhere on
+the planet; anyone should be able to own, and then take responsibility
+for operating, a piece of the global network. Avoiding these kinds of
+limitations may seem obvious, but historically, many networks have
+assumed tight control by a central authority rather than the loose
+federation of cooperating parties, as is the case with the Internet.
 
 The second requirement is that the network be *general-purpose*, that
 is, able to support a wide range of applications. In principle, this
@@ -91,7 +90,7 @@ challenge. This mechanism should be fair (for some definition of
 fairness), but also efficient. The latter requirement means that we
 want to maximize the amount data the network delivers on behalf of its
 users, for a given set of resource capacities.  We expand on this
-requirement in Section 1.5.
+requirement in Section 1.4.
 
 The fourth requirement is that the network be *high performance.*
 Everyone wants the network to be fast, but performance is
@@ -102,7 +101,7 @@ packet delivery is predictable, so that a video stream plays without
 jarring pauses. All of these metrics depend on physical limitations,
 such as the speed of light, but there is also significant work that a
 network has to do in order to deliver on this potential. We expand
-on this requirement in Section 1.6.
+on this requirement in Section 1.5.
 
 We highlight these four requirements because they dominate the design
 challenges discussed throughout the book. There are other
@@ -112,14 +111,14 @@ manageable, reliable, usable, available, evolvable, and so on. All of
 these requirements play a role, and we address them throughout the
 book. Keep in mind, though, that it is not possible to design any
 system that treats all requirements as equally "the most important".
-Tradeoffs are inevitable, and they change over time.  Security is a
-great example.  Everyone agrees security is important, but it was of
-lower priority during the early days of the Internet, when the focus
-was on getting it to work in the first place. As the Internet became
-more and more successful, attracting more users and applications,
-security moved up in importance. Today it is one of the topmost
-concerns. We address security in multiple places throughout the book,
-with the most detailed discussion in Chapter 12. For a more
+Tradeoffs are inevitable, and priorities change over time.  Security
+is a great example.  Everyone agrees security is important, but it was
+of lower priority during the early days of the Internet, when the
+focus was on getting it to work in the first place. As the Internet
+became more successful, attracting more and more users and
+applications, security moved up in importance. Today it is one of the
+topmost concerns. We address security in multiple places throughout
+the book, with the most detailed discussion in Chapter 12. For a more
 comprehensive look at network security, we recommend a companion book.
 
 .. admonition:: Further Reading

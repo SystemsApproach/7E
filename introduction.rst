@@ -49,7 +49,7 @@ identifying the fundamental challenges that have to be addressed, and
 exploring the design space of possible solutions. That is the goal of
 this book.
 
-It's also important to keep in mind that path from conception to
+It's also important to keep in mind that the path from conception to
 today’s reality is not a straight line, nor is today’s Internet the
 end of the process. There have been many false starts and stop-gap
 solutions, followed by years of iterative improvement. This evolution
