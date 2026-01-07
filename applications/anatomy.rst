@@ -1,4 +1,4 @@
-10.1 Anatomy of an Application
+2.1 Anatomy of an Application
 ---------------------------------------
 
 The applications that run on the Internet have come a long way. The
@@ -14,7 +14,7 @@ cloud. Before getting into specific examples, we first look at the
 basic structure that is common to nearly all applications, including a
 brief overview of how they are implemented in the cloud.
 
-10.1.1 Client-Server Computing
+2.1.1 Client-Server Computing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Most of the Internet's early applications could be classified as
@@ -32,7 +32,6 @@ implement them; instead, they are provided as part of the operating
 system, and exposed to applications through a standard API
 (application programming interface). For several decades the standard
 API for client-server applications has been the socket API.
-
 
 The *socket interface* was originally provided by the Berkeley
 distribution of Unix, and is now supported in virtually all popular
@@ -328,7 +327,7 @@ out the characters that arrive on the connection.
      }
    }
 
-10.1.2 Scalable Services
+2.1.2 Scalable Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The cloud did not exist when the first iteration of network
@@ -407,7 +406,7 @@ the inter-rack case).
 Figure Y. Example of a leaf-spine switching fabric common to cloud
 datacenters and other clusters, such as on-premises edge clouds.
 
-10.1.3 Distributed Services
+2.1.3 Distributed Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While the previous subsection describes how applications have evolved

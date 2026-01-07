@@ -3,7 +3,7 @@
 .. SPDX-License-Identifier: Apache-2.0
 
 
-Chapter 2:  Packet Switches
+Chapter 3:  Packet Switches
 ==================================
 
 We started Chapter 1 by asking one of the first questions any system architect must ask:
@@ -39,11 +39,10 @@ there are now domain-specific chips optimized for packet switching,
 analogous to the emergence of GPUs for graphics and TPUs for AI.
 
 This chapter gives an overview of these building block technologies,
-which then serve as the basis for the rest of Part One. While this
-chapter focuses on Ethernet, we caution that other technologies do
-exist. We discuss some of them in the last section, but Ethernet is
-the example technology that we describe in detail. If you understand
-Ethernet in depth, you can more easily digest any other technology you
-encounter.
+which then serve as the basis for Part III. While this chapter focuses
+on Ethernet, we caution that other technologies do exist. We discuss
+some of them in the last section, but Ethernet is the example
+technology that we describe in detail. If you understand Ethernet in
+depth, you can more easily digest any other technology you encounter.
 
 .. include:: switches/link-layer.rst

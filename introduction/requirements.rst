@@ -68,14 +68,14 @@ federation of cooperating parties, as is the case with the Internet.
 The second requirement is that the network be *general-purpose*, that
 is, able to support a wide range of applications. In principle, this
 means avoiding assumptions about how the network will be used. In
-practice, this means that the lowest levels of the network—the base
-that is shared by all applications—should be relatively minimal. It
-should provide a service that is of value to all applications and
-leave most decisions about functionality to higher layers (with the
-application at the top of the software stack).  For example, it makes
-little sense for the base service to provide absolute guarantees about
-message delivery if not all applications need it. On the other hand,
-many applications share common requirements about such things as
+practice, this means two things. One, that the network allow
+applications to be implemented in software on general-purpose
+processors. Two, that the lowest levels of the network—the base that
+is shared by all applications—should be relatively minimal. It should
+provide a service that is of value to all applications and leave most
+decisions about functionality to higher layers (with the application
+at the top of the software stack).  On the other hand, many
+applications share common requirements about such things as
 reliability and security, so it is helpful to provide optional
 capabilities they can employ if they want to. Getting this right is a
 balancing act, which we revisit at many points throughout the book.

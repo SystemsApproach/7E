@@ -280,10 +280,11 @@ T-shirts commonly worn at IETF meetings:
 1.2.3 Separation of Concerns
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-System design principles are often applied to architectural questions,
-and ultimately shape the resulting blueprint. We highlight several
-design principles throughout the book, but we have already seen
-one—the *separation of concerns*\ —applied to the Internet
+System design principles—the collective wisdom that comes from years
+of experience building systems—are often applied to architectural
+decisions, and ultimately shape the resulting blueprint. We highlight
+several design principles throughout the book, but we have already
+seen one—the *separation of concerns*\ —applied to the Internet
 architecture.  As discussed in the previous subsection, the Internet
 is purposely agnostic about the application layer and the network
 layer, focusing instead on how to assemble a collection of networks
@@ -306,27 +307,35 @@ more optimized solution), but most of the time it’s a recipe for
 failure.
 
 This approach to dealing with complexity is so fundamental that we
-leverage it as an organizing principle for this book, which we break
-into two parts:
+leverage it as an organizing principle for the rest of this book,
+which we break into three parts:
 
-* **Inside the Network:** Part One describes how to support
-  global-scale best-effort packet delivery. We begin Part One in
-  Chapter 2, where we look at the possible design space for switches,
-  but settle on a particular design that plays an important role in
-  today’s Internet: Ethernet. The rest of Part One then builds on top
-  of this foundation, identifying all the challenges that have to be
-  addressed in order to send and receive messages over a global
-  network of interconnected switches.
+* **Foundation:** Part I introduces the base concepts and terminology,
+  and scopes the other two parts. Chapter 2 introduces a
+  representative set of applications and identifies how they differ
+  and what they have in common. This sets the stage for understanding
+  the edge software stack described in Part III.  Chapter 3 looks at
+  the possible design space for switches and links, and then settles
+  on a particular technology—Ethernet—that serves as an exemplar
+  building block for discussing the challenges raised in Part II.
 
-* **Edge of the Network:** Part Two focuses on the edge software stack
-  that supports applications. We begin Part Two with Chapter 10, where
-  we introduce a representative set of applications, and identify both
-  how they differ and what they have in common. Based on what we know
-  about the underlying network—that it provides the universal,
-  best-effort packet delivery service described in Part One—the
-  subsequent chapters then discuss the key challenges that arise when
-  you try to “fill the gap” between what applications need and the
-  underlying packet delivery service provides.
+* **Inside the Network:** Part II describes how to support
+  global-scale best-effort packet delivery. The chapters in Part II
+  address the key challenges in building a packet switch network that
+  interconnects tens of billions of edge devices. This substrate makes
+  it possible for those devices to host the edge software stack
+  described in Part III.
+
+* **Edge of the Network:** Part III focuses on the edge software stack
+  that supports applications. The chapters in Part III address the key
+  challenges that arise when you try to “fill the gap” between what
+  applications need and what the underlying packet delivery service
+  described in Part II provides.
+
+Parts II and III can be read in either order, knowing that the
+“interface” between the two halves is a universal, best-effort packet
+delivery service; Part II implements the service and Part III uses the
+service.
 
 Like any deconstruction of a complex system into separate parts, this
 decomposition is not perfect. The inside-vs-edge separation is

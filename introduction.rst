@@ -6,11 +6,6 @@
 Chapter 1:  Introduction
 =============================
 
-   I must create a System, or be enslav’d by another Man’s; I will not
-   Reason and Compare: my business is to Create.
-
-   *—William Blake*
-
 Suppose you want to build a computer network, one that has the
 potential to grow to global scale and support applications as diverse
 as video conferencing, live and on-demand streaming, e-commerce,
