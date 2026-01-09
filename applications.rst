@@ -45,3 +45,4 @@ applications. But before getting to these examples, we first describe
 the basic anatomy of an application.
 
 .. include:: applications/anatomy.rst
+.. include:: applications/web.rst
