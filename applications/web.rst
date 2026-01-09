@@ -12,7 +12,7 @@ protocol—HTTP—underpinning it. In this section we dig into the details
 of that protocol and the architecture of the web.
 
 
-Before we go any further,it is important to distinguish between
+Before we go any further, it is important to distinguish between
 application *programs* and application *protocols*. For example, the
 HyperText Transport Protocol (HTTP) is an application protocol that is
 used to retrieve web pages from remote servers. Many different
@@ -189,7 +189,8 @@ For example, the ``START_LINE``
 
    GET http://www.cs.princeton.edu/index.html HTTP/1.1
 
-says that the client wants the server on host to return the page named
+says that the client wants the server on host ``www.cs.princeton.edu``
+to return the page named
 ``index.html``.  This particular example uses an absolute URL. It is
 also possible to request a path in the ``START_LINE`` and specify the host name
 in one of the ``MESSAGE_HEADER`` lines; for example,
@@ -416,7 +417,7 @@ loss, rather than causing a stall in the entire TCP connection while
 waiting for that lost packet to be retransmitted. At the same time,
 that lost packet provides a congestion signal that is applied to all
 streams in the QUIC connection. We cover QUIC in more detail in
-:ref:`Section 5.2 <5.2 Reliable Byte Stream (TCP)>`.
+Chapter 13.
 
 Another significant advantage of QUIC compared to TCP is the way it
 handles the steps required to secure an HTTP connection. The original
@@ -430,12 +431,13 @@ data to be sent in the first round trip rather than waiting multiple
 RTTs for connection establishment.
 
 HTTP/3 is implemented in the majority of browsers and is incrementally
-being deployed on servers across the Internet. There remain
-plenty of servers running HTTP/2 and even some HTTP/1.1 as well, so version negotiation is
-likely to be part of HTTP implementations for the foreseeable future.
+being deployed on servers across the Internet. There remain plenty of
+servers running HTTP/2 and even some HTTP/1.1 as well, so version
+negotiation is likely to be part of HTTP implementations for the
+foreseeable future.
 
-Caching
-~~~~~~~
+2.2.1 Caching
+~~~~~~~~~~~~~~
 
 An important implementation strategy that makes the web more usable is
 to cache web pages. Caching has many benefits. From the client’s
@@ -469,6 +471,14 @@ it can use it to satisfy a future request.
        the request to the server and the response to the client do not
        follow the same sequence of router hops.
 
+For the last couple of decades, caching has also been provided by
+specialized networks of servers known as Content Distribution Networks
+(CDNs). These are generally implemented as an overlay on top of the
+Internet to serve popular content from caches that are widely
+distributed and closer to the users than the origin servers. They not
+only improve performance but also make it harder for a popular site to
+be brought down by a *denial-of-service* attack.
+
 No matter where pages are cached, the ability to cache web pages is
 important enough that HTTP has been designed to make the job easier. The
 trick is that the cache needs to make sure it is not responding with an
@@ -483,10 +493,10 @@ to verify that it has the most recent copy of the page. More generally,
 there are a set of *cache directives* that must be obeyed by all caching
 mechanisms along the request/response chain. These directives specify
 whether or not a document can be cached, how long it can be cached, how
-fresh a document must be, and so on. We’ll look at the related issue of
-CDNs—which are effectively distributed caches—in a later section.
+fresh a document must be, and so on. We’ll return to the subject of
+CDNs in a later section.
 
-2.2.1 Web Services
+2.2.2 Web Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 So far we have focused on interactions between a human and a web server.
