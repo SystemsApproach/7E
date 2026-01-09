@@ -610,7 +610,7 @@ structure (i.e., the state representation). XML and the lighter-weight
 JavaScript Object Notation (JSON) are the most frequently used
 presentation languages for this state. Interoperability depends on
 agreement, between a Web Service and its clients, on the state
-representation. 
+representation.
 
 One of the selling features of REST is that it leverages the
 infrastructure that has been deployed to support the web. For example,
