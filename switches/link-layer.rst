@@ -1,4 +1,4 @@
-2.1 Link Layer
+3.1 Link Layer
 ---------------------------------
 
 As introduced in Chapter 1, all network communication depends on
@@ -11,7 +11,14 @@ signal onto the available analog signal. The process is performed by a
 Digital-to-Analog Converter (DAC). Every home stereo system includes a
 DAC working in the audio range of the spectrum; for network
 communication, we are typically working in the higher frequency bands
-depicted in Figure X from Chapter 1.
+depicted in :numref:`Figure %s <fig-spectrum>`.
+
+.. _fig-spectrum:
+.. figure:: switches/figures/spectrum.png
+   :width: 600px
+   :align: center
+
+   Electromagnetic spectrum.
 
 Abstractly, then, we can picture network communication as a digital
 signal being passed between nodes, where we can think of this signal
