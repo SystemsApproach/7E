@@ -1,0 +1,649 @@
+2.2 The World Wide Web
+------------------------------
+
+
+We begin our discussion of applications by focusing on the one that is
+so ubiquitous, it is often mixed up with the Internet itself: the
+World Wide Web. The web is so widely used today that it is hard to
+call it an application; it might be better thought of as a framework
+for building and delivering applications. But it did in fact start out
+as a single application, with a single application layer
+protocol—HTTP—underpinning it. In this section we dig into the details
+of that protocol and the architecture of the web.
+
+
+Before we go any further,it is important to distinguish between
+application *programs* and application *protocols*. For example, the
+HyperText Transport Protocol (HTTP) is an application protocol that is
+used to retrieve web pages from remote servers. Many different
+application programs—that is, web clients like Internet Explorer,
+Chrome, Firefox, and Safari—provide users with a different look and
+feel, but all of them use the same HTTP protocol to communicate with
+web servers over the Internet. Indeed, it is the fact that the
+protocol is published and standardized that enables application
+programs developed by many different companies and individuals to
+interoperate. That is how so many browsers are able to interoperate
+with all the web servers (of which there are also many varieties).
+
+Second, we observe that many application layer protocols, including
+HTTP, have a companion protocol that specifies the format of the data
+that can be exchanged. This is one reason why these protocols are
+relatively simple: much of the complexity is managed in this companion
+standard.  HTTP is a protocol for fetching web pages, but HyperText
+Markup Language (HTML) is a companion specification that defines the
+basic form of those pages. This separation between the data transfer
+protocol and the data format shows up again repeatedly, as we will see
+in the next section.
+
+The World Wide Web has been so successful and has been the primary way
+many people interact with the Internet for so long that sometimes, in
+the popular consciousness, the web *is* the Internet. (Of course, many
+people now interact with the Internet mainly using their phones,
+unaware that the web underpins most mobile apps as well.)  In fact,
+the design of the system that became the web started around 1989, long
+after the Internet had become a widely deployed system and numerous
+other methods to retrieve information over the Internet already
+existed. The original goal of the web was to offer a new way to organize
+and retrieve information, drawing on ideas about hypertext—interlinked
+documents—that had been around since at least the 1960s.\ [#]_ The
+core idea of hypertext is that one document can link to another
+document, and the protocol (HTTP) and document language (HTML) were
+designed to meet that goal.
+
+.. [#] A short history of the web provided by the World Wide Web
+       consortium traces its roots to a 1945 article describing links
+       between microfiche documents.
+
+One way to think of the web is as a set of cooperating clients
+and servers, all of whom speak the same language: HTTP. Most people are
+exposed to the web through a graphical client program or web browser
+such as Safari, Chrome, Firefox, or Internet Explorer. :numref:`Figure %s
+<fig-netscape>` shows the Safari browser in use, displaying a page of
+information from Princeton University.
+
+.. _fig-netscape:
+.. figure:: figures/browser-screenshot.png
+   :width: 600px
+   :align: center
+
+   The Safari web browser.
+
+If you want to organize information into a system of linked
+documents or objects, there needs to be a way to identify documents so
+you can link to them. Uniform Resource Locators (URLs)
+are so familiar to most of us by now that it’s easy to forget that they
+haven’t been around forever. They provide information that allows
+objects on the web to be located, and they look like the following:
+
+.. code-block:: html
+
+   http://www.cs.princeton.edu/index.html
+
+If you opened that particular URL, your web browser would open a TCP
+connection to the web server at a machine called
+``www.cs.princeton.edu`` and immediately retrieve and display the file
+called ``index.html``. Most files on the web contain images and text,
+and many have other objects such as audio and video clips, pieces of
+code, etc. They also frequently include URLs that point to other files
+that may be located on other machines, which is the core of the
+“hypertext” part of HTTP and HTML. A web browser has some way in which
+you can recognize URLs (often by highlighting or underlining some
+text) and then you can ask the browser to open them. These embedded
+URLs are an example of *hypertext links*. When you ask your web browser to
+open one of these embedded URLs (e.g., by pointing and clicking on it
+with a mouse), it will retrieve and display
+the named file. It thus becomes very easy to hop from one machine to
+another around the network, following links to all sorts of
+information. Once you have a means to embed a link in a document and
+allow a user to follow that link to get another document, you have the
+basis of a hypertext system.
+
+When you ask your browser to view a page, your browser (the client)
+fetches the page from the server using HTTP, which traditionally runs
+over TCP. At its core, HTTP is a text-based
+request/response protocol, where every message has the general form
+
+::
+
+   START_LINE <CRLF>
+   MESSAGE_HEADER <CRLF>
+   <CRLF>
+   MESSAGE_BODY <CRLF>
+
+where ``<CRLF>`` stands for carriage-return+line-feed. The
+first line (``START_LINE``) indicates whether this is a request message
+or a response message. In effect, it identifies the “remote procedure”
+to be executed (in the case of a request message), or the *status* of
+the request (in the case of a response message). The next set of lines
+specifies a collection of options and parameters that qualify the
+request or response. There are zero or more of these ``MESSAGE_HEADER``
+lines—the set is terminated by a blank line—each of which looks like a
+header line in an email message. HTTP defines many possible header
+types, some of which pertain to request messages, some to response
+messages, and some to the data carried in the message body. Instead of
+giving the full set of possible header types, though, we just give a
+handful of representative examples. Finally, after the blank line comes
+the contents of the message (``MESSAGE_BODY``); this part of
+the message is where a server would place the requested page when
+responding to a request, and it is typically empty for request messages.
+
+Why was HTTP designed to run over TCP? The designers didn’t have to do
+it that way, but TCP provides numerous services that HTTP needs:
+reliable delivery (no-one wants a web page with missing data), flow
+control, and congestion control. Using TCP (as opposed to either IP or
+UDP) meant that the designers of HTTP didn't need to reimplement those
+features. However, as we’ll see below, a few issues arose from
+building a request/response protocol on top of TCP. These issues
+become more apparent as you consider the details of the interactions
+between the application and transport layer protocols, and were
+exacerbated by the addition of security to the transport layer. This
+has led to new versions of HTTP and a new underlying transport, QUIC,
+discussed below.
+
+Request Messages
+~~~~~~~~~~~~~~~~
+
+The first line of an HTTP request message specifies three things: the
+operation to be performed, the web page the operation should be
+performed on, and the version of HTTP being used. Although HTTP
+defines a wide assortment of possible request operations—including
+*write* operations that allow a web page to be posted on a server—the
+two most common operations are ``GET`` (fetch the specified web page)
+and ``HEAD`` (fetch status information about the specified web
+page). The former is obviously used when your browser wants to
+retrieve and display a web page. The latter is used to test the
+validity of a hypertext link or to see if a particular page has been
+modified since the browser last fetched it. The full set of operations
+is summarized in :numref:`Table %s <tab-ops>`. As innocent as it
+sounds, the ``POST`` command enables much mischief (including spam) on
+the Internet.
+
+.. _tab-ops:
+.. table::  HTTP Request Operations.
+   :align: center
+   :widths: auto
+
+   +-----------+-----------------------------------------------------------+
+   | Operation | Description                                               |
+   +===========+===========================================================+
+   | OPTIONS   | Request information about available options               |
+   +-----------+-----------------------------------------------------------+
+   | GET       | Retrieve document identified in URL                       |
+   +-----------+-----------------------------------------------------------+
+   | HEAD      | Retrieve metainformation about document identified in URL |
+   +-----------+-----------------------------------------------------------+
+   | POST      | Give information (e.g., annotation) to server             |
+   +-----------+-----------------------------------------------------------+
+   | PUT       | Store document under specified URL                        |
+   +-----------+-----------------------------------------------------------+
+   | DELETE    | Delete specified URL                                      |
+   +-----------+-----------------------------------------------------------+
+   | TRACE     | Loopback request message                                  |
+   +-----------+-----------------------------------------------------------+
+   | CONNECT   | For use by proxies                                        |
+   +-----------+-----------------------------------------------------------+
+
+For example, the ``START_LINE``
+
+::
+
+   GET http://www.cs.princeton.edu/index.html HTTP/1.1
+
+says that the client wants the server on host to return the page named
+``index.html``.  This particular example uses an absolute URL. It is
+also possible to request a path in the ``START_LINE`` and specify the host name
+in one of the ``MESSAGE_HEADER`` lines; for example,
+
+.. code-block:: http
+
+   GET /index.html HTTP/1.1
+   Host: www.cs.princeton.edu
+
+Here, ``Host`` is one of the possible ``MESSAGE_HEADER`` fields. One
+of the more interesting of these is ``If-Modified-Since``, which gives
+the client a way to conditionally request a web page—the server
+returns the page only if it has been modified since the time specified
+in that header line.
+
+Response Messages
+~~~~~~~~~~~~~~~~~
+
+Like request messages, response messages begin with a single
+``START_LINE``. In this case, the line specifies the version of HTTP
+being used, a three-digit code indicating whether or not the request was
+successful, and a text string giving the reason for the response. For
+example, the ``START_LINE``
+
+.. code-block:: http
+
+   HTTP/1.1 202 Accepted
+
+indicates that the server was able to satisfy the request, while
+
+.. code-block:: http
+
+   HTTP/1.1 404 Not Found
+
+indicates that it was not able to satisfy the request because the page
+was not found. There are five general types of response codes, with the
+first digit of the code indicating its type. :numref:`Table %s <tab-codes>`
+summarizes the five types of codes.
+
+.. _tab-codes:
+.. table::  Five Types of HTTP Result Codes.
+   :align: center
+   :widths: auto
+
+   +------+---------------+--------------------------------------------------------+
+   | Code | Type          | Example Reasons                                        |
+   +======+===============+========================================================+
+   | 1xx  | Informational | request received, continuing process                   |
+   +------+---------------+--------------------------------------------------------+
+   | 2xx  | Success       | action successfully received, understood, and accepted |
+   +------+---------------+--------------------------------------------------------+
+   | 3xx  | Redirection   | further action must be taken to complete the request   |
+   +------+---------------+--------------------------------------------------------+
+   | 4xx  | Client Error  | request contains bad syntax or cannot be fulfilled     |
+   +------+---------------+--------------------------------------------------------+
+   | 5xx  | Server Error  | server failed to fulfill an apparently valid request   |
+   +------+---------------+--------------------------------------------------------+
+
+As with the unexpected consequences of the ``POST`` request message, it
+is sometimes surprising how various response messages are used in
+practice. For example, request redirection (specifically code 302) turns
+out to be a powerful mechanism that plays a big role in Content
+Distribution Networks (CDNs) by redirecting requests to a nearby cache.
+
+Also similar to request messages, response messages can contain one or
+more ``MESSAGE_HEADER`` lines. These lines relay additional
+information back to the client. For example, the ``Location`` header
+line specifies that the requested URL is available at another
+location. Thus, if the Princeton CS Department web page had moved from
+``http://www.cs.princeton.edu/index.html`` to
+``http://www.princeton.edu/cs/index.html``, for example, then the
+server at the original address might respond with
+
+.. code-block:: http
+
+   HTTP/1.1 301 Moved Permanently
+   Location: http://www.princeton.edu/cs/index.html
+
+In the common case, the response message will also carry the requested
+page. This page is an HTML document, but since it may carry nontextual
+data (e.g., a GIF image), it is encoded using MIME (see the previous
+section). Certain of the ``MESSAGE_HEADER`` lines give attributes of the
+page contents, including (number of bytes in the contents), ``Expires``
+(time at which the contents are considered stale), and (time at which
+the contents were last modified at the server).
+
+Uniform Resource Identifiers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The URLs that HTTP uses as addresses are one type of *Uniform Resource
+Identifier* (URI). A URI is a character string that identifies a
+resource, where a resource can be anything that has identity, such as a
+document, an image, or a service.
+
+The format of URIs allows various more specialized kinds of resource
+identifiers to be incorporated into the URI space of identifiers. The
+first part of a URI is a *scheme* that names a particular way of
+identifying a certain kind of resource, such as ``mailto`` for email
+addresses or ``file`` for file names. The second part of a URI,
+separated from the first part by a colon, is the *scheme-specific part*.
+It is a resource identifier consistent with the scheme in the first
+part, as in the URIs ``mailto:santa@northpole.org`` and
+``file:///C:/foo.html``.
+
+A resource doesn’t have to be retrievable or accessible. There are
+URIs that look an awful lot like URLs, but they are not *locators*
+because they don’t tell you how to locate something; they just provide
+a globally unique identifier for something. We’ll see an example
+of a URI that is not a URL in a later section.
+
+TCP Connections
+~~~~~~~~~~~~~~~
+
+The original version of HTTP (1.0) established a separate TCP
+connection for each data item retrieved from the server. It’s not too
+hard to see how this was a very inefficient mechanism: a TCP
+connection requires setup and teardown messages to be exchanged
+between the client and server even if all the client wanted to do was
+verify that it had the most recent copy of a page. Thus, retrieving a
+page that included some text and a dozen icons or other small graphics
+would result in 13 separate TCP connections being established and
+closed. :numref:`Figure %s <fig-oldhttp>` shows the sequence of events
+for fetching a page that has just a single embedded object.  Colored
+lines indicate TCP messages, while black lines indicate the HTTP
+requests and responses. (Some of the TCP ACKs are not shown to avoid
+cluttering the picture.) You can see two round trip times are spent
+setting up TCP connections while another two (at least) are spent
+getting the page and image. As well as the latency impact, there is
+also processing cost on the server to handle the extra TCP connection
+establishment and termination. This is a striking example of how
+passing off functionality to be implemented in another layer without
+looking at the details can have negative consequences.
+
+.. _fig-oldhttp:
+.. figure:: figures/f09-04-9780123850591.png
+   :width: 500px
+   :align: center
+
+   HTTP 1.0 behavior.
+
+To overcome this situation, HTTP version 1.1 introduced *persistent
+connections*—the client and server can exchange multiple
+request/response messages over the same TCP connection. Persistent
+connections have many advantages. First, they eliminate the
+connection setup overhead, thereby reducing the load on the server,
+the load on the network caused by the additional TCP packets, and the
+delay perceived by the user. Second, because a client can send
+multiple request messages down a single TCP connection, TCP’s
+congestion window mechanism is able to operate more efficiently. This
+is because it’s not necessary to go through the slow start phase for
+each page. :numref:`Figure %s <fig-persist>` shows the transaction
+from :numref:`Figure %s <fig-oldhttp>` using a persistent connection
+in the case where the connection is already open (presumably due to
+some prior access of the same server).
+
+.. _fig-persist:
+.. figure:: figures/f09-05-9780123850591.png
+   :width: 500px
+   :align: center
+
+   HTTP 1.1 behavior with persistent connections.
+
+Persistent connections carry a price, however. The problem
+is that neither the client nor server necessarily knows how long to keep
+a particular TCP connection open. This is especially critical on the
+server, which might be asked to keep connections opened on behalf of
+thousands of clients. The solution is that the server must time out and
+close a connection if it has received no requests on the connection for
+a period of time. Also, both the client and server must watch to see if
+the other side has elected to close the connection, and they must use
+that information as a signal that they should close their side of the
+connection as well. (Both sides must close a TCP connection
+before it is fully terminated.) Concerns about this added complexity may
+be one reason why persistent connections were not used from the outset,
+but today it is widely accepted that the benefits of persistent
+connections more than offset the drawbacks.
+
+While 1.1 is still widely supported, version 2.0 was formally
+approved by the IETF in 2015. Known as HTTP/2, the new version is
+backwards compatible with 1.1 (i.e,. it adopts the same syntax for
+header fields, status codes, and URIs), but it adds two new features.
+
+The first is to make it easier for web servers to *minify* the
+information they send back to web browsers. If you look closely at the
+makeup of the HTML in a typical web page, you will find a plethora of
+references to other bits-and-pieces (e.g., images, scripts, style files)
+that the browser needs to render the page. Rather than force the client
+to request these bits-and-pieces (technically known as *resources*) in
+subsequent requests, HTTP/2 provides a means for the server to bundle
+the required resources and proactively *push* them to the client without
+incurring the round-trip delay of forcing the client to request them.
+This feature is coupled with a compression mechanism that reduces the
+number of bytes that need to be pushed. The whole goal is to minimize
+the latency an end-user experiences from the moment they click on a
+hyperlink until the selected page is fully rendered.
+
+The second big advance of HTTP/2 is to multiplex several requests on a
+single TCP connection. This goes beyond what version 1.1
+supports—allowing a *sequence* of requests to reuse a TCP
+connection—by permitting these requests to overlap with each
+other. The way HTTP/2 does this is to use some of the generic
+mechanisms introduced in Chapter 1: it defines a
+*channel* abstraction (technically, the channels are called
+*streams*), permits multiple concurrent streams to be active at a
+given time (each labeled with a unique *stream id*), and limits each
+stream to one active request/reply exchange at a time.
+
+HTTP/3 and QUIC
+~~~~~~~~~~~~~~~
+As the preceding discussion illustrates, the history of HTTP has
+included a series of incremental changes to make better use of TCP as
+the underlying transport. But there is a fundamental issue that can't
+be fully resolved: TCP provides a byte-stream abstraction, while HTTP
+is a request/response protocol. The natural solution would be to adopt
+a more suitable transport, but for a long time there wasn't a suitable candidate.
+
+Ultimately, the solution to this mismatch was to create a new
+transport protocol known as QUIC. QUIC was explicitly designed to provide a
+good match to the requirements of HTTP, and HTTP/3 takes advantage of
+the improved underlying transport. For example, QUIC explicitly
+supports stream multiplexing at the transport layer. Thus, a single
+packet loss only impacts the delivery of the stream that suffered the
+loss, rather than causing a stall in the entire TCP connection while
+waiting for that lost packet to be retransmitted. At the same time,
+that lost packet provides a congestion signal that is applied to all
+streams in the QUIC connection. We cover QUIC in more detail in
+:ref:`Section 5.2 <5.2 Reliable Byte Stream (TCP)>`.
+
+Another significant advantage of QUIC compared to TCP is the way it
+handles the steps required to secure an HTTP connection. The original
+design of transport layer security (TLS) performs an exchange of
+cryptographic information after the TCP connection is established,
+QUIC handles security as part of session establishment, leading to a
+considerable reduction in the number of round-trips needed to
+establish a secure connection before the first content is
+delivered. In the best case, QUIC allows cryptographically protected
+data to be sent in the first round trip rather than waiting multiple
+RTTs for connection establishment.
+
+HTTP/3 is implemented in the majority of browsers and is incrementally
+being deployed on servers across the Internet. There remain
+plenty of servers running HTTP/2 and even some HTTP/1.1 as well, so version negotiation is
+likely to be part of HTTP implementations for the foreseeable future.
+
+Caching
+~~~~~~~
+
+An important implementation strategy that makes the web more usable is
+to cache web pages. Caching has many benefits. From the client’s
+perspective, a page that can be retrieved from a nearby cache can be
+displayed much more quickly than if it has to be fetched from across the
+world. From the server’s perspective, having a cache intercept and
+satisfy a request reduces the load on the server.
+
+Caching can be implemented in many different places. For example, a
+user’s browser can cache recently accessed pages and simply display the
+cached copy if the user visits the same page again. As another example,
+a site can support a single site-wide cache. This allows users to take
+advantage of pages previously downloaded by other users. Closer to the
+middle of the Internet, Internet Service Providers (ISPs) can cache
+pages.\ [#]_ Note that, in the second case, the users within the site most
+likely know what machine is caching pages on behalf of the site, and
+they configure their browsers to connect directly to the caching host.
+This node is sometimes called a *proxy*. In contrast, the sites that
+connect to the ISP are probably not aware that the ISP is caching pages.
+It simply happens to be the case that HTTP requests coming out of the
+various sites pass through a common ISP router. This router can peek
+inside the request message and look at the URL for the requested page.
+If it has the page in its cache, it returns it. If not, it forwards the
+request to the server and watches for the response to fly by in the
+other direction. When it does, the router saves a copy in the hope that
+it can use it to satisfy a future request.
+
+.. [#] There are quite a few issues with this sort of caching, ranging
+       from the technical to the regulatory. One example of a
+       technical challenge is the effect of *asymmetric paths*, when
+       the request to the server and the response to the client do not
+       follow the same sequence of router hops.
+
+No matter where pages are cached, the ability to cache web pages is
+important enough that HTTP has been designed to make the job easier. The
+trick is that the cache needs to make sure it is not responding with an
+out-of-date version of the page. For example, the server assigns an
+expiration date (the ``Expires`` header field) to each page it sends
+back to the client (or to a cache between the server and client). The
+cache remembers this date and knows that it need not reverify the page
+each time it is requested until after that expiration date has passed.
+After that time (or if that header field is not set) the cache can use
+the ``HEAD`` or conditional ``GET`` operation (``GET`` with header line)
+to verify that it has the most recent copy of the page. More generally,
+there are a set of *cache directives* that must be obeyed by all caching
+mechanisms along the request/response chain. These directives specify
+whether or not a document can be cached, how long it can be cached, how
+fresh a document must be, and so on. We’ll look at the related issue of
+CDNs—which are effectively distributed caches—in a later section.
+
+2.2.1 Web Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+So far we have focused on interactions between a human and a web server.
+For example, a human uses a web browser to interact with a server, and
+the interaction proceeds in response to input from the user (e.g., by
+clicking on links). However, there is increasing demand for direct
+computer-to-computer interaction. And, just as the applications
+described above need protocols, so too do the applications that
+communicate directly with each other. We conclude this section by
+looking at the challenges of building large numbers of
+application-to-application protocols and some of the proposed solutions.
+
+Much of the motivation for enabling direct application-to-application
+communication comes from the business world. Historically, interactions
+between enterprises—businesses or other organizations—have involved some
+manual steps such as filling out an order form or making a phone call to
+determine whether some product is in stock. Even within a single
+enterprise it is common to have manual steps between software systems
+that cannot interact directly because they were developed independently.
+Increasingly, such manual interactions are being replaced with direct
+application-to-application interaction. An ordering application at
+enterprise A would send a message to an order fulfillment application at
+enterprise B, which would respond immediately indicating whether the
+order can be filled. Perhaps, if the order cannot be filled by B, the
+application at A would immediately order from another supplier or
+solicit bids from a collection of suppliers.
+
+Here is a simple example of what we are talking about. Suppose you buy a
+book at an online retailer like Amazon. Once your book has been
+shipped, Amazon could send you the tracking number in an email, and then
+you could head over to the website for the shipping
+company—\ ``http://www.fedex.com``, perhaps—and track the package.
+However, you can also track your package directly from the Amazon.com
+website. In order to make this happen, Amazon has to be able to send a
+query to FedEx, in a format that FedEx understands, interpret the
+result, and display it in a web page that perhaps contains other
+information about your order. Underlying the user experience of getting
+all the information about the order served up at once on the Amazon.com
+web page is the fact that Amazon and FedEx had to have a protocol for
+exchanging the information needed to track packages—call it the Package
+Tracking Protocol. It should be clear that there are so many potential
+protocols of this type that we’d better have some tools to simplify the
+task of specifying them and building them.
+
+Network applications, even those that cross organization boundaries, are
+not new—email and web browsing cross such boundaries. What is new about
+this problem is the scale. Not scale in the size of the network, but
+scale in the number of different kinds of network applications. Both the
+protocol specifications and the implementations of those protocols for
+traditional applications like electronic mail and file transfer have
+typically been developed by a small group of networking experts. To
+enable the vast number of potential network applications to be developed
+quickly, it was necessary to come up with some technologies that
+simplify and automate the task of application protocol design and
+implementation.
+
+Two architectures have been advocated as solutions to this problem. Both
+architectures are called *web Services*, taking their name from the term
+for the individual applications that offer a remotely accessible service
+to client applications to form network applications. The terms used as
+informal shorthand to distinguish the two web Services architectures are
+*SOAP* and *REST*. We will discuss the technical meanings of those terms
+shortly.
+
+The SOAP architecture’s approach to the problem is to make it feasible,
+at least in theory, to generate protocols that are customized to each
+network application. The key elements of the approach are a framework
+for protocol specification, software toolkits for automatically
+generating protocol implementations from the specifications, and modular
+partial specifications that can be reused across protocols.
+
+The REST architecture’s approach to the problem is to regard individual
+web services as World Wide Web resources—identified by URIs and accessed
+via HTTP. Essentially, the REST architecture is just the web
+architecture. The web architecture’s strengths include stability and a
+demonstrated scalability (in the network-size sense). It could be
+considered a weakness that HTTP is not well suited to the usual
+procedural or operation-oriented style of invoking a remote service.
+REST advocates argue, however, that rich services can nonetheless be
+exposed using a more data-oriented or document-passing style for which
+HTTP is well suited. While both SOAP and REST have their adherents,
+REST is arguably simpler and more widely used so we focus our
+attention on REST for this discussion.
+
+A Generic Application Protocol (REST)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The REST Web Services architecture is based on the assumption
+that the best way to integrate applications across networks is by
+re-applying the model underlying the World Wide Web architecture. This
+model, articulated by web architect Roy Fielding, is known as
+*REpresentational State Transfer* (REST). There is no need for a new
+REST architecture for Web Services—the existing web architecture is
+sufficient, although a few extensions are probably necessary. In the web
+architecture, individual Web Services are regarded as resources
+identified by URIs and accessed via HTTP—a single generic application
+protocol with a single generic addressing scheme.
+
+REST uses the small set of available HTTP methods, such as ``GET`` and
+``POST`` (see :numref:`Table %s <tab-ops>`) to provide an interface to
+a Web Service. In the REST model, any complexity in this interface is
+shifted from the protocol to the payload. The payload is a
+representation of the abstract state of a resource. For example, a
+``GET`` could return a representation of the current state of the
+resource, and a ``POST`` could send a representation of a desired
+state of the resource.
+
+The representation of a resource state is abstract; it need not resemble
+how the resource is actually implemented by a particular Web Service
+instance. It is not necessary to transmit a complete resource state in
+each message. The size of messages can be reduced by transmitting just
+the parts of a state that are of interest (e.g., just the parts that are
+being modified). And, because Web Services share a single protocol and
+address space with other web resources, parts of states can be passed by
+reference—by URI—even when they are other Web Services.
+
+This approach is best summarized as a data-oriented or document-passing
+style, as opposed to a procedural style. Defining an application
+protocol in this architecture consists of defining the document
+structure (i.e., the state representation). XML and the lighter-weight
+JavaScript Object Notation (JSON) are the most frequently used
+presentation languages for this state. Interoperability depends on
+agreement, between a Web Service and its clients, on the state
+representation. 
+
+One of the selling features of REST is that it leverages the
+infrastructure that has been deployed to support the web. For example,
+web proxies can enforce security or cache information. Existing content
+distribution networks (CDNs) can be used to support RESTful
+applications
+
+The online retailer Amazon, as it happens, was an early adopter
+(2002) of Web Services. Interestingly, Amazon made its systems publicly
+accessible via *both* SOAP and REST approaches, and according
+to some reports a substantial majority of developers use the REST
+interface. Of course, this is just one data point and may well reflect
+factors specific to Amazon.
+
+From Web Services to Cloud Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If Web Services is what we call it when the web server that implements
+my application sends a request to the web server that implements your
+application, then what do we call it when we both put our applications
+in the cloud so that they can support scalable workloads? We can call
+both of them *Cloud Services* if we want to, but is that a distinction
+without a difference? It depends.
+
+Moving a server process from a physical machine running in my machine
+room into a virtual machine running in a cloud provider’s datacenter
+shifts responsibility for keeping the machine running from my system
+admin to the cloud provider’s operations team, but the application is
+still designed according to the Web Services architecture. On the
+other hand, if the application is designed from scratch to run on a
+scalable (and potentially unreliable) cloud platform, for example by
+adhering to the *micro-services architecture*, then we say the
+application is *cloud native*. So the important distinction is cloud
+native versus legacy Web Services deployed in the cloud.
+
+
