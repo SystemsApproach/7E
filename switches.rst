@@ -43,7 +43,8 @@ which then serve as the basis for Part II. While this chapter focuses
 on Ethernet, we caution that other technologies do exist. We discuss
 some of them in the last section, but Ethernet is the example
 technology that we describe in detail. If you understand Ethernet in
-depth, you can more easily digest any other technology you encounter.
+depth—both its links and switches—you can more easily digest any other
+technology you encounter.
 
 .. include:: switches/link-layer.rst
 .. include:: switches/switch.rst

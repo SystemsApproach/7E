@@ -15,7 +15,7 @@ depicted in :numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
 .. figure:: switches/figures/spectrum.png
-   :width: 600px
+   :width: 650px
    :align: center
 
    Electromagnetic spectrum.
@@ -28,7 +28,7 @@ us to the second challenge, which is encoding digital data (i.e., 1’s
 and 0’s) onto this digital signal. On the surface, this encoding seems
 simple enough—the high signal encodes a 1 and the low signal encodes a
 0—but in practice the digital signal may have more than two (high/low)
-settings. If there are four detectable digital signals, for example,
+settings. If there are four recoverable digital signals, for example,
 then two bits could be coded in each. In general, we think of the
 digital signal as carrying symbols rather than bits, where each symbol
 is one or more bits in length.
@@ -42,8 +42,7 @@ reader to authoritative sources on the topic. For our purposes, we
 pick up the story with the ability to send and receive symbols over a
 link. At that point, we still have plenty of work to do, and it
 corresponds to what is usually referred to as the link layer—a term
-originally coined by the ISO reference model presented in Figure Y
-from Chapter 1.
+originally coined by the OSI reference model presented in Chapter 1.
 
 This section introduces the problems addressed by the link layer, and
 uses Ethernet as its representative example. The Ethernet has
@@ -66,3 +65,6 @@ historical background in Section 2.1.4.
 
 2.1.4 Historical Background
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*[Mention the Media Access Control (MAC) terminology. Refer back to
+Aloha, and forward to WiFi.]*

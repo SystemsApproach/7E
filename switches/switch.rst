@@ -1,11 +1,11 @@
 3.2 Switch Design
 ---------------------------------
 
-Packet switches are the device that make it possible to assemble
-networks from individual communication links. There is a
-straightforward way to build a switch: Buy a general-purpose processor
-and equip it with multiple network interface cards. Such a device,
-running suitable software, can receive packets on one of its
+Packet switches are the technology that makes it possible to
+interconnect a set of point-to-point links into a full network. There
+is a straightforward way to build a switch: Buy a general-purpose
+processor and equip it with multiple network interface cards. Such a
+device, running suitable software, can receive packets on one of its
 interfaces, decide the best way to forward each packet on towards its
 destination, and then send packets out another of its interfaces.
 This so called *software switch* is not too far removed from the
@@ -16,80 +16,90 @@ advantage of additional hardware acceleration. We refer to these as
 combination of hardware and software.
 
 This section gives an overview of both software-centric and
-hardware-centric designs. Keep in mind that our goal is to understand
+hardware-centric designs. It also describes fundemental concepts that
+underly both designs. Keep in mind that our goal is to understand
 switches in enough depth so we can use them as the primary building
 block for the best-effort message delivery system covered in Part II.
 
 3.2.1 Control and Data Planes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At a high level, switch forwarding logic is straightforward. Every
-switch maintains a table that maps addresses to output ports. For
-every packet received on one of its input ports, the switch extracts
-the destination address from the packet header, looks it up in the
-table, and then enqueues the packet for transmission on the specified
-output port. Looking back at the IP and ETH headers in Section 1.1.3
-for example, this would mean a switch configured to forward IP packets
-would use the 32-bit ``DestinationAddr`` found at an offset of 20
-bytes from the beginning of the IP header as its lookup key, while a
-switch configured to forward ETH packets would use the 48-bit
-``DestinationAddr`` found at an offset of 6 bytes from the beginning
-of the ETH header as its lookup key.
+Switch forwarding logic is straightforward. Every switch maintains a
+table that maps addresses to output ports. For every packet received
+on one of its input ports, the switch extracts the destination address
+from the packet header, looks it up in the table, and then enqueues
+the packet for transmission on the specified output port. Looking back
+at the IP and ETH headers in Section 1.1.3, for example, this would
+mean a switch configured to forward IP packets would use the 32-bit
+``DestinationAddr`` found at an offset of 20 bytes from the beginning
+of the IP header as its lookup key, while a switch configured to
+forward ETH packets would use the 48-bit ``DestinationAddr`` found at
+an offset of 6 bytes from the beginning of the ETH header as its
+lookup key.
 
-There is much more going on than this simple overview reveals, leading
-switch designers to make a distinction between a switch's *control
-plane* and its *data plane*.  The control plane determines how the
-network should behave (i.e., it puts address-to-port mappings in the
-lookup table), while the data plane is responsible for applying those
-mappings to individual packets (i.e., it forwards packets based on
-what is finds in the lookup table).
+One important takeaway from this example is that switches are highly
+configurable—it is possible to configure a switch to forward IP
+packets or Ethernet packets. This helps explain the distinction
+between switches and routers: they are just different configurations
+of the same forwarding device. To put it in pragmatic terms, network
+administrators typically buy a single forwarding box from a vendor and
+then configure it to be an Ethernet switch (sometimes called an *L2
+switch*, for Layer 2 in the OSI architecture), an IP router (sometimes
+called an *L3 switch*, for Layer 3 in the OSI architecture), or some
+combination of the two. For this reason, these packet forwarding
+devices are sometimes called *L2/L3 switches*.
 
-More specifically, the control plane runs a *routing algorithm* that
-collects any information it might need to select the best route at a
-given point in time, including alternative paths, their respective
-costs, and any policy constraints. Chapter 4 looks at several widely
-used routing algorithms, and while the exact collection of information
-it collects is algorithm-specific, it is commonly referred to as the
-*Routing Information Base (RIB)*.
-
-The task of actually forwarding packets along those routes is the job
-of the data plane. This is where the switch makes forwarding decisions
-on a packet-by-packet basis. Data plane's lookup table is commonly
-called the *Forwarding Information Base (FIB)*, and it is implemented
-using an optimized data structure that supports fast lookup operations.
+There are many other possible configuration options, but to understand
+them, we need a more sophisticated model of a switch. For starters,
+switches make a distinction between a their *control plane* and their
+*data plane*.  The control plane determines how the network should
+behave (i.e., it puts address-to-port mappings in the lookup table),
+while the data plane is responsible for applying those mappings to
+individual packets (i.e., it forwards packets based on what is finds
+in the lookup table).
 
 .. _fig-fib:
 .. figure:: switches/figures/fib.png
     :width: 300px
     :align: center
 
-    Control plane (and corresponding RIB) decoupled from the data
-    plane (and the corresponding FIB).
+    Packet switches are divided into two planes: the *Control Plane*
+    runs a routing algorith and maintains routing information in a
+    RIB, and the *Data Plane* implements packet forwarding logic
+    and maintains forwarding information in a FIB.
 
-As shown in :numref:`Figure %s <fig-fib>`, there is an interface
-between the control and data planes, with the former periodically
-loading new address-to-port mappings into the FIB.  There is no
-controversy about the value of decoupling the network. It is a
-well-established practice among switch vendors, although this
-interface has historically been closed. Over the last several years, a
+As shown in :numref:`Figure %s <fig-fib>`, the control plane runs a
+*routing algorithm* that collects any information it might need to
+select the best route at a given point in time, including alternative
+paths, their respective costs, and any policy constraints. Chapter 4
+looks at several widely used routing algorithms, and while the exact
+set of information it collects is algorithm-specific, it is commonly
+referred to as the *Routing Information Base (RIB)*.
+
+The task of actually forwarding packets along the routes selected by
+the routing algorithm is the job of the data plane. This is where the
+switch makes forwarding decisions on a packet-by-packet basis. Data
+plane's lookup table is sometimes called the *Forwarding Information
+Base (FIB)*, and it is implemented using a data structure that has
+been optimized to support fast lookup operations. This data structure
+needs to support multiple possible lookup keys (we have already seen
+32-bit IP address and 48-bit Ethernet address, but there are others),
+which complicates its design.  For now you can think of the FIB as
+being implemented by multiple lookup tables—one per type of key—but we
+postpone an in-depth description until subsection 3.2.4.
+
+:numref:`Figure %s <fig-fib>` also shows an interface between the
+control and data planes, with the former periodically loading new
+address-to-port mappings into the FIB.  There is no controversy about
+the value of decoupling the two planes. It is a well-established
+practice among switch vendors, although this interface has
+historically been closed. Over the last several years, however, a
 *Software-Defined Networking (SDN)* initiative has worked to define an
 open interface for installing routes in the data plane, with the goal
 of giving network owners (as opposed to switch vendors) more
-control. We return to this topic at the end of this section.
-
-One major takeaway from this discussion is that switches are highly
-configurable. As our openning example implied, it is possible to
-configure a switch to forward IP packets or Ethernet packets. This
-helps explain the distinction between switches and routers: they are
-just different configurations of the same forwarding device. To put it
-in pragmatic terms, network administrators typically buy a single
-forwarding box from a vendor and then configure it to be an Ethernet
-switch (sometimes called an *L2 switch*, for Layer 2 in the OSI
-architecture), an IP router (sometimes called an *L3 switch*, for
-Layer 3 in the OSI architecture), or some combination of the two. For
-this reason, these packet forwarding devices are sometimes called
-*L2/L3 switches*. There are many other possible configuration options,
-which we'll highlight throughout the book.
+control. The exact nature of this interface is related to the FIB data
+structure, so we cover in subsection 3.2.4, after seeing how switches
+are implemented in both software and hardware.
 
 3.2.2 Software Switch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,14 +167,15 @@ about 1 Gbps on each port.\ [#]_
        high-end server could achieve, but they are indicative of
        limits one ultimately faces in pursuing this approach.
 
-One final consideration is important to understand when evaluating
-switch implementations. The routing algorithms mentioned in Section
-3.2.1 are *not* directly part of the per-packet forwarding decision.
-They run periodically in the background, rather than for every packet
-it forwards. The most costly routine the CPU is likely to execute on a
-per-packet basis is a table lookup, for example, looking up an IP
-address in an L3 forwarding table, or an Ethernet address in an L2
-forwarding table.
+Finally, note that the control plane (routing algorithm) and the data
+plane (forwarding logic) are implemented as separate processes on the
+same CPU. The routing algorithm is *not* directly part of the
+per-packet forwarding decision, but there must be enough CPU capacity
+for it to run periodically in the background without slowing down the
+data plane. As for the data plane, the most costly routine the CPU is
+likely to execute on a per-packet basis is a table lookup, for
+example, looking up an IP address in an L3 forwarding table, or an
+Ethernet address in an L2 forwarding table.
 
 3.2.3 Hardware Switch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -237,36 +248,32 @@ with 32x100-Gbps ports, or the 48x40-Gbps ports shown in the diagram.
 The beauty of this new switch design is that a given bare-metal switch
 can now be programmed to be an L2 switch, an L3 router, or a
 combination of both, just by a matter of programming. The exact same
-control plane software stack used in a software switch still runs on
-the control CPU, but in addition, data plane “programs” are loaded
-onto the NPU to reflect the forwarding decisions made by the control
-plane software.  Exactly how one “programs” the NPU depends on the
-chip vendor, of which there are currently several. In some cases, the
+control plane software used in a software switch still runs on the
+control CPU, but in addition, data plane “programs” are loaded onto
+the NPU to reflect the forwarding decisions made by the control plane
+software.  Exactly how one “programs” the NPU depends on the chip
+vendor, of which there are currently several. In some cases, the
 forwarding pipeline is fixed and the control processor merely loads
 the forwarding table into the NPU (by fixed we mean the NPU only knows
 how to process certain headers, like Ethernet and IP), but in other
-cases, the forwarding pipeline is itself programmable. P4 is a new
-programming language that can be used to program such NPU-based
-forwarding pipelines. Among other things, P4 tries to hide many of the
-differences in the underlying NPU instruction sets.
+cases, the forwarding pipeline is itself programmable.
 
-Internally, an NPU takes advantage of three technologies. First, a fast
-SRAM-based memory buffers packets while they are being processed. SRAM
-(Static Random Access Memory), is roughly an order of magnitude faster
-than the DRAM (Dynamic Random Access Memory) that is used by main
-memory. Second, a TCAM-based memory stores bit patterns to be matched in
-the packets being processed. The “CAM” in TCAM stands for “Content
-Addressable Memory,” which means that the key you want to look up in a
-table can effectively be used as the address into the memory that
-implements the table. The “T” stands for “Ternary” which is a fancy way
-to say the key you want to look up can have wildcards in it (e.g, key
-``10*1`` matches both ``1001`` and ``1011``). Finally, the processing
-involved to forward each packet is implemented by a forwarding pipeline.
-This pipeline is implemented by an ASIC, but when well-designed, the
-pipeline’s forwarding behavior can be modified by changing the program
-it runs. At a high level, this program is expressed as a collection of
-*(Match, Action)* pairs: if you match such-and-such field in the header,
-then execute this-or-that action.
+Internally, an NPU takes advantage of three technologies. First, a
+fast SRAM-based memory buffers packets while they are being
+processed. SRAM (Static Random Access Memory), is roughly an order of
+magnitude faster than the DRAM (Dynamic Random Access Memory) that is
+used by main memory. Second, a TCAM-based memory stores bit patterns
+to be matched in the packets being processed. The “CAM” in TCAM stands
+for “Content Addressable Memory,” which means that the key you want to
+look up in a table can effectively be used as the address into the
+memory that implements the table. The “T” stands for “Ternary” which
+is a fancy way to say the key you want to look up can have wildcards
+in it (e.g, key ``10*1`` matches both ``1001`` and ``1011``). Finally,
+the processing involved to forward each packet is implemented by a
+forwarding pipeline.  This pipeline is implemented by an ASIC, but
+when well-designed, the pipeline’s forwarding behavior can be modified
+by changing the program it runs. More on exactly what it means to
+"program an NPU" is given in the next subsection.
 
 The relevance of packet processing being implemented by a multi-stage
 pipeline rather than a single-stage processor is that forwarding a
@@ -283,17 +290,121 @@ Finally, :numref:`Figure %s <fig-baremetal>` includes other commodity
 components that make this all practical. In particular, it is now
 possible to buy pluggable *transceiver* modules that take care of all
 the media access details—be it Gigabit Ethernet, 10-Gigabit Ethernet,
-or SONET—as well as the optics. These transceivers all conform to
-standardized form factors, such as SFP+, that can in turn be connected
-to other components over a standardized bus (e.g., SFI). Again, the
-key takeaway is that the networking industry is just now entering into
-the same commoditized world that the computing industry has enjoyed
-for the last two decades.
+or some non-Ethernet technology such as SONET—as well as the
+optics. These transceivers all conform to standardized form factors,
+such as SFP+, that can in turn be connected to other components over a
+standardized bus (e.g., SFI). Again, the key takeaway is that the
+networking industry is just now entering into the same commoditized
+world that the computing industry has enjoyed for the last two
+decades.
 
 3.2.4 Flow Abstraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*[This section will introduce the flow abstraction, and briefly talk
-abouet OpenFlow and P4. It likely mentions SDN-style centralized
-controllers, but that topic is better covered in Chapter 4.]*
+Having seen a high-level schematic of a hardware switch, and knowing
+that we need an interface by which the control plance installs
+forwarding rules in the data plane, we are now ready to take a closer
+look at this interface. At the heart of the interface is a *forwarding
+abstraction:* a general-purpose way for the control plane to instruct
+the data plane to forward packets in a particular way. But like any
+good abstraction, it should **not** restrict how a given switch vendor
+implements the data plane (e.g., the exact form of its forwarding
+table or the process by which it forwards packets). This forwarding
+abstraction should not assume (or favor) one data plane implementation
+over another.
 
+There have been two generations of this interface. The original
+interface, called *OpenFlow*, was published in 2008. It introduced
+*Flow Rules* as a simple-but-powerful way to specify forwarding
+behavior. A flow rule is a *(Match, Action)* pair: Any packet that
+*Matches* the first part of the rule should have the associated
+*Action* applied to it. A simple flow rule, for example, might specify
+that any packet with destination address *D* be forwarded on output
+port *i*. The original OpenFlow spec allowed the header fields shown
+in :numref:`Figure %s <fig-headers>` to be included in the Match half
+of the rule. So for example, a Match might specify a packet's MAC
+header ``Type`` field equals ``0x800`` (indicating the frame carries
+and IP packet) and its IP header ``DstAddr`` field be contained in
+some subnet (e.g., ``192.12.69/24``).
+
+.. _fig-headers:
+.. figure:: switches/figures/Slide03.png
+    :width: 600px
+    :align: center
+
+    Header Fields Matched in Original OpenFlow Specification.
+
+The Actions originally included *“forward packet to one or more
+ports”* and *“drop packet,”* plus a *“send packet up to the control
+plane”* escape hatch for any packet that requires further processing
+by a *controller* (a term introduced to signify the process running in
+the control plane responsible for controlling the switch). The Actions
+also specify how various header fields should be modified. For
+example, a packet received on a given input port would have this
+switch's ETH address as the packet's destination, but a different
+destination address would be inserted into the ETH header for the
+selected output port, identifying the next hop the packet is to
+take. The ETH source address would also need to be changed
+accordingly.
+
+The OpenFlow specification grew more complicated over time, and was
+certainly defined with much more precision than the previous
+paragraphs. We're not going to dive into the syntax of of *(Match,
+Action)* pairs, but there is one more issue to address: How OpenFlow
+switches achieve high performance through parallelism.
+
+We saw in Section 3.2.3 that hardware switches often employ a
+forwarding pipeline, making it possible to do multiple lookups on a
+packet in parallel. :numref:`Figure %s <fig-pipeline>` takes a closer
+look at this pipeline, this time with the knowledge that it is being
+used to install flow rules. The idea is that the forwarding pipeline
+implements a series of flow tables, each focused on a subset of the
+header fields that might be involved in a given flow rule (e.g., one
+table matches the ETH header, one matches the IP header, and so on). A
+given packet is processed by multiple flow tables in sequence—i.e., a
+pipeline—to determine how it is ultimately forwarded. A set of actions
+are accumulated as the packet flows through the pipeline, and executed
+as a set in the last stage, resulting in the packet being modified and
+enqueued for transmission (or dropped).
+
+.. _fig-pipeline:
+.. figure:: switches/figures/Slide07.png
+    :width: 500px
+    :align: center
+
+    Simple Schematic of an OpenFlow Forwarding Pipeline.
+
+As shown in :numref:`Figure %s <fig-pipeline>` the pipeline is static,
+in the sense that each stage is hardcoded to know about exactly one
+header field. This means the pipeline as a whole is limited to
+matching a fixed set of fields in the packet headers (e.g., the fields
+shown in :numref:`Figure %s <fig-headers>`) and perform a fixed set of
+actions; they are sometimes called *fixed-function pipelines*. Most
+switching chips are still designed this way, although the set of flow
+tables has is quite large, and the corresponding flow rules quite
+complex.  (We'll see many additional header fields that switches want
+to inspect in the chapters of Part II.)
+
+An alternative is to build a *programmable pipeline*, coupled with a
+programming language that can be used to dynamically program what each
+stage in the pipeline does. This has happened over the last several
+years, resulting in a *Protocol Independent Switching Architecture
+(PISA)* and the *P4* programming language. Both are beyond the scope
+of this introduction to switch design, but we describe them in
+auxilary material, and encourage readers to take advantage of open
+source software to write P4 programs and run them on emulated PISA
+hardware.
+
+.. _reading_openflow:
+.. admonition:: Further Reading
+
+   N. McKeown, et. al. `OpenFlow: Enabling Innovation in Campus Networks
+   <http://ccr.sigcomm.org/online/files/p69-v38n2n-mckeown.pdf>`__.
+   SIGCOMM CCR, March 2008.
+
+   L. Peterson, C. Cascone, B. O'Connor, T. Vachuska, and B. Davie.
+   `Software-Defined Networks: A Systems Approach
+   <https://sdn.systemsapproach.org>`__.  November 2021.
+
+   `P4 Tutorials
+   <https://github.com/p4lang/tutorials>`__. P4 Consortium, May 2019.
