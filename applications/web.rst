@@ -62,7 +62,7 @@ such as Safari, Chrome, Firefox, or Internet Explorer. :numref:`Figure %s
 information from Princeton University.
 
 .. _fig-netscape:
-.. figure:: figures/browser-screenshot.png
+.. figure:: applications/figures/browser-screenshot.png
    :width: 600px
    :align: center
 
@@ -325,7 +325,7 @@ passing off functionality to be implemented in another layer without
 looking at the details can have negative consequences.
 
 .. _fig-oldhttp:
-.. figure:: figures/f09-04-9780123850591.png
+.. figure:: applications/figures/f09-04-9780123850591.png
    :width: 500px
    :align: center
 
@@ -347,7 +347,7 @@ in the case where the connection is already open (presumably due to
 some prior access of the same server).
 
 .. _fig-persist:
-.. figure:: figures/f09-05-9780123850591.png
+.. figure:: applications/figures/f09-05-9780123850591.png
    :width: 500px
    :align: center
 
