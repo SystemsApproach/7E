@@ -181,7 +181,7 @@ Linux ``talk`` program, which is similar to the program at the core of
 instant messaging applications.
 
 Client
-~~~~~~
++++++++++++++++
 
 We start with the client side, which takes the name of the remote
 machine as an argument. It calls the Linux utility to translate this name
@@ -262,7 +262,7 @@ sends it over the socket.
    }
 
 Server
-~~~~~~
++++++++++++++++++
 
 The server is equally simple. It first constructs the address data
 structure by filling in its own port number (``SERVER_PORT``). By not
