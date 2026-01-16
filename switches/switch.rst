@@ -1,18 +1,17 @@
 3.2 Switch Design
 ---------------------------------
 
-Packet switches are the technology that makes it possible to
-interconnect a set of point-to-point links into a full network. There
-is a straightforward way to build a switch: Buy a general-purpose
-processor and equip it with multiple network interface cards. Such a
-device, running suitable software, can receive packets on one of its
-interfaces, decide the best way to forward each packet on towards its
-destination, and then send packets out another of its interfaces.
-This so called *software switch* is not too far removed from the
-architecture of many commercial mid- to low-end network devices.
-Implementations that deliver high-end performance typically take
-advantage of additional hardware acceleration. We refer to these as
-*hardware switches*, although both approaches obviously include a
+Packet switches are devices that interconnect a set of point-to-point
+links. There is a straightforward way to build a switch: Buy a
+general-purpose processor and equip it with multiple network interface
+cards. Such a device, running suitable software, can receive packets
+on one of its interfaces, decide the best way to forward each packet
+on towards its destination, and then send packets out another of its
+interfaces.  This so called *software switch* is not too far removed
+from the architecture of many commercial mid- to low-end network
+devices.  Implementations that deliver high-end performance typically
+take advantage of additional hardware acceleration. We refer to these
+as *hardware switches*, although both approaches obviously include a
 combination of hardware and software.
 
 This section gives an overview of both software-centric and
@@ -69,24 +68,26 @@ in the lookup table).
     and maintains forwarding information in a FIB.
 
 As shown in :numref:`Figure %s <fig-fib>`, the control plane runs a
-*routing algorithm* that collects any information it might need to
-select the best route at a given point in time, including alternative
-paths, their respective costs, and any policy constraints. Chapter 4
-looks at several widely used routing algorithms, and while the exact
-set of information it collects is algorithm-specific, it is commonly
-referred to as the *Routing Information Base (RIB)*.
+*routing algorithm* that collects the information about the network's
+topology so it can select the best route to each destination at a
+given point in time. This includes available paths, their respective
+costs, and any policy constraints. Chapter 4 looks at several widely
+used routing algorithms, and while the exact set of information it
+collects is algorithm-specific, it is commonly referred to as the
+*Routing Information Base (RIB)*.
 
 The task of actually forwarding packets along the routes selected by
 the routing algorithm is the job of the data plane. This is where the
-switch makes forwarding decisions on a packet-by-packet basis. Data
-plane's lookup table is sometimes called the *Forwarding Information
-Base (FIB)*, and it is implemented using a data structure that has
-been optimized to support fast lookup operations. This data structure
-needs to support multiple possible lookup keys (we have already seen
-32-bit IP address and 48-bit Ethernet address, but there are others),
-which complicates its design.  For now you can think of the FIB as
-being implemented by multiple lookup tables—one per type of key—but we
-postpone an in-depth description until subsection 3.2.4.
+switch makes forwarding decisions on a packet-by-packet basis. The
+data plane's lookup table is sometimes called the *Forwarding
+Information Base (FIB)*, and it uses a data structure that has been
+optimized to support fast lookup operations since it may have only
+nanoseconds to make a decision. To further complicate matters, this
+data structure needs to support multiple possible lookup keys; we have
+already seen 32-bit IP address and 48-bit Ethernet address, but there
+are others.  For now you can think of the FIB as being implemented by
+multiple lookup tables—one per type of key—but we postpone an in-depth
+description until subsection 3.2.4.
 
 :numref:`Figure %s <fig-fib>` also shows an interface between the
 control and data planes, with the former periodically loading new
@@ -128,15 +129,13 @@ fields into its internal registers for processing.
 
 There are two potential bottlenecks with this approach, one or both of
 which limits the aggregate packet forwarding capacity of the software
-switch.
-
-The first problem is that performance is limited by the fact that all
-packets must pass into and out of main memory. Your mileage will vary
-based on how much you are willing to pay for hardware, but as an
-example, a machine limited by a 1333-MHz, 64-bit-wide memory bus can
-transmit data at a peak rate of a little over 100 Gbps—enough to build a
-switch with a handful of 10-Gbps Ethernet ports, but hardly enough for a
-high-end switch in the core of the Internet.
+switch. The first problem is that performance is limited by the fact
+that all packets must pass into and out of main memory. Your mileage
+will vary based on how much you are willing to pay for hardware, but
+as an example, a machine limited by a 1333-MHz, 64-bit-wide memory bus
+can transmit data at a peak rate of a little over 100 Gbps—enough to
+build a switch with a handful of 10-Gbps Ethernet ports, but hardly
+enough for a high-end switch in the core of the Internet.
 
 Moreover, this upper bound assumes that moving data is the only problem.
 This is a fair approximation for long packets but a bad one when packets
@@ -182,31 +181,19 @@ Ethernet address in an L2 forwarding table.
 
 Throughout much of the Internet’s history, high-performance switches
 have been specialized devices, built with Application-Specific
-Integrated Circuits (ASICs). While it was possible to build low-end
-switches using commodity servers running C programs, ASICs were
-required to achieve the required throughput rates.
-
-The problem with ASICs is that hardware takes a long time to design and
-fabricate, meaning the delay for adding new features to a switch is
-usually measured in years, not the days or weeks today’s software
-industry is accustomed to. Ideally, we’d like to benefit from the
-performance of ASICs and the agility of software.
-
-Fortunately, recent advances in domain specific processors (and other
-commodity components) have made this possible. Just as importantly, the
-full architectural specification for switches that take advantage of
-these new processors is now available online—the hardware equivalent of
-*open source software*. This means anyone can build a high-performance
-switch by pulling the blueprint off the web (see the Open Compute
-Project, OCP, for examples) in the same way it is possible to build your
-own PC. In both cases you still need software to run on the hardware,
-but just as Linux is available to run on your home-built PC, there are
-now open source L2 and L3 stacks available on GitHub to run on your
-home-built switch. Alternatively, you can simply buy a pre-built switch
-from a commodity switch manufacturer and then load your own software
-onto it. The following describes these open *bare-metal switches*, so
-called to contrast them with closed devices, in which hardware and
-software are tightly bundled, that have
+Integrated Circuits (ASICs). Today, the availability of ASIC-based
+switching chips, along with other commodity components and an open
+architectural specification, makes it possible for anyone can build a
+high-performance switch by pulling the blueprint off the web (see the
+Open Compute Project, OCP, for examples) in the same way it is
+possible to build your own PC. In both cases you still need software
+to run on the hardware, but just as Linux is available to run on your
+home-built PC, there are now open source L2 and L3 stacks available on
+GitHub to run on your home-built switch. Alternatively, you can simply
+buy a pre-built switch from a commodity switch manufacturer and then
+load your own software onto it. The following describes these open
+*bare-metal switches*, so called to contrast them with closed devices,
+in which hardware and software are tightly bundled, that have
 historically dominated the industry.
 
 .. _fig-baremetal:
@@ -214,8 +201,7 @@ historically dominated the industry.
    :width: 500px
    :align: center
 
-   Bare-metal switch using a Network Processing
-   Unit.
+   Bare-metal switch using a Network Processing Unit.
 
 :numref:`Figure %s <fig-baremetal>` is a simplified depiction of a
 bare-metal switch. The key difference from the earlier implementation
@@ -232,31 +218,30 @@ with 32x100-Gbps ports, or the 48x40-Gbps ports shown in the diagram.
 
 .. sidebar:: Network Processing Units
 
-          Our use of the term NPU is a bit
-          non-standard. Historically, NPU was the name given more
-          narrowly-defined network processing chips used, for
-          example, to implement intelligent firewalls or deep
-          packet inspection. They were not as general-purpose as
-          the NPUs we’re discussing here; nor were they as
-          high-performance. It seems likely that the current
+          Our use of the term NPU is a bit non-standard. Historically,
+          NPU was the name given more narrowly-defined network
+          processing chips used, for example, to implement intelligent
+          firewalls or deep packet inspection. They were not as
+          general-purpose as the NPUs we’re discussing here; nor were
+          they as high-performance. It seems likely that the current
           approach will make purpose-built network processors
           obsolete, but in any case, we prefer the NPU nomenclature
           because it is consistent with the trend to build
-          programmable domain-specific processors, including GPUs
-          for graphics and TPUs (Tensor Processing Units) for AI.
+          programmable domain-specific processors, including GPUs for
+          graphics and TPUs (Tensor Processing Units) for AI.
 
-The beauty of this new switch design is that a given bare-metal switch
-can now be programmed to be an L2 switch, an L3 router, or a
-combination of both, just by a matter of programming. The exact same
-control plane software used in a software switch still runs on the
-control CPU, but in addition, data plane “programs” are loaded onto
-the NPU to reflect the forwarding decisions made by the control plane
-software.  Exactly how one “programs” the NPU depends on the chip
-vendor, of which there are currently several. In some cases, the
-forwarding pipeline is fixed and the control processor merely loads
-the forwarding table into the NPU (by fixed we mean the NPU only knows
-how to process certain headers, like Ethernet and IP), but in other
-cases, the forwarding pipeline is itself programmable.
+The beauty of this design is that a given bare-metal switch can now be
+programmed to be an L2 switch, an L3 router, or a combination of both,
+just by a matter of programming. The exact same control plane
+software used in a software switch still runs on the control CPU, but
+in addition, data plane “programs” are loaded onto the NPU to reflect
+the forwarding decisions made by the control plane software.  Exactly
+how one “programs” the NPU depends on the chip vendor, of which there
+are currently several. In some cases, the forwarding pipeline is fixed
+and the control processor merely loads the forwarding table into the
+NPU (by fixed we mean the NPU only knows how to process certain
+headers, like Ethernet and IP), but in other cases, the forwarding
+pipeline is itself programmable.
 
 Internally, an NPU takes advantage of three technologies. First, a
 fast SRAM-based memory buffers packets while they are being
@@ -277,28 +262,27 @@ by changing the program it runs. More on exactly what it means to
 
 The relevance of packet processing being implemented by a multi-stage
 pipeline rather than a single-stage processor is that forwarding a
-single packet likely involves looking at multiple header fields. Each
-stage can be programmed to look at a different combination of fields. A
-multi-stage pipeline adds a little end-to-end latency to each packet
-(measured in nanoseconds), but also means that multiple packets can be
-processed at the same time. For example, Stage 2 can be making a second
-lookup on packet A while Stage 1 is doing an initial lookup on packet B,
-and so on. This means the NPU as a whole is able to keep up with line
+single packet likely involves looking at multiple header fields; each
+stage looks at a different combination of fields. A multi-stage
+pipeline adds a little end-to-end latency to each packet (measured in
+nanoseconds), but also means that multiple packets can be processed at
+the same time. For example, Stage 2 can be making a second lookup on
+packet A while Stage 1 is doing an initial lookup on packet B, and so
+on. This means the NPU as a whole is able to keep up with line
 speeds. As of this writing, the state of the art is 25.6 Tbps.
 
 Finally, :numref:`Figure %s <fig-baremetal>` includes other commodity
 components that make this all practical. In particular, it is now
 possible to buy pluggable *transceiver* modules that take care of all
-the media access details—be it Gigabit Ethernet, 10-Gigabit Ethernet,
-or some non-Ethernet technology such as SONET—as well as the
-optics. These transceivers all conform to standardized form factors,
+the media access details described in Section 3.1, be it Gigabit
+Ethernet, 10-Gigabit Ethernet, or some non-Ethernet technology such as
+SONET. These transceivers all conform to standardized form factors,
 such as SFP+, that can in turn be connected to other components over a
 standardized bus (e.g., SFI). Again, the key takeaway is that the
 networking industry is just now entering into the same commoditized
-world that the computing industry has enjoyed for the last two
-decades.
+world that the computing industry has enjoyed for decades.
 
-3.2.4 Flow Abstraction
+3.2.4 Flow Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Having seen a high-level schematic of a hardware switch, and knowing
@@ -322,13 +306,13 @@ behavior. A flow rule is a *(Match, Action)* pair: Any packet that
 that any packet with destination address *D* be forwarded on output
 port *i*. The original OpenFlow spec allowed the header fields shown
 in :numref:`Figure %s <fig-headers>` to be included in the Match half
-of the rule. So for example, a Match might specify a packet's MAC
+of the rule. So for example, a Match might specify a packet's ETH
 header ``Type`` field equals ``0x800`` (indicating the frame carries
 and IP packet) and its IP header ``DstAddr`` field be contained in
 some subnet (e.g., ``192.12.69/24``).
 
 .. _fig-headers:
-.. figure:: switches/figures/Slide03.png
+.. figure:: switches/figures/headers.png
     :width: 600px
     :align: center
 
@@ -343,9 +327,9 @@ also specify how various header fields should be modified. For
 example, a packet received on a given input port would have this
 switch's ETH address as the packet's destination, but a different
 destination address would be inserted into the ETH header for the
-selected output port, identifying the next hop the packet is to
-take. The ETH source address would also need to be changed
-accordingly.
+selected output port, identifying the *next* hop the packet is to
+visit along its route to the ultimate destination. The ETH source
+address would also need to be changed accordingly.
 
 The OpenFlow specification grew more complicated over time, and was
 certainly defined with much more precision than the previous
@@ -365,25 +349,25 @@ given packet is processed by multiple flow tables in sequence—i.e., a
 pipeline—to determine how it is ultimately forwarded. A set of actions
 are accumulated as the packet flows through the pipeline, and executed
 as a set in the last stage, resulting in the packet being modified and
-enqueued for transmission (or dropped).
+enqueued for transmission (or optionally dropped).
 
 .. _fig-pipeline:
-.. figure:: switches/figures/Slide07.png
-    :width: 500px
+.. figure:: switches/figures/pipeline.png
+    :width: 550px
     :align: center
 
     Simple Schematic of an OpenFlow Forwarding Pipeline.
 
-As shown in :numref:`Figure %s <fig-pipeline>` the pipeline is static,
-in the sense that each stage is hardcoded to know about exactly one
+The pipeline shown in :numref:`Figure %s <fig-pipeline>` is static, in
+the sense that each stage is hardcoded to know about exactly one
 header field. This means the pipeline as a whole is limited to
 matching a fixed set of fields in the packet headers (e.g., the fields
 shown in :numref:`Figure %s <fig-headers>`) and perform a fixed set of
 actions; they are sometimes called *fixed-function pipelines*. Most
-switching chips are still designed this way, although the set of flow
-tables has is quite large, and the corresponding flow rules quite
-complex.  (We'll see many additional header fields that switches want
-to inspect in the chapters of Part II.)
+switching chips are designed this way, although the set of flow tables
+has is quite large, and the corresponding flow rules quite complex.
+(We'll see many additional header fields that switches want to inspect
+in the chapters of Part II.)
 
 An alternative is to build a *programmable pipeline*, coupled with a
 programming language that can be used to dynamically program what each
