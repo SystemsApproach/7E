@@ -1,6 +1,5 @@
 2.2 The World Wide Web
-------------------------------
-
+=======================
 
 We begin our discussion of applications by focusing on the one that is
 so ubiquitous, it is often mixed up with the Internet itself: the
@@ -9,8 +8,10 @@ call it an application; it might be better thought of as a framework
 for building and delivering applications. But it did in fact start out
 as a single application, with a single application layer
 protocol—HTTP—underpinning it. In this section we dig into the details
-of that protocol and the architecture of the web.
+of that protocol and the architecture of the Web.
 
+2.2.1 Applications and Application Protocols
+--------------------------------------------
 
 Before we go any further, it is important to distinguish between
 application *programs* and application *protocols*. For example, the
@@ -37,26 +38,26 @@ in the next section.
 
 The World Wide Web has been so successful and has been the primary way
 many people interact with the Internet for so long that sometimes, in
-the popular consciousness, the web *is* the Internet. (Of course, many
+the popular consciousness, the Web *is* the Internet. (Of course, many
 people now interact with the Internet mainly using their phones,
-unaware that the web underpins most mobile apps as well.)  In fact,
-the design of the system that became the web started around 1989, long
+unaware that the Web underpins most mobile apps as well.)  In fact,
+the design of the system that became the World Wide Web started around 1989, long
 after the Internet had become a widely deployed system and numerous
 other methods to retrieve information over the Internet already
-existed. The original goal of the web was to offer a new way to organize
+existed. The original goal of the Web was to offer a new way to organize
 and retrieve information, drawing on ideas about hypertext—interlinked
 documents—that had been around since at least the 1960s.\ [#]_ The
 core idea of hypertext is that one document can link to another
 document, and the protocol (HTTP) and document language (HTML) were
 designed to meet that goal.
 
-.. [#] A short history of the web provided by the World Wide Web
+.. [#] A short history of the Web provided by the World Wide Web
        consortium traces its roots to a 1945 article describing links
        between microfiche documents.
 
-One way to think of the web is as a set of cooperating clients
+One way to think of the Web is as a set of cooperating clients
 and servers, all of whom speak the same language: HTTP. Most people are
-exposed to the web through a graphical client program or web browser
+exposed to the Web through a graphical client program or web browser
 such as Safari, Chrome, Firefox, or Internet Explorer. :numref:`Figure %s
 <fig-netscape>` shows the Safari browser in use, displaying a page of
 information from Princeton University.
@@ -82,7 +83,7 @@ objects on the web to be located, and they look like the following:
 If you opened that particular URL, your web browser would open a TCP
 connection to the web server at a machine called
 ``www.cs.princeton.edu`` and immediately retrieve and display the file
-called ``index.html``. Most files on the web contain images and text,
+called ``index.html``. Most files on the Web contain images and text,
 and many have other objects such as audio and video clips, pieces of
 code, etc. They also frequently include URLs that point to other files
 that may be located on other machines, which is the core of the
@@ -141,7 +142,7 @@ has led to new versions of HTTP and a new underlying transport, QUIC,
 discussed below.
 
 Request Messages
-~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 
 The first line of an HTTP request message specifies three things: the
 operation to be performed, the web page the operation should be
@@ -371,7 +372,7 @@ connections more than offset the drawbacks.
 While 1.1 is still widely supported, version 2.0 was formally
 approved by the IETF in 2015. Known as HTTP/2, the new version is
 backwards compatible with 1.1 (i.e,. it adopts the same syntax for
-header fields, status codes, and URIs), but it adds two new features.
+header fields, status codes, and URIs), but it adds several new features.
 
 The first is to make it easier for web servers to *minify* the
 information they send back to web browsers. If you look closely at the
@@ -387,7 +388,13 @@ number of bytes that need to be pushed. The whole goal is to minimize
 the latency an end-user experiences from the moment they click on a
 hyperlink until the selected page is fully rendered.
 
-The second big advance of HTTP/2 is to multiplex several requests on a
+Additionally, HTTP/2 adopts a form of header compression. As web pages
+have become more complex and the number of requests required to fully
+render a page has grown, reducing the overhead of each request is
+important for the latency experienced by the client. Header
+compression goes some way to improving the latency of fetching a page.
+
+The third advance of HTTP/2 is to multiplex several requests on a
 single TCP connection. This goes beyond what version 1.1
 supports—allowing a *sequence* of requests to reuse a TCP
 connection—by permitting these requests to overlap with each
@@ -398,8 +405,14 @@ mechanisms introduced in Chapter 1: it defines a
 given time (each labeled with a unique *stream id*), and limits each
 stream to one active request/reply exchange at a time.
 
-HTTP/3 and QUIC
-~~~~~~~~~~~~~~~
+You can see from this discussion how the layering decisions made in
+the early days of HTTP had long-lasting effects on its performance as
+the Web evolved. Ultimately there was a realization that an
+alternative approach to layering would be worth the effort.
+
+2.2.2 HTTP/3 and QUIC
+----------------------
+
 As the preceding discussion illustrates, the history of HTTP has
 included a series of incremental changes to make better use of TCP as
 the underlying transport. But there is a fundamental issue that can't
@@ -428,7 +441,10 @@ considerable reduction in the number of round-trips needed to
 establish a secure connection before the first content is
 delivered. In the best case, QUIC allows cryptographically protected
 data to be sent in the first round trip rather than waiting multiple
-RTTs for connection establishment.
+RTTs for connection establishment. We will take another look at QUIC
+when we get to the discussion of securing connections in a later
+chapter.
+
 
 HTTP/3 is implemented in the majority of browsers and is incrementally
 being deployed on servers across the Internet. There remain plenty of
@@ -436,8 +452,21 @@ servers running HTTP/2 and even some HTTP/1.1 as well, so version
 negotiation is likely to be part of HTTP implementations for the
 foreseeable future.
 
-2.2.1 Caching
-~~~~~~~~~~~~~~
+.. admonition:: Key Takeaway
+
+  The important lesson to take away from this discussion is how
+  layering decisions have a profound impact on system behavior and
+  performance. Running HTTP version 1 on top of TCP was a completely
+  understandable decision that enabled the Web to get off the ground,
+  but we have now gone through 3 major revisions of this layered
+  approach culminating in a totally new design for the transport layer
+  underpinning HTTP. This is partly a testament to the ability of the
+  Intenet to support incremental evolution but also a reminder that we
+  need to think carefully about the entire system not just the
+  behavior of a single layer when designing protocols.
+
+2.2.3 Caching
+--------------
 
 An important implementation strategy that makes the web more usable is
 to cache web pages. Caching has many benefits. From the client’s
@@ -496,8 +525,8 @@ whether or not a document can be cached, how long it can be cached, how
 fresh a document must be, and so on. We’ll return to the subject of
 CDNs in a later section.
 
-2.2.2 Web Services
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.2.4 Web Services
+---------------------
 
 So far we have focused on interactions between a human and a web server.
 For example, a human uses a web browser to interact with a server, and

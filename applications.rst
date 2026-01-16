@@ -47,3 +47,4 @@ the basic anatomy of an application.
 .. include:: applications/anatomy.rst
 .. include:: applications/web.rst
 .. include:: applications/email.rst
+.. include:: applications/dash.rst
