@@ -15,8 +15,8 @@ as *hardware switches*, although both approaches obviously include a
 combination of hardware and software.
 
 This section gives an overview of both software-centric and
-hardware-centric designs. It also describes fundemental concepts that
-underly both designs. Keep in mind that our goal is to understand
+hardware-centric designs. It also describes fundamental concepts that
+underlie both designs. Keep in mind that our goal is to understand
 switches in enough depth so we can use them as the primary building
 block for the best-effort message delivery system covered in Part II.
 
@@ -63,7 +63,7 @@ in the lookup table).
     :align: center
 
     Packet switches are divided into two planes: the *Control Plane*
-    runs a routing algorith and maintains routing information in a
+    runs a routing algorithm and maintains routing information in a
     RIB, and the *Data Plane* implements packet forwarding logic
     and maintains forwarding information in a FIB.
 
@@ -286,7 +286,7 @@ world that the computing industry has enjoyed for decades.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Having seen a high-level schematic of a hardware switch, and knowing
-that we need an interface by which the control plance installs
+that we need an interface by which the control plane installs
 forwarding rules in the data plane, we are now ready to take a closer
 look at this interface. At the heart of the interface is a *forwarding
 abstraction:* a general-purpose way for the control plane to instruct
@@ -354,9 +354,9 @@ transmission.
     Simple Schematic of an OpenFlow Forwarding Pipeline.
 
 Second, the pipeline shown in :numref:`Figure %s <fig-pipeline>` is
-static, in the sense that each stage is hardcoded to know about
-exactly one subset of header fields. This means the pipeline as a
-whole is limited to matching a fixed set of fields in the packet
+usually static, in the sense that each stage is hard coded to know
+about exactly one subset of header fields. This means the pipeline as
+a whole is limited to matching a fixed set of fields in the packet
 headers (e.g., the fields shown in :numref:`Figure %s <fig-headers>`)
 and perform a fixed set of actions; they are sometimes called
 *fixed-function pipelines*. Most switching chips are designed this
@@ -365,15 +365,17 @@ example shown in :numref:`Figure %s <fig-headers>` suggests.  (We'll
 see many additional header fields that switches want to inspect in the
 chapters of Part II.)
 
-An alternative is to build a *programmable pipeline*, coupled with a
-programming language that can be used to dynamically program what each
-stage in the pipeline does. This has happened over the last several
-years, resulting in a *Protocol Independent Switching Architecture
-(PISA)* and the *P4* programming language. Both are beyond the scope
-of this introduction to switch design, but we describe them in
-auxilary material, and encourage readers to take advantage of open
-source software to write P4 programs and run them on emulated PISA
-hardware.
+An alternative is to build a *programmable pipeline*, and pair it with
+a programming language that can be used to dynamically program what
+each stage in the pipeline does. This has happened over the last
+several years, resulting in a *Protocol Independent Switching
+Architecture (PISA)* and the *P4* programming language. The details of
+both are beyond the scope of this introduction to switch design, but
+we describe them in auxiliary material, and encourage readers to take
+advantage of open source software to write P4 programs and run them on
+emulated PISA hardware. Doing so will give you the power to implement
+many of the ideas described in this book, and do so with performance
+that competes with the biggest vendors in the networking industry.
 
 .. _reading_openflow:
 .. admonition:: Further Reading
