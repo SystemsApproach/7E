@@ -3,10 +3,11 @@
 
 As introduced in Chapter 1, all network communication depends on
 transmitting and receiving electromagnetic signals over some physical
-medium, be it through the atmosphere, or over copper wires or optical
-fibers. Each signal can be modeled as a sine function of some
-amplitude, frequency, and phase. This happens within the frequency
-bands depicted in :numref:`Figure %s <fig-spectrum>`.
+medium, be radio waves it through the atmosphere, an electrical
+current over copper wires, or light waves through optical fibers. Each
+signal can be modeled as a sine function of some amplitude, frequency,
+and phase. This happens within the frequency bands depicted in
+:numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
 .. figure:: switches/figures/spectrum.png
@@ -52,8 +53,8 @@ That still leaves us with plenty of work to do, corresponding to what
 is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
 —terms originally coined by the OSI reference model presented in
 Chapter 1.  A related term you will often see is *Medium Access
-Control *(MAC)*, indicating that the focus is on controlling on how
-the sending and receiving nodes access a physical medium.
+Control (MAC)*, indicating that the focus is on controlling on how the
+sending and receiving nodes access a physical medium.
 
 This section introduces the problems addressed by the link layer, and
 uses Ethernet as its representative example. The Ethernet has
@@ -259,13 +260,13 @@ some mechanism is needed to detect these errors so that corrective
 action can be taken.
 
 One of the most common techniques for detecting transmission errors is
-a technique known as the *cyclic redundancy check* (CRC). Ethernet
-uses a 32-bit CRC code (denoted CRC-32), which works by adding only 32
-extra bits to the message. These few bits are enough to provide strong
-protection against common bit errors in messages that are thousands of
-bytes long. The theoretical foundation of the cyclic redundancy check
-is rooted in a branch of mathematics called *finite fields*. While
-this may sound daunting, the basic ideas is easy to understood.
+known as the *cyclic redundancy check* (CRC). Ethernet uses a 32-bit
+CRC code (denoted CRC-32), which works by adding only 32 extra bits to
+the message. These few bits are enough to provide strong protection
+against common bit errors in messages that are thousands of bytes
+long. The theoretical foundation of the cyclic redundancy check is
+rooted in a branch of mathematics called *finite fields*. While this
+may sound daunting, the basic ideas is easy to understood.
 
 To start, think of an (n+1)-bit message as being represented by an :math:`n`
 degree polynomial, that is, a polynomial whose highest-order term is
@@ -475,4 +476,40 @@ front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
 2.1.4 Historical Background
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*[Describe Ethernet as a multi-access network. Refer back to Aloha, and forward to WiFi.]*
+Ethernet has been the dominant link technology for nearly 40 years,
+but a lot has changed since it was first introduced in 1978.
+Originally, Ethernet was a *multi-access* technology (connecting tens
+or hundreds of nodes) rather than *point-to-point* link (connecting
+only two nodes).  This was possible because Ethernet ran over coax
+cable, with hosts "tapping" (splicing) into the cable at many
+locations (as opposed to having just two nodes at either end of a
+single cable).  Because all the nodes connected to a single cable had
+to compete to send messages, early Ethernet shared much more with
+wireless networks than today's wired networks. In fact, Ethernet's
+media access control algorithm was inspired by an earlier wireless
+network, called Aloha, that interconnected the Hawaiian Islands. And
+that Ethernet algorithm, in turn, inspired the approach used by today's
+Wi-Fi. We describe that algorithm in Chapter 5.
+
+The other big change is that today Ethernet often runs at speeds of 1,
+10, or 100 Gbps, rather than the original 10 Mbps standard. As we saw
+earlier in this section, this was done in part by upgrading the
+encoding algorithm. The rest of the Ethernet standard—the part that's
+visible to anyone using Ethernet—remained backward compatible with the
+original standard. This adaptability makes it worth saying a few words
+about why Ethernet has been so successful.
+
+First, an Ethernet is extremely easy to administer and maintain: There
+is no routing or configuration tables to be kept up-to-date, and it is
+easy to add a new host to the network. It is hard to imagine a simpler
+network to administer.  Second, it is inexpensive: cable/fiber is
+relatively cheap, and the only other cost is the network adaptor on
+each host. Ethernet became deeply entrenched for these reasons, and
+any switch-based approach that aspired to displace it required
+additional investment in infrastructure (the switches), on top of the
+cost of each adaptor. The switch-based variant of Ethernet did
+eventually succeed in replacing multi-access Ethernet, but this is
+primarily because it could be *deployed incrementally*—with some hosts
+connected by point-to-point links to switches while others remained
+tapped into coax—all the while retaining the simplicity of network
+administration.
