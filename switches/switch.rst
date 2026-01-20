@@ -1,12 +1,12 @@
 3.2 Switch Design
 ---------------------------------
 
-Packet switches are devices that interconnect a set of point-to-point
+Packet switches are devices that interconnect point-to-point
 links. There is a straightforward way to build a switch: Buy a
 general-purpose processor and equip it with multiple network interface
 cards. Such a device, running suitable software, can receive packets
 on one of its interfaces, decide the best way to forward each packet
-on towards its destination, and then send packets out another of its
+on towards its destination, and then transmit packets on another of its
 interfaces.  This so called *software switch* is not too far removed
 from the architecture of many commercial mid- to low-end network
 devices.  Implementations that deliver high-end performance typically
@@ -114,10 +114,11 @@ bus (PCIe in this example) using a technique called *direct memory
 access* (DMA). Once the packet is in memory, the CPU examines its
 header to determine which interface the packet should be sent out on,
 and instructs NIC 2 to transmit the packet, again directly out of main
-memory using DMA. The important take-away is that the packet is
-buffered in main memory (this is the “store” half of
-store-and-forward), with the CPU reading only the necessary header
-fields into its internal registers for processing.
+memory using DMA. (Recall that because there may be contention, the
+packet may be queued in the buffer waiting to be sent.) The important
+take-away is that the packet is buffered in main memory (this is the
+“store” half of store-and-forward), with the CPU reading only the
+necessary header fields into its internal registers for processing.
 
 .. _fig-softswitch:
 .. figure:: switches/figures/softswitch.png
@@ -154,7 +155,7 @@ would imply
 
 .. centered:: = 2048 × 10\ :sup:`7`
 
-that is, a throughput of about 20 Gbps—fast, but substantially below
+That is, a throughput of about 20 Gbps—fast, but substantially below
 the range users are demanding from their switches today. Bear in mind
 that this 20 Gbps would be shared by all users connected to the
 switch. Thus, for example, a 16-port switch with this aggregate
@@ -232,16 +233,15 @@ with 32x100-Gbps ports, or the 48x40-Gbps ports shown in the diagram.
 
 The beauty of this design is that a given bare-metal switch can now be
 programmed to be an L2 switch, an L3 router, or a combination of both,
-just by a matter of programming. The exact same control plane
-software used in a software switch still runs on the control CPU, but
-in addition, data plane “programs” are loaded onto the NPU to reflect
-the forwarding decisions made by the control plane software.  Exactly
-how one “programs” the NPU depends on the chip vendor, of which there
-are currently several. In some cases, the forwarding pipeline is fixed
-and the control processor merely loads the forwarding table into the
-NPU (by fixed we mean the NPU only knows how to process certain
-headers, like Ethernet and IP), but in other cases, the forwarding
-pipeline is itself programmable.
+just by a matter of programming. The exact same control plane software
+used in a software switch still runs on the control CPU, but in
+addition, data plane “programs” are loaded onto the NPU to reflect the
+forwarding decisions made by the control plane software.  Exactly how
+one “programs” the NPU depends on the chip vendor. In some cases, the
+forwarding pipeline is fixed and the control processor merely loads
+the forwarding table into the NPU (by fixed we mean the NPU only knows
+how to process certain headers, like Ethernet and IP), but in other
+cases, the forwarding pipeline is itself programmable.
 
 Internally, an NPU takes advantage of three technologies. First, a
 fast SRAM-based memory buffers packets while they are being
@@ -258,7 +258,7 @@ the processing involved to forward each packet is implemented by a
 forwarding pipeline.  This pipeline is implemented by an ASIC, but
 when well-designed, the pipeline’s forwarding behavior can be modified
 by changing the program it runs. More on exactly what it means to
-"program an NPU" is given in the next subsection.
+"program the forwarding pipeline" is given in the next subsection.
 
 The relevance of packet processing being implemented by a multi-stage
 pipeline rather than a single-stage processor is that forwarding a
@@ -269,7 +269,7 @@ nanoseconds), but also means that multiple packets can be processed at
 the same time. For example, Stage 2 can be making a second lookup on
 packet A while Stage 1 is doing an initial lookup on packet B, and so
 on. This means the NPU as a whole is able to keep up with line
-speeds. As of this writing, the state of the art is 25.6 Tbps.
+speeds. As of this writing, the state of the art is 102.4 Tbps.
 
 Finally, :numref:`Figure %s <fig-baremetal>` includes other commodity
 components that make this all practical. In particular, it is now
@@ -316,7 +316,7 @@ some subnet (e.g., ``192.12.69/24``).
     :width: 600px
     :align: center
 
-    Header Fields Matched in Original OpenFlow Specification.
+    Example header Fields Matched in Original OpenFlow Specification.
 
 The Actions originally included *“forward packet to one or more
 ports”* and *“drop packet,”* plus a *“send packet up to the control
@@ -331,25 +331,20 @@ selected output port, identifying the *next* hop the packet is to
 visit along its route to the ultimate destination. The ETH source
 address would also need to be changed accordingly.
 
-The OpenFlow specification grew more complicated over time, and was
-certainly defined with much more precision than the previous
-paragraphs. We're not going to dive into the syntax of of *(Match,
-Action)* pairs, but there is one more issue to address: How OpenFlow
-switches achieve high performance through parallelism.
-
-We saw in Section 3.2.3 that hardware switches often employ a
-forwarding pipeline, making it possible to do multiple lookups on a
-packet in parallel. :numref:`Figure %s <fig-pipeline>` takes a closer
-look at this pipeline, this time with the knowledge that it is being
-used to install flow rules. The idea is that the forwarding pipeline
-implements a series of flow tables, each focused on a subset of the
-header fields that might be involved in a given flow rule (e.g., one
-table matches the ETH header, one matches the IP header, and so on). A
-given packet is processed by multiple flow tables in sequence—i.e., a
-pipeline—to determine how it is ultimately forwarded. A set of actions
-are accumulated as the packet flows through the pipeline, and executed
-as a set in the last stage, resulting in the packet being modified and
-enqueued for transmission (or optionally dropped).
+There are two other noteworthy aspects of flow rules. First, as we saw
+in Section 3.2.3, hardware switches employ a forwarding pipeline that
+makes it possible to do multiple lookups in parallel. :numref:`Figure
+%s <fig-pipeline>` takes a closer look at this pipeline, this time
+with the knowledge that it is being used to execute flow rules. The
+idea is that the forwarding pipeline implements a series of flow
+tables, each focused on a subset of the header fields that might be
+involved in a given flow rule (e.g., one table matches the ETH header,
+one matches the IP header, and so on). A given packet is processed by
+multiple flow tables in sequence—i.e., a pipeline—to determine how it
+is ultimately forwarded. A set of actions are accumulated as the
+packet flows through the pipeline, and executed as a set in the last
+stage, resulting in the packet being modified and enqueued for
+transmission.
 
 .. _fig-pipeline:
 .. figure:: switches/figures/pipeline.png
@@ -358,16 +353,17 @@ enqueued for transmission (or optionally dropped).
 
     Simple Schematic of an OpenFlow Forwarding Pipeline.
 
-The pipeline shown in :numref:`Figure %s <fig-pipeline>` is static, in
-the sense that each stage is hardcoded to know about exactly one
-header field. This means the pipeline as a whole is limited to
-matching a fixed set of fields in the packet headers (e.g., the fields
-shown in :numref:`Figure %s <fig-headers>`) and perform a fixed set of
-actions; they are sometimes called *fixed-function pipelines*. Most
-switching chips are designed this way, although the set of flow tables
-has is quite large, and the corresponding flow rules quite complex.
-(We'll see many additional header fields that switches want to inspect
-in the chapters of Part II.)
+Second, the pipeline shown in :numref:`Figure %s <fig-pipeline>` is
+static, in the sense that each stage is hardcoded to know about
+exactly one subset of header fields. This means the pipeline as a
+whole is limited to matching a fixed set of fields in the packet
+headers (e.g., the fields shown in :numref:`Figure %s <fig-headers>`)
+and perform a fixed set of actions; they are sometimes called
+*fixed-function pipelines*. Most switching chips are designed this
+way, although the set of flow tables has grown much larger than the
+example shown in :numref:`Figure %s <fig-headers>` suggests.  (We'll
+see many additional header fields that switches want to inspect in the
+chapters of Part II.)
 
 An alternative is to build a *programmable pipeline*, coupled with a
 programming language that can be used to dynamically program what each
