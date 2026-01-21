@@ -1,18 +1,20 @@
 3.2 Switch Design
 ---------------------------------
 
-Packet switches are devices that interconnect point-to-point
-links. There is a straightforward way to build a switch: Buy a
-general-purpose processor and equip it with multiple network interface
-cards. Such a device, running suitable software, can receive packets
-on one of its interfaces, decide the best way to forward each packet
-on towards its destination, and then transmit packets on another of its
-interfaces.  This so called *software switch* is not too far removed
-from the architecture of many commercial mid- to low-end network
-devices.  Implementations that deliver high-end performance typically
-take advantage of additional hardware acceleration. We refer to these
-as *hardware switches*, although both approaches obviously include a
-combination of hardware and software.
+Packet switches are devices that interconnect point-to-point links,
+making it possible to assemble networks that connect hundreds or
+thousands of hosts (rather than just two).  There is a straightforward
+way to build a switch: Buy a general-purpose processor and equip it
+with multiple network interface cards. Such a device, running suitable
+software, can receive packets on one of its interfaces, decide the
+best way to forward each packet on towards its destination, and then
+transmit packets on another of its interfaces.  This so called
+*software switch* is not too far removed from the architecture of many
+commercial mid- to low-end network devices.  Implementations that
+deliver high-end performance typically take advantage of additional
+hardware acceleration. We refer to these as *hardware switches*,
+although both approaches obviously include a combination of hardware
+and software.
 
 This section gives an overview of both software-centric and
 hardware-centric designs. It also describes fundamental concepts that

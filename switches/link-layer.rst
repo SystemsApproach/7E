@@ -1,13 +1,13 @@
 3.1 Link Technology
 ---------------------------------
 
-As introduced in Chapter 1, all network communication depends on
-transmitting and receiving electromagnetic signals over some physical
-medium, be radio waves it through the atmosphere, an electrical
-current over copper wires, or light waves through optical fibers. Each
-signal can be modeled as a sine function of some amplitude, frequency,
-and phase. This happens within the frequency bands depicted in
-:numref:`Figure %s <fig-spectrum>`.
+All network communication depends on transmitting and receiving
+electromagnetic signals over some physical medium, be it radio waves
+through the atmosphere or space, an electrical current over copper
+wires, or light waves through optical fibers. Each signal can be
+modeled as a sine function of some amplitude, frequency, and phase,
+with the frequency (measured in Hertz, Hz) found in the bands shown
+in :numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
 .. figure:: switches/figures/spectrum.png
@@ -23,16 +23,16 @@ a "high frequency" and a "low frequency". What makes modulation a hard
 problem is that the receiver has to recover the intended digital value
 from analog signal in the face of noise and attenuation.
 
-This brings us to the second challenge, which is encoding digital data
-(i.e., 1’s and 0’s) onto this digital signal. On the surface, this
-encoding seems simple enough—the high signal encodes a 1 and the low
-signal encodes a 0—but in practice the digital signal may have more
-than two (high/low) settings. If there are four recoverable digital
-signals, for example, then two bits could be coded in each. In
-general, we think of the digital signal as carrying symbols rather
-than bits, where each symbol is one or more bits in length.
-:numref:`Figure %s <fig-signals>` summarizes the layers involved in
-encoding binary data for transmission.
+The second challenge is how to encode digital data (i.e., 1’s and 0’s)
+onto this digital signal. On the surface, this encoding seems simple
+enough—the high signal encodes a 1 and the low signal encodes a 0—but
+in practice the digital signal may have more than two (high/low)
+settings. If there are four recoverable digital signals, for example,
+then two bits could be coded in each. In general, we think of the
+digital signal as carrying symbols rather than bits, where each symbol
+is one or more bits in length.  :numref:`Figure %s <fig-signals>`
+summarizes the layers involved in encoding binary data for
+transmission.
 
 .. _fig-signals:
 .. figure:: switches/figures/signals.png
@@ -42,19 +42,19 @@ encoding binary data for transmission.
    Binary data encoded in a digital signal, and in turn modulated over
    an analog signal.
 
-It should be clear that the engineering required to transmit and
-receive digital messages over a physical medium is non-trivial. The
-same is true for the science—known as *Information Theory*\ —that
-explains how efficiently that task can be performed. We consider both
-Information Theory and modulation techniques out-of-scope for this
-book, and refer the reader to authoritative sources on the topic.
+The engineering required to transmit and receive digital messages over
+a physical medium is non-trivial. The same is true for the
+science—known as *Information Theory*\ —that explains how efficiently
+that task can be performed. We consider both Information Theory and
+modulation techniques out-of-scope for this book, and refer the reader
+to authoritative sources on the topic.
 
 That still leaves us with plenty of work to do, corresponding to what
 is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
 —terms originally coined by the OSI reference model presented in
-Chapter 1.  A related term you will often see is *Medium Access
-Control (MAC)*, indicating that the focus is on controlling on how the
-sending and receiving nodes access a physical medium.
+Chapter 1.  Another term you will often see is *Medium Access Control
+(MAC)*, indicating that the focus is on controlling on how the sending
+and receiving nodes access a physical medium.
 
 This section introduces the problems addressed by the link layer, and
 uses Ethernet as its representative example. The Ethernet has
@@ -158,17 +158,17 @@ in the same time period.
 Note that bit rate isn’t necessarily less than or equal to the baud
 rate, as the Manchester encoding suggests. If the modulation scheme is
 able to utilize (and recognize) four different signals, as opposed to
-just two (e.g., “high” and “low”), then it is possible to encode two bits
-into each clock interval, resulting in a bit rate that is twice the baud
-rate. Similarly, being able to modulate among eight different signals
-means being able to transmit three bits per clock interval. In
+just two (e.g., “high” and “low”), then it is possible to encode two
+bits into each clock interval, resulting in a bit rate that is twice
+the baud rate. Similarly, being able to modulate among eight different
+signals means being able to transmit three bits per clock interval. In
 general, it is important to keep in mind we have over-simplified
-modulation, which is much more sophisticated than transmitting
-"high" and "low" signals. It is not uncommon to vary a combination
-of a signal's phase and amplitude, making it possible to encode
-16 or even 64 different patterns (often called *symbols*) during each
-clock interval. *QAM (Quadrature Amplitude Modulation)* is widely used
-example of such a modulation scheme.
+modulation, which is much more sophisticated than transmitting "high"
+and "low" signals. It is not uncommon to vary a combination of a
+signal's phase and amplitude—for a fixed frequency band—making it
+possible to encode 16 or even 64 different patterns (symbols) during
+each clock interval. *QAM (Quadrature Amplitude Modulation)* is widely
+used example of such a modulation scheme.
 
 A more efficient alternative, called *4B/5B*, attempts to address the
 inefficiency of the Manchester encoding without suffering from the
@@ -235,20 +235,76 @@ purposes. Of these, code ``11111`` is used when the line is idle, code
 interpreted to mean halt. Of the remaining 13 codes, 7 of them are not
 valid because they violate the “one leading 0, two trailing 0s,” rule,
 and the other 6 represent various control symbols. Some of the framing
-protocols described later in this chapter make use of these control
+protocols described in the next section make use of these control
 symbols.
 
-As for our exemplar link technology, Ethernet has been adaptive as its
-bandwidth improved over time. It originally used Manchester encoding
-when it rat at 10Mbps speeds, but switched to 4B/5B when it was
-upgraded to run at 100Mbps. The jump to 1Gbps Ethernet (also called
-1GE) was coupled with a change to 8B/10B encoding (8 bits of data
-encoded in 10 digital signals), and more recently, 10GE and above uses
-a 64B/66B encoding.
+As for our exemplar link technology, Ethernet has changed its encoding
+scheme as its bandwidth improved over time. It originally used
+Manchester encoding when it ran at 10Mbps speeds, but switched to
+4B/5B when it was upgraded to run at 100Mbps. The jump to 1Gbps
+Ethernet (also called 1GE or 1GigE) was coupled with a change to
+8B/10B encoding (8 bits of data encoded in a 10-bit code). And more
+recently, 10GE and above uses a 64B/66B encoding.
 
 
 2.1.2 Framing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Now that we have seen how to transmit a sequence of bits over a
+point-to-point link, the next challenge is subdivide that bit-stream
+into a sequence of *frames*, each of which is a self-contained block
+of data being sent through a packet-switched network to some
+destination host.  We wouldn't necessarily have to do this—it is
+possible for a network to be purely bit-oriented—but as discussed in
+Section 1.4, the goal of efficiently sharing network infrastructure is
+best met through statistical multiplexing. Packets define the unit of
+data being forwarded through the network. A frame is what we call a
+packet at the link layer, and *framing* is the problem of determining
+exactly what set of bits constitutes a frame—that is, determining
+where the frame begins and ends.
+
+There are several ways to address the framing problem, and each of
+them have been used at one time or another by different link
+technologies. We briefly introduce two of them here, one of which is
+the strategy used by Ethernet.
+
+One of the oldest approaches to framing has its roots in connecting
+terminals to mainframes. The idea is view each frame as a collection
+of bytes (characters) rather than a collection of bits. Today, the
+widely used Point-to-Point Protocol (PPP) still uses this approach.
+
+The idea is to use special *sentinel characters* to indicate where
+frames start and end. For example, a frame is everything contained
+between a special STX (start of text) and ETX (end of text) character.
+The problem with the sentinel approach, of course, is that one of the
+special characters might appear in the data portion of the frame. The
+standard way to overcome this problem by “escaping” the character by
+preceding it with a DLE (data-link-escape) character whenever it
+appears in the body of a frame; the DLE character is also escaped (by
+preceding it with an extra DLE) in the frame body. Note that it's also
+possible for the special characters to become corrupted, which results
+in a *framing error*. When this happens, the receiver has to wait
+until the next sentinel character is sent to get back in sync.
+
+Ethernet uses an similar approach, but without assuming anything about
+byte-boundaries—it simply views the frame as a collection of bits.
+These bits might come from some character set, such as ASCII; they
+might be pixel values in an image; or they could be instructions and
+operands from an executable file. Specifically, it appends a special
+bit pattern to demarc the beginning of a frame: a 64-bit preamble
+consisting of a sequence of alternating 0s and 1s.  Other than that
+preamble, the rest of the frame format is exactly as shown in Section
+1.3.3; it includes a 48-bit source address, a 48-bit destination
+address, and a 16-bit type field; followed by the payload; followed by
+a 32-bit CRC code. The sending and receiving host do not see the
+preamble or CRC code; they are attached (and stripped) by the network
+adaptor.
+
+Ethernet does not need to "escape" the preamble in the middle of a
+frame because the encoding scheme (see the previous subsection)
+ensures that sequence of bits does not occur in the message itself.
+In fact, one of the codes is used to mark the end of the frame, and
+another of the codes is sent when the link is idle.
 
 2.1.3 Error Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -481,35 +537,42 @@ but a lot has changed since it was first introduced in 1978.
 Originally, Ethernet was a *multi-access* technology (connecting tens
 or hundreds of nodes) rather than *point-to-point* link (connecting
 only two nodes).  This was possible because Ethernet ran over coax
-cable, with hosts "tapping" (splicing) into the cable at many
-locations (as opposed to having just two nodes at either end of a
-single cable).  Because all the nodes connected to a single cable had
-to compete to send messages, early Ethernet shared much more with
+cable, with hosts "tapping" (splicing) into the cable at a nearby
+point as it snaked up-and-down the corridors of office buildings.
+
+Because all the nodes connected to a single cable had to compete to
+send messages—i.e., messages sent from two hosts at the same time
+would interfere with each other—early Ethernet shared much more with
 wireless networks than today's wired networks. In fact, Ethernet's
 media access control algorithm was inspired by an earlier wireless
-network, called Aloha, that interconnected the Hawaiian Islands. And
-that Ethernet algorithm, in turn, inspired the approach used by today's
-Wi-Fi. We describe that algorithm in Chapter 5.
+network, called Aloha, that interconnected computers on the Hawaiian
+Islands. And that Ethernet algorithm, in turn, inspired the approach
+used by today's Wi-Fi. We describe that algorithm in Chapter 5.
 
 The other big change is that today Ethernet often runs at speeds of 1,
 10, or 100 Gbps, rather than the original 10 Mbps standard. As we saw
 earlier in this section, this was done in part by upgrading the
 encoding algorithm. The rest of the Ethernet standard—the part that's
 visible to anyone using Ethernet—remained backward compatible with the
-original standard. This adaptability makes it worth saying a few words
-about why Ethernet has been so successful.
+original standard. This adaptability was key to Ethernet's longevity,
+but there were two other factors that contributed to its success.
 
 First, an Ethernet is extremely easy to administer and maintain: There
-is no routing or configuration tables to be kept up-to-date, and it is
-easy to add a new host to the network. It is hard to imagine a simpler
-network to administer.  Second, it is inexpensive: cable/fiber is
-relatively cheap, and the only other cost is the network adaptor on
-each host. Ethernet became deeply entrenched for these reasons, and
-any switch-based approach that aspired to displace it required
-additional investment in infrastructure (the switches), on top of the
-cost of each adaptor. The switch-based variant of Ethernet did
-eventually succeed in replacing multi-access Ethernet, but this is
-primarily because it could be *deployed incrementally*—with some hosts
-connected by point-to-point links to switches while others remained
-tapped into coax—all the while retaining the simplicity of network
-administration.
+are no configuration tables to be kept up-to-date, and it is easy to
+add a new host to the network. You just plug it in. It is hard to
+imagine a simpler network to administer.  Second, is inexpensive to
+deploy: Cable/fiber is relatively cheap, and the only other cost is
+the network adaptor on each host. These adaptors, also known as
+*Network Interface Cards (NICs)*, hide the changes in the encoding
+scheme, so the software stack sitting on top of the Ethernet device
+driver are completely unaware of any changes in modulation or
+encoding, as well as whether the link itself is point-to-point or
+multi-access.
+
+Ethernet became deeply entrenched for these reasons, and even though
+the switch-based approach that eventually replaced the multi-access
+cables required additional investment in infrastructure (the
+switches), that new infrastructure could be *deployed incrementally*.
+That is, some hosts could be connected by point-to-point links to
+switched Ethernet, while others remained tapped into coax—all the
+while retaining the simplicity of network administration.

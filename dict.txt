@@ -347,7 +347,7 @@ decrypts
 deliverHLP
 deliverSWP
 DeLong
-demarking
+demarc
 demultiplexed
 demultiplexes
 demultiplexing
@@ -557,6 +557,7 @@ GetResponse
 Gettys
 GFC
 gif
+GigE
 GitOps
 Giulio
 GKE
