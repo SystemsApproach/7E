@@ -2,7 +2,7 @@
 -------------------------------
 
 Efforts to stream video and audio data across the Internet go back at
-least to the 1990s, with the MBONE (multcast backbone) being an
+least to the 1990s, with the MBONE (multicast backbone) being an
 overlay network that was used to experiment with both multicast
 routing and real-time streaming.
 
@@ -67,7 +67,7 @@ congestion control mechanisms that try to match the rate at which data
 is sent across the network to the available capacity. If congestion is
 detected, TCP reduces its sending rate; in the absence of congestion,
 it periodically tries to increase its sending rate to take advantage
-of the available capacity. We'll expore these mechanisms in much more
+of the available capacity. We'll explore these mechanisms in much more
 detail in Chapter 14. For now, we can just accept that TCP is going to
 deliver packets at a rate that varies over time depending on the available
 network capacity.
@@ -91,7 +91,7 @@ than it is being filled, at some point the video playback would stall,
 which looks bad to the end user. So the client tries to avoid this. If
 the queue is starting to drain and there is a risk that it will become
 empty, the client can request a lower quality of video, in the hope
-that the reducded bandwidth can now be met by the network, and the
+that the reduced bandwidth can now be met by the network, and the
 queue will start to fill again. If the queue is getting more full over
 time, that can be a sign that a higher quality can be requested.
 

@@ -463,7 +463,7 @@ foreseeable future.
   but we have now gone through 3 major revisions of this layered
   approach, culminating in a totally new design for the transport layer
   underpinning HTTP. This is partly a testament to the ability of the
-  Intenet to support incremental evolution but also a reminder that we
+  Internet to support incremental evolution but also a reminder that we
   need to think carefully about the entire system, not just the
   behavior of a single layer, when designing protocols.
 
