@@ -1,5 +1,6 @@
 2.2 The World Wide Web
-------------------------------
+-----------------------------
+
 
 We begin our discussion of applications by focusing on the one that is
 so ubiquitous, it is often mixed up with the Internet itself: the
@@ -11,7 +12,7 @@ protocol—HTTP—underpinning it. In this section we dig into the details
 of that protocol and the architecture of the Web.
 
 2.2.1 Applications and Application Protocols
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before we go any further, it is important to distinguish between
 application *programs* and application *protocols*. For example, the
@@ -281,7 +282,6 @@ the contents were last modified at the server).
 Uniform Resource Identifiers
 +++++++++++++++++++++++++++++++++
 
-
 The URLs that HTTP uses as addresses are one type of *Uniform Resource
 Identifier* (URI). A URI is a character string that identifies a
 resource, where a resource can be anything that has identity, such as a
@@ -305,6 +305,7 @@ of a URI that is not a URL in a later section.
 
 TCP Connections
 ++++++++++++++++++++++
+
 
 The original version of HTTP (1.0) established a separate TCP
 connection for each data item retrieved from the server. It’s not too
@@ -467,7 +468,8 @@ foreseeable future.
   behavior of a single layer, when designing protocols.
 
 2.2.3 Caching
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
+
 
 An important implementation strategy that makes the web more usable is
 to cache web pages. Caching has many benefits. From the client’s
@@ -527,7 +529,7 @@ fresh a document must be, and so on. We’ll return to the subject of
 CDNs in a later section.
 
 2.2.4 Web Services
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 So far we have focused on interactions between a human and a web server.
 For example, a human uses a web browser to interact with a server, and
@@ -667,6 +669,7 @@ factors specific to Amazon.
 
 From Web Services to Cloud Services
 ++++++++++++++++++++++++++++++++++++++++
+
 
 If Web Services is what we call it when the web server that implements
 my application sends a request to the web server that implements your
