@@ -73,20 +73,35 @@ detail in Chapter 14. For now, we can just accept that TCP is going to
 deliver packets at a rate that varies over time depending on the available
 network capacity.
 
+TCP and QUIC also provide reliable delivery of packets. That in itself
+is not a bad thing, but reliability is achieved by retransmitting
+packets that have been dropped in transit. Retransmission adds to the
+time take for a packet to arrive, since it takes time both to detect
+the loss and to retransmit the lost packet. All of this means that the
+rate at which packets arrive is inherently variable and that some
+packets will take longer to arrive than others. To handle this
+variability, it is necessary for the client to have a local buffer of received
+packets to smooth out the variability. This buffer plays an important
+role in adaptive streaming as described below.
 
-What the client does in this case is to request the first chunk of
-video at some default quality, and then wait for packets to arrive. It
+To start playing a video, the client requests the first chunk of
+video at some default quality, and then waits for packets to arrive. It
 buffers a few packets in local storage and then starts to decode them
-and play the video. We now have a queue that is being filled with
-packets at some rate as they arrive across the network, and is being
-emptied at some rate as they are decoded and played out on the screen.
+and play the video. A large buffer implies a longer start-up delay,
+but also gives more insurance against the variable arrival rate of
+packets. So tuning the initial size of the buffer is a tradeoff that system
+designers can make based on expected network conditions.
+
+Once a few packets have arrived, we now have a queue that is being filled with
+packets as they arrive across the network, and is being
+emptied of packets as they are decoded and played out on the screen.
 The rate at which the queue is emptied is dependent on the quality of
 the video: higher quality means more bits per second need to be
-available for playback. The rate at which the queue fill us is
+available for playback. The rate at which the queue fills up is
 determined by the rate at which packets are arriving across the
 network.
 
-The client now uses a local algorithm to decide what it should request
+The client now uses a local algorithm to decide what quality it should request
 for each chunk of video. If the local buffer is being drained faster
 than it is being filled, at some point the video playback would stall,
 which looks bad to the end user. So the client tries to avoid this. If
@@ -116,3 +131,13 @@ while allowing for innovation in the client algorithms to switch among
 quality levels and also permitting the providers of streaming content
 to make their own decisions about how many different quality levels to
 support on their servers.
+
+Finally, note that this approach would not really make sense for
+real-time video such as video conferencing. A video or audio
+conference depends on quite low latency interaction between
+participants: you need to receive the data within a few hundred
+milliseconds of it being sent or you will be unable to have a
+conversation. Even at 300ms the delay becomes noticeable and
+annoying. So this demands a different approach that doesn't rely on
+TCP or QUIC for congestion control and reliable delivery. We will
+examine this problem space in Chapter 16.
