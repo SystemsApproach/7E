@@ -11,7 +11,7 @@ We started Chapter 1 by asking one of the first questions any system architect m
   *What available technologies will serve as the underlying building blocks?*
 
 When the inventors of the Internet asked that question in the
-mid-1970s, there weren’t many options. The ARPANET was the assumed
+mid-1970s, there weren’t many options. The ARPANET was an experimental
 wide-area network, and the Ethernet had just been invented by
 researchers at Xerox. At the time, large mainframe computers were the
 norm, with Digital Equipment Corporation’s PDP-11 (a 16-bit
@@ -33,10 +33,11 @@ different. Today’s phone companies emulate voice circuits on top of a
 packet switch substrate that can be directly traced back to the
 ARPANET. Hundreds of link technologies have been proposed (and
 abandoned), with Ethernet continually adapting to serve as a
-ubiquitous network technology. And while low-end packet switches are
-still implemented in software running on general-purpose processors,
-there are now domain-specific chips optimized for packet switching,
-analogous to the emergence of GPUs for graphics and TPUs for AI.
+ubiquitous communication technology. And while low-end packet switches
+are still implemented in software running on general-purpose
+processors, there are now domain-specific chips optimized for packet
+switching, analogous to the emergence of GPUs for graphics and TPUs
+for AI.
 
 This chapter gives an overview of these building block technologies,
 which then serve as the basis for Part II. While this chapter focuses
@@ -48,3 +49,4 @@ technology you encounter.
 
 .. include:: technology/link.rst
 .. include:: technology/switch.rst
+.. include:: technology/circuits.rst

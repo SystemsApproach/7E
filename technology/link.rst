@@ -552,7 +552,18 @@ network, called Aloha, that interconnected computers on the Hawaiian
 Islands. And that Ethernet algorithm, in turn, inspired the approach
 used by today's Wi-Fi. We describe that algorithm in Chapter 5.
 
-The other big change is that today Ethernet often runs at speeds of 1,
+One consequence of multiple nodes having access to a shared medium is
+that all the nodes have to be in releatively close proximity to each
+other, so they can safely determine when it's safe to transmit. The
+original Ethernet access control algorithm required that the RTT—from
+one end of an Ethernet to the other and back—be no more than 51.2
+μs. This meant that an Ethernet could not be more than 2500 meters
+long, clearly limiting it to serve as a *Local-Area Networking (LAN)*
+technology. Today, as a predominately point-to-point technology, that
+limit is no longer relevant, and Ethernet can now be used for
+long-haul links as part of a *Wide-Area Network (WAN)*.
+
+Another big change is that today Ethernet often runs at speeds of 1,
 10, or 100 Gbps, rather than the original 10 Mbps standard. As we saw
 earlier in this section, this was done in part by upgrading the
 encoding algorithm. The rest of the Ethernet standard—the part that's
