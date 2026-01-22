@@ -26,7 +26,7 @@ Larry Peterson and Bruce Davie
    part_one.rst
    introduction.rst
    applications.rst
-   switches.rst
+   technology.rst
    part_two.rst
    part_three.rst
    README.rst

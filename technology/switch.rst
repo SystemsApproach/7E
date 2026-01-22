@@ -1,4 +1,4 @@
-3.2 Switch Design
+3.2 Packet Switches
 ---------------------------------
 
 Packet switches are devices that interconnect point-to-point links,
@@ -60,8 +60,8 @@ individual packets (i.e., it forwards packets based on what is finds
 in the lookup table).
 
 .. _fig-fib:
-.. figure:: switches/figures/fib.png
-    :width: 300px
+.. figure:: technology/figures/fib.png
+    :width: 250px
     :align: center
 
     Packet switches are divided into two planes: the *Control Plane*
@@ -123,7 +123,7 @@ take-away is that the packet is buffered in main memory (this is the
 necessary header fields into its internal registers for processing.
 
 .. _fig-softswitch:
-.. figure:: switches/figures/softswitch.png
+.. figure:: technology/figures/softswitch.png
    :width: 350px
    :align: center
 
@@ -200,7 +200,7 @@ in which hardware and software are tightly bundled, that have
 historically dominated the industry.
 
 .. _fig-baremetal:
-.. figure:: switches/figures/baremetal.png
+.. figure:: technology/figures/baremetal.png
    :width: 500px
    :align: center
 
@@ -314,7 +314,7 @@ and IP packet) and its IP header ``DstAddr`` field be contained in
 some subnet (e.g., ``192.12.69/24``).
 
 .. _fig-headers:
-.. figure:: switches/figures/headers.png
+.. figure:: technology/figures/headers.png
     :width: 600px
     :align: center
 
@@ -349,7 +349,7 @@ stage, resulting in the packet being modified and enqueued for
 transmission.
 
 .. _fig-pipeline:
-.. figure:: switches/figures/pipeline.png
+.. figure:: technology/figures/pipeline.png
     :width: 550px
     :align: center
 
@@ -377,7 +377,7 @@ we describe them in auxiliary material, and encourage readers to take
 advantage of open source software to write P4 programs and run them on
 emulated PISA hardware. Doing so will give you the power to implement
 many of the ideas described in this book, and do so with performance
-that competes with the biggest vendors in the networking industry.
+that competes with the largest vendors in the networking industry.
 
 .. _reading_openflow:
 .. admonition:: Further Reading

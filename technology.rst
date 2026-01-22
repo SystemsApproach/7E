@@ -3,7 +3,7 @@
 .. SPDX-License-Identifier: Apache-2.0
 
 
-Chapter 3:  Packet Switches
+Chapter 3:  Network Technology
 ==================================
 
 We started Chapter 1 by asking one of the first questions any system architect must ask:
@@ -46,5 +46,5 @@ technology that we describe in detail. If you understand Ethernet in
 depth—both its links and switches—you can more easily digest any other
 technology you encounter.
 
-.. include:: switches/link-layer.rst
-.. include:: switches/switch.rst
+.. include:: technology/link.rst
+.. include:: technology/switch.rst

@@ -1,5 +1,5 @@
-3.1 Link Technology
----------------------------------
+3.1 Communication Links
+-------------------------------------------
 
 All network communication depends on transmitting and receiving
 electromagnetic signals over some physical medium, be it radio waves
@@ -10,7 +10,7 @@ with the frequency (measured in Hertz, Hz) found in the bands shown
 in :numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
-.. figure:: switches/figures/spectrum.png
+.. figure:: technology/figures/spectrum.png
    :width: 650px
    :align: center
 
@@ -19,9 +19,10 @@ in :numref:`Figure %s <fig-spectrum>`.
 The first challenge of communication is to convert a digital signal
 into the available analog signal, a process is known as *modulation*.
 For example, *frequency modulation* corresponds to alternating between
-a "high frequency" and a "low frequency". What makes modulation a hard
-problem is that the receiver has to recover the intended digital value
-from analog signal in the face of noise and attenuation.
+a "high frequency" and a "low frequency" within some band (e.g., a
+20MHz-wide band at 2.4GHz).  What makes modulation a hard problem is
+that the receiver has to recover the intended digital value from
+analog signal in the face of noise and attenuation.
 
 The second challenge is how to encode digital data (i.e., 1’s and 0’s)
 onto this digital signal. On the surface, this encoding seems simple
@@ -35,7 +36,7 @@ summarizes the layers involved in encoding binary data for
 transmission.
 
 .. _fig-signals:
-.. figure:: switches/figures/signals.png
+.. figure:: technology/figures/signals.png
    :width: 500px
    :align: center
 
@@ -54,7 +55,9 @@ is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
 —terms originally coined by the OSI reference model presented in
 Chapter 1.  Another term you will often see is *Medium Access Control
 (MAC)*, indicating that the focus is on controlling on how the sending
-and receiving nodes access a physical medium.
+and receiving nodes access a physical medium. The MAC layer is usually
+implemented in a *network adaptor*, also known as a *Network Interface
+Card (NIC)*, plugged into a computer.
 
 This section introduces the problems addressed by the link layer, and
 uses Ethernet as its representative example. The Ethernet has
@@ -82,7 +85,7 @@ NRZ-encoded signal (bottom) that corresponds to the transmission of a
 particular sequence of bits (top).
 
 .. _fig-nrz:
-.. figure:: switches/figures/f02-04-9780123850591.png
+.. figure:: technology/figures/f02-04-9780123850591.png
    :width: 400px
    :align: center
 
@@ -138,7 +141,7 @@ to the signal, the clock can be effectively recovered at the
 receiver.
 
 .. _fig-encode-all:
-.. figure:: switches/figures/f02-05-9780123850591.png
+.. figure:: technology/figures/f02-05-9780123850591.png
    :width: 400px
    :align: center
 
@@ -454,7 +457,7 @@ small error (e.g., if the error affected only one bit). A code that
 enables error correction is called an *error-correcting code* (ECC).
 
 .. _fig-crcalc:
-.. figure:: switches/figures/f02-15-9780123850591.png
+.. figure:: technology/figures/f02-15-9780123850591.png
    :width: 400px
    :align: center
 
@@ -522,7 +525,7 @@ put an XOR gate in front of bit :math:`n` if there is a term
 front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
 
 .. _fig-crc-hard:
-.. figure:: switches/figures/f02-16-9780123850591.png
+.. figure:: technology/figures/f02-16-9780123850591.png
    :width: 350px
    :align: center
 
@@ -562,10 +565,9 @@ are no configuration tables to be kept up-to-date, and it is easy to
 add a new host to the network. You just plug it in. It is hard to
 imagine a simpler network to administer.  Second, is inexpensive to
 deploy: Cable/fiber is relatively cheap, and the only other cost is
-the network adaptor on each host. These adaptors, also known as
-*Network Interface Cards (NICs)*, hide the changes in the encoding
-scheme, so the software stack sitting on top of the Ethernet device
-driver are completely unaware of any changes in modulation or
+the network adaptor on each host. The adaptor hides any changes in the
+encoding scheme, so the software stack sitting on top of the Ethernet
+device driver is completely unaware of any changes in modulation or
 encoding, as well as whether the link itself is point-to-point or
 multi-access.
 
