@@ -142,7 +142,7 @@ has led to new versions of HTTP and a new underlying transport, QUIC,
 discussed below.
 
 Request Messages
-++++++++++++++++++++++++++++
+++++++++++++++++++++
 
 The first line of an HTTP request message specifies three things: the
 operation to be performed, the web page the operation should be
@@ -208,7 +208,7 @@ returns the page only if it has been modified since the time specified
 in that header line.
 
 Response Messages
-++++++++++++++++++++++++++++
+++++++++++++++++++++
 
 Like request messages, response messages begin with a single
 ``START_LINE``. In this case, the line specifies the version of HTTP
@@ -279,7 +279,7 @@ page contents, including (number of bytes in the contents), ``Expires``
 the contents were last modified at the server).
 
 Uniform Resource Identifiers
-+++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++
 
 The URLs that HTTP uses as addresses are one type of *Uniform Resource
 Identifier* (URI). A URI is a character string that identifies a
@@ -303,7 +303,7 @@ a globally unique identifier for something. We’ll see an example
 of a URI that is not a URL in a later section.
 
 TCP Connections
-++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++
 
 The original version of HTTP (1.0) established a separate TCP
 connection for each data item retrieved from the server. It’s not too
@@ -459,11 +459,11 @@ foreseeable future.
   performance. Running HTTP version 1 on top of TCP was a completely
   understandable decision that enabled the Web to get off the ground,
   but we have now gone through 3 major revisions of this layered
-  approach culminating in a totally new design for the transport layer
+  approach, culminating in a totally new design for the transport layer
   underpinning HTTP. This is partly a testament to the ability of the
-  Intenet to support incremental evolution but also a reminder that we
-  need to think carefully about the entire system not just the
-  behavior of a single layer when designing protocols.
+  Internet to support incremental evolution but also a reminder that we
+  need to think carefully about the entire system, not just the
+  behavior of a single layer, when designing protocols.
 
 2.2.3 Caching
 ~~~~~~~~~~~~~~
@@ -611,7 +611,7 @@ REST is arguably simpler and more widely used so we focus our
 attention on REST for this discussion.
 
 A Generic Application Protocol (REST)
-+++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 The REST Web Services architecture is based on the assumption
 that the best way to integrate applications across networks is by
@@ -665,7 +665,7 @@ interface. Of course, this is just one data point and may well reflect
 factors specific to Amazon.
 
 From Web Services to Cloud Services
-++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 If Web Services is what we call it when the web server that implements
 my application sends a request to the web server that implements your

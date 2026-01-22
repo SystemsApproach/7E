@@ -1,4 +1,3 @@
-
 2.3 Electronic Mail (Email)
 ----------------------------------------
 
@@ -46,7 +45,7 @@ header lines; the interested reader is referred to RFC 822.
 
 You might notice that this structure looks very similar to that of
 HTTP messages. This is not a coincidence, as email was an obvious
-application protocol that the designers of HTTP could use as a model. 
+application protocol that the designers of HTTP could use as a model.
 
 RFC 822 was extended in 1993 (and updated quite a few times since
 then) to allow email messages to carry many different types of data:
@@ -165,7 +164,7 @@ smartphone; they do not first log into the host that stores their mail
 is used to remotely download email from a mail server to the user’s
 device. To further complicate matters, many users just use a web
 browser to read their mail, which in some ways brings us full circle
-back to the days of logging into a specific machine to read mail. 
+back to the days of logging into a specific machine to read mail.
 
 Second, there is a *mail daemon* (or process) running on each host that
 holds a mailbox. You can think of this process, also called a *message
