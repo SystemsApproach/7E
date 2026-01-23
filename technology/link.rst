@@ -6,15 +6,15 @@ electromagnetic signals over some physical medium, be it radio waves
 through the atmosphere or space, an electrical current over copper
 wires, or light waves through optical fibers. Each signal can be
 modeled as a sine function of some amplitude, frequency, and phase,
-with the frequency (measured in Hertz, Hz) found in the bands shown
-in :numref:`Figure %s <fig-spectrum>`.
+corresponding to the frequency bands shown in :numref:`Figure %s
+<fig-spectrum>`.
 
 .. _fig-spectrum:
 .. figure:: technology/figures/spectrum.png
    :width: 650px
    :align: center
 
-   Electromagnetic spectrum.
+   Electromagnetic spectrum, with frequencies measured in Hertz (Hz).
 
 The first challenge of communication is to convert a digital signal
 into the available analog signal, a process is known as *modulation*.
@@ -233,13 +233,11 @@ the problem of consecutive 1s. Note that the 4B/5B encoding results in
 each of the 16 possible 4-bit data symbols. Notice that since 5 bits
 are enough to encode 32 different codes, and we are using only 16 of
 these for data, there are 16 codes left over that we can use for other
-purposes. Of these, code ``11111`` is used when the line is idle, code
-``00000`` corresponds to when the line is dead, and ``00100`` is
-interpreted to mean halt. Of the remaining 13 codes, 7 of them are not
-valid because they violate the “one leading 0, two trailing 0s,” rule,
-and the other 6 represent various control symbols. Some of the framing
-protocols described in the next section make use of these control
-symbols.
+purposes. Of these, code ``11111`` is used when the line is idle and
+code ``01101`` indicates the end of a frame.  Of the remaining
+14 codes, 7 of them are not valid because they violate the “one
+leading 0, two trailing 0s,” rule. The other six represent various
+control symbols.
 
 As for our exemplar link technology, Ethernet has changed its encoding
 scheme as its bandwidth improved over time. It originally used
@@ -299,15 +297,15 @@ consisting of a sequence of alternating 0s and 1s.  Other than that
 preamble, the rest of the frame format is exactly as shown in Section
 1.3.3; it includes a 48-bit source address, a 48-bit destination
 address, and a 16-bit type field; followed by the payload; followed by
-a 32-bit CRC code. The sending and receiving host do not see the
-preamble or CRC code; they are attached (and stripped) by the network
+a 32-bit CRC code; and finally the end-of-frame code. The sending and
+receiving host do not see the preamble, CRC code, or any of the
+control codes; they are attached (and stripped) by the network
 adaptor.
 
-Ethernet does not need to "escape" the preamble in the middle of a
-frame because the encoding scheme (see the previous subsection)
-ensures that sequence of bits does not occur in the message itself.
-In fact, one of the codes is used to mark the end of the frame, and
-another of the codes is sent when the link is idle.
+Note that Ethernet does not need to "escape" the preamble in the
+middle of a frame because the encoding scheme (see the previous
+subsection) ensures that sequence of bits does not occur in the
+message itself.
 
 2.1.3 Error Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
