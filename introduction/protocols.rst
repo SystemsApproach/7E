@@ -176,15 +176,23 @@ data being transmitted on behalf of the application—is called the
 message’s *body* or *payload*. We say that the application’s data is
 *encapsulated* in the new message created by UDP.
 
-To make the discussion a more concrete, :numref:`Figure %s
-<fig-udphdr>`, :numref:`%s <fig-iphdr>`, and :numref:`%s <fig-ethhdr>`
-depict the header for three protocols we use as examples in this
-section: UDP, IP, and Ethernet, respectively.  The examples include
-two different (but common) formats for depicting protocol headers: as
-a sequence of fields spread over 32-bit words (UDP and IP) and as a
-sequence of fields of specified bit lengths (ETH). We'll explain the
-meaning of most of these fields in later chapters, but there is some
-commonality in all headers, which we describe in the next subsection.
+To make the discussion a more concrete, :numref:`Figures %s
+<fig-tcphdr>`, :numref:`%s <fig-udphdr>`, :numref:`%s
+<fig-iphdr>`, and :numref:`%s <fig-ethhdr>` depict the header for four
+protocols we use as examples in this section: TCP, UDP, IP, and
+Ethernet, respectively.  The examples include two different (but
+common) formats for depicting protocol headers: as a sequence of
+fields spread over 32-bit words (TCP, UDP and IP) and as a sequence of
+fields of specified bit lengths (ETH). We'll explain the meaning of
+most of these fields in later chapters, but there is some commonality
+in all headers, which we describe in the next subsection.
+
+.. _fig-tcphdr:
+.. figure:: introduction/figures/tcphdr.png
+   :width: 350px
+   :align: center
+
+   TCP header specification.
 
 .. _fig-udphdr:
 .. figure:: introduction/figures/udphdr.png
@@ -290,25 +298,26 @@ communication, while in the latter case, each side uses a different key
 to identify the high-level protocol (or application program) to which
 the message is to be delivered.
 
-Looking back at the example headers given in :numref:`Figure %s
-<fig-udphdr>`, :numref:`%s <fig-iphdr>`, and :numref:`%s
-<fig-ethhdr>`, IP uses the 8-bit ``Protocol`` field as its demux key,
-with ``0x11`` (decimal 17) indicating the message belongs to UDP and
-``0x06`` (decimal 6) indicating the message belongs to TCP. Similarly,
-Ethernet uses the 16-bit ``Type`` field as its demux key, with
-``0x0800`` indicating the message belongs to IP.  UDP is an example of
-a protocol that uses a different demux key on each end, corresponding
-to the 16-bit ``SrcPort`` and ``DstPort`` fields. These assigned demux
-keys are defined in the respective protocol's specification.
+Looking back at the example headers given in :numref:`Figures %s
+<fig-tcphdr>`, :numref:`%s <fig-udphdr>`, :numref:`%s <fig-iphdr>`,
+and :numref:`%s <fig-ethhdr>`, IP uses the 8-bit ``Protocol`` field as
+its demux key, with ``0x11`` (decimal 17) indicating the message
+belongs to UDP and ``0x06`` (decimal 6) indicating the message belongs
+to TCP. Similarly, Ethernet uses the 16-bit ``Type`` field as its
+demux key, with ``0x0800`` indicating the message belongs to IP.  TCP
+and UDP are example protocols that use a different demux key on each
+end, corresponding to the 16-bit ``SrcPort`` and ``DstPort``
+fields. These assigned demux keys are defined in the respective
+protocol's specification.
 
 Other fields in our example headers only make sense when you look at
 what the protocol is trying to do (which we'll do in later chapters),
 but some are typical of protocols in general. For example, many
 headers indicate how long the message is (e.g., the ``Length`` field
-in the IP and UDP headers); how long the header is (e.g., IP's
+in the IP and UDP headers); how long the header is (e.g., IP and TCP's
 ``HLen`` field); the addresses of the sending and receiving hosts
 (e.g., the ``SourceAddr`` and ``DestinationAddr`` fields in IP and
 ETH); and some form of error code used to detect and possibly correct
 bit errors (e.g., IP and UDP's ``Checksum`` and ETH's ``CRC``.)  We
 discuss error detection, and explain why ETH does not have a length
-field, in Chapter 2.
+field, in Chapter 3.
