@@ -213,7 +213,7 @@ but for now, we summarize the key resources:
   an input port to an output port. This requires an internal forwarding
   mechanism. This capacity is measured in packets-per-second
   (pps), with a given switch engineered to support some fixed
-  forwarding rate. (See Chapter 2 for more details.) A new switch has
+  forwarding rate. (See Chapter 3 for more details.) A new switch has
   to be deployed when additional forwarding capacity is needed.
 
 * **Buffer Capacity:** Switches store packets in a buffer, where they
