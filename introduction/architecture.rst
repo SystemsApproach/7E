@@ -34,13 +34,13 @@ understand how the existing network behaves). As a consequence, one of
 the main values of an architecture is to define terminology.
 
 This section explains the role of a network architecture by
-introducing two of the most widely referenced examples—the OSI (or
-7-layer) architecture and the Internet architecture.  Because we're
-just getting started, the description is intentionally high level, and
-we do not attempt to justify either architecture as "the right
-answer."  They are just two examples that illustrate how one might
-break the a problem of building a network into manageable subsystems,
-setting the stage for the rest of the book.
+introducing two of the most widely referenced examples—the OSI
+architecture and the Internet architecture.  Because we're just
+getting started, the description is intentionally high level, and we
+do not attempt to justify either architecture as "the right answer."
+They are just two examples that illustrate how one might break the a
+problem of building a network into manageable subsystems, setting the
+stage for the rest of the book.
 
 
 1.2.1 OSI Model
@@ -155,7 +155,7 @@ architecture allows for arbitrarily many different network
 technologies (which the diagram denotes as Net\ :sub:`1` to Net\
 :sub:`N`). In practice, the applications can be anything from web
 browsing to video streaming, while popular network technologies
-include Ethernet, WiFi, and 5G.
+include Ethernet, Wi-Fi, and 5G.
 
 The intermediate layer sitting between IP and the applications, which
 typically includes TCP and UDP but could include other protocols,

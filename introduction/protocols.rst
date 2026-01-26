@@ -177,7 +177,7 @@ message’s *body* or *payload*. We say that the application’s data is
 *encapsulated* in the new message created by UDP.
 
 To make the discussion a more concrete, :numref:`Figures %s
-<fig-tcphdr>`, :numref:`%s <fig-udphdr>`, :numref:`%s
+<fig-udphdr>`, :numref:`%s <fig-tcphdr>`, :numref:`%s
 <fig-iphdr>`, and :numref:`%s <fig-ethhdr>` depict the header for four
 protocols we use as examples in this section: TCP, UDP, IP, and
 Ethernet, respectively.  The examples include two different (but
@@ -187,19 +187,19 @@ fields of specified bit lengths (ETH). We'll explain the meaning of
 most of these fields in later chapters, but there is some commonality
 in all headers, which we describe in the next subsection.
 
-.. _fig-tcphdr:
-.. figure:: introduction/figures/tcphdr.png
-   :width: 350px
-   :align: center
-
-   TCP header specification.
-
 .. _fig-udphdr:
 .. figure:: introduction/figures/udphdr.png
    :width: 350px
    :align: center
 
    UDP header specification.
+
+.. _fig-tcphdr:
+.. figure:: introduction/figures/tcphdr.png
+   :width: 350px
+   :align: center
+
+   TCP header specification.
 
 .. _fig-iphdr:
 .. figure:: introduction/figures/iphdr.png
@@ -307,17 +307,35 @@ to TCP. Similarly, Ethernet uses the 16-bit ``Type`` field as its
 demux key, with ``0x0800`` indicating the message belongs to IP.  TCP
 and UDP are example protocols that use a different demux key on each
 end, corresponding to the 16-bit ``SrcPort`` and ``DstPort``
-fields. These assigned demux keys are defined in the respective
-protocol's specification.
+fields. Assigning demux keys to different protocols and applications
+is part of a network's specification since everyone has to agree to
+their meaning.
 
 Other fields in our example headers only make sense when you look at
 what the protocol is trying to do (which we'll do in later chapters),
 but some are typical of protocols in general. For example, many
 headers indicate how long the message is (e.g., the ``Length`` field
 in the IP and UDP headers); how long the header is (e.g., IP and TCP's
-``HLen`` field); the addresses of the sending and receiving hosts
-(e.g., the ``SourceAddr`` and ``DestinationAddr`` fields in IP and
-ETH); and some form of error code used to detect and possibly correct
-bit errors (e.g., IP and UDP's ``Checksum`` and ETH's ``CRC``.)  We
-discuss error detection, and explain why ETH does not have a length
-field, in Chapter 3.
+``HLen`` field); and some form of error code used to detect and
+possibly correct bit errors (e.g., IP, TCP, and UDP's ``Checksum`` and
+ETH's ``CRC``).
+
+The host addresses in the IP and ETH headers are also noteworthy.
+The field names are the same—\ ``SourceAddr`` and
+``DestinationAddr``\ —and both protocols use their respective addresses
+to uniquely identify the sender and receiver of every message. But the
+addressing scheme the Internet and Ethernet use are completely
+different. We'll describe those schemes in later chapters, but for
+now, we briefly introduce the standard way we make them
+human-readable.  Ethernet's 48-bit addresses are usually written as
+six hexidecimal numbers, one for each 8-bit byte in the address. For
+example, ``6e:86:88:18:7d:39``. A 32-bit IP address is typically
+written as four decimal numbers, one for each 8-bit byte in the
+address. For example, ``128.112.155.172``.  This is called "dot
+notation" for the obvious reason. Note that there are situations where
+we only care about some prefix of an IP address, say the first 16 or
+24 bits, in which case we'll write ``128.112.0.0/16`` or
+``128.112.155.0/24``.
+
+
+

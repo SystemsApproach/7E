@@ -572,7 +572,7 @@ but there were two other factors that contributed to its success.
 First, an Ethernet is extremely easy to administer and maintain: There
 are no configuration tables to be kept up-to-date, and it is easy to
 add a new host to the network. You just plug it in. It is hard to
-imagine a simpler network to administer.  Second, is inexpensive to
+imagine a simpler network to administer.  Second, it is inexpensive to
 deploy: Cable/fiber is relatively cheap, and the only other cost is
 the network adaptor on each host. The adaptor hides any changes in the
 encoding scheme, so the software stack sitting on top of the Ethernet
