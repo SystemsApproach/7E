@@ -422,6 +422,7 @@ DVMRP's
 dvroute
 dvtab
 DWDM
+EAP
 EBCDIC
 eBGP
 eBPF
