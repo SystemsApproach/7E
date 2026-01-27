@@ -1,7 +1,7 @@
 5.3 Mobile Cellular Network
 --------------------------------------------
 
-The mobile celluar network, which have a 40-year history that
+The mobile celluar network, which has a 40-year history that
 parallels the Internet's, has undergone significant change. The first
 two generations supported voice and then text, with 3G defining the
 transition to broadband access, supporting data rates measured in

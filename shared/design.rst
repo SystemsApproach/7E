@@ -92,8 +92,9 @@ station* or *access point*, as they are often called. The resource
 allocation challenge is deciding which, among potentially multiple
 base stations in some geographic area, serves a given mobile node, and
 how does this allocation change over time as nodes move around. The
-two wireless technologies have developed approaches to address this
-problem.
+two wireless technologies have developed different approaches to
+address this problem, each in keeping with their optimistic versus
+conservative assumptions.
 
 
 

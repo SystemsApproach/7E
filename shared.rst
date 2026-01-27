@@ -20,11 +20,11 @@ Another possibility is to connect multiple nodes directly to a shared
 communication medium, a so called *multi-access network*.  Wireless
 networks are an obvious example; the "shared medium" is the space
 carrying radio signals. There are also wired examples, with the
-original Ethernet being the best known. Just as with multiple people
-in a room trying to talk at the same time, multiple nodes
-simultaneously initiating radio tranmissions will interfere with each
-other. Some strategy is needed to decide who's turn it is to transmit
-(or speak) next.
+original Ethernet being the most widely deployed. Just as with
+multiple people in a room trying to talk at the same time, multiple
+nodes simultaneously initiating a tranmission will interfere with
+each other. Some strategy is needed to decide who's turn it is to
+transmit (or speak) next.
 
 This chapter looks at three approaches, as adopted by three different
 network technologies. Wi-Fi and 5G are two wireless examples; *Passive
