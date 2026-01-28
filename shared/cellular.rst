@@ -1,4 +1,4 @@
-5.3 Mobile Cellular Network
+5.4 Mobile Cellular Network
 --------------------------------------------
 
 The mobile celluar network, which has a 40-year history that
@@ -11,7 +11,7 @@ megabits per second) to 5G, with the promise of a tenfold increase in
 data rates. This section describes how 5G works, with a focus on the
 hard problem of managing its scarce resource: radio spectrum.
 
-5.3.1 Overview
+5.4.1 Overview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The mobile cellular network provides wireless connectivity to devices
@@ -155,7 +155,7 @@ Mobile Core. This is done through a combination of allocating distinct
 resources to each slice and scheduling shared resources on behalf of a
 set of slices.
 
-5.3.2 Radio Access Network
+5.4.2 Radio Access Network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We now describe the RAN by sketching the role each base station plays.
@@ -308,7 +308,7 @@ radio. This high-level summary is shown in :numref:`Figure %s
 <fig-quality>`. We explore how this information is used in a later
 subsection.
 
-5.3.3 Mobile Core
+5.4.3 Mobile Core
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At the most basic level, the function of the Mobile Core is to provide
@@ -477,137 +477,8 @@ an interface by which one Mobile Core (running on behalf of one MNO)
 queries another Mobile Core (running on behalf of some other MNO), to
 map between the IMSI, the phone number, and the subscriber profile.
 
-5.3.4  Scheduling Algorithm
+5.4.4  Scheduling Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-How the scheduler does its job is one of the most important properties
-of each generation of the cellular network, which in turn depends on
-the multiplexing mechanism. For example, 2G used *Time Division
-Multiple Access (TDMA)* and 3G used *Code Division Multiple Access
-(CDMA)*. How data is multiplexed is also a major differentiator for 4G
-and 5G, completing the transition from the cellular network being
-fundamentally circuit-switched to fundamentally packet-switched.
-
-Both 4G and 5G are based on *Orthogonal Frequency-Division
-Multiplexing (OFDM)*, an approach that multiplexes data over multiple
-orthogonal subcarrier frequencies, each of which is modulated
-independently. One attraction of OFDM is that, by splitting
-the frequency band into subcarriers, it can send symbols on each
-subcarrier at a relatively low rate. This makes it easier to correctly
-decode symbols in the presence of multipath interference. The
-efficiency of OFDM depends on the selection of
-subcarrier frequencies so as to avoid interference, that is, how it
-achieves orthogonality. That topic is beyond the scope of this book.
-
-As long as you understand that OFDM uses a set of subcarriers, with
-symbols (each of which contain a few bits of data) being sent at some
-rate on each subcarrier, that you can appreciate that there are
-discrete schedulable units of the radio spectrum. The fundamental unit
-is the time to transmit one symbol on one subcarrier. With that
-building block in mind, we are now in a position to examine how
-multiplexing and scheduling work in 4G and 5G.
-
-
-Multiplexing in 4G
-+++++++++++++++++++++++++++
-
-We start with 4G because it provides a foundational understanding that
-makes 5G easier to explain, where both 4G and 5G use an approach to
-multiplexing called *Orthogonal Frequency-Division Multiple Access
-(OFDMA)*. You can think of OFDMA as a specific application of OFDM. In
-the 4G case, OFDMA multiplexes data over a set of 12 orthogonal
-(non-interfering) subcarrier frequencies, each of which is modulated
-independently.\ [#]_ The “Multiple Access” in OFDMA implies that data
-can simultaneously be sent on behalf of multiple users, each on a
-different subcarrier frequency and for a different duration of
-time. The 4G-defined subbands are narrow (e.g., 15 kHz), and the
-coding of user data into OFDMA symbols is designed to minimize the
-risk of data loss due to interference.
-
-.. [#] 4G uses OFDMA for downstream traffic, and a different
-       multiplexing strategy for upstream transmissions (from user
-       devices to base stations), but we do not describe it because
-       the approach is not applicable to 5G.
-
-The use of OFDMA naturally leads to conceptualizing the radio spectrum
-as a 2-D resource, as shown in :numref:`Figure %s <fig-sched-grid>`,
-with the subcarriers represented in the vertical dimension and the time to
-transmit symbols on each subcarrier represented in the horizontal dimension.
-The basic unit of transmission, called a *Resource Element (RE)*,
-corresponds to a 15-kHz band around one subcarrier frequency and the
-time it takes to transmit one OFDMA symbol. The number of bits that
-can be encoded in each symbol depends on the modulation scheme in use.
-For example, using *Quadrature Amplitude Modulation (QAM)*, 16-QAM
-yields 4 bits per symbol and 64-QAM yields 6 bits per symbol. The
-details of the modulation need not concern us here; the key point is
-that there is a degree of freedom to choose the modulation scheme
-based on the measured channel quality, sending more bits per symbol
-(and thus more bits per second) when the quality is high.
-
-.. _fig-sched-grid:
-.. figure:: shared/figures/sched-grid.png
-    :width: 600px
-    :align: center
-
-    Spectrum abstractly represented by a 2-D grid of
-    schedulable Resource Elements.
-
-A scheduler allocates some number of REs to each user that has data to
-transmit during each 1 ms *Transmission Time Interval (TTI)*, where users
-are depicted by different colored blocks in :numref:`Figure %s <fig-sched-grid>`.
-The only constraint on the scheduler is that it must make its allocation
-decisions on blocks of 7x12=84 resource elements, called a *Physical
-Resource Block (PRB)*. :numref:`Figure %s <fig-sched-grid>` shows two
-back-to-back PRBs. Of course time continues to flow along one axis, and
-depending on the size of the available frequency band (e.g., it might be
-100 MHz wide), there may be many more subcarrier slots (and hence PRBs)
-available along the other axis, so the scheduler is essentially
-preparing and transmitting a sequence of PRBs.
-
-Note that OFDMA is not a coding/modulation algorithm, but instead
-provides a framework for selecting a specific coding and modulation for
-each subcarrier frequency. QAM is one common example modulation. It is
-the scheduler's responsibility to select the modulation to use for each
-PRB, based on the CQI feedback it has received. The scheduler also
-selects the coding on a per-PRB basis, for example, by how it sets the
-parameters to the turbo code algorithm.
-
-The 1-ms TTI corresponds to the time frame in which the scheduler
-receives feedback from users about the quality of the signal they are
-experiencing. This is the role of CQI: once every
-millisecond, each user sends a set of metrics, which the scheduler uses
-to make its decision as to how to allocate PRBs during the subsequent
-TTI.
-
-Another input to the scheduling decision is the *QoS Class Identifier
-(QCI)*, which indicates the quality-of-service each class of traffic
-is to receive. In 4G, the QCI value assigned to each class (there are
-twenty six such classes, in total) indicates whether the traffic has
-a *Guaranteed Bit Rate (GBR)* or not *(non-GBR)*, plus the class's
-relative priority within those two categories. (Note that the 5QI
-parameter introduced in Chapter 2 serves the same purpose as the
-QCI parameter in 4G.)
-
-Finally, keep in mind that :numref:`Figure %s <fig-sched-grid>` focuses on
-scheduling transmissions from a single antenna, but the MIMO technology
-described above means the scheduler also has to determine which antenna
-(or more generally, what subset of antennas) will most effectively reach
-each receiver. But again, in the abstract, the scheduler is charged with
-allocating a sequence of Resource Elements.
-
-Note that the scheduler has many degrees of freedom: it has to decide which
-set of users to service during a given time interval, how many resource
-elements to allocate to each such user, how to select the coding and
-modulation levels, and which antenna to transmit their data on. This is
-an optimization problem that, fortunately, we are not trying to solve
-here. Our goal is to describe an architecture that allows someone else
-to design and plug in an effective scheduler. Keeping the cellular
-architecture open to innovations like this is one of our goals, and as
-we will see in the next section, becomes even more important in 5G where
-the scheduler operates with even more degrees of freedom.
-
-Multiplexing in 5G
-+++++++++++++++++++++++++
 
 The transition from 4G to 5G introduces additional flexibility in
 how the radio spectrum is scheduled, making it possible to adapt the

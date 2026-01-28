@@ -47,13 +47,13 @@ given number of tries and reports a transmit error to the
 host. Senders typically retry up to 16 times, although the backoff
 algorithm caps *n* in the above formula at 10.
 
-Why 51.2 μs is an obvious question, and while the details are mostly
-of historical interest at this point, the fundamental problem they
-were trying to solve is general. For the algorithm to work, Ethernet
-had to know the worst-case RTT. Restrictions were placed on the
-physical deployment (e.g., length of cable, how many repeaters could
-be used) so it could establish an upper bound on the RTT. It was also
-important that all nodes be able to detect when a collision had
+What's special about 51.2 μs is an obvious question, and while the
+details are now mostly of historical interest, the fundamental problem
+they were trying to solve is general. For the algorithm to work,
+Ethernet had to know the worst-case RTT. Restrictions were placed on
+the physical deployment (e.g., length of cable, how many repeaters
+could be used) so it could establish an upper bound on the RTT. It was
+also important that all nodes be able to detect when a collision had
 happened, so there was a minimum frame size (46 bytes of data, plus
 the Ethernet header). For our purposes, one big takeaway is that
 multi-access networks have to be of a limited size, both in terms of
@@ -63,25 +63,29 @@ with a room full of people, too many nodes (people) results in no one
 getting the floor.
 
 One generalization we can make about these examples is that they can
-be characterized as optimistic or conservative. If you assume a
+be characterized as either optimistic or conservative. If you assume a
 lightly loaded network, you can optimistically transmit when the
 shared link is idle and back off if contention is detected. Like the
-original Ethernet, this is what Wi-Fi does. On the other hand, if
-you've assume a highly utilized network (perhaps because you are
-trying to maximize the number of nodes that can connect to a limited
-amount of spectrum), then you will be more conservative in your
-allocation strategy and centrally allocate different "shares of link
-capacity" to nodes. This is what 5G does. (PON is closer in spirit to
-5G, but enough different to warrent it's own subsection.)
+original Ethernet, this is what Wi-Fi does. On the other hand, if you
+are trying to run your network at high utilization, perhaps because
+you are trying to maximize the number of nodes that can connect to a
+limited amount of radio spectrum, then you will be more conservative
+in your allocation strategy, and centrally allocate some "share of
+link capacity" to each node. This is what 5G does. PON is closer in
+spirit to 5G, but enough different to warrent it's own subsection.
 
 There are two other design issues of note. The first is multi-access
 networks allow all connected nodes to see (receive) any packet any of
-the other hosts sends. In one respect, this is a feature in that it it
-means the network can support *broadcast packets*; some applications
-take advantage of this capability. But in another respect, this is a
-bug in that it's easy for nodes so snoop on each other's traffic;
-dealing with the security consequences is an inherent aspect of
-multi-access networks.
+the other hosts sends. Being able too receive every message has an
+upside—it means the network can easily support *broadcast*, which
+simplifies the design of some network applications—but it also has
+security implications since nodes can snoop on each other's
+traffic. This risk is compounded by the fact there there are often no
+physical barriers, like a secured room or building, to keep bad actors
+from gaining access to network traffic. Deciding what hosts are
+allowed to legitimately connect to such a network, for example using
+an authentication mechanism, is an important part of a comprehensive
+solution.
 
 The second issue is unique to wireless multi-access network: Wireless
 nodes are inherently mobile, and this mobility has implications on
@@ -91,7 +95,7 @@ the mobile nodes with wider connectivity. This is the role of a *base
 station* or *access point*, as they are often called. The resource
 allocation challenge is deciding which, among potentially multiple
 base stations in some geographic area, serves a given mobile node, and
-how does this allocation change over time as nodes move around. The
+how does this assignment change over time as nodes move around. The
 two wireless technologies have developed different approaches to
 address this problem, each in keeping with their optimistic versus
 conservative assumptions.
