@@ -5,23 +5,29 @@
 Efforts to stream video and audio data across the Internet go back at
 least to the 1990s, with the MBONE (multicast backbone) being an
 overlay network that was used to experiment with both multicast
-routing and real-time streaming.
+routing and real-time streaming. Today video is one of the dominant
+application classes on the Internet, making up a substantial fraction
+of the total traffic over the network.
 
 Before video can be streamed across the Internet, it needs to be
-encoded, and video coding schemes such as those developed by MPEG (the
-Moving Picture Expert Group) allow for a
-trade-off between the bandwidth consumed and the quality of the
-image. Since the bandwidth that is available on a network path
-typically varies over time, it is generally desirable to pick a set of
-coding parameters that provides sufficient quality without exceeding
-the available network bandwidth. There is also no point delivering
-higher quality that an end system can support. This tradeoff applies whether we are
-talking about real-time video (e.g., video conferencing) or streaming
-of recorded content as with video streaming services such as Netflix.
-In this section, we are going to focus on the latter, which provides
-an interesting case study in how the Web has come to dominate
-application design, even for applications that didn't initially seem
-well suited to HTTP.
+encoded, and video coding is another field with a long history. To
+make efficient use of bandwidth and storage, video is usually
+compressed, are organizations such as MPEG (the
+Moving Picture Expert Group) produce standards that allow for
+interoperability among devices that encode, store, and play video content.
+
+Most video coding schemes allow for a trade-off between the bandwidth
+consumed and the quality of the images. Since the bandwidth that is
+available on a network path typically varies over time, it is
+desirable to pick a set of coding parameters that provides sufficient
+quality without exceeding the available network bandwidth. There is
+also no point delivering higher quality than an end system can
+support. This tradeoff applies whether we are talking about real-time
+video (e.g., video conferencing) or streaming of recorded content as
+with video streaming services such as Netflix.  In this section, we
+are going to focus on the latter, which provides an interesting case
+study in how the Web has come to dominate application design, even for
+applications that didn't initially seem well suited to HTTP.
 
 Early efforts to transmit video over HTTP recognized that HTTP was
 becoming a ubiquitously supported protocol that could generally pass
@@ -31,7 +37,7 @@ just another sort of digital content that can be retrieved using HTTP,
 two main innovations underpin the use of HTTP for video streaming:
 
  - The ability to request segments of a video (e.g. the first ten
-   seconds, next  ten seconds, etc.) rather than an entire
+   seconds, next ten seconds, etc.) rather than an entire
    video file;
 
  - The idea of storing the video at multiple different quality levels,
@@ -46,20 +52,22 @@ the quality level to match what the network is able to deliver.  In
 other words, a movie is typically stored as a set of N × M chunks
 (files): N quality levels for each of M segments.
 
-To understand how this works, let's first assume that we have some way to measure
-the amount of free capacity and level of congestion along a path.  For
-example, a client can simply measure the rate at which data has been
-arriving over some recent time interval. We can infer that there is at
-least that much bandwidth available. If the quality that is currently
-being delivered is acceptable, e.g. because it matches the highest
-resolution of the display at the client device, then there is no need
-to do anything. But if the client could take advantage of higher
-quality, it can request that the next segment of video be sent at that
-higher quality. The total amount of data being delivered per second
-should now increase if there is no congestion. If it doesn't increase
-as much as we expect, we might conclude that there is congestion and
-so the client could now go back to asking for a lower quality of
-video.
+To understand how this works, let's first assume that we have some way
+to measure the amount of free capacity along a
+path.  For example, a client can simply measure the rate at which data
+has been arriving over some recent time interval. We can infer that
+there is at least that much bandwidth available. If the quality that
+is currently being delivered is acceptable, e.g. because it matches
+the highest resolution of the display at the client device, then there
+is no need to do anything. But if the client could take advantage of
+higher quality, it can request that the next segment of video be sent
+at that higher quality. The total amount of data being delivered per
+second should now increase if there is no congestion. If it doesn't
+increase as much as we expect, we might conclude that there is
+congestion and so the client could now go back to asking for a lower
+quality of video.
+
+.. a picture would be good showing playback buffer and requests
 
 The situation is a bit more complicated than what we just described,
 however, because the underlying transport protocol below HTTP is
@@ -76,11 +84,15 @@ network capacity.
 TCP and QUIC also provide reliable delivery of packets. That in itself
 is not a bad thing, but reliability is achieved by retransmitting
 packets that have been dropped in transit. Retransmission adds to the
-time take for a packet to arrive, since it takes time both to detect
+time taken for a packet to arrive, since it takes time both to detect
 the loss and to retransmit the lost packet. All of this means that the
 rate at which packets arrive is inherently variable and that some
-packets will take longer to arrive than others. To handle this
-variability, it is necessary for the client to have a local buffer of received
+packets will take longer to arrive than others. Video frames, however,
+need to be played out at a smooth rate, and so the client should not
+find itself waiting for the next piece of data to arrive when it is
+time to display the next video frame.  To handle the variability of
+the rate at which packets arrive at the client, it is therefore
+necessary for the client to maintain a local buffer of received
 packets to smooth out the variability. This buffer plays an important
 role in adaptive streaming as described below.
 
