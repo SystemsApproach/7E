@@ -3,33 +3,33 @@
 
 How to mediate access to a shared medium is a resource allocation
 problem.  The communication medium is the resource, and some mechanism
-needs to decide who to allocate it to next. The network problem is
-somewhat unique in that it seems obvious that the decision-making
-process needs to be decentralized; each node has to participate in the
-decision. While literally true, in the sense that each node has to
-"behave correctly", the actual decision mechanism could be
-centralized.  This is what happens with a room full of people when one
-is elected as the moderator; people raise their hand when they want to
-speak, and the moderator decides who goes next. This is a fairly
-common strategy for networks, and just as with people, the moderator
-can announce a "scheduling plan" when several speakers have their hand
-up, rather than having to interject itself between every speaker's
-turn.
+needs to decide who to allocate it to next. In a network setting it
+seems obvious that the decision-making process needs to be
+decentralized; each node has to participate in the decision. While
+literally true, in the sense that each node has to "behave correctly",
+the actual decision-making mechanism could be centralized.  This is
+what happens with a room full of people when one is elected as the
+moderator; people raise their hand when they want to speak, and the
+moderator decides who goes next. This is a fairly common strategy for
+networks, and just as with people, the moderator may announce a
+"schedule" (i.e., an order of speakers) when several people have their
+hand up, rather than having to interject itself between every speaker.
 
 Another common solution in the human setting is to "go around the
-room", giving person an opportunity to speak. If they decline, the
-"speaking token" is passed to the next person. One of the earliest
+room", giving each person an opportunity to speak. If they decline,
+the "speaking token" is passed to the next person. One of the earliest
 Local Area Network technologies, generically known as *Token Ring*,
 adopted a mediation algorithm inspired by this idea. It required the
 nodes be arranged in a ring topology, providing a physical order on
-the hosts. The *Cambridge Ring*, a contemporary of the original
-Ethernet, is one of the earliest examples.  Later, *Fiber Distributed
-Data Interface (FDDI)* was an international standard based on the same
-approach. FDDI supported 100 Mbps speeds, but was eventually rendered
-obsolete by Ethernet's continual bandwidth upgrades.
+which host is next. The *Cambridge Ring*, a contemporary of the
+original Ethernet, is one of the earliest examples.  Later, *Fiber
+Distributed Data Interface (FDDI)* was an international standard based
+on the same approach. FDDI supported 100 Mbps speeds, but was
+eventually rendered obsolete by Ethernet's continued bandwidth
+improvements.
 
 Finally, just as in a roomful of people, it also works to let each
-node speak whenever it has something to say (assuming no one else is
+node speak whenever it has something to say (assuming no other node is
 currently transmitting), and then adopt some "backoff-and-retry"
 algorithm should two or more nodes happen to speak at the same
 time. Similar in spirit to statistical multiplexing, this is exactly
@@ -71,13 +71,13 @@ are trying to run your network at high utilization, perhaps because
 you are trying to maximize the number of nodes that can connect to a
 limited amount of radio spectrum, then you will be more conservative
 in your allocation strategy, and centrally allocate some "share of
-link capacity" to each node. This is what 5G does. PON is closer in
-spirit to 5G, but enough different to warrent it's own subsection.
+link capacity" to each node. This is what 5G does. PON is more like 5G
+than Wi-Fi, but enough different to warrent it's own subsection.
 
-There are two other design issues of note. The first is multi-access
-networks allow all connected nodes to see (receive) any packet any of
-the other hosts sends. Being able too receive every message has an
-upside—it means the network can easily support *broadcast*, which
+There are two other design issues of note. The first is that
+multi-access networks allow all connected nodes to see (receive) every
+packet the other hosts send. Being able too receive every message has
+an upside—it means the network can easily support *broadcast*, which
 simplifies the design of some network applications—but it also has
 security implications since nodes can snoop on each other's
 traffic. This risk is compounded by the fact there there are often no
@@ -90,15 +90,18 @@ solution.
 The second issue is unique to wireless multi-access network: Wireless
 nodes are inherently mobile, and this mobility has implications on
 resource allocation. This is because even in a network that supports
-mobility, some nodes remain teathered to the wired network, providing
-the mobile nodes with wider connectivity. This is the role of a *base
-station* or *access point*, as they are often called. The resource
-allocation challenge is deciding which, among potentially multiple
-base stations in some geographic area, serves a given mobile node, and
-how does this assignment change over time as nodes move around. The
-two wireless technologies have developed different approaches to
-address this problem, each in keeping with their optimistic versus
-conservative assumptions.
+mobility, some nodes typically remain teathered to the wired network,
+providing the mobile nodes with wider connectivity. This is the role
+of a *base station* or *access point*, as they are often
+called. Moreover, these base stations are typically deployed in a way
+that provides overlapping coverage, with two or more potentially able
+to serve a given mobile node. The resource allocation challenge is
+deciding which, among potentially multiple base stations in some
+geographic area, serves a given mobile node, and how does this
+assignment change over time as nodes move around. The two wireless
+technologies have developed different approaches to address this
+problem, each in keeping with their optimistic versus conservative
+assumptions.
 
 
 

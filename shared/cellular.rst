@@ -480,31 +480,96 @@ map between the IMSI, the phone number, and the subscriber profile.
 5.4.4  Scheduling Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The transition from 4G to 5G introduces additional flexibility in
-how the radio spectrum is scheduled, making it possible to adapt the
-cellular network to a more diverse set of devices and application
-domains.
+Recall that OFDMA uses a set of narrow subbands, with symbols (each of
+which contain a few bits of data) being sent at some rate on each
+subband. With that understanding, it is easy to appreciate that there
+are discrete schedulable units of the radio spectrum. The fundamental
+unit is the time to transmit one symbol on one subband. Recognizing
+this discrete unit naturally leads to conceptualizing the radio
+spectrum as a 2-D resource, as shown in :numref:`Figure %s
+<fig-sched-grid>`, with the subbands represented in the vertical
+dimension and the time to transmit symbols on each subband represented
+in the horizontal dimension.  The basic unit of transmission, called a
+*Resource Element (RE)*, corresponds to a 15-kHz band around one
+subband frequency and the time it takes to transmit one OFDMA symbol.
 
-Fundamentally, 5G defines a family of waveforms—unlike LTE, which
-specified only one waveform—each optimized for a different band in the
-radio spectrum.\ [#]_  The bands with carrier frequencies below 1 GHz are
-designed to deliver mobile broadband and massive IoT services with a
-primary focus on range. Carrier frequencies between 1-6 GHz are
-designed to offer wider bandwidths, focusing on mobile broadband and
-mission-critical applications. Carrier frequencies above 24 GHz
-(mmWaves) are designed to provide super-wide bandwidths over short,
-line-of-sight coverage.
+.. _fig-sched-grid:
+.. figure:: shared/figures/sched-grid.png
+    :width: 600px
+    :align: center
+
+    Spectrum abstractly represented by a 2-D grid of
+    schedulable Resource Elements.
+
+The scheduler allocates some number of REs to each user that has data
+to transmit during each 1 ms *Transmission Time Interval (TTI)*, where
+users are depicted by different colored blocks in :numref:`Figure %s
+<fig-sched-grid>`.  The only constraint on the scheduler is that it
+must make its allocation decisions on blocks of 7x12=84 resource
+elements, called a *Physical Resource Block (PRB)*. :numref:`Figure %s
+<fig-sched-grid>` shows two back-to-back PRBs. Of course time
+continues to flow along one axis, and depending on the size of the
+available frequency band (e.g., it might be 100 MHz wide), there may
+be many more subband slots (and hence PRBs) available along the other
+axis, so the scheduler is essentially preparing and transmitting a
+sequence of PRBs.
+
+.. Missing some context. See the last paragraph from spectrum.rst
+   which mentions 3GPP.
+
+The 1-ms TTI corresponds to the time frame in which the scheduler
+receives feedback from users about the quality of the signal they are
+experiencing. This is the role of CQI: once every millisecond, each
+user sends a set of metrics, which the scheduler uses to make its
+decision as to how to allocate PRBs during the subsequent TTI.
+
+Another input to the scheduling decision is the *QoS Class Identifier
+(QCI)*, which indicates the quality-of-service each class of traffic
+is to receive. In 4G, the QCI value assigned to each class (there are
+twenty six such classes, in total) indicates whether the traffic has a
+*Guaranteed Bit Rate (GBR)* or not *(non-GBR)*, plus the class's
+relative priority within those two categories. (Note that the 5QI
+parameter introduced in Chapter 2 serves the same purpose as the QCI
+parameter in 4G.)
+
+Finally, keep in mind that :numref:`Figure %s <fig-sched-grid>`
+focuses on scheduling transmissions from a single antenna, but the
+MIMO technology described above means the scheduler also has to
+determine which antenna (or more generally, what subset of antennas)
+will most effectively reach each receiver. But again, in the abstract,
+the scheduler is charged with allocating a sequence of Resource
+Elements.
+
+Note that the scheduler has many degrees of freedom: it has to decide
+which set of users to service during a given time interval, how many
+resource elements to allocate to each such user, how to select the
+coding and modulation levels, and which antenna to transmit their data
+on. This is an optimization problem that we are not in a position to
+solve here: the details of scheduling are highly-valued proprietary
+intellectual property of Mobile Cellular Network vendors. What we can
+say is that 5G introduces significant flexibility in how the schedular
+is parameterized, making it possible to adapt the cellular network to
+a more diverse set of devices and application domains.
+
+Fundamentally, 5G defines a family of waveforms, each optimized for a
+different band in the radio spectrum.\ [#]_ The bands with carrier
+frequencies below 1 GHz are designed to deliver mobile broadband and
+massive IoT services with a primary focus on range. Carrier
+frequencies between 1-6 GHz are designed to offer wider bandwidths,
+focusing on mobile broadband and mission-critical
+applications. Carrier frequencies above 24 GHz (mmWaves) are designed
+to provide super-wide bandwidths over short, line-of-sight coverage.
 
 .. [#] A waveform is defined by the frequency, amplitude, and phase-shift
    independent property (shape) of a signal. A sine wave is a simple
    example of a waveform.
 
-These different waveforms affect the scheduling and subcarrier intervals
+These different waveforms affect the scheduling and subband intervals
 (i.e., the “size” of the resource elements described in the previous
 section).
 
 -  For frequency range 1 (410 MHz - 7125 MHz), 5G allows maximum 100 MHz
-   bandwidths. In this case, there are three waveforms with subcarrier
+   bandwidths. In this case, there are three waveforms with subband
    spacings of 15, 30 and 60 kHz. (We used 15 kHz in the example shown in
    :numref:`Figure %s <fig-sched-grid>`.) The corresponding to scheduling
    intervals of 0.5, 0.25, and 0.125 ms, respectively. (We used 0.5 ms in
@@ -512,10 +577,10 @@ section).
 
 -  For millimeter bands, also known as frequency range 2 (24.25 GHz -
    52.6 GHz), bandwidths may go from 50 MHz up to 400 MHz. There are
-   two waveforms, with subcarrier spacings of 60 kHz and 120 kHz. Both
+   two waveforms, with subband spacings of 60 kHz and 120 kHz. Both
    have scheduling intervals of 0.125 ms.
 
-These various configurations of subcarrier spacing and scheduling
+These various configurations of subband spacing and scheduling
 intervals are sometimes called the *numerology* of the radio's air
 interface.
 

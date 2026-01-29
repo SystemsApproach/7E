@@ -18,35 +18,35 @@ the risk of interference.)
 
 Another possibility is to connect multiple nodes directly to a shared
 communication medium, a so called *multi-access network*.  Wireless
-networks are an obvious example; the "shared medium" is the space
-carrying radio signals. There are also wired examples, with the
+networks are an obvious example. where the "shared medium" is the
+space carrying radio signals. There are also wired examples, with the
 original Ethernet being the most widely deployed. Just as with
 multiple people in a room trying to talk at the same time, multiple
-nodes simultaneously initiating a tranmission will interfere with
-each other. Some strategy is needed to decide who's turn it is to
-transmit (or speak) next.
+nodes simultaneously initiating a tranmission will interfere with each
+other. Some strategy is needed to decide who's turn it is to transmit
+(or speak) next.
 
 This chapter looks at three approaches, as adopted by three different
-network technologies. Wi-Fi and the mobile cellular network\ [#]_ are
+network technologies. Wi-Fi and the Mobile Cellular Network\ [#]_ are
 two wireless examples; *Passive Optical Networks (PON)*\ —colloquially
 known as Fiber-to-the-Home—is the third. In addition to illustrating
 three different approaches to mediating access to shared resources,
 all three technologies can be categoritzed as *access networks*,
-indicating that they are typically the immediate network edge hosts
-first connect to, thereby indirectly connecting to the larger
-Internet. It is common for access networks to implement some form of
-authentication to ensure that the user has permission to access its
-resources in the first place. Establishing identity is always the
-first step in any resource allocation mechanism.
+indicating that they are the immediate network that edge hosts connect
+to, thereby being indirectly connecting to the rest of the Internet.
+It is common for access networks to implement some form of
+authentication to ensure that the connecting host has permission to
+access its resources in the first place. Establishing identity is
+always the first step in any resource allocation mechanism.
 
 .. [#] For simplity, we refer the the mobile cellular network as 5G,
        except when we are making a point about issues that span
        generations of the technology.
 
-Before looking at those three approaches in detail, we first take a
-closer look at the problem and the design options for addressing those
-problems. We also include a short primer on the unique challenges of
-managing radio spectrum.
+Before looking at our three example networks in detail, we first take
+a closer look at the problems they are trying to solve, and the design
+options for addressing those problems. We also include a short primer
+on the unique challenges of managing radio spectrum.
 
 .. include:: shared/design.rst
 .. include:: shared/spectrum.rst
