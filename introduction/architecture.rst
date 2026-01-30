@@ -77,10 +77,10 @@ implemented on all network nodes, including switches within the
 network and hosts connected to the edge of the network. The
 *transport* layer then implements what we sometimes refer to as a
 *process-to-process channel*, an *IPC (Interprocess Communication)*
-mechanism. Here, the unit of data exchanged is commonly called a
-*message* or a *segment* rather than a packet or a frame. The
-transport layer and higher layers typically run only on the end hosts
-and not on the intermediate switches.
+mechanism. Here, the unit of data exchanged is also sometimes called a
+*message*, *segment*, or *datagram* rather than a packet or a
+frame. The transport layer and higher layers typically run only on the
+end hosts and not on the intermediate switches.
 
 Skipping ahead to the top (seventh) layer and working our way back
 down, we find the *application* layer. Application layer protocols

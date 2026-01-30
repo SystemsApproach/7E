@@ -48,7 +48,7 @@ digital blocks of data that are then processed by the switch. A
 circuit-based alternative, known as *Dense Wavelength Division
 Multiplexing (DWDM)*, instead switches the optical signal without
 requiring that time-consuming conversion. DWDM equipment is able to
-transmit a large numbers of optical wavelengths (colors) down a single
+transmit a large number of optical wavelengths (colors) down a single
 fiber. Each wavelength is called a lambda (λ), and corresponds to the
 length of each wave (measured in nanoseconds) in the optical
 signal. The D(ense) in DWDM is to indicate that the technology is able
@@ -94,7 +94,7 @@ bit-streams at some constant rate.
 Much of SONET’s complexity—its full specification is substantially
 longer than this book—reflects the fact that phone companies have
 historically been concerned with multiplexing large numbers of 64 Kbps
-channels for telephone calls. To this end, SONET defines a hierarchy
+channels for voice calls. To this end, SONET defines a hierarchy
 of channels, with multiple "low bandwidth" channels multiplexed over
 one "high-bandwidth" channel; this can be repeated multiple times to
 form a hierarchy of transmission speeds. Finally, all of this is done
@@ -124,7 +124,7 @@ supported by SONET is STS-768, at 39,813.12 Mbps.
 Below SONET is an optical signalling layer, called *Optical Carrier
 (OC)*, with a corresponding set of transmission rates; e.g., OC-1 at
 51.84 Mbps, OC-3 at 155.52 Mbps, and so on. Those optical signals can,
-in turn, be carried byy a single wavelength over a DWDM substrate.
+in turn, be carried by a single wavelength over a DWDM substrate.
 
 In summary, SONET establishes a hierarchy of circuits, with 64 Kbps
 circuits aggregated in one STS-1 circuit, and N STS-1 circuits

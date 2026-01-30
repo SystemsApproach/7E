@@ -56,8 +56,8 @@ is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
 Chapter 1.  Another term you will often see is *Medium Access Control
 (MAC)*, indicating that the focus is on controlling on how the sending
 and receiving nodes access a physical medium. The MAC layer is usually
-implemented in a *network adaptor*, also known as a *Network Interface
-Card (NIC)*, plugged into a computer.
+implemented in a *network adaptor*, otherwise known as a *Network
+Interface Card (NIC)*, plugged into a computer.
 
 This section introduces the problems addressed by the link layer, and
 uses Ethernet as its representative example. The Ethernet has
@@ -68,6 +68,34 @@ approaching 1-Tbps, many orders of magnitude greater than the original
 2.94-Mbps rate over coaxial cable. We focus on the modern version of
 Ethernet in the next three subsections, and then fill in some of the
 historical background in Section 2.1.4.
+
+.. sidebar:: Ethernet Standards
+
+   When we say "Ethernet" we are really talking about a family of
+   standards, tracing back to the first specification written by
+   Digital Equipment Corporation (DEC), Intel, and Xerox. That
+   vendor-led defintion, known as DIX, was subsequently standardized
+   by the IEEE as 802.3. The orignal standard was for a solution based
+   on *Carrier Sense, Multiple Access with Collision Detect (CSMA/CD)*
+   technology. The “carrier sense” in CSMA/CD meant that all the nodes
+   were able to distinguish between an idle and a busy link, "multiple
+   access" meant that multiple nodes connected to the same coax cable,
+   and “collision detect” meant that nodes listen as they transmit and
+   can therefore detect when a frame interfers (collides) with another
+   frame.
+
+   Over time, Ethernet was approved for differnt cable types (e.g.,
+   twisted-pair, passive optical, single-mode fiber, multi-mode
+   fiber), to run at different speeds (e.g., 10Mbps, 100Mbps, 1Gbps,
+   10Gbps, 40Gbps, 100Gbps, 200Gbps, 400Gbps, 800Gbps), to span
+   different distances (e.g., 10 meters, 100 meters, 40 kilometers),
+   and for full-duplex communition (as opposed to the original
+   CSMA/CD). Each of these variants was independently standardized,
+   with designations of the form 802.11xx. For the purposes of this
+   book, none of these distinctions impact how the technology is
+   incorporated into packet-switched network, although we primarily
+   focus on point-to-point links rather than their multi-access
+   predecessors.
 
 2.1.1 Encoding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -533,8 +561,8 @@ front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
 2.1.4 Historical Background
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ethernet has been the dominant link technology for nearly 40 years,
-but a lot has changed since it was first introduced in 1978.
+Ethernet has been the dominant link technology for nearly 50 years,
+but a lot has changed since it was first introduced in 1976.
 Originally, Ethernet was a *multi-access* technology (connecting tens
 or hundreds of nodes) rather than *point-to-point* link (connecting
 only two nodes).  This was possible because Ethernet ran over coax
@@ -587,3 +615,15 @@ switches), that new infrastructure could be *deployed incrementally*.
 That is, some hosts could be connected by point-to-point links to
 switched Ethernet, while others remained tapped into coax—all the
 while retaining the simplicity of network administration.
+
+.. admonition:: Further Reading
+
+   R. M. Metcalfe and D. R. Boggs. Ethernet: Distributed Packet
+   Switching for Local Computer Networks. *Communications of the ACM,*
+   Volume 19, Issue 7. July 1976.
+   (https://dl.acm.org/doi/abs/10.1145/360248.360253)
+
+   N. Abramson. The ALOHA System - Another Alternative for Computer
+   Communications. *Proceedings of the 1970 Fall Joint Computer
+   Conference*. AFIPS Press. 1971.
+   (https://www.clear.rice.edu/comp551/papers/Abramson-Aloha.pdf)
