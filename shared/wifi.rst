@@ -16,7 +16,6 @@ through space.
 
 802.11 defines a number of different physical layers that operate in
 various frequency bands and provide a range of different data rates.
-
 The original 802.11 standard defined two radio-based physical layers
 standards, one using frequency hopping (over 79 1-MHz-wide frequency
 bandwidths) and the other using direct sequence spread spectrum (with
@@ -38,36 +37,37 @@ antennas and allowing greater wireless channel bandwidths. The use of
 multiple antennas is often called *MIMO* for multiple-input,
 multiple-output. The latest emerging standard, 802.11ax, promises
 another substantial improvement in throughput, in part by adopting
-many of the coding and modulation techniques used in the 4G/5G
-cellular network, which we describe in the next section.
+many of the coding and modulation techniques used in 5G.
 
-It is common for commercial products to support more than one flavor of
-802.11; many base stations support all five variants (a,b, g, n, and ac).
-This not only ensures compatibility with any device that supports any
-one of the standards but also makes it possible for two such products to
-choose the highest bandwidth option for a particular environment.
+It is common for commercial products to support more than one flavor
+of 802.11; many base stations support all five variants (a,b, g, n,
+and ac).  This not only ensures compatibility with any device that
+supports any one of the standards but also makes it possible for two
+such products to choose the highest bandwidth option for a particular
+environment.
 
 It is worth noting that while all the 802.11 standards define a
-*maximum* bit rate that can be supported, they mostly support lower bit
-rates as well (e.g., 802.11a allows for bit rates of 6, 9, 12,
-18, 24, 36, 48, and 54 Mbps). At lower bit rates, it is easier to decode
+*maximum* bit rate that can be supported, they mostly support lower
+bit rates as well (e.g., 802.11a allows for bit rates of 6, 9, 12, 18,
+24, 36, 48, and 54 Mbps). At lower bit rates, it is easier to decode
 transmitted signals in the presence of noise. Different modulation
 schemes are used to achieve the various bit rates. In addition, the
-amount of redundant information in the form of error-correcting codes is
-varied. More redundant information means higher resilience to bit errors
-at the cost of lowering the effective data rate (since more of the
-transmitted bits are redundant).
+amount of redundant information in the form of error-correcting codes
+is varied. More redundant information means higher resilience to bit
+errors at the cost of lowering the effective data rate (since more of
+the transmitted bits are redundant).
 
 The systems try to pick an optimal bit rate based on the noise
 environment in which they find themselves; the algorithms for bit rate
 selection can be quite complex. Interestingly, the 802.11 standards do
 not specify a particular approach but leave the algorithms to the
-various vendors. The basic approach to picking a bit rate is to estimate
-the bit error rate either by directly measuring the signal-to-noise
-ratio (SNR) at the physical layer or by estimating the SNR by measuring
-how often packets are successfully transmitted and acknowledged. In some
-approaches, a sender will occasionally probe a higher bit rate by
-sending one or more packets at that rate to see if it succeeds.
+various vendors. The basic approach to picking a bit rate is to
+estimate the bit error rate either by directly measuring the
+signal-to-noise ratio (SNR) at the physical layer or by estimating the
+SNR by measuring how often packets are successfully transmitted and
+acknowledged. In some approaches, a sender will occasionally probe a
+higher bit rate by sending one or more packets at that rate to see if
+it succeeds.
 
 5.3.2 Collision Avoidance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -115,15 +115,15 @@ neither A nor C is aware of this collision. A and C are said to be
    to A while C transmits to D. (A and D's reaches are not shown.)
 
 A related problem, called the *exposed node problem*, occurs under the
-circumstances illustrated in :numref:`Figure %s <fig-wifiExposedNode>`,
-where each
-of the four nodes is able to send and receive signals that reach just
-the nodes to its immediate left and right. For example, B can exchange
-frames with A and C but it cannot reach D, while C can reach B and D but
-not A. Suppose B is sending to A. Node C is aware of this communication
-because it hears B’s transmission. It would be a mistake, however, for C
-to conclude that it cannot transmit to anyone just because it can hear
-B’s transmission. For example, suppose C wants to transmit to node D.
+circumstances illustrated in :numref:`Figure %s
+<fig-wifiExposedNode>`, where each of the four nodes is able to send
+and receive signals that reach just the nodes to its immediate left
+and right. For example, B can exchange frames with A and C but it
+cannot reach D, while C can reach B and D but not A. Suppose B is
+sending to A. Node C is aware of this communication because it hears
+B’s transmission. It would be a mistake, however, for C to conclude
+that it cannot transmit to anyone just because it can hear B’s
+transmission. For example, suppose C wants to transmit to node D.
 This is not a problem since C’s transmission to D will not interfere
 with A’s ability to receive from B. (It would interfere with A sending
 to B, but B is transmitting in our example.)
@@ -173,9 +173,9 @@ well.
 5.3.3 Distribution System
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As described so far, 802.11 would be suitable for a network with a mesh
-(*ad hoc*) topology, and development of an 802.11s standard for mesh
-networks is nearing completion. At the current time, however, nearly all
+As described so far, 802.11 would be suitable for a network with a
+mesh (*ad hoc*) topology, and extensions for mesh networks is nearing
+is now part of the standard. At the current time, however, nearly all
 802.11 networks use a base-station-oriented topology.
 
 Instead of all nodes being created equal, some nodes are allowed to

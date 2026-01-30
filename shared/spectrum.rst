@@ -31,24 +31,23 @@ radio systems is motivated by the need to deal with these challenges.
   with another signal. For example, a cordless phone (a common
   unlicensed device) might have a range of about 100 feet.
 
-As we will see in the next two sections, Wi-Fi is contention-based,
-whereas 5G uses a reservation-based strategy. But despite this
-fundamental difference, Wi-Fi and the 5G both deal with the underlying
-radio spectrum using the same transmission technology.  This has not
-always been the case, but is now with the latest generation of Wi-Fi,
-known as Wi-Fi 6.0 (also called 802.11ax). The rest of this section
-introduces that technology.
+As we will see in the next two sections, Wi-Fi take very different
+approaches to how they allocate radio spectrum, but despite these
+difference, they both use the same multiplexing technology. This has
+not always been the case, but is now with the latest generation of
+Wi-Fi, known as Wi-Fi 6.0 (also called 802.11ax). The rest of this
+section describes the inherent challenges and introduces the
+technology used to address it.
 
 5.2.1 Transmission Challenges
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We start with a little background on the challenge radio-based data
-transmission face dealing with several impairments, including noise,
-attenuation, distortion, fading, and interference. To see this,
-consider the scenario depicted in :numref:`Figure %s <fig-multipath>`,
-where the signal bounces off various stationary and moving objects,
-following multiple paths from the transmitter to the receiver, who may
-also be moving.
+Radio-based data transmission has to deal with several impairments,
+including noise, attenuation, distortion, fading, and interference. To
+see this, consider the scenario depicted in :numref:`Figure %s
+<fig-multipath>`, where the signal bounces off various stationary and
+moving objects, following multiple paths from the transmitter to the
+receiver, who may also be moving.
 
 .. _fig-multipath:
 .. figure:: shared/figures/multipath.png
@@ -103,28 +102,13 @@ direction. This technology, called *Multiple-Input-Multiple-Output
 antennas in an effort to reach the receiver, adding even more paths to
 the environment-imposed multipath propagation.
 
-.. Following paragraph is 5G-specific. Need to rewrite to generalize
-   for Wi-Fi, which also uses feedback (but of a different sort).
-
-One of the most important consequences of these factors is that the
-transmitter must receive feedback from every receiver to judge how to
-best utilize the wireless medium on their behalf. 3GPP specifies a
-*Channel Quality Indicator (CQI)* for this purpose. In practice,
-the receiver sends a CQI status report to the base station periodically
-(e.g., every millisecond). These CQI messages report the observed
-signal-to-noise ratio, which impacts the receiver's ability to recover
-the data bits. The base station then uses this information to adapt how
-it allocates the available radio spectrum to the subscribers it is
-serving, as well as which coding and modulation scheme to employ.
-All of these decisions are made by the scheduler.
-
 5.2.2  Multiplexing Technique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We saw an overview of multiplexing strategies in Chapter 1, and both
 Wi-Fi and the Mobile Cellular Network have a rich history using
 variants of those approaches. For example, Wi-Fi originally used
-*spread spectrum*, a technique developed by the miliary to combat
+*spread spectrum*, a technique developed by the military to combat
 intentional attempts to jam radio signals. The idea behind spread
 spectrum is to spread the signal over a wider frequency band, so as to
 minimize the impact of interference from other devices. For example,
@@ -174,4 +158,5 @@ measured channel quality, sending more bits per symbol (and thus more
 bits per second) when the quality is high. In other words, OFDMA is
 not a coding/modulation algorithm, *per se*, but instead provides a
 framework for selecting a specific coding and modulation for each
-subband frequency.
+subband frequency. The difference between Wi-Fi and 5G boils down to a
+difference how the two systems exploit (control) that framework.

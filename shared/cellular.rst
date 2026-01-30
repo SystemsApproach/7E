@@ -1,7 +1,7 @@
 5.4 Mobile Cellular Network
 --------------------------------------------
 
-The mobile celluar network, which has a 40-year history that
+The mobile cellular network, which has a 40-year history that
 parallels the Internet's, has undergone significant change. The first
 two generations supported voice and then text, with 3G defining the
 transition to broadband access, supporting data rates measured in
@@ -35,11 +35,9 @@ As shown in :numref:`Figure %s <fig-cellular>`, the mobile cellular
 network consists of two main subsystems: the *Radio Access Network
 (RAN)* and the *Mobile Core*. The RAN manages the radio resources
 (i.e., spectrum), making sure it is used efficiently and meets the
-quality of service (QoS) requirements of every user. It corresponds
-to a distributed collection of base stations. As noted above, these
-are cryptically named *eNodeB* or *eNB* (which is short for *evolved
-Node B*) in 4G. In 5G, base stations are known as *gNB*, where the
-"g" stands for *next Generation*.
+quality of service (QoS) requirements of every user. It corresponds to
+a distributed collection of base stations. These are cryptically
+called *gNodeB* (gNB*), where the "g" stands for *next Generation*.
 
 The Mobile Core is a bundle of functionality (conventionally packaged
 as one or more devices) that serves several purposes.
@@ -50,38 +48,33 @@ as one or more devices) that serves several purposes.
 -  Tracks user mobility to ensure uninterrupted service.
 -  Tracks subscriber usage for billing and charging.
 
-For readers familiar with the Internet architecture and Wi-Fi as a
-common access technology, some of these functions might look a bit
-surprising. For example, Wi-Fi, like most of the Internet, normally
-provides a best-effort service, whereas cellular networks often aim
-to deliver some sort of QoS guarantee. Tracking subscribers for both
-mobility and billing are also not the sort of things we tend to think
-about in the Internet, but they are considered important functions for
-cellular networks. The reasons for these differences are numerous,
-including the typically large costs of acquiring cellular spectrum and
-maintaining the infrastructure to use it such as radio towers. With
-that large investment, there is a desire to recoup costs by charging
-subscribers, which in turn leads to making some sort of service
-guarantees to those subscribers to justify the cost. There is also a
-need to maximize the efficiency of spectrum usage. Much of the
+These functions are similar to what a standard switch would perform,
+except cellular networks often aim to deliver some sort of QoS
+guarantee. Tracking subscribers for both mobility and billing are also
+not the norm on a typical switch, but they are considered important
+functions for cellular networks. The reasons for these differences are
+numerous, including the typically large costs of acquiring cellular
+spectrum and maintaining the infrastructure to use it such as radio
+towers. With that large investment, there is a desire to recoup costs
+by charging subscribers, which in turn leads to making some sort of
+service guarantees to those subscribers to justify the cost. There is
+also a need to maximize the efficiency of spectrum usage. Much of the
 complexity of the mobile core follows from these requirements being
 imposed by service providers. Even when we get to enterprises running
 their own 5G networks, they still need to manage the usage of spectrum
 to obtain the benefits of 5G over Wi-Fi, such as more predictable
 control over latency and bandwidth.
 
-Note that Mobile Core is another example of a generic term. In 4G it
-was called the *Evolved Packet Core (EPC)* and in 5G it is called the
-*5G Core (5GC)*. Moreover, even though the word “Core” is in its name,
-the Mobile Core runs near the edge of the network, effectively providing
-a bridge between the RAN in some geographic area and the greater
-IP-based Internet. 3GPP provides significant flexibility in how the
-Mobile Core is geographically deployed, ranging from minimal deployments
-(the RAN and the mobile core can be co-located) to areas that are
-hundreds of kilometers wide. A common model is that an instantiation
-of the Mobile Core serves a metropolitan area. The corresponding RAN
-would then span several dozens (or even hundreds) of cell towers in
-that geographic area.
+Note that the word “Core” is a bit misleading; the Mobile Core runs
+near the edge of the network, effectively providing a bridge between
+the RAN in some geographic area and the greater IP-based
+Internet. 3GPP provides significant flexibility in how the Mobile Core
+is geographically deployed, ranging from minimal deployments (the RAN
+and the mobile core can be co-located) to areas that are hundreds of
+kilometers wide. A common model is that an instantiation of the Mobile
+Core serves a metropolitan area. The corresponding RAN would then span
+several dozens (or even hundreds) of cell towers in that geographic
+area.
 
 Taking a closer look at :numref:`Figure %s <fig-cellular>`, we see
 that a *Backhaul Network* interconnects the base stations that
@@ -93,26 +86,25 @@ a necessary part of the RAN, but it is an implementation choice and
 not prescribed by the 3GPP standard.
 
 Although 3GPP specifies all the elements that implement the RAN and
-Mobile Core in an open standard—including sub-layers we have not yet
-introduced—network operators have historically bought proprietary
-implementations of each subsystem from a single vendor. This lack of
-an open source implementation contributes to the perceived
-“opaqueness” of the mobile cellular network in general, and the RAN in
-particular. And while it is true that base stations contain
-sophisticated algorithms for scheduling transmission on the radio
-spectrum—algorithms that are considered valuable intellectual property
-of the equipment vendors—there is significant opportunity to open and
-disaggregate both the RAN and the Mobile Core. This book gives a
-recipe for how to do exactly that.
+Mobile Core in an open standard—including sub-layers—network operators
+have historically bought proprietary implementations of each subsystem
+from a single vendor. This lack of an open source implementation
+contributes to the perceived “opaqueness” of the mobile cellular
+network in general, and the RAN in particular. And while it is true
+that base stations contain sophisticated algorithms for scheduling
+transmission on the radio spectrum—algorithms that are considered
+valuable intellectual property of the equipment vendors—there is
+significant opportunity to open and disaggregate both the RAN and the
+Mobile Core. A companion book describes how to do that.
 
-Before getting to those details, we have three more architectural
-concepts to introduce. First, :numref:`Figure %s <fig-cups>` redraws
-components from :numref:`Figure %s <fig-cellular>` to highlight the
-fact that a base station has an analog component (depicted by an
-antenna) and a digital component (depicted by a processor pair). This
-book mostly focuses on the latter, but we introduce enough information
-about the over-the-air radio transmission to appreciate its impact on
-the overall architecture.
+There are three more architectural concepts to introduce. First,
+:numref:`Figure %s <fig-cups>` redraws components from :numref:`Figure
+%s <fig-cellular>` to highlight the fact that a base station has an
+analog component (depicted by an antenna) and a digital component
+(depicted by a processor pair). This book mostly focuses on the
+latter, but we introduce enough information about the over-the-air
+radio transmission to appreciate its impact on the overall
+architecture.
 
 .. _fig-cups:
 .. figure:: shared/figures/cups.png
@@ -284,9 +276,7 @@ mechanisms that are similar to those found in other types of networks.
 These functions imply a global decision-making process, whereby it's
 possible to forward traffic to a different base station (or to
 multiple base stations) in an effort to make efficient use of the
-radio spectrum over a larger geographic area. We will revisit how such
-RAN-wide (global) decisions can be made using SDN techniques in
-Chapter 4.
+radio spectrum over a larger geographic area.
 
 .. _fig-quality:
 .. figure:: shared/figures/quality.png
@@ -514,14 +504,22 @@ be many more subband slots (and hence PRBs) available along the other
 axis, so the scheduler is essentially preparing and transmitting a
 sequence of PRBs.
 
-.. Missing some context. See the last paragraph from spectrum.rst
-   which mentions 3GPP.
-
-The 1-ms TTI corresponds to the time frame in which the scheduler
-receives feedback from users about the quality of the signal they are
-experiencing. This is the role of CQI: once every millisecond, each
-user sends a set of metrics, which the scheduler uses to make its
-decision as to how to allocate PRBs during the subsequent TTI.
+The key input to the scheduling decision is feedback sent from every
+node back to the base station, reporting how much interference it is
+experiencing. 5G specifies a *Channel Quality Indicator (CQI)* for
+this purpose. In practice, the receiver sends a CQI status report to
+the base station periodically (e.g., every millisecond). These CQI
+messages report the observed signal-to-noise ratio, which impacts the
+receiver's ability to recover the data bits. The base station then
+uses this information to adapt how it allocates the available radio
+spectrum to the subscribers it is serving, as well as which coding and
+modulation scheme to employ.  All of these decisions are made by the
+scheduler.  The 1-ms TTI corresponds to the time frame in which the
+scheduler receives feedback from users about the quality of the signal
+they are experiencing. This is the role of CQI: once every
+millisecond, each user sends a set of metrics, which the scheduler
+uses to make its decision as to how to allocate PRBs during the
+subsequent TTI.
 
 Another input to the scheduling decision is the *QoS Class Identifier
 (QCI)*, which indicates the quality-of-service each class of traffic
@@ -529,8 +527,7 @@ is to receive. In 4G, the QCI value assigned to each class (there are
 twenty six such classes, in total) indicates whether the traffic has a
 *Guaranteed Bit Rate (GBR)* or not *(non-GBR)*, plus the class's
 relative priority within those two categories. (Note that the 5QI
-parameter introduced in Chapter 2 serves the same purpose as the QCI
-parameter in 4G.)
+parameter serves the same purpose as the QCI parameter in 4G.)
 
 Finally, keep in mind that :numref:`Figure %s <fig-sched-grid>`
 focuses on scheduling transmissions from a single antenna, but the
@@ -547,7 +544,7 @@ coding and modulation levels, and which antenna to transmit their data
 on. This is an optimization problem that we are not in a position to
 solve here: the details of scheduling are highly-valued proprietary
 intellectual property of Mobile Cellular Network vendors. What we can
-say is that 5G introduces significant flexibility in how the schedular
+say is that 5G introduces significant flexibility in how the scheduler
 is parameterized, making it possible to adapt the cellular network to
 a more diverse set of devices and application domains.
 
