@@ -28,7 +28,7 @@ so it can be used by the data plane. Historically, switches had a
 simpler control plane (based on the spanning tree protocol) and they
 only forwarded based on the Ethernet header, but today
 there are Ethernet switches that combine traditional switching functions with
-those of a router, so it's harder to make a strong distinction. 
+those of a router, so it's harder to make a strong distinction.
 
 One key question we should be asking anytime we try to build a
 mechanism for the Internet is: “Does this solution scale?” The answer

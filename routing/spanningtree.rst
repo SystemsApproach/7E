@@ -7,13 +7,14 @@ connected together a couple of ethernet segments. In its simplest
 form, a bridge would receive packets on one port and copy them out to
 its other port or ports, effectively broadcasting packets from one
 segment to another. Over time, a bridge could "learn" which hosts were
-reachable on on which port by watching the source addresses of
+reachable on which port by watching the source addresses of
 received packets, so a "learning bridge" would not waste resources
 forwarding a packet onto a port that didn't lead to the destination.
 
 Learning bridges are fine until the network has a loop in it, in which
 case they fail badly—frames potentially get forwarded forever. The
-problem with looping packets is that they consume resources: switch
+problem with looping packets is that not only do they not get to their
+destination, they consume resources: switch
 capacity and link capacity. This is particularly bad in the case of
 Ethernet which has no way to tell when a packet is circulating in a
 loop. (The Internet Protocol does have such a mechanism, although
@@ -65,7 +66,7 @@ graph on the left and one of possibly many spanning trees on the
 right.
 
 .. _fig-graphs:
-.. figure:: figures/f03-11-9780123850591.png
+.. figure:: routing/figures/f03-11-9780123850591.png
    :width: 500px
    :align: center
 
@@ -116,7 +117,7 @@ switch relative to each of its ports. The switch forwards frames over
 those ports for which it is the designated switch.
 
 .. _fig-elan4:
-.. figure:: figures/impl/Slide6.png
+.. figure:: routing/figures/Slide6.png
    :width: 500px
    :align: center
 

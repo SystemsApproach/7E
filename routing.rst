@@ -21,7 +21,7 @@ similar to what most networks use. You obviously don't want to go
 around in circles—the path should be loop-free—and you normally want
 to optimize some metric, such as travel time or distance. Similar
 goals apply for routing across computer networks, but there are a
-number of important differences. 
+number of important differences.
 
 There are several different approaches to routing in use today,
 with different metrics of success. In the global Internet, routing
@@ -44,6 +44,6 @@ switches. We will start our discussion of approaches to routing there.
 
 
 .. include:: routing/design.rst
-.. include:: routing/spanning.rst
+.. include:: routing/spanningtree.rst
 .. include:: routing/linkstate.rst
 .. include:: routing/distancevector.rst

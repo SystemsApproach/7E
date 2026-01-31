@@ -1,7 +1,7 @@
-4.3 Link State (OSPF)
------------------------
+4.3 Link-State Routing (OSPF)
+-----------------------------
 
-Link-state routing is the most widely used classs of intradomain routing
+Link-state routing is the most widely used class of intradomain routing
 protocol, at least in the service provider networks that make up most
 of the
 Internet. Distance-vector routing, which we discuss below, continues
@@ -93,7 +93,7 @@ then turn around and do the same thing, the most recent copy of the LSP
 eventually reaches all nodes.
 
 .. _fig-flood:
-.. figure:: figures/f03-32-9780123850591.png
+.. figure:: routing/figures/f03-32-9780123850591.png
    :width: 500px
    :align: center
 
@@ -118,7 +118,7 @@ generate an LSP is if one of its directly connected links or immediate
 neighbors has gone down. As noted above, either a link-layer-specific
 alarm or the failure to receive some sort of periodic “hello” packet
 can alert a node to the loss of connectivity to a neighbor (or failure
-of the neighoring node itself). The link to that neighbor will be
+of the neighboring node itself). The link to that neighbor will be
 declared down, and a new LSP will be generated to reflect this fact.
 
 One of the important design goals of a link-state protocol’s flooding
@@ -172,7 +172,7 @@ theory—Dijkstra’s shortest-path algorithm.
 We first define Dijkstra’s algorithm in graph-theoretic terms. Imagine
 that a node takes all the LSPs it has received and constructs a
 graphical representation of the network, in which N denotes the set of
-nodes in the graph, l(i,j) denotes the nonnegative cost (weight)
+nodes in the graph, l(i,j) denotes the non-negative cost (weight)
 associated with the edge between nodes i, j in N and l(i, j) = ∞ if no
 edge connects i and j. In the following description, we let s in N
 denote this node, that is, the node executing the algorithm to find the
@@ -235,7 +235,7 @@ The algorithm works as follows:
    ``Confirmed`` list, and return to step 2.
 
 .. _fig-lsroute:
-.. figure:: figures/f03-33-9780123850591.png
+.. figure:: routing/figures/f03-33-9780123850591.png
    :width: 350px
    :align: center
 
@@ -366,7 +366,7 @@ basic link-state algorithm described above, including the following:
    network capacity.
 
 .. _fig-ospf:
-.. figure:: figures/f03-34-9780123850591.png
+.. figure:: routing/figures/f03-34-9780123850591.png
    :width: 400px
    :align: center
 
@@ -406,7 +406,7 @@ routers in a domain to determine the cost of reaching all networks in
 that domain and the appropriate next hop for each network.
 
 .. _fig-ospf-lsa:
-.. figure:: figures/f03-35-9780123850591.png
+.. figure:: routing/figures/f03-35-9780123850591.png
    :width: 450px
    :align: center
 
@@ -451,13 +451,14 @@ multiple parallel links if necessary. The ``metric`` is of course the
 cost of the link. ``Type`` tells us something about the link—for
 example, if it is a point-to-point link.
 
-The TOS information is present to allow OSPF to choose different routes
-for IP packets based on the value in their TOS field. Instead of
-assigning a single metric to a link, it is possible to assign different
-metrics depending on the TOS value of the data. For example, if we had a
-link in our network that was very good for delay-sensitive traffic, we
-could give it a low metric for the TOS value representing low delay and
-a high metric for everything else. OSPF would then pick a different
-shortest path for those packets that had their TOS field set to that
-value. It is worth noting that, at the time of writing, this capability
-has not been widely deployed.
+The TOS information is present to allow OSPF to choose different
+routes for IP packets based on the value in their Type Of Service
+(TOS) field. Instead of assigning a single metric to a link, it is
+possible to assign different metrics depending on the TOS value of the
+data. For example, if we had a link in our network that was very good
+for delay-sensitive traffic, we could give it a low metric for the TOS
+value representing low delay and a high metric for everything
+else. OSPF would then pick a different shortest path for those packets
+that had their TOS field set to that value. It is worth noting that,
+in the decades since OSPF was defined, the meaning of the IP TOS field
+has changed and this capability has not been widely deployed.
