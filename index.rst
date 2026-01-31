@@ -28,6 +28,7 @@ Larry Peterson and Bruce Davie
    applications.rst
    technology.rst
    part_two.rst
+   routing.rst
    shared.rst
    part_three.rst
    README.rst
