@@ -331,8 +331,8 @@ The Open Shortest Path First Protocol (OSPF)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two widely used link-state routing protocols: OSPF and IS-IS.
-OSPF is an open standard, created under the auspices of the Internet
-Engineering Task Force (IETF). IS-IS, by contrast, is an ISO
+Both are open standards: OSPF was created under the auspices of the Internet
+Engineering Task Force (IETF), while  IS-IS is an ISO
 standard. At a high level, both protocols follow the approach
 described above. We provide some more details of OSPF to illustrate the
 amount of complexity that goes into bridging between theory and
@@ -440,25 +440,20 @@ not been corrupted. It covers all fields in the packet except
 ``LS Age`` is incremented. ``Length`` is the length in bytes of the
 complete LSA.
 
-Now we get to the actual link-state information. This is made a little
-complicated by the presence of TOS (type of service) information.
-Ignoring that for a moment, each link in the LSA is represented by a
+Now we get to the actual link-state information.  Ignoring ``TOS``
+information for a moment, each link in the LSA is represented by a
 ``Link ID``, some ``Link Data``, and a ``metric``. The first two of
-these fields identify the link; a common way to do this would be to use
-the router ID of the router at the far end of the link as the
+these fields identify the link; a common way to do this would be to
+use the router ID of the router at the far end of the link as the
 ``Link ID`` and then use the ``Link Data`` to disambiguate among
 multiple parallel links if necessary. The ``metric`` is of course the
-cost of the link. ``Type`` tells us something about the link—for
+cost of the link. ``Link type`` tells us something about the link—for
 example, if it is a point-to-point link.
 
-The TOS information is present to allow OSPF to choose different
-routes for IP packets based on the value in their Type Of Service
-(TOS) field. Instead of assigning a single metric to a link, it is
-possible to assign different metrics depending on the TOS value of the
-data. For example, if we had a link in our network that was very good
-for delay-sensitive traffic, we could give it a low metric for the TOS
-value representing low delay and a high metric for everything
-else. OSPF would then pick a different shortest path for those packets
-that had their TOS field set to that value. It is worth noting that,
-in the decades since OSPF was defined, the meaning of the IP TOS field
-has changed and this capability has not been widely deployed.
+The TOS information is mostly present for historical reasons. In
+theory it was possible for OSPF to choose different routes for IP
+packets based on the value in their Type Of Service (TOS) field, e.g.,
+to send low-latency packets over a different path than bulk
+data. However, in the decades since OSPF was defined, the meaning of
+the IP TOS field has changed and this capability has not been widely
+deployed.
