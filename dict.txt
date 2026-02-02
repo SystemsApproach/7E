@@ -1,3 +1,4 @@
+Abramson
 ABR
 ABRs
 absorber
@@ -164,6 +165,7 @@ BMC
 BNG
 BNGs
 Bohe
+Boggs
 BOM
 boolean
 Booleans
@@ -916,7 +918,7 @@ MEPs
 mergeRoute
 metadata
 metainformation
-Metcalf
+Metcalfe
 MIB
 MIBs
 Micheloni

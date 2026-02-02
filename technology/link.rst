@@ -20,9 +20,11 @@ The first challenge of communication is to convert a digital signal
 into the available analog signal, a process is known as *modulation*.
 For example, *frequency modulation* corresponds to alternating between
 a "high frequency" and a "low frequency" within some band (e.g., a
-20MHz-wide band at 2.4GHz).  What makes modulation a hard problem is
-that the receiver has to recover the intended digital value from
-analog signal in the face of noise and attenuation.
+20MHz-wide band at 2.4GHz). Similarly, *amplitude modulation* varies a
+signal's amplitude, which intuitively corresponds to high-power (on)
+and low-power (off). What makes modulation a hard problem is that the
+receiver has to recover the intended digital value from analog signal
+in the face of noise and attenuation.
 
 The second challenge is how to encode digital data (i.e., 1’s and 0’s)
 onto this digital signal. On the surface, this encoding seems simple
@@ -74,22 +76,22 @@ historical background in Section 2.1.4.
    When we say "Ethernet" we are really talking about a family of
    standards, tracing back to the first specification written by
    Digital Equipment Corporation (DEC), Intel, and Xerox. That
-   vendor-led defintion, known as DIX, was subsequently standardized
-   by the IEEE as 802.3. The orignal standard was for a solution based
+   vendor-led definition, known as DIX, was subsequently standardized
+   by the IEEE as 802.3. The original standard was for a solution based
    on *Carrier Sense, Multiple Access with Collision Detect (CSMA/CD)*
    technology. The “carrier sense” in CSMA/CD meant that all the nodes
    were able to distinguish between an idle and a busy link, "multiple
    access" meant that multiple nodes connected to the same coax cable,
    and “collision detect” meant that nodes listen as they transmit and
-   can therefore detect when a frame interfers (collides) with another
+   can therefore detect when a frame interferes (collides) with another
    frame.
 
-   Over time, Ethernet was approved for differnt cable types (e.g.,
+   Over time, Ethernet was approved for different cable types (e.g.,
    twisted-pair, passive optical, single-mode fiber, multi-mode
    fiber), to run at different speeds (e.g., 10Mbps, 100Mbps, 1Gbps,
    10Gbps, 40Gbps, 100Gbps, 200Gbps, 400Gbps, 800Gbps), to span
    different distances (e.g., 10 meters, 100 meters, 40 kilometers),
-   and for full-duplex communition (as opposed to the original
+   and for full-duplex communication (as opposed to the original
    CSMA/CD). Each of these variants was independently standardized,
    with designations of the form 802.11xx. For the purposes of this
    book, none of these distinctions impact how the technology is
@@ -579,7 +581,7 @@ Islands. And that Ethernet algorithm, in turn, inspired the approach
 used by today's Wi-Fi. We describe that algorithm in Chapter 5.
 
 One consequence of multiple nodes having access to a shared medium is
-that all the nodes have to be in releatively close proximity to each
+that all the nodes have to be in relatively close proximity to each
 other, so they can safely determine when it's safe to transmit. The
 original Ethernet access control algorithm required that the RTT—from
 one end of an Ethernet to the other and back—be no more than 51.2
