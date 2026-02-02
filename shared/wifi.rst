@@ -4,89 +4,42 @@
 Most readers will have used a wireless network based on the IEEE
 802.11 standards, often referred to as *Wi-Fi*. Wi-Fi is technically a
 trademark, owned by a trade group called the Wi-Fi Alliance, which
-certifies product compliance with 802.11. Like Ethernet, 802.11 is
-designed for use in a limited geographical area (homes, office
-buildings, campuses), and its primary challenge is to mediate access
-to a shared communication medium—in this case, signals propagating
-through space.
+certifies product compliance with 802.11. Like Ethernet's 802.3
+standard, 802.11 has evolved to accommodate new radio technologies
+and new spectrum allocations.
 
+Wi-Fi originally used spread spectrum to support rates in the 2 Mbps
+range, followed by 802.11b at rates up to 11 Mbps. These early
+variants all operated in the license-exempt 2.4-GHz frequency
+band. Then came 802.11a, which delivered up to 54 Mbps using OFDM and
+the license-exempt 5-GHz band. Many other variants followed, using
+both the 2.4 and 5-GHz band and achieving per-device data rates of 150
+Mbps to 450 Mbps.  As of this writing, 802.11ax (this is the variant
+that corresponds to Wi-Fi 6.0) is becoming mainstream; it provides yet
+another substantial improvement in throughput, in part by adopting the
+OFDMA framework described in Section 5.2 and in part by adding
+spectrum in the 6-GHz band. Wi-Fi 7.0 (802.11be) is also now approved;
+increased availability of 802.1be devices can be expected to spur
+wider adoption.
 
-5.3.1 Physical Properties
+5.3.1 Collision Avoidance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-802.11 defines a number of different physical layers that operate in
-various frequency bands and provide a range of different data rates.
-The original 802.11 standard defined two radio-based physical layers
-standards, one using frequency hopping (over 79 1-MHz-wide frequency
-bandwidths) and the other using direct sequence spread spectrum (with
-an 11-bit chipping sequence). Both provided data rates in the 2 Mbps
-range.  Subsequently, the physical layer standard 802.11b was added,
-and using a variant of direct sequence, supported up to 11 Mbps. These
-three standards all operated in the license-exempt 2.4-GHz frequency
-band of the electromagnetic spectrum. Then came 802.11a, which
-delivered up to 54 Mbps using a variant of frequency division
-multiplexing called *orthogonal frequency division multiplexing
-(OFDM)*. 802.11a runs in the license-exempt 5-GHz band.  802.11g
-followed, and also using OFDM, delivered up to 54 Mbps. 802.11g is
-backward compatible with 802.11b (and returns to the 2.4-GHz band).
-
-At the time of writing, many devices support 802.11n or 802.11ac,
-which typically achieve per-device data rates of 150 Mbps to 450 Mbps,
-respectively. This improvement is partly due to the use of multiple
-antennas and allowing greater wireless channel bandwidths. The use of
-multiple antennas is often called *MIMO* for multiple-input,
-multiple-output. The latest emerging standard, 802.11ax, promises
-another substantial improvement in throughput, in part by adopting
-many of the coding and modulation techniques used in 5G.
-
-It is common for commercial products to support more than one flavor
-of 802.11; many base stations support all five variants (a,b, g, n,
-and ac).  This not only ensures compatibility with any device that
-supports any one of the standards but also makes it possible for two
-such products to choose the highest bandwidth option for a particular
-environment.
-
-It is worth noting that while all the 802.11 standards define a
-*maximum* bit rate that can be supported, they mostly support lower
-bit rates as well (e.g., 802.11a allows for bit rates of 6, 9, 12, 18,
-24, 36, 48, and 54 Mbps). At lower bit rates, it is easier to decode
-transmitted signals in the presence of noise. Different modulation
-schemes are used to achieve the various bit rates. In addition, the
-amount of redundant information in the form of error-correcting codes
-is varied. More redundant information means higher resilience to bit
-errors at the cost of lowering the effective data rate (since more of
-the transmitted bits are redundant).
-
-The systems try to pick an optimal bit rate based on the noise
-environment in which they find themselves; the algorithms for bit rate
-selection can be quite complex. Interestingly, the 802.11 standards do
-not specify a particular approach but leave the algorithms to the
-various vendors. The basic approach to picking a bit rate is to
-estimate the bit error rate either by directly measuring the
-signal-to-noise ratio (SNR) at the physical layer or by estimating the
-SNR by measuring how often packets are successfully transmitted and
-acknowledged. In some approaches, a sender will occasionally probe a
-higher bit rate by sending one or more packets at that rate to see if
-it succeeds.
-
-5.3.2 Collision Avoidance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-At first glance, it might seem that a wireless protocol would follow the
-same algorithm as the Ethernet—wait until the link becomes idle before
-transmitting and back off should a collision occur—and, to a first
-approximation, this is what 802.11 does. The additional complication for
-wireless is that, while a node on an Ethernet receives every other
-node’s transmissions and can transmit and receive at the same time,
-neither of these conditions holds for wireless nodes. This makes
-detection of collisions rather more complex. The reason why wireless
-nodes cannot usually transmit and receive at the same time (on the same
-frequency) is that the power generated by the transmitter is much higher
-than any received is likely to be and so swamps the receiving circuitry.
-The reason why a node may not receive transmissions from another node is
-because that node may be too far away or blocked by an obstacle. This
-situation is a bit more complex than it first appears, as the following
-discussion will illustrate.
+At first glance, it might seem that a wireless protocol would follow
+the same algorithm as the Ethernet: wait until the link becomes idle
+before transmitting and back off should a collision occur. To a first
+approximation, this is what 802.11 does, but with an additional
+complication. Unlike an Ethernet where every node receives every other
+node’s transmission, and nodes can transmit and receive at the same
+time, neither of these conditions holds for wireless nodes.  This
+makes detection of collisions rather more complex. The reason why
+wireless nodes cannot usually transmit and receive at the same time
+(on the same frequency) is that the power generated by the transmitter
+is much higher than any received is likely to be and so swamps the
+receiving circuitry.  The reason why a node may not receive
+transmissions from another node is because that node may be too far
+away or blocked by an obstacle. This situation is a bit more complex
+than it first appears, as the following discussion will illustrate.
 
 .. _fig-wifiHiddenNode:
 .. figure:: shared/figures/f02-30-9780123850591.png
@@ -170,23 +123,20 @@ channel again, using the same process described above. By this time, of
 course, other nodes may again be trying to get access to the channel as
 well.
 
-5.3.3 Distribution System
+5.3.2 Distribution System
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As described so far, 802.11 would be suitable for a network with a
-mesh (*ad hoc*) topology, and extensions for mesh networks is nearing
-is now part of the standard. At the current time, however, nearly all
-802.11 networks use a base-station-oriented topology.
-
-Instead of all nodes being created equal, some nodes are allowed to
-roam (e.g., your laptop) and some are connected to a wired network
-infrastructure. 802.11 calls these base stations *access points*
-(APs), and they are connected to each other by a so-called
-*distribution system*. :numref:`Figure %s <fig-wireless2>` illustrates
-a distribution system that connects three access points, each of which
-services the nodes in some region. Each access point operates on some
-channel in the appropriate frequency range, and each AP will typically
-be on a different channel than its neighbors.
+802.11 provides extensions for a mesh (*ad hoc*) topology, in which
+all nodes are equal, but the more common deployment uses a
+base-station topology, in which some nodes are allowed to roam (e.g.,
+your laptop) and some are connected to a wired network infrastructure.
+802.11 calls the latter *access points* (APs), and they are connected
+to each other by a so-called *distribution system*. :numref:`Figure %s
+<fig-wireless2>` illustrates a distribution system that connects three
+access points, each of which services the nodes in some region. Each
+access point operates on some channel in the appropriate frequency
+range, and each AP will typically be on a different channel (frequency
+range) than its neighbors.
 
 .. _fig-wireless2:
 .. figure:: shared/figures/f02-32-9780123850591.png
@@ -196,20 +146,22 @@ be on a different channel than its neighbors.
    Access points connected to a distribution system.
 
 The details of the distribution system are not important to this
-discussion—it could be an Ethernet, for example. The only important
-point is that the distribution network operates at the link layer, the
-same protocol layer as the wireless links. In other words, it does not
-depend on any higher-level protocols (such as the network layer).
+discussion—it could be a switched Ethernet, for example. The only
+expectation is that the distribution network operates at the link
+layer (L2), which is the same as the wireless component. This makes it
+possible to forward packets across the distribution network without
+depending on any higher-level protocols, such as IP; the learning
+bridge mechanism described in Section 4.4 is sufficient.
 
-Although two nodes can communicate directly with each other if they are
-within reach of each other, the idea behind this configuration is that
-each node associates itself with one access point. For node A to
-communicate with node E, for example, A first sends a frame to its
-access point (AP-1), which forwards the frame across the distribution
-system to AP-3, which finally transmits the frame to E. How AP-1 knew to
-forward the message to AP-3 is beyond the scope of 802.11; it may have
-used a bridging protocol. What 802.11 does specify is how nodes select
-their access points and, more interestingly, how this algorithm works in
+Although two nodes can directly communicate if they are within range
+of each other, the idea behind this configuration is that each node
+associates itself with one access point. For node A to communicate
+with node E, for example, A first sends a frame to its access point
+(AP-1), which forwards the frame across the distribution system to
+AP-3, which finally transmits the frame to E. How AP-1 knew to forward
+the message to AP-3 is beyond the scope of 802.11; it may have used a
+bridging protocol. What 802.11 does specify is how nodes select their
+access points and, more interestingly, how this algorithm works in
 light of nodes moving from one cell to another.
 
 The technique for selecting an AP is called *scanning* and involves the
@@ -253,7 +205,7 @@ is called *passive scanning*, and a node can change to this AP based
 on the ``Beacon`` frame simply by sending an ``Association Request``
 frame back to the access point.
 
-5.3.4 Frame Format
+5.3.3 Frame Format
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Most of the 802.11 frame format, which is depicted in
@@ -297,7 +249,7 @@ corresponds to E, ``Addr2`` identifies AP-3, ``Addr3`` corresponds to
 AP-1, and ``Addr4`` identifies
 A.
 
-5.3.5 Security of Wireless Links
+5.3.4 Security of Wireless Links
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One obvious problem wireless networks face compared to wires or fibers
@@ -397,3 +349,24 @@ confidentiality encryption and serves to expose replay attacks.) The MAC
 is subsequently encrypted along with the plaintext in order to prevent
 birthday attacks, which depend on finding different messages with the
 same authenticator.
+
+5.3.5 Scheduling Transmission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We indicated in Section 5.2 that Wi-Fi and 5G use different strategies
+(a) deciding how to allocate transmission resources to different
+users, and (b) determining how to adapt transmission parameters based
+on feedback they receive. In both cases, the Wi-Fi approach is
+minimal.  Wi-Fi does not make quality-of-service guarantees; each
+node—including both APs and mobile nodes—independently schedules its
+packets for transmission in FIFO order.
+
+Wi-Fi does use heuristics to adjust the that adjust the modulation
+level. The inputs to these heuristics are a combination of directly
+measuring the signal-to-noise ratio (SNR) at the physical layer, and
+estimating the SNR by measuring how often packets are successfully
+transmitted and acknowledged. In some approaches, a sender will
+occasionally probe a higher bit rate by sending one or more packets at
+that rate to see if it succeeds.
+
+
