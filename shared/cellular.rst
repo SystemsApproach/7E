@@ -467,103 +467,50 @@ an interface by which one Mobile Core (running on behalf of one MNO)
 queries another Mobile Core (running on behalf of some other MNO), to
 map between the IMSI, the phone number, and the subscriber profile.
 
-5.4.4  Scheduling Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5.4.4  Scheduling Transmission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Recall that OFDMA uses a set of narrow subbands, with symbols (each of
-which contain a few bits of data) being sent at some rate on each
-subband. With that understanding, it is easy to appreciate that there
-are discrete schedulable units of the radio spectrum. The fundamental
-unit is the time to transmit one symbol on one subband. Recognizing
-this discrete unit naturally leads to conceptualizing the radio
-spectrum as a 2-D resource, as shown in :numref:`Figure %s
-<fig-sched-grid>`, with the subbands represented in the vertical
-dimension and the time to transmit symbols on each subband represented
-in the horizontal dimension.  The basic unit of transmission, called a
-*Resource Element (RE)*, corresponds to a 15-kHz band around one
-subband frequency and the time it takes to transmit one OFDMA symbol.
+Responsibility for scheduling transmission is centered at the base
+stations. It depends on two key inputs. The first is feedback sent
+from every node back to the base station, reporting how much
+interference it is experiencing. 5G specifies a *Channel Quality
+Indicator (CQI)* for this purpose. In practice, the receiver sends a
+CQI status report to the base station periodically (e.g., every
+millisecond). These CQI messages report the observed signal-to-noise
+ratio, which impacts the receiver's ability to recover the data bits.
 
-.. _fig-sched-grid:
-.. figure:: shared/figures/sched-grid.png
-    :width: 600px
-    :align: center
-
-    Spectrum abstractly represented by a 2-D grid of
-    schedulable Resource Elements.
-
-The scheduler allocates some number of REs to each user that has data
-to transmit during each 1 ms *Transmission Time Interval (TTI)*, where
-users are depicted by different colored blocks in :numref:`Figure %s
-<fig-sched-grid>`.  The only constraint on the scheduler is that it
-must make its allocation decisions on blocks of 7x12=84 resource
-elements, called a *Physical Resource Block (PRB)*. :numref:`Figure %s
-<fig-sched-grid>` shows two back-to-back PRBs. Of course time
-continues to flow along one axis, and depending on the size of the
-available frequency band (e.g., it might be 100 MHz wide), there may
-be many more subband slots (and hence PRBs) available along the other
-axis, so the scheduler is essentially preparing and transmitting a
-sequence of PRBs.
-
-The key input to the scheduling decision is feedback sent from every
-node back to the base station, reporting how much interference it is
-experiencing. 5G specifies a *Channel Quality Indicator (CQI)* for
-this purpose. In practice, the receiver sends a CQI status report to
-the base station periodically (e.g., every millisecond). These CQI
-messages report the observed signal-to-noise ratio, which impacts the
-receiver's ability to recover the data bits. The base station then
-uses this information to adapt how it allocates the available radio
-spectrum to the subscribers it is serving, as well as which coding and
-modulation scheme to employ.  All of these decisions are made by the
-scheduler.  The 1-ms TTI corresponds to the time frame in which the
-scheduler receives feedback from users about the quality of the signal
-they are experiencing. This is the role of CQI: once every
-millisecond, each user sends a set of metrics, which the scheduler
-uses to make its decision as to how to allocate PRBs during the
-subsequent TTI.
-
-Another input to the scheduling decision is the *QoS Class Identifier
+The second input to the scheduling decision is a *QoS Class Identifier
 (QCI)*, which indicates the quality-of-service each class of traffic
-is to receive. In 4G, the QCI value assigned to each class (there are
-twenty six such classes, in total) indicates whether the traffic has a
-*Guaranteed Bit Rate (GBR)* or not *(non-GBR)*, plus the class's
-relative priority within those two categories. (Note that the 5QI
-parameter serves the same purpose as the QCI parameter in 4G.)
+is to receive. The richness of the QCI is a major difference between
+4G and 5G. In 4G, the QCI value assigned to each class indicates
+whether the traffic has a *Guaranteed Bit Rate (GBR)* or not
+*(non-GBR)*, plus the class's relative priority within those two
+categories.  In 5G, the QCI value (renamed 5QI) reflects increasing
+differentiation among classes that 5G aims to support. Each class
+includes the following attributes:
 
-Finally, keep in mind that :numref:`Figure %s <fig-sched-grid>`
-focuses on scheduling transmissions from a single antenna, but the
-MIMO technology described above means the scheduler also has to
-determine which antenna (or more generally, what subset of antennas)
-will most effectively reach each receiver. But again, in the abstract,
-the scheduler is charged with allocating a sequence of Resource
-Elements.
+- Resource Type: Guaranteed Bit Rate (GBR), Delay-Critical GBR, Non-GBR
+- Priority Level
+- Packet Delay Budget
+- Packet Error Rate
+- Maximum Data Burst
+- Averaging Window
 
-Note that the scheduler has many degrees of freedom: it has to decide
-which set of users to service during a given time interval, how many
-resource elements to allocate to each such user, how to select the
-coding and modulation levels, and which antenna to transmit their data
-on. This is an optimization problem that we are not in a position to
-solve here: the details of scheduling are highly-valued proprietary
-intellectual property of Mobile Cellular Network vendors. What we can
-say is that 5G introduces significant flexibility in how the scheduler
-is parameterized, making it possible to adapt the cellular network to
-a more diverse set of devices and application domains.
-
-Fundamentally, 5G defines a family of waveforms, each optimized for a
-different band in the radio spectrum.\ [#]_ The bands with carrier
-frequencies below 1 GHz are designed to deliver mobile broadband and
-massive IoT services with a primary focus on range. Carrier
-frequencies between 1-6 GHz are designed to offer wider bandwidths,
-focusing on mobile broadband and mission-critical
+The other big difference for 5G (differentiating it from both 4G and
+Wi-Fi) is that 5G supports multiple *waveforms*, each optimized for a
+different workload and a different band in the radio spectrum.\ [#]_
+The bands with carrier frequencies below 1 GHz are designed to deliver
+mobile broadband and massive IoT services with a primary focus on
+range. Carrier frequencies between 1-6 GHz are designed to offer wider
+bandwidths, focusing on mobile broadband and mission-critical
 applications. Carrier frequencies above 24 GHz (mmWaves) are designed
 to provide super-wide bandwidths over short, line-of-sight coverage.
 
 .. [#] A waveform is defined by the frequency, amplitude, and phase-shift
-   independent property (shape) of a signal. A sine wave is a simple
-   example of a waveform.
+   independent property (shape) of a signal.
 
 These different waveforms affect the scheduling and subband intervals
-(i.e., the “size” of the resource elements described in the previous
-section).
+(i.e., the “size” of the resource elements described in the Section 5.2).
 
 -  For frequency range 1 (410 MHz - 7125 MHz), 5G allows maximum 100 MHz
    bandwidths. In this case, there are three waveforms with subband
@@ -579,49 +526,15 @@ section).
 
 These various configurations of subband spacing and scheduling
 intervals are sometimes called the *numerology* of the radio's air
-interface.
-
-This range of numerology is important because it adds another degree
-of freedom to the scheduler. In addition to allocating radio resources
-to users, it has the ability to dynamically adjust the size of the
-resource by changing the waveform being used. With this additional
-freedom, fixed-sized REs are no longer the primary unit of resource
-allocation. We instead use more abstract terminology, and talk about
-allocating *Resource Blocks* to subscribers, where the 5G scheduler
-determines both the size and number of Resource Blocks allocated
-during each time interval.
-
-:numref:`Figure %s <fig-scheduler>` depicts the role of the scheduler
-from this more abstract perspective. Just as with 4G, CQI
-feedback from the receivers and the 5QI quality-of-service class
-selected by the subscriber are the two key pieces of input to the
-scheduler. Note that the set of 5QI values available in 5G is
-considerably greater than its QCI counterpart in 4G,
-reflecting the increasing differentiation among classes that 5G aims
-to support. For 5G, each class includes the following attributes:
-
--  Resource Type: Guaranteed Bit Rate (GBR), Delay-Critical GBR, Non-GBR
--  Priority Level
--  Packet Delay Budget
--  Packet Error Rate
--  Maximum Data Burst
--  Averaging Window
-
-Note that while the preceding discussion could be interpreted to imply a
-one-to-one relationship between subscribers and a 5QI, it is more
-accurate to say that each 5QI is associated with a class of traffic
-(often corresponding to some type of application), where a given
-subscriber might be sending and receiving traffic that belongs to
-multiple classes at any given time.
-
-.. We explore this idea in much more
-.. depth in a later chapter.
-
-.. Do we? Which chapter?
-
-.. Might try to say more about QCI. Check out this reference:
-   https://www.tech-invite.com/3m23/toc/tinv-3gpp-23-501_za.html#e-5-7-3
-
+interface. This range of numerology is important because it adds
+another degree of freedom to the scheduler. In addition to allocating
+radio resources to users, it has the ability to dynamically adjust the
+size of the resource by changing the waveform being used. With this
+additional freedom, fixed-sized REs are no longer the primary unit of
+resource allocation. We instead use more abstract terminology, and
+talk about allocating *Resource Blocks* to subscribers, where the 5G
+scheduler determines both the size and number of Resource Blocks
+allocated during each time interval.
 
 .. _fig-scheduler:
 .. figure:: shared/figures/scheduler.png
@@ -631,4 +544,17 @@ multiple classes at any given time.
     Scheduler allocates Resource Blocks to user data streams based on
     CQI feedback from receivers and the 5QI parameters associated with
     each class of service.
+
+:numref:`Figure %s <fig-scheduler>` depicts the role of the scheduler
+from this more abstract perspective. The CQI feedback from the
+receivers and the 5QI quality-of-service class selected by the
+subscriber are the two key pieces of input to the scheduler.  Note
+that while the preceding discussion could be interpreted to imply a
+one-to-one relationship between subscribers and a 5QI, it is more
+accurate to say that each 5QI is associated with a class of traffic
+(often corresponding to some type of application), where a given
+subscriber might be sending and receiving traffic that belongs to
+multiple classes at any given time.
+
+
 
