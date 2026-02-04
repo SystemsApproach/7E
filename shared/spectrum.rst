@@ -28,11 +28,10 @@ radio systems is motivated by the need to deal with these challenges.
   certain restrictions to make that otherwise unconstrained sharing
   work. Most important of these is a limit on transmission power. This
   limits the range of a signal, making it less likely to interfere
-  with another signal. For example, a cordless phone (a common
-  unlicensed device) might have a range of about 100 feet. The upper
-  bound on power for Wi-Fi limits its range to roughly 100 meters,
-  although in practice closer to tens of meters indoors where walls
-  absorb much of the signal.
+  with another signal. For example, a cordless phone might have a
+  range of about 100 feet. The upper bound on power for Wi-Fi limits
+  its range to roughly 100 meters, although in practice closer to tens
+  of meters indoors where walls absorb much of the signal.
 
 As we will see in the next two sections, Wi-Fi and 5G take very
 different approaches to how they allocate radio spectrum, but despite
@@ -109,7 +108,7 @@ the environment-imposed multipath propagation.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We saw an overview of multiplexing strategies in Chapter 1, and both
-Wi-Fi and the Mobile Cellular Network have a rich history using
+Wi-Fi and the Mobile Cellular Network have a long history using
 variants of those approaches. For example, Wi-Fi originally used
 *spread spectrum*, a technique developed by the military to combat
 intentional attempts to jam radio signals. The idea was to spread the
@@ -130,83 +129,118 @@ On the mobile network side, each generation has used a different
 approach. For example, 2G used *Time Division Multiple Access (TDMA)*,
 3G used *Code Division Multiple Access (CDMA)*, and 4G uses
 *Orthogonal Frequency-Division Multiplexing (OFDM)*—an approach that
-multiplexes data over multiple orthogonal frequency subbands, each of
-which is modulated independently. One attraction of OFDM is that, by
-splitting the frequency band into subbands, it can send symbols on
-each subband at a relatively low rate. This makes it easier to
-correctly decode symbols in the presence of multipath
+multiplexes data over multiple orthogonal frequency subcarriers, each
+of which is modulated independently.\ [#]_ One attraction of OFDM is
+that, by splitting the frequency band into subcarriers, it can send
+symbols on each subcarrier at a relatively low rate. This makes it
+easier to correctly decode symbols in the presence of multipath
 interference. The efficiency of OFDM depends on the selection of
-subband frequencies so as to avoid interference, that is, how it
+subcarrier frequencies so as to avoid interference, that is, how it
 achieves orthogonality. That topic is beyond the scope of this book.
+
+.. [#] In radio communication, term "carrier" refers to the base
+       signal before it has been modulated to carry data.  Because we
+       are now focused on dividing a larger frequency band into
+       smaller subbands, each of those subbands has it's own carrier
+       signal, hence "subcarrier".
 
 Today, the radio multiplexing technology used by both 5G and Wi-Fi is
 a specific application of OFDM, a technique called *Orthogonal
 Frequency-Division Multiple Access (OFDMA)*.  The “Multiple Access” in
 OFDMA just means that data can simultaneously be sent on behalf of
-multiple users, each on a different subband and for a different
+multiple users, each on a different subcarrier and for a different
 duration of time. Wi-Fi and 5G manage OFDMA in different ways—as we'll
 see in their respective sections—but they are starting with the same
 building block.
 
-In its simplest form, the subbands are narrow (e.g., 15 kHz), and the
-coding of user data into OFDMA symbols is designed to minimize the
+Before getting into the details, there is one other bit of context to
+set.  At a high level, some range of spectrum bandwidth is set aside
+for wireless communication, whether it's licensed or unlicensed. We
+often use a short-hand to refer to that band; e.g., "Wi-Fi at 5-GHz"
+or "5G at 6-GHz". In actuality, we're talking about a specific range;
+for example, Wi-Fi uses 5.150-GHz to 5.850-GHz. Within such a band, it
+is common to then subdivide the full range into discrete *channels*,
+of say, 20-MHz or 40-MHz each. The exact number varies from country to
+country, and there are so many options that it's impossible to keep
+track. For our purposes, we focus on a single channel in this section
+(let's assume it's 20-MHz wide), and we take up the question of how to
+manage a set of channels in later sections.
+
+In its simplest form, the subcarriers are narrow (e.g., 15 kHz), and
+the coding of user data into OFDMA symbols is designed to minimize the
 risk of data loss due to interference.  The number of bits that can be
 encoded in each symbol depends on the modulation scheme in use.  For
 example, using *Quadrature Amplitude Modulation (QAM)*, 16-QAM yields
-4 bits per symbol and 64-QAM yields 6 bits per symbol. The key is that
-there is a degree of freedom to choose the modulation scheme based on
-the measured channel quality, sending more bits per symbol (and thus
-more bits per second) when the quality is high. In other words, OFDMA
-is not a coding/modulation algorithm, *per se*, but instead provides a
-framework for selecting a specific coding and modulation for each
-subband frequency.
+4 bits per symbol, 64-QAM yields 6 bits per symbol, and 1024-QAM
+yields 10 bits per symbol (the current max for both Wi-FI and 5G). The
+key is that there is a degree of freedom to choose the modulation
+scheme based on the measured channel quality, sending more bits per
+symbol (and thus more bits per second) when the quality is high. In
+other words, OFDMA is not a coding/modulation algorithm, *per se*, but
+instead provides a framework for selecting a specific coding and
+modulation for each subcarrier frequency.
 
 We can visualize the OFDMA framework as a grid of discrete schedulable
 units of the radio spectrum. The fundamental unit is the time to
-transmit one symbol on one subband. :numref:`Figure %s
+transmit one symbol on one subcarrier. :numref:`Figure %s
 <fig-sched-grid>` shows the radio spectrum as a 2-D resource, where
-the subbands is represented in the vertical dimension and the time to
-transmit symbols on each subband is represented in the horizontal
-dimension. The basic unit of transmission, called a *Resource Element
-(RE)*, corresponds to a 15-kHz band around one subband frequency and
-the time it takes to transmit one OFDMA symbol.
+the subcarriers is represented in the vertical dimension and the time
+to transmit symbols on each subcarrier is represented in the
+horizontal dimension. The basic unit of transmission, called a
+*Resource Units (RU)*, corresponds to a 15-kHz band around one
+subcarrier frequency and the time it takes to transmit one OFDMA
+symbol.
 
 .. _fig-sched-grid:
 .. figure:: shared/figures/sched-grid.png
     :width: 600px
     :align: center
 
-    Spectrum abstractly represented by a 2-D grid of
-    schedulable Resource Elements.
+    Spectrum abstractly represented by a 2-D grid of schedulable
+    Resource Units. The example is for a 180-kHz frequency band and a
+    0.5ms scheduling interval.
 
 Any scheduler employed by the network does two things. First, it
 specifies the OFDMA parameters to use during the next transmission
 interval (e.g., QAM and MIMO settings). It does this based on feedback
 it collects about the interference its transmissions experienced
 during previous time intervals. Second, it allocates some number of
-REs to each user that has data to transmit during the next interval,
+RUs to each user that has data to transmit during the next interval,
 where users are depicted by different colored blocks in
-:numref:`Figure %s <fig-sched-grid>`. The only constraint on the
-scheduler is that it must make its allocation decisions on blocks of
-7x12=84 resource elements, called a *Physical Resource Block
+:numref:`Figure %s <fig-sched-grid>`. Keep in mind that the 2-D grid
+shown in the figure is an abstraction; physical radio resources are
+actually allocated for blocks of RUs, called *Physical Resource Block
 (PRB)*. :numref:`Figure %s <fig-sched-grid>` shows two back-to-back
-PRBs. Of course time continues to flow along one axis, and depending
-on the size of the available frequency band (e.g., it might be 100 MHz
-wide in some scenarios), there may be many more subband slots (and
-hence PRBs) available along the other axis, so the scheduler is
-essentially preparing and transmitting a sequence of PRBs.
+PRBs, each of which takes 0.5ms to transmit. (Although not shown on
+the frequency axis, there are also additional 180-kHz bands within a
+single 20-MHz channel.)  In other words, allocation decisions are made
+on a per-RU basis, with a sequence of "allocation plans" executed on a
+PRB-by-PRB basis over time.
 
-Making these two decisions requires complex analysis and heavy use of
-heuristics. (It is also an opportunity to leverage AI.)  Exactly how
-the decisions are made is network-specific (Wi-Fi and 5G adopt
-different strategies), but also vendor-specific. That is to say, the
-actual algorithms are not part of the respective standards, but
-instead are proprietary. What the next two sections focus on is the
-objectives Wi-Fi and 5G, respectively, are trying to achieve. Wi-Fi is
-consistent with the best-effort philosophy of the Internet, with each
-node deciding for itself how and when to transmit. In contrast, 5G
-tries to deliver the most predictable performance it can to the largest
-number of devices. Achieving this level of coordination requires a
-centralized approach, in which each base station decides when and how
-all the devices it connects to should transmit.
+There is one last detail of note. We used 15-kHz as our example
+subcarrier spacing within a 180-kHz band, with a per-PRB transmission
+time of 0.5ms. These are sometimes referred to as the *numerology* of
+the radio's air interface, and our example is just that—an example.
+Any given wireless network will be configured with a particular
+numerology. The exact settings can be configured for the target
+environment (e.g., urban, suburban, indoors), and in some cases, even
+dynamically changed based on observed behavior.  That is to say,
+selecting a network's numerology is potentially another
+degree-of-freedom that a scheduling algorithm might take into
+consideration.
+
+All of this brings us to the following observation: making scheduling
+decisions requires complex analysis and heavy use of heuristics. (It
+is also an opportunity to leverage AI.)  Exactly how the decisions are
+made is network-specific (Wi-Fi and 5G adopt different strategies),
+but also vendor-specific. The actual algorithms are not part of the
+respective standards, but rather, are proprietary.  What the next two
+sections focus on is the objectives Wi-Fi and 5G, respectively, are
+trying to achieve. Wi-Fi's approach is consistent with the best-effort
+philosophy of the Internet, with each node deciding for itself how and
+when to transmit. In contrast, 5G tries to deliver the most
+predictable performance it can to the largest number of devices.
+Achieving this level of coordination requires a centralized approach,
+in which each base station decides when and how all the devices it
+connects to should transmit.
 

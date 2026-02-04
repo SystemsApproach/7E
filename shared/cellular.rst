@@ -32,6 +32,16 @@ It's fair to say that many of these goals remain more ambition than
 reality, but we expect them to carry over to 6G, which is now under
 active discussion.
 
+Note that specific frequency bands that are licensed for cellular
+networks vary around the world, and are complicated by the fact that
+network operators often simultaneously support both old/legacy
+technologies and new/next-generation technologies, each of which
+occupies a different frequency band. The high-level summary is that
+traditional cellular technologies range from 700-2400 MHz, with new
+mid-spectrum allocations now happening at 6 GHz, and millimeter-wave
+(mmWave) allocations opening above 24 GHz. We'll see how these new
+bands are being exploited for different purposes in Section 5.4.4.
+
 
 5.4.1 Overview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -51,9 +61,6 @@ stations, which are cryptically called *gNodeB (gNB)*.
 
     Mobile cellular networks consist of a Radio Access Network (RAN)
     and a Mobile Core.
-
-
-
 
 The Mobile Core is a bundle of functionality that serves several
 purposes:
@@ -110,7 +117,12 @@ to be scaled independently of each other.
 5.4.2 Radio Access Network
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We now describe the RAN by sketching the role each base station plays.
+We now describe the RAN by sketching the role each base station plays,
+but keep in mind that the collection of base stations in a RAN are
+cooperating to manage the radio spectrum as a whole. Since their
+coverage overlaps, they need to cooperate with each other to make
+globally optimal decisions.
+
 First, each base station establishes the wireless channel for a
 subscriber's UE upon power-up or upon handover when the UE is active.
 This channel is released when the UE remains idle for a predetermined
@@ -175,11 +187,12 @@ UDP.
     tunneled over GTP/UDP/IP.
 
 Fifth, each base station coordinates UE handovers with neighboring
-base stations, using direct station-to-station links. Exactly like the
-station-to-core connectivity shown in the previous figure, these links
-are used to transfer both control plane (SCTP over IP) and user plane
-(GTP over UDP/IP) packets. The decision as to when to do a handover is
-part of the scheduling decision described in Section 5.4.4.
+base stations, using direct station-to-station communication. Exactly
+like the station-to-core connectivity shown in the previous figure,
+this communication uses the same control plane (SCTP over IP) and user
+plane (GTP over UDP/IP) packets. The decision as to when to do a
+handover is part of the scheduling decision described in Section
+5.4.4.
 
 .. _fig-handover:
 .. figure:: shared/figures/handover.png
@@ -201,10 +214,10 @@ handover from one base station to another.
     aggregation) to UEs.
 
 The main takeaway is that the base station does much more than
-implement the radio interface.  In downstream (Internet-to-UE)
+implement the radio interface.  In the downstream (Internet-to-UE)
 direction, it fragments outgoing packets into physical layer segments
 and schedules them for transmission over the available radio spectrum,
-and in the upstream (UE-to-Internet) direction it assembles physical
+and in the upstream (UE-to-Internet) direction, it assembles physical
 layer segments into IP packets and forwards them (over a GTP/UDP/IP
 tunnel) to the upstream user plane of the Mobile Core. Also, based on
 observations of the wireless channel quality and per-subscriber
@@ -234,8 +247,7 @@ subscribers are authenticated and aims to deliver the service
 qualities to which they have subscribed. As subscribers may move
 around among base station coverage areas, the Mobile Core needs to
 keep track of their whereabouts at the granularity of the serving base
-station. The reasons for this tracking are discussed further in
-Chapter 5. It is this support for security, mobility, and QoS that
+station. It is this support for security, mobility, and QoS that
 differentiates the cellular network from Wi-Fi.
 
 We start with the security architecture, which is grounded in two
@@ -383,41 +395,29 @@ includes the following attributes:
 - Averaging Window
 
 The other big difference for 5G (differentiating it from both 4G and
-Wi-Fi) is that 5G has more degrees-of-freedom in how it manages the
-radio spectrum.  The bands with below 1 GHz are designed to deliver
-mobile broadband and massive IoT services with a primary focus on
-range. Frequencies between 1-6 GHz are designed to offer wider
-bandwidths, focusing on mobile broadband and mission-critical
-applications. Frequencies above 24 GHz (mmWaves) are designed to
-provide super-wide bandwidths over short, line-of-sight coverage. And
-for each of these, 5G has the ability to dynamically change OFDMA's
-scheduling and subband intervals (i.e., the “size” of the resource
-elements described in the Section 5.2).
+Wi-Fi) is that 5G tailors its scheduling algorithm according to the
+use case it is trying to satisfy. Specifically, 5G bands below 1 GHz
+are designed to deliver mobile broadband and massive IoT services with
+a primary focus on range. Frequencies between 1-6 GHz are designed to
+offer wider bandwidths, focusing on mobile broadband and
+mission-critical applications. Frequencies above 24 GHz (mmWaves) are
+designed to provide super-wide bandwidths over short, line-of-sight
+coverage.
 
--  For frequency range 1 (410 MHz - 7125 MHz), 5G allows maximum 100
-   MHz bandwidths. In this case, there are three options with subband
-   spacings of 15, 30 and 60 kHz. (We used 15 kHz in the example shown
-   in :numref:`Figure %s <fig-sched-grid>`.) These correspond to
-   scheduling intervals of 0.5, 0.25, and 0.125 ms, respectively. (We
-   used 0.5 ms in the example shown in :numref:`Figure %s
-   <fig-sched-grid>`.)
+Moreover, for each of these, 5G dynamically adapts the numerology to
+match that target use case. (Recall that we used 15 kHz frequency
+spacing and 0.5ms scheduling intervals in the example shown in
+:numref:`Figure %s <fig-sched-grid>`.)
 
--  For millimeter bands, also known as frequency range 2 (24.25 GHz -
-   52.6 GHz), bandwidths may go from 50 MHz up to 400 MHz. There are
-   two options, with subband spacings of 60 kHz and 120 kHz. Both
+-  For the frequency range 410 MHz - 7125 MHz, 5G allows maximum 100
+   MHz bandwidths. In this case, there are three options with subcarrier
+   spacings of 15, 30 and 60 kHz. These correspond to scheduling
+   intervals of 0.5, 0.25, and 0.125 ms, respectively.
+
+-  For millimeter bands, corresponding to the frequency range 24.25 GHz -
+   52.6 GHz, bandwidths may go from 50 MHz up to 400 MHz. There are
+   two options, with subcarrier spacings of 60 kHz and 120 kHz. Both
    have scheduling intervals of 0.125 ms.
-
-These various configurations of subband spacing and scheduling
-intervals are sometimes called the *numerology* of the radio's air
-interface. This range of numerology is important because it adds
-another degree of freedom to the scheduler. In addition to allocating
-radio resources to users, it has the ability to dynamically adjust the
-size of the resource by changing the waveform being used. With this
-additional freedom, fixed-sized REs are no longer the primary unit of
-resource allocation. We instead use more abstract terminology, and
-talk about allocating *Resource Blocks* to subscribers, where the 5G
-scheduler determines both the size and number of Resource Blocks
-allocated during each time interval.
 
 .. _fig-scheduler:
 .. figure:: shared/figures/scheduler.png
@@ -437,7 +437,12 @@ one-to-one relationship between subscribers and a 5QI, it is more
 accurate to say that each 5QI is associated with a class of traffic
 (often corresponding to some type of application), where a given
 subscriber might be sending and receiving traffic that belongs to
-multiple classes at any given time.
+multiple classes at any given time). Finally, note that one possible
+decision the scheduler might make is to "hand-off" the user to another
+base station, as outlined in Section 5.4.2.
 
+.. See https://www.youtube.com/watch?v=GEQgEDcRcZI 5G for numerology.
 
-
+.. See
+   https://documentation.meraki.com/Wireless/Design_and_Configure/Architecture_and_Best_Practices/Wi-Fi_6_(802.11ax)_Technical_Guide
+   for wifi numerology
