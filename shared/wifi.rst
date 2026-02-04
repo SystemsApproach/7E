@@ -14,10 +14,10 @@ the license-exempt 2.4-GHz frequency band. Then came 802.11a, which
 delivered up to 54 Mbps using OFDM and the license-exempt 5-GHz
 band. Many other variants followed, using both the 2.4 and 5-GHz band
 and achieving per-device data rates of 150 Mbps to 450 Mbps.  As of
-this writing, 802.11ax; this is the variant that corresponds to Wi-Fi
+this writing, 802.11ax (this is the variant that corresponds to Wi-Fi
 6.0) is becoming mainstream. It provides yet another substantial
 improvement in throughput, in part by adopting the OFDMA framework
-described in Section 5.2 and in part by adding spectrum in the 6-GHz
+described in Section 5.2, and in part by adding spectrum in the 6-GHz
 band. Wi-Fi 7.0 (802.11be) has recently been approved, and we can
 expect wider adoption as 802.1be devices become available.
 
@@ -133,8 +133,8 @@ to each other by a so-called *distribution system*. :numref:`Figure %s
 <fig-wireless2>` illustrates a distribution system that connects three
 access points, each of which services the nodes in some region. Each
 access point operates on some channel in the appropriate frequency
-range, and each AP will typically be on a different channel (frequency
-range) than its neighbors.
+range, and each AP will typically be on a different channel (i.e.,
+20-MHz frequency band introduced in Section 5.2) than its neighbors.
 
 .. _fig-wireless2:
 .. figure:: shared/figures/f02-32-9780123850591.png
@@ -357,9 +357,12 @@ users, and (b) determining how to adapt transmission parameters based
 on feedback. In both cases, the Wi-Fi approach is minimal (especially
 when compared to 5G).
 
-Wi-Fi does not make quality-of-service guarantees. Each node,
-including both APs and mobile nodes, independently makes a local
-scheduling decision, transmiting its packets in FIFO order.
+Wi-Fi does not make quality-of-service guarantees; like the Internet
+as a whole, Wi-Fi is a best-effort solution. Each node, including both
+APs and mobile nodes, independently makes a local scheduling decision,
+transmitting its packets in FIFO order. The numerology is configured
+for the environment, but not attempt is made to dynamically adapt the
+numerology based on feedback.
 
 Wi-Fi does use heuristics to adjust the modulation level. The inputs
 to these heuristics are a combination of directly measuring the
