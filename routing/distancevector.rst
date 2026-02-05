@@ -357,23 +357,20 @@ learns from router B that network X can be reached at a lower cost via
 B than via the existing next hop in the routing table, A updates the
 cost and next hop information for the network number accordingly.
 
-RIP is in fact a fairly straightforward implementation of
+RIP is a straightforward implementation of
 distance-vector routing. Routers running RIP send their advertisements
 every 30 seconds; a router also sends an update message whenever an
-update from another router causes it to change its routing table. One
-point of interest is that it supports multiple address families, not
-just IP—that is the reason for the ``Family`` part of the
-advertisements. RIP version 2 (RIPv2) also introduced the subnet masks
-described in an earlier section, whereas RIP version 1 worked with the
-old classful addresses of IP.
+update from another router causes it to change its routing table.
 
-As we will see below, it is possible to use a range of different metrics
-or costs for the links in a routing protocol. RIP takes the simplest
-approach, with all link costs being equal to 1, just as in our example
-above. Thus, it always tries to find the minimum hop route. Valid
-distances are 1 through 15, with 16 representing infinity. This also
-limits RIP to running on fairly small networks—those with no paths
-longer than 15 hops.
+As we have discussed, it is generally possible to use a range of
+different metrics or costs for the links in a routing protocol. RIP
+takes the simplest approach, with all link costs being equal to 1,
+just as in our example above. (EIGRP, by contast, has a fairly complex
+approach to calculating costs that includes both bandwidth and latency as
+inputs.) Thus, RIP always tries to find the
+minimum hop route. Valid distances are 1 through 15, with 16
+representing infinity. This also limits RIP to running on fairly small
+networks—those with no paths longer than 15 hops.
 
 
 

@@ -326,6 +326,53 @@ scalability. Some solutions to both the specific problem (the amount of
 storage potentially required at each node) and the general problem
 (scalability) will be discussed in the next section.
 
+.. sidebar:: The History Of Metrics
+
+
+   Routing metrics in modern networks are almost always static,
+   configured values. It is common to use a constant multiplied by
+   (1/link_bandwidth) so that faster links are preferred to slower
+   links. However, there is a long history of dynamic metrics going
+   back to the early days of the ARPANET. The ARPANET's links were
+   quite varied in terms of latency and throughput, including some
+   very high latency satellite links. Also, with link speeds measured
+   in kilobits per second, it wasn't hard for a link to build up a
+   large queue that would take a long time to drain. Early efforts
+   tried to use dynamic metrics to steer traffic towards the links
+   that would give the best performance, and away from those that were
+   congested.
+
+   The problem with dynamic metrics is that it can be hard to ensure
+   stable operation. The analogous situation that arises in road
+   networks is when congestion on the highway causes everyone to
+   start looking for alternate routes through neighboring streets
+   which then become just as congested as the highway. The history of
+   the ARPANET routing metric is full of incidents where traffic swung
+   heavily away from a congested link causing other links to be
+   congested while the other link was left idle. On top of the problem
+   of dynamic behavior there is the question of how heavily should a
+   link be penalized for high latency versus low bandwidth. Should a
+   satellite link that is six times higher in throughput than a
+   terrestrial link but also adds hundreds of milliseconds of latency
+   be more or less costly than the alternative?
+
+   For better or worse, efforts to use dynamic metrics in the ARPANET
+   eventually led to the conclusion that static metrics would be a
+   better choice. As is so often the case with complex systems,
+   iterative design based on experience led to the current state. We
+   seldom get it right the first time, so it’s important to deploy a
+   simple solution sooner rather than later, and expect to improve it
+   over time. Staying stuck in the design phase indefinitely is
+   usually not a good plan. This experience also illustrates the
+   well-known KISS principle: *Keep it Simple, Stupid.* When building
+   a complex system, less is often more. Opportunities to invent
+   sophisticated optimizations are plentiful, and it’s a tempting
+   opportunity to pursue. While such optimizations sometimes have
+   short-term value, it is shocking how often a simple approach proves
+   best over time. This is because when a system has many moving
+   parts, as the Internet most certainly does, keeping each part as
+   simple as possible is usually the best approach.
+
 
 4.3.3 The Open Shortest Path First Protocol (OSPF)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
