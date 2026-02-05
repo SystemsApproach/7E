@@ -34,7 +34,7 @@ network. Thus, link-state routing protocols rely on two mechanisms:
 reliable dissemination of link-state information, and the calculation
 of routes from the sum of all the accumulated link-state knowledge.
 When all the nodes have reached a common view of the network, routing
-is said to have *converged*. 
+is said to have *converged*.
 
 4.3.1 Reliable Flooding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

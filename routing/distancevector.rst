@@ -134,7 +134,7 @@ beauty of a distributed algorithm like this is that it enables all
 nodes to achieve a consistent view of the network in the absence of
 any centralized authority. So we achieve convergence—a consistent view
 among all nodes—without any node having a full picture of the
-network. 
+network.
 
 .. _tab-dvtab4:
 .. table:: Final Distances Stored at Each Node (Global View).
@@ -323,7 +323,7 @@ extremely simple. RIP is the canonical example of a routing protocol
 built on the distance-vector algorithm just described. Today it is
 less common. A commercial implementation of distance-vector known as
 EIGRP (Enhanced Interior Gateway Routing Protocol) remains popular in
-enterprise networks. 
+enterprise networks.
 
 Routing protocols in real networks differ very slightly from the
 idealized graph model described above. In an internetwork, the goal of
