@@ -121,6 +121,13 @@ channel again, using the same process described above. By this time, of
 course, other nodes may again be trying to get access to the channel as
 well.
 
+Finally, the CA mechanism just described is the basic process that has
+been used across multiple generations of 802.11. The latest versions
+augment this RTS-CTS exchange with additional information that is used
+by the scheduler to improve throughput. We highlight these in Section
+5.3.5, but note that 802.11 is designed to be backward compatible, so
+devices with older technology still work side-by-side with enhanced APs.
+
 5.3.2 Distribution System
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -133,8 +140,8 @@ to each other by a so-called *distribution system*. :numref:`Figure %s
 <fig-wireless2>` illustrates a distribution system that connects three
 access points, each of which services the nodes in some region. Each
 access point operates on some channel in the appropriate frequency
-range, and each AP will typically be on a different channel (i.e.,
-20-MHz frequency band introduced in Section 5.2) than its neighbors.
+range, with each AP typically on a different channel (i.e., 20-MHz
+frequency band introduced in Section 5.2) than its neighbors.
 
 .. _fig-wireless2:
 .. figure:: shared/figures/f02-32-9780123850591.png
@@ -357,18 +364,52 @@ users, and (b) determining how to adapt transmission parameters based
 on feedback. In both cases, the Wi-Fi approach is minimal (especially
 when compared to 5G).
 
-Wi-Fi does not make quality-of-service guarantees; like the Internet
-as a whole, Wi-Fi is a best-effort solution. Each node, including both
-APs and mobile nodes, independently makes a local scheduling decision,
-transmitting its packets in FIFO order. The numerology is configured
-for the environment, but not attempt is made to dynamically adapt the
-numerology based on feedback.
-
-Wi-Fi does use heuristics to adjust the modulation level. The inputs
-to these heuristics are a combination of directly measuring the
+Wi-Fi uses heuristics to adjust the modulation level. The inputs to
+these heuristics are a combination of directly measuring the
 signal-to-noise ratio (SNR) at the physical layer, and estimating the
 SNR by measuring how often packets are acknowledged. In some
 scenarios, a sender will occasionally probe a higher bit rate by
-sending one or more packets at that rate to see if it succeeds.
+sending one or more packets at that rate to see if it succeeds.  Note
+that the numerology is configured for the environment, but no attempt
+is made to dynamically adapt the numerology based on feedback.
+
+Wi-Fi does not make quality-of-service guarantees; like the Internet
+as a whole, Wi-Fi is a best-effort solution. In early versions, each
+node (including both APs and mobile nodes) independently makes a local
+scheduling decision, transmitting its packets in FIFO order according
+to the CA mechanism described in Section 5.3.1. With Wi-Fi 6.0, the
+APs take on additional responsibility coordinating with other devices
+as to when transmissions should happen. It does this by piggybacking
+RU assignments on RTS messages sent to devices, notifying them both
+when they should expect downlink traffic, and when they are cleared to
+send uplink traffic. Devices and APs also exchange *Buffer Status
+Report Pool (BSRP)* message telling each other how much traffic they
+have buffered, awaiting transmission. This information helps the
+scheduler make RU allocations.
+
+.. _fig-wifi-grid:
+.. figure:: shared/figures/wifi-grid.png
+    :width: 600px
+    :align: center
+
+    Wi-Fi allocates RUs to complete packets on some subset of the
+    available subcarrier frequencies. Maximizing spectrum utilization
+    is not an explicit objective.
+
+Finally, be aware that the example shown in :numref:`Figure %s
+<fig-sched-grid>` is a bit biased towards the 5G perspective,
+specifically in the way blocks of RUs for a given receiver (i.e., the
+different colored regions) are shaped. 5G is more likely to interleave
+a few symbols from many senders and strive for full utilization (i.e.,
+filling all the RUs with data). Because Wi-Fi is fundamentally based
+on statistical multiplexing, it more likely sends entire packets on
+some set of subcarrier frequencies, and accepts that some capacity
+goes unused. :numref:`Figure %s <fig-wifi-grid>` shows a more
+representative example of how bandwidth is allocated for Wi-Fi
+(keeping in mind this is still a simplified example).
+
+.. See for more details
+   https://documentation.meraki.com/Wireless/Design_and_Configure/Architecture_and_Best_Practices/Wi-Fi_6_(802.11ax)_Technical_Guide
+
 
 
