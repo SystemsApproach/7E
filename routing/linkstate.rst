@@ -1,20 +1,18 @@
 4.3 Link-State Routing (OSPF)
 -----------------------------
 
-Link-state routing is the most widely used class of intradomain routing
-protocol, at least in the service provider networks that make up most
-of the
-Internet. Distance-vector routing, which we discuss below, continues
-to be used in many enterprise networks.
+Link-state routing is the most widely used class of intradomain
+routing protocol, at least in the service provider networks that make
+up most of the Internet. Distance-vector routing, which we discuss
+below, continues to be used in many enterprise networks.
 
 To start with, link-state routing assumes that every node (router) can
-determine the state of links to each of its neighbors: the state can be up or
-down. Determining the state is usually
-achieved by sending periodic probes along the link to the neighbor;
-the specifics of these probes depend on the link type and the
-particular routing protocol. But somehow, the link state is determined
-and changes from up to down or *vice versa* can be detected the same
-way.
+determine the state of links to each of its neighbors: the state can
+be up or down. Determining the state is usually achieved by sending
+periodic probes along the link to the neighbor; the specifics of these
+probes depend on the link type and the particular routing
+protocol. But somehow, the link state is determined and changes from
+up to down or *vice versa* can be detected the same way.
 
 
 Each link also has a *cost* or *metric*, which is usually a configured
@@ -35,6 +33,8 @@ necessary one) for finding the shortest path to any point in the
 network. Thus, link-state routing protocols rely on two mechanisms:
 reliable dissemination of link-state information, and the calculation
 of routes from the sum of all the accumulated link-state knowledge.
+When all the nodes have reached a common view of the network, routing
+is said to have *converged*. 
 
 4.3.1 Reliable Flooding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -327,8 +327,8 @@ storage potentially required at each node) and the general problem
 (scalability) will be discussed in the next section.
 
 
-The Open Shortest Path First Protocol (OSPF)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4.3.3 The Open Shortest Path First Protocol (OSPF)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two widely used link-state routing protocols: OSPF and IS-IS.
 Both are open standards: OSPF was created under the auspices of the Internet
@@ -455,5 +455,6 @@ theory it was possible for OSPF to choose different routes for IP
 packets based on the value in their Type Of Service (TOS) field, e.g.,
 to send low-latency packets over a different path than bulk
 data. However, in the decades since OSPF was defined, the meaning of
-the IP TOS field has changed and this capability has not been widely
+the IP TOS field has changed (see Differentiated Services later in
+this book) and this routing capability has not been widely
 deployed.
