@@ -346,7 +346,7 @@ From the client side, a cloud service looks exactly the same as
 before: you send a request message to an IP address and wait for the
 reply. The difference is on the server side, where an extra level of
 indirection is introduced. Specifically, that IP address is for a
-logical server—which is called a service—where a load balancer
+logical server—which is called a *service*\ —where a *load balancer*
 intercepts the request message and forwards it to one of a scalable
 number of backend processes.
 
@@ -365,46 +365,57 @@ then implemented by code packaged inside multiple containers, running
 inside one or more VMs, which in turn have been instantiated on one or
 more physical servers.
 
-Figure X. A client sending a request to a scalable cloud service.
+.. _fig-service:
+.. figure:: applications/figures/service.png
+    :width: 400px
+    :align: center
 
-Figure X shows the basic structure, where the load balancer can be
-implemented in different ways, including a hardware device, but it is
-typically implemented by a proxy process that runs in a VM (also
-hosted in the cloud) rather than as a physical appliance. The
-individual Servers in the diagram can be physical machines, but in
-commercial clouds, they are more likely to be VMs.
+    Client process sending a request to a scalable cloud service.
+
+:numref:`Figure %s <fig-service>` shows the basic structure, where
+the load balancer can be implemented in different ways, including a
+hardware device, but it is typically implemented by a proxy process
+that runs in a VM (also hosted in the cloud) rather than as a physical
+appliance. The individual Servers in the diagram can be physical
+machines, but in commercial clouds, they are more likely to be VMs.
 
 There is a set of best practices for implementing the server code that
 eventually responds to that request, and some additional cloud
 machinery to create/destroy containers and load balance requests
 across those containers. Kubernetes is today’s canonical example of
-such a container management system, and the microservices architecture
-is what we call the best practices in building services in this cloud
-native manner. Both are interesting topics, but beyond the scope of
-this book.
+such a container management system, and the *microservices
+architecture* is what we call the best practices in building services
+in this cloud native manner. Both are interesting topics, but beyond
+the scope of this book. We recommend an excellent tutorial if you
+want to learn how to use Kubernetes.
 
 Keep in mind that the thousands of servers hosted in every cloud
 datacenter are interconnected using Internet technology. So the cloud
 is simultaneously a platform for implementing network applications and
-a use case for the underlying network. Figure Y shows a simplified
-schematic of how a modern datacenter is structured, with a switching
-fabric built from the same commodity switches described in Chapter 2
-arranged according to a leaf-spine topology. For the small 4-rack
-example in the figure, each rack has a Top-of-Rack (ToR) switch that
-interconnects the servers in that rack; these are referred to as the
-leaf switches of the fabric. (There are typically two such ToR
-switches per rack for resilience, but the figure shows only one for
-simplicity.) Each leaf switch then connects to a subset of available
-spine switches, with two requirements: (1) that there be multiple
-paths between any pair of racks, and (2) that each rack-to-rack path
-is two-hops (i.e., via a single intermediate spine switch). Note that
-this means in leaf-spine designs like the one shown in the figure,
-every server-to-server path is either two hops (server-leaf-server in
-the intra-rack case) or four hops (server-leaf-spine-leaf-server in
-the inter-rack case).
+a use case for the underlying network.  :numref:`Figure %s
+<fig-leaf-spine>` shows a simplified schematic of how a modern
+datacenter is structured, with a switching fabric built from the same
+commodity switches described in Chapter 3 arranged according to a
+*leaf-spine* topology. For the small 4-rack example in the figure, each
+rack has a Top-of-Rack (ToR) switch that interconnects the servers in
+that rack; these are referred to as the leaf switches of the
+fabric. (There are typically two such ToR switches per rack for
+resilience, but the figure shows only one for simplicity.) Each leaf
+switch then connects to a subset of available spine switches, with two
+requirements: (1) that there be multiple paths between any pair of
+racks, and (2) that each rack-to-rack path is two-hops (i.e., via a
+single intermediate spine switch). Note that this means in leaf-spine
+designs like the one shown in the figure, every server-to-server path
+is either two hops (server-leaf-server in the intra-rack case) or four
+hops (server-leaf-spine-leaf-server in the inter-rack case).
 
-Figure Y. Example of a leaf-spine switching fabric common to cloud
-datacenters and other clusters, such as on-premises edge clouds.
+.. _fig-leaf-spine:
+.. figure:: applications/figures/leaf-spine.png
+    :width: 500px
+    :align: center
+
+    Example of a leaf-spine switching fabric common to cloud
+    datacenters and other clusters, such as on-premises clouds.
 
 2.1.3 Distributed Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -430,20 +441,27 @@ datacenters that companies like Google, Amazon, and Microsoft operate,
 and more modest-sized facilities, often co-located with Internet
 Exchange Points (IXPs) that interconnect operator backbones. Plus,
 increasingly, there are “on premises” clusters embedded within
-enterprises connected to the edge of the network (not shown in the
-figure).
+enterprises connected to the edge of the network.
 
-In other words, we can view the cloud as being organized into a
-hierarchy of compute and storage resources, similar to that shown in
-Figure Z. In such an environment, invoking a service involves
+In other words, the cloud is structured as an interleaving of
+datacenters and networks, similar to that shown in :numref:`Figure %s
+<fig-structure>` . In such an environment, invoking a service involves
 additional levels of indirection. For example, the first step might be
-to resolve the service name into the IP address for a server running
-in a nearby cloud site, and then a load balancer distributes those
-requests across local servers within that site. In general, how an
-application is partitioned into independent functions, how those
+to resolve the service name into the IP address for a service endpoint
+running in a nearby cloud site, and then a load balancer distributes
+those requests across local servers within that site. In general, how
+an application is partitioned into independent functions, how those
 functions are placed in the right cloud location, and how client
 requests are forwarded to the best location are application-specific
 questions.
+
+.. _fig-structure:
+.. figure:: applications/figures/structure.png
+    :width: 550px
+    :align: center
+
+    Cloud datacenters are distributed throughout the globe, with a
+    site often in close proximity to users.
 
 The big takeaway is that arbitrary computation can take place
 throughout the network, and not just at two endpoints. From one
