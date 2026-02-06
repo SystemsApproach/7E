@@ -19,21 +19,21 @@ minicomputer that would inspire Intel’s x86 and Motorola’s 68000
 microprocessors) being the most influential offering in the “small and
 affordable” computer market.
 
-To set a bit more historical context, the viability of packet
+To set a bit more historical context, demonstrating the viability of packet
 switching itself—as opposed to circuit switching technology used by
 phone companies—was the ARPANET’s main innovation. The ARPANET, in
-turn, was built on top of two existing technologies: (1) the ability
-to lease 64kbps digital circuits from AT&T, and (2) a 16-bit processor
+turn, was built on top of two existing technologies: (1) 64kbps
+digital circuits leased from AT&T, and (2) a 16-bit processor
 from Honeywell, a peer of the PDP-11 that was typically deployed in
 industrial environments. The former provided the link technology and
 the latter was programmed to forward packets.
 
 Jump forward to the present day, and the technology landscape is very
 different. Today’s phone companies emulate voice circuits on top of a
-packet switch substrate that can be directly traced back to the
+packet-switched substrate that can be directly traced back to the
 ARPANET. Hundreds of link technologies have been proposed (and
 abandoned), with Ethernet continually adapting to serve as a
-ubiquitous communication technology. And while low-end packet switches
+ubiquitous communication technology. And while some low-end packet switches
 are still implemented in software running on general-purpose
 processors, there are now domain-specific chips optimized for packet
 switching, analogous to the emergence of GPUs for graphics and TPUs
