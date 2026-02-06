@@ -197,11 +197,11 @@ can take anywhere from seconds or minutes to days or weeks; the former
 when those resources just need to be "turned on" and the latter when
 new hardware needs to be procured and deployed. Scheduling resources
 happens on much shorter time scales, typically measured in
-microseconds or less. For example, statistical multiplexing
+microseconds or nanoseconds. For example, statistical multiplexing
 effectively schedules link resources on a packet-by-packet basis.
 
 We revisit both provisioning and scheduling throughout the book,
-but for now, we summarize the key resources:
+but for now, we identify three specific resources:
 
 * **Link Capacity:** Every link as a fixed bandwidth that limits the
   rate at which it can transmit packets. This capacity is measured in
@@ -224,3 +224,40 @@ but for now, we summarize the key resources:
   problematic, and so buffer capacity is often defined as a function
   of how many bytes can be in transit across the network (a concept
   explained in the next section).
+
+Another way to look at capacity is to ask what the network is able to
+deliver in the aggregate. Doing so typically involves questions of
+*network toplogy*, which can be addressed using graph theory. (A
+network's topology can be represented by an undirected graph, where
+edges correspond to links and vertices correspond to switches.) As an
+example, a network designer might ask if there the graph contains a
+vertex (switch), that if cut (the switch fails), causes the graph to
+become partitioned (it's impossible for nodes in each subgraph to
+exchange messages).
+
+Such theoretical analysis is beyond the scope of this book, but there
+are a few common topologies of note. One is a mesh topology, of which
+:numref:`Figure %s <fig-network>` in Section 1.2 is an example.  Mesh
+topologies have no obvious structure, although in practice they often
+mirror geographical maps (as would the case for a nation-wide backbone
+network with switches in major cities). Another common example is a
+*leaf-spine* topology, similar to the one one shown in Section
+2.1. This particular structure is designed to support low-latency
+communication between servers in a cloud datacenter.
+
+.. _fig-topology:
+.. figure:: introduction/figures/topology.png
+   :width: 650px
+   :align: center
+
+   Two network topologies commonly used to isolate network behavior.
+
+:numref:`Figure %s <fig-topology>` shows two other topologies that are
+often used to gain insight when you are trying to isolate network
+behavior so you can study it. The example on the left is a *star
+topology* implemented by a single switch; it is relevant when a switch
+is a possible bottleneck. (When drawn this way, we assume the Internet
+is upstream of this switch. Another rendering has links coming out in
+all directions, which is the inspiration for its name.) The example on
+the right is a *barbell topology*; it is relevant when you are focused
+on a shared link being a possible bottleneck.
