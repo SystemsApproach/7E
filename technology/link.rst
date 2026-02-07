@@ -5,9 +5,9 @@ All network communication depends on transmitting and receiving
 electromagnetic signals over some physical medium, be it radio waves
 through the atmosphere or space, an electrical current over copper
 wires, or light waves through optical fibers. Each signal can be
-modeled as a waveform of some amplitude, frequency, and phase,
-corresponding to the frequency bands shown in :numref:`Figure %s
-<fig-spectrum>`.
+modeled as a waveform that can be transmitted within some frequency
+band. Some of the available freuquency bands and their uses are shown
+in :numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
 .. figure:: technology/figures/spectrum.png
@@ -18,32 +18,21 @@ corresponding to the frequency bands shown in :numref:`Figure %s
 
 The first challenge of communication is to convert a digital signal
 into the available analog signal, a process is known as *modulation*.
-For example, *frequency modulation* corresponds to alternating between
-a "high frequency" and a "low frequency" within some band (e.g., a
-20MHz-wide band at 2.4GHz). Similarly, *amplitude modulation* varies a
-signal's amplitude, which intuitively corresponds to high-power (on)
-and low-power (off). What makes modulation a hard problem is that the
-receiver has to recover the intended digital value from a received analog signal
+In some cases this is very simple, as in *baseband modulation*, where
+a digital signal may be directly encoded as, say, high and low voltage
+levels on a cable. Many forms of modulation involve modifying the
+phase, amplitude, or frequency of a *carrier* at a certain frequency,
+so that the signal may be transmitted in one of the frequency bands
+illustrated above. 
+
+
+There are quite a few hard problems to be solved in mapping the
+digital signal to an analog waveform, and then reversing the process
+at the other end. The channel between sender and receiver will usually
+*attenuate* the signal (making it weaker) and introduce noise. The
+receiver has to recover the intended digital value 
 in the face of noise and attenuation.
 
-The second challenge is how to encode digital data (i.e., 1’s and 0’s)
-onto this digital signal. On the surface, this encoding seems simple
-enough—the high signal encodes a 1 and the low signal encodes a 0—but
-in practice the digital signal may have more than two (high/low)
-settings. If there are four recoverable digital signals, for example,
-then two bits could be coded in each. In general, we think of the
-digital signal as carrying symbols rather than bits, where each symbol
-is one or more bits in length.  :numref:`Figure %s <fig-signals>`
-summarizes the layers involved in encoding binary data for
-transmission.
-
-.. _fig-signals:
-.. figure:: technology/figures/signals.png
-   :width: 500px
-   :align: center
-
-   Binary data encoded in a digital signal, and in turn modulated over
-   an analog signal.
 
 The engineering required to transmit and receive digital messages over
 a physical medium is non-trivial. The same is true for the
