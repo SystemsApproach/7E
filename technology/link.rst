@@ -5,9 +5,9 @@ All network communication depends on transmitting and receiving
 electromagnetic signals over some physical medium, be it radio waves
 through the atmosphere or space, an electrical current over copper
 wires, or light waves through optical fibers. Each signal can be
-modeled as a sine function of some amplitude, frequency, and phase,
-corresponding to the frequency bands shown in :numref:`Figure %s
-<fig-spectrum>`.
+modeled as a waveform that can be transmitted within some frequency
+band. Some of the available freuquency bands and their uses are shown
+in :numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
 .. figure:: technology/figures/spectrum.png
@@ -18,32 +18,21 @@ corresponding to the frequency bands shown in :numref:`Figure %s
 
 The first challenge of communication is to convert a digital signal
 into the available analog signal, a process is known as *modulation*.
-For example, *frequency modulation* corresponds to alternating between
-a "high frequency" and a "low frequency" within some band (e.g., a
-20MHz-wide band at 2.4GHz). Similarly, *amplitude modulation* varies a
-signal's amplitude, which intuitively corresponds to high-power (on)
-and low-power (off). What makes modulation a hard problem is that the
-receiver has to recover the intended digital value from analog signal
+In some cases this is very simple, as in *baseband modulation*, where
+a digital signal may be directly encoded as, say, high and low voltage
+levels on a cable. Many forms of modulation involve modifying the
+phase, amplitude, or frequency of a *carrier* at a certain frequency,
+so that the signal may be transmitted in one of the frequency bands
+illustrated above. 
+
+
+There are quite a few hard problems to be solved in mapping the
+digital signal to an analog waveform, and then reversing the process
+at the other end. The channel between sender and receiver will usually
+*attenuate* the signal (making it weaker) and introduce noise. The
+receiver has to recover the intended digital value 
 in the face of noise and attenuation.
 
-The second challenge is how to encode digital data (i.e., 1’s and 0’s)
-onto this digital signal. On the surface, this encoding seems simple
-enough—the high signal encodes a 1 and the low signal encodes a 0—but
-in practice the digital signal may have more than two (high/low)
-settings. If there are four recoverable digital signals, for example,
-then two bits could be coded in each. In general, we think of the
-digital signal as carrying symbols rather than bits, where each symbol
-is one or more bits in length.  :numref:`Figure %s <fig-signals>`
-summarizes the layers involved in encoding binary data for
-transmission.
-
-.. _fig-signals:
-.. figure:: technology/figures/signals.png
-   :width: 500px
-   :align: center
-
-   Binary data encoded in a digital signal, and in turn modulated over
-   an analog signal.
 
 The engineering required to transmit and receive digital messages over
 a physical medium is non-trivial. The same is true for the
@@ -87,15 +76,15 @@ historical background in Section 2.1.4.
    frame.
 
    Over time, Ethernet was approved for different cable types (e.g.,
-   twisted-pair, passive optical, single-mode fiber, multi-mode
+   twisted-pair, single-mode fiber, multi-mode
    fiber), to run at different speeds (e.g., 10Mbps, 100Mbps, 1Gbps,
    10Gbps, 40Gbps, 100Gbps, 200Gbps, 400Gbps, 800Gbps), to span
    different distances (e.g., 10 meters, 100 meters, 40 kilometers),
    and for full-duplex communication (as opposed to the original
    CSMA/CD). Each of these variants was independently standardized,
-   with designations of the form 802.11xx. For the purposes of this
+   with designations of the form 802.3xx. For the purposes of this
    book, none of these distinctions impact how the technology is
-   incorporated into packet-switched network, although we primarily
+   incorporated into packet-switched networks, although we primarily
    focus on point-to-point links rather than their multi-access
    predecessors.
 
@@ -569,7 +558,7 @@ Originally, Ethernet was a *multi-access* technology (connecting tens
 or hundreds of nodes) rather than *point-to-point* link (connecting
 only two nodes).  This was possible because Ethernet ran over coax
 cable, with hosts "tapping" (splicing) into the cable at a nearby
-point as it snaked up-and-down the corridors of office buildings.
+point as it snaked up and down the corridors of office buildings.
 
 Because all the nodes connected to a single cable had to compete to
 send messages—i.e., messages sent from two hosts at the same time
@@ -599,11 +588,11 @@ visible to anyone using Ethernet—remained backward compatible with the
 original standard. This adaptability was key to Ethernet's longevity,
 but there were two other factors that contributed to its success.
 
-First, an Ethernet is extremely easy to administer and maintain: There
+First, an Ethernet is extremely easy to administer and maintain: there
 are no configuration tables to be kept up-to-date, and it is easy to
 add a new host to the network. You just plug it in. It is hard to
 imagine a simpler network to administer.  Second, it is inexpensive to
-deploy: Cable/fiber is relatively cheap, and the only other cost is
+deploy: cable/fiber is relatively cheap, and the only other cost is
 the network adaptor on each host. The adaptor hides any changes in the
 encoding scheme, so the software stack sitting on top of the Ethernet
 device driver is completely unaware of any changes in modulation or
@@ -625,7 +614,7 @@ while retaining the simplicity of network administration.
    Volume 19, Issue 7. July 1976.
    (https://dl.acm.org/doi/abs/10.1145/360248.360253)
 
-   N. Abramson. The ALOHA System - Another Alternative for Computer
+   N. Abramson. The ALOHA System—Another Alternative for Computer
    Communications. *Proceedings of the 1970 Fall Joint Computer
    Conference*. AFIPS Press. 1971.
    (https://www.clear.rice.edu/comp551/papers/Abramson-Aloha.pdf)
