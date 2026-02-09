@@ -1,4 +1,4 @@
-2.3 Electronic Mail (Email)
+2.3 Electronic Mail
 ----------------------------------------
 
 Email is one of the oldest network applications. After all, what could
@@ -10,12 +10,42 @@ email as a key application when the network was created—remote access to
 computing resources was the main design goal—but it turned out to be the
 Internet’s original killer app.
 
-As noted above, it is important (1) to distinguish the user interface
+As with the web, it is important to (1) distinguish the user interface
 (i.e., your mail reader) from the underlying message transfer protocols
-(such as SMTP or IMAP), and (2) to distinguish between this transfer
+(such as SMTP or IMAP), and (2) distinguish between this transfer
 protocol and a companion standard (RFC 822 and MIME) that defines the
-format of the messages being exchanged. We start by looking at the
-message format.
+format of the messages being exchanged. We begin by looking at the
+message format—which helps to explain why there are two formatting
+standards—but before doing that, the explanation for why there are
+two transfer protocols warrants a quick look.
+
+The key abstraction in email is a *mailbox*, which provides a
+rendez-vous point for an email exchange: SMTP is used to send email to
+a mailbox, and IMAP is used to read email from a mailbox.  The mailbox
+also holds an archive of exchanged messages, with IMAP used to browse,
+read, and manage that archive. As originally designed, however, the
+mailbox abstraction was implemented as a file on a multi-user machine.
+This meant the reader was just a program that directly accessed that
+file; there was no need for a protocol like IMAP. As workstations and
+laptops became more common, users no longer logged into a shared
+server, and so there was a need for a second protocol to retrieve
+email from a that server.
+
+Today, the server process that implements the mailbox abstraction is
+most likely implemented as a scalable cloud service. This is certainly
+the case if you have a Gmail account, where reading email no longer
+requires IMAP. Instead you are effectively using a RESTfull API
+running over HTTPS to access your mailbox.\ [#]_ This suggests an
+interesting *"What if?"* question: If you were going to start over
+with email using today's best practices, what would you do different?
+One likely answer is that you would define a RESTful API for email,
+and use HTTPS to both write messages to a mailbox and read messages
+from a mailbox. In fact, the same could be said for many applications
+that pre-date the web—their protocols are just purpose-built
+Request/Reply protocols (a topic we address in Chapter 13).
+
+.. [#] IMAP is still used to pull email from a non-GMail mailbox into
+       a GMail-based mailbox.
 
 2.3.1 Message Format
 ~~~~~~~~~~~~~~~~~~~~
