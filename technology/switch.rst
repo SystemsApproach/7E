@@ -4,7 +4,7 @@
 Packet switches are devices that interconnect point-to-point links,
 making it possible to assemble networks that connect hundreds or
 thousands of hosts (rather than just two).  There is a straightforward
-way to build a switch: Buy a general-purpose processor and equip it
+way to build a switch: buy a general-purpose processor and equip it
 with multiple network interface cards. Such a device, running suitable
 software, can receive packets on one of its interfaces, decide the
 best way to forward each packet on towards its destination, and then
@@ -38,10 +38,10 @@ forward ETH packets would use the 48-bit ``DestinationAddr`` found at
 an offset of 6 bytes from the beginning of the ETH header as its
 lookup key.
 
-One important takeaway from this example is that switches are highly
-configurable—it is possible to configure a switch to forward IP
+One important takeaway from this example is that many switches are highly
+configurable—it is often possible to configure the same switch to forward IP
 packets or Ethernet packets. This helps explain the distinction
-between switches and routers: they are just different configurations
+between switches and routers: they are often just different configurations
 of the same forwarding device. To put it in pragmatic terms, network
 administrators typically buy a single forwarding box from a vendor and
 then configure it to be an Ethernet switch (sometimes called an *L2
@@ -101,7 +101,7 @@ historically been closed. Over the last several years, however, a
 open interface for installing routes in the data plane, with the goal
 of giving network owners (as opposed to switch vendors) more
 control. The exact nature of this interface is related to the FIB data
-structure, so we cover in subsection 3.2.4, after seeing how switches
+structure, so we cover it in subsection 3.2.4, after seeing how switches
 are implemented in both software and hardware.
 
 3.2.2 Software Switch
@@ -186,15 +186,15 @@ Throughout much of the Internet’s history, high-performance switches
 have been specialized devices, built with Application-Specific
 Integrated Circuits (ASICs). Today, the availability of ASIC-based
 switching chips, along with other commodity components and an open
-architectural specification, makes it possible for anyone can build a
+architectural specification, makes it possible for anyone to build a
 high-performance switch by pulling the blueprint off the web (see the
 Open Compute Project, OCP, for examples) in the same way it is
 possible to build your own PC. In both cases you still need software
 to run on the hardware, but just as Linux is available to run on your
-home-built PC, there are now open source L2 and L3 stacks available on
-GitHub to run on your home-built switch. Alternatively, you can simply
-buy a pre-built switch from a commodity switch manufacturer and then
-load your own software onto it. The following describes these open
+home-built PC, there are now open source L2 and L3 stacks available to
+run on your home-built switch. Alternatively, you can simply buy a
+pre-built switch from a commodity switch manufacturer and then load
+your own software onto it. The following describes these open
 *bare-metal switches*, so called to contrast them with closed devices,
 in which hardware and software are tightly bundled, that have
 historically dominated the industry.
@@ -279,8 +279,9 @@ possible to buy pluggable *transceiver* modules that take care of all
 the media access details described in Section 3.1, be it Gigabit
 Ethernet, 10-Gigabit Ethernet, or some non-Ethernet technology such as
 SONET. These transceivers all conform to standardized form factors,
-such as SFP+, that can in turn be connected to other components over a
-standardized bus (e.g., SFI). Again, the key takeaway is that the
+such as SFP+ (small form-factor pluggable), that can in turn be
+connected to other components over a standardized bus (e.g., SFI, the
+Serial Framing Interface). Again, the key takeaway is that the
 networking industry is just now entering into the same commoditized
 world that the computing industry has enjoyed for decades.
 
@@ -301,8 +302,8 @@ over another.
 
 There have been two generations of this interface. The original
 interface, called *OpenFlow*, was published in 2008. It introduced
-*Flow Rules* as a simple-but-powerful way to specify forwarding
-behavior. A flow rule is a *(Match, Action)* pair: Any packet that
+*Flow Rules* as a simple but powerful way to specify forwarding
+behavior. A flow rule is a *(Match, Action)* pair: any packet that
 *Matches* the first part of the rule should have the associated
 *Action* applied to it. A simple flow rule, for example, might specify
 that any packet with destination address *D* be forwarded on output
