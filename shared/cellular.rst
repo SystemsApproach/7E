@@ -439,7 +439,9 @@ accurate to say that each 5QI is associated with a class of traffic
 subscriber might be sending and receiving traffic that belongs to
 multiple classes at any given time). Finally, note that one possible
 decision the scheduler might make is to "hand-off" the user to another
-base station, as outlined in Section 5.4.2.
+base station, as outlined in Section 5.4.2. In this way, a collection
+of base stations effectively collaborate to allocate spectrum across
+a set of radio cells.
 
 .. See https://www.youtube.com/watch?v=GEQgEDcRcZI 5G for numerology.
 

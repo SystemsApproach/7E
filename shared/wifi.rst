@@ -403,13 +403,15 @@ different colored regions) are shaped. 5G is more likely to interleave
 a few symbols from many senders and strive for full utilization (i.e.,
 filling all the RUs with data). Because Wi-Fi is fundamentally based
 on statistical multiplexing, it more likely sends entire packets on
-some set of subcarrier frequencies, and accepts that some capacity
+some set of subcarrier frequencies, and accept that some capacity
 goes unused. :numref:`Figure %s <fig-wifi-grid>` shows a more
 representative example of how bandwidth is allocated for Wi-Fi
-(keeping in mind this is still a simplified example).
+(but it is still a simplified example).
 
 .. See for more details
    https://documentation.meraki.com/Wireless/Design_and_Configure/Architecture_and_Best_Practices/Wi-Fi_6_(802.11ax)_Technical_Guide
+
+   https://www.cisco.com/c/en/us/products/collateral/wireless/white-paper-c11-740788.html
 
 
 

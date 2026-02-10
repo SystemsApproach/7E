@@ -184,7 +184,7 @@ We can visualize the OFDMA framework as a grid of discrete schedulable
 units of the radio spectrum. The fundamental unit is the time to
 transmit one symbol on one subcarrier. :numref:`Figure %s
 <fig-sched-grid>` shows the radio spectrum as a 2-D resource, where
-the subcarriers is represented in the vertical dimension and the time
+the subcarriers are represented in the vertical dimension and the time
 to transmit symbols on each subcarrier is represented in the
 horizontal dimension. The basic unit of transmission, called a
 *Resource Units (RU)*, corresponds to a 15-kHz band around one
@@ -197,8 +197,9 @@ symbol.
     :align: center
 
     Spectrum abstractly represented by a 2-D grid of schedulable
-    Resource Units. The example is for a 180-kHz frequency band and a
-    0.5ms scheduling interval.
+    Resource Units (RU). The example shows just 12 subcarriers (a full
+    channel might be 20 MHz, or more) and a 0.5ms transmission time
+    for each Physical Block of RUs.
 
 Any scheduler employed by the network does two things. First, it
 specifies the OFDMA parameters to use during the next transmission
@@ -207,27 +208,36 @@ it collects about the interference its transmissions experienced
 during previous time intervals. Second, it allocates some number of
 RUs to each user that has data to transmit during the next interval,
 where users are depicted by different colored blocks in
-:numref:`Figure %s <fig-sched-grid>`. Keep in mind that the 2-D grid
-shown in the figure is an abstraction; physical radio resources are
-actually allocated for blocks of RUs, called *Physical Resource Block
-(PRB)*. :numref:`Figure %s <fig-sched-grid>` shows two back-to-back
-PRBs, each of which takes 0.5ms to transmit. (Although not shown on
-the frequency axis, there are also additional 180-kHz bands within a
-single 20-MHz channel.)  In other words, allocation decisions are made
-on a per-RU basis, with a sequence of "allocation plans" executed on a
-PRB-by-PRB basis over time.
+:numref:`Figure %s <fig-sched-grid>`.
 
-There is one last detail of note. We used 15-kHz as our example
-subcarrier spacing within a 180-kHz band, with a per-PRB transmission
-time of 0.5ms. These are sometimes referred to as the *numerology* of
-the radio's air interface, and our example is just that—an example.
-Any given wireless network will be configured with a particular
-numerology. The exact settings can be configured for the target
-environment (e.g., urban, suburban, indoors), and in some cases, even
-dynamically changed based on observed behavior.  That is to say,
-selecting a network's numerology is potentially another
-degree-of-freedom that a scheduling algorithm might take into
-consideration.
+There are two other things to note about the 2-D grid shown in the
+figure. First, while individual RUs can be allocated to different
+users, larger blocks of RUs, denoted *Physical Blocks* in the figure,
+are transmitted over the air.\ [#]_ :numref:`Figure %s
+<fig-sched-grid>` shows two back-to-back physical blocks, each of
+which takes 0.5ms to transmit. In other words, allocation decisions
+are made on a per-RU basis, with a sequence of "allocation plans"
+executed on a block-by-block basis over time.
+
+.. [#] This section gives a general overview of OFDMA, independent of
+       how it is used by Wi-Fi and 5G, but both of those use cases has
+       its own terminology for various concepts. For example, what we
+       refer to as a *Physical Block*, is called a *Physical Resource
+       Block (PRB)* in 5G and a *Physical Packet Data Unit (PPDU)* in
+       Wi-Fi. The term "Scheduling Horizon" is a similar generic term.
+       We try to avoid technology-specific jargon, and use intuitively
+       helpful terminology in its place.
+
+Second, we used 15-kHz as our example subcarrier spacing, with a
+Physical Block transmission time of 0.5ms. These are sometimes
+referred to as the *numerology* of the radio's air interface, and our
+example is just that—an example.  Any given wireless network will be
+configured with a particular numerology. The exact settings can be
+configured for the target environment (e.g., urban, suburban,
+indoors), and in some cases, even dynamically changed based on
+observed behavior.  That is to say, selecting a network's numerology
+is potentially another degree-of-freedom that a scheduling algorithm
+might take into consideration.
 
 All of this brings us to the following observation: making scheduling
 decisions requires complex analysis and heavy use of heuristics. (It
@@ -237,10 +247,9 @@ but also vendor-specific. The actual algorithms are not part of the
 respective standards, but rather, are proprietary.  What the next two
 sections focus on is the objectives Wi-Fi and 5G, respectively, are
 trying to achieve. Wi-Fi's approach is consistent with the best-effort
-philosophy of the Internet, with each node deciding for itself how and
-when to transmit. In contrast, 5G tries to deliver the most
-predictable performance it can to the largest number of devices.
-Achieving this level of coordination requires a centralized approach,
-in which each base station decides when and how all the devices it
-connects to should transmit.
+philosophy of the Internet; there are no guarantees. In contrast, 5G
+tries to deliver the most predictable performance it can to the
+largest number of devices.  Achieving this level of coordination
+requires a centralized approach, in which base stations collaborate to
+decide when and how all the devices they connect should transmit.
 
