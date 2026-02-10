@@ -51,7 +51,7 @@ optical signal without requiring that time- and energy-consuming
 conversion. DWDM equipment is able to transmit a large number of
 optical wavelengths (colors) down a single fiber. Each wavelength is
 called a lambda (λ), and corresponds to the length of each wave
-(measured in nanoseconds) in the optical signal. The "Dense" qualifier
+(measured in nanometers) in the optical signal. The "Dense" qualifier
 in DWDM indicates that the technology is able to distinguish between
 ~100 different wavelengths; each of these wavelengths might carry as
 much as 100 Gbps of data.
