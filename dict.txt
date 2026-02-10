@@ -564,6 +564,7 @@ GigE
 GitOps
 Giulio
 GKE
+Gmail
 GMPLS
 gNB
 gNB's
@@ -1350,6 +1351,7 @@ reimplement
 Reitblatt
 Rekhter
 Renderer
+rendez
 reorderings
 repo
 Repo
@@ -1868,6 +1870,7 @@ VNF
 VNFs
 VNI
 VOLTHA
+vous
 VPI
 vpn
 VPN

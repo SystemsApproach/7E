@@ -1,4 +1,4 @@
-2.3 Electronic Mail (Email)
+2.3 Electronic Mail
 ----------------------------------------
 
 Email is one of the oldest network applications. After all, what could
@@ -10,23 +10,54 @@ email as a key application when the network was created—remote access to
 computing resources was the main design goal—but it turned out to be the
 Internet’s original killer app.
 
-As noted above, it is important (1) to distinguish the user interface
+As with the web, it is important to (1) distinguish the user interface
 (i.e., your mail reader) from the underlying message transfer protocols
-(such as SMTP or IMAP), and (2) to distinguish between this transfer
+(such as SMTP or IMAP), and (2) distinguish between this transfer
 protocol and a companion standard (RFC 822 and MIME) that defines the
-format of the messages being exchanged. We start by looking at the
-message format.
+format of the messages being exchanged. We begin by looking at the
+message format—which helps to explain why there are two formatting
+standards—but before doing that, the explanation for why there are
+two transfer protocols warrants a quick look.
+
+The key abstraction in email is a *mailbox*, which provides a
+rendez-vous point for an email exchange: SMTP is used to send email to
+a mailbox, and IMAP is used to read email from a mailbox.  The mailbox
+also holds an archive of exchanged messages, with IMAP used to browse,
+search, read, and manage that archive. As originally designed,
+however, the mailbox abstraction was implemented as a file on a
+multi-user machine.  This meant the reader was just a program that
+directly accessed that file; there was no need for a protocol like
+IMAP. As workstations and laptops became more common, users no longer
+logged into a shared server, and so there was a need for a second
+protocol to retrieve email from that server.
+
+Today, the server process that implements the mailbox abstraction is
+most likely implemented as a scalable cloud service. This is certainly
+the case if you have a Gmail account, where reading email no longer
+requires IMAP. Instead you are effectively using a RESTfull API
+running over HTTPS to access your mailbox.\ [#]_ This suggests an
+interesting *"What if?"* question: If you were going to start over
+with email using today's best practices, what would you do different?
+One likely answer is that you would define a RESTful API for email,
+and use HTTPS to both write messages to a mailbox and read messages
+from a mailbox. In fact, the same could be said for many applications
+that pre-date the web—their protocols are just purpose-built
+Request/Reply protocols. This is a topic we address in Chapter 13.
+
+.. [#] IMAP is still used to pull email from a non-Gmail mailbox into
+       a Gmail-based mailbox.
 
 2.3.1 Message Format
 ~~~~~~~~~~~~~~~~~~~~
 
 RFC 822 defines messages to have two parts: a *header* and a *body*.
 Both parts are represented in ASCII text. Originally, the body was
-assumed to be simple text. This is still the case, although RFC 822 has
-been augmented by MIME to allow the message body to carry all sorts of
-data. This data is still represented as ASCII text, but because it may
-be an encoded version of, say, a JPEG image, it’s not necessarily
-readable by human users. More on MIME in a moment.
+assumed to be simple text. This is still the case, although RFC 822
+has been augmented by MIME (*Multipurpose Internet Mail Extensions*)
+to allow the message body to carry all sorts of data. This data is
+still represented as ASCII text, but because it may be an encoded
+version of, say, a JPEG image, it’s not necessarily readable by human
+users. More on MIME in a moment.
 
 The message header is a series of ``<CRLF>``-terminated lines.
 (``<CRLF>`` stands for carriage-return plus line-feed, which are a
@@ -46,6 +77,9 @@ header lines; the interested reader is referred to RFC 822.
 You might notice that this structure looks very similar to that of
 HTTP messages. This is not a coincidence, as email was an obvious
 application protocol that the designers of HTTP could use as a model.
+
+.. Is it worth mentioning that 822 has been updated:
+   https://datatracker.ietf.org/doc/html/rfc5322
 
 RFC 822 was extended in 1993 (and updated quite a few times since
 then) to allow email messages to carry many different types of data:
@@ -99,7 +133,7 @@ upper- and lowercase letters, the 10 digits 0 through 9, and the special
 characters + and /. These are the first 64 values in the ASCII character
 set.
 
-As one aside, so as to make reading mail as painless as possible for
+As an aside, so as to make reading mail as painless as possible for
 those who still insist on using text-only mail readers, a MIME message
 that consists of regular text only can be encoded using 7-bit ASCII.
 There’s also a readable encoding for mostly ASCII data.
@@ -112,8 +146,8 @@ JPEG image, and a PostScript file would look something like this:
    MIME-Version: 1.0
    Content-Type: multipart/mixed;
    boundary="-------417CA6E2DE4ABCAFBC5"
-   From: Alice Smith <Alice@systemsapproach.org>
-   To: Bob@cs.Princeton.edu
+   From: Alice Smith <alice@systemsapproach.org>
+   To: bob@Princeton.edu
    Subject: promised material
    Date: Mon, 07 Sep 1998 19:45:19 -0400
 
@@ -144,110 +178,89 @@ not appear in the data itself. Each piece then has its own
 2.3.2 Message Transfer
 ~~~~~~~~~~~~~~~~~~~~~~
 
-For many years, the majority of email was moved from host to host using
-only SMTP. While SMTP continues to play a central role, it is now just
-one email protocol of several, Internet Message Access Protocol (IMAP)
-and Post Office Protocol (POP) being two other important protocols for
-retrieving mail messages. We’ll begin our discussion by looking at SMTP,
-and move on to IMAP below.
+As previewed in the introduction to this section, SMTP (*Simple
+Message Transfer Protocol*) is used to send email to one or more
+recipient mailboxes. A mailbox, in turn, is an abstraction implemented
+either by a server process running on some machine, or as a scalable
+service running in the cloud. We'll assume the former in the following
+discussion, but the implementation choice is completely independent
+from the protocol (as should be the case for all protocols).
 
-To place SMTP in the right context, we need to identify the key components.
-First, users interact with a *mail reader* when they compose, file,
-search, and read their email. Countless mail readers are available, just
-like there are many web browsers to choose from. In the early days of
-the Internet, users typically logged into the machine on which their
-*mailbox* resided, and the mail reader they invoked was a local
-application program that extracted messages from the file system. Today,
-of course, users remotely access their mailbox from their laptop or
-smartphone; they do not first log into the host that stores their mail
-(a mail server). A second mail transfer protocol, such as POP or IMAP,
-is used to remotely download email from a mail server to the user’s
-device. To further complicate matters, many users just use a web
-browser to read their mail, which in some ways brings us full circle
-back to the days of logging into a specific machine to read mail.
+This process is called a *Message Transfer Agent (MTA)*, and it runs
+on every host that holds a mailbox.\ [#]_ It implements both the
+client side of the SMTP protocol (which gets executed when the user's
+email reader wants to send a message to someone else) and the server
+side of the STMP protocol (which runs continuously waiting for
+incoming TCP connections). Note that while anyone can implement an
+MTA, there are only a few popular implementations, with ``sendmail``
+and ``postfix`` being two widely used open source examples.
 
-Second, there is a *mail daemon* (or process) running on each host that
-holds a mailbox. You can think of this process, also called a *message
-transfer agent* (MTA), as playing the role of a post office: users (or
-their mail readers) give the daemon messages they want to send to other
-users, the daemon uses SMTP running over TCP to transmit the message to
-a daemon running on another machine, and the daemon puts incoming
-messages into the user’s mailbox (where that user’s mail reader can
-later find them). Since SMTP is a protocol that anyone could implement,
-in theory there could be many different implementations of the mail
-daemon. It turns out, though, that there are only a few popular
-implementations, with the old ``sendmail`` program from Berkeley Unix
-and ``postfix`` being the most widespread.
+.. [#] Not that we need more names for the same thing, but the MTA
+       process is also called a *mail daemon*, dating back to its
+       original implementation in Unix, where all long-running server
+       processes were known as *daemon processes*.
 
 .. _fig-mail:
-.. figure:: applications/figures/f09-01-9780123850591.png
+.. figure:: applications/figures/smtp.png
    :width: 600px
    :align: center
 
-   Sequence of mail gateways store and forward email messages.
+   Sequence of MTAs store and forward email messages. Each MTP writes
+   messages to disk (stable storage) so it can fulfill its promise to
+   deliver a message once it as accepted it from an upstream MTA.
 
-While it is certainly possible that the MTA on a sender’s machine
-establishes an SMTP/TCP connection to the MTA on the recipient’s mail
-server, in many cases the mail traverses one or more *mail gateways*
-on its route from the sender’s host to the receiver’s host. Like the
-end hosts, these gateways also run a message transfer agent
-process. These intermediate nodes are called *gateways* since their
-job is to store and forward email messages, much like an IP router
-(which was at one time also referred to as a gateway) stores and forwards
-IP datagrams. The key difference is that a mail gateway typically
-buffers messages on disk and is willing to try retransmitting them to
-the next machine for several days, while an IP router buffers
-datagrams in memory and is only willing to retry transmitting them for
-a fraction of a second. :numref:`Figure %s <fig-mail>` illustrates a
-two-hop path from the sender to the receiver.
+While it is possible that the MTA on a sender’s machine could
+establish an SMTP/TCP connection to the MTA on the recipient’s mail
+server, in many cases the mail traverses one or more intermediate MTA
+(also call a *mail gateway*) on its route from the sender’s host to
+the receiver’s host. The gateway MTA buffers messages on disk, and is
+willing to try retransmitting them to the next machine for several
+days.  :numref:`Figure %s <fig-mail>` illustrates a two-hop path from
+the sender to the receiver.
 
-Why, you might ask, are mail gateways necessary? Why can’t the sender’s
-host send the message to the receiver’s host? One reason is that the
-recipient does not want to include the specific host on which he or she
-reads email in his or her address. Another is scale: In large
-organizations, it’s often the case that a number of different machines
-hold the *mailboxes* for the organization. For example, mail delivered
-to ``bob@cs.princeton.edu`` is first sent to a mail gateway in the CS
-Department at Princeton (that is, to the host named
-``cs.princeton.edu``), and then forwarded—involving a second
-connection—to the specific machine on which Bob has a mailbox. The
-forwarding gateway maintains a database that maps users into the machine
-on which their mailbox resides; the sender need not be aware of this
-specific name. (The list of header lines in the message will help you
-trace the mail gateways that a given message traversed.) Yet another
-reason, particularly true in the early days of email, is that the
-machine that hosts any given user’s mailbox may not always be up or
-reachable, in which case the mail gateway holds the message until it can
-be delivered.
+Why are mail gateways necessary? Why can’t the sender’s host send the
+message to the receiver’s host? One reason is that the recipient does
+not want to include the specific host on which he or she reads email
+in his or her address. A second is scale: In large organizations, it’s
+often the case that a number of different machines hold the
+mailboxes for the organization. For example, mail delivered to
+``bob@princeton.edu`` might first sent to a University gateway (that
+is, to the host named ``princeton.edu``), and then forwarded—involving
+a second connection—to the specific machine on which Bob has a mailbox
+(perhaps on a department server). The forwarding gateway maintains a
+database that maps users into the machine on which their mailbox
+resides; the sender need not be aware of this specific name. (The list
+of header lines in the message will help you trace the mail gateways
+that a given message traversed.)
 
 Independent of how many mail gateways are in the path, an independent
-SMTP connection is used between each host to move the message closer to
-the recipient. Each SMTP session involves a dialog between the two mail
-daemons, with one acting as the client and the other acting as the
-server. Multiple messages might be transferred between the two hosts
-during a single session. Since RFC 822 defines messages using ASCII as
-the base representation, it should come as no surprise to learn that
-SMTP is also ASCII based. This means it is possible for a human at a
-keyboard to pretend to be an SMTP client program.
+SMTP connection is used between each host to move the message closer
+to the recipient. Each SMTP session involves a dialog between the two
+MTA processes, with one acting as the client and the other acting as
+the server. Multiple messages might be transferred between the two
+hosts during a single session. Since RFC 822 defines messages using
+ASCII as the base representation, it should come as no surprise to
+learn that SMTP is also ASCII based. This means it is possible for a
+human at a keyboard to pretend to be an SMTP client program.
 
 SMTP is best understood by a simple example. The following is an
-exchange between sending host ``cs.princeton.edu`` and receiving host
-``systemsapproach.org`` . In this case, user Bob at Princeton is trying to send
-mail to users Alice and Tom at Systems Approach. Extra blank lines have been added
-to make the dialog more readable.
+exchange between sending host ``princeton.edu`` and receiving host
+``systemsapproach.org`` . In this case, user Bob at Princeton is
+trying to send mail to users Alice and Tom at Systems Approach. Extra
+blank lines have been added to make the dialog more readable.
 
 .. code-block:: shell
 
    HELO cs.princeton.edu
-   250 Hello daemon@mail.cs.princeton.edu [128.12.169.24]
+   250 Hello daemon@mail.princeton.edu [128.12.169.24]
 
-   MAIL FROM:<Bob@cs.princeton.edu>
+   MAIL FROM:<bob@princeton.edu>
    250 OK
 
-   RCPT TO:<Alice@systemsapproach.org>
+   RCPT TO:<alice@systemsapproach.org>
    250 OK
 
-   RCPT TO:<Tom@systemsapproach.org>
+   RCPT TO:<tom@systemsapproach.org>
    550 No such user here
 
    DATA
@@ -275,46 +288,48 @@ server responds by saying “yes” to one and “no” to the other. Then the
 client sends the message, which is terminated by a line with a single
 period (“.”) on it. Finally, the client terminates the connection.
 
-There are, of course, many other commands and return codes. For example,
-the server can respond to a client’s ``RCPT`` command with a ``251``
-code, which indicates that the user does not have a mailbox on this
-host, but that the server promises to forward the message onto another
-mail daemon. In other words, the host is functioning as a mail gateway.
-As another example, the client can issue a ``VRFY`` operation to verify
-a user’s email address, but without actually sending a message to the
-user.
+There are, of course, many other commands and return codes. For
+example, the server can respond to a client’s ``RCPT`` command with a
+``251`` code, which indicates that the user does not have a mailbox on
+this host, but that the server promises to forward the message onto
+another MTA. In other words, the host is functioning as a mail
+gateway.  As another example, the client can issue a ``VRFY``
+operation to verify a user’s email address, but without actually
+sending a message to the user.
 
 The only other point of interest is the arguments to the ``MAIL`` and
-``RCPT`` operations; for example, ``FROM:<Bob@cs.princeton.edu>`` and
-``TO:<Alice@systemsapproach.org>``, respectively. These look a lot like 822 header
-fields, and in some sense they are. What actually happens is that the
-mail daemon parses the message to extract the information it needs to
-run SMTP. The information it extracts is said to form an *envelope* for
-the message. The SMTP client uses this envelope to parameterize its
-exchange with the SMTP server. One historical note: The reason
-``sendmail`` became so popular is that no one wanted to reimplement this
-message parsing function. While today’s email addresses look pretty tame
-(e.g., ``Bob@cs.princeton.edu``), this was not always the case. In the
-days before everyone was connected to the Internet, it was not uncommon
-to see email addresses of the form ``user%host@site!neighbor``.
+``RCPT`` operations; for example, ``FROM:<bob@princeton.edu>`` and
+``TO:<alice@systemsapproach.org>``, respectively. These look a lot
+like 822 header fields, and in some sense they are. What actually
+happens is that the MTA process parses the message to extract the
+information it needs to run SMTP. The information it extracts is said
+to form an *envelope* for the message. The SMTP client uses this
+envelope to parameterize its exchange with the SMTP server. One
+historical note: The reason ``sendmail`` became so popular is that no
+one wanted to reimplement this message parsing function. While today’s
+email addresses look pretty tame (e.g., ``bob@princeton.edu``), this
+was not always the case. In the days before everyone was connected to
+the Internet, it was not uncommon to see email addresses of the form
+``user%host@site!neighbor``.
 
 2.3.3 Mail Reader
 ~~~~~~~~~~~~~~~~~
 
 The final step is for the user to actually retrieve their messages
-from the mailbox, read them, reply to them, and possibly save a copy for
-future reference. The user performs all these actions by interacting
-with a mail reader. As pointed out earlier, this reader was originally
-just a program running on the same machine as the user’s mailbox, in
-which case it could simply read and write the file that implements the
-mailbox. This was the common case in the pre-laptop era. Today, most
-often the user accesses their mailbox from a remote machine using
-yet another protocol, such as POP or IMAP. It is beyond the scope of
-this book to discuss the user interface aspects of the mail reader, but
-it is definitely within our scope to talk about the access protocol. We
-consider IMAP, in particular.
+from the mailbox, read them, reply to them, and possibly save a copy
+for future reference. The user performs all these actions by
+interacting with a mail reader. As pointed out earlier, this reader
+was originally just a program running on the same machine as the
+user’s mailbox, in which case it could simply read and write the file
+that implements the mailbox. This was the common case in the
+pre-laptop era. Today, most often the user accesses their mailbox from
+a remote machine using yet another protocol, such as POP (*Post Office
+Protocol*) or IMAP (*Internet Message Access Protocol*). It is beyond
+the scope of this book to discuss the user interface aspects of the
+mail reader, but it is definitely within our scope to talk about the
+access protocol. We consider IMAP, in particular.
 
-IMAP is similar to SMTP in many ways. It is a client/server protocol
+IMAP is similar to SMTP in many ways. It is a client-server protocol
 running over TCP, where the client (running on the user’s desktop
 machine) issues commands in the form of ``<CRLF>``-terminated ASCII
 text lines and the mail server (running on the machine that maintains
