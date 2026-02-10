@@ -22,8 +22,9 @@ format—including why there are two formatting standards—but before
 doing that, the explanation for why there are multiple transfer
 protocols warrants a quick look.
 
-.. [#] It is common to refer to the original RFC that defined the
-       format of email messages, but it has been updated, the
+.. [#] RFC 822 is often used as shorthand for "the
+       original, plain text email standard."  It has been updated
+       several times, the
        most current version at the time of writing being RFC 5322.
 
 The key abstraction in email is a *mailbox*, which provides a
@@ -307,7 +308,7 @@ sending a message to the user.
 The only other point of interest is the arguments to the ``MAIL`` and
 ``RCPT`` operations; for example, ``FROM:<bob@princeton.edu>`` and
 ``TO:<alice@systemsapproach.org>``, respectively. These look a lot
-like 822 header fields, and in some sense they are. What actually
+like RFC 822 header fields, and in some sense they are. What actually
 happens is that the MTA process parses the message to extract the
 information it needs to run SMTP. The information it extracts is said
 to form an *envelope* for the message. The SMTP client uses this
