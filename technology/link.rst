@@ -23,23 +23,25 @@ a digital signal may be directly encoded as, say, high and low voltage
 levels on a cable. Many forms of modulation involve modifying the
 phase, amplitude, or frequency of a *carrier* at a certain frequency,
 so that the signal may be transmitted in one of the frequency bands
-illustrated above. 
+illustrated above.
 
 
 There are quite a few hard problems to be solved in mapping the
 digital signal to an analog waveform, and then reversing the process
 at the other end. The channel between sender and receiver will usually
 *attenuate* the signal (making it weaker) and introduce noise. The
-receiver has to recover the intended digital value 
-in the face of noise and attenuation.
+receiver has to recover the intended digital value in the face of
+noise and attenuation.
 
 
 The engineering required to transmit and receive digital messages over
 a physical medium is non-trivial. The same is true for the
 science—known as *Information Theory*\ —that explains how efficiently
 that task can be performed. We consider both Information Theory and
-modulation techniques out-of-scope for this book, and refer the reader
-to authoritative sources on the topic.
+the details of modulation techniques out of scope for this book, and
+refer the reader to authoritative sources on the topic. We will,
+however, come back to modulation when we look at transmitting wireless
+signals in Chapter 5.
 
 That still leaves us with plenty of work to do, corresponding to what
 is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
@@ -177,35 +179,38 @@ by the Manchester encoding in :numref:`Figure %s <fig-encode-all>`, then
 both NRZ and NRZI could have been able to transmit twice as many bits
 in the same time period.
 
-Note that bit rate isn’t necessarily less than or equal to the baud
-rate, as the Manchester encoding suggests. If the modulation scheme is
-able to utilize (and recognize) four different signals, as opposed to
-just two (e.g., “high” and “low”), then it is possible to encode two
-bits into each clock interval, resulting in a bit rate that is twice
-the baud rate. Similarly, being able to modulate among eight different
-signals means being able to transmit three bits per clock interval. In
-general, it is important to keep in mind we have over-simplified
-modulation, which is much more sophisticated than transmitting "high"
-and "low" signals. It is not uncommon to vary a combination of a
-signal's phase and amplitude—for a fixed frequency band—making it
-possible to encode 16 or even 64 different patterns (symbols) during
-each clock interval. *QAM (Quadrature Amplitude Modulation)* is widely
-used example of such a modulation scheme.
+While Manchester encoding creates a situation where the bit rate is
+less than the baud rate, this need not be the case. Suppose we used a
+modulation scheme with four distinct levels rather than two; this
+would allow us to encode two bits into each clock interval, resulting
+in a bit rate that is twice the baud rate.  Similarly, if our
+modulation scheme allows for eight different signals, we can transmit
+three bits per clock interval. In general, modulation is much more
+sophisticated than just transmitting "high" and "low" signals.
+Instead we talk about tramsmitting *symbols*, which are distinct
+patterns that can be reliably recovered by the receiver.  For example,
+it is common to vary a combination of a signal's phase and
+amplitude—for a fixed frequency band—making it possible to encode 16,
+64, or more different patterns (symbols) during each clock
+interval. If we have 64 different symbols, we can encode 6 bits per
+symbol. *QAM (Quadrature Amplitude Modulation)* is widely used example
+of such a modulation scheme, which we will look at more closely in
+Chapter 5.
 
-A more efficient alternative, called *4B/5B*, attempts to address the
-inefficiency of the Manchester encoding without suffering from the
-problem of having extended durations of high or low signals. The idea
-of 4B/5B is to insert extra bits into the bit stream so as to break up
-long sequences of 0s or 1s. Specifically, every 4 bits of actual data
-are encoded in a 5-bit code that is then transmitted to the receiver;
-hence, the name 4B/5B. The 5-bit codes are selected in such a way that
-each one has no more than one leading 0 and no more than two trailing
-0s. Thus, when sent back-to-back, no pair of 5-bit codes results in
-more than three consecutive 0s being transmitted. The resulting 5-bit
-codes are then transmitted using the NRZI encoding, which explains why
-the code is only concerned about consecutive 0s—NRZI already solves
-the problem of consecutive 1s. Note that the 4B/5B encoding results in
-80% efficiency.
+A more efficient alternative to Manchester encoding, called *4B/5B*,
+avoids doubling the baud rate while also ensuring there are no
+extended durations of high or low signals. The idea of 4B/5B is to
+insert extra bits into the bit stream so as to break up long sequences
+of 0s or 1s. Specifically, every 4 bits of actual data are encoded in
+a 5-bit code that is then transmitted to the receiver; hence, the name
+4B/5B. The 5-bit codes are selected in such a way that each one has no
+more than one leading 0 and no more than two trailing 0s. Thus, when
+sent back-to-back, no pair of 5-bit codes results in more than three
+consecutive 0s being transmitted. The resulting 5-bit codes are then
+transmitted using the NRZI encoding, which explains why the code is
+only concerned about consecutive 0s—NRZI already solves the problem of
+consecutive 1s. Note that the 4B/5B encoding results in 80%
+efficiency rather than Manchester's 50%.
 
 .. _tab-4b5b:
 .. table:: 4B/5B encoding.
@@ -271,17 +276,17 @@ recently, 10GE and above uses a 64B/66B encoding.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that we have seen how to transmit a sequence of bits over a
-point-to-point link, the next challenge is subdivide that bit-stream
-into a sequence of *frames*, each of which is a self-contained block
-of data being sent through a packet-switched network to some
-destination host.  We wouldn't necessarily have to do this—it is
-possible for a network to be purely bit-oriented—but as discussed in
-Section 1.4, the goal of efficiently sharing network infrastructure is
-best met through statistical multiplexing. Packets define the unit of
-data being forwarded through the network. A frame is what we call a
-packet at the link layer, and *framing* is the problem of determining
-exactly what set of bits constitutes a frame—that is, determining
-where the frame begins and ends.
+point-to-point link, the next challenge is to subdivide that
+bit-stream into a sequence of *frames*, each of which is a
+self-contained block of data being sent through a packet-switched
+network to some destination host. While purely bit-oriented networks
+exist, the goal of efficiently sharing network infrastructure, as
+described in Section 1.4, is best met through statistical
+multiplexing. Packets define the unit of data that allows statistical
+multiplexing. A frame is just a name for a packet at the link layer, and
+*framing* is the problem of determining exactly what set of bits
+constitutes a frame—that is, determining where the frame begins and
+ends.
 
 There are several ways to address the framing problem, and each of
 them have been used at one time or another by different link
@@ -330,19 +335,19 @@ message itself.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Bit errors are sometimes introduced into frames during transmission.
-This happens, for example, because of electrical interference or
+This happens, for example, because of electromagnetic interference or
 thermal noise. Although errors are rare, especially on optical links,
 some mechanism is needed to detect these errors so that corrective
 action can be taken.
 
 One of the most common techniques for detecting transmission errors is
 known as the *cyclic redundancy check* (CRC). Ethernet uses a 32-bit
-CRC code (denoted CRC-32), which works by adding only 32 extra bits to
+CRC code (denoted CRC-32), which works by adding 32 extra bits to
 the message. These few bits are enough to provide strong protection
 against common bit errors in messages that are thousands of bytes
 long. The theoretical foundation of the cyclic redundancy check is
 rooted in a branch of mathematics called *finite fields*. While this
-may sound daunting, the basic ideas is easy to understood.
+may sound daunting, the basic idea is easy to understand.
 
 To start, think of an (n+1)-bit message as being represented by an :math:`n`
 degree polynomial, that is, a polynomial whose highest-order term is
@@ -555,17 +560,18 @@ front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
 Ethernet has been the dominant link technology for nearly 50 years,
 but a lot has changed since it was first introduced in 1976.
 Originally, Ethernet was a *multi-access* technology (connecting tens
-or hundreds of nodes) rather than *point-to-point* link (connecting
-only two nodes).  This was possible because Ethernet ran over coax
-cable, with hosts "tapping" (splicing) into the cable at a nearby
-point as it snaked up and down the corridors of office buildings.
+or hundreds of nodes to a single shared cable) rather than
+*point-to-point* link (connecting only two nodes at either end of a
+cable).  This was possible because hosts "tapped" (or were spliced)
+into the coaxial Ethernet cable at a nearby point as it snaked up and
+down the corridors of office buildings.
 
 Because all the nodes connected to a single cable had to compete to
 send messages—i.e., messages sent from two hosts at the same time
 would interfere with each other—early Ethernet shared much more with
 wireless networks than today's wired networks. In fact, Ethernet's
 media access control algorithm was inspired by an earlier wireless
-network, called Aloha, that interconnected computers on the Hawaiian
+network, called Aloha, which interconnected computers on the Hawaiian
 Islands. And that Ethernet algorithm, in turn, inspired the approach
 used by today's Wi-Fi. We describe that algorithm in Chapter 5.
 

@@ -4,7 +4,7 @@
 This book squarely focuses on packet-switched networks, in which
 complete packets are transmitted from one node to another, and any
 switch along an end-to-end path from source to destination
-stores-and-forwards packets.  There is another general approach to
+stores and forwards packets.  There is another general approach to
 building networks, known as *circuit switching*, that pre-dates packet
 switching. It has always been an integral part of the telephony
 network. In fact, as we pointed out in the introduction to this
@@ -12,7 +12,7 @@ chapter, the original ARPANET was an experiment to demonstrate the
 feasibility of packet switching, and it ran on top of 64 Kbps circuits
 leased from the phone company.
 
-At a high-level, circuit switching involves passing data through a
+At a high level, circuit switching involves passing data through a
 switch without breaking it into discrete chunks. In some cases, the
 analog signal is itself passed through the switch, from input port to
 output port, without first converting it to a digital representation.
@@ -42,18 +42,19 @@ multiplexing (STDM).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While it's possible to send and receive Ethernet frames over optical
-fiber at bandwidths approaching 1 Tbps, doing so implies packet
-switches that convert between the optical signals on the fiber and the
-digital blocks of data that are then processed by the switch. A
-circuit-based alternative, known as *Dense Wavelength Division
-Multiplexing (DWDM)*, instead switches the optical signal without
-requiring that time-consuming conversion. DWDM equipment is able to
-transmit a large number of optical wavelengths (colors) down a single
-fiber. Each wavelength is called a lambda (λ), and corresponds to the
-length of each wave (measured in nanoseconds) in the optical
-signal. The D(ense) in DWDM is to indicate that the technology is able
-to distinguish between ~100 different wavelengths, each of which might
-carry as much as 100 Gbps of data.
+fiber at bandwidths approaching 1 Tbps, forwarding packets at this
+speed would entail interfaces on switches that convert between the
+optical signals on the fiber and the digital blocks of data that are
+then processed by the switch. A circuit-based alternative, known as
+*Dense Wavelength Division Multiplexing (DWDM)*, instead switches the
+optical signal without requiring that time- and energy-consuming
+conversion. DWDM equipment is able to transmit a large number of
+optical wavelengths (colors) down a single fiber. Each wavelength is
+called a lambda (λ), and corresponds to the length of each wave
+(measured in nanoseconds) in the optical signal. The "Dense" qualifier
+in DWDM indicates that the technology is able to distinguish between
+~100 different wavelengths; each of these wavelengths might carry as
+much as 100 Gbps of data.
 
 .. _fig-roadm:
 .. figure:: technology/figures/roadm.png
@@ -73,9 +74,10 @@ perspective of a packet-switched network that might be constructed on
 top of this optical transport, one wavelength, even if it crosses
 multiple ROADMs, appears to be a single point-to-point link between
 two packet switches. This scenario is shown in :numref:`Figure %s
-<fig-roadm>`. The reconfigurability feature of ROADMs means
-that it is possible to change these underlying end-to-end paths,
-effectively creating a new topology at the packet-switching layer.
+<fig-roadm>`. The reconfigurability feature of ROADMs means that it is
+possible to change these underlying end-to-end paths, effectively
+creating a new topology when viewed from the perspective of the
+packet-switching layer.
 
 3.3.2 SONET
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
