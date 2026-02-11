@@ -6,7 +6,7 @@ electromagnetic signals over some physical medium, be it radio waves
 through the atmosphere or space, an electrical current over copper
 wires, or light waves through optical fibers. Each signal can be
 modeled as a waveform that can be transmitted within some frequency
-band. Some of the available freuquency bands and their uses are shown
+band. Some of the available frequency bands and their uses are shown
 in :numref:`Figure %s <fig-spectrum>`.
 
 .. _fig-spectrum:
@@ -187,14 +187,14 @@ in a bit rate that is twice the baud rate.  Similarly, if our
 modulation scheme allows for eight different signals, we can transmit
 three bits per clock interval. In general, modulation is much more
 sophisticated than just transmitting "high" and "low" signals.
-Instead we talk about tramsmitting *symbols*, which are distinct
+Instead we talk about transmitting *symbols*, which are distinct
 patterns that can be reliably recovered by the receiver.  For example,
 it is common to vary a combination of a signal's phase and
 amplitude—for a fixed frequency band—making it possible to encode 16,
 64, or more different patterns (symbols) during each clock
 interval. If we have 64 different symbols, we can encode 6 bits per
 symbol. *QAM (Quadrature Amplitude Modulation)* is widely used example
-of such a modulation scheme, which we will look at more closely in
+of such a modulation scheme, which we will see again in
 Chapter 5.
 
 A more efficient alternative to Manchester encoding, called *4B/5B*,
@@ -265,7 +265,7 @@ control symbols.
 
 As for our exemplar link technology, Ethernet has changed its encoding
 scheme as its bandwidth improved over time. It originally used
-Manchester encoding when it ran at 10Mbps speeds, but switched to
+Manchester encoding when it ran at 10-Mbps speeds, but switched to
 4B/5B when it was upgraded to run at 100Mbps. The jump to 1Gbps
 Ethernet (also called 1GE or 1GigE) was coupled with a change to
 8B/10B encoding (8 bits of data encoded in a 10-bit code). And more

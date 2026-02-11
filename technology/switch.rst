@@ -278,12 +278,13 @@ components that make this all practical. In particular, it is now
 possible to buy pluggable *transceiver* modules that take care of all
 the media access details described in Section 3.1, be it Gigabit
 Ethernet, 10-Gigabit Ethernet, or some non-Ethernet technology such as
-SONET. These transceivers all conform to standardized form factors,
-such as SFP+ (small form-factor pluggable), that can in turn be
-connected to other components over a standardized bus (e.g., SFI, the
-Serial Framing Interface). Again, the key takeaway is that the
-networking industry is just now entering into the same commoditized
-world that the computing industry has enjoyed for decades.
+SONET (see Section 3.3). These transceivers all conform to
+standardized form factors, such as SFP+ (small form-factor pluggable),
+that can in turn be connected to other components over a standardized
+bus (e.g., SFI, the Serial Framing Interface). Again, the key takeaway
+is that the networking industry is just now entering into the same
+commoditized world that the computing industry has enjoyed for
+decades.
 
 3.2.4 Flow Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,7 +313,8 @@ in :numref:`Figure %s <fig-headers>` to be included in the Match half
 of the rule. So for example, a Match might specify a packet's ETH
 header ``Type`` field equals ``0x800`` (indicating the frame carries
 and IP packet) and its IP header ``DstAddr`` field be contained in
-some subnet (e.g., ``192.12.69/24``).
+some subnet (e.g., ``192.12.69/24``). It is also possible to write
+flow rules that match specific UDP or TCP port numbers.
 
 .. _fig-headers:
 .. figure:: technology/figures/headers.png

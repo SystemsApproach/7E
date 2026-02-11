@@ -31,7 +31,7 @@ the latter was programmed to forward packets.
 Jump forward to the present day, and the technology landscape is very
 different. Today’s phone companies emulate voice circuits on top of a
 packet-switched substrate that can be directly traced back to the
-ARPANET. Hundreds of link technologies have been proposed (and
+ARPANET. Hundreds of link technologies have been introduced (and
 abandoned), with Ethernet continually adapting to serve as a
 ubiquitous communication technology. And while some low-end packet switches
 are still implemented in software running on general-purpose
