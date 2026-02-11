@@ -1,4 +1,4 @@
-2.2 The World Wide Web
+2.2 World Wide Web
 -----------------------------
 
 We begin our discussion of applications by focusing on the one that is
@@ -8,9 +8,10 @@ call it an application; it might be better thought of as a framework
 for building and delivering applications. But it did in fact start out
 as a single application, with a single application layer
 protocol—HTTP—underpinning it. In this section we dig into the details
-of that protocol and the architecture of the Web.
+of that protocol, as well as the role it plays as a framework for
+building new applications.
 
-2.2.1 Applications and Application Protocols
+2.2.1 Application Protocols
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Before we go any further, it is important to distinguish between
@@ -129,17 +130,21 @@ the message is where a server would place the requested page when
 responding to a request, and it is typically empty for request messages.
 
 Why was HTTP designed to run over TCP? The designers didn’t have to do
-it that way, but TCP provides numerous services that HTTP needs:
-reliable delivery (no-one wants a web page with missing data), flow
-control, and congestion control. Using TCP (as opposed to either IP or
-UDP) meant that the designers of HTTP didn't need to reimplement those
-features. However, as we’ll see below, a few issues arose from
+it that way, but TCP provides multiple features that HTTP needs,
+most notably, reliable data delivery (no-one wants a web page with
+missing data). Using TCP (as opposed to either IP or
+UDP) meant that the designers of HTTP didn't need to worry about
+reliability. However, as we’ll see below, a few issues arose from
 building a request/response protocol on top of TCP. These issues
 become more apparent as you consider the details of the interactions
 between the application and transport layer protocols, and were
 exacerbated by the addition of security to the transport layer. This
-has led to new versions of HTTP and a new underlying transport, QUIC,
-discussed below.
+has led to new versions of HTTP, which has in turn inspired new
+transport protocols (specifically QUIC, which we describe in Chapter
+14). The interplay between HTTP and the transport layer is a great
+example of how modularity boundaries shift over time as systems
+mature and evolve.
+
 
 Request Messages
 ++++++++++++++++++++
@@ -316,14 +321,14 @@ would result in 13 separate TCP connections being established and
 closed. :numref:`Figure %s <fig-oldhttp>` shows the sequence of events
 for fetching a page that has just a single embedded object.  Colored
 lines indicate TCP messages, while black lines indicate the HTTP
-requests and responses. (Some of the TCP ACKs are not shown to avoid
-cluttering the picture.) You can see two round trip times are spent
-setting up TCP connections while another two (at least) are spent
-getting the page and image. As well as the latency impact, there is
-also processing cost on the server to handle the extra TCP connection
-establishment and termination. This is a striking example of how
-passing off functionality to be implemented in another layer without
-looking at the details can have negative consequences.
+requests and responses. (The figure is purposely vague about the exact
+TCP messages being exchanged; we'll fill in the details in Chapter 11.)
+
+The key is to count the number of round trips that are required: one
+to set up the TCP connection, one for HTTP to request the page, and a
+third for TCP to tear down the connection. This is a striking example
+of how passing off functionality to be implemented in another layer
+without looking at the details can have negative consequences.
 
 .. _fig-oldhttp:
 .. figure:: applications/figures/f09-04-9780123850591.png
@@ -340,9 +345,10 @@ connection setup overhead, thereby reducing the load on the server,
 the load on the network caused by the additional TCP packets, and the
 delay perceived by the user. Second, because a client can send
 multiple request messages down a single TCP connection, TCP’s
-congestion window mechanism is able to operate more efficiently. This
-is because it’s not necessary to go through the slow start phase for
-each page. :numref:`Figure %s <fig-persist>` shows the transaction
+is able to operate more efficiently. (TCP includes a congestion
+control mechanism that paces traffic so as to not overload the
+network; that mechanism is described in Chapter 14.)
+:numref:`Figure %s <fig-persist>` shows the transaction
 from :numref:`Figure %s <fig-oldhttp>` using a persistent connection
 in the case where the connection is already open (presumably due to
 some prior access of the same server).
@@ -408,64 +414,27 @@ stream to one active request/reply exchange at a time.
 You can see from this discussion how the layering decisions made in
 the early days of HTTP had long-lasting effects on its performance as
 the Web evolved. Ultimately there was a realization that an
-alternative approach to layering would be worth the effort.
+alternative approach to layering would be worth the effort. That
+effort has resulted in a new version of HTTP (known as HTTP/3) and a
+new transport protocol to be used in place of TCP (that protocol is
+called QUIC). Since understanding QUIC requires a deeper look at
+transport layer issues—including how we secure end-to-end
+communication—we postpone it until Chapter 13. For the purposes or
+this discussion, the big takeaway is that it is sometimes necessary to
+look across protocol layer boundaries, in this case, across the
+transport/application boundary.
 
-2.2.2 HTTP/3 and QUIC
-~~~~~~~~~~~~~~~~~~~~~~
+Or stated another way, layering decisions can have a profound impact
+on system behavior and performance. Running HTTP version 1 on top of
+TCP was a completely understandable decision that enabled the Web to
+get off the ground, but we have now gone through 3 major revisions of
+this layered approach, culminating in a totally new design for the
+transport layer underpinning HTTP. This is partly a testament to the
+ability of the Internet to support incremental evolution but also a
+reminder that we need to think carefully about the entire system, not
+just the behavior of a single layer, when designing protocols.
 
-As the preceding discussion illustrates, the history of HTTP has
-included a series of incremental changes to make better use of TCP as
-the underlying transport. But there is a fundamental issue that can't
-be fully resolved: TCP provides a byte-stream abstraction, while HTTP
-is a request/response protocol. The natural solution would be to adopt
-a more suitable transport, but for a long time there wasn't a suitable candidate.
-
-Ultimately, the solution to this mismatch was to create a new
-transport protocol known as QUIC. QUIC was explicitly designed to provide a
-good match to the requirements of HTTP, and HTTP/3 takes advantage of
-the improved underlying transport. For example, QUIC explicitly
-supports stream multiplexing at the transport layer. Thus, a single
-packet loss only impacts the delivery of the stream that suffered the
-loss, rather than causing a stall in the entire TCP connection while
-waiting for that lost packet to be retransmitted. At the same time,
-that lost packet provides a congestion signal that is applied to all
-streams in the QUIC connection. We cover QUIC in more detail in
-Chapter 13.
-
-Another significant advantage of QUIC compared to TCP is the way it
-handles the steps required to secure an HTTP connection. The original
-design of transport layer security (TLS) performs an exchange of
-cryptographic information after the TCP connection is established,
-QUIC handles security as part of session establishment, leading to a
-considerable reduction in the number of round-trips needed to
-establish a secure connection before the first content is
-delivered. In the best case, QUIC allows cryptographically protected
-data to be sent in the first round trip rather than waiting multiple
-RTTs for connection establishment. We will take another look at QUIC
-when we get to the discussion of securing connections in a later
-chapter.
-
-
-HTTP/3 is implemented in the majority of browsers and is incrementally
-being deployed on servers across the Internet. There remain plenty of
-servers running HTTP/2 and even some HTTP/1.1 as well, so version
-negotiation is likely to be part of HTTP implementations for the
-foreseeable future.
-
-.. admonition:: Key Takeaway
-
-  The important lesson to take away from this discussion is how
-  layering decisions have a profound impact on system behavior and
-  performance. Running HTTP version 1 on top of TCP was a completely
-  understandable decision that enabled the Web to get off the ground,
-  but we have now gone through 3 major revisions of this layered
-  approach, culminating in a totally new design for the transport layer
-  underpinning HTTP. This is partly a testament to the ability of the
-  Internet to support incremental evolution but also a reminder that we
-  need to think carefully about the entire system, not just the
-  behavior of a single layer, when designing protocols.
-
-2.2.3 Caching
+2.2.2 Caching
 ~~~~~~~~~~~~~~
 
 An important implementation strategy that makes the web more usable is
@@ -525,7 +494,7 @@ whether or not a document can be cached, how long it can be cached, how
 fresh a document must be, and so on. We’ll return to the subject of
 CDNs in a later section.
 
-2.2.4 Web Services
+2.2.3 Web Services
 ~~~~~~~~~~~~~~~~~~~~~
 
 So far we have focused on interactions between a human and a web server.
