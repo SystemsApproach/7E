@@ -8,8 +8,8 @@ call it an application; it might be better thought of as a framework
 for building and delivering applications. But it did in fact start out
 as a single application, with a single application layer
 protocol—HTTP—underpinning it. In this section we dig into the details
-of that protocol, as well as the role it plays as a framework for
-building new applications.
+of that protocol, and in doing so, tease out the reasons the web has
+become such a ubiquitous framework for building new applications.
 
 2.2.1 Application Protocols
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -277,35 +277,11 @@ server at the original address might respond with
 
 In the common case, the response message will also carry the requested
 page. This page is an HTML document, but since it may carry nontextual
-data (e.g., a GIF image), it is encoded using MIME (see the previous
-section). Certain of the ``MESSAGE_HEADER`` lines give attributes of the
-page contents, including (number of bytes in the contents), ``Expires``
-(time at which the contents are considered stale), and (time at which
-the contents were last modified at the server).
-
-Uniform Resource Identifiers
-+++++++++++++++++++++++++++++++++
-
-The URLs that HTTP uses as addresses are one type of *Uniform Resource
-Identifier* (URI). A URI is a character string that identifies a
-resource, where a resource can be anything that has identity, such as a
-document, an image, or a service.
-
-The format of URIs allows various more specialized kinds of resource
-identifiers to be incorporated into the URI space of identifiers. The
-first part of a URI is a *scheme* that names a particular way of
-identifying a certain kind of resource, such as ``mailto`` for email
-addresses or ``file`` for file names. The second part of a URI,
-separated from the first part by a colon, is the *scheme-specific part*.
-It is a resource identifier consistent with the scheme in the first
-part, as in the URIs ``mailto:santa@northpole.org`` and
-``file:///C:/foo.html``.
-
-A resource doesn’t have to be retrievable or accessible. There are
-URIs that look an awful lot like URLs, but they are not *locators*
-because they don’t tell you how to locate something; they just provide
-a globally unique identifier for something. We’ll see an example
-of a URI that is not a URL in a later section.
+data (e.g., a GIF image), it is encoded using MIME (see the section on
+email). Certain of the ``MESSAGE_HEADER`` lines give attributes of the
+page contents, including (number of bytes in the contents),
+``Expires`` (time at which the contents are considered stale), and
+(time at which the contents were last modified at the server).
 
 TCP Connections
 ++++++++++++++++++++++
@@ -319,14 +295,15 @@ verify that it had the most recent copy of a page. Thus, retrieving a
 page that included some text and a dozen icons or other small graphics
 would result in 13 separate TCP connections being established and
 closed. :numref:`Figure %s <fig-oldhttp>` shows the sequence of events
-for fetching a page that has just a single embedded object.  Colored
+for fetching a page that has just a single embedded object.  Blue
 lines indicate TCP messages, while black lines indicate the HTTP
 requests and responses. (The figure is purposely vague about the exact
 TCP messages being exchanged; we'll fill in the details in Chapter 11.)
 
-The key is to count the number of round trips that are required: one
-to set up the TCP connection, one for HTTP to request the page, and a
-third for TCP to tear down the connection. This is a striking example
+The key is that every HTTP request requires two round trips: one
+for TCP to set up the connection, one for HTTP to request the page.
+Closing a TCP connection requires another TCP message, but the
+client doesn't wait for confirmation. This is a striking example
 of how passing off functionality to be implemented in another layer
 without looking at the details can have negative consequences.
 
@@ -400,16 +377,14 @@ render a page has grown, reducing the overhead of each request is
 important for the latency experienced by the client. Header
 compression goes some way to improving the latency of fetching a page.
 
-The third advance of HTTP/2 is to multiplex several requests on a
-single TCP connection. This goes beyond what version 1.1
+The third advance of HTTP/2 is to multiplex several request/reply
+pairs on a single TCP connection. This goes beyond what version 1.1
 supports—allowing a *sequence* of requests to reuse a TCP
 connection—by permitting these requests to overlap with each
-other. The way HTTP/2 does this is to use some of the generic
-mechanisms introduced in Chapter 1: it defines a
-*channel* abstraction (technically, the channels are called
-*streams*), permits multiple concurrent streams to be active at a
-given time (each labeled with a unique *stream id*), and limits each
-stream to one active request/reply exchange at a time.
+other. The way HTTP/2 does this is to allow independent *streams*,
+each of which is labled in the HTTP header with a unique *stream
+id*. A given stream is limited to one request/reply exchange at a
+time, but multiple streams can be active on a given TCP connection.
 
 You can see from this discussion how the layering decisions made in
 the early days of HTTP had long-lasting effects on its performance as
@@ -424,7 +399,7 @@ this discussion, the big takeaway is that it is sometimes necessary to
 look across protocol layer boundaries, in this case, across the
 transport/application boundary.
 
-Or stated another way, layering decisions can have a profound impact
+Stated another way, layering decisions can have a profound impact
 on system behavior and performance. Running HTTP version 1 on top of
 TCP was a completely understandable decision that enabled the Web to
 get off the ground, but we have now gone through 3 major revisions of
@@ -434,7 +409,46 @@ ability of the Internet to support incremental evolution but also a
 reminder that we need to think carefully about the entire system, not
 just the behavior of a single layer, when designing protocols.
 
-2.2.2 Caching
+2.2.2 Uniform Resource Identifiers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The URLs that HTTP uses as addresses are one type of *Uniform Resource
+Identifier* (URI). A URI is a character string that identifies a
+resource, where a resource can be anything that has identity, such as a
+document, an image, or a service.
+
+The format of URIs allows various more specialized kinds of resource
+identifiers to be incorporated into the URI space of identifiers. The
+first part of a URI is a *scheme* that names a particular way of
+identifying a certain kind of resource, such as ``mailto`` for email
+addresses or ``file`` for file names. The second part of a URI,
+separated from the first part by a colon, is the *scheme-specific part*.
+It is a resource identifier consistent with the scheme in the first
+part, as in the URIs ``mailto:santa@northpole.org`` and
+``file:///C:/foo.html``.
+
+For URIs that most people are familiar with—where the scheme is
+``http``, ``https``, ``mailto`` or ``file``\ —the scheme-specific part
+includes information that can be used to *locate* the resource. The
+domain name for a web or an email server is a common example.  This
+locator information is what qualifies a URI as a URL. Another type of
+URI, known as a *Uniform Resource Name (URN)* , is used to specify a
+unique name for a resource, but without giving any hint as to its
+location. For URNs, we can think of the scheme as specifying a *name
+space* and the scheme-specific part as specifying a unique name within
+that name space. For example, the *DOI Foundation* (where DOI stands
+for *Digital Object Identifier*) manages an effort to assign a unique
+and persistent (never changing) identifier to every object in the
+Internet. A URN corresponding to the DOI name space would look
+something like this: ``doi:10.1000/456%23789``. If you want to learn
+more about the DOI effort, and how to interpret the name
+``10.1000/456%23789``, you can visit the DOI web site using the
+following URL: ``https://doi.org``. As this example illustrates,
+discussions about naming can easily descend into an an abstruse
+philosophical debate. We'll give it another try in Chapter 7 when
+we take a look at DNS.
+
+2.2.3 Caching
 ~~~~~~~~~~~~~~
 
 An important implementation strategy that makes the web more usable is
@@ -492,119 +506,56 @@ there are a set of *cache directives* that must be obeyed by all caching
 mechanisms along the request/response chain. These directives specify
 whether or not a document can be cached, how long it can be cached, how
 fresh a document must be, and so on. We’ll return to the subject of
-CDNs in a later section.
+CDNs in Chapter 15.
 
-2.2.3 Web Services
+2.2.3 RESTful API
 ~~~~~~~~~~~~~~~~~~~~~
 
-So far we have focused on interactions between a human and a web server.
-For example, a human uses a web browser to interact with a server, and
-the interaction proceeds in response to input from the user (e.g., by
-clicking on links). However, there is increasing demand for direct
-computer-to-computer interaction. And, just as the applications
-described above need protocols, so too do the applications that
-communicate directly with each other. We conclude this section by
-looking at the challenges of building large numbers of
-application-to-application protocols and some of the proposed solutions.
+So far we have focused on interactions between a human and a web
+server.  For example, a human uses a web browser to interact with a
+server, and the interaction proceeds in response to input from the
+user (e.g., by clicking on links). However, there is also significant
+demand for direct computer-to-computer interaction, which is what
+happens every time you initiate a commercial transaction in a browser
+or a cellphone app: retail service talks to a payment service, a
+shipping service, an inventory service, and upstream supplier, and so
+on. We conclude this section by looking at how HTTP and the web have
+played a central role in supporting such transactions, which is often
+referred to as *Web Services*. In short, HTTP helps by defining an
+API for web services.
 
-Much of the motivation for enabling direct application-to-application
-communication comes from the business world. Historically, interactions
-between enterprises—businesses or other organizations—have involved some
-manual steps such as filling out an order form or making a phone call to
-determine whether some product is in stock. Even within a single
-enterprise it is common to have manual steps between software systems
-that cannot interact directly because they were developed independently.
-Increasingly, such manual interactions are being replaced with direct
-application-to-application interaction. An ordering application at
-enterprise A would send a message to an order fulfillment application at
-enterprise B, which would respond immediately indicating whether the
-order can be filled. Perhaps, if the order cannot be filled by B, the
-application at A would immediately order from another supplier or
-solicit bids from a collection of suppliers.
+REST is an acronym—\ *REpresentational State Transfer*\ —used to
+explain the software architecture that underlies the web. It was
+articulated in a PhD thesis by Roy Fielding in 2000, several years
+after the web started to take off. A RESTful API is an API that is
+consistent with the REST architecture. If you understand the basic
+ideas of the web we've just covered, you understand the essence
+of REST: everything is a *resource*, resources are identified by
+a URI, and the operations you can perform on resources include
+``GET``, ``POST``, ``PUT``, and ``DELETE`` (see
+:numref:`Table %s <tab-ops>`).
 
-Here is a simple example of what we are talking about. Suppose you buy a
-book at an online retailer like Amazon. Once your book has been
-shipped, Amazon could send you the tracking number in an email, and then
-you could head over to the website for the shipping
-company—\ ``http://www.fedex.com``, perhaps—and track the package.
-However, you can also track your package directly from the Amazon.com
-website. In order to make this happen, Amazon has to be able to send a
-query to FedEx, in a format that FedEx understands, interpret the
-result, and display it in a web page that perhaps contains other
-information about your order. Underlying the user experience of getting
-all the information about the order served up at once on the Amazon.com
-web page is the fact that Amazon and FedEx had to have a protocol for
-exchanging the information needed to track packages—call it the Package
-Tracking Protocol. It should be clear that there are so many potential
-protocols of this type that we’d better have some tools to simplify the
-task of specifying them and building them.
+While this sounds like a circular definition, it really boils down to
+an observation that the web, whether by design or accident, reinvented
+an object-oriented software architecture—resource is just another name
+for an object, and the set of HTTP operations are just a slight
+variation of a well-known set of data-centric operations known as
+*CRUD*: *Create*, *Read*, *Update*, *Delete*.
 
-Network applications, even those that cross organization boundaries, are
-not new—email and web browsing cross such boundaries. What is new about
-this problem is the scale. Not scale in the size of the network, but
-scale in the number of different kinds of network applications. Both the
-protocol specifications and the implementations of those protocols for
-traditional applications like electronic mail and file transfer have
-typically been developed by a small group of networking experts. To
-enable the vast number of potential network applications to be developed
-quickly, it was necessary to come up with some technologies that
-simplify and automate the task of application protocol design and
-implementation.
-
-Two architectures have been advocated as solutions to this problem. Both
-architectures are called *web Services*, taking their name from the term
-for the individual applications that offer a remotely accessible service
-to client applications to form network applications. The terms used as
-informal shorthand to distinguish the two web Services architectures are
-*SOAP* and *REST*. We will discuss the technical meanings of those terms
-shortly.
-
-The SOAP architecture’s approach to the problem is to make it feasible,
-at least in theory, to generate protocols that are customized to each
-network application. The key elements of the approach are a framework
-for protocol specification, software toolkits for automatically
-generating protocol implementations from the specifications, and modular
-partial specifications that can be reused across protocols.
-
-The REST architecture’s approach to the problem is to regard individual
-web services as World Wide Web resources—identified by URIs and accessed
-via HTTP. Essentially, the REST architecture is just the web
-architecture. The web architecture’s strengths include stability and a
-demonstrated scalability (in the network-size sense). It could be
-considered a weakness that HTTP is not well suited to the usual
-procedural or operation-oriented style of invoking a remote service.
-REST advocates argue, however, that rich services can nonetheless be
-exposed using a more data-oriented or document-passing style for which
-HTTP is well suited. While both SOAP and REST have their adherents,
-REST is arguably simpler and more widely used so we focus our
-attention on REST for this discussion.
-
-A Generic Application Protocol (REST)
-++++++++++++++++++++++++++++++++++++++++
-
-The REST Web Services architecture is based on the assumption
-that the best way to integrate applications across networks is by
-re-applying the model underlying the World Wide Web architecture. This
-model, articulated by web architect Roy Fielding, is known as
-*REpresentational State Transfer* (REST). There is no need for a new
-REST architecture for Web Services—the existing web architecture is
-sufficient, although a few extensions are probably necessary. In the web
-architecture, individual Web Services are regarded as resources
-identified by URIs and accessed via HTTP—a single generic application
-protocol with a single generic addressing scheme.
-
-REST uses the small set of available HTTP methods, such as ``GET`` and
-``POST`` (see :numref:`Table %s <tab-ops>`) to provide an interface to
-a Web Service. In the REST model, any complexity in this interface is
-shifted from the protocol to the payload. The payload is a
-representation of the abstract state of a resource. For example, a
-``GET`` could return a representation of the current state of the
-resource, and a ``POST`` could send a representation of a desired
-state of the resource.
+The REST architecture is based on the assumption that the best way to
+integrate applications across networks is by re-applying the model
+underlying the World Wide Web architecture.  Since the only operations
+REST supports are the HTTP methods, such as ``GET`` and ``POST`` to
+provide an interface to a Web Service. In the REST model, any
+complexity in this interface is shifted from the protocol to the
+payload. The payload is a representation of the abstract state of a
+resource. For example, a ``GET`` could return a representation of the
+current state of the resource, and a ``POST`` could send a
+representation of a desired state of the resource.
 
 The representation of a resource state is abstract; it need not resemble
-how the resource is actually implemented by a particular Web Service
-instance. It is not necessary to transmit a complete resource state in
+how the resource is actually implemented by a particular backend
+service. It is not necessary to transmit a complete resource state in
 each message. The size of messages can be reduced by transmitting just
 the parts of a state that are of interest (e.g., just the parts that are
 being modified). And, because Web Services share a single protocol and
@@ -626,22 +577,35 @@ web proxies can enforce security or cache information. Existing content
 distribution networks (CDNs) can be used to support RESTful
 applications
 
-The online retailer Amazon, as it happens, was an early adopter
-(2002) of Web Services. Interestingly, Amazon made its systems publicly
-accessible via *both* SOAP and REST approaches, and according
-to some reports a substantial majority of developers use the REST
-interface. Of course, this is just one data point and may well reflect
-factors specific to Amazon.
+.. sidebar:: Alternative Design
 
-From Web Services to Cloud Services
-++++++++++++++++++++++++++++++++++++++++
+     The Internet did not settle on REST overnight. An alternative
+     approach to Web Services, called *SOAP (Simple Object Access
+     Protocol)* also gained traction.  The SOAP architecture’s
+     approach to the problem was to make it feasible, at least in
+     theory, to generate protocols that are customized to each network
+     application. The key elements of the approach are a framework for
+     protocol specification, software toolkits for automatically
+     generating protocol implementations from the specifications, and
+     modular partial specifications that can be reused across
+     protocols. In other words, SOAP supports a procedural style,
+     while REST supports a data-centric style.
 
-If Web Services is what we call it when the web server that implements
-my application sends a request to the web server that implements your
-application, then what do we call it when we both put our applications
-in the cloud so that they can support scalable workloads? We can call
-both of them *Cloud Services* if we want to, but is that a distinction
-without a difference? It depends.
+     The online retailer Amazon, not surprisingly, was an early
+     adopter (2002) of Web Services. Interestingly, Amazon made its
+     systems publicly accessible via *both* SOAP and REST approaches,
+     and according to some reports a substantial majority of
+     developers use the REST interface. Of course, this is just one
+     data point and may well reflect factors specific to Amazon.
+     As for the purposes of this book, we focus on REST as the
+     canonical approach to web services.
+
+As a final note, if Web Services is what we call it when the web
+server that implements my application sends a request to the web
+server that implements your application, then what do we call it when
+we both put our applications in the cloud so that they can support
+scalable workloads? We can call both of them *Cloud Services* if we
+want to, but is that a distinction without a difference? It depends.
 
 Moving a server process from a physical machine running in my machine
 room into a virtual machine running in a cloud provider’s datacenter
@@ -649,9 +613,7 @@ shifts responsibility for keeping the machine running from my system
 admin to the cloud provider’s operations team, but the application is
 still designed according to the Web Services architecture. On the
 other hand, if the application is designed from scratch to run on a
-scalable (and potentially unreliable) cloud platform, for example by
-adhering to the *micro-services architecture*, then we say the
-application is *cloud native*. So the important distinction is cloud
-native versus legacy Web Services deployed in the cloud.
-
-
+scalable cloud platform, for example by adhering to the
+*micro-services architecture*, then we say the application is *cloud
+native*. So the important distinction is cloud native versus legacy
+Web Services deployed in the cloud.
