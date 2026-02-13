@@ -102,8 +102,10 @@ basis of a hypertext system.
 
 When you ask your browser to view a page, your browser (the client)
 fetches the page from the server using HTTP, which traditionally runs
-over TCP. At its core, HTTP is a text-based
-request/response protocol, where every message has the general form
+over TCP. (If you looked at the source for a web browser, you would
+find the client-side socket calls shown in Section 2.1.1.)  At its
+core, HTTP is a text-based request/response protocol, where every
+message has the general form
 
 ::
 
@@ -140,8 +142,7 @@ become more apparent as you consider the details of the interactions
 between the application and transport layer protocols, and were
 exacerbated by the addition of security to the transport layer. This
 has led to new versions of HTTP, which has in turn inspired new
-transport protocols (specifically QUIC, which we describe in Chapter
-14). The interplay between HTTP and the transport layer is a great
+transport protocols. The interplay between HTTP and the transport layer is a great
 example of how modularity boundaries shift over time as systems
 mature and evolve.
 
@@ -283,7 +284,7 @@ page contents, including (number of bytes in the contents),
 ``Expires`` (time at which the contents are considered stale), and
 (time at which the contents were last modified at the server).
 
-TCP Connections
+Connection Overhead
 ++++++++++++++++++++++
 
 The original version of HTTP (1.0) established a separate TCP
@@ -294,25 +295,29 @@ between the client and server even if all the client wanted to do was
 verify that it had the most recent copy of a page. Thus, retrieving a
 page that included some text and a dozen icons or other small graphics
 would result in 13 separate TCP connections being established and
-closed. :numref:`Figure %s <fig-oldhttp>` shows the sequence of events
-for fetching a page that has just a single embedded object.  Blue
-lines indicate TCP messages, while black lines indicate the HTTP
-requests and responses. (The figure is purposely vague about the exact
-TCP messages being exchanged; we'll fill in the details in Chapter 11.)
+closed.
 
-The key is that every HTTP request requires two round trips: one
-for TCP to set up the connection, one for HTTP to request the page.
-Closing a TCP connection requires another TCP message, but the
-client doesn't wait for confirmation. This is a striking example
-of how passing off functionality to be implemented in another layer
-without looking at the details can have negative consequences.
+To make matters worse, securely accessing an HTTPS page results in
+even more round trips for the two sides to exchange and verify security
+credentials. In this case, HTTPS runs over TLS, which in turn runs
+over TCP. :numref:`Figure %s <fig-oldhttp>` shows the sequence of
+events for fetching a page that has just a single embedded object.
+Blue lines indicate TCP and TLS messages, while black lines indicate
+the HTTP requests and responses. The figure is purposely vague about
+the exact TCP/TLS messages being exchanged (we'll fill in the details
+in Chapters 11 and 12), but the key takeaway is clear: multiple round
+trips are required to download even the simplest web page.  This is a
+striking example of how passing off functionality to be implemented in
+another layer without looking at the details can have negative
+consequences.
 
 .. _fig-oldhttp:
-.. figure:: applications/figures/f09-04-9780123850591.png
+.. figure:: applications/figures/rtt-overhead.png
    :width: 500px
    :align: center
 
-   HTTP 1.0 behavior.
+   HTTP 1.0 results in multiple round trips for a single
+   Request/Response pair.
 
 To overcome this situation, HTTP version 1.1 introduced *persistent
 connections*—the client and server can exchange multiple
@@ -377,13 +382,13 @@ render a page has grown, reducing the overhead of each request is
 important for the latency experienced by the client. Header
 compression goes some way to improving the latency of fetching a page.
 
-The third advance of HTTP/2 is to multiplex several request/reply
+The third advance of HTTP/2 is to multiplex several request/response
 pairs on a single TCP connection. This goes beyond what version 1.1
 supports—allowing a *sequence* of requests to reuse a TCP
 connection—by permitting these requests to overlap with each
 other. The way HTTP/2 does this is to allow independent *streams*,
 each of which is labled in the HTTP header with a unique *stream
-id*. A given stream is limited to one request/reply exchange at a
+id*. A given stream is limited to one request/response exchange at a
 time, but multiple streams can be active on a given TCP connection.
 
 You can see from this discussion how the layering decisions made in
@@ -430,23 +435,25 @@ part, as in the URIs ``mailto:santa@northpole.org`` and
 For URIs that most people are familiar with—where the scheme is
 ``http``, ``https``, ``mailto`` or ``file``\ —the scheme-specific part
 includes information that can be used to *locate* the resource. The
-domain name for a web or an email server is a common example.  This
+domain name for a web server or an email server is a common example.  This
 locator information is what qualifies a URI as a URL. Another type of
 URI, known as a *Uniform Resource Name (URN)* , is used to specify a
 unique name for a resource, but without giving any hint as to its
 location. For URNs, we can think of the scheme as specifying a *name
 space* and the scheme-specific part as specifying a unique name within
-that name space. For example, the *DOI Foundation* (where DOI stands
-for *Digital Object Identifier*) manages an effort to assign a unique
-and persistent (never changing) identifier to every object in the
+that name space.
+
+For example, the *DOI Foundation* (where DOI stands for *Digital
+Object Identifier*) manages an effort to assign a unique and
+persistent (never changing) identifier to every object in the
 Internet. A URN corresponding to the DOI name space would look
 something like this: ``doi:10.1000/456%23789``. If you want to learn
 more about the DOI effort, and how to interpret the name
 ``10.1000/456%23789``, you can visit the DOI web site using the
 following URL: ``https://doi.org``. As this example illustrates,
 discussions about naming can easily descend into an an abstruse
-philosophical debate. We'll give it another try in Chapter 7 when
-we take a look at DNS.
+philosophical debate. We'll venture back into that discussion in
+Chapter 7 when we take a look at DNS.
 
 2.2.3 Caching
 ~~~~~~~~~~~~~~
@@ -517,41 +524,47 @@ server, and the interaction proceeds in response to input from the
 user (e.g., by clicking on links). However, there is also significant
 demand for direct computer-to-computer interaction, which is what
 happens every time you initiate a commercial transaction in a browser
-or a cellphone app: retail service talks to a payment service, a
-shipping service, an inventory service, and upstream supplier, and so
-on. We conclude this section by looking at how HTTP and the web have
-played a central role in supporting such transactions, which is often
-referred to as *Web Services*. In short, HTTP helps by defining an
-API for web services.
+or by using a cell phone app: a retail service talks to a payment
+service, a shipping service, an inventory service, an upstream
+supplier, and so on. We conclude this section by looking at how HTTP
+and the web have played a central role in supporting such
+transactions, which are collectively known as *Web Services*. In
+short, HTTP helps by defining an API for web services, and that API is
+often characterized as *RESTful*.
 
 REST is an acronym—\ *REpresentational State Transfer*\ —used to
 explain the software architecture that underlies the web. It was
-articulated in a PhD thesis by Roy Fielding in 2000, several years
-after the web started to take off. A RESTful API is an API that is
-consistent with the REST architecture. If you understand the basic
-ideas of the web we've just covered, you understand the essence
-of REST: everything is a *resource*, resources are identified by
-a URI, and the operations you can perform on resources include
-``GET``, ``POST``, ``PUT``, and ``DELETE`` (see
-:numref:`Table %s <tab-ops>`).
+articulated in a PhD thesis by Roy Fielding in 2000, a few years after
+the web started to become mainstream. A RESTful API, in turn, is an
+API that is consistent with the REST architecture. If you understand
+the basic ideas of the web we've just covered, you understand the
+essence of REST: everything is a *resource*, resources are identified
+by a URI, and the operations you can perform on resources include
+``GET``, ``POST``, ``PUT``, and ``DELETE`` (see :numref:`Table %s
+<tab-ops>`).
 
 While this sounds like a circular definition, it really boils down to
 an observation that the web, whether by design or accident, reinvented
 an object-oriented software architecture—resource is just another name
 for an object, and the set of HTTP operations are just a slight
-variation of a well-known set of data-centric operations known as
-*CRUD*: *Create*, *Read*, *Update*, *Delete*.
+variation of a well-known set of object-oriented operations referred
+to as *CRUD*: *Create*, *Read*, *Update*, *Delete*.
 
-The REST architecture is based on the assumption that the best way to
-integrate applications across networks is by re-applying the model
-underlying the World Wide Web architecture.  Since the only operations
-REST supports are the HTTP methods, such as ``GET`` and ``POST`` to
-provide an interface to a Web Service. In the REST model, any
-complexity in this interface is shifted from the protocol to the
-payload. The payload is a representation of the abstract state of a
-resource. For example, a ``GET`` could return a representation of the
-current state of the resource, and a ``POST`` could send a
-representation of a desired state of the resource.
+.. TODO: show an example resource and operations on it. Point to
+   tooling that helps you build a REST API. This could be a source
+   of programming exercises (in addition to Socket programming).
+
+In the context of web services, the REST architecture is based on the
+assumption that the best way to integrate applications across networks
+is by re-applying the model underlying the World Wide Web
+architecture.  Since the only operations REST supports are the HTTP
+methods, such as ``GET`` and ``POST`` to provide an interface to a Web
+Service. In the REST model, any complexity in this interface is
+shifted from the protocol to the payload. The payload is a
+representation of the abstract state of a resource. For example, a
+``GET`` could return a representation of the current state of the
+resource, and a ``POST`` could send a representation of a desired
+state of the resource.
 
 The representation of a resource state is abstract; it need not resemble
 how the resource is actually implemented by a particular backend
@@ -596,9 +609,9 @@ applications
      systems publicly accessible via *both* SOAP and REST approaches,
      and according to some reports a substantial majority of
      developers use the REST interface. Of course, this is just one
-     data point and may well reflect factors specific to Amazon.
-     As for the purposes of this book, we focus on REST as the
-     canonical approach to web services.
+     data point and may well reflect factors specific to Amazon.  As
+     for this book, we view REST as the more elegant approach to web
+     services, and so elect to focus on it.
 
 As a final note, if Web Services is what we call it when the web
 server that implements my application sends a request to the web
@@ -616,4 +629,5 @@ other hand, if the application is designed from scratch to run on a
 scalable cloud platform, for example by adhering to the
 *micro-services architecture*, then we say the application is *cloud
 native*. So the important distinction is cloud native versus legacy
-Web Services deployed in the cloud.
+Web Services deployed in the cloud. Either approach can export
+a RESTful API.
