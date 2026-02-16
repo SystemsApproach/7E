@@ -414,4 +414,5 @@ representative example of how bandwidth is allocated for Wi-Fi
    https://www.cisco.com/c/en/us/products/collateral/wireless/white-paper-c11-740788.html
 
 
-
+.. Notes: 801.11ax designed to be backward compatible with a/g/n/ac
+   Backward compatible extensions to RTS/CTS

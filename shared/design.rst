@@ -74,7 +74,7 @@ in your allocation strategy, and centrally allocate some "share of
 link capacity" to each node. This is what 5G does. PON is more like 5G
 than Wi-Fi, but enough different to warrent it's own subsection.
 
-There are two other design issues of note. The first is that
+There are three other design issues of note. The first is that
 multi-access networks allow all connected nodes to see (receive) every
 packet the other hosts send. Being able too receive every message has
 an upside—it means the network can easily support *broadcast*, which
@@ -96,12 +96,17 @@ of a *base station* or *access point*, as they are often
 called. Moreover, these base stations are typically deployed in a way
 that provides overlapping coverage, with two or more potentially able
 to serve a given mobile node. The resource allocation challenge is
-deciding which, among potentially multiple base stations in some
-geographic area, serves a given mobile node, and how does this
-assignment change over time as nodes move around. The two wireless
+deciding which base station, among potentially many in some
+geographic area, serves a given mobile node, as well as how this
+assignment changes over time as nodes move around. The two wireless
 technologies have developed different approaches to address this
 problem, each in keeping with their optimistic versus conservative
 assumptions.
 
-
-
+The third issue, which is unique to wireless networks, is that the
+capacity of the network—i.e., how much bandwidth is available to be
+allocated—is variable. It depends on how many external factors are
+interferring with the radio signal, and those factors continually
+change over time. This means the allocation problem fundamentally has
+two parts: (1) determine how many resources are available to allocate,
+and (2) allocate those resources to the users with packets to transmit.
