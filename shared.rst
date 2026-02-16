@@ -23,7 +23,7 @@ space carrying radio signals. There are also wired examples, with the
 original Ethernet being the most widely deployed. Just as with
 multiple people in a room trying to talk at the same time, multiple
 nodes simultaneously initiating a tranmission will interfere with each
-other. Some strategy is needed to decide who's turn it is to transmit
+other. Some strategy is needed to decide whose turn it is to transmit
 (or speak) next.
 
 This chapter looks at three approaches, as adopted by three different
@@ -37,7 +37,7 @@ to, thereby being indirectly connecting to the rest of the Internet.
 It is common for access networks to implement some form of
 authentication to ensure that the connecting host has permission to
 access its resources in the first place. Establishing identity is
-always the first step in any resource allocation mechanism.
+often the first step before resource allocation takes place.
 
 .. [#] For simplity, we refer the the mobile cellular network as 5G,
        except when we are making a point about issues that span
