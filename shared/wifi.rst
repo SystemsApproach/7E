@@ -21,6 +21,13 @@ described in Section 5.2, and in part by adding spectrum in the 6-GHz
 band. Wi-Fi 7.0 (802.11be) has recently been approved, and we can
 expect wider adoption as 802.1be devices become available.
 
+Across all of these changes, Wi-Fi has made backwards compatibility a
+priority, so any deployment that supports 802.11ax also supports
+802.11a/g/n/ac (all the variants based on OFDM). The rest of this
+section primarily focuses on 802.11ax, but as we will see, the
+starting point for any legacy technology often colors the solution you
+see today.
+
 5.3.1 Collision Avoidance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -375,7 +382,7 @@ is made to dynamically adapt the numerology based on feedback.
 
 Wi-Fi does not make quality-of-service guarantees; like the Internet
 as a whole, Wi-Fi is a best-effort solution. In early versions, each
-node (including both APs and mobile nodes) independently makes a local
+node (including both APs and mobile nodes) independently made a local
 scheduling decision, transmitting its packets in FIFO order according
 to the CA mechanism described in Section 5.3.1. With Wi-Fi 6.0, the
 APs take on additional responsibility coordinating with other devices
@@ -393,20 +400,24 @@ scheduler make RU allocations.
     :align: center
 
     Wi-Fi allocates RUs to complete packets on some subset of the
-    available subcarrier frequencies. Maximizing spectrum utilization
-    is not an explicit objective.
+    available subcarrier frequencies.
 
 Finally, be aware that the example shown in :numref:`Figure %s
 <fig-sched-grid>` is a bit biased towards the 5G perspective,
 specifically in the way blocks of RUs for a given receiver (i.e., the
 different colored regions) are shaped. 5G is more likely to interleave
-a few symbols from many senders and strive for full utilization (i.e.,
-filling all the RUs with data). Because Wi-Fi is fundamentally based
-on statistical multiplexing, it more likely sends entire packets on
-some set of subcarrier frequencies, and accept that some capacity
-goes unused. :numref:`Figure %s <fig-wifi-grid>` shows a more
-representative example of how bandwidth is allocated for Wi-Fi
-(but it is still a simplified example).
+a few symbols from many senders, in an effort to support a constant
+bit-rate (as is required by voice). In contrast, Wi-Fi is
+fundamentally a best-effort approach: it interleaves complete packets
+based on statistical multiplexing. :numref:`Figure %s <fig-wifi-grid>`
+shows a more representative example of how bandwidth is allocated for
+Wi-Fi. It is still a simplification, but it does help illustrate an
+essential aspect of Wi-Fi: once a device gains permission to transmit
+(based on a RTS/CTS exchange), and the AP has allocated some subset of
+subcarriers to that device, the device is allowed to hold those
+subcarriers for as long as it takes to send a complete packet
+(although the AP does enforce an upper limit to protect against
+misbehaving devices).
 
 .. See for more details
    https://documentation.meraki.com/Wireless/Design_and_Configure/Architecture_and_Best_Practices/Wi-Fi_6_(802.11ax)_Technical_Guide
@@ -414,5 +425,3 @@ representative example of how bandwidth is allocated for Wi-Fi
    https://www.cisco.com/c/en/us/products/collateral/wireless/white-paper-c11-740788.html
 
 
-.. Notes: 801.11ax designed to be backward compatible with a/g/n/ac
-   Backward compatible extensions to RTS/CTS

@@ -12,7 +12,7 @@ radio systems is motivated by the need to deal with these challenges.
 .. sidebar:: Spectrum Allocation
 
   Before networks can allocate spectrum to users, someone has to
-  decide how to allocate (license) spectrum to network operators.
+  decide how to allocate spectrum to network operators.
   These allocations are typically determined by government agencies,
   such as the Federal Communications Commission (FCC) in the United
   States.  Specific bands (frequency ranges) are allocated to certain
@@ -28,18 +28,19 @@ radio systems is motivated by the need to deal with these challenges.
   certain restrictions to make that otherwise unconstrained sharing
   work. Most important of these is a limit on transmission power. This
   limits the range of a signal, making it less likely to interfere
-  with another signal. For example, a cordless phone might have a
+  with another signal. For example, a wireless microphone might have a
   range of about 100 feet. The upper bound on power for Wi-Fi limits
   its range to roughly 100 meters, although in practice closer to tens
   of meters indoors where walls absorb much of the signal.
 
-As we will see in the next two sections, Wi-Fi and 5G take very
-different approaches to how they allocate radio spectrum, but despite
-these difference, they both use the same multiplexing technology. This
-has not always been the case, but is now with the latest generation of
-Wi-Fi, known as Wi-Fi 6.0 (also called 802.11ax). The rest of this
-section describes the inherent challenges and introduces the
-technology used to address it.
+As we cover in the next two sections, Wi-Fi and 5G take different
+approaches to the allocation of radio spectrum, but despite these
+difference, they use basically the same multiplexing technology. This
+has not always been the case, but is now with the latest generations
+of Wi-Fi, known as Wi-Fi 6 and Wi-Fi 7 (also called 802.11ax and
+802.11be respectively). The rest of this section introduces the
+inherent challenges of using wireless spectrum and decribes the
+technology used to address them.
 
 5.2.1 Transmission Challenges
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -151,7 +152,9 @@ OFDMA just means that data can simultaneously be sent on behalf of
 multiple users, each on a different subcarrier and for a different
 duration of time. Wi-Fi and 5G manage OFDMA in different ways—as we'll
 see in their respective sections—but they are starting with the same
-building block.
+building block. It is this building block, and the ways it can be
+(re-)configured to address variability, that is the main take away
+from this section.
 
 Before getting into the details, there is one other bit of context to
 set.  At a high level, some range of spectrum bandwidth is set aside
