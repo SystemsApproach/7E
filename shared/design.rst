@@ -98,7 +98,7 @@ solution.
 
 The second issue is unique to wireless multi-access network: wireless
 nodes are inherently mobile, and this mobility has implications on
-resource allocation. This is because even in a network that supports
+resource allocation. This is because, even in a network that supports
 mobility, some nodes typically remain tethered to the wired network,
 providing the mobile nodes with wider connectivity. This is the role
 of a *base station* or *access point*, as they are often
@@ -112,7 +112,7 @@ wireless technologies have developed different approaches to address
 this problem, each in keeping with their optimistic versus
 conservative assumptions.
 
-The third issue, which is unique to wireless networks, is that the
+The third issue, also specific to wireless networks, is that the
 capacity of the network—i.e., how much bandwidth is available to be
 allocated—is variable. It depends on several external factors that
 interfere with the radio signal, and those factors continually change

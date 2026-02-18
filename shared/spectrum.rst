@@ -39,7 +39,7 @@ difference, they use basically the same multiplexing technology. This
 has not always been the case, but is now with the latest generations
 of Wi-Fi, known as Wi-Fi 6 and Wi-Fi 7 (also called 802.11ax and
 802.11be respectively). The rest of this section introduces the
-inherent challenges of using wireless spectrum and decribes the
+inherent challenges of using wireless spectrum and describes the
 technology used to address them.
 
 5.2.1 Transmission Challenges
@@ -62,13 +62,13 @@ receiver, who may also be moving.
 
 As a consequence of these multiple paths, the original signal arrives
 at the receiver spread over time, as illustrated in :numref:`Figure %s
-<fig-coherence>`. Empirical evidence shows that the Multipath
-Spread—the time between the first and last signals of one transmission
-arriving at the receiver—is 1-10μs in urban environments and 10-30μs
+<fig-coherence>`. Empirical evidence shows that the *multipath
+spread*—the time between the first and last signals of one transmission
+arriving at the receiver—is 1–10μs in urban environments and 10–30μs
 in suburban environments. These multipath signals can interfere with
 each other constructively or destructively, and this will vary over
 time. Theoretical bounds for the time duration for which the channel
-may be assumed to be invariant, known as the *Coherence Time* and
+may be assumed to be invariant, known as the *coherence time* and
 denoted :math:`T_c`, is given by
 
 .. math::
@@ -124,7 +124,7 @@ the same algorithm as the sender and initializes it with the same
 seed; hence, it is able to hop frequencies in sync with the
 transmitter to correctly receive the frame. This scheme reduces
 interference by making it unlikely that two signals would be using the
-same frequency for more than the infrequent isolated bit.
+same frequency for very long. 
 
 On the mobile network side, each generation has used a different
 approach. For example, 2G used *Time Division Multiple Access (TDMA)*,
@@ -142,7 +142,7 @@ achieves orthogonality. That topic is beyond the scope of this book.
 .. [#] In radio communication, term "carrier" refers to the base
        signal before it has been modulated to carry data.  Because we
        are now focused on dividing a larger frequency band into
-       smaller subbands, each of those subbands has it's own carrier
+       smaller subbands, each of those subbands has its own carrier
        signal, hence "subcarrier".
 
 Today, the radio multiplexing technology used by both 5G and Wi-Fi is
@@ -153,8 +153,7 @@ multiple users, each on a different subcarrier and for a different
 duration of time. Wi-Fi and 5G manage OFDMA in different ways—as we'll
 see in their respective sections—but they are starting with the same
 building block. It is this building block, and the ways it can be
-(re-)configured to address variability, that is the main take away
-from this section.
+(re-)configured to address variability, that is the main focus of this section.
 
 Before getting into the details, there is one other bit of context to
 set.  At a high level, some range of spectrum bandwidth is set aside
@@ -169,19 +168,21 @@ track. For our purposes, we focus on a single channel in this section
 (let's assume it's 20-MHz wide), and we take up the question of how to
 manage a set of channels in later sections.
 
-In its simplest form, the subcarriers are narrow (e.g., 15 kHz), and
-the coding of user data into OFDMA symbols is designed to minimize the
-risk of data loss due to interference.  The number of bits that can be
-encoded in each symbol depends on the modulation scheme in use.  For
-example, using *Quadrature Amplitude Modulation (QAM)*, 16-QAM yields
-4 bits per symbol, 64-QAM yields 6 bits per symbol, and 1024-QAM
-yields 10 bits per symbol (the current max for both Wi-FI and 5G). The
-key is that there is a degree of freedom to choose the modulation
-scheme based on the measured channel quality, sending more bits per
-symbol (and thus more bits per second) when the quality is high. In
-other words, OFDMA is not a coding/modulation algorithm, *per se*, but
-instead provides a framework for selecting a specific coding and
-modulation for each subcarrier frequency.
+The subcarriers in OFDMA are narrow (e.g., 15 kHz), and the coding of
+user data into OFDMA symbols is designed to minimize the risk of data
+loss due to interference.  The number of bits that can be encoded in
+each symbol depends on the specifics of the modulation scheme in use,
+which is chosen based on the channel quality.
+*Quadrature Amplitude Modulation (QAM)* is commonly used, and it
+allows a wide range of bits per symbol depending on the specific
+QAM parameters: 16-QAM yields 4 bits per symbol, 64-QAM yields 6 bits per
+symbol, and 1024-QAM yields 10 bits per symbol (the current max for
+Wi-Fi 6 and 5G). The key is that there is a degree of freedom to
+choose the modulation scheme based on the measured channel quality,
+sending more bits per symbol (and thus more bits per second) when the
+quality is high. In other words, OFDMA is not so much a coding/modulation
+algorithm as a *framework* for selecting a
+specific coding and modulation scheme for each subcarrier frequency.
 
 We can visualize the OFDMA framework as a grid of discrete schedulable
 units of the radio spectrum. The fundamental unit is the time to
@@ -190,7 +191,7 @@ transmit one symbol on one subcarrier. :numref:`Figure %s
 the subcarriers are represented in the vertical dimension and the time
 to transmit symbols on each subcarrier is represented in the
 horizontal dimension. The basic unit of transmission, called a
-*Resource Units (RU)*, corresponds to a 15-kHz band around one
+*Resource Unit (RU)*, corresponds to a small frequency band around one
 subcarrier frequency and the time it takes to transmit one OFDMA
 symbol.
 
@@ -244,15 +245,16 @@ might take into consideration.
 
 All of this brings us to the following observation: making scheduling
 decisions requires complex analysis and heavy use of heuristics. (It
-is also an opportunity to leverage AI.)  Exactly how the decisions are
-made is network-specific (Wi-Fi and 5G adopt different strategies),
-but also vendor-specific. The actual algorithms are not part of the
-respective standards, but rather, are proprietary.  What the next two
-sections focus on is the objectives Wi-Fi and 5G, respectively, are
-trying to achieve. Wi-Fi's approach is consistent with the best-effort
-philosophy of the Internet; there are no guarantees. In contrast, 5G
-tries to deliver the most predictable performance it can to the
-largest number of devices.  Achieving this level of coordination
-requires a centralized approach, in which base stations collaborate to
-decide when and how all the devices they connect should transmit.
+is also, arguably, an opportunity to leverage machine learning.)
+Exactly how the decisions are made is both network-specific (Wi-Fi and 5G
+adopt different strategies) and vendor-specific. The actual
+algorithms are not part of the respective standards, but rather, are
+proprietary.  What the next two sections focus on is the objectives
+Wi-Fi and 5G, respectively, are trying to achieve. Wi-Fi's approach is
+consistent with the best-effort philosophy of the Internet; there are
+no guarantees. In contrast, 5G tries to deliver the most predictable
+performance it can to the largest number of devices.  Achieving this
+level of coordination requires a centralized approach, in which base
+stations collaborate to decide when and how all the devices they
+connect should transmit.
 
