@@ -394,6 +394,14 @@ includes the following attributes:
 - Maximum Data Burst
 - Averaging Window
 
+.. Dropped the following qualifier (TMI).  Note that while the
+   preceding discussion could be interpreted to imply a one-to-one
+   relationship between subscribers and a 5QI, it is more accurate to
+   say that each 5QI is associated with a class of traffic (often
+   corresponding to some type of application), where a given
+   subscriber might be sending and receiving traffic that belongs to
+   multiple classes at any given time)
+
 The other big difference for 5G (differentiating it from both 4G and
 Wi-Fi) is that 5G tailors its scheduling algorithm according to the
 use case it is trying to satisfy. Specifically, 5G bands below 1 GHz
@@ -402,9 +410,7 @@ a primary focus on range. Frequencies between 1-6 GHz are designed to
 offer wider bandwidths, focusing on mobile broadband and
 mission-critical applications. Frequencies above 24 GHz (mmWaves) are
 designed to provide super-wide bandwidths over short, line-of-sight
-coverage.
-
-Moreover, for each of these, 5G dynamically adapts the numerology to
+coverage. For each of these, 5G dynamically adapts the numerology to
 match that target use case. (Recall that we used 15 kHz frequency
 spacing and 0.5ms scheduling intervals in the example shown in
 :numref:`Figure %s <fig-sched-grid>`.)
@@ -424,24 +430,33 @@ spacing and 0.5ms scheduling intervals in the example shown in
     :width: 600px
     :align: center
 
-    Scheduler allocates Resource Blocks to user data streams based on
+    Scheduler allocates RUs to user data streams based on
     CQI feedback from receivers and the 5QI parameters associated with
     each class of service.
 
 :numref:`Figure %s <fig-scheduler>` depicts the role of the scheduler
-from this more abstract perspective. The CQI feedback from the
+from this abstract perspective. The CQI feedback from the
 receivers and the 5QI quality-of-service class selected by the
-subscriber are the two key pieces of input to the scheduler.  Note
-that while the preceding discussion could be interpreted to imply a
-one-to-one relationship between subscribers and a 5QI, it is more
-accurate to say that each 5QI is associated with a class of traffic
-(often corresponding to some type of application), where a given
-subscriber might be sending and receiving traffic that belongs to
-multiple classes at any given time). Finally, note that one possible
-decision the scheduler might make is to "hand-off" the user to another
-base station, as outlined in Section 5.4.2. In this way, a collection
-of base stations effectively collaborate to allocate spectrum across
-a set of radio cells.
+subscriber are the two key pieces of input to the scheduler. Rather
+than a single FIFO queue (as would be the case for Wi-Fi) the
+scheduler serves multiple queues. This makes it possible for the
+scheduler to preferentially send important traffic from one queue
+before lower priority traffic from another queue, so as to meet its
+QoS promises. This general approach to scheduling happens any time a
+network is trying to make QoS guarantees; we revisit it again in
+Chapter 16.
+
+The figure also depicts each queue as holding packet segments rather
+than complete packets (as would be the case for Wi-Fi). In effect,
+packets are transmitted in a piecemeal fashion, one segment at a time,
+according to how many RUs are available to service the corresponding
+queue at any point in time.  The segments are reassembled back into
+complete packets at the receiver, before being passed up to the
+device (for downstream traffic) or on to the Mobile Core (for upstream
+traffic). Finally, note that one possible decision the scheduler might
+make is to "hand-off" the user to another base station, as outlined in
+Section 5.4.2. In this way, a collection of base stations effectively
+collaborate to allocate spectrum across a set of radio cells.
 
 .. See https://www.youtube.com/watch?v=GEQgEDcRcZI 5G for numerology.
 
