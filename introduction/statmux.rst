@@ -31,7 +31,7 @@ hosts—are multiplexed onto a single physical link by switch 1 and then
 *demultiplexed* back into separate flows by switch 2. Note that we are
 being intentionally vague about exactly what a “flow of data”
 corresponds to. For the purposes of this discussion, assume that each
-host on the left has a large supply of data that it wants to send to
+host on the left has a large file that it wants to send to
 its counterpart on the right.
 
 .. _fig-mux:
@@ -203,7 +203,7 @@ effectively schedules link resources on a packet-by-packet basis.
 We revisit both provisioning and scheduling throughout the book,
 but for now, we identify three specific resources:
 
-* **Link Capacity:** Every link as a fixed bandwidth that limits the
+* **Link Capacity:** Every link has a fixed bandwidth that limits the
   rate at which it can transmit packets. This capacity is measured in
   bits-per-second (bps). Sometimes new cables need to be laid, but
   more often than not, additional bandwidth can be "turned

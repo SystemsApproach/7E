@@ -231,7 +231,7 @@ an internet can be built from a set of internets.  Thus, we can
 recursively build arbitrarily large networks by interconnecting clouds
 to form larger clouds.
 
-We take a closer look at how IP achieves this goal in Chapter 5, but
+We take a closer look at how IP achieves this goal in Chapter 6, but
 for now the main take away is that we can define a *network*
 recursively as consisting of two or more nodes connected by a physical
 link, or as two or more networks connected by a node. In other words,
@@ -245,7 +245,7 @@ bottom level, the network is implemented by some physical medium.
    Internet Engineering Task Force (IETF), which is responsible for
    the specification of many of the Internet protocols, such as TCP,
    UDP, IP, DNS, and BGP. The Internet architecture also embraces
-   protocols defined by other organizations, including IEEE's 802.11
+   protocols defined by other organizations, including IEEE's 802.3
    ethernet and Wi-Fi standards, W3C's HTTP/HTML web specifications,
    3GPP's 4G and 5G cellular networks standards, and ITU-T's H.232
    video encoding standards, to name a few.*

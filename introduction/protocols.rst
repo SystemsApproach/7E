@@ -56,7 +56,9 @@ a different service to the higher layers, but building on the same
 low-level abstractions. We saw this in the Internet architecture
 depicted in :numref:`Figure %s <fig-internet>`, where TCP and UDP
 offer two different process-to-process communication services, one
-making reliability guarantees (TCP) and the other not (UDP).
+establishing a reliable byte-stream between two processes (TCP) and
+the other delivering unreliable datagrams between two processes (UDP).
+
 
 1.3.2 Interfaces
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
