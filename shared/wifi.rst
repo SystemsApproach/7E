@@ -371,28 +371,30 @@ users, and (b) determining how to adapt transmission parameters based
 on feedback. In both cases, the Wi-Fi approach is minimal (especially
 when compared to 5G).
 
-Wi-Fi uses heuristics to adjust the modulation level. The inputs to
-these heuristics are a combination of directly measuring the
-signal-to-noise ratio (SNR) at the physical layer, and estimating the
-SNR by measuring how often packets are acknowledged. In some
-scenarios, a sender will occasionally probe a higher bit rate by
-sending one or more packets at that rate to see if it succeeds.  Note
-that the numerology is configured for the environment, but no attempt
-is made to dynamically adapt the numerology based on feedback.
+To start, Wi-Fi has its own numerology, based on the environments it
+is expected to be deployed. Specifically, Wi-Fi adopts per-symbol
+transmission times of 13.6, 14.4, and 16.0  μs. A particular value is
+selected to balance maximizing throughput with maximizing
+reliability. The corresponding subcarrier spacing is 78.125 kHz.
+Wi-Fi then uses heuristics to dynamically adjust the modulation level
+(e.g., QAM-256 vs QAM-1024). The inputs to these heuristics are a
+combination of directly measuring the signal-to-noise ratio (SNR) at
+the physical layer, and estimating the SNR by measuring how often
+packets are acknowledged.
 
 Wi-Fi does not make quality-of-service guarantees; like the Internet
-as a whole, Wi-Fi is a best-effort solution. In early versions, each
-node (including both APs and mobile nodes) independently made a local
-scheduling decision, transmitting its packets in FIFO order according
-to the CA mechanism described in Section 5.3.1. With Wi-Fi 6, the
-APs take on additional responsibility coordinating with other devices
-as to when transmissions should happen. It does this by piggybacking
-RU assignments on RTS messages sent to devices, notifying them both
-when they should expect downlink traffic, and when they are cleared to
-send uplink traffic. Devices and APs also exchange *Buffer Status
-Report Pool (BSRP)* message telling each other how much traffic they
-have buffered, awaiting transmission. This information helps the
-scheduler make RU allocations.
+as a whole, Wi-Fi is a best-effort solution. This means packets
+enqueued at the MAC layer are transmitted in FIFO order. Initiating a
+transmission first involves the CA mechanism described in Section
+5.3.1. The main difference from earlier versions is that in Wi-Fi 6,
+the APs take on additional responsibility coordinating with other
+devices as to when transmissions should happen. They do this by
+piggybacking RU assignments on RTS messages sent to devices, notifying
+them both when they should expect downlink traffic, and when they are
+cleared to send uplink traffic. Devices and APs also periodically
+exchange *Buffer Status Report Pool (BSRP)* message telling each other
+how much traffic they have buffered, awaiting transmission. This
+information helps the scheduler make RU allocations.
 
 .. _fig-wifi-grid:
 .. figure:: shared/figures/wifi-grid.png
@@ -402,22 +404,26 @@ scheduler make RU allocations.
     Wi-Fi allocates RUs to complete packets on some subset of the
     available subcarrier frequencies.
 
-Finally, be aware that the example shown in :numref:`Figure %s
-<fig-sched-grid>` is a bit biased towards the 5G perspective,
-specifically in the way blocks of RUs for a given receiver (i.e., the
-different colored regions) are shaped. 5G is more likely to interleave
-a few symbols from many senders, in an effort to support a constant
-bit-rate (as is required by voice). In contrast, Wi-Fi is
-fundamentally a best-effort approach: it interleaves complete packets
-based on statistical multiplexing. :numref:`Figure %s <fig-wifi-grid>`
-shows a more representative example of how bandwidth is allocated for
-Wi-Fi. It is still a simplification, but it does help illustrate an
-essential aspect of Wi-Fi: once a device gains permission to transmit
-(based on a RTS/CTS exchange), and the AP has allocated some subset of
+Given this overall approach, be aware that the example depicted in
+:numref:`Figure %s <fig-sched-grid>` is a bit biased towards the 5G
+perspective, specifically in the way blocks of RUs for a given
+receiver (i.e., the different colored regions) are shaped. 5G is more
+likely to interleave a few symbols from many senders, in an effort to
+support a constant bit-rate (as is required by voice). In contrast,
+Wi-Fi interleaves complete packets based on statistical
+multiplexing. :numref:`Figure %s <fig-wifi-grid>` shows a more
+representative example of how bandwidth is allocated for Wi-Fi. It is
+still a simplification, but it does help illustrate an essential
+aspect of Wi-Fi: once a device gains permission to transmit (based on
+a RTS/CTS exchange), and the AP has allocated some subset of
 subcarriers to that device, the device is allowed to hold those
-subcarriers for as long as it takes to send a complete packet
-(although the AP does enforce an upper limit to protect against
-misbehaving devices).
+subcarriers for as long as it takes to send a complete packet. The AP
+does enforce an upper limit on how long a sender holds the
+subcarriers, ensuring an opportunity to preempt one sender so another
+can utilize the resource, but the limit is big enough that Wi-Fi
+connected hosts can send one or more packets from the front of its
+queue.
+
 
 .. See for more details
    https://documentation.meraki.com/Wireless/Design_and_Configure/Architecture_and_Best_Practices/Wi-Fi_6_(802.11ax)_Technical_Guide

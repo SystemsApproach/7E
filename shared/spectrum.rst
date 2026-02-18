@@ -105,12 +105,18 @@ direction. This technology, called *Multiple-Input-Multiple-Output
 antennas in an effort to reach the receiver, adding even more paths to
 the environment-imposed multipath propagation.
 
+The main takeaway from this brief introduction to the challenges of
+radio transmission is that the solution needs to be adaptive, so it
+can be configured to match the environment (indoor, urban, suburban)
+and dynamically reconfigured to match changing conditions. (noise,
+mobility).
+
 5.2.2  Multiplexing Technique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We saw an overview of multiplexing strategies in Chapter 1, and both
 Wi-Fi and the Mobile Cellular Network have a long history using
-variants of those approaches. For example, Wi-Fi originally used
+variants of those approaches. Wi-Fi originally used
 *spread spectrum*, a technique developed by the military to combat
 intentional attempts to jam radio signals. The idea was to spread the
 signal over a wide frequency band, so as to minimize the impact of
@@ -233,14 +239,16 @@ executed on a block-by-block basis over time.
        helpful terminology in its place.
 
 Second, we used 15-kHz as our example subcarrier spacing, with a
-Physical Block transmission time of 0.5ms. These are sometimes
-referred to as the *numerology* of the radio's air interface, and our
-example is just that—an example.  Any given wireless network will be
-configured with a particular numerology. The exact settings can be
-configured for the target environment (e.g., urban, suburban,
-indoors), and in some cases, even dynamically changed based on
-observed behavior.  That is to say, selecting a network's numerology
-is potentially another degree-of-freedom that a scheduling algorithm
+Physical Block transmission time of 0.5ms. (This corresponds to a
+time-per-symbol 66.67 μs in the example, taking into account other
+overhead associated with transmitting a physical block.) These are
+sometimes referred to as the *numerology* of the radio's air
+interface, and our example is just that—an example.  Any given
+wireless network will be configured with a particular numerology. The
+exact settings can be configured for the target environment (e.g.,
+urban, suburban, indoors), and in some cases, even dynamically changed
+based on observed behavior.  That is to say, selecting a network's
+numerology is another degree-of-freedom that a scheduling algorithm
 might take into consideration.
 
 All of this brings us to the following observation: making scheduling
@@ -253,8 +261,5 @@ proprietary.  What the next two sections focus on is the objectives
 Wi-Fi and 5G, respectively, are trying to achieve. Wi-Fi's approach is
 consistent with the best-effort philosophy of the Internet; there are
 no guarantees. In contrast, 5G tries to deliver the most predictable
-performance it can to the largest number of devices.  Achieving this
-level of coordination requires a centralized approach, in which base
-stations collaborate to decide when and how all the devices they
-connect should transmit.
+performance it can to the largest number of devices.
 
