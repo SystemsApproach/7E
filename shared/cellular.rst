@@ -123,14 +123,17 @@ cooperating to manage the radio spectrum as a whole. Since their
 coverage overlaps, they need to cooperate with each other to make
 globally optimal decisions.
 
-First, each base station establishes the wireless channel for a
-subscriber's UE upon power-up or upon handover when the UE is active.
-This channel is released when the UE remains idle for a predetermined
-period of time. Using 3GPP terminology, this wireless channel is said
-to provide a *radio bearer*. The term “bearer” has historically been
-used in telecommunications (including early wireline technologies such
-as ISDN) to denote a data channel, as opposed to a channel that
-carries signaling information.
+The end-systems such as mobile phones in cellular networks are usually
+referred to in 3GPP documents as *user equipment (UE)* so we will use
+that terminology here. When a UE is powered on or comes in range of a
+new base station while moving, the nearby base station establishes the
+wireless channel for communication with the UE.  This channel is
+released when the UE remains idle for a predetermined period of
+time. Using 3GPP terminology, this wireless channel is said to provide
+a *radio bearer*. The term “bearer” has historically been used in
+telecommunications (including early wireline technologies such as
+ISDN) to denote a data channel, as opposed to a channel that carries
+signaling (or control) information.
 
 .. _fig-active-ue:
 .. figure:: shared/figures/active-ue.png
@@ -169,13 +172,14 @@ slicing mechanism.
     the Mobile Core's User Plane (known in 3GPP terms as PDU session).
 
 Fourth, the base station forwards both control and user plane packets
-between the Mobile Core and the UE. These packets are tunneled over
-SCTP/IP and GTP/UDP/IP, respectively. SCTP (Stream Control Transport
-Protocol) is an alternative reliable transport to TCP, tailored to carry
-signaling (control) information for telephony services. GTP (a nested
-acronym corresponding to (General Packet Radio Service) Tunneling
-Protocol) is a 3GPP-specific tunneling protocol designed to run over
-UDP.
+between the Mobile Core and the UE. These packets are tunneled using
+protocols designed to ensure UEs can remain connected to the core as they move
+among base stations. The control packets are tunneled using SCTP
+(Stream Control Transport Protocol), which is similar to TCP, but
+tailored to carry signaling (control) information for telephony
+services. The data is tunneled using GTP, a nested acronym
+corresponding to (General Packet Radio Service) Tunneling Protocol,
+which is a 3GPP-specific protocol designed to run over UDP.
 
 .. _fig-tunnels:
 .. figure:: shared/figures/tunnels.png
@@ -256,9 +260,9 @@ connected to the Mobile Core by a secure private network, over which
 it establishes the tunnels introduced in :numref:`Figure %s
 <fig-tunnels>`: a GTP/UDP/IP tunnel to the Core's User Plane (Core-UP)
 and a SCTP/IP tunnel to the Core's Control Plane (Core-CP). Second,
-each UE has an operator-provided SIM card, which contains information
-that uniquely identifies the subscriber and includes a secret key that
-the UE uses to authenticate itself.
+each UE has an operator-provided SIM (Subscriber Identiy Module) card,
+which contains information that uniquely identifies the subscriber and
+includes a secret key that the UE uses to authenticate itself.
 
 The identifier burned into each SIM card, called an *IMSI
 (International Mobile Subscriber Identity)*, is a globally unique
@@ -311,10 +315,10 @@ initially in the clear since the base station to UE link is not yet
 secure.
 
 Once the UE and Core-CP are satisfied with each other's identity, the
-Core-CP informs the other 5GC components of the parameters they will need
+Core-CP informs the other 5G components of the parameters they will need
 to service the UE (Step 3). This includes: (a) instructing the Core-UP
 to initialize the user plane (e.g., assign an IP address to the UE and
-set the appropriate 5QI); (b) instructing the base station to
+set the appropriate QoS parameters); (b) instructing the base station to
 establish an encrypted channel to the UE; and (c) giving the UE the
 symmetric key it will need to use the encrypted channel with the base
 station. The symmetric key is encrypted using the public key of the
@@ -341,7 +345,7 @@ Support for mobility can now be understood as the process of
 re-executing one or more of the steps shown in :numref:`Figure %s
 <fig-secure>` as the UE moves throughout the RAN. The unauthenticated
 link indicated by (1) allows the UE to be known to all base stations
-within range. Based on the signal's measured CQI, the base stations
+within range. Based on the signal's measured channel quality, the base stations
 communicate directly with each other to make a handover decision.
 Once made, the decision is then communicated to the Mobile Core,
 re-triggering the setup functions indicated by (3), which in turn
@@ -431,12 +435,12 @@ spacing and 0.5ms scheduling intervals in the example shown in
     :align: center
 
     Scheduler allocates RUs to user data streams based on
-    CQI feedback from receivers and the 5QI parameters associated with
+    CQI feedback from receivers and the QoS parameters associated with
     each class of service.
 
 :numref:`Figure %s <fig-scheduler>` depicts the role of the scheduler
 from this abstract perspective. The CQI feedback from the
-receivers and the 5QI quality-of-service class selected by the
+receivers and the quality-of-service class selected by the
 subscriber are the two key pieces of input to the scheduler. Rather
 than a single FIFO queue (as would be the case for Wi-Fi) the
 scheduler serves multiple queues. This makes it possible for the
