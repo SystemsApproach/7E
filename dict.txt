@@ -8,6 +8,7 @@ Ack
 ACK
 acked
 ACKed
+acknowledge
 acknowledgement
 Acknowledgement
 Acknowledgements
@@ -1752,6 +1753,7 @@ uint
 UMD
 UMR
 unACKed
+unacknowledge
 unaddressed
 unchoked
 uncompress

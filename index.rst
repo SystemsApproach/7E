@@ -31,6 +31,7 @@ Larry Peterson and Bruce Davie
    routing.rst
    shared.rst
    part_three.rst
+   reliable.rst
    README.rst
    authors.rst
    latest.rst
