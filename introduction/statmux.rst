@@ -241,8 +241,9 @@ are a few common topologies of note. One is a mesh topology, of which
 topologies have no obvious structure, although in practice they often
 mirror geographical maps (as would the case for a nation-wide backbone
 network with switches in major cities). Another common example is a
-*leaf-spine* topology, similar to the one one shown in Section
-2.1. This particular structure is designed to support low-latency
+*leaf-spine* topology, similar to the one one shown in
+:ref:`Section 2.1 <fig-leaf-spine>`.
+This particular structure is designed to support low-latency
 communication between servers in a cloud datacenter.
 
 .. _fig-topology:
