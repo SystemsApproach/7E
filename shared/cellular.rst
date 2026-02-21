@@ -243,7 +243,7 @@ radio spectrum over a larger geographic area.
 5.4.3 Mobile Core
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At the most basic level, the function of the Mobile Core is to provide
+The function of the Mobile Core is to provide
 packet data network connectivity to mobile subscribers, i.e., connect
 them to the Internet. As we noted above, there is more to providing
 this connectivity than meets the eye: the Mobile Core ensures that
@@ -439,28 +439,28 @@ spacing and 0.5ms scheduling intervals in the example shown in
     each class of service.
 
 :numref:`Figure %s <fig-scheduler>` depicts the role of the scheduler
-from this abstract perspective. The CQI feedback from the
-receivers and the quality-of-service class selected by the
-subscriber are the two key pieces of input to the scheduler. Rather
-than a single FIFO queue (as would be the case for Wi-Fi) the
-scheduler serves multiple queues. This makes it possible for the
-scheduler to preferentially send important traffic from one queue
-before lower priority traffic from another queue, so as to meet its
-QoS promises. This general approach to scheduling happens any time a
-network is trying to make QoS guarantees; we revisit it again in
-Chapter 16.
+from this abstract perspective. The CQI feedback from the receivers
+and the quality-of-service class selected by the subscriber are the
+two key pieces of input to the scheduler. Rather than a single FIFO
+queue (as would be the case for Wi-Fi) the scheduler serves multiple
+queues. This makes it possible for the scheduler to preferentially
+send high-priorty traffic from one queue before lower priority traffic
+from another queue, so as to meet its QoS promises. The exact
+algorithm used in 5G is proprietary, but we describe a generic QoS
+scheduler in Chapter 8.
 
-The figure also depicts each queue as holding packet segments rather
-than complete packets (as would be the case for Wi-Fi). In effect,
-packets are transmitted in a piecemeal fashion, one segment at a time,
-according to how many RUs are available to service the corresponding
-queue at any point in time.  The segments are reassembled back into
-complete packets at the receiver, before being passed up to the
-device (for downstream traffic) or on to the Mobile Core (for upstream
-traffic). Finally, note that one possible decision the scheduler might
-make is to "hand-off" the user to another base station, as outlined in
-Section 5.4.2. In this way, a collection of base stations effectively
-collaborate to allocate spectrum across a set of radio cells.
+Another difference between Wi-Fi and 5G is that the scheduler shown in
+:numref:`Figure %s <fig-scheduler>` does not necessarily transmit full
+packets. Instead, packets are transmitted in a piecemeal fashion, one
+fragment at a time, according to how many RUs are available to service
+the corresponding queue during each scheduling interval. The fragments
+are reassembled back into complete packets at the receiver, before
+being passed up to the device (for downstream traffic) or on to the
+Mobile Core (for upstream traffic). Finally, note that one possible
+decision the scheduler might make is to "hand-off" the user to another
+base station, as outlined in Section 5.4.2. In this way, a collection
+of base stations effectively collaborate to allocate spectrum across a
+set of radio cells.
 
 .. See https://www.youtube.com/watch?v=GEQgEDcRcZI 5G for numerology.
 

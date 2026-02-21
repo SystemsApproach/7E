@@ -61,8 +61,10 @@ of service.
 
 PON is similar to Ethernet in the sense that it defines a sharing
 algorithm that has evolved over time to accommodate higher and higher
-bandwidths. G-PON (Gigabit-PON) is the most widely deployed today,
+bandwidths. G-PON (Gigabit-PON) was first deployed a decade ago,
 supporting a bandwidth of 2.25-Gbps per wavelength. XGS-PON (10
-Gigabit-PON) is just now starting to be deployed.
+Gigabit-PON) is the more common deployment today, with 50G-PON on the
+horizon. In each case, the bandwidth provided by a given wavelength is
+shared among multiple subscribers.
 
 
