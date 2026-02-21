@@ -1,14 +1,15 @@
 5.4 Passive Optical Network
 -----------------------------
 
-PON is the technology most commonly used to deliver fiber-based
-broadband to homes and businesses. PON adopts a point-to-multipoint
-design, which means the network is structured as a tree, with a single
-point starting in the ISP’s network and then fanning out to reach up to
-1024 homes. PON gets its name from the fact that the splitters are
-passive: they forward optical signals downstream and upstream without
-actively storing-and-forwarding frames. In this way, they are the
-optical variant of repeaters used in the classic Ethernet. Framing then
+PON (Passive Optical Network) is the technology most commonly used to
+deliver fiber-based broadband to homes and businesses. PON adopts a
+point-to-multipoint design, which means the network is structured as a
+tree, with a single point starting in the ISP’s network and then
+fanning out to reach on the order of a thousand homes. PON gets its
+name from the fact that the splitters are passive: they forward
+optical signals downstream and upstream without actively
+storing and forwarding frames. In this way, they are the optical
+equivalent of repeaters used in the classic Ethernet. Framing then
 happens at the source in the ISP’s premises, in a device called an
 *Optical Line Terminal* (OLT), and at the end-points in individual
 homes, in a device called an *Optical Network Unit* (ONU).
@@ -50,7 +51,7 @@ Upstream traffic is then time-division multiplexed on the upstream
 wavelength, with each ONU periodically getting a turn to transmit.
 Because the ONUs are distributed over a fairly wide area (measured in
 kilometers) and at different distances from the OLT, it is not practical
-for them to transmit based on synchronized clocks, as in SONET. Instead,
+for them to transmit based on synchronized clocks. Instead,
 the OLT transmits *grants* to the individual ONUs, giving them a time
 interval during which they can transmit. In other words, the single OLT
 is responsible for centrally implementing the round-robin sharing of the
@@ -61,7 +62,7 @@ of service.
 PON is similar to Ethernet in the sense that it defines a sharing
 algorithm that has evolved over time to accommodate higher and higher
 bandwidths. G-PON (Gigabit-PON) is the most widely deployed today,
-supporting a bandwidth of 2.25-Gbps. XGS-PON (10 Gigabit-PON) is just
-now starting to be deployed.
+supporting a bandwidth of 2.25-Gbps per wavelength. XGS-PON (10
+Gigabit-PON) is just now starting to be deployed.
 
 
