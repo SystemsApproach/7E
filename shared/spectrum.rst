@@ -130,7 +130,7 @@ the same algorithm as the sender and initializes it with the same
 seed; hence, it is able to hop frequencies in sync with the
 transmitter to correctly receive the frame. This scheme reduces
 interference by making it unlikely that two signals would be using the
-same frequency for very long. 
+same frequency for very long.
 
 On the mobile network side, each generation has used a different
 approach. For example, 2G used *Time Division Multiple Access (TDMA)*,
