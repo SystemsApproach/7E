@@ -154,7 +154,7 @@ Finally, even though this discussion focuses on a simple network
 topology involving a single switch, statistical multiplexing works
 across an arbitrarily large network. This is because each multiplexing
 decision—i.e., deciding which packet to forward next and which packet
-to drop if the buffer is full—is made on purely local basis. It
+to drop if the buffer is full—is made on a purely local basis. It
 doesn't matter if a given packet has already traversed a dozen
 upstream switches, or just now entered the network.  No global
 coordination is required. This might not always result in a fair
@@ -218,11 +218,11 @@ but for now, we identify three specific resources:
 
 * **Buffer Capacity:** Switches store packets in a buffer, where they
   wait their turn to be transmitted. This buffer is implemented in a
-  finite amount of memory, with capacity is measured in bytes.  Memory
+  finite amount of memory, with capacity measured in bytes.  Memory
   is easily added to an existing switch, but too much memory for
   buffering results in potentially long buffering delays. This can be
-  problematic, and so buffer capacity is often defined as a function
-  of how many bytes can be in transit across the network (a concept
+  problematic, and so buffer capacity is often proportional to
+  how many bytes can be in transit across the network (a concept
   explained in the next section).
 
 Another way to look at capacity is to ask what the network is able to

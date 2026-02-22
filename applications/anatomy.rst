@@ -445,7 +445,7 @@ enterprises connected to the edge of the network.
 
 In other words, the cloud is structured as an interleaving of
 datacenters and networks, similar to that shown in :numref:`Figure %s
-<fig-structure>` . In such an environment, invoking a service involves
+<fig-structure>`. In such an environment, invoking a service involves
 additional levels of indirection. For example, the first step might be
 to resolve the service name into the IP address for a service endpoint
 running in a nearby cloud site, and then a load balancer distributes
