@@ -1,7 +1,7 @@
 1.3  Network Protocols
 ------------------------------------------
 
-Network architectures prescribe/describe a particular modularization
+Network architectures prescribe and describe a particular modularization
 of the network. The challenge is to identify the collection of modules
 that simultaneously provide a service that is useful in a large number
 of situations, and can be efficiently implemented in the underlying
@@ -106,17 +106,17 @@ service (the peer interface). This situation is illustrated in :numref:`Figure
 
    Service interfaces and peer interfaces.
 
-Except at the hardware level, where peers directly communicate with
-each other over a physical medium, peer-to-peer communication is
-indirect—each protocol communicates with its peer by passing messages
-to some lower-level protocol, which in turn delivers the message to
-*its* peer. And because there are potentially multiple protocols at
-any given level, each providing a different communication service, we
-represent the suite of protocols that make up a network system with a
-*protocol graph*. The nodes of the graph correspond to protocols, and
-the edges represent a *depends on* relation. For example,
-:numref:`Figure %s <fig-protograph>` illustrates a protocol graph for
-our Internet-inspired layered system.
+At the lowest hardware level, peers directly communicate with each
+other over a physical medium. At every level about that, however,
+peer-to-peer communication is indirect—each protocol communicates with
+its peer by passing messages to some lower-level protocol, which in
+turn delivers the message to *its* peer. And because there are
+potentially multiple protocols at any given level, each providing a
+different communication service, we represent the suite of protocols
+that make up a network system with a *protocol graph*. The nodes of
+the graph correspond to protocols, and the edges represent a *depends
+on* relation. For example, :numref:`Figure %s <fig-protograph>`
+illustrates a protocol graph for our Internet-inspired layered system.
 
 .. _fig-protograph:
 .. figure:: introduction/figures/protograph.png
@@ -249,7 +249,8 @@ attached to it to implement the lower-level communication services.
 This whole process is illustrated in :numref:`Figure %s
 <fig-encapsulation>`. Note that in a multi-hop network, intermediate
 nodes (e.g., switches and routers) may inspect their header to determine
-how to forward the message on towards its destination.
+how to forward the message on towards its destination. They may also
+modify the header before forwarding it.
 
 .. _fig-encapsulation:
 .. figure:: introduction/figures/encapsulation.png
@@ -326,11 +327,11 @@ The host addresses in the IP and ETH headers are also noteworthy.
 The field names are the same—\ ``SourceAddr`` and
 ``DestinationAddr``\ —and both protocols use their respective addresses
 to uniquely identify the sender and receiver of every message. But the
-addressing scheme the Internet and Ethernet use are completely
+addressing schemes the Internet and Ethernet use are completely
 different. We'll describe those schemes in later chapters, but for
 now, we briefly introduce the standard way we make them
 human-readable.  Ethernet's 48-bit addresses are usually written as
-six hexidecimal numbers, one for each 8-bit byte in the address. For
+six hexadecimal numbers, one for each 8-bit byte in the address. For
 example, ``6e:86:88:18:7d:39``. A 32-bit IP address is typically
 written as four decimal numbers, one for each 8-bit byte in the
 address. For example, ``128.112.155.172``.  This is called "dot

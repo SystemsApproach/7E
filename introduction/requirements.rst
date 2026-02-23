@@ -9,34 +9,34 @@ these, and other requirements.  To place the requirements in their
 proper context, it is important to recognize that there are multiple
 stakeholders interested in the outcome.  They include:
 
-* **Application Developers:** People that program applications care
+* **Application Developers:** People who program applications care
   about the communication services their applications need. This
   includes, for example, a guarantee that each message the application
   sends will be delivered without error within a certain amount of
   time or the ability to switch gracefully among different connections
   to the network as the user moves around.
 
-* **Network Operators:** People that operate networks care that it is
+* **Network Operators:** People who operate networks care that it is
   easy to administer and manage. This includes, for example, that
   faults can be easily isolated, new devices can be added to the
   network and configured correctly, and it is easy to account for
   usage.
 
-* **Network Owners:** People that assemble networks for a particular
+* **Network Owners:** People who assemble networks for a particular
   use case, such as an enterprise or datacenter, take budgetary
   considerations into account. These stakeholders care that they get a
   good return on investment—that network resources are used
   efficiently.
 
-It's possible to come up with other other stakeholders, but this list
+It's possible to come up with other stakeholders, but this list
 is inclusive enough to stress our design. Importantly, instead of
 adopting just one of these as our primary perspective, we approach the
 problem of building a network from the perspective of the architect
-that is responsible for crafting a design that takes all stakeholder
+who is responsible for crafting a design that takes all stakeholder
 requirements into account.
 
-With this in mind, that the network be *scalable* is our first
-requirement.  Scalability does not necessarily mean picking a target
+With this in mind, our first requirement is that the network be
+*scalable*.  Scalability does not necessarily mean picking a target
 size, but rather, being aware of factors that might limit how large a
 network can grow.  The original Internet architects were aware that
 using 32-bit addresses for Internet-connected devices implied there
@@ -68,17 +68,19 @@ federation of cooperating parties, as is the case with the Internet.
 The second requirement is that the network be *general-purpose*, that
 is, able to support a wide range of applications. In principle, this
 means avoiding assumptions about how the network will be used. In
-practice, this means two things. One, that the network allow
+practice, this means two things. First, the network should allow
 applications to be implemented in software on general-purpose
-processors. Two, that the lowest levels of the network—the base that
-is shared by all applications—should be relatively minimal. It should
+processors. Second, the lowest levels of the network—the base that is
+shared by all applications—should be close to minimal. It should
 provide a service that is of value to all applications and leave most
 decisions about functionality to higher layers (with the application
-at the top of the software stack).  On the other hand, many
+at the top of the software stack).  At the same time, many
 applications share common requirements about such things as
 reliability and security, so it is helpful to provide optional
-capabilities they can employ if they want to. Getting this right is a
-balancing act, which we revisit at many points throughout the book.
+capabilities they can employ if they want to. Getting this balance
+right—creating a minimal set of base services, with optional shared
+services available on top of the base—requires some judgement, which
+we revisit at many points throughout the book.
 
 The third requirement is that the network allow for *cost-effective
 resource sharing*. Networks are built using finite resources; they do
