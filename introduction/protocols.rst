@@ -107,7 +107,7 @@ service (the peer interface). This situation is illustrated in :numref:`Figure
    Service interfaces and peer interfaces.
 
 At the lowest hardware level, peers directly communicate with each
-other over a physical medium. At every level about that, however,
+other over a physical medium. At every level above that, however,
 peer-to-peer communication is indirect—each protocol communicates with
 its peer by passing messages to some lower-level protocol, which in
 turn delivers the message to *its* peer. And because there are
