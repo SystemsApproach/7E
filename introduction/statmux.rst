@@ -13,7 +13,7 @@ being sent by multiple users can be multiplexed over the physical
 links and switches that make up a network.
 
 This section explores the options typically adopted by networks,
-settling on *statsitical multiplexing* as the strategy we will employ
+settling on *statistical multiplexing* as the strategy we will employ
 going forward. It's the approach that has proven the most
 cost-effective for the general-purpose network we want to build.
 
@@ -211,26 +211,26 @@ but for now, we identify three specific resources:
 
 * **Forwarding Capacity:** Switches are devices that move data from
   an input port to an output port. This requires an internal forwarding
-  mechanism. This capacity is measured in packets-per-second
-  (pps), with a given switch engineered to support some fixed
+  mechanism. This capacity is usually measured in packets-per-second
+  (pps), with a given switch engineered to support some maximum
   forwarding rate. (See Chapter 3 for more details.) A new switch has
   to be deployed when additional forwarding capacity is needed.
 
 * **Buffer Capacity:** Switches store packets in a buffer, where they
   wait their turn to be transmitted. This buffer is implemented in a
   finite amount of memory, with capacity measured in bytes.  Memory
-  is easily added to an existing switch, but too much memory for
+  is easily added to an existing switch (within limits), but too much memory for
   buffering results in potentially long buffering delays. This can be
-  problematic, and so buffer capacity is often proportional to
-  how many bytes can be in transit across the network (a concept
+  problematic, and so buffer capacity is often designed in proportion to
+  the number of bytes can be in transit across the network (a concept
   explained in the next section).
 
 Another way to look at capacity is to ask what the network is able to
 deliver in the aggregate. Doing so typically involves questions of
-*network toplogy*, which can be addressed using graph theory. (A
+*network topology*, which can be addressed using graph theory. (A
 network's topology can be represented by an undirected graph, where
 edges correspond to links and vertices correspond to switches.) As an
-example, a network designer might ask if there the graph contains a
+example, a network designer might ask if the graph contains a
 vertex (switch), that if cut (the switch fails), causes the graph to
 become partitioned (it's impossible for nodes in each subgraph to
 exchange messages).
@@ -239,9 +239,9 @@ Such theoretical analysis is beyond the scope of this book, but there
 are a few common topologies of note. One is a mesh topology, of which
 :numref:`Figure %s <fig-network>` in Section 1.2 is an example.  Mesh
 topologies have no obvious structure, although in practice they often
-mirror geographical maps (as would the case for a nation-wide backbone
+mirror geographical maps (as would be the case for a nation-wide backbone
 network with switches in major cities). Another common example is a
-*leaf-spine* topology, similar to the one one shown in
+*leaf-spine* topology, similar to the one shown in
 :ref:`Section 2.1 <fig-leaf-spine>`.
 This particular structure is designed to support low-latency
 communication between servers in a cloud datacenter.

@@ -26,7 +26,7 @@ takes 0.1 microsecond (μs) to transmit each bit.
 Bandwidth and throughput are subtly different terms. Bandwidth is
 literally a measure of the width of a frequency band. For example,
 legacy voice-grade telephone lines supported a frequency band ranging
-from 300 to 3300 Hz; it was said to have a bandwidth of 3300 Hz
+from 300 to 3300 Hz; they had a bandwidth of 3300 Hz
 - 300 Hz = 3000 Hz. If you see the word *bandwidth* used in a situation
 in which it is being measured in hertz, then it probably refers to the
 range of signals that can be accommodated.
@@ -45,16 +45,14 @@ of nodes connected by a link with a bandwidth of 1 Gbps might achieve
 end-to-end throughput of only 100 Mbps. This would mean that an
 application on one host could send data to the other host at 100 Mbps.
 
-Finally, at the physical level, bandwidth is constantly improving due
-to improvements in transmission hardware—the components that send and
-receive signals on the physical medium. Intuitively, if you think of a
-second of time as a distance you could measure with a ruler and
-bandwidth as how many bits fit in that distance, then you can think of
-each bit as a pulse of some width. For example, each bit on a 1-Gbps
-link is 1 nanosecond (ns) wide, while each bit on a 2-Gbps link is 0.5
-ns wide, as illustrated in :numref:`Figure %s <fig-bit-width>`. The
-more sophisticated the transmitting and receiving technology, the
-narrower each bit can become and, thus, the higher the bandwidth.
+Intuitively, if you think of a second of time as a distance you could
+measure with a ruler and bandwidth as how many bits fit in that
+distance, then you can think of each bit as a pulse of some width. For
+example, each bit on a 1-Gbps link is 1 nanosecond (ns) wide, while
+each bit on a 2-Gbps link is 0.5 ns wide, as illustrated in
+:numref:`Figure %s <fig-bit-width>`. The more sophisticated the
+transmitting and receiving technology, the narrower each bit can
+become and, thus, the higher the bandwidth.
 
 .. _fig-bit-width:
 .. figure:: introduction/figures/f01-16-9780123850591.png
@@ -66,6 +64,11 @@ narrower each bit can become and, thus, the higher the bandwidth.
    (each bit is 1 nanosecond wide); (b) bits transmitted at 2 Gbps
    (each bit is 0.5 nanoseconds wide).
 
+At the physical level, bandwidth is constantly improving due
+to improvements in transmission hardware—the components that send and
+receive signals on the physical medium—as well as advances in how
+digital signals are represented on physical media. We will see examples of these
+improvements when we look at technologies such as Ethernet and Wi-Fi.
 
 The second performance metric, latency, corresponds to how long it takes
 a message to travel from one end of a network to the other. (As with
@@ -156,7 +159,7 @@ time) you can calculate how many bits fit in the pipe. For example, a
 transcontinental channel with a one-way latency of 50 ms and a bandwidth
 of 45 Mbps is able to hold
 
-.. centered:: 50 × 10\ :sup:`-3` × 45 × 10\ :sup:`6` *bits/sec* = 2.25
+.. centered:: 50 × 10\ :sup:`-3` *sec* × 45 × 10\ :sup:`6` *bits/sec* = 2.25
               × 10\ :sup:`6` *bits*
 
 or approximately 280 KB of data. In other words, this example channel
@@ -268,9 +271,10 @@ relationship as
 
 .. centered:: TransferTime = RTT + 1/Bandwidth x TransferSize
 
-We use this calculation to account for a request message being sent
+We use RTT in this calculation to account for a request message being sent
 across the network and the data being sent back. For example, consider a
-situation where a user wants to fetch a 1-MB file across a 1-Gbps with a
+situation where a user wants to fetch a 1-MB file across a 1-Gbps
+network with a
 round-trip time of 100 ms. This includes both the transmit time for 1 MB
 (1 / 1 Gbps × 1 MB = 8 ms) and the 100-ms RTT, for a total transfer time
 of 108 ms. This means that the effective throughput will be
@@ -278,12 +282,13 @@ of 108 ms. This means that the effective throughput will be
 .. centered:: 1 MB / 108 ms = 74.1 Mbps
 
 not 1 Gbps. Clearly, transferring a larger amount of data will help
-improve the effective throughput, where in the limit an infinitely large
-transfer size will cause the effective throughput to approach the
-network bandwidth. On the other hand, having to endure more than
-1 RTT—for example, to retransmit missing packets—will hurt the effective
-throughput for any transfer of finite size and will be most noticeable
-for small transfers.
+improve the effective throughput, where in the limit an infinitely
+large transfer size will cause the effective throughput to approach
+the network bandwidth. On the other hand, having to endure more than
+1 RTT—for example, to retransmit missing packets, or to set up
+security properties for the connection at the start of the
+transfer—will hurt the effective throughput for any transfer of finite
+size and will be most noticeable for small transfers.
 
 1.5.4 Application Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -298,15 +303,15 @@ the faster the program will be able to complete its task.
 
 However, some applications are able to state an upper limit on how
 much bandwidth they need. Video applications are a prime
-example. Suppose one wants to stream a video that has a resolution of
-352 by 240 pixels. If each pixel is represented by 24 bits of
-information, as would be the case for 24-bit color, then the size of
-each frame would be (352 × 240 × 24) / 8 = 247.5 KB. If the application
-needs to support a frame rate of 30 frames per second, then it might
-request a throughput rate of 75 Mbps. The ability of the network to
-provide more bandwidth is of no interest to such an application
-because it has only so much data to transmit in a given period of
-time.
+example. Suppose one wants to stream a video to a small screen that
+has a resolution of 352 by 240 pixels. If each pixel is represented by
+24 bits of information, as would be the case for 24-bit color, then
+the size of each frame would be (352 × 240 × 24) / 8 = 247.5 KB. If
+the application needs to support a frame rate of 30 frames per second,
+then it might request a throughput rate of 75 Mbps. The ability of the
+network to provide more bandwidth is of no interest to such an
+application because it has only so much data to transmit in a given
+period of time.
 
 The situation is not as simple as this example suggests.  Because the
 difference between any two adjacent frames in a video stream is often
@@ -316,7 +321,7 @@ because not all the detail in a picture is readily perceived by a
 human eye. The compressed video does not flow at a constant rate, but
 varies with time according to factors such as the amount of action and
 detail in the picture and the compression algorithm being used.
-Therefore, it is possible to say what the average bandwidth
+Therefore, it is possible to say approximately what the average bandwidth
 requirement will be, but the instantaneous rate may be more or less.
 
 The key factor is the time interval over which the average is
@@ -384,4 +389,4 @@ it can delay the time at which it starts playing back the video (i.e.,
 displays the first frame) long enough to ensure that in the future it
 will always have a frame to display when it needs it. The receiver
 delays the frame, effectively smoothing out the jitter, by storing it in
-a buffer.
+a buffer. We will return to this scenario in the next chapter.

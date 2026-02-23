@@ -50,7 +50,10 @@ end of the process. There have been many false starts and stop-gap
 solutions, followed by years of iterative improvement. This evolution
 culminates in today’s software and hardware artifacts—many of which
 are worth looking at in detail—but always keeping in mind that those
-too will likely change over time.
+too will likely change over time. Our goal is not just to explain how
+the Internet of today works, but to teach the principles that will
+enable the designers of future networks to build systems that expand
+on the capabilities available today.
 
 .. include:: introduction/requirements.rst
 .. include:: introduction/architecture.rst

@@ -26,9 +26,9 @@ implemented from the users of the object.
 
 Architectures are *not* programs. They help people build a mental
 model (typically expressed in words and diagrams), of what actually
-runs in the network.  Their purpose is to both *prescribe* how the
+runs in the network.  Their purpose is both to *prescribe* how the
 network should be implemented (with the goal of guiding engineers in
-the actual code that gets written) and *describe* how the network has
+the actual code that gets written) and to *describe* how the network has
 been implemented (with the goal of helping developers and operators
 understand how the existing network behaves). As a consequence, one of
 the main values of an architecture is to define terminology.
@@ -136,7 +136,7 @@ viewed as a contemporary competitor.
    :width: 350px
    :align: center
 
-   Abstract depiction of the Internet architecture. It's general shape
+   Abstract depiction of the Internet architecture. Its general shape
    is similar to an hourglass: wide at the top (representing many
    applications) and wide at the bottom (representing many network
    technologies), with a narrow waist in the middle (corresponding to
@@ -170,7 +170,7 @@ with "transport protocol" being a universal term.
 While it is possible to roughly map the other layers between the two
 architectures, understanding how and why they differ is more
 instructive. At the top-end, the Internet does not partition
-applications into sub-layers, corresponding to the OSI's layers 5, 6,
+application protocols into sub-layers, corresponding to the OSI's layers 5, 6,
 and 7.  This is because it treats applications as an orthogonal
 concern, with each app free to adopt whatever modularization makes
 sense. At the bottom-end, the Internet does not prescribe how the
@@ -210,7 +210,7 @@ delivery (as wireless networks sometimes do). As a consequence, IP
 establishes a minimal service model, known as *best-effort*. That is,
 IP attempts to deliver every packet from source host to destination
 host, but it makes no guarantees. Implicit in this definition, but
-worth highlighting, is that IP is a *packet-swithced network*, and its
+worth highlighting, is that IP is a *packet-switched network*, and its
 switches (i.e., routers) are *packet switches*: they receive full
 packets on their input ports, store those packets in memory, and then
 forward complete packets on an output port. Such networks are
@@ -219,8 +219,8 @@ circuit-based networks that pass signals (either electrical or
 optical) directly from input to output without buffering or delay. We
 discuss the importance of this design in Section 1.4.
 
-That the Internet is a *logical* network running on top of a
-collection of *physical* networks is a powerful idea, with non-obvious
+The Internet is a *logical* network running on top of a
+collection of *physical* networks, and this is a powerful idea, with non-obvious
 consequences. For example, because a minimal network consisting of
 exactly one link connecting two switches still qualifies as a network,
 it is possible to construct a switched network like the one shown in
@@ -246,8 +246,8 @@ bottom level, the network is implemented by some physical medium.
    the specification of many of the Internet protocols, such as TCP,
    UDP, IP, DNS, and BGP. The Internet architecture also embraces
    protocols defined by other organizations, including IEEE's 802.3
-   ethernet and Wi-Fi standards, W3C's HTTP/HTML web specifications,
-   3GPP's 4G and 5G cellular networks standards, and ITU-T's H.232
+   ethernet and 802.11 Wi-Fi standards, W3C's HTTP/HTML web specifications,
+   3GPP's 4G and 5G cellular networks standards, and ITU-T's H.264
    video encoding standards, to name a few.*
 
    *In addition to defining architectures and specifying protocols,
@@ -321,7 +321,7 @@ which we break into three parts:
 
 * **Inside the Network:** Part II describes how to support
   global-scale best-effort packet delivery. The chapters in Part II
-  address the key challenges in building a packet switch network that
+  address the key challenges in building a packet-switched network that
   interconnects tens of billions of edge devices. This substrate makes
   it possible for those devices to host the edge software stack
   described in Part III.
