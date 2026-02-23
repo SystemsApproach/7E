@@ -749,6 +749,7 @@ iptables
 IPTV
 IPv
 iPXE
+Iraj
 ISAKMP
 ISDN
 ISP's
@@ -1535,6 +1536,7 @@ SNMP
 SNR
 SOAP's
 sockaddr
+Sodagar
 softwarization
 SONET
 SONET's
@@ -1672,6 +1674,7 @@ TEID
 telco
 Telco's
 telcos
+templating
 TempP
 Tennenhouse
 Terraform

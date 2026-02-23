@@ -1,4 +1,4 @@
-2.4 Adaptive Streaming (DASH)
+2.4 Adaptive Streaming
 -------------------------------
 
 
@@ -12,9 +12,11 @@ of the total traffic over the network.
 Before video can be streamed across the Internet, it needs to be
 encoded, and video coding is another field with a long history. To
 make efficient use of bandwidth and storage, video is usually
-compressed, are organizations such as MPEG (the
+compressed, and organizations such as MPEG (the
 Moving Picture Expert Group) produce standards that allow for
 interoperability among devices that encode, store, and play video content.
+
+.. We might package our MPEG section as a standalone supplement.
 
 Most video coding schemes allow for a trade-off between the bandwidth
 consumed and the quality of the images. Since the bandwidth that is
@@ -25,7 +27,7 @@ also no point delivering higher quality than an end system can
 support. This tradeoff applies whether we are talking about real-time
 video (e.g., video conferencing) or streaming of recorded content as
 with video streaming services such as Netflix.  In this section, we
-are going to focus on the latter, which provides an interesting case
+focus on the latter, which provides an interesting case
 study in how the Web has come to dominate application design, even for
 applications that didn't initially seem well suited to HTTP.
 
@@ -52,8 +54,98 @@ the quality level to match what the network is able to deliver.  In
 other words, a movie is typically stored as a set of N × M chunks
 (files): N quality levels for each of M segments.
 
-To understand how this works, let's first assume that we have some way
-to measure the amount of free capacity along a
+The same MPEG organization that specified the video format also
+defined a standard way to represent this information. The standard,
+called MPEG DASH (Dynamic Adaptive Streaming over HTTP), is necessary
+so that a variety of clients (video players) can interoperate with
+different backend video servers. DASH specifies a hierarchical
+*manifest* for each video—officially known as an MPD (Media
+Presentation Description) file. An MPD manifest is represented as an
+XML document, where the following shows a partial example:
+
+.. code-block:: xml
+
+   <MPD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="urn:mpeg:dash:schema:mpd:2011"
+           xsi:schemaLocation="urn:mpeg:dash:schema:mpd:2011"
+           type="dynamic"
+           minimumUpdatePeriod="PT2S"
+           timeShiftBufferDepth="PT30M"
+           availabilityStartTime="2011-12-25T12:30:00"
+           minBufferTime="PT4S"
+           profiles="urn:mpeg:dash:profile:isoff-live:2011">
+      <BaseURL>http://server1.example.com/</BaseURL>
+      <BaseURL>http://server2.example.com/</BaseURL>
+      <Period id="1">
+         <AdaptationSet contentType="video"
+                 segmentAlignment="true"
+                 bitstreamSwitching="true"
+                 frameRate="15/2">
+            <Representation id="0"
+                    mimeType="video/mp4"
+                    codecs="avc1.4d0020"
+                    bandwidth="2000000"
+                    width="1280"
+                    height="960"
+                    frameRate="15/2">
+               <SegmentList duration="10">
+                  <SegmentURL media="seg-1.mp4"/>
+                  <SegmentURL media="seg-2.mp4"/>
+                  <SegmentURL media="seg-3.mp4"/>
+                  ...
+               </SegmentList>
+            </Representation>
+            ...
+         </AdaptationSet>
+         ...
+      </Period>
+      ...
+   </MPD>
+
+As the snippet of XML shows, a manifest identifies a nested set of
+elements: each video is broken into a set of *Periods*; each Period
+contains a set of *Adaptation Sets*; an Adaptation Set contains a set
+of *Representations* ; and finally, each Representation specifies a
+set of *Segments* (each of which is an MPEG-compressed chunk of
+video). If this seems like more layers than our "N × M chunks"
+overview suggests, it is, but this corresponds a real-world
+application of that idea.  For example, Periods typically last many
+seconds (e.g., on the order of a minute), and define the boundary at
+which the player is allowed to shift from one bandwidth to another.
+Representations correspond to a given bandwidth, with the example
+encoded at 2 Mbps. The Adaptation Set supports other degrees of
+freedom, including the choice of audio streams (e.g., French, English,
+German).
+
+Although not shown in this example, there is also support for "trick
+play" (skipping forward and backward in a video), and even an
+opportunity to interject ads (between Periods). There is also support
+for templating, so that full URLs need not be given for every segment.
+(The example shows only the simplest form of templating, in which the
+full URL is constructed from the ``BaseURL`` and the segment name.)
+Finally, to allow for the possibility that the schema of the MPD file
+may change over time, a URN (``urn:mpeg:dash:schema:mpd:2011``)
+identifies the schema being used by this manifest. In other words,
+standards often require a *lot* of detail, in many cases to
+accommodate the various options different constituencies
+require. That's the bigger point we're trying to make, but for a more
+complete introduction to DASH, we recommend Iraj Sodagar's paper:
+
+.. _reading_dash:
+.. admonition:: Further Reading
+
+   I. Sodagar. `The MPEG-DASH Standard for Multimedia Streaming Over
+   the Internet
+   <https://ieeexplore.ieee.org/document/6077864>`__. *IEEE
+   MultiMedia, vol. 18, no. 4*, April 2011.
+
+With this peek into the bookkeeping challenge of HTTP-based streaming,
+let's pop back up to the big picture. To view a video, a player first
+downloads its ``.mpd`` file, parses it, and then starts issuing HTTP
+GET requests for a sequence of ``.mp4`` files, decoding and displaying
+each at a smooth video frame rate But what is the right bandwidth to
+select? For simplicity, let's first assume we have some way to measure
+the amount of free capacity along a
 path.  For example, a client can simply measure the rate at which data
 has been arriving over some recent time interval. We can infer that
 there is at least that much bandwidth available. If the quality that
@@ -71,7 +163,7 @@ quality of video.
 
 The situation is a bit more complicated than what we just described,
 however, because the underlying transport protocol below HTTP is
-either TCP or its modern sibling QUIC. Both these protocols have
+either TCP (or its modern sibling QUIC). Both these protocols have
 congestion control mechanisms that try to match the rate at which data
 is sent across the network to the available capacity. If congestion is
 detected, TCP reduces its sending rate; in the absence of congestion,
@@ -81,7 +173,7 @@ detail in Chapter 14. For now, we can just accept that TCP is going to
 deliver packets at a rate that varies over time depending on the available
 network capacity.
 
-TCP and QUIC also provide reliable delivery of packets. That in itself
+TCP also provide reliable delivery of packets. That in itself
 is not a bad thing, but reliability is achieved by retransmitting
 packets that have been dropped in transit. Retransmission adds to the
 time taken for a packet to arrive, since it takes time both to detect
@@ -136,20 +228,23 @@ server. More levels means more storage, but also gives the client more
 options for matching the quality to the available bandwidth and
 different display sizes, from phones to large TV screens.
 
-This general approach is called HTTP adaptive streaming, and the
-predominant standard is MPEG DASH (Dynamic Adaptive Streaming over
-HTTP). The standard ensures that clients and servers interoperate,
-while allowing for innovation in the client algorithms to switch among
-quality levels and also permitting the providers of streaming content
-to make their own decisions about how many different quality levels to
-support on their servers.
-
-Finally, note that this approach would not really make sense for
+As a reminder, this approach would not make sense for
 real-time video such as video conferencing. A video or audio
 conference depends on quite low latency interaction between
 participants: you need to receive the data within a few hundred
 milliseconds of it being sent or you will be unable to have a
 conversation. Even at 300ms the delay becomes noticeable and
 annoying. So this demands a different approach that doesn't rely on
-TCP or QUIC for congestion control and reliable delivery. We will
+TCP for congestion control and reliable delivery. We will
 examine this problem space in Chapter 16.
+
+Finally, it is worth noting that video streaming involves a complex
+interplay between the application protocol and the underlying
+transport protocol. They are, in effect, trying to co-mange the rate
+at which packets get delivered. As an application developer, you would
+undoubtedly prefer that the socket API for TCP told you everything you
+need to know about TCP's behavior, but that's just not the case. The
+API says nothing about timeliness, which in the Internet can be highly
+variable, largely due to congestion. This leaves the application
+developer with only one option: you need to first build a deep
+understanding of how the underlying network behaves.
