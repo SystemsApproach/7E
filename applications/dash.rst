@@ -61,7 +61,7 @@ so that a variety of clients (video players) can interoperate with
 different backend video servers. DASH specifies a hierarchical
 *manifest* for each video—officially known as an MPD (Media
 Presentation Description) file. An MPD manifest is represented as an
-XML document, where the following shows a partial example:
+XML document, where the following shows a truncated example:
 
 .. code-block:: xml
 
@@ -80,14 +80,14 @@ XML document, where the following shows a partial example:
          <AdaptationSet contentType="video"
                  segmentAlignment="true"
                  bitstreamSwitching="true"
-                 frameRate="15/2">
+                 frameRate="24">
             <Representation id="0"
                     mimeType="video/mp4"
                     codecs="avc1.4d0020"
                     bandwidth="2000000"
                     width="1280"
                     height="960"
-                    frameRate="15/2">
+                    frameRate="24">
                <SegmentList duration="10">
                   <SegmentURL media="seg-1.mp4"/>
                   <SegmentURL media="seg-2.mp4"/>
@@ -114,22 +114,22 @@ seconds (e.g., on the order of a minute), and define the boundary at
 which the player is allowed to shift from one bandwidth to another.
 Representations correspond to a given bandwidth, with the example
 encoded at 2 Mbps. The Adaptation Set supports other degrees of
-freedom, including the choice of audio streams (e.g., French, English,
-German).
+freedom, including the choice of audio streams (e.g., language, Dolby
+mode).
 
-Although not shown in this example, there is also support for "trick
-play" (skipping forward and backward in a video), and even an
-opportunity to interject ads (between Periods). There is also support
-for templating, so that full URLs need not be given for every segment.
-(The example shows only the simplest form of templating, in which the
-full URL is constructed from the ``BaseURL`` and the segment name.)
-Finally, to allow for the possibility that the schema of the MPD file
-may change over time, a URN (``urn:mpeg:dash:schema:mpd:2011``)
-identifies the schema being used by this manifest. In other words,
-standards often require a *lot* of detail, in many cases to
-accommodate the various options different constituencies
-require. That's the bigger point we're trying to make, but for a more
-complete introduction to DASH, we recommend Iraj Sodagar's paper:
+Although not shown in the example manifest, DASH supports "trick play"
+(skipping forward and backward in a video), and even an opportunity to
+interject ads (between Periods). There is also support for templating,
+so that full URLs need not be given for every segment.  (The example
+shows only the simplest form of templating, in which the full URL is
+constructed from the ``BaseURL`` and the segment name.)  Finally, to
+allow for the possibility that the schema of the MPD file may change
+over time, a URN (``urn:mpeg:dash:schema:mpd:2011``) identifies the
+schema being used by this manifest. In other words, standards often
+require a surprising amount of detail, in many cases to accommodate
+the all the options different constituencies require. That's the
+lesson you should take away from this example, but for a more complete
+introduction to DASH, we recommend Iraj Sodagar's paper:
 
 .. _reading_dash:
 .. admonition:: Further Reading
@@ -159,8 +159,6 @@ increase as much as we expect, we might conclude that there is
 congestion and so the client could now go back to asking for a lower
 quality of video.
 
-.. a picture would be good showing playback buffer and requests
-
 The situation is a bit more complicated than what we just described,
 however, because the underlying transport protocol below HTTP is
 TCP (or its modern sibling QUIC). TCP and QUIC have
@@ -173,11 +171,11 @@ detail in Chapter 14. For now, we can just accept that TCP is going to
 deliver packets at a rate that varies over time depending on the available
 network capacity.
 
-TCP also provide reliable delivery of packets. That in itself
-is not a bad thing, but reliability is achieved by retransmitting
-packets that have been dropped in transit. Retransmission adds to the
-time taken for a packet to arrive, since it takes time both to detect
-the loss and to retransmit the lost packet. All of this means that the
+TCP also provides reliable delivery of packets. That in itself is not
+a bad thing, but reliability is achieved by retransmitting packets
+that have been dropped in transit. Retransmission adds to the time
+taken for a packet to arrive, since it takes time both to detect the
+loss and to retransmit the lost packet. All of this means that the
 rate at which packets arrive is inherently variable and that some
 packets will take longer to arrive than others. Video frames, however,
 need to be played out at a smooth rate, and so the client should not
@@ -185,8 +183,18 @@ find itself waiting for the next piece of data to arrive when it is
 time to display the next video frame.  To handle the variability of
 the rate at which packets arrive at the client, it is therefore
 necessary for the client to maintain a local buffer of received
-packets to smooth out the variability. This buffer plays an important
-role in adaptive streaming as described below.
+packets to smooth out the variability. This buffer, depicted in
+:numref:`Figure %s <fig-buffer>`, plays an important role in adaptive
+streaming as described below.
+
+.. _fig-buffer:
+.. figure:: applications/figures/buffer.png
+   :width: 550px
+   :align: center
+
+   Playback buffer smooths out packet arrivals and provides
+   information the player uses to adjust the video rate it requests.
+   When the buffer runs too low, the player requests a lower rate.
 
 To start playing a video, the client requests the first chunk of
 video at some default quality, and then waits for packets to arrive. It
@@ -241,10 +249,10 @@ examine this problem space in Chapter 16.
 Finally, it is worth noting that video streaming involves a complex
 interplay between the application protocol and the underlying
 transport protocol. They are, in effect, trying to co-mange the rate
-at which packets get delivered. As an application developer, you would
+at which packets are delivered. As an application developer, you would
 undoubtedly prefer that the socket API for TCP told you everything you
 need to know about TCP's behavior, but that's just not the case. The
 API says nothing about timeliness, which in the Internet can be highly
 variable, largely due to congestion. This leaves the application
-developer with only one option: you need to first build a deep
+developer with only one option: you need to first develop an
 understanding of how the underlying network behaves.
