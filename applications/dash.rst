@@ -163,7 +163,7 @@ quality of video.
 
 The situation is a bit more complicated than what we just described,
 however, because the underlying transport protocol below HTTP is
-either TCP (or its modern sibling QUIC). Both these protocols have
+TCP (or its modern sibling QUIC). TCP and QUIC have
 congestion control mechanisms that try to match the rate at which data
 is sent across the network to the available capacity. If congestion is
 detected, TCP reduces its sending rate; in the absence of congestion,
