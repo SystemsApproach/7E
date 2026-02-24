@@ -124,7 +124,7 @@ Section 11.4. If you are interested in a protocol-agnostic description
 of the sliding window algorithm, we suggest:
 
 .. We might package as a standalone supplement.
-   
+
 https://book.systemsapproach.org/direct/reliable.html#sliding-window
 
 Unlike this simplified example, one of the more severe complications
