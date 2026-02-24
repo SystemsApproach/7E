@@ -105,7 +105,7 @@ XML document, where the following shows a truncated example:
 As the snippet of XML shows, a manifest identifies a nested set of
 elements: each video is broken into a set of *Periods*; each Period
 contains a set of *Adaptation Sets*; an Adaptation Set contains a set
-of *Representations* ; and finally, each Representation specifies a
+of *Representations*; and finally, each Representation specifies a
 set of *Segments* (each of which is an MPEG-compressed chunk of
 video). If this seems like more layers than our "N × M chunks"
 overview suggests, it is, but this corresponds a real-world
