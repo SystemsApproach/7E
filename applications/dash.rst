@@ -121,15 +121,16 @@ Although not shown in the example manifest, DASH supports "trick play"
 (skipping forward and backward in a video), and even an opportunity to
 interject ads (between Periods). There is also support for templating,
 so that full URLs need not be given for every segment.  (The example
-shows only the simplest form of templating, in which the full URL is
-constructed from the ``BaseURL`` and the segment name.)  Finally, to
-allow for the possibility that the schema of the MPD file may change
-over time, a URN (``urn:mpeg:dash:schema:mpd:2011``) identifies the
-schema being used by this manifest. In other words, standards often
-require a surprising amount of detail, in many cases to accommodate
-the all the options different constituencies require. That's the
-lesson you should take away from this example, but for a more complete
-introduction to DASH, we recommend Iraj Sodagar's paper:
+does not include any templating directives, but it does illustrate how
+a full URL is constructed from the ``BaseURL`` and the segment name.)
+Finally, to allow for the possibility that the schema of the MPD file
+may change over time, a URN (``urn:mpeg:dash:schema:mpd:2011``)
+identifies the schema being used by this manifest. In other words,
+standards often require a surprising amount of detail, in many cases
+to accommodate the all the options different constituencies
+require. That's the main lesson you should take away from this example, but
+for a more complete introduction to DASH, we recommend Iraj Sodagar's
+paper:
 
 .. _reading_dash:
 .. admonition:: Further Reading
