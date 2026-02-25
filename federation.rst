@@ -31,7 +31,7 @@ that has many thousands of autonomous networks, many of which themselves
 contain thousands of links and switches.
 
 Compounding the issue of scale is the problem of heterogeneity. The
-original Internet connected the ARPAnet, a pioneering packet-switched
+original Internet connected the ARPANET, a pioneering packet-switched
 network, with some other early networks that used radio and satellite
 technology. One of the early design decisions was that the other
 networks would not be modified to "fit" into the Internet; the
@@ -65,5 +65,5 @@ other system-wide problems.
 .. include:: federation/design.rst
 .. include:: federation/hetero.rst
 .. include:: federation/scale.rst
-.. include:: federation/routes.rst
-.. include:: federation/security.rst
+.. include:: federation/routingbgp.rst
+.. include:: federation/securebgp.rst

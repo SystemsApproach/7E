@@ -30,6 +30,7 @@ Larry Peterson and Bruce Davie
    part_two.rst
    routing.rst
    shared.rst
+   federation.rst
    part_three.rst
    reliable.rst
    README.rst
