@@ -78,10 +78,9 @@ Clearly, a key part of the IP service model is the type of packets
 that can be carried. The IP datagram, like most packets, consists of a
 header followed by a number of bytes of data. The format of the header
 (for IP version 4)
-is shown in :numref:`Figure %s <fig-iphead>`. Note that we have
-adopted a different style of representing packets than the one we used
-in previous chapters. This is because packet formats at the
-internetworking layer and above are almost invariably designed to
+is shown in :numref:`Figure %s <fig-iphead>`. As we saw in Chapter 4,
+packet headers at the
+internetworking layer and above are almost always designed to
 align on 32-bit boundaries to simplify the task of processing them in
 software. Thus, the common way of representing them (used in Internet
 RFCs, for example) is to draw them as a succession of
@@ -178,127 +177,50 @@ complete IP implementation must handle them all. It is commonly the
 case that routers process options as an exception less
 efficiently that normal "fast path" processing.
 
-Fragmentation and Reassembly
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. sidebar:: Fragmentation Considered Harmful
 
-One of the problems of providing a uniform host-to-host service model
-over a heterogeneous collection of networks is that each network
-technology tends to have its own idea of how large a packet can be. For
-example, classic Ethernet can accept packets up to 1500 bytes long, but
-modern-day variants can deliver larger (jumbo) packets that carry up to
-9000 bytes of payload. This leaves two choices for the IP service model:
-ensure that all IP datagrams are small enough to fit inside one
-packet on any network technology, or provide a means by which packets
-can be fragmented and reassembled when they are too big to go over a
-given network technology. The latter turns out to be a good choice,
-especially when you consider the fact that new network technologies are
-always turning up, and IP needs to run over all of them; this would make
-it hard to pick a suitably small bound on datagram size. This also means
-that a host will not send needlessly small packets, which wastes
-bandwidth and consumes processing resources by requiring more headers
-per byte of data sent.
+   One of the problems of providing a uniform host-to-host service
+   model over a heterogeneous collection of networks is that each
+   network technology has its own idea of how large a packet
+   can be. For example, classic Ethernet can accept packets up to
+   1500 bytes long, but modern-day variants can deliver larger (jumbo)
+   packets that carry up to 9000 bytes of payload. This leaves two
+   choices for the IP service model: ensure that all IP datagrams are
+   small enough to fit inside one packet on any network technology, or
+   provide a means by which packets can be fragmented and reassembled
+   when they are too big to go over a given network technology. IP
+   version 4 chose fragmentation, while IP version 6, benefitting from
+   a few decades of experience, opted for a twist on the first option:
+   path MTU discovery.
 
-The central idea here is that every network type has a *maximum
-transmission unit* (MTU), which is the largest IP datagram that it can
-carry in a frame. Note that this value is smaller than the largest
-packet size on that network because the IP datagram needs to fit in the
-*payload* of the link-layer frame.
+   The central idea here is that every network type has a *maximum
+   transmission unit* (MTU), which is the largest IP datagram that it
+   can carry in a frame. Note that this value is smaller than the
+   largest packet size on that network because the IP datagram needs
+   to fit in the *payload* of the link-layer frame. When a host sends
+   an IP datagram, therefore, it can choose any size that it wants. A
+   reasonable choice is the MTU of the network to which the host is
+   directly attached. Then, fragmentation will only be necessary if
+   the path to the destination includes a network with a smaller MTU.
 
-When a host sends an IP datagram, therefore, it can choose any size that
-it wants. A reasonable choice is the MTU of the network to which the
-host is directly attached. Then, fragmentation will only be necessary if
-the path to the destination includes a network with a smaller MTU.
-Should the transport protocol that sits on top of IP give IP a packet
-larger than the local MTU, however, then the source host must
-fragment it.
+   The downsides of fragmentation were identified as early as 1987 in
+   a paper titled "Fragmentation Considered Harmful" by Mogul and
+   Kent. (That paper inspired an entire genre of future work on "X
+   Considered Harmful.") Fragmentation consumes resources, is
+   fragile—one lost fragment means an entire datagram is lost—and the
+   reaassembly process may degrade performance.
 
-Fragmentation typically occurs in a router when it receives a datagram
-that it will forward over a network with an MTU that is smaller
-than the received datagram. To enable these fragments to be reassembled
-at the receiving host, they all carry the same identifier in the
-``Ident`` field. This identifier is chosen by the sending host and is
-intended to be unique among all the datagrams that might arrive at the
-destination from this source over some reasonable time period. Since all
-fragments of the original datagram contain this identifier, the
-reassembling host will be able to recognize those fragments that go
-together. Should all the fragments not arrive at the receiving host, the
-host gives up on the reassembly process and discards the fragments that
-did arrive. IP does not attempt to recover from missing fragments.
+   The way that fragmentation can be avoided is called Path
+   MTU Discovery. In IPv4, this is done by setting a "don't fragment" bit in the
+   header, and sending a packet using the MTU of the host's local
+   network. In IPv6, no fragmentation is possible, so there is no
+   corresponding bit. But in either case, if the packet arrives at a
+   router and is found to be too large for its outgoing network, the
+   router sends a control message back to the host. That message
+   contains the MTU of the outgoing link so the host learns the new
+   MTU that it can safely use. This could happen more than once along
+   the path but eventually the host discovers an MTU that works. 
 
-.. _fig-frag:
-.. figure:: federation/figures/f03-17-9780123850591.png
-   :width: 600px
-   :align: center
-
-   IP datagrams traversing the sequence of physical
-   networks graphed in the earlier figure.
-
-To see what this all means, consider what happens when host H5 sends a
-datagram to host H8 in the example internet shown in :numref:`Figure
-%s <fig-inet>`. Assuming that the MTU is 1500 bytes for the two
-Ethernets and the 802.11 network, and 532 bytes for the point-to-point
-network, then a 1420-byte datagram (20-byte IP header plus 1400 bytes
-of data) sent from H5 makes it across the 802.11 network and the first
-Ethernet without fragmentation but must be fragmented into three
-datagrams at router R2. These three fragments are then forwarded by
-router R3 across the second Ethernet to the destination host. This
-situation is illustrated in :numref:`Figure %s <fig-frag>`. This
-figure also serves to reinforce two important points:
-
-1. Each fragment is itself a self-contained IP datagram that is
-   transmitted over a sequence of physical networks, independent of the
-   other fragments.
-
-2. Each IP datagram is re-encapsulated for each physical network over
-   which it travels.
-
-.. _fig-fragment:
-.. figure:: federation/figures/f03-18-9780123850591.png
-   :align: center
-   :width: 350px
-
-   Header fields used in IP fragmentation:
-   (a) unfragmented packet; (b) fragmented packets.
-
-The fragmentation process can be understood in detail by looking at
-the header fields of each datagram, as is done in :numref:`Figure %s
-<fig-fragment>`.  The unfragmented packet, shown at the top, has
-1400 bytes of data and a 20-byte IP header. When the packet arrives at
-router R2, which has an MTU of 532 bytes, it has to be fragmented. A
-532-byte MTU leaves 512 bytes for data after the 20-byte IP header, so
-the first fragment contains 512 bytes of data. The router sets the M
-bit in the ``Flags`` field (see :numref:`Figure %s <fig-iphead>`),
-meaning that there are more fragments to follow, and it sets the
-``Offset`` to 0, since this fragment contains the first part of the
-original datagram. The data carried in the second fragment starts with
-the 513th byte of the original data, so the ``Offset`` field in this
-header is set to 64, which is 512/8. Why the division by 8? Because
-the designers of IP decided that fragmentation should always happen on
-8-byte boundaries, which means that the ``Offset`` field counts 8-byte
-chunks, not bytes.  (We leave it as an exercise for you to figure out
-why this design decision was made.) The third fragment contains the
-last 376 bytes of data, and the offset is now 2 × 512/8 = 128. Since
-this is the last fragment, the M bit is not set.
-
-Observe that the fragmentation process is done in such a way that it
-could be repeated if a fragment arrived at another network with an even
-smaller MTU. Fragmentation produces smaller, valid IP datagrams that can
-be readily reassembled into the original datagram upon receipt,
-independent of the order of their arrival. Reassembly is done at the
-receiving host and not at each router.
-
-IP reassembly is far from a simple process. For example, if a single
-fragment is lost, the receiver will still attempt to reassemble the
-datagram, and it will eventually give up and have to garbage-collect the
-resources that were used to perform the failed reassembly. Getting a
-host to tie up resources needlessly can be the basis of a
-denial-of-service attack.
-
-For this reason, among others, IP fragmentation is generally considered
-a good thing to avoid. Hosts are now strongly encouraged to perform
-“path MTU discovery,” a process by which fragmentation is avoided by
-sending packets that are small enough to traverse the link with the
-smallest MTU in the path from sender to receiver.
 
 6.2.2 Global Addresses
 ----------------------
@@ -403,7 +325,7 @@ that *forwarding* is the process of taking a packet from an input and
 sending it out on the appropriate output, while *routing* is the process
 of building up the tables that allow the correct output for a packet to
 be determined. The discussion here focuses on forwarding; we return to
-routing in a later section.
+routing in the next chapter.
 
 The main points to bear in mind as we discuss the forwarding of IP
 datagrams are the following:
@@ -634,7 +556,7 @@ this host will ever need the source’s link-level address; there is no
 need to clutter its ARP table with this information.
 
 .. _fig-arp:
-.. figure:: figures/f03-23-9780123850591.png
+.. figure:: federation/figures/f03-23-9780123850591.png
    :width: 500px
    :align: center
 
