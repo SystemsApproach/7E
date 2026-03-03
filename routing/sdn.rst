@@ -21,7 +21,7 @@ Not only did SDN define a standard interface between the data and
 control planes, but it also advanced the idea of using a centalized
 control plane to push forwarding rules to many devices implementing
 the data plane. A conceptual picture of an SDN system is shown in
-:numref:`Figure %s <fig-v6addrnos>`.
+:numref:`Figure %s <fig-nos>`.
 
 
 
