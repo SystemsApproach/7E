@@ -373,13 +373,13 @@ with an example.
    :width: 500px
    :align: center
 
-   A NAT operation in progesss. 1. Original packet from
+   A NAT operation in progress. 1. Original packet from
    client. 2. Packet destined for server after NAT. 3. Reply from
    server. 4. Translated reply packet continues back to client.
 
 
 
-When the client tries to send a packet to the destatation server, it
+When the client tries to send a packet to the destination server, it
 puts its own local, private address in the source address field, and
 the server's public address in the destination address field. It uses
 a random source port and the designated port (80) for HTTP
@@ -457,7 +457,7 @@ software for every host and router in the Internet. This is clearly
 not a trivial matter—it is a major change that needs to be thought
 about very carefully.
 
-Oringally known as IP Next
+Originally known as IP Next
 Generation, or IPng, once an official IP version
 number was assigned, IPng became IPv6. The existing version which we
 have discussed above is IPv4. The apparent

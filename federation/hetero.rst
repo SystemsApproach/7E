@@ -189,7 +189,7 @@ efficiently that normal "fast path" processing.
    small enough to fit inside one packet on any network technology, or
    provide a means by which packets can be fragmented and reassembled
    when they are too big to go over a given network technology. IP
-   version 4 chose fragmentation, while IP version 6, benefitting from
+   version 4 chose fragmentation, while IP version 6, benefiting from
    a few decades of experience, opted for a twist on the first option:
    path MTU discovery.
 
@@ -208,7 +208,7 @@ efficiently that normal "fast path" processing.
    Kent. (That paper inspired an entire genre of future work on "X
    Considered Harmful.") Fragmentation consumes resources, is
    fragile—one lost fragment means an entire datagram is lost—and the
-   reaassembly process may degrade performance.
+   reassembly process may degrade performance.
 
    The way that fragmentation can be avoided is called Path
    MTU Discovery. In IPv4, this is done by setting a "don't fragment" bit in the
