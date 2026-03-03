@@ -721,7 +721,7 @@ be removed from the IPv6 header. The ``HopLimit`` field is simply the
 ``TTL`` of IPv4, renamed to reflect the way it is actually used.
 
 .. _fig-v6header:
-.. figure:: figures/f04-12-9780123850591.png
+.. figure:: federation/figures/f04-12-9780123850591.png
    :width: 500px
    :align: center
 
