@@ -231,7 +231,7 @@ addresses efficiently. To do this, CIDR helps us to *aggregate* routes.
 That is, it lets us use a single entry in a forwarding table to tell us
 how to reach a lot of different networks. It does this by
 breaking the rigid boundaries between address classes. CIDR works with
-*prefixes* rather than networks. 
+*prefixes* rather than networks.
 
 Consider our organization with 16 class C
 network numbers. Instead of handing out 16 addresses at random, we can
@@ -364,7 +364,7 @@ discuss in Chapter 11). So it is possible for many different hosts in
 the private network to *simultaneously* use the same global address
 for external communication by using the TCP or UDP port field as a key
 to distinguish one host from another. This is probably best explained
-with an example. 
+with an example.
 
 
 
@@ -399,7 +399,26 @@ The NAT table is basically a cache of currently active "flows". So if
 the client keeps talking to the same server, the same table entry will
 keep being used. At some point, if the client stops sending traffic to
 the server or the server stops replying, the NAT table entry can be
-aged out of the cache. 
+aged out of the cache.
+
+Why does it matter that NAT gives up on globally unique addresses? One
+problem is that it now becomes difficult to initiate a connection to a
+device behind a NAT, because you don't know how to address it, and
+NAT devices typically won't create new table entries for flows that
+start outside the NAT. So, it's not easy to run a server out of your
+home network, for example. Establishing direct IP connectivity between
+two devices that are both behind NATs is hard, since neither has a
+public address to get the connection established. Techniques to work
+around these problems have been developed (STUN is an IETF standard
+for NAT traversal, for example) but certainly this is a far cry from the simple,
+global addressing model of the original Internet.
+
+The path back to globally unique addresses required an expansion of
+the IP address space, which is exactly what IP version 6 provides. You
+can read about the initial design of NAT in the 1993 paper below; Paul
+Francis and Paul Tsuchiya are the same person (he changed his last
+name) and he wrote a short piece looking at why NAT was so widely
+adopted in 2015.
 
 
 
@@ -430,3 +449,302 @@ connected to the Internet. Even if we were able to use all 4 billion
 addresses, we are well past that number of hosts now, admittedly many
 of them sitting behind NAT devices.  With the clarity of 20/20 hindsight,
 a 32-bit address space was quite small.
+
+The IETF began looking at the problem of expanding the IP address
+space in 1991, and several alternatives were proposed. Larger
+addresses require a new version of the Internet Protocol and hence new
+software for every host and router in the Internet. This is clearly
+not a trivial matter—it is a major change that needs to be thought
+about very carefully.
+
+Oringally known as IP Next
+Generation, or IPng, once an official IP version
+number was assigned, IPng became IPv6. The existing version which we
+have discussed above is IPv4. The apparent
+discontinuity in numbering is the result of version number 5 being used
+for a discontinued experimental protocol many years ago.
+
+A common view in the IETF at the time was that this was a
+once-in-a-generation change in which many other problems with IP
+beyond the address space could be addressed. Consequently, the IETF
+solicited white papers asking for
+input on the features that might be desired in a new version of IP. In
+addition to the need to accommodate scalable routing and addressing,
+some of the other wish list items for IPng included:
+
+-  Support for real-time services
+
+-  Security support
+
+-  Autoconfiguration (i.e., the ability of hosts to automatically
+   configure themselves with such information as their own IP address
+   and domain name)
+
+-  Enhanced routing functionality, including support for mobile hosts
+
+It is interesting to note that, while many of these features were absent
+from IPv4 at the time IPv6 was being designed, support for all of them
+has made its way into IPv4 in recent years, often using similar
+techniques in both protocols. It can be argued that the freedom to think
+of IPv6 as a clean slate facilitated the design of new capabilities for
+IP that were then retrofitted into IPv4.
+
+In addition to the wish list, one absolutely non-negotiable feature
+for IPv6 was that there must be a transition plan to move from IPv4 to
+IPv6. With the Internet being so large and having no centralized
+control, it would be completely impossible to have a “flag day” on
+which everyone shut down their hosts and routers and installed a new
+version of IP. The architects expected a long transition period in
+which some hosts and routers would run IPv4 only, some will run IPv4
+and IPv6, and some will run IPv6 only. It is unclear if they
+anticipated that transition period would extend beyond 30 years.
+
+4.2.2 Addresses and Routing
+---------------------------
+
+First and foremost, IPv6 provides a 128-bit address space, as opposed
+to the 32 bits of version 4. Thus, while version 4 can potentially
+address 4 billion nodes if address assignment efficiency reaches 100%,
+IPv6 can address 3.4 × 10\ :sup:`38` nodes, again assuming 100%
+efficiency.  As we have seen, though, 100% efficiency in address
+assignment is impossible. Some analysis of other addressing schemes,
+such as those of the French and U.S. telephone networks, as well as
+that of IPv4, have turned up some empirical numbers for address
+assignment efficiency. Based on the most pessimistic estimates of
+efficiency drawn from this study, the IPv6 address space is predicted
+to provide over 1500 addresses per square foot of the Earth’s surface,
+which certainly seems like it should serve us well even when toasters
+on Mars have IP addresses.
+
+Address Space Allocation
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Drawing on the effectiveness of CIDR in IPv4, IPv6 addresses are also
+classless, but the address space is still subdivided in various ways
+based on the leading bits. Rather than specifying different address
+classes, the leading bits specify different uses of the IPv6 address.
+The current assignment of prefixes is listed in :numref:`Table %s
+<tab-v6tab>`.
+
+.. _tab-v6tab:
+.. table:: Address Prefix Assignments for IPv6.
+   :align: center
+   :widths: auto
+
+   +-----------------+---------------------+
+   | Prefix          | Use                 |
+   +=================+=====================+
+   | 00…0 (128 bits) | Unspecified         |
+   +-----------------+---------------------+
+   | 00…1 (128 bits) | Loopback            |
+   +-----------------+---------------------+
+   | 1111 1111       | Multicast addresses |
+   +-----------------+---------------------+
+   | 1111 1110 10    | Link-local unicast  |
+   +-----------------+---------------------+
+   | Everything else | Global Unicast      |
+   +-----------------+---------------------+
+
+This allocation of the address space warrants a little discussion.
+First, the entire functionality of IPv4’s three main address classes (A,
+B, and C) is contained inside the “everything else” range. Global
+Unicast Addresses are a lot like classless IPv4
+addresses, only much longer. These are the main ones of interest at this
+point, with over 99% of the total IPv6 address space available to this
+important form of address.
+
+The multicast address space is (obviously) for multicast, thereby
+serving the same role as class D addresses in IPv4. Note that multicast
+addresses are easy to distinguish—they start with a byte of all 1s. We
+will see how these addresses are used in a later section.
+
+The idea behind link-local use addresses is to enable a host to
+construct an address that will work on the network to which it is
+connected without being concerned about the global uniqueness of the
+address. This may be useful for autoconfiguration, as we will see below.
+Similarly, the site-local use addresses are intended to allow valid
+addresses to be constructed on a site (e.g., a private corporate
+network) that is not connected to the larger Internet; again, global
+uniqueness need not be an issue.
+
+Within the global unicast address space are some important special types
+of addresses. A node may be assigned an IPv4-compatible IPv6 address by
+zero-extending a 32-bit IPv4 address to 128 bits. A node that is only
+capable of understanding IPv4 can be assigned an IPv4-mapped IPv6
+address by prefixing the 32-bit IPv4 address with 2 bytes of all 1s and
+then zero-extending the result to 128 bits. These two special address
+types have uses in the IPv4-to-IPv6 transition (see the sidebar on this
+topic).
+
+Address Notation
+~~~~~~~~~~~~~~~~
+
+Just as with IPv4, there is some special notation for writing down IPv6
+addresses. The standard representation is ``x:x:x:x:x:x:x:x``, where
+each ``x`` is a hexadecimal representation of a 16-bit piece of the
+address. An example would be
+
+::
+
+   47CD:1234:4422:AC02:0022:1234:A456:0124
+
+Any IPv6 address can be written using this notation. Since there are a
+few special types of IPv6 addresses, there are some special notations
+that may be helpful in certain circumstances. For example, an address
+with a large number of contiguous 0s can be written more compactly by
+omitting all the 0 fields. Thus,
+
+::
+
+   47CD:0000:0000:0000:0000:0000:A456:0124
+
+could be written
+
+::
+
+   47CD::A456:0124
+
+Clearly, this form of shorthand can only be used for one set of
+contiguous 0s in an address to avoid ambiguity.
+
+The two types of IPv6 addresses that contain an embedded IPv4 address
+have their own special notation that makes extraction of the IPv4
+address easier. For example, the IPv4-mapped IPv6 address of a host
+whose IPv4 address was 128.96.33.81 could be written as
+
+::
+
+   ::FFFF:128.96.33.81
+
+That is, the last 32 bits are written in IPv4 notation, rather than as a
+pair of hexadecimal numbers separated by a colon. Note that the double
+colon at the front indicates the leading 0s.
+
+Global Unicast Addresses
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+By far the most important sort of addressing that IPv6 must provide is
+plain old unicast addressing. It must do this in a way that supports the
+rapid rate of addition of new hosts to the Internet and that allows
+routing to be done in a scalable way as the number of physical networks
+in the Internet grows. Thus, at the heart of IPv6 is the unicast address
+allocation plan that determines how unicast addresses will be assigned
+to service providers, autonomous systems, networks, hosts, and routers.
+
+As with CIDR, the goal of the IPv6 address allocation plan is to provide
+aggregation of routing information to reduce the burden on intradomain
+routers. Again, the key idea is to use an address prefix—a set of
+contiguous bits at the most significant end of the address—to aggregate
+reachability information to a large number of networks and even to a
+large number of autonomous systems.
+
+The main way to achieve this is to allocate addresses in a hierarchy
+that loosely follows the structure of the Internet. While the Internet is far
+from a simple tree structure, it nevertheless displays a sort of
+hierarchy with "Tier-1" service providers at the top, lower tier
+providers below them, and end customers, both business and
+residential, at the leaves of the hierarchy.
+
+Roughly speaking, then, large blocks of address space are allocated to
+providers. Those providers can then allocate prefixes within their
+block to their customers, who may themselves be providers to other
+customers lower in the hierarchy. This ensures that routing
+advertisements can be aggregated.
+
+The drawback of having providers allocate address blocks to their
+customers is that, if a customer decides to change providers, then it
+will no longer have an address prefix that is part of the range
+allocated to its provider.  For residential customers, moving to a new
+provider is likely to just mean they get a whole new set of
+addresses. Thanks to the dynamic way in which addresses are assigned
+today, they mostly won't be greatly bothered by this. But larger
+customers, either corporate networks or those customers who are
+themselves providers, generally won't be willing or able to change
+their allocated addresses. Thus, one would expect over time to see
+that more prefixes appear in the global routing tables due to
+customers moving to new providers, independent of the growth of
+Internet.
+
+.. _fig-v6addr:
+.. figure:: federation/figures/f04-11-9780123850591.png
+   :width: 500px
+   :align: center
+
+   An IPv6 provider-based unicast address.
+
+One place where aggregation works well is at the national or
+continental level. Continental boundaries and oceans form natural divisions in
+the Internet topology—submarine fibers are expensive and hence there are
+relatively few of them. If all addresses in Europe, for example, had a few
+common prefixes, then a great deal of aggregation could be done, and
+most routers in other continents would only need one routing table
+entry for all networks with the Europe prefix. Providers in Europe
+would all select their prefixes such that they began with the European
+prefixes. Using this scheme, an IPv6 address might look like
+:numref:`Figure %s <fig-v6addr>`. The ``RegistryID`` might be an
+identifier assigned to a European address registry, with different IDs
+assigned to other continents or countries.  Note that prefixes would
+be of different lengths under this scenario.  For example, a provider
+with few customers could have a longer prefix (and thus less total
+address space available) than one with many customers. There are
+regional internet registries for each continent today as well as some
+smaller registries at a national level and they for the basis for hierarchical
+address allocation.
+
+
+
+4.2.3 Packet Format
+-------------------
+
+Despite the fact that IPv6 extends IPv4 in several ways, its header
+format is actually simpler. This simplicity is due to a concerted effort
+to remove unnecessary functionality from the protocol. :numref:`Figure
+%s <fig-v6header>` shows the result.
+
+The ``Version`` field is in the same place relative
+to the start of the header as IPv4’s ``Version`` field so that
+header-processing software can immediately decide which header format to
+look for. The ``TrafficClass`` and ``FlowLabel`` fields both relate to
+quality of service issues.
+
+The ``PayloadLen`` field gives the length of the packet, excluding the
+IPv6 header, measured in bytes. The ``NextHeader`` field cleverly
+replaces both the IP options and the ``Protocol`` field of IPv4. If
+options are required, then they are carried in one or more special
+headers following the IP header, and this is indicated by the value of
+the ``NextHeader`` field. If there are no special headers, the
+``NextHeader`` field is the demux key identifying the higher-level
+protocol running over IP (e.g., TCP or UDP); that is, it serves the
+same purpose as the IPv4 ``Protocol`` field. Also, fragmentation is
+largely avoided, allowing the fragmentation-related fields of IPv4 to
+be removed from the IPv6 header. The ``HopLimit`` field is simply the
+``TTL`` of IPv4, renamed to reflect the way it is actually used.
+
+.. _fig-v6header:
+.. figure:: figures/f04-12-9780123850591.png
+   :width: 500px
+   :align: center
+
+   IPv6 packet header.
+
+Finally, the bulk of the header is taken up with the source and
+destination addresses, each of which is 16 bytes (128 bits) long. Thus,
+the IPv6 header is always 40 bytes long. Considering that IPv6 addresses
+are four times longer than those of IPv4, this compares quite well with
+the IPv4 header, which is 20 bytes long in the absence of options.
+
+The way that IPv6 handles options is quite an improvement over IPv4. In
+IPv4, if any options were present, every router had to parse the entire
+options field to see if any of the options were relevant. This is
+because the options were all buried at the end of the IP header, as an
+unordered collection of ‘(type, length, value)’ tuples. In contrast,
+IPv6 treats options as *extension headers* that must, if present, appear
+in a specific order. This means that each router can quickly determine
+if any of the options are relevant to it; in most cases, they will not
+be. Usually this can be determined by just looking at the ``NextHeader``
+field. The end result is that option processing is much more efficient
+in IPv6, which is an important factor in router performance. In
+addition, the new formatting of options as extension headers means that
+they can be of arbitrary length, whereas in IPv4 they were limited to
+44 bytes at most.
+

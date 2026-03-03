@@ -51,7 +51,7 @@ and their customers to set and enforce business rules about whose
 traffic is carried by whom. We explore these challenges in this
 chapter. Finally we look at the ongoing work of securing the routing system
 against attacks that can lead to traffic hijacking, black holes, and
-other system-wide problems. 
+other system-wide problems.
 
 .. _reading_inet:
 .. admonition:: Further Reading

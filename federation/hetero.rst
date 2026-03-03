@@ -213,13 +213,13 @@ efficiently that normal "fast path" processing.
    The way that fragmentation can be avoided is called Path
    MTU Discovery. In IPv4, this is done by setting a "don't fragment" bit in the
    header, and sending a packet using the MTU of the host's local
-   network. In IPv6, no fragmentation is possible, so there is no
+   network. In IPv6, routers do not perform fragmentation, so there is no
    corresponding bit. But in either case, if the packet arrives at a
    router and is found to be too large for its outgoing network, the
    router sends a control message back to the host. That message
    contains the MTU of the outgoing link so the host learns the new
    MTU that it can safely use. This could happen more than once along
-   the path but eventually the host discovers an MTU that works. 
+   the path but eventually the host discovers an MTU that works.
 
 
 6.2.2 Global Addresses
