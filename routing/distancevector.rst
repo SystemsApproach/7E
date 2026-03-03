@@ -383,7 +383,7 @@ networks—those with no paths longer than 15 hops.
    neighbors, but it tells them everything it has learned (i.e.,
    distance to all nodes). In link-state, each node talks to all other
    nodes, but it tells them only what it knows for sure (i.e., only
-   the state of its directly connected links). In contrast to both of
-   these algorithms, we will consider a more centralized approach to
-   routing in :ref:`Section 3.5 <3.5 Implementation>` when we
-   introduce Software Defined Networking (SDN). :ref:`[Next] <key-kiss>`
+   the state of its directly connected links). There is a third
+   option, which moves the calculation to a central controller, which
+   we discuss below.
+
