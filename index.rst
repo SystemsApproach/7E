@@ -32,6 +32,7 @@ Larry Peterson and Bruce Davie
    shared.rst
    part_three.rst
    reliable.rst
+   message.rst
    README.rst
    authors.rst
    latest.rst
