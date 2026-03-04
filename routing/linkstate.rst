@@ -420,8 +420,12 @@ basic link-state algorithm described above, including the following:
    OSPF header format.
 
 There are several different types of OSPF messages, but all begin with
-the same header, as shown in :numref:`Figure %s <fig-ospf>`. The
-``Version`` field is currently set to 2, and the ``Type`` field may
+the same header, as shown in :numref:`Figure %s <fig-ospf>`. Like most
+Internet protocols, OSPF uses packet formats that align on 32 bit
+boundaries as in this figure.
+
+The
+``Version`` field is most commonly 2, and the ``Type`` field may
 take the values 1 through 5. The ``SourceAddr`` identifies the sender
 of the message, and the ``AreaId`` is a 32-bit identifier of the area
 in which the node is located. The entire packet, except the
