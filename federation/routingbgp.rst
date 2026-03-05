@@ -39,7 +39,7 @@ while providing a global service (b) to support aggregation of routing
 information in a large internet, thus improving scalability. We can divide
 the global routing problem into two parts: routing within a single autonomous
 system (which we covered in Chapter 4) and routing between autonomous
-systems. Autonomous sytems are also known as
+systems. Autonomous systems are also known as
 routing *domains*, so we refer to the two parts of the routing problem as
 interdomain routing and intradomain routing. The AS model decouples
 the intradomain routing that takes place in one AS from that taking
@@ -65,28 +65,28 @@ willing to carry, and who they expect to carry their traffic. As
 discussed in the section on address allocation for IPv6, there are
 networks that function as providers and others that appear as their
 customers. A mid-level ISP might be a customer of a large Tier-1
-provider whil also acting as the provider for smaller
+provider while also acting as the provider for smaller
 customers. Customers expect their provider(s) to carry their traffic
 in both directions, inbound and outbound. Providers agree to carry
 traffic to and from their customers. Conversely, a customer would not
 expect to deliver traffic to some unrelated prefix that is neither its
-own nor belonging to one of its customers. 
+own nor belonging to one of its customers.
 
-A simple
-example routing policy implemented at a particular AS might look like
-this: “Whenever possible, I prefer to send traffic via AS X than via AS
-Y, but I’ll use AS Y if it is the only path, and I never want to carry
-traffic from AS X to AS Y or *vice versa*.” Such a policy would be
-typical when I have paid money to both AS X and AS Y to connect my AS to
-the rest of the Internet, and AS X is my preferred provider of
-connectivity, with AS Y being the fallback. Because I view both AS X and
-AS Y as providers (and presumably I paid them to play this role), I
-don’t expect to help them out by carrying traffic between them across my
-network (this is called *transit* traffic). The more autonomous systems
-I connect to, the more complex policies I might have, especially when
-you consider backbone providers, who may interconnect with dozens of
-other providers and hundreds of customers and have different economic
-arrangements (which affect routing policies) with each one.
+A simple example routing policy implemented at a particular AS might
+look like this: “Whenever possible, I prefer to send traffic via AS X
+than via AS Y, but I’ll use AS Y if it is the only path, and I never
+want to carry traffic from AS X to AS Y or *vice versa*.” Such a
+policy would be typical when I have paid money to both AS X and AS Y
+to connect my AS to the rest of the Internet, and AS X is my preferred
+provider of connectivity, with AS Y being the fallback. Because I view
+both AS X and AS Y as providers (and presumably I paid them to play
+this role), I don’t expect to help them out by carrying traffic
+between them across my network (this is called *transit* traffic). The
+more autonomous systems I connect to, the more complex policies
+I might have, especially when you consider backbone providers, who may
+interconnect with dozens of other providers and hundreds of customers
+and have different economic arrangements (which affect routing
+policies) with each one.
 
 A key design goal of interdomain routing is that policies like the
 example above, and much more complex ones, should be supported by the
@@ -139,8 +139,7 @@ To get a better sense of how we might manage routing among this complex
 interconnection of autonomous systems, we can start by defining a few
 terms. We define *local traffic* as traffic that originates at or
 terminates on nodes within an AS, and *transit traffic* as traffic that
-passes through an AS. 
-
+passes through an AS.
 
 As noted above, scaling the routing system has been a concern for at
 least three decades. An Internet backbone router must be
@@ -342,7 +341,7 @@ have other providers as their customers. At the top, we have providers
 who have customers and peers but are not customers of anyone. These
 providers are known as the *Tier-1* providers. The Tier-1 providers
 have no-one higher up to depend on, so they must carry all the
-Internet's  routable prefixes in their routing tables. 
+Internet's  routable prefixes in their routing tables.
 
 .. _key-scaling:
 .. admonition:: Key Takeaway
@@ -366,7 +365,7 @@ possible to infer who is the customer and who is the provider among a
 pair of connected ASes by observing BGP advertisements. Assessing when
 a relationship is peer-to-peer is a bit harder and relies on
 heuristics. The underlying data is collected by viewing BGP
-adverstisments from different vantage points around the Internet. One
+advertisements from different vantage points around the Internet. One
 of the early papers describing this work is from CAIDA (the Center for
 Applied Internet Data Analysis). CAIDA continues to report the
 inferred AS relationships data set, and the site is a wonderful source
@@ -381,7 +380,6 @@ Internet.
    SIGCOMM CCR, January 2007.
 
    CAIDA. `Center for Applied Internet Data Analysis <https://www.caida.org>`__.
-   
 
 6.4.4 Integrating Interdomain and Intradomain Routing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

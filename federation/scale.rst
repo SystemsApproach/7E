@@ -652,9 +652,9 @@ customers lower in the hierarchy. This ensures that routing
 advertisements can be aggregated. A provider can advertise
 reachability for a single prefix that covers all their customers. We
 will look more closely at how these advertisements work in the next
-section. This approach was adopted in IPv4
-after the introduction of CIDR; for IPv6 it has been applied from the
-start, allowing a cleaner approach. 
+section. This approach was adopted in IPv4 after the introduction of
+CIDR; for IPv6 it has been applied from the start, allowing a cleaner
+approach.
 
 The drawback of having providers allocate address blocks to their
 customers is that, if a customer decides to change providers, then it
