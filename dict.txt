@@ -692,6 +692,7 @@ imsis
 IMSIs
 INADDR
 Inband
+Infiniband
 incentivize
 incentivizes
 incrementing
@@ -818,6 +819,7 @@ LastByteRead
 LastByteSent
 LastByteWritten
 latencies
+Lauer
 layerist
 LCP
 LDAP
@@ -1327,6 +1329,7 @@ RCP
 RcvBufferSize
 RCVD
 RDBMS
+RDMA
 reachability
 reactively
 Realtime

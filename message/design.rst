@@ -29,10 +29,10 @@ specific target identifier as one of its header fields. The reply
 message then needs to include an identifier for the transaction, so
 the response can be paired with the original caller. The TCP port
 fields played this role for TCP—with the server being assigned a
-well-known port—but this is just how TCP decided to identify
-communication end points. Every end-to-end protocol needs to define an
-analogous mechanism, tailored for the abstraction they provide; for
-example, calling procedures and accessing memory.
+well-known port—but this is just how TCP identifies communication end
+points. Every end-to-end protocol needs to define an analogous
+mechanism, tailored for the abstraction it provides; for example,
+calling procedures and accessing memory.
 
 The second problem is how to support reliable mesage delivey, and as
 with TCP, we assume an imperfect network substrate. One option is to
@@ -40,36 +40,36 @@ with TCP, we assume an imperfect network substrate. One option is to
 protocol like TCP. Another option is for the message transaction
 protocol to implement its own reliable message delivery layer on top
 of an unreliable substrate (e.g., UDP/IP). Such a protocol would
-likely implement reliability using acknowledgments and timeouts,
-similar to TCP. It would likely be optimized to have the response
-message also acknowlege receipt of the request message (rather than
-send a separate ACK). One complication is that the sender does not
-know long it will take the receiver to produce the response; it may be
+implement reliability using acknowledgments and timeouts, similar to
+TCP. It would also likely be optimized to have the response message
+implicitly acknowlege receipt of the request message (rather than send
+a separate ACK). One complication is that the sender does not know
+long it will take the receiver to produce the response; it may be
 asking the receiver to execute a time-consuming computation. This
 suggests a "keep alive" mechanism similar to the one implemented by
 TCP may be necessary.
 
 Note that there is an opportunity to fine-tune the definition of what
 it means for the transaction protocol to be reliable. Typically, we
-assume it supports a property known as *at-most-once semantics*. This
-means that for every request message that the client sends, at most
-one copy of that message is delivered to the server (and hence, the
-remote procedure is executed only once or the remote memory location
-is a accessed only once). On the other hand, if we assume the
-operation being performed is *idempotent* (may be executed more than
-once without any adverse side effects), then we do not need to protect
-against duplicate messages being delivered. We still want to try to
-execute the operation at least once—so reliable delivery is still a
-goal—but we do not need to worry about duplicates.
+assume a transaction-based protocol supports a property known as
+*at-most-once semantics*. This means that for every request message
+that the client sends, at most one copy of that message is delivered
+to the server (and hence, the remote procedure is executed only once
+or the remote memory location is a accessed only once). On the other
+hand, if we assume the operation being performed is *idempotent* (may
+be executed more than once without any adverse side effects), then we
+do not need to protect against duplicate messages being delivered. We
+still want to try to execute the operation at least once—so reliable
+delivery is still a goal—but we do not need to worry about duplicates.
 
 The third challenge is to deal with request/response messsages that
 are larger than the underlying network packets. Again, a message
 transaction protocol could run on top of TCP and take advantage of
 it's ability to reassmble segments, or it could implement its own
 fragmentation/reassembly mechanism. Yet another option is to limit the
-size of messages it is willing to deliver, which effectively moves
-responsibility for larger blocks of data onto the application. As
-limiting as this sounds, if the message transaction protocol knows
+size of messages the protocol is willing to deliver, which effectively
+moves responsibility for larger blocks of data onto the application.
+As limiting as this sounds, if the message transaction protocol knows
 that 99% of the time applications deal with small chunks of data, it
 could be a reasonable design choice.
 
@@ -86,10 +86,10 @@ This can been done in different ways. For example, a multi-threaded
 process could afford to have one thread block waiting for a reply,
 while others do productive work.  (The threads would still need to
 synchronize if they ever got to the point that they needed to access
-data in the reply message.) If a program is multi-threaded, then it is
-possible that more than one thread will initiate its own message
+data in the reply message.) But if a program is multi-threaded, then
+it is possible that more than one thread will initiate its own message
 transaction, meaning that multiple request/response transactions may
-happen in parallel. The protocol would likely need to accommodate such
+happen in parallel. The protocol would need to accommodate such
 parallelism. The *stream id* in HTTP/2 (as described in Chapter 2)
 supports exactly such a situation. Another design option is that
 request messages do not block waiting for a reply, but instead, the
@@ -105,8 +105,8 @@ the application whether they contain ASCII-encoded email messsages or
 MPEG-encoded video—but we raise the point because of how message
 transactions sometimes imply a strong link between the programming
 environment and the messages being exchanged. For example, a caller
-passing a data structure as an argument to a procedure or a remore
-process reading a memory location that holds a data structure make
+passing a data structure as an argument to a procedure (or a remore
+process reading a memory location that holds a data structure) makes
 assumptions about how that data structure is layed out in memory.  As
 a consequence, both RPC and RDMA make design choices about formatting.
 
@@ -115,7 +115,8 @@ transaction protocol in the first place is to support
 latency-sensitive applications, then the design needs to aggresively
 look for opportunities to optimize performance. Eliminating network
 round-trips is an important part of that exercise, but as we will see
-with our two two examples, there are other opportunities to exploit.
+with our two two examples, there are other opportunities to reduce
+delay.
 
 .. Maybe move latency to the top. QUIC gets better latency over
    wide-area and RDMA / RoCE gets better latency in datacenters.
