@@ -10,7 +10,7 @@ then define a set of protocols that enable that service to be
 delivered over heterogeneous networks.
 
 6.2.1 Service Model
--------------------
+~~~~~~~~~~~~~~~~~~~~
 
 The main concern in defining a service model for an internetwork is that
 we can only offer a host-to-host service that can somehow
@@ -32,7 +32,7 @@ postpone a discussion of the addressing scheme for now and look first at
 the data delivery model.
 
 Datagram Delivery
-~~~~~~~~~~~~~~~~~
+++++++++++++++++++
 
 
 The IP datagram is fundamental to the Internet Protocol. Every
@@ -72,7 +72,7 @@ applications that run above IP need to be aware of all these possible
 failure modes and deal with them.
 
 Packet Format
-~~~~~~~~~~~~~
++++++++++++++++++
 
 Clearly, a key part of the IP service model is the type of packets
 that can be carried. The IP datagram, like most packets, consists of a
@@ -223,7 +223,7 @@ efficiently that normal "fast path" processing.
 
 
 6.2.2 Global Addresses
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In the above discussion of the IP service model, we mentioned that one
 of the things that it provides is an addressing scheme. After all, if
@@ -317,7 +317,7 @@ forwarding decisions.
 
 
 6.2.3 Datagram Forwarding in IP
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We are now ready to look at the basic mechanism by which IP routers
 forward datagrams in an internetwork. Recall from chapter 4
@@ -494,7 +494,7 @@ by no means the last) in achieving scalability.
    aggregated piece of information.
 
 6.2.5 Address Translation (ARP)
--------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have talked about how to get IP datagrams to the
 right physical network but glossed over the issue of how to get a

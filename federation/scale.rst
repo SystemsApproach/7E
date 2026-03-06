@@ -11,7 +11,7 @@ the Internet to keep on scaling up.
 
 
 6.3.1 Subnetting and Classless Addressing
------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The original "classful" design for IP addresses uses the network part
 of the address to identify exactly one physical network. It turns out that this
@@ -182,7 +182,7 @@ information, which is fundamental to scaling of the routing system. The
 next section shows how aggregation can be taken to another level.
 
 Classless Addressing
-~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++
 
 Subnetting has a counterpart, sometimes called *supernetting*, but more
 often called *Classless Interdomain Routing* or CIDR, pronounced
@@ -288,7 +288,7 @@ as needed. Note that there is no
 need for all customer prefixes to be the same length.
 
 IP Forwarding Revisited
-~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++
 
 In our discussion of IP forwarding so far, we have assumed that we
 could find the network number in a packet and then look up that number
@@ -313,7 +313,7 @@ uses an approach known as a *PATRICIA tree*, which was actually
 developed well in advance of CIDR.
 
 6.3.2 Network Address Translation
----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Network Address Translation (NAT) has a long and somewhat
 controversial history. It seems the idea was independently invented by
@@ -435,7 +435,7 @@ adopted in 2015.
 
 
 6.3.3 IP Version 6
-------------------
+~~~~~~~~~~~~~~~~~~~~~
 
 The motivation for defining a new version of IP is simple: to deal
 with exhaustion of the IP address space. CIDR helped considerably to
@@ -499,8 +499,8 @@ which some hosts and routers would run IPv4 only, some will run IPv4
 and IPv6, and some will run IPv6 only. It is unclear if they
 anticipated that transition period would extend beyond 30 years.
 
-4.2.2 Addresses and Routing
----------------------------
+IPv6 Addresses and Routing
+++++++++++++++++++++++++++++++
 
 First and foremost, IPv6 provides a 128-bit address space, as opposed
 to the 32 bits of version 4. Thus, while version 4 can potentially
@@ -517,7 +517,7 @@ which certainly seems like it should serve us well even when toasters
 on Mars have IP addresses.
 
 Address Space Allocation
-~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++
 
 Drawing on the effectiveness of CIDR in IPv4, IPv6 addresses are also
 classless, but the address space is still subdivided in various ways
@@ -577,7 +577,7 @@ types have uses in the IPv4-to-IPv6 transition (see the sidebar on this
 topic).
 
 Address Notation
-~~~~~~~~~~~~~~~~
++++++++++++++++++++
 
 Just as with IPv4, there is some special notation for writing down IPv6
 addresses. The standard representation is ``x:x:x:x:x:x:x:x``, where
@@ -621,7 +621,7 @@ pair of hexadecimal numbers separated by a colon. Note that the double
 colon at the front indicates the leading 0s.
 
 Global Unicast Addresses
-~~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++++
 
 By far the most important sort of addressing that IPv6 must provide is
 plain old unicast addressing. It must do this in a way that supports the
@@ -649,7 +649,12 @@ Roughly speaking, then, large blocks of address space are allocated to
 providers. Those providers can then allocate prefixes within their
 block to their customers, who may themselves be providers to other
 customers lower in the hierarchy. This ensures that routing
-advertisements can be aggregated.
+advertisements can be aggregated. A provider can advertise
+reachability for a single prefix that covers all their customers. We
+will look more closely at how these advertisements work in the next
+section. This approach was adopted in IPv4 after the introduction of
+CIDR; for IPv6 it has been applied from the start, allowing a cleaner
+approach.
 
 The drawback of having providers allocate address blocks to their
 customers is that, if a customer decides to change providers, then it
@@ -688,13 +693,13 @@ be of different lengths under this scenario.  For example, a provider
 with few customers could have a longer prefix (and thus less total
 address space available) than one with many customers. There are
 regional internet registries for each continent today as well as some
-smaller registries at a national level and they for the basis for hierarchical
+smaller registries at a national level and they form the basis for hierarchical
 address allocation.
 
 
 
-4.2.3 Packet Format
--------------------
+IPv6 Packet Format
++++++++++++++++++++
 
 Despite the fact that IPv6 extends IPv4 in several ways, its header
 format is actually simpler. This simplicity is due to a concerted effort
