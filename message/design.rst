@@ -1,7 +1,7 @@
 13.1 Design Issues
 ----------------------
 
-Any message transaction protocol faces many of the problems TCP
+A message transaction protocol faces many of the problems TCP
 addressed in Chapter 11, starting with a precise definition of the
 semantics we want to support. In this case, we're aided by the fact
 that we're trying to emulate a local procedure call (in the case of
@@ -12,8 +12,8 @@ that we talk about a generic "message transaction protocol" without
 being specific as to whether it supports RPC or RDMA. This is not to
 imply that there is a single protocol that supports both use
 cases. It's conceivable there could be, but it turns out each has
-adopted a different design. In this section, we are just looking
-generally at the issues that require attention.
+adopted a different design. In this section, we look generally at the
+issues that require attention.
 
 .. sidebar:: Story of VMTP
 
@@ -39,15 +39,16 @@ with TCP, we assume an imperfect network substrate. One option is to
 "define the problem away" by choosing to run on top of a reliable
 protocol like TCP. Another option is for the message transaction
 protocol to implement its own reliable message delivery layer on top
-of an unreliable substrate (e.g., UDP/IP). Such a protocol would
-implement reliability using acknowledgments and timeouts, similar to
-TCP. It would also likely be optimized to have the response message
-implicitly acknowlege receipt of the request message (rather than send
-a separate ACK). One complication is that the sender does not know
-long it will take the receiver to produce the response; it may be
-asking the receiver to execute a time-consuming computation. This
-suggests a "keep alive" mechanism similar to the one implemented by
-TCP may be necessary.
+of an unreliable substrate, either directly on IP (as a peer of TCP)
+or as a user-level process running on top of UDP. Such a protocol
+would implement reliability using acknowledgments and timeouts,
+similar to TCP. It would also likely be optimized to have the response
+message implicitly acknowlege receipt of the request message (rather
+than send a separate ACK). One complication is that the sender does
+not know long it will take the receiver to produce the response; it
+may be asking the receiver to execute a time-consuming
+computation. This suggests a "keep alive" mechanism similar to the one
+implemented by TCP may be necessary.
 
 Note that there is an opportunity to fine-tune the definition of what
 it means for the transaction protocol to be reliable. Typically, we
@@ -62,8 +63,8 @@ do not need to protect against duplicate messages being delivered. We
 still want to try to execute the operation at least once—so reliable
 delivery is still a goal—but we do not need to worry about duplicates.
 
-The third challenge is to deal with request/response messsages that
-are larger than the underlying network packets. Again, a message
+The third challenge is how to deal with request/response messsages
+that are larger than the underlying network packets. Again, a message
 transaction protocol could run on top of TCP and take advantage of
 it's ability to reassmble segments, or it could implement its own
 fragmentation/reassembly mechanism. Yet another option is to limit the
@@ -79,8 +80,10 @@ challenge of keeping the pipe full, but for the message transaction
 use case, we don't have an indefinite stream of data to send.
 However, if the sender has to block waiting for a reply, it will have
 lost the opportunity work on other tasks (presumably, tasks that do
-not directly depend on the reply). Said another way, a message
-transaction protocol needs to take concurrency into account.
+not directly depend on the reply). Just as importantly, that reply not
+only signals that the destination has received the message (as with
+TCP), but that the application has acted upon it. Said another way, a
+message transaction protocol needs to take concurrency into account.
 
 This can been done in different ways. For example, a multi-threaded
 process could afford to have one thread block waiting for a reply,
@@ -96,7 +99,8 @@ request messages do not block waiting for a reply, but instead, the
 caller is allowed to proceed and will be notified when the reply
 arrives. As with the multi-threaded design, the caller may eventually
 have to block if it reaches a point where it needs to use the return
-value in a computation.
+value in a computation. This implies the message protocol needs to
+signal the application that the reply has arrived.
 
 A fifth design challenge concerns the format of the data being
 exchanged in the request/response pair. Typically transport protocols

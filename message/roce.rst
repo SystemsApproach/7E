@@ -1,39 +1,120 @@
 .. _artifact-roce:
 
-13.5 Generalizing RDMA
---------------------------------
+13.5 Optimizing Ethernet for RDMA
+------------------------------------------
 
-Shooting for a best of both worlds: Performance of RDMA and the
-ubiquity of Ethernet networks. (Do we focus on generalizing RDMA or
-optimizing Ethernet, or both.)
+The adoption of RDMA as the preferred transport protocol for HPC
+workloads initially happened on Infiniband, which is a self-contained
+networking technology, developed in parallel with the Internet
+architecture.  Infiniband achieved the desired performance because
+it (1) off-loaded the transport protocol logic to the NIC (aka HCA),
+thereby bypassing the overhead of the OS-hosted TCP/IP protocol stack;
+and (2) augmented packet switches with the queue management logic
+needed to avoid the buffering delays and packet loss associated with
+best-effort forwarding.
 
-IB supports RC "natively"; edge logic is in the NIC. Go-Back-N and
-Selective Repeat (SR). Notes from the white paper below.
+But the Internet did not stop evolving in 1999 (even though you will
+still see both arguments in favor of Infiniband still being made even
+today). For example, it is now common place for Ethernet adaptors to
+support per-application transmit/receive packet queues, making it
+possible to get messages into and out of user space without any OS
+involvement. There have also been many "SmartNIC" products over the
+years that off-load various aspects of TCP/IP to the NIC, with today's
+*Infrastructure Packet Units (IPUs)* replacing traditional NICs as the
+preferred technology for connecting servers to datacenter networks.
+The first Infiniband advantage no longer holds, although it is
+perfectly legitimate to argue that TCP is not the right abstraction
+for RDMA (similar to QUIC being preferred to TCP for RPC traffic).
 
-* IB is a complete network, from layer 1 up.
+The main advantage Infiniband continues to enjoy is its ability to
+avoid the performance hit of congestion in an Ethernet-based
+packet-switched network. It does this with two mechanisms.  First, it
+implements per-hop flow control: an upstream node (either an end-host
+or a switch) is not allowed to transmit a packet to a downstream node
+(host or switch) unless the downstream node has issued a "credit"
+saying it has buffer space to hold that packet. Credits are logically
+equivalent to advertizing an open flow control window in TCP, the main
+difference being TCP does flow control on an end-to-end basis, whereas
+Infiniband does it on a per-hop basis.
 
- * At the link layer, you set up "virtual lanes" (think virtual
-   circuits). Closest we've seen is SONET, but many differences: up to
-   16 lanes each at a different priority (VL15 is highest and carries
-   mgmt traffic), VL0 is lowest).  QoS Service Level (SL)is applied to
-   traffic; each switch maps SL to VL.  Uses Point-to-Point flow
-   control at the link level, on a per VL-basis.  It's credit based:
-   receiving end supplies crdits to sending device.  This is about
-   buffer space. There's a CRC.
+The second mechanism is support for multiple "virtual lanes", with
+each switch supporting a separate queue for each lane. (You can think
+of a lane as similar to a virtual circuit.) Flow control credits are
+issued on a per-lane basis (ensuring each queue avoids having to drop
+a packet), and the set of queues are serviced in priority order.
+Infiniband defines 16 lanes, and hence, 16 priority queues. Each
+end-to-end connection is assigned to one of the lanes according to the
+QoS parameters associated with that connection.  This is an indirect
+way of making a per-connection reservation (the weighted fair queuing
+algorithm described in Chapter X would be more direct), but is does
+provide more isolation between user flows than the single FIFO queue
+in a standard Ethernet switch.
 
-  * Significant aspect is Routing at the Network Layer. Two-layer
-    (local and global ids). Elements of IPv6. Switched subnets
-    connected by routers.
+There are two related limitations to this approach. The first is that
+Infiniband networks are limited in scale. You cannot make the kinds
+of guarantees Infiniband makes when you are trying to connect billions
+of edge devices. They do scale to support modest-sized datacenters,
+but at increased cost. Cost is Infiniband's second limitation, which
+is related to the fact that, unlike Ethernet, Infiniband is not ubiquitous;
+it is purpose-built for the RDMA use case.
 
-  * Transport layer is as expected... See Cloudswit.ch below
+This is where the continued evolution of Internet technology again
+provides an answer. It is possible to augment an Ethernet switch with
+Internet-based alternatives to Infiniband's flow control and packet
+scheduling algorithm. They are not identical mechanisms, but do result
+in rough equivalency. This realization has led to an effort called
+*Converged Ethernet (CE)*, which has resulted in two versions of a
+standard known as *RoCE: RDMA over Converged Ethernet*.
 
-RoCEv2 runs on top of UDP/IP. v1 assumes on the same L2 broadcast
-domain. (A concept we need to explain).
+The first version, *RoCE.v1* encapsulates Infiniband packets in an
+Ethernet packet. In this case, the network is limited to an L2
+broadcast domain. The second version, *RoCE.v2*, encapsulates
+Infiniband packets in a UDP datagram, meaning the full routing
+capability of IP can be leveraged to interconnect nodes. Datacenters
+typically interconnect racks of servers at the IP layer, so we focus
+on v2 in the following. :numref:`Figure %s <fig-ib-encapsulate>` shows
+the RoCE.v2 packet format. Note that native Infiniband packets also
+have network and link layer headers, but they are not needed in RoCE.v2
+since IP subsumes the packet-delivery function; only Infiniband's
+transport header, plus the message payload, needs to be encapsulated.
 
-RoCE uses IP at the network layer, and includes support for ECN
-(Explicit Congestion Notification) for end-to-end congestion control
-and DSCP (Diff Serv) as a replacement for IB’s Traffic Class to
-implement QoS.
+.. _fig-ib-encapsulate:
+.. figure:: message/figures/ib-encapsulate.png
+   :width: 500px
+   :align: center
+
+   The Infiniband transport header and payload are encapsulated in a
+   UDP datagram.
+
+There are two main options for how Ethernet switches emulate
+Infiniband behavior, although other approaches continue to be under
+consideration. The first is to simply replicate the Infiniband
+mechanism by adding support for Priority Flow Control to Ethernet.
+This approach has been standardized as IEEE 802.1Qbb.  The second is
+to take advantage of two existing mechanisms: the Explicit Congestion
+Notification (ECN) described in Chapter X and the Differentiated
+Services Code Point (DSCP) described in Chapter Y. Both are encoded in
+IP's TOS field, and so require no change to standards. The approach
+is also appealing to cloud providers because their datacenters already
+leverage ECN in their approach to TCP congestion control.
+
+.. _fig-soft-roce:
+.. figure:: message/figures/soft-roce.png
+   :width: 200px
+   :align: center
+
+   Software configuration of a RoCE-capable edge server, with the
+   Infiniband transport layer implemented in software and running in
+   user space (as part of the application).
+
+Finally, there is the question of where the RDMA transport function is
+implemented for RoCE: (1) in hardware on the NIC, or (2) in software
+running on the host. While hardware offloading is possible (see the
+sidebar on IPUs), a software implementation is a standard part of the
+Linux kernel. The latter consumes host resources, but that does not
+necessarily translate to worse performance. This configuration is
+shown in :numref:`Figure %s <fig-soft-roce>`.
+
 
 ..  Infiband (role of fabric)
     https://network.nvidia.com/pdf/whitepapers/IB_Intro_WP_190.pdf
@@ -47,32 +128,13 @@ implement QoS.
 
     RoCEv2 Header Encapsulation https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet#/media/File:RoCE_Header_format.png
 
-    RoCE encapsulate IB payload in and Ethernet frame. v1 was at L2; v2
-    is now L3-based.
+    A good overview of RoCE
+    https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
 
-    A good overview of RoCE  https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
+    For a good overview of RoCE, see
+    https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
 
-Some facts... Convergence Enhanced Ethernet was defined (2008-09) by
-group of vendors including Broadcom, Brocade Communications Systems,
-Cisco Systems, Emulex, HP, IBM, Juniper Networks, QLogic. Led to
-proposals to 802.1 working groups:
 
- * Priority-based Flow Control (PFC) provides a link-level flow
-   control mechanism that can be controlled independently for each
-   frame priority. The goal of this mechanism is to ensure zero loss
-   under congestion.
+.. sidebar:: Information Processing Units
 
- * Enhanced Transmission Selection (ETS) provides a common management
-   framework for the assignment of bandwidth to frame priorities.
-
- * Data Center Bridging eXchange (DCBX) is a discovery and capability
-   exchange protocol that is used for report capabilities and
-   configuration between neighbors to ensure consistent configuration
-   across the network.
-
-.. For a good overview of RoCE, see
-   https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
-
-.. sidebar:: On-NIC TCP Processing
-
-   Why not just put TCP/IP on the NIC? Maybe talk about IPUs too.
+   Tell the IPU/DPU story.

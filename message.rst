@@ -15,22 +15,28 @@ that is already well-understood on a single machine—a procedure call
 and direct memory access—has been extended to work over the network.
 
 Less obviously, both depend on a *message transaction* to implement
-their respective remote activity. This is just another way of saying
-that both support a request/response message transaction between a
-pair of processes: one sends a request message, and the other replies
-with a response message. There are variations, but typically the
-sender blocks (suspends execution) to wait for the reply.
-:numref:`Figure %s <fig-rpc-timeline>` illustrates the canonical
-interaction in such an exchange.
+their respective remote activity. That is, both implement a
+request/response message exchange between a pair of processes: one
+sends a request message, and the other replies with a response
+message. :numref:`Figure %s <fig-rpc-timeline>` shows a common
+timeline for the exchange, in which the sender blocks (suspends
+execution) to wait for the reply. Message transaction protocols
+sometimes support a non-blocking option, but in that case, the
+protocol delivers a "completion signal" to the sender when the reply
+arrives. In both cases, the reply message indicates that the
+application process received (and possibly acted upon) the request
+message, not just that the peer on the destination received it. This
+is the single biggest distinction between stream-oriented protocols
+like TCP and message-oriented protocols like RPC and RDMA.
 
 .. _fig-rpc-timeline:
 .. figure:: message/figures/transaction.png
    :width: 350px
    :align: center
 
-   Timeline for a request/response message transaction. In some cases,
-   the response message simply acknowledges delivery, and no other
-   computation is involved.
+   Timeline for a request/response message transaction. The reply
+   indicates the application process received (and possibly acted
+   upon) the request message.
 
 Certainly, there is nothing keeping a pair of application processes
 from implementing a message transaction on top of a TCP byte stream;
@@ -54,7 +60,7 @@ strong that for much or their decades-long history, RPC and RDMA were
 viewed as "niche" technologies that would not interoperable with the
 larger Internet. Today, however, there is a convergence of both RPC
 and RDMA with the Internet, with the goal of supporting both
-high-performance and ubiquitiy of Internet connectivity.
+high-performance and the ubiquitiy of Internet connectivity.
 
 That said, the first advantage should not be overlooked.  Making the
 developer's job easier often requires auxiliary components, above and
@@ -66,10 +72,10 @@ layer on the protocol stack.
 
 As we will see, RPC and RDMA make different assumptions, and took
 different paths to the wide-spread adoption they enjoy today.  Because
-they represent such different approaches, they they make for an
-interesting comparative case study. But just as importantly, they both
-have the potential to become the dominant transport protocol for their
-target application workloads.
+they represent such different approaches, they make for an interesting
+comparative case study. But just as importantly, they both have the
+potential to become the dominant transport protocol for their target
+application workloads.
 
 .. Make a bigger deal about datacenter use cases, especially wrt
    supporting AI.

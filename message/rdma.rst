@@ -277,8 +277,9 @@ packet (rather than per-byte, as with TCP). It also fragments large
 messages into packet-sized fragments on the sending side, and
 reassembles those fragments into application message on the receiving
 side. Each fragment is a separate packet, with its own sequence
-number; how we know a sequence of packets need to be reassembled will
-become clear in a moment.
+number. How we know a sequence of packets need to be reassembled
+(because they are part of the same large message) will become clear in
+a moment.
 
 The transport header also includes a 24-bit *Queue Pair (QP)* to
 identify the communication channel.  This is similar to the TCP port
