@@ -187,6 +187,195 @@ describe three different uses of the RPKI in the following sections.
    <https://faculty.cc.gatech.edu/~ctestart8/publications/RoutingSecTPRC.pdf>`__. TPRC
    48, February 2021.
 
+6.5.3 Route Origin Validation (ROV)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The first use of RPKI is to allow an AS to prove that it is authorized
+to originate routing advertisements for specific address prefixes. A
+Route Origin Authorization (ROA) contains a certificate (which we
+explain below),
+an AS number, and a set of prefixes that the AS is authorized to
+advertise. The ROA is cryptographically signed by an entity that is
+itself trusted to provide this authorization, generally the organization to
+which this address prefix has been allocated. For example, an ISP
+typically is allocated a certain set of prefixes and may originate
+routing advertisements for those prefixes. An ROA allows the ISP to
+assert that it has the authority to make such an announcement, and for
+BGP speakers elsewhere in the Internet to validate that assertion. The
+challenge lies in how we establish trust in the ISPs to make these
+announcements so that they can be validated anywhere in the Internet.
+
+Address allocation, since the introduction of CIDR and IPv6, has been
+a hierarchical process.  Regional Internet Registries (RIRs) are at
+the top of the hierarchy for address allocation. Their position in the
+hierarchy of address allocation makes them a logical place to
+establish "roots of trust", known as trust anchors. There are five
+RIRs globally (ARIN, RIPE, APNIC, AFRINIC and LACNIC) and each has a
+root certificate in the RPKI. We will see how certificates work in
+more detail in Chapter 12. For our purposes in this chapter, it is
+sufficient to understand that if I know the public key of some entity
+such as an ISP or an RIR, then I can check the validity of something
+signed by that entity. And a certificate is just a cryptographically
+signed statement providing some information. For example, an RIR can sign a
+certificate the asserts that a certain ISP has a particular public
+key or a certain allocated set of addresses. 
+
+The chain of trust for address allocation starts from an RIR, the root
+of trust. An RIR allocates a chunk of address space to an ISP, and the
+ISP can sub-allocate from that chunk to each of its customers. There
+may be additional layers in this hierarchy. A hierarchy of
+certificates is created to follow this hierarchy of address
+allocation. At each level in the hierarchy, a certificate is issued
+that says "this entity has been allocated the following block of
+address prefixes, and has the following public key. By repeating this
+process all the way down the hierarchy we can build "chains of trust"
+from the root to the leaves.
+
+
+
+.. _fig-rpki:
+.. figure:: federation/figures/rpki.png
+   :width: 600px
+   :align: center
+
+   Chain of trust for RPKI
+
+:numref:`Figure %s <fig-rpki>` shows how the certificates are arranged
+for a simple example of an ISP *A* with customer *C*. There is a chain
+of trust from the root certificate to the customer. The certificate
+that ISP *A* issues, on the far right of the picture, says that some
+address prefix has been allocated to customer *C*, and includes the
+public key of customer C. This certificate is signed by ISP *A* using
+the private key of *A*. So if we can trust *A*, we learn two things
+about *C*: its public key and the set of addresses allocated to the
+holder of that public key. Note that we don't learn who *C* is; we
+just learn the public key of the entity that is authorized to
+originate routing advertisements for some prefix or prefixes.
+
+One level higher in the chain, the Regional Internet Registry (RIR) has
+issued a certificate that states ISP *A* has authority to allocate
+addresses out of some prefix. The certificate also tells us the
+public key of *A*. The prefix that *A* has allocated to *C*
+must be a subprefix within the allocation made by the RIR.
+By following the chain back to the root certificate, it is possible to
+establish that *C* is legitimately able to advertise the prefix
+allocated to it by *A*. This chain works as long as we trust the root
+certificate, and so we have to take care to distribute root
+certificates in some secure manner to bootstrap the process.
+
+At this point we have created a set of bindings between public keys,
+which are held by entities such as Internet Registries, ISPs, and end
+customers, and IP address prefixes allocated to those entities. The
+next step is to create a Route Origin Authorization (ROA), which is a
+cryptographically signed object that associates a prefix with an AS
+that is authorized to originate routing advertisements for that
+prefix.
+
+In our example above, *C* creates an ROA which it signs
+with its private key. The ROA contains the AS number of *C* and the
+prefix or prefixes that it wishes to advertise. Anyone who looks at
+the ROA and the resource certificate chain that leads from the root CA to *C*
+can validate that it has been signed with the private key belonging to
+C; they can also check that C is authorized to advertise the prefixes contained in the
+ROA. Because the ROA also contains the AS number for *C*, we now know
+that we should trust advertisements of this prefix if they originate
+from the stated AS. Furthermore, an ROA may limit the maximum length of the prefix to
+protect against bogus advertisements of more specific routes to a
+sub-prefix (as in the YouTube example above).
+
+.. _fig-roa:
+.. figure:: federation/figures/ROA-trust.png
+   :width: 600px
+   :align: center
+
+   An ROA has a chain of trust back to the RPKI root
+
+Rather than being passed around in real time with routing advertisements,
+the RPKI certificates and ROAs are stored in repositories, which are typically
+operated by the RIRs. Address allocations happen at a relatively long
+timescale, and certificates can be issued at the same time. Thus it is
+feasible to fetch the entire contents of the RPKI repository to build up a
+complete picture of the chains of certificates and signed ROAs that have been
+issued. With this information, ISPs use validation tools to determine *in advance* which
+ASes could originate routing advertisements for which prefixes. When a
+router that participates in BGP receives a new announcement, it can
+check its validity against the local validation tool. The
+repositories now become an essential part of our routing
+infrastructure and must themselves be secured and protected against
+Denial of Service (DoS) attacks.
+
+There is a well-established set of software tools to automate the
+process of leveraging the RPKI for popular operating systems and
+commercial routing platforms. Notably, the routers running BGP do not
+perform cryptographic operations in real time when processing route
+advertisements; all the cryptographic operations happen in advance on
+servers that are external to the routers themselves.  The external validator
+systems answer queries about the validity of BGP advertisements based on information
+they have downloaded from the RPKI repository.
+
+With the RPKI in place it is now possible to perform Route Origin
+Validation (ROV). That is, if a given AS claims to be the originator of a
+certain prefix, that claim can be checked against the information in
+the RPKI. So, for example, if Pakistan Telecom were now to claim to be the
+origin AS for a subprefix of YouTube, that could immediately be
+detected as false information and discarded by any router receiving
+such an advertisement, not just the neighbors of the offending ISP.
+
+.. _fig-rpki-sys:
+.. figure:: federation/figures/RPKI-system.png
+   :width: 600px
+   :align: center
+
+   Each AS maintains a local cache of the RPKI repository, and BGP
+   speakers query the local cache, allowing them to validate BGP
+   advertisements.
+
+Some of the practical aspects of ROV are shown in :numref:`Figure %s
+<fig-rpki-sys>`. An AS performing route origin validation maintains a
+local cache of the RPKI repository, which is fetched using rsync or
+the RPKI Repository Delta Protocol (RRDP). A BGP speaker in the AS
+retrieves the set of valid ROAs by querying the local cache, using
+another protocol called the RPKI-to-router (RTR) protocol. This
+protocol allows the router to receive periodic updates to the set of
+valid ROAs from the local cache. With this information in hand, the
+router is able to check the validity of the originating AS in BGP
+advertisements that it receives from other ASes.
+
+While there are many forms of attack or misconfiguration that would
+not be caught by ROV (particularly an AS falsely advertising a path that
+doesn't actually exist to a valid originating AS) it does prevent a large number of issues,
+especially those caused by misconfiguration. To more fully combat the
+advertisement of false information in BGP, it is necessary to adopt
+some sort of path validation, as discussed below.
+
+The adoption of ROAs is tracked by
+NIST (the National Institute of Standards and Technology in the
+U.S.)—see the Further Reading section. At the time of writing, the
+NIST RPKI monitor indicates that of the one-million-plus routes
+advertised globally in BGP, about 56% are covered by valid ROAs. Less than 2%
+are detected as invalid (the ROV check fails) while the remaining 42%
+do not contain ROA information.  Looking at the deployment over time
+we can see a steady increase in valid ROA and a corresponding decrease
+in the "not found" group—the advertisements with no ROA. While 56% is
+a long way from 100%, this level of penetration is a significant
+accomplishment—especially given the historical difficulty of making
+changes to Internet routing and the "core" of the Internet.
+
+Finally, note that there needs to be a process to revoke certificates,
+for cases such as the re-allocation of an address prefix from one
+provider to another. Revocation can be handled by the RPKI
+repositories using "certificate revocation lists" (CRLs) which are
+distributed using the same mechanisms as certificates.
+
+
+.. _reading_rpki:
+.. admonition::  Further Reading
+
+
+   NIST. `RPKI Monitor <https://rpki-monitor.antd.nist.gov/ROV/>`__.
+
+
+   
 6.5.4 Path Validation (BGPsec)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
