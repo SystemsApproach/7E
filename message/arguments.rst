@@ -32,23 +32,22 @@ appropriate and effective way” to form a network message.
    Argument marshalling involves serializing and unpacking application
    data.
 
-You might ask what makes this problem challenging. One reason is that
-computers represent data in different ways. For example, some
-computers represent floating-point numbers in IEEE standard 754
-format, while some older machines still use their own nonstandard
-format. Even for something as simple as integers, different
-architectures use different sizes (e.g., 16-bit, 32-bit, 64-bit). To
-make matters worse, on some machines integers are represented in
-*big-endian* form (the most significant bit of a word—the "big end"—is
-in the byte with the lowest address), while on other machines integers
-are represented in *little-endian* form (the least significant bit—the
-"little end"—is in the byte with the lowest address). For example,
-PowerPC processors are big-endian machines, and the Intel x86 family
-is a little-endian architecture. Today, many architectures (e.g., ARM)
-support both representations (and so are called *bi-endian*), but the
+One challenge is that computers represent data in different ways. For
+example, while most modern computers represent floating-point numbers
+in IEEE standard 754 format, some older machines still use their own
+nonstandard format. Even for something as simple as integers,
+different architectures use different sizes (e.g., 16-bit, 32-bit,
+64-bit). To make matters worse, on some machines integers are
+represented in *big-endian* form (the most significant bit of a
+word—the "big end"—is in the byte with the lowest address), while on
+other machines integers are represented in *little-endian* form (the
+least significant bit—the "little end"—is in the byte with the lowest
+address). Today, most architectures are little-endian, although some
+support both representations (and so are called *bi-endian*). The
 point is that you can never be sure how the host you are communicating
 with stores integers. The big-endian and little-endian representations
-of the integer 34,677,374 are given in :numref:`Figure %s <fig-endian>`.
+of the integer 34,677,374 are given in :numref:`Figure %s
+<fig-endian>`.
 
 .. _fig-endian:
 .. figure:: message/figures/f07-02-9780123850591.png
