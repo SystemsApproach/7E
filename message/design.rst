@@ -34,7 +34,7 @@ points. Every end-to-end protocol needs to define an analogous
 mechanism, tailored for the abstraction it provides; for example,
 calling procedures and accessing memory.
 
-The second problem is how to support reliable mesage delivey, and as
+The second problem is how to support reliable message delivery, and as
 with TCP, we assume an imperfect network substrate. One option is to
 "define the problem away" by choosing to run on top of a reliable
 protocol like TCP. Another option is for the message transaction
@@ -63,10 +63,10 @@ do not need to protect against duplicate messages being delivered. We
 still want to try to execute the operation at least once—so reliable
 delivery is still a goal—but we do not need to worry about duplicates.
 
-The third challenge is how to deal with request/response messsages
+The third challenge is how to deal with request/response messages
 that are larger than the underlying network packets. Again, a message
 transaction protocol could run on top of TCP and take advantage of
-it's ability to reassmble segments, or it could implement its own
+it's ability to reassemble segments, or it could implement its own
 fragmentation/reassembly mechanism. Yet another option is to limit the
 size of messages the protocol is willing to deliver, which effectively
 moves responsibility for larger blocks of data onto the application.
@@ -103,20 +103,20 @@ value in a computation. This implies the message protocol needs to
 signal the application that the reply has arrived.
 
 A fifth design challenge concerns the format of the data being
-exchanged in the request/response pair. Typically transport protocols
+exchanged in the request/response pair. Transport protocols typically
 treat the payloads they carry as opaque blocks of data—leaving it to
-the application whether they contain ASCII-encoded email messsages or
+the application whether they contain ASCII-encoded email messages or
 MPEG-encoded video—but we raise the point because of how message
 transactions sometimes imply a strong link between the programming
 environment and the messages being exchanged. For example, a caller
-passing a data structure as an argument to a procedure (or a remore
+passing a data structure as an argument to a procedure (or a remote
 process reading a memory location that holds a data structure) makes
-assumptions about how that data structure is layed out in memory.  As
+assumptions about how that data structure is laid out in memory.  As
 a consequence, both RPC and RDMA make design choices about formatting.
 
 Finally, to the extent a key motivations for using a message
 transaction protocol in the first place is to support
-latency-sensitive applications, then the design needs to aggresively
+latency-sensitive applications, then the design needs to aggressively
 look for opportunities to optimize performance. Eliminating network
 round-trips is an important part of that exercise, but as we will see
 with our two two examples, there are other opportunities to reduce

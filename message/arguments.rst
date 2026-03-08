@@ -9,7 +9,7 @@ ignored by RDMA. This is an explicit design choice. RPC makes no
 assumptions about the process on the other end of a message exchange,
 and so has to account for wide variation. The rest of this section
 explains the implications. In contrast, RDMA was originally designed
-for tighly-coupled parallel programs, where the same programmer was
+for tightly-coupled parallel programs, where the same programmer was
 responsible for both sides of a communication. In that scenario, it is
 typically assumed that a common machine architecture and just one
 compiler are being used throughout the program. The programmer is

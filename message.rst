@@ -5,7 +5,7 @@
 Chapter 13:  Message Transactions
 =====================================
 
-TCP's reliable byte stream abstraction has proven to be versitle, able
+TCP's reliable byte stream abstraction has proven to be versatile, able
 to support a wide range of applications, but there are other
 possibilities. This chapter takes a look at two of them: *Remote
 Procedure Call (RPC)* and *Remote Direct Memory Access (RDMA)*.  The
@@ -23,11 +23,10 @@ timeline for the exchange, in which the sender blocks (suspends
 execution) to wait for the reply. Message transaction protocols
 sometimes support a non-blocking option, but in that case, the
 protocol delivers a "completion signal" to the sender when the reply
-arrives. In both cases, the reply message indicates that the
-application process received (and possibly acted upon) the request
-message, not just that the peer on the destination received it. This
-is the single biggest distinction between stream-oriented protocols
-like TCP and message-oriented protocols like RPC and RDMA.
+arrives. This is a critical aspect of the transaction, because the
+reply message indicates that the application process—and not just the
+remote peer—has received (and in some cases acted upon) the request
+message.
 
 .. _fig-rpc-timeline:
 .. figure:: message/figures/transaction.png
@@ -48,19 +47,20 @@ takes to send or receive a message adds up, impacting the latency
 applications experience.
 
 This chapter describes an alternative approach, in which a
-request/response message pair is the core transport mechanism. This
-has two potential advantages: (1) it's a better match for what the
-application needs, making the application developer's job easier;
-and (2) the implementation is simpler, resulting in better performance.
+request/response message pair is the core transport protocol.
+This has two potential advantages: (1) it's a better match for what
+the application needs, making the application developer's job easier;
+and (2) the implementation is simpler, resulting in better
+performance.
 
 The second advantage is the main driver of the approaches described in
-this chapter, primarily because of their focus on reducing latency for
-datacenter workloads. This focus on low-latency transactions is so
-strong that for much or their decades-long history, RPC and RDMA were
-viewed as "niche" technologies that would not interoperable with the
-larger Internet. Today, however, there is a convergence of both RPC
-and RDMA with the Internet, with the goal of supporting both
-high-performance and the ubiquitiy of Internet connectivity.
+this chapter, both of which focus on reducing latency for datacenter
+workloads. This focus on low-latency transactions is so strong that
+for much or their decades-long history, RPC and RDMA were "niche"
+technologies that would not interoperable with the larger Internet.
+Today, however, there is a convergence of both RPC and RDMA with the
+Internet, with the goal of supporting both high-performance and the
+ubiquity of Internet connectivity.
 
 That said, the first advantage should not be overlooked.  Making the
 developer's job easier often requires auxiliary components, above and

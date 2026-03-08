@@ -7,7 +7,7 @@ The adoption of RDMA as the preferred transport protocol for HPC
 workloads initially happened on Infiniband, which is a self-contained
 networking technology, developed in parallel with the Internet
 architecture.  Infiniband achieved the desired performance because
-it (1) off-loaded the transport protocol logic to the NIC (aka HCA),
+it (1) off-loaded the transport protocol logic to the NIC (HCA),
 thereby bypassing the overhead of the OS-hosted TCP/IP protocol stack;
 and (2) augmented packet switches with the queue management logic
 needed to avoid the buffering delays and packet loss associated with

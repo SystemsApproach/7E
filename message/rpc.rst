@@ -3,20 +3,22 @@
 13.2 Remote Procedure Call
 --------------------------------
 
-RPC is not a protocol—it is better thought of as a general mechanism
-for structuring distributed systems. RPC is popular because it is
-based on the semantics of a local procedure call—the application
-program makes a call into a procedure without regard for whether it is
-local or remote and blocks until the call returns. An application
-developer can be largely unaware of whether the procedure is local or
-remote, simplifying his task considerably. This is why RPC is such a
+RPC is a popular mechanism for structuring distributed systems, based
+on the semantics of a local procedure call—the application program
+makes a call into a procedure without regard for whether it is local
+or remote and blocks until the call returns. An application developer
+can be largely unaware of whether the procedure is local or remote,
+simplifying his task considerably. This is why RPC is such a
 compelling abstraction.
 
 A complete RPC mechanism actually involves two major components:
 
 1. A protocol that manages the messages sent between the client and
    the server processes and that deals with failure modes of the
-   underlying network.
+   underlying network. This protocol is sometimes referred to as an
+   "RPC Protocol", but we distinguish between the overall mechanism
+   and the underlying protocol by calling the latter a message
+   transaction protocol.
 
 2. Programming language and compiler support to package the arguments
    into a request message on the client machine and then to translate
@@ -151,7 +153,7 @@ implement distributed applications, HTTP is an example of an
 application-level protocol, and yet gRPC runs on top of HTTP rather
 than the other way around.
 
-The short explanation is that layering provides a convenient way for
+The explanation is that layering provides a convenient way for
 humans to wrap their heads around complex systems, but what we’re
 really trying to do is solve a set of problem (e.g., reliably transfer
 messages of arbitrary size, identify senders and recipients, match

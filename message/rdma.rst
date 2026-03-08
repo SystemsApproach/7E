@@ -4,16 +4,16 @@
 .. A helpful RDMA Tutorial Slide Deck
    https://www.doc.ic.ac.uk/~jgiceva/teaching/ssc18-rdma.pdf
 
-RDMA is a remote variant of DMA, an architecture commonly used for
-device/host communication over a computer's I/O bus. A network adaptor
-(aka NIC) is an example device that uses DMA to pass frames between
-the NIC and the host. For example, a host passes an address for an
-empty memory buffer to the NIC, and the NIC is able to directly write
-incoming frames (arriving from the network) into that buffer without
-the host CPU being involved. In the other direction, the host passes
-an address for a full memory buffer to the NIC, and the NIC is able to
-transmit a frame onto the network by directly reading from that
-buffer, again without the host CPU being involved.
+RDMA is a remote variant of DMA, an architectural feature commonly
+used for device/host communication over a computer's I/O bus. A
+network adaptor (i.e., NIC) is an example device that uses DMA to pass
+frames between the NIC and the host. For example, a host passes an
+address for an empty memory buffer to the NIC, and the NIC is able to
+directly write incoming frames (arriving from the network) into that
+buffer without the host CPU being involved. In the other direction,
+the host passes an address for a full memory buffer to the NIC, and
+the NIC is able to transmit a frame onto the network by directly
+reading from that buffer, again without the host CPU being involved.
 
 As a communication abstraction, RDMA simply extends that model to
 network-connected machines, as shown in :numref:`Figure %s
@@ -103,7 +103,7 @@ Passing Interface (MPI)* , *Open SHMEM* (for "shared memory"), and
 *Open Fabrics Enterprise Distribution (OFED)*.
 
 Second, Ethernet continues to evolve, and in this particular
-circumstance, offers an alternative to Inifiband's "native" switches.
+circumstance, offers an alternative to Inifiniband's "native" switches.
 This effort is known as *Converged Ethernet (CE)*, and it makes it
 possible to enjoy the best of both worlds: the performance of
 Infiniband and the ubiquity of Ethernet.  Putting these two outcomes
@@ -151,7 +151,7 @@ transaction protocol at the core of RDMA is in the NIC.
    libraries that directly interact with the HCA (Infiniband NIC).
 
 Much of the complexity in using RDMA is in setting up (managing) the
-shared state that the application processes need to communicate.  For
+shared state that the application processes need to communicate. For
 example, registering memory is a two-step process: (1) create a
 *protection domain* that identifies the set of nodes that are to
 collaboratively share access to each others' memory, and (2) bind the
@@ -165,10 +165,16 @@ In addition to registering memory, setup also involves creating
 notifications that a transaction has taken place. This is best
 understood in terms of the familiar its DMA counterpart: a device
 driver registers with a device so it can receive interrupts signaling
-a transaction completing. (See the example code snippet below.)  All
-of this "communication management" overhead is conceptually simple,
-but tediously detailed. We refer you to the respective manual pages
-for the two libraries for more information.
+a transaction completing. (See the example code snippet below.)
+
+All of this "communication management" overhead is conceptually
+simple, but tediously detailed. We refer you to the respective manual
+pages for the two libraries for more information. Also note that this
+connection setup phase happens once for a long-running parallel
+program, involving a relatively static set of peers. This means we are
+not overly concerned about the overhead. A client browser would
+definitely *not* want to go to this trouble for every web server it
+connects to, so RDMA is not a candidate replacement for, say QUIC.
 
 Once everything is set up, there are two usage patterns for RDMA,
 which we broadly characterize as either *shared memory* oriented or
@@ -244,9 +250,9 @@ client waiting for notification its message has been successfully
 written to the remote buffer, and the server waiting for notification
 that a message has arrived in its local buffer.
 
-Note that these are both clearly low-level primitives, upon which MPI
-and the other libraries implement more powerful read/write and
-send/receive operations. One could even implement RPC on top of such a
+Clearly, these are both low-level primitives, upon which MPI and the
+other libraries implement more powerful read/write and send/receive
+operations. One could even implement RPC on top of such a
 primitive. The point is that just such a primitive mechanism—assuming
 the underlying NICs do their job—is the foundation for much of today's
 AI workloads. We're now ready to look at the NIC in more detail.
