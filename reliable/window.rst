@@ -277,7 +277,7 @@ bandwidths.
    | 10GigE (10 Gbps)         | 3 seconds             |
    +--------------------------+-----------------------+
 
-.. Should probably undate this and the next table with at least one
+.. Should probably update this and the next table with at least one
    40Gbps entries.
 
 As you can see, the 32-bit sequence number space is adequate at modest
