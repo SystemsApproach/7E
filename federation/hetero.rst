@@ -92,8 +92,8 @@ of 8 bits, you can determine the field lengths by looking at the bit
 positions marked at the top of the packet.
 
 .. _fig-iphead:
-.. figure:: federation/figures/f03-16-9780123850591.png
-   :width: 450px
+.. figure:: introduction/figures/iphdr.png
+   :width: 400px
    :align: center
 
    IPv4 packet header.
@@ -320,12 +320,13 @@ forwarding decisions.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We are now ready to look at the basic mechanism by which IP routers
-forward datagrams in an internetwork. Recall from chapter 4
-that *forwarding* is the process of taking a packet from an input and
-sending it out on the appropriate output, while *routing* is the process
-of building up the tables that allow the correct output for a packet to
-be determined. The discussion here focuses on forwarding; we return to
-routing in the next chapter.
+forward datagrams in an internetwork. Recall that *forwarding* is the
+process of taking a packet from an input and sending it out on the
+appropriate output (we looked at this in depth in Chapter 2), while
+*routing* is the process of building up the tables that allow the
+correct output for a packet to be determined (we saw several examples
+of this in Chapter 4). The discussion here focuses on forwarding; we
+return to routing in the next chapter.
 
 The main points to bear in mind as we discuss the forwarding of IP
 datagrams are the following:

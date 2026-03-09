@@ -6,29 +6,30 @@
 Chapter 6: Federating Networks
 ========================================
 
-Now that we have looked at the operation of switches and the routing
-algorithms that allow us to determine best paths through large
-networks, we are well on our way to being able to
-build a network of global scale. However, there is an important aspect
-of the Internet that has enabled it to scale to billions of devices
-and connect the majority of the world's population. That is the
-ability to interconnect independently built and operated networks into
-a global *internetwork* that has no central point of control and yet
-manages to deliver a reasonably consistent service to all those
-devices and the applications running on them. Now that the Internet
-has been around for more than 50 years it is easy to lose sight of the
-design decisions and challenges that had to be tackled to achieve this
-remarkable feat. In this chapter we examine the problem of
-*federating* networks: taking networks that are run by independent
-operators using widely varying underlying technologies and connecting
-them together to provide a useful, global datagram delivery service.
+Having looked at the operation of switches and the routing algorithms
+that allow us to determine best paths through large networks, we are
+well on our way to being able to build a network of global scale.
+However, there is an another aspect of the Internet that has enabled
+it to scale to connect the majority of the world's population: the
+ability to interconnect independently built and operated networks.
 
-Many problems in networking come down to dealing with scale, and
-nowhere is that more apparent than in the design of the
-Internet. Not only do you need a way to address billions of devices,
-you need to be able to calculate routes to them across an internet
-that has many thousands of autonomous networks, many of which themselves
-contain thousands of links and switches.
+This results in a global *internetwork* that has no central point of
+control and yet manages to deliver a reasonably consistent service to
+all those devices and the applications running on them. Now that the
+Internet has been around for more than 50 years it is easy to lose
+sight of the design decisions and challenges that had to be tackled to
+achieve this remarkable feat. In this chapter we examine the problem
+of *federating* networks: taking networks that are run by independent
+operators using widely varying underlying technologies and connecting
+them together to provide a useful, global packet delivery service.
+
+Federating autonomous networks helps scale the approach to operations,
+since each organization responsible for managing its own network, but
+it adds to the scalability challenge in other ways. Not only do you
+need a way to address billions of devices, you also need to be able to
+calculate routes to them across an internet that has many thousands of
+autonomous networks, many of which themselves contain thousands of
+links and switches.
 
 Compounding the issue of scale is the problem of heterogeneity. The
 original Internet connected the ARPANET, a pioneering packet-switched

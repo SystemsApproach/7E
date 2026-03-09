@@ -94,8 +94,8 @@ AND 255.255.255.128 equals 128.96.34.0, so this is the subnet number
 for the topmost subnet in the figure.
 
 .. _fig-subnet:
-.. figure:: federation/figures/f03-21-9780123850591.png
-   :width: 500px
+.. figure:: federation/figures/subnet.png
+   :width: 700px
    :align: center
 
    An example of subnetting.
@@ -113,7 +113,7 @@ number for H1 (128.96.34.0) so H1 knows that H2 is on a different
 subnet. Since H1 cannot deliver the packet to H2 directly over the
 subnet, it sends the packet to its default router R1.
 
-The forwarding table of a router also changes slightly when we introduce
+The forwarding table of a router also changes when we introduce
 subnetting. Recall that we previously had a forwarding table that
 consisted of entries of the form ``(NetworkNum, NextHop)``. To support
 subnetting, the table must now hold entries of the form
@@ -306,11 +306,13 @@ other hand, a packet destined to 171.69.20.5 would match 171.69 and
 *not* 171.69.10, and in the absence of any other matching entry in the
 routing table 171.69 would be the longest match.
 
-The task of efficiently finding the longest match between an IP address
-and the variable-length prefixes in a forwarding table has been a
-fruitful field of research for many years. The most well-known algorithm
-uses an approach known as a *PATRICIA tree*, which was actually
-developed well in advance of CIDR.
+The task of efficiently finding the longest match between an IP
+address and the variable-length prefixes in a forwarding table has
+been a fruitful field of research for many years. The most well-known
+algorithm uses an approach known as a *PATRICIA tree*, which was
+actually developed well in advance of CIDR. High-end switches, as
+described in Chapter 3, offer a hardware-based alternative by using
+doing address lookups in Ternary Content Addressable Memory (TCAM).
 
 6.3.2 Network Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

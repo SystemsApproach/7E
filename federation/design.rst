@@ -56,30 +56,36 @@ Internet.
 
 
 .. _fig-inet:
-.. figure:: federation/figures/f03-14-9780123850591.png
-   :width: 500px
-   :align: center
-
-   A simple internetwork. H denotes a host and R denotes
-   a router.
-
-:numref:`Figure %s <fig-inet>` shows an example internetwork. An
-internetwork is often referred to as a “network of networks” because
-it is made up of lots of smaller networks. In this figure, we see
-Ethernets, a wireless network, and a point-to-point link. Each of
-these is a single-technology network. The nodes that interconnect the
-networks are called *routers*.  They historically were also sometimes called
-*gateways*, but since this term has several other connotations, we
-restrict our usage to router.
-
-.. _fig-ip-graph:
-.. figure:: federation/figures/f03-15-9780123850591.png
+.. figure:: federation/figures/inet.png
    :width: 600px
    :align: center
 
-   A simple internetwork, showing the protocol layers
-   used to connect H5 to H8 in the above figure. ETH is the protocol
-   that runs over the Ethernet and PPP is the point-to-point protocol.
+   A simple internetwork, with two routers (R1 and R2) connecting
+   three networks.
+
+
+:numref:`Figure %s <fig-inet>` shows an example internetwork. An
+internetwork is often referred to as a “network of networks” because
+it is made up of lots of smaller networks. In this figure, we see a
+switched Ethernet and two Wi-Fi networks. Each of these is a
+single-technology network. The nodes that interconnect the networks
+are called *routers*.  They historically were also sometimes called
+*gateways*, but since this term has several other connotations, we
+restrict our usage to router.\ [#]_
+
+.. [#] As we saw in Chapter 2, our other option is to call them L3
+   switches, but we reserve that name for when we use IP *within* a
+   packet-switched network, and we reserve the word "router" for a
+   device that interconnects two or more distinct networks.
+
+.. _fig-ip-graph:
+.. figure:: federation/figures/ip-graph.png
+   :width: 600px
+   :align: center
+
+   A simple internetwork, showing the protocol layers used to connect
+   H1 to H6 in the above figure. ETH is the protocol that runs over
+   the Ethernet and 802.11 is the Wi-Fi protocol.
 
 The *Internet Protocol* is the key tool used today to build scalable,
 heterogeneous internetworks. It was originally known as the Kahn-Cerf
@@ -87,7 +93,7 @@ protocol after its inventors. One way to think of IP is that it runs on
 all the nodes (both hosts and routers) in a collection of networks and
 defines the infrastructure that allows these nodes and networks to
 function as a single logical internetwork. For example, :numref:`Figure
-%s <fig-ip-graph>` shows how hosts H5 and H8 are logically connected by
+%s <fig-ip-graph>` shows how hosts H1 and H6 are logically connected by
 the internet in :numref:`Figure %s <fig-inet>`, including the protocol graph
 running on each node. Note that higher-level protocols, such as TCP and
 UDP, typically run on top of IP on the hosts.
@@ -96,7 +102,7 @@ The design goals listed in the design philosophy paper give a good
 overview of the issues that need to be tackled in an internetwork:
 
  - Internet communication must continue despite loss of networks or
-   gateways.
+   routers.
 
  - The Internet must support multiple types of communications service.
 
@@ -114,10 +120,10 @@ overview of the issues that need to be tackled in an internetwork:
 
 Some of these will look familiar from our discussion of requirements
 in Chapter 1. The idea that the Internet keeps working in the face of
-failure of any network or router (gateway) is widely
-understood—although the claim that it was meant to survive nuclear war
-seems to be a conflation of ideas from other research, according the
-authoritative history by Leiner *et al*.
+failure of any network or router is widely understood—although the
+claim that it was meant to survive nuclear war seems to be a
+conflation of ideas from other research, according the authoritative
+history by Leiner *et al*.
 
 The second and third requirements are captured by the hourglass shape
 we saw in Chapter 1. Many types of communications
