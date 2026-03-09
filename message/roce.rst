@@ -111,9 +111,10 @@ Finally, there is the question of where the RDMA transport function is
 implemented for RoCE: (1) in hardware on the NIC, or (2) in software
 running on the host. While hardware offloading is possible (see the
 sidebar on IPUs), a software implementation is a standard part of the
-Linux kernel. The latter consumes host resources, but that does not
-necessarily translate to worse performance. This configuration is
-shown in :numref:`Figure %s <fig-soft-roce>`.
+Linux kernel. The latter consumes host resources—leaving fewer cycles
+for application-level computations—but that does not necessarily
+translate to worse message latency. This configuration is shown in
+:numref:`Figure %s <fig-soft-roce>`.
 
 
 ..  Infiband (role of fabric)
@@ -137,4 +138,7 @@ shown in :numref:`Figure %s <fig-soft-roce>`.
 
 .. sidebar:: Information Processing Units
 
-   Tell the IPU/DPU story.
+   Tell the IPU/DPU story. Focus on datacenters wanting to separate
+   "sellable" cycles from "infrastructure" cycles. Explain how that is
+   not the same as e2e message latency, as cycles are still required
+   in both cases.

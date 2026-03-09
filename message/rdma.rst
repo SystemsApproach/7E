@@ -15,7 +15,7 @@ the host passes an address for a full memory buffer to the NIC, and
 the NIC is able to transmit a frame onto the network by directly
 reading from that buffer, again without the host CPU being involved.
 
-As a communication abstraction, RDMA simply extends that model to
+As a communication abstraction, RDMA extends that model to
 network-connected machines, as shown in :numref:`Figure %s
 <fig-rdma>`.  As a consequence, it becomes possible for two
 application process to access (read and write) blocks of data from
@@ -23,7 +23,7 @@ each others' memory. Functionally, RDMA can be viewed as a special
 case of an RPC, where only two "remote procedures" are supported:
 *Read( )* and *Write( )*. That perspective glosses over a lot of
 details, but it is helpful to see the similarities between the two
-technologies.
+abstrations.
 
 .. _fig-rdma:
 .. figure:: message/figures/rdma.png
@@ -281,11 +281,11 @@ packet delivery. It accomplishes this by implementing the sliding
 window algorithm, with a 24-bit sequence number assigned to each
 packet (rather than per-byte, as with TCP). It also fragments large
 messages into packet-sized fragments on the sending side, and
-reassembles those fragments into application message on the receiving
-side. Each fragment is a separate packet, with its own sequence
-number. How we know a sequence of packets need to be reassembled
-(because they are part of the same large message) will become clear in
-a moment.
+reassembles those fragments into an application message on the
+receiving side. Each fragment is a separate packet, with its own
+sequence number. How we know that a sequence of packets need to be
+reassembled (because they are part of the same large message) will
+become clear in a moment.
 
 The transport header also includes a 24-bit *Queue Pair (QP)* to
 identify the communication channel.  This is similar to the TCP port
