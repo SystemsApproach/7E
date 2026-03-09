@@ -6,7 +6,7 @@
 Chapter 11:  Reliable Byte Stream
 ====================================
 
-Part II described how to build a best-effort packet delivery service,
+In Part II we described how to build a best-effort packet delivery service,
 but best-effort implies any number of things can go wrong.  Packets
 may be dropped, reordered, duplicated, and/or delayed for an arbitrary
 amount of time. In addition to these failure modes, packets are
@@ -14,16 +14,16 @@ limited to some finite size, typically on the order of a few thousand
 bytes.
 
 At the same time, applications like the ones we looked at in Chapter 2
-expect a higher level of service from the network. This includes the
-obvious: that at most one copy of each message is delivered, that a
-sequence of messages are delivered in the same order they are sent,
-and that there is no limit on the size of a given message. Less
-obviously, applications expect support for some form of *end-to-end*
-synchronization between the sending and the receiving processes. This
-might involve something as simple a blocking the sender if the
-receiver is not able to keep up with incoming byte stream, or as
-sophisticated as blocking the sender until the receiver has responded
-with a reply.
+expect a higher level of service from the network. This often includes
+requirements like the following: at most one copy of each message is
+delivered; a sequence of messages should be delivered in the same
+order they are sent; and there should be no limit on the size of
+messages. Less obviously, many applications expect support for some
+form of *end-to-end* synchronization between the sending and the
+receiving processes. This might involve something as simple a blocking
+the sender if the receiver is not able to keep up with incoming data,
+or as sophisticated as blocking the sender until the receiver has
+responded with a reply.
 
 This chapter looks at the Internet's most widely used transport
 protocol, TCP, and how it is designed to "fill the gap" between what

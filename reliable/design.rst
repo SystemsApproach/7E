@@ -1,27 +1,27 @@
 11.1  Design Issues
 ------------------------------
 
-To appreciate the design challenge, we need to first add a little meat
-to our definition of the abstraction, beyond it providing a reliable,
-in-order delivery of a stream of bytes. It is a full-duplex protocol,
-meaning that each TCP connection supports a pair of byte streams, one
-flowing in each direction. It also includes a flow-control mechanism
-for each of these byte streams that allows the receiver to pace how
-much data the sender is allowed to transmit at a given time. This
-mechanism blocks the sender if it gets to far ahead of the receiver.
-Finally, TCP supports a demultiplexing mechanism that allows multiple
-application processes on any given host to simultaneously carry on a
-conversation with their peers.
+To appreciate the design challenge, we need to first refine our
+definition of the abstraction, beyond the reliable, in-order delivery
+of a stream of bytes. It is a full-duplex protocol, meaning that each
+TCP connection supports a pair of byte streams, one flowing in each
+direction. It also includes a flow-control mechanism for each of these
+byte streams that allows the receiver to pace how much data the sender
+is allowed to transmit at a given time. This mechanism blocks the
+sender if it gets too far ahead of the receiver.  Finally, TCP
+supports a demultiplexing mechanism that allows multiple application
+processes on any given host to simultaneously carry on a conversation
+with their peers.
 
 With that background, we might ask why a byte stream is the right
 abstraction for building applications (the reliable part is pretty
 easy to justify). That answer is that a byte stream is a simple
-concept, familiar to any programmer that has written code to read or
+concept, familiar to any programmer who has written code to read or
 write data from a file. That doesn't rule out other possibilities.
 Just like picking the right software tool or programming language for
 a task, a case can be made other abstractions for various use cases.
 We'll see examples in later chapters. But once we settle on a byte
-stream as a reasonable abstraction the next set of design issues
+stream as a reasonable abstraction, the next set of design issues
 revolve around how to efficiently implement that abstraction on a
 best-effort packet delivery network. This reveals a set of challenges,
 primarily centered around how to achieve both reliability and high
@@ -118,7 +118,7 @@ ninth packet, we can reuse sequence number 0. Or so it would seem. It
 turns out that in the worst case, we need a window size that is twice
 the number of packets we hope to have in flight at any given time
 (i.e., a 4-bit field supporting 16 sequence numbers in this example).
-We leaeve it as an exercise for the reader to figure out why this is
+We leave it as an exercise for the reader to figure out why this is
 the case, and do a deeper dive into the specific approach TCP uses in
 Section 11.4. If you are interested in a protocol-agnostic description
 of the sliding window algorithm, we suggest:
@@ -130,7 +130,7 @@ https://book.systemsapproach.org/direct/reliable.html#sliding-window
 Unlike this simplified example, one of the more severe complications
 TCP has to address is that it doesn't have a perfect knowledge of the
 network RTT, and hence, it does not know how many packets should be in
-flight (unacknowledge) in order to keep the pipe full.  For example, a
+flight (unacknowledged) in order to keep the pipe full.  For example, a
 TCP connection between a host in San Francisco and a host in Boston,
 which are separated by several thousand kilometers, might have an RTT
 of 100 ms, while a TCP connection between two hosts in the same room,
@@ -143,19 +143,21 @@ connection that lasts only a few minutes. What this means to the
 sliding window algorithm is that the timeout mechanism that triggers
 retransmissions must be adaptive.
 
-A second complication our simple example does not take into account is
+A second complication is
 that packets may be reordered as they cross the Internet. Packets that
-are slightly out of order do not cause a problem since the sliding
+are slightly out of order do not cause a problem; the sliding
 window algorithm can reorder packets correctly using the sequence
 number. The real issue is how far out of order packets can get or,
 said another way, how late a packet can arrive at the destination. In
 the worst case, a packet can be delayed in the Internet until the IP
 time to live (``TTL``) field expires, at which time the packet is
-discarded (and hence there is no danger of it arriving late). Knowing
-that IP throws packets away after their ``TTL`` expires, TCP assumes
+discarded (and hence there is no danger of it arriving late). Of
+course, TTL is a misnomer; it has for many years simply been number
+decremented at every router hop. TCP, however, assumes
 that each packet has a maximum lifetime. The exact lifetime, known as
 the *maximum segment lifetime* (MSL), is an engineering choice. The
-current recommended setting is 120 seconds. Keep in mind that IP does
+current recommended setting in the TCP RFC is 120 seconds (although
+many modern implementations use a lower value). IP does
 not directly enforce this 120-second value; it is simply a
 conservative estimate that TCP makes of how long a packet might live
 in the Internet. The implication is significant—TCP has to be prepared

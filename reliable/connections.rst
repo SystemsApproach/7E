@@ -62,7 +62,7 @@ if the expected response is not received the segment is retransmitted.
 
 You may be asking yourself why the client and server have to exchange
 starting sequence numbers with each other at connection setup time. It
-would be simpler if each side simply started at some “well-known”
+would appear to be simpler if each side started at some “well-known”
 sequence number, such as 0. In fact, the TCP specification requires that
 each side of a connection select an initial starting sequence number at
 random. The reason for this is to protect against two incarnations of
@@ -104,24 +104,25 @@ to SYN_RCVD), or (2) the local application process invokes an
 operation on TCP (e.g., the *active open* event on the arc from CLOSED
 to SYN_SENT).  In other words, TCP’s state-transition diagram
 effectively defines the *semantics* of both its peer-to-peer interface
-and its service interface. The *syntax* of these two interfaces is
-given by the segment format (as illustrated in :numref:`Figure %s
-<fig-tcp-format>`) and by some application programming interface, such
-as the socket API, respectively.
+and its service interface. The *syntax* of the peer interface is given
+by the segment format (as illustrated in :numref:`Figure %s
+<fig-tcp-format>`), while the service interface is defined by an
+application programming interface, such as the socket API described in
+Chapter 2.
 
 Now let’s trace the typical transitions taken through the diagram in
-:numref:`Figure %s <fig-tcp-std>`. Keep in mind that at each end of the
-connection, TCP makes different transitions from state to state. When
-opening a connection, the server first invokes a passive open operation
-on TCP, which causes TCP to move to the LISTEN state. At some later
-time, the client does an active open, which causes its end of the
-connection to send a SYN segment to the server and to move to the
-SYN_SENT state. When the SYN segment arrives at the server, it moves to
-the SYN_RCVD state and responds with a SYN+ACK segment. The arrival of
-this segment causes the client to move to the ESTABLISHED state and to
-send an ACK back to the server. When this ACK arrives, the server
-finally moves to the ESTABLISHED state. In other words, we have just
-traced the three-way handshake.
+:numref:`Figure %s <fig-tcp-std>`. Keep in mind that TCP makes
+different transitions from state to state at each end of the
+connection. When opening a connection, the server first invokes a
+passive open operation on TCP, which causes TCP to move to the LISTEN
+state. At some later time, the client does an active open, which
+causes its end of the connection to send a SYN segment to the server
+and to move to the SYN_SENT state. When the SYN segment arrives at the
+server, it moves to the SYN_RCVD state and responds with a SYN+ACK
+segment. The arrival of this segment causes the client to move to the
+ESTABLISHED state and to send an ACK back to the server. When this ACK
+arrives, the server finally moves to the ESTABLISHED state. In other
+words, we have just traced the three-way handshake.
 
 There are three things to notice about the connection establishment half
 of the state-transition diagram. First, if the client’s ACK to the
@@ -146,7 +147,7 @@ and instead actively establish the connection. To the best of our
 knowledge, this is a feature of TCP that no application process actually
 takes advantage of.
 
-The final thing to notice about the diagram is the arcs that are not
+Finally, note that a number of arcs are not
 shown. Specifically, most of the states that involve sending a segment
 to the other side also schedule a timeout that eventually causes the
 segment to be resent if the expected response does not happen. These
@@ -155,8 +156,8 @@ after several tries the expected response does not arrive, TCP gives up
 and returns to the CLOSED state.
 
 Turning our attention now to the process of terminating a connection,
-the important thing to keep in mind is that the application process on
-both sides of the connection must independently close its half of the
+it is important to remember that the application process on
+each side of the connection must independently close its half of the
 connection. If only one side closes the connection, then this means it
 has no more data to send, but it is still available to receive data from
 the other side. This complicates the state-transition diagram because it
@@ -185,8 +186,9 @@ combination of circumstances leads to this fourth possibility.
 
 The main thing to recognize about connection teardown is that a
 connection in the TIME_WAIT state cannot move to the CLOSED state until
-it has waited for two times the maximum amount of time an IP datagram
-might live in the Internet (i.e., 120 seconds). The reason for this is
+it has waited for the twice maximum segment lifetime defined
+above. With an MSL of the traditional 120 seconds, this means staying
+in the TIME_WAIT state for 240 seconds. The reason for this is
 that, while the local side of the connection has sent an ACK in response
 to the other side’s FIN segment, it does not know that the ACK was
 successfully delivered. As a consequence, the other side might
@@ -196,4 +198,7 @@ CLOSED state, then another pair of application processes might come
 along and open the same connection (i.e., use the same pair of port
 numbers), and the delayed FIN segment from the earlier incarnation of
 the connection would immediately initiate the termination of the later
-incarnation of that connection.
+incarnation of that connection. Because there is a resource cost to
+staying in the TIME_WAIT state, and it would be exceptional for a
+packet to circulate in the modern Internet for 120 seconds, 60 seconds
+is a more common value for the timeout in modern systems. 

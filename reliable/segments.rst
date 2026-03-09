@@ -1,19 +1,21 @@
 11.2 Segments
 -----------------------------
 
-Being a byte-oriented protocol means that the sender writes bytes into
-a TCP connection and the receiver reads bytes out of the TCP
-connection. Although “byte stream” describes the service TCP offers to
-application processes, TCP does not, itself, transmit individual bytes
-over the Internet. Instead, TCP on the source host buffers enough
-bytes from the sending process to fill a reasonably sized packet and
-then sends this packet to its peer on the destination host. TCP on the
-destination host then empties the contents of the packet into a
-receive buffer, and the receiving process reads from this buffer at
-its leisure.  This situation is illustrated in :numref:`Figure %s
-<fig-tcp-stream>`, which, for simplicity, shows data flowing in only
-one direction. Remember that, in general, a single TCP connection
-supports byte streams flowing in both directions.
+When we describe TCP as a byte-oriented protocol, we are describing
+the abstraction that it offers to software running above it. This
+means that the sender writes bytes into a TCP connection and the
+receiver reads bytes out of the connection.  “Byte stream” describes
+the service TCP offers to application processes.  TCP does not,
+itself, transmit individual bytes over the Internet. Instead, TCP on
+the source host buffers enough bytes from the sending process to fill
+a reasonably sized packet and then sends this packet to its peer on
+the destination host. TCP on the destination host then empties the
+contents of the packet into a receive buffer, and the receiving
+process reads from this buffer at its leisure.  This situation is
+illustrated in :numref:`Figure %s <fig-tcp-stream>`, which, for
+simplicity, shows data flowing in only one direction. Remember that,
+in general, a single TCP connection supports byte streams flowing in
+both directions.
 
 .. _fig-tcp-stream:
 .. figure:: reliable/figures/f05-03-9780123850591.png
@@ -77,21 +79,21 @@ later in this chapter.
 
 The 6-bit ``Flags`` field is used to relay control information between
 TCP peers. The possible flags include ``SYN``, ``FIN``, ``RESET``,
-``PUSH``, ``URG``, and ``ACK``. The ``SYN`` and ``FIN`` flags are used
-when establishing and terminating a TCP connection, respectively. Their
-use is described in a later section. The ``ACK`` flag is set any time
-the ``Acknowledgement`` field is valid, implying that the receiver
-should pay attention to it. The ``URG`` flag signifies that this segment
+``PUSH``, ``URG``, and ``ACK``. The ``SYN`` (synchronize) and ``FIN``
+(finish) flags are used when establishing and terminating a TCP
+connection, respectively.  The ``ACK`` flag is set any time the
+``Acknowledgement`` field is valid, implying that the receiver should
+pay attention to it. The ``URG`` flag signifies that this segment
 contains urgent data. When this flag is set, the ``UrgPtr`` field
-indicates where the nonurgent data contained in this segment begins. The
-urgent data is contained at the front of the segment body, up to and
-including a value of ``UrgPtr`` bytes into the segment. The ``PUSH``
-flag signifies that the sender invoked the push operation, which
-indicates to the receiving side of TCP that it should notify the
-receiving process of this fact. We discuss these last two features more
-in a later section. Finally, the ``RESET`` flag signifies that the
-receiver has become confused—for example, because it received a segment
-it did not expect to receive—and so wants to abort the connection.
+indicates where the nonurgent data contained in this segment
+begins. The urgent data is contained at the front of the segment body,
+up to and including a value of ``UrgPtr`` bytes into the segment. The
+``PUSH`` flag signifies that the sender invoked the push operation,
+which indicates to the receiving side of TCP that it should notify the
+receiving process of this fact.  Finally, the ``RESET`` flag signifies
+that the receiver has become confused—for example, because it received
+a segment it did not expect to receive—and so wants to abort the
+connection. We discuss the usage of these flags later in this chapter.
 
 Finally, the ``Checksum`` field is computed over the TCP header, the
 TCP data, and extra fields known as a *pseudoheader*, which is simply
