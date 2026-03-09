@@ -26,7 +26,7 @@ A complete RPC mechanism actually involves two major components:
    likewise with the return value (this piece of the RPC mechanism is
    sometimes called a *stub compiler*).
 
-:numref:`Figure %s <fig-rpc-stub>` schematically depicts what happens
+:numref:`Figure %s <fig-rpc>` schematically depicts what happens
 when a client invokes a remote procedure. First, the client calls a
 local stub for the procedure, passing it the arguments required by the
 procedure.  This stub hides the fact that the procedure is remote by
@@ -41,8 +41,8 @@ protocol on the client passes this message up to the client stub,
 which translates it into a return value that it returns to the client
 program.
 
-.. _fig-rpc-stub:
-.. figure:: message/figures/f05-14-9780123850591.png
+.. _fig-rpc:
+.. figure:: message/figures/rpc.png
    :width: 500px
    :align: center
 

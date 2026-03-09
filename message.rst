@@ -25,8 +25,8 @@ sometimes support a non-blocking option, but in that case, the
 protocol delivers a "completion signal" to the sender when the reply
 arrives. This is a critical aspect of the transaction, because the
 reply message indicates that the application process—and not just the
-remote peer—has received (and in some cases acted upon) the request
-message.
+destination server—has received (and in some cases acted upon) the
+request message.
 
 .. _fig-rpc-timeline:
 .. figure:: message/figures/transaction.png
