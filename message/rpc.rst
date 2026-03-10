@@ -69,9 +69,13 @@ standard Internet protocol under the name ONC RPC.
 
 .. admonition:: Further Reading
 
-    Birrell and Nelson
+    A. Birrell and B. Nelson. `Implementing Remote Procedure Calls
+    <http://birrell.org/andrew/papers/ImplementingRPC.pdf>`__. ACM
+    Transactions on Computer Systems, February 1984. 
 
-    SunRPC
+    R. Thurlow. `RPC: Remote Procedure Call Protocol Specification
+    Version 2 <https://www.rfc-editor.org/rfc/rfc5531>`__. RFC 5531,
+    May 2009.
 
 The emergence of the cloud led to another seismic shift in RPC design,
 in part corresponding to the wide-spread adoption of HTTP as discussed
@@ -275,7 +279,7 @@ Buffers are gRPC’s way of specifying how the parameters being passed
 to the server are encoded into a message, which is in turn used to
 generate the stubs that sit between the underlying RPC mechanism and
 the actual functions being called (see :numref:`Figure %s
-<fig-rpc-stub>`).
+<fig-rpc>`).
 
 The bottom line is that complex mechanisms like RPC, once packaged as
 a monolithic bundle of software (as with SunRPC), is nowadays built by
