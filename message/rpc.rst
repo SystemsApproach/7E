@@ -23,8 +23,8 @@ A complete RPC mechanism actually involves two major components:
 2. Programming language and compiler support to package the arguments
    into a request message on the client machine and then to translate
    this message back into the arguments on the server machine, and
-   likewise with the return value (this piece of the RPC mechanism is
-   sometimes called a *stub compiler*).
+   likewise with the return value. This piece of the RPC mechanism is
+   sometimes called a *stub compiler*.
 
 :numref:`Figure %s <fig-rpc>` schematically depicts what happens
 when a client invokes a remote procedure. First, the client calls a
@@ -35,7 +35,7 @@ underlying message transaction protocol to send the request message to
 the server machine. At the server, the transaction protocol delivers
 the request message to the server stub, which translates it into the
 arguments to the procedure and then calls the local procedure. After
-the server procedure completes, it returns in a reply message that it
+the server procedure completes, it returns a reply message that it
 hands off to the protocol for transmission back to the client. The
 protocol on the client passes this message up to the client stub,
 which translates it into a return value that it returns to the client
@@ -80,13 +80,13 @@ standard Internet protocol under the name ONC RPC.
 The emergence of the cloud led to another seismic shift in RPC design,
 in part corresponding to the wide-spread adoption of HTTP as discussed
 in Chapter 2. This is where we pick up the story by turning our
-attention to gRPC, a popular RPC mechanism that Google open
-sourced. gRPC is based on an RPC mechanism that Google had been using
-internally to implement cloud services in their datacenters.
+attention to gRPC, a popular open source RPC mechanism. gRPC is based
+on an RPC mechanism that Google had been using internally to implement
+cloud services in their datacenters.
 
 .. sidebar:: RPC vs REST
 
-   A false dicotomy...
+   A false dichotomy...
 
 Despite its origins in Google, gRPC does not stand for Google RPC. The
 “g” stands for something different in each release. For version 1.10
@@ -106,7 +106,7 @@ In the client/server world, the client invokes a method on a specific
 server process running on a specific server machine. One server
 process is presumed to be enough to serve calls from all the client
 processes that might call it. With cloud services, the client invokes
-a method on a *service*, which in order to support calls from
+a method on a *service*, which, in order to support calls from
 arbitrarily many clients at the same time, is implemented by a
 scalable number of server processes, each potentially running on a
 different server (or VM).  A *load balancer* then directs that
@@ -129,8 +129,8 @@ size. Second, gRPC actually runs on top of *Transport Layer Security*
 means it also outsources responsibility for securing the communication
 channel so adversaries can’t eavesdrop or hijack the message
 exchange. Third, gRPC actually, actually runs on top of HTTP/2 (which
-is itself layered on top of TCP and TLS), meaning gRPC outsources yet
-two other problems: (1) efficiently encoding/compressing binary data
+is itself layered on top of TCP and TLS), meaning gRPC outsources 
+two further problems: (1) efficiently encoding/compressing binary data
 into a message, (2) multiplexing multiple concurrent remote procedure
 calls onto a single TCP connection.
 
@@ -157,27 +157,43 @@ implement distributed applications, HTTP is an example of an
 application-level protocol, and yet gRPC runs on top of HTTP rather
 than the other way around.
 
-The explanation is that layering provides a convenient way for
-humans to wrap their heads around complex systems, but what we’re
-really trying to do is solve a set of problem (e.g., reliably transfer
+It's not that uncommon to see layering produce this sort of convoluted
+result.  Layering provides a convenient way for
+humans to wrap their heads around complex systems, and outsourcing
+problems to an existing layer can be see and an efficient want to
+avoid duplication of effort. However, what we’re
+really trying to do is solve a set of problems (e.g., reliably transfer
 messages of arbitrary size, identify senders and recipients, match
 requests messages with reply messages, and so on) and the way these
 solutions get bundled into protocols, and those protocols then layered
 on top of each other, is the consequence of incremental changes over
-time. You could argue it’s an historical accident. Had the Internet
-started with an RPC mechanism as ubiquitous as TCP—see the sidebar on
-VTMP in the previous section for an example—HTTP might have been
-implemented on top of it (as might have almost all of the other
-application-level protocols that exist today) and Google would have
-spent their time improving *that* protocol rather than inventing one
-of their own (as they and others have been doing with TCP). What
-happened instead is that the web became the Internet’s killer app,
-which meant that its application protocol (HTTP) became universally
-supported by the rest of the Internet’s infrastructure: Firewalls,
-Load Balancers, Encryption, Authentication, Compression, and so
-on. Because all of these network elements have been designed to work
-well with HTTP, HTTP has effectively become the Internet’s universal
-request/reply transport protocol.
+time. It's easy to imagine a different outcome if the set of available
+protocols at any point in time had been slightly different.
+
+Imagine, for example, a different version of history in which the
+Internet had started with an RPC mechanism as ubiquitous as TCP—see
+the sidebar on VTMP in the previous section for an example. HTTP then
+might have been implemented on top of that RPC layer. Google might
+have spent their time improving the RPC protocol rather than inventing
+one of their own in gRPC. What happened instead is that the web became
+the Internet’s killer app, which meant that its application protocol
+(HTTP) became universally supported by the rest of the Internet’s
+infrastructure: Firewalls, Load Balancers, Encryption, Authentication,
+Compression, and so on. Because all of these network elements have
+been designed to work well with HTTP, HTTP has effectively become the
+Internet’s universal request/reply transport protocol.\ [#]_
+
+.. [#] If you are
+   wondering why we would describe an application protocol as a transport
+   protocol, just remember that layering is an abstraction to help
+   us understand and modularize networks, not a set of precise rules about what
+   happens in any given module.
+
+There is, however, a possibility of a different set of layers
+replacing or at least coexisting with gRPC/HTTP/TCP. As we discuss
+below, QUIC has been developed to be a more suitable transport for
+HTTP, and part of what it offers is a better match to the
+request/reply semantics of both HTTP and RPC.
 
 Returning to the unique characteristics of gRPC, the biggest value it
 brings to the table is to incorporate *streaming* into the RPC
@@ -279,14 +295,15 @@ Buffers are gRPC’s way of specifying how the parameters being passed
 to the server are encoded into a message, which is in turn used to
 generate the stubs that sit between the underlying RPC mechanism and
 the actual functions being called (see :numref:`Figure %s
-<fig-rpc>`).
+<fig-rpc>`). This is how gRPC tackles the *argument marshalling*
+problem, to which we return in Section 13.6.
 
 The bottom line is that complex mechanisms like RPC, once packaged as
-a monolithic bundle of software (as with SunRPC), is nowadays built by
+a monolithic bundle of software (as with SunRPC), are nowadays built by
 assembling an assortment of smaller pieces, each of which solves a
 narrow problem. gRPC is both an example of that approach, and a tool
 that enables further adoption of the approach.  The microservices
 architecture mentioned Chapter 2 applies the “built from small parts”
-strategy to entire cloud applications (e.g., Uber, Lyft, Netflix,
-Yelp, Spotify), where gRPC is often the communication mechanism used
+strategy to entire cloud applications (e.g., the services provided by Uber, Lyft, Netflix,
+Yelp, Spotify, etc.), where gRPC is often the communication mechanism used
 by those small pieces to exchange messages with each other.
