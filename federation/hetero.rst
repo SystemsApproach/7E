@@ -31,21 +31,37 @@ IP makes every effort to deliver datagrams, it makes no guarantees. We
 postpone a discussion of the addressing scheme for now and look first at
 the data delivery model.
 
-Datagram Delivery
+Before looking at the details of the IP service model, we first
+explain a bit of history. At the time IP was defined, the decision to
+make it connectionless was revolutionary. Telcos were the dominate
+communication provider, and they supported circuit-based service
+models. The circuit model defines a procedure to first establish an
+end-to-end connection, which includes allocating resources at all the
+switches along the circuit's path. Expecting a packet to successfully
+traverse a sequence of best-effort packet switches, each of which
+statistically multiplexes its resources, was innovative. As a
+consequence, early Internet documents referred to IP as providing a
+"connectionless datagram" service model, so as to distinguish it from
+the current standard practice. We usually refer to them as IP packets
+(rather than IP datagrams) in this book, since they are the current
+best practice, but any of the terms "best effort", "statistical
+multiplexing", and "connectionless datagram" should interpreted as
+roughly equivalent ways of talking about the same idea.
+
+Packet Delivery
 ++++++++++++++++++
 
-
-The IP datagram is fundamental to the Internet Protocol. Every
-datagram carries enough information to let the network forward the
-packet to its correct destination; there is no need for any advance
-setup mechanism to tell the network what to do when the packet
-arrives. You just send it, and the network makes its best effort to
-get it to the desired destination.  The “best-effort” part means that
-if something goes wrong and the packet gets lost, corrupted,
-misdelivered, or in any way fails to reach its intended destination,
-the network does nothing—it made its best effort, and that is all it
-has to do. It does not make any attempt to recover from the
-failure. This is sometimes called an *unreliable* service.
+The IP packet is fundamental to the Internet Protocol. Every packet
+carries enough information to let the network forward the packet to
+its correct destination; there is no need for any advance setup
+mechanism to tell the network what to do when the packet arrives. You
+just send it, and the network makes its best effort to get it to the
+desired destination.  The “best-effort” part means that if something
+goes wrong and the packet gets lost, corrupted, misdelivered, or in
+any way fails to reach its intended destination, the network does
+nothing—it made its best effort, and that is all it has to do. It does
+not make any attempt to recover from the failure. This is sometimes
+called an *unreliable* service.
 
 Best-effort, connectionless service is about the simplest service you
 could ask for from an internetwork, and this is its great strength. For
@@ -75,7 +91,7 @@ Packet Format
 +++++++++++++++++
 
 Clearly, a key part of the IP service model is the type of packets
-that can be carried. The IP datagram, like most packets, consists of a
+that can be carried. The IP packet consists of a
 header followed by a number of bytes of data. The format of the header
 (for IP version 4)
 is shown in :numref:`Figure %s <fig-iphead>`. As we saw in Chapter 4,
@@ -102,7 +118,7 @@ Looking at each field in the IP header, we see that the “simple” model
 of best-effort datagram delivery still has some subtle features. The
 ``Version`` field specifies the version of IP. The most widely deployed version
 of IP is 4, which is typically called *IPv4*. Observe that putting this
-field right at the start of the datagram makes it easy for everything
+field right at the start of the packet makes it easy for everything
 else in the packet format to be redefined in subsequent versions; the
 header processing software starts off by looking at the version and then
 branches off to process the rest of the packet according to the
@@ -115,9 +131,9 @@ differently based on application needs. For example, the ``TOS`` value
 might determine whether or not a packet should be placed in a special
 queue that receives low delay.
 
-The next 16 bits of the header contain the ``Length`` of the datagram,
+The next 16 bits of the header contain the ``Length`` of the packet,
 including the header. Unlike the ``HLen`` field, the ``Length`` field
-counts bytes rather than words. Thus, the maximum size of an IP datagram
+counts bytes rather than words. Thus, the maximum size of an IP packet
 is 65,535 bytes. The physical network over which IP is running, however,
 typically does not support such long packets. For this reason, IP supports a
 fragmentation and reassembly process. The second word of the header
@@ -316,11 +332,11 @@ packets, and it is those addresses that are used in IP routers to make
 forwarding decisions.
 
 
-6.2.3 Datagram Forwarding in IP
+6.2.3 Packet Forwarding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We are now ready to look at the basic mechanism by which IP routers
-forward datagrams in an internetwork. Recall that *forwarding* is the
+forward packets in an internetwork. Recall that *forwarding* is the
 process of taking a packet from an input and sending it out on the
 appropriate output (we looked at this in depth in Chapter 2), while
 *routing* is the process of building up the tables that allow the
@@ -329,9 +345,9 @@ of this in Chapter 4). The discussion here focuses on forwarding; we
 return to routing in the next chapter.
 
 The main points to bear in mind as we discuss the forwarding of IP
-datagrams are the following:
+packets are the following:
 
--  Every IP datagram contains the IP address of the destination host.
+-  Every packet contains the IP address of the destination host.
 
 -  The network part of an IP address uniquely identifies a single
    physical network that is part of the larger Internet.
@@ -345,8 +361,8 @@ datagrams are the following:
    physical network; this router can exchange packets with hosts or
    routers on either network.
 
-Forwarding IP datagrams can therefore be handled in the following way. A
-datagram is sent from a source host to a destination host, possibly
+Forwarding IP packets can therefore be handled in the following way. A
+packet is sent from a source host to a destination host, possibly
 passing through several routers along the way. Any node, whether it is a
 host or a router, first tries to establish whether it is connected to
 the same physical network as the destination. To do this, it compares
@@ -359,10 +375,10 @@ interface, and the packet can be directly delivered over that network. A
 later section explains some of the details of this process.
 
 If the node is not connected to the same physical network as the
-destination node, then it needs to send the datagram to a router. In
+destination node, then it needs to send the packet to a router. In
 general, each node will have a choice of several routers, and so it
 needs to pick the best one, or at least one that has a reasonable chance
-of getting the datagram closer to its destination. The router that it
+of getting the packet closer to its destination. The router that it
 chooses is known as the *next hop* router. The router finds the correct
 next hop by consulting its forwarding table. The forwarding table is
 conceptually just a list of ``(NetworkNum, NextHop)``\ pairs. (As we
@@ -371,10 +387,10 @@ additional information related to the next hop.) Normally, there is also
 a default router that is used if none of the entries in the table
 matches the destination’s network number. For a host, it is more
 common to simply have a default router and nothing else—this means that all
-datagrams destined for hosts not on the physical network to which the
+packets destined for hosts not on the physical network to which the
 sending host is attached will be sent to the default router.
 
-We can describe the datagram forwarding algorithm in the following way:
+We can describe the forwarding algorithm in the following way:
 
 ::
 
@@ -397,26 +413,26 @@ forwarding table, this simplifies to
        deliver packet to default router
 
 Let’s see how this works in the example internetwork of :numref:`Figure
-%s <fig-inet>`. First, suppose that H1 wants to send a datagram to H2.
+%s <fig-inet>`. First, suppose that H1 wants to send a packet to H2.
 Since they are on the same physical network, H1 and H2 have the same
 network number in their IP address. Thus, H1 deduces that it can deliver
-the datagram directly to H2 over the Ethernet. The one issue that needs
+the packet directly to H2 over the Ethernet. The one issue that needs
 to be resolved is how H1 finds out the correct Ethernet address for
-H2—the address resolution mechanism known as ARP, described below, addresses this
-issue.
+H2—the address resolution mechanism known as ARP, described below,
+addresses this issue.
 
-Now suppose H5 wants to send a datagram to H8. Since these hosts are
-on different physical networks, they have different network numbers,
-so H5 deduces that it needs to send the datagram to a router. R1 is
-the only choice—the default router—so H1 sends the datagram over the
+Now suppose H1 wants to send a packet to H5. Since these hosts are on
+different physical networks, they have different network numbers, so
+H1 deduces that it needs to send the packet to a router. R1 is the
+only choice—the default router—so H1 sends the packet over the
 wireless network to R1. Similarly, R1 knows that it cannot deliver a
-datagram directly to H8 because neither of R1’s interfaces are on the
-same network as H8. Suppose R1’s default router is R2; R1 then sends
-the datagram to R2 over the Ethernet. Assuming R2 has the forwarding
-table shown in :numref:`Table %s <tab-ipfwdtab>`, it looks up H8’s
-network number (network 4) and forwards the datagram over the
-point-to-point network to R3. Finally, R3, since it is on the same
-network as H8, forwards the datagram directly to H8.
+packet directly to H5 because neither of R1’s interfaces are on the
+same network as H5. Suppose R1’s default router is R2; R1 sends the
+packet to R2 over the PON link.  Assuming R2 has the forwarding table
+shown in :numref:`Table %s <tab-ipfwdtab>`, it looks up H5’s network
+number (network 4) and forwards the packet over the packet-switched
+network to R3. Finally, R3, since it is on the same network as H5,
+forwards the packet directly to H5.
 
 .. _tab-ipfwdtab:
 .. table:: Forwarding table for Router R2.
@@ -432,11 +448,11 @@ network as H8, forwards the datagram directly to H8.
    +------------+---------+
 
 Note that it is possible to include the information about directly
-connected networks in the forwarding table. For example, we could label
-the network interfaces of router R2 as interface 0 for the
-point-to-point link (network 3) and interface 1 for the Ethernet
-(network 2). Then R2 would have the forwarding table shown
-in :numref:`Table %s <tab-ipfwdtab2>`.
+connected networks in the forwarding table. For example, we could
+label the network interfaces of router R2 as interface 0 for the
+Ethernet (network 3) and interface 1 for the point-to-point link
+(network 2). Then R2 would have the forwarding table shown in
+:numref:`Table %s <tab-ipfwdtab2>`.
 
 .. _tab-ipfwdtab2:
 .. table:: Complete Forwarding table for Router R2.
@@ -491,23 +507,23 @@ by no means the last) in achieving scalability.
    networks at the top level and nodes at the bottom level. We have
    aggregated information by letting routers deal only with reaching the
    right network; the information that a router needs to deliver a
-   datagram to any node on a given network is represented by a single
+   packet to any node on a given network is represented by a single
    aggregated piece of information.
 
 6.2.5 Address Translation (ARP)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We have talked about how to get IP datagrams to the
+We have talked about how to get IP packets to the
 right physical network but glossed over the issue of how to get a
-datagram to a particular host or router on that network. The main issue
-is that IP datagrams contain IP addresses, but the physical interface
-hardware on the host or router to which you want to send the datagram
+packet to a particular host or router on that network. The main issue
+is that IP packet contain IP addresses, but the physical interface
+hardware on the host or router to which you want to send the packet
 only understands the addressing scheme of that particular network. Thus,
 we need to translate the IP address to a link-level address that makes
 sense on this network (e.g., a 48-bit Ethernet or Wi-Fi address). We can then
-encapsulate the IP datagram inside a frame that contains that link-level
+encapsulate the IP packet inside a frame that contains that link-level
 address and send it either to the ultimate destination or to a router
-that promises to forward the datagram toward the ultimate destination.
+that promises to forward the packet toward the ultimate destination.
 
 
 The general solution is for each host to maintain a table of
@@ -526,7 +542,7 @@ currently stored in a host is known as the ARP cache or ARP table.
 
 ARP takes advantage of the fact that many link-level network
 technologies, such as Ethernet and Wi-Fi, support broadcast. If a host wants to
-send an IP datagram to a host (or router) that it knows to be on the
+send an IP packet to a host (or router) that it knows to be on the
 same network (i.e., the sending and receiving nodes have the same IP
 network number), it first checks for a mapping in the cache. If no
 mapping is found, it needs to invoke the Address Resolution Protocol
@@ -586,6 +602,6 @@ and target, the packet contains
 
 Note that the results of the ARP process can be added as an extra column
 in a forwarding table like the one in :numref:`Table %s <tab-ipfwdtab>`.
-Thus, for example, when R2 needs to forward a packet to network 2, it
-not only finds that the next hop is R1, but also finds the MAC address
-to place on the packet to send it to R1.
+Thus, for example, when R2 needs to forward a packet to network 3, it
+not only finds that the next hop is R3, but also finds the MAC address
+to place on the packet to send it to R3.

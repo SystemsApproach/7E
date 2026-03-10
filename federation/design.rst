@@ -60,23 +60,31 @@ Internet.
    :width: 600px
    :align: center
 
-   A simple internetwork, with two routers (R1 and R2) connecting
-   three networks.
+   A simplified internetwork, showing possible connectivity from a set
+   of Wi-Fi connected workstations to a set of servers in a remote
+   datacenter, via a PON access link and an Ethernet-based
+   backbone. The path traverses routers R1, R2, and R3.
 
 
 :numref:`Figure %s <fig-inet>` shows an example internetwork. An
 internetwork is often referred to as a “network of networks” because
 it is made up of lots of smaller networks. In this figure, we see a
-switched Ethernet and two Wi-Fi networks. Each of these is a
-single-technology network. The nodes that interconnect the networks
-are called *routers*.  They historically were also sometimes called
-*gateways*, but since this term has several other connotations, we
-restrict our usage to router.\ [#]_
+Wi-Fi based local network, a PON-based access network, a switched
+Ethernet (representing a wide-area backbone), and an Ethernet-based
+switching fabric in a datacenter. The nodes that interconnect the
+networks are called *routers*.  They historically were also sometimes
+called *gateways*, but since this term has several other connotations,
+we restrict our usage to router.\ [#]_
 
-.. [#] As we saw in Chapter 2, our other option is to call them L3
-   switches, but we reserve that name for when we use IP *within* a
-   packet-switched network, and we reserve the word "router" for a
-   device that interconnects two or more distinct networks.
+.. [#] As we saw in Chapter 2, whether a switch forwards L2 frames or
+       L3 packets is often a matter of configuration. This means our
+       other option is to call them L3 switches, but we reserve that
+       name for when we use IP *within* a packet-switched network—as
+       is often the case with a datacenter switching fabric or a
+       wide-area backbone—and we reserve the word "router" for a
+       forwarding device that interconnects two or more distinct
+       networks. This distinction is depicted in figures by using a
+       cylinder icon for a router.
 
 .. _fig-ip-graph:
 .. figure:: federation/figures/ip-graph.png
@@ -84,19 +92,22 @@ restrict our usage to router.\ [#]_
    :align: center
 
    A simple internetwork, showing the protocol layers used to connect
-   H1 to H6 in the above figure. ETH is the protocol that runs over
-   the Ethernet and 802.11 is the Wi-Fi protocol.
+   H1 to H5 in the previous figure. ETH denotes the MAC protocol that
+   connects to an Ethernet, PON denotes the MAC protocol that connects
+   to a Passive Optical Network, and Wi-Fi denotes the MAC protocol
+   that connects to Wi-Fi.
 
 The *Internet Protocol* is the key tool used today to build scalable,
 heterogeneous internetworks. It was originally known as the Kahn-Cerf
-protocol after its inventors. One way to think of IP is that it runs on
-all the nodes (both hosts and routers) in a collection of networks and
-defines the infrastructure that allows these nodes and networks to
-function as a single logical internetwork. For example, :numref:`Figure
-%s <fig-ip-graph>` shows how hosts H1 and H6 are logically connected by
-the internet in :numref:`Figure %s <fig-inet>`, including the protocol graph
-running on each node. Note that higher-level protocols, such as TCP and
-UDP, typically run on top of IP on the hosts.
+protocol after its inventors. One way to think of IP is that it runs
+on all the nodes (both hosts and routers) in a collection of networks
+and defines the infrastructure that allows these nodes and networks to
+function as a single logical internetwork. For example,
+:numref:`Figure %s <fig-ip-graph>` shows how hosts H1 and H5 are
+logically connected by the internet in :numref:`Figure %s <fig-inet>`,
+including the protocol graph running on each node. Note that
+higher-level protocols, such as TCP and UDP, typically run on top of
+IP on the hosts.
 
 The design goals listed in the design philosophy paper give a good
 overview of the issues that need to be tackled in an internetwork:

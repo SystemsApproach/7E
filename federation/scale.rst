@@ -140,15 +140,15 @@ shown in :numref:`Table %s <tab-subnettab>`.
    | 128.96.33.0   | 255.255.255.0   | R2          |
    +---------------+-----------------+-------------+
 
-Continuing with the example of a datagram from H1 being sent to H2, R1
+Continuing with the example of a packet from H1 being sent to H2, R1
 would AND H2’s address (128.96.34.139) with the subnet mask of the first
 entry (255.255.255.128) and compare the result (128.96.34.128) with the
 network number for that entry (128.96.34.0). Since this is not a match,
 it proceeds to the next entry. This time a match does occur, so R1
-delivers the datagram to H2 using interface 1, which is the interface
+delivers the packet to H2 using interface 1, which is the interface
 connected to the same network as H2.
 
-We can now describe the datagram forwarding algorithm in the following
+We can now describe the forwarding algorithm in the following
 way:
 
 ::
@@ -158,9 +158,9 @@ way:
        D1 = SubnetMask & D
        if D1 = SubnetNumber
            if NextHop is an interface
-               deliver datagram directly to destination
+               deliver packet directly to destination
            else
-               deliver datagram to NextHop (a router)
+               deliver packet to NextHop (a router)
 
 Although not shown in this example, a default route would usually be
 included in the table and would be used if no explicit matches were

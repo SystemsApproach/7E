@@ -85,6 +85,7 @@ Arrobo
 ArtifactHub
 arvdrpoo
 ascii
+ASes
 ASIC
 ASICs
 ASM
@@ -833,6 +834,7 @@ LEDBAT's
 LEDs
 leffler
 Leinen
+Leiner
 Lempel
 len
 León
@@ -1738,6 +1740,7 @@ TSDB
 TSO
 TSpec
 TSpecs
+Tsuchiya
 TTCP
 TTI
 TTL

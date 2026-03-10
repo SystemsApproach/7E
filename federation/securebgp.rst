@@ -218,7 +218,7 @@ such as an ISP or an RIR, then I can check the validity of something
 signed by that entity. And a certificate is just a cryptographically
 signed statement providing some information. For example, an RIR can sign a
 certificate the asserts that a certain ISP has a particular public
-key or a certain allocated set of addresses. 
+key or a certain allocated set of addresses.
 
 The chain of trust for address allocation starts from an RIR, the root
 of trust. An RIR allocates a chunk of address space to an ISP, and the
@@ -375,7 +375,7 @@ distributed using the same mechanisms as certificates.
    NIST. `RPKI Monitor <https://rpki-monitor.antd.nist.gov/ROV/>`__.
 
 
-   
+
 6.5.4 Path Validation (BGPsec)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
