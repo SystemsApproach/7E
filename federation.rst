@@ -24,12 +24,13 @@ operators using widely varying underlying technologies and connecting
 them together to provide a useful, global packet delivery service.
 
 Federating autonomous networks helps scale the approach to operations,
-since each organization responsible for managing its own network, but
-it adds to the scalability challenge in other ways. Not only do you
-need a way to address billions of devices, you also need to be able to
-calculate routes to them across an internet that has many thousands of
-autonomous networks, many of which themselves contain thousands of
-links and switches.
+since each organization that manages a network can make its own
+independent decisions about how to manage that network. It also gives
+us a handle on how to scale routing to calculate paths across a global
+network by breaking routing into two parts: routing among networks and
+routing within individual networks. At the same time we need to find a
+way to address billions of devices, a problem that turned out to be
+bigger than first envisioned by the Internet's designers.
 
 Compounding the issue of scale is the problem of heterogeneity. The
 original Internet connected the ARPANET, a pioneering packet-switched

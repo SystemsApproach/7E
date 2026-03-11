@@ -33,20 +33,22 @@ the data delivery model.
 
 Before looking at the details of the IP service model, we first
 explain a bit of history. At the time IP was defined, the decision to
-make it connectionless was revolutionary. Telcos were the dominate
-communication provider, and they supported circuit-based service
+make it connectionless was revolutionary. Telcos were the dominant
+communication providers, and they supported circuit-based service
 models. The circuit model defines a procedure to first establish an
 end-to-end connection, which includes allocating resources at all the
 switches along the circuit's path. Expecting a packet to successfully
 traverse a sequence of best-effort packet switches, each of which
-statistically multiplexes its resources, was innovative. As a
-consequence, early Internet documents referred to IP as providing a
-"connectionless datagram" service model, so as to distinguish it from
-the current standard practice. We usually refer to them as IP packets
-(rather than IP datagrams) in this book, since they are the current
-best practice, but any of the terms "best effort", "statistical
-multiplexing", and "connectionless datagram" should interpreted as
-roughly equivalent ways of talking about the same idea.
+statistically multiplexes its resources, was innovative. A competing
+idea at the time was the *virtual circuit*, which allowed for some
+resource allocation to take place along a path before the first packet
+was sent. As a consequence, early Internet documents referred to IP as
+providing a "connectionless datagram" service model, so as to
+distinguish it from the alternatives. We usually refer
+to IP packets (rather than IP datagrams) in this book, since
+they are the current best practice, but "connectionless datagram"
+should interpreted as a roughly equivalent way of talking about the
+same idea.
 
 Packet Delivery
 ++++++++++++++++++
@@ -342,7 +344,7 @@ appropriate output (we looked at this in depth in Chapter 2), while
 *routing* is the process of building up the tables that allow the
 correct output for a packet to be determined (we saw several examples
 of this in Chapter 4). The discussion here focuses on forwarding; we
-return to routing in the next chapter.
+return to routing at the end of this chapter.
 
 The main points to bear in mind as we discuss the forwarding of IP
 packets are the following:
@@ -430,9 +432,9 @@ packet directly to H5 because neither of R1’s interfaces are on the
 same network as H5. Suppose R1’s default router is R2; R1 sends the
 packet to R2 over the PON link.  Assuming R2 has the forwarding table
 shown in :numref:`Table %s <tab-ipfwdtab>`, it looks up H5’s network
-number (network 4) and forwards the packet over the packet-switched
-network to R3. Finally, R3, since it is on the same network as H5,
-forwards the packet directly to H5.
+number (network 4) and forwards the packet over the backbone link to
+R3. Finally, R3, since it is on the same network as H5, forwards the
+packet directly to H5.
 
 .. _tab-ipfwdtab:
 .. table:: Forwarding table for Router R2.
@@ -450,7 +452,7 @@ forwards the packet directly to H5.
 Note that it is possible to include the information about directly
 connected networks in the forwarding table. For example, we could
 label the network interfaces of router R2 as interface 0 for the
-Ethernet (network 3) and interface 1 for the point-to-point link
+Ethernet (network 3) and interface 1 for the PON
 (network 2). Then R2 would have the forwarding table shown in
 :numref:`Table %s <tab-ipfwdtab2>`.
 
@@ -482,7 +484,7 @@ packet is to be sent next.
 The forwarding table used by R2 is simple enough that it could be
 manually configured. Usually, however, these tables are more complex and
 would be built up by running a routing protocol such as one of those
-described in a later section. Also note that, in practice, the network
+described in Chapter 4. Also note that, in practice, the network
 numbers are usually longer (e.g., 128.96).
 
 We can now see how hierarchical addressing—splitting the address into
@@ -491,7 +493,7 @@ a large network.
 Routers contain forwarding tables that list only a set of network
 numbers rather than all the nodes in the network. In our simple example,
 that meant that R2 could store the information needed to reach all the
-hosts in the network (of which there were eight) in a four-entry table.
+hosts in the network (of which there were nine) in a four-entry table.
 Even if there were 100 hosts on each physical network, R2 would still
 only need those same four entries. This is a good first step (although
 by no means the last) in achieving scalability.

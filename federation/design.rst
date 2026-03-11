@@ -69,8 +69,8 @@ Internet.
 :numref:`Figure %s <fig-inet>` shows an example internetwork. An
 internetwork is often referred to as a “network of networks” because
 it is made up of lots of smaller networks. In this figure, we see a
-Wi-Fi based local network, a PON-based access network, a switched
-Ethernet (representing a wide-area backbone), and an Ethernet-based
+Wi-Fi based local network, a PON-based access network, a point-to-point
+Ethernet (representing a wide-area backbone link), and an Ethernet-based
 switching fabric in a datacenter. The nodes that interconnect the
 networks are called *routers*.  They historically were also sometimes
 called *gateways*, but since this term has several other connotations,
@@ -113,7 +113,7 @@ The design goals listed in the design philosophy paper give a good
 overview of the issues that need to be tackled in an internetwork:
 
  - Internet communication must continue despite loss of networks or
-   routers.
+   routers.\ [#]_
 
  - The Internet must support multiple types of communications service.
 
@@ -129,11 +129,13 @@ overview of the issues that need to be tackled in an internetwork:
 
  - The resources used in Internet architecture must be accountable.
 
+.. [#] In the original paper the word "gateways" is used here.
+
 Some of these will look familiar from our discussion of requirements
 in Chapter 1. The idea that the Internet keeps working in the face of
 failure of any network or router is widely understood—although the
 claim that it was meant to survive nuclear war seems to be a
-conflation of ideas from other research, according the authoritative
+conflation of ideas from other research, according to the authoritative
 history by Leiner *et al*.
 
 The second and third requirements are captured by the hourglass shape

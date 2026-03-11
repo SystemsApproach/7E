@@ -164,10 +164,10 @@ way:
 
 Although not shown in this example, a default route would usually be
 included in the table and would be used if no explicit matches were
-found. Note that a naive implementation of this algorithm—one involving
-repeated ANDing of the destination address with a subnet mask that may
-not be different every time, and a linear table search—would be very
-inefficient.
+found. Note that this conceptual description of the algorithm,
+involving repeated ANDing of the destination address with a subnet
+mask and a linear table search, would be very inefficient. Efficient forwarding
+algorithms, often implemented in hardware, are widely used.
 
 An important consequence of subnetting is that different parts of the
 internet see the world differently. From outside our hypothetical
@@ -311,8 +311,8 @@ address and the variable-length prefixes in a forwarding table has
 been a fruitful field of research for many years. The most well-known
 algorithm uses an approach known as a *PATRICIA tree*, which was
 actually developed well in advance of CIDR. High-end switches, as
-described in Chapter 3, offer a hardware-based alternative by using
-doing address lookups in Ternary Content Addressable Memory (TCAM).
+described in Chapter 3, offer a hardware-based alternative, often by
+performing address lookups in Ternary Content Addressable Memory (TCAM).
 
 6.3.2 Network Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
