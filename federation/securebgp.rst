@@ -187,7 +187,7 @@ describe three different uses of the RPKI in the following sections.
    <https://faculty.cc.gatech.edu/~ctestart8/publications/RoutingSecTPRC.pdf>`__. TPRC
    48, February 2021.
 
-6.5.3 Route Origin Validation (ROV)
+6.5.3 Route Origin Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first use of RPKI is to allow an AS to prove that it is authorized
@@ -376,7 +376,7 @@ distributed using the same mechanisms as certificates.
 
 
 
-6.5.4 Path Validation (BGPsec)
+6.5.4 Path Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -503,7 +503,7 @@ in the following section.
    in partial deployment: is the juice worth the squeeze? <https://dl.acm.org/doi/10.1145/2534169.2486010>`__ ACM
    SIGCOMM, August 2013.
 
-6.5.5 AS Provider Authorization (ASPA)
+6.5.5 AS Provider Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At the time of writing, there is an effort underway at the IETF to

@@ -1,3 +1,5 @@
+.. _artifact-bpg:
+
 6.4 Sharing Routes
 -------------------
 
@@ -7,35 +9,35 @@ routing. One might expect similar approaches could be applied to
 routing among networks, but there are two main challenges that
 complicate the problem of routing among federated networks. First
 there is the issue of scale. There are tens of thousands of autonomous
-systems (ASes) in the Internet and they span the globe, so its not clear that
-the routing protocols we have seen to date could scale to that level
-even if we treated each AS as a simple point in a graph. But more
-importantly, the problem definition is not "find the shortest path to
-destination X". Instead, it is "find a path to X that matches the
-policies of the providers who can deliver traffic to X". Ever since
-the Internet moved past the point of being a simple tree-like topology
-with the NSFNET as its root, with the introduction of multiple
-"backbone" providers in the 1990s, the protocol used to determine paths
-among the Internet's autonomous systems has been BGP, the
-Border Gateway Protocol.
+systems (ASes) in the Internet and they span the globe, so its not
+clear that the routing protocols we have seen to date could scale to
+that level even if we treated each AS as a simple point in a
+graph. But more importantly, the problem definition is not "find the
+shortest path to destination X". Instead, it is "find a path to X that
+matches the policies of the providers who can deliver traffic to
+X". Ever since the Internet moved past the point of being a simple
+tree-like topology with a single backbone network as its root, with
+the introduction of multiple backbone providers in the 1990s, the
+protocol used to determine paths among the Internet's autonomous
+systems has been BGP, the Border Gateway Protocol.
 
 The Internet is organized as autonomous systems, each of which is
 under the control of a single administrative entity. A corporation’s
 complex internal network might be a single AS, as may the national or regional
 network of any single Internet Service Provider (ISP). :numref:`Figure
-%s <fig-autonomous>` shows a simple network with two autonomous
+%s <fig-autonomous>` shows a simple internet with two autonomous
 systems.
 
 .. _fig-autonomous:
-.. figure:: federation/figures/f04-03-9780123850591.png
-   :width: 400px
+.. figure:: federation/figures/autonomous.png
+   :width: 600px
    :align: center
 
-   A network with two autonomous systems.
+   An internet with two autonomous systems.
 
 The basic idea behind autonomous systems is (a) to allow the federated
 networks of the Internet to operate independently from each other
-while providing a global service (b) to support aggregation of routing
+while providing a global service, and (b) to support aggregation of routing
 information in a large internet, thus improving scalability. We can divide
 the global routing problem into two parts: routing within a single autonomous
 system (which we covered in Chapter 4) and routing between autonomous
@@ -61,10 +63,9 @@ the policies of the ASes involved.
 
 What do we mean when we talk about the policies of an AS? They are
 quite varied, but they commonly come down to whose traffic they are
-willing to carry, and who they expect to carry their traffic. As
-discussed in the section on address allocation for IPv6, there are
-networks that function as providers and others that appear as their
-customers. A mid-level ISP might be a customer of a large Tier-1
+willing to carry, and who they expect to carry their traffic.  There
+are networks that function as providers and others that appear as
+their customers. A mid-level ISP might be a customer of a large Tier-1
 provider while also acting as the provider for smaller
 customers. Customers expect their provider(s) to carry their traffic
 in both directions, inbound and outbound. Providers agree to carry
@@ -73,24 +74,24 @@ expect to deliver traffic to some unrelated prefix that is neither its
 own nor belonging to one of its customers.
 
 A simple example routing policy implemented at a particular AS might
-look like this: “Whenever possible, I prefer to send traffic via AS X
+look like this: *“Whenever possible, I prefer to send traffic via AS X
 than via AS Y, but I’ll use AS Y if it is the only path, and I never
-want to carry traffic from AS X to AS Y or *vice versa*.” Such a
-policy would be typical when I have paid money to both AS X and AS Y
+want to carry traffic from AS X to AS Y or vice versa.”* Such a
+policy would be typical when you have paid money to both AS X and AS Y
 to connect my AS to the rest of the Internet, and AS X is my preferred
 provider of connectivity, with AS Y being the fallback. Because I view
 both AS X and AS Y as providers (and presumably I paid them to play
 this role), I don’t expect to help them out by carrying traffic
 between them across my network (this is called *transit* traffic). The
-more autonomous systems I connect to, the more complex policies
-I might have, especially when you consider backbone providers, who may
+more autonomous systems an AS connects to, the more complex policies
+it might have, especially when you consider backbone providers, who may
 interconnect with dozens of other providers and hundreds of customers
 and have different economic arrangements (which affect routing
 policies) with each one.
 
 A key design goal of interdomain routing is that policies like the
 example above, and much more complex ones, should be supported by the
-interdomain routing system. To make the problem harder, I need to be
+interdomain routing system. To make the problem harder, each AS needs to be
 able to implement such a policy without any help from other autonomous
 systems, and in the face of possible misconfiguration or malicious
 behavior by other autonomous systems. Furthermore, there is often a
@@ -106,12 +107,12 @@ significantly.  EGP was designed when the Internet had a treelike
 topology, with a single backbone, and did not allow for the topology
 to become more general.
 
-The replacement for EGP was the Border Gateway Protocol (BGP), which has
-iterated through four versions (we're now on BGP-4). BGP is often regarded as one of
-the more complex technologies of the Internet. We’ll cover some of its high
-points here.
+The Border Gateway Protocol (BGP) replaced EGP, and it has iterated
+through four versions (we're now on BGP-4). BGP is often regarded as
+one of the more complex technologies of the Internet. We’ll cover some
+of its high points here.
 
-Unlike its predecessor EGP, BGP makes virtually no assumptions about how
+Unlike its predecessor, BGP makes virtually no assumptions about how
 autonomous systems are interconnected—they form an arbitrary graph. This
 model is clearly general enough to accommodate non-tree-structured
 internetworks, like the simplified picture of a multi-provider Internet
@@ -136,7 +137,7 @@ providers and some larger corporations. Often, many providers arrange to
 interconnect with each other at a single *peering point*.
 
 To get a better sense of how we might manage routing among this complex
-interconnection of autonomous systems, we can start by defining a few
+interconnection of autonomous systems, we start by defining a few
 terms. We define *local traffic* as traffic that originates at or
 terminates on nodes within an AS, and *transit traffic* as traffic that
 passes through an AS.
@@ -148,7 +149,7 @@ having a routing table that will provide a match for any valid IP
 address. While CIDR has helped to control the number of distinct
 prefixes that are carried in the Internet’s backbone routing, there is
 inevitably a lot of routing information to pass around—the number of
-prefixes has exceeded one million by 2025.
+prefixes now exceeds one million.
 
 A further challenge in interdomain routing arises from the autonomous
 nature of the domains. Each domain may run its own interior
@@ -171,9 +172,9 @@ out to have made a mistake configuring his routers or to have
 insufficient capacity to carry the traffic.
 
 The issue of trust is also related to the need to support complex
-policies as noted above. For example, I might be willing to trust a
-particular provider only when he advertises reachability to certain
-prefixes, and thus I would have a policy that says, “Use AS X to reach
+policies as noted above. For example, a given AS might be willing to trust a
+particular provider only when it advertises reachability to certain
+prefixes, and thus would define a policy that says, “Use AS X to reach
 only prefixes :math:`p` and :math:`q`, if and only if AS X advertises
 reachability to those prefixes.”
 
@@ -211,16 +212,16 @@ to choose from.
 
    Example of a network running BGP.
 
-To see how this works, consider the very simple example network in
+To see how this works, consider the simple example network in
 :numref:`Figure %s <fig-bgpeg>`.  A BGP speaker for the
-AS of provider A (AS 2) would be able to advertise reachability
+AS of provider A (AS 2) would advertise reachability
 information for each of the network numbers assigned to customers P
-and Q. Thus, it would say, in effect, “The networks 128.96, 192.4.153,
-192.4.32, and 192.4.3 can be reached directly from AS 2.” The backbone
-network, on receiving this advertisement, can advertise, “The networks
+and Q. Thus, it would say, in effect, *“Networks 128.96, 192.4.153,
+192.4.32, and 192.4.3 can be reached directly from AS 2.”* The backbone
+network, on receiving this advertisement, can advertise, *“Networks
 128.96, 192.4.153, 192.4.32, and 192.4.3 can be reached along the path
-(AS 1, AS 2).” Similarly, it could advertise, “The networks 192.12.69,
-192.4.54, and 192.4.23 can be reached along the path (AS 1, AS 3).”
+(AS 1, AS 2).”* Similarly, it could advertise, *“Networks 192.12.69,
+192.4.54, and 192.4.23 can be reached along the path (AS 1, AS 3).”*
 
 .. _fig-aspath:
 .. figure:: federation/figures/f04-06-9780123850591.png
@@ -285,7 +286,7 @@ BGP speakers can count on TCP to be reliable, this means that any
 information that has been sent from one speaker to another does not need
 to be sent again. Thus, as long as nothing has changed, a BGP speaker
 can simply send an occasional *keepalive* message that says, in effect,
-“I’m still here and nothing has changed.” If that router were to crash
+*“I’m still here and nothing has changed.”* If that router were to crash
 or become disconnected from its peer, it would stop sending the
 keepalives, and the other routers that had learned routes from it would
 assume that those routes were no longer valid.
@@ -389,8 +390,8 @@ interdomain routing information, the question still remains as to how
 all the other routers in a domain get this information. There are
 several ways this problem can be addressed.
 
-Let’s start with a very simple situation, which is also very common. A
-*stub* AS is one that only carries local traffic. If such an AS is
+Let’s start with a simple situation, which is also very common. A
+*stub* AS is one that carries only local traffic. If such an AS is
 *single-homed*, i.e., it only connects to one provider, then the
 border router connecting to that provider is clearly the only choice for all
 routes that are outside the AS. Such a router can inject a *default
@@ -407,8 +408,8 @@ AS. That router could learn that the network prefix 192.4.54/24 is
 located inside the customer AS, either through BGP or because the
 information is configured into the border router. It could inject a
 route to that prefix into the routing protocol running inside the
-provider AS. This would be an advertisement of the sort, “I have a link
-to 192.4.54/24 of cost X.” This would cause other routers in the
+provider AS. This would be an advertisement of the sort, *“I have a link
+to 192.4.54/24 of cost X.”* This would cause other routers in the
 provider AS to learn that this border router is the place to send
 packets destined for that prefix.
 

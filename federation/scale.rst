@@ -312,7 +312,12 @@ been a fruitful field of research for many years. The most well-known
 algorithm uses an approach known as a *PATRICIA tree*, which was
 actually developed well in advance of CIDR. High-end switches, as
 described in Chapter 3, offer a hardware-based alternative, often by
-performing address lookups in Ternary Content Addressable Memory (TCAM).
+performing address lookups in Ternary Content Addressable Memory
+(TCAM). This supports constant-time lookups, but TCAM is often limited
+in size. This means it is often treated as a cache of the most
+frequently used forwarding entries; a fallback lookup algorithm is
+still needed.
+
 
 6.3.2 Network Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -435,6 +440,7 @@ adopted in 2015.
    <https://dl.acm.org/doi/epdf/10.1145/2766330.2766340>`__. SIGCOMM
    CCR, April 2015.
 
+.. _artifact-ipv6:
 
 6.3.3 IP Version 6
 ~~~~~~~~~~~~~~~~~~~~~

@@ -1,3 +1,5 @@
+.. _artifact-ipv4:
+
 6.2 Heterogeneity
 -------------------
 
@@ -111,7 +113,7 @@ positions marked at the top of the packet.
 
 .. _fig-iphead:
 .. figure:: introduction/figures/iphdr.png
-   :width: 400px
+   :width: 350px
    :align: center
 
    IPv4 packet header.
@@ -160,7 +162,7 @@ the sending host: Set it too high and packets could circulate rather a
 lot before getting dropped; set it too low and they may not reach their
 destination. The value 64 is the current default.
 
-The ``Protocol`` field is simply a demultiplexing key that identifies
+The ``Protocol`` field is a demultiplexing key that identifies
 the higher-level protocol to which this IP packet should be passed.
 There are values defined for the TCP (Transmission Control Protocol—6),
 UDP (User Datagram Protocol—17), and many other protocols that may sit
@@ -276,18 +278,16 @@ Thus, in the simple internetwork of :numref:`Figure %s <fig-inet>`,
 the addresses of the hosts on network 1, for example, would all have
 the same network part and different host parts.
 
-Note that the routers in :numref:`Figure %s <fig-inet>` are attached to two
-networks. They need to have an address on each network, one for each
-interface. For example, router R1, which sits between the wireless
-network and an Ethernet, has an IP address on the interface to the
-wireless network whose network part is the same as all the hosts on that
-network. It also has an IP address on the interface to the Ethernet that
-has the same network part as the hosts on that Ethernet. Thus, bearing
-in mind that a router might be implemented as a host with two network
-interfaces, it is more precise to think of IP addresses as belonging to
-interfaces than to hosts.
+Note that the routers in :numref:`Figure %s <fig-inet>` are attached
+to two networks. They need to have an address on each network, one for
+each interface. For example, router R3, which sits between two
+Ethernets, has an IP address on the interface to each of them; the
+network part of each address the same as all the hosts on that
+network. Thus, bearing in mind that a router might be implemented as a
+host with two network interfaces, it is more precise to think of IP
+addresses as belonging to interfaces than to hosts.
 
-Now, what do these hierarchical addresses look like? Unlike some other
+What do these hierarchical addresses look like? Unlike some other
 forms of hierarchical address, the sizes of the two parts are not the
 same for all addresses. Originally, IP addresses were divided into
 three different classes, as shown in :numref:`Figure %s <fig-class>`,
@@ -452,8 +452,8 @@ packet directly to H5.
 Note that it is possible to include the information about directly
 connected networks in the forwarding table. For example, we could
 label the network interfaces of router R2 as interface 0 for the
-Ethernet (network 3) and interface 1 for the PON
-(network 2). Then R2 would have the forwarding table shown in
+PON link (network 2) and interface 1 for the Ethernet link
+(network 3). Then R2 would have the forwarding table shown in
 :numref:`Table %s <tab-ipfwdtab2>`.
 
 .. _tab-ipfwdtab2:
@@ -466,9 +466,9 @@ Ethernet (network 3) and interface 1 for the PON
    +============+=============+
    | 1          | R1          |
    +------------+-------------+
-   | 2          | Interface 1 |
+   | 2          | Interface 0 |
    +------------+-------------+
-   | 3          | Interface 0 |
+   | 3          | Interface 1 |
    +------------+-------------+
    | 4          | R3          |
    +------------+-------------+
@@ -477,9 +477,7 @@ Thus, for any network number that R2 encounters in a packet, it knows
 what to do. Either that network is directly connected to R2, in which
 case the packet can be delivered to its destination over that network,
 or the network is reachable via some next hop router that R2 can reach
-over a network to which it is connected. In either case, R2 will use
-ARP, described below, to find the MAC address of the node to which the
-packet is to be sent next.
+over a network to which it is connected.
 
 The forwarding table used by R2 is simple enough that it could be
 manually configured. Usually, however, these tables are more complex and
@@ -512,7 +510,9 @@ by no means the last) in achieving scalability.
    packet to any node on a given network is represented by a single
    aggregated piece of information.
 
-6.2.5 Address Translation (ARP)
+.. _artifact-arp:
+
+6.2.5 Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have talked about how to get IP packets to the
@@ -543,18 +543,18 @@ This happens on the order of every 15 minutes. The set of mappings
 currently stored in a host is known as the ARP cache or ARP table.
 
 ARP takes advantage of the fact that many link-level network
-technologies, such as Ethernet and Wi-Fi, support broadcast. If a host wants to
-send an IP packet to a host (or router) that it knows to be on the
-same network (i.e., the sending and receiving nodes have the same IP
-network number), it first checks for a mapping in the cache. If no
-mapping is found, it needs to invoke the Address Resolution Protocol
-over the network. It does this by broadcasting an ARP query onto the
-network. This query contains the IP address in question (the target IP
-address). Each host receives the query and checks to see if it matches
-its IP address. If it does match, the host sends a response message that
-contains its link-layer address back to the originator of the query. The
-originator adds the information contained in this response to its ARP
-table.
+technologies, such as Ethernet and Wi-Fi (but also PON) support
+broadcast. If a host wants to send an IP packet to a host (or router)
+that it knows to be on the same network (i.e., the sending and
+receiving nodes have the same IP network number), it first checks for
+a mapping in the cache. If no mapping is found, it needs to invoke the
+Address Resolution Protocol over the network. It does this by
+broadcasting an ARP query onto the network. This query contains the IP
+address in question (the target IP address). Each host receives the
+query and checks to see if it matches its IP address. If it does
+match, the host sends a response message that contains its link-layer
+address back to the originator of the query. The originator adds the
+information contained in this response to its ARP table.
 
 The query message also includes the IP address and link-layer address of
 the sending host. Thus, when a host broadcasts a query message, each
