@@ -94,8 +94,8 @@ AND 255.255.255.128 equals 128.96.34.0, so this is the subnet number
 for the topmost subnet in the figure.
 
 .. _fig-subnet:
-.. figure:: federation/figures/f03-21-9780123850591.png
-   :width: 500px
+.. figure:: federation/figures/subnet.png
+   :width: 700px
    :align: center
 
    An example of subnetting.
@@ -113,7 +113,7 @@ number for H1 (128.96.34.0) so H1 knows that H2 is on a different
 subnet. Since H1 cannot deliver the packet to H2 directly over the
 subnet, it sends the packet to its default router R1.
 
-The forwarding table of a router also changes slightly when we introduce
+The forwarding table of a router also changes when we introduce
 subnetting. Recall that we previously had a forwarding table that
 consisted of entries of the form ``(NetworkNum, NextHop)``. To support
 subnetting, the table must now hold entries of the form
@@ -140,15 +140,15 @@ shown in :numref:`Table %s <tab-subnettab>`.
    | 128.96.33.0   | 255.255.255.0   | R2          |
    +---------------+-----------------+-------------+
 
-Continuing with the example of a datagram from H1 being sent to H2, R1
+Continuing with the example of a packet from H1 being sent to H2, R1
 would AND H2’s address (128.96.34.139) with the subnet mask of the first
 entry (255.255.255.128) and compare the result (128.96.34.128) with the
 network number for that entry (128.96.34.0). Since this is not a match,
 it proceeds to the next entry. This time a match does occur, so R1
-delivers the datagram to H2 using interface 1, which is the interface
+delivers the packet to H2 using interface 1, which is the interface
 connected to the same network as H2.
 
-We can now describe the datagram forwarding algorithm in the following
+We can now describe the forwarding algorithm in the following
 way:
 
 ::
@@ -158,16 +158,16 @@ way:
        D1 = SubnetMask & D
        if D1 = SubnetNumber
            if NextHop is an interface
-               deliver datagram directly to destination
+               deliver packet directly to destination
            else
-               deliver datagram to NextHop (a router)
+               deliver packet to NextHop (a router)
 
 Although not shown in this example, a default route would usually be
 included in the table and would be used if no explicit matches were
-found. Note that a naive implementation of this algorithm—one involving
-repeated ANDing of the destination address with a subnet mask that may
-not be different every time, and a linear table search—would be very
-inefficient.
+found. Note that this conceptual description of the algorithm,
+involving repeated ANDing of the destination address with a subnet
+mask and a linear table search, would be very inefficient. Efficient forwarding
+algorithms, often implemented in hardware, are widely used.
 
 An important consequence of subnetting is that different parts of the
 internet see the world differently. From outside our hypothetical
@@ -306,11 +306,13 @@ other hand, a packet destined to 171.69.20.5 would match 171.69 and
 *not* 171.69.10, and in the absence of any other matching entry in the
 routing table 171.69 would be the longest match.
 
-The task of efficiently finding the longest match between an IP address
-and the variable-length prefixes in a forwarding table has been a
-fruitful field of research for many years. The most well-known algorithm
-uses an approach known as a *PATRICIA tree*, which was actually
-developed well in advance of CIDR.
+The task of efficiently finding the longest match between an IP
+address and the variable-length prefixes in a forwarding table has
+been a fruitful field of research for many years. The most well-known
+algorithm uses an approach known as a *PATRICIA tree*, which was
+actually developed well in advance of CIDR. High-end switches, as
+described in Chapter 3, offer a hardware-based alternative, often by
+performing address lookups in Ternary Content Addressable Memory (TCAM).
 
 6.3.2 Network Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
