@@ -31,6 +31,7 @@ Larry Peterson and Bruce Davie
    routing.rst
    shared.rst
    federation.rst
+   policy.rst
    part_three.rst
    reliable.rst
    message.rst

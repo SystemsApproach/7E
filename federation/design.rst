@@ -138,6 +138,13 @@ claim that it was meant to survive nuclear war seems to be a
 conflation of ideas from other research, according to the authoritative
 history by Leiner *et al*.
 
+.. _reading_inet:
+.. admonition:: Further Reading
+
+   B. Leiner, et. al. `A Brief History of the Internet
+   <https://dl.acm.org/doi/10.1145/1629607.1629613>`__.
+   SIGCOMM CCR, October 2009.
+
 The second and third requirements are captured by the hourglass shape
 we saw in Chapter 1. Many types of communications
 service (or applications) can run over the Internet, and many

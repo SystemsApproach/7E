@@ -44,28 +44,15 @@ technologies ranging from multi-gigabit optical fiber to 5G
 wireless—technologies that were not even on the horizon at the time of
 the Internet's design.
 
-Calculating and sharing routes among the autonomously operated
-networks making up the Internet has proven to be one of its greatest
-challenges. Not only does the Internet's interdomain routing protocol,
-BGP, now carry about one million pieces of routing information, but it
-also bears the responsibility of allowing Internet Service Providers
-and their customers to set and enforce business rules about whose
-traffic is carried by whom. We explore these challenges in this
-chapter. Finally we look at the ongoing work of securing the routing system
-against attacks that can lead to traffic hijacking, black holes, and
-other system-wide problems.
-
-.. _reading_inet:
-.. admonition:: Further Reading
-
-   B. Leiner, et. al. `A Brief History of the Internet
-   <https://dl.acm.org/doi/10.1145/1629607.1629613>`__.
-   SIGCOMM CCR, October 2009.
-
-
+This chapter addresses the challenges of heterogeneity and scale,
+which are substantial, but it is important to not lose sight of the
+bigger picture: that accommodating autonomy is the key enabler. Fully
+embracing that autonomy means the organizations responsible for the
+underlying networks retain the right to set policies about how their
+networks are used. The Internet's approach to specifying and enforcing
+such policies is a complex topic in its own right, and one we address
+in the next chapter.
 
 .. include:: federation/design.rst
 .. include:: federation/hetero.rst
 .. include:: federation/scale.rst
-.. include:: federation/routingbgp.rst
-.. include:: federation/securebgp.rst
