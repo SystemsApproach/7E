@@ -31,10 +31,9 @@ internetwork, and a datagram (connectionless) model of data delivery.
 This service model is sometimes called *best effort* because, although
 IP makes every effort to deliver datagrams, it makes no guarantees. We
 postpone a discussion of the addressing scheme for now and look first at
-the data delivery model.
+the data delivery model. But before doing that, we explain a bit of history.
 
-Before looking at the details of the IP service model, we first
-explain a bit of history. At the time IP was defined, the decision to
+At the time IP was defined, the decision to
 make it connectionless was revolutionary. Telcos were the dominant
 communication providers, and they supported circuit-based service
 models. The circuit model defines a procedure to first establish an
@@ -200,10 +199,10 @@ efficiently that normal "fast path" processing.
 .. sidebar:: Fragmentation Considered Harmful
 
    One of the problems of providing a uniform host-to-host service
-   model over a heterogeneous collection of networks is that each
-   network technology has its own idea of how large a packet
-   can be. For example, classic Ethernet can accept packets up to
-   1500 bytes long, but modern-day variants can deliver larger (jumbo)
+   model over heterogeneous networks is that each
+   network has its own idea of how large a packet
+   can be. For example, classic Ethernet accepts packets up to
+   1500 bytes long, but modern variants can deliver larger (jumbo)
    packets that carry up to 9000 bytes of payload. This leaves two
    choices for the IP service model: ensure that all IP datagrams are
    small enough to fit inside one packet on any network technology, or
@@ -213,14 +212,14 @@ efficiently that normal "fast path" processing.
    a few decades of experience, opted for a twist on the first option:
    path MTU discovery.
 
-   The central idea here is that every network type has a *maximum
+   The central idea is that every network type has a *maximum
    transmission unit* (MTU), which is the largest IP datagram that it
-   can carry in a frame. Note that this value is smaller than the
+   can carry in a frame. (This value is smaller than the
    largest packet size on that network because the IP datagram needs
-   to fit in the *payload* of the link-layer frame. When a host sends
-   an IP datagram, therefore, it can choose any size that it wants. A
+   to fit in the *payload* of the link-layer frame.) When a host sends
+   an IP datagram, it can choose any size that it wants. A
    reasonable choice is the MTU of the network to which the host is
-   directly attached. Then, fragmentation will only be necessary if
+   directly attached. Then, fragmentation is necessary only if
    the path to the destination includes a network with a smaller MTU.
 
    The downsides of fragmentation were identified as early as 1987 in
@@ -230,7 +229,7 @@ efficiently that normal "fast path" processing.
    fragile—one lost fragment means an entire datagram is lost—and the
    reassembly process may degrade performance.
 
-   The way that fragmentation can be avoided is called Path
+   One approach to avoiding fragmentation is called Path
    MTU Discovery. In IPv4, this is done by setting a "don't fragment" bit in the
    header, and sending a packet using the MTU of the host's local
    network. In IPv6, routers do not perform fragmentation, so there is no
@@ -543,7 +542,7 @@ This happens on the order of every 15 minutes. The set of mappings
 currently stored in a host is known as the ARP cache or ARP table.
 
 ARP takes advantage of the fact that many link-level network
-technologies, such as Ethernet and Wi-Fi support
+technologies, such as Ethernet and Wi-Fi, support
 broadcast. If a host wants to send an IP packet to a host (or router)
 that it knows to be on the same network (i.e., the sending and
 receiving nodes have the same IP network number), it first checks for

@@ -735,7 +735,7 @@ be removed from the IPv6 header. The ``HopLimit`` field is simply the
 
 .. _fig-v6header:
 .. figure:: federation/figures/f04-12-9780123850591.png
-   :width: 500px
+   :width: 350px
    :align: center
 
    IPv6 packet header.

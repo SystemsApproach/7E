@@ -153,7 +153,7 @@ time) can be accommodated within the Internet's architecture. We refer
 to this property as heterogeneity.
 
 Distributed management of resources is one of the key problems that we
-will discuss further in this chapter. This captures the idea that
+discuss further in this and the next chapter. This captures the idea that
 individual networks are autonomously managed. The routing system of
 the Internet in particular has evolved to enable the
 operators of the autonomous networks to set policies about how the

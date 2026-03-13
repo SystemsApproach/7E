@@ -4,11 +4,12 @@
 Although we have been using the term "autonomous system" somewhat
 informally, the Internet defines it as a first-class abstraction. That
 is, the Internet is organized as collection of *autonomous systems
-(ASes)*, each of which is under the control of a single administrative
-entity. A corporation’s complex internal network might be a single AS,
-as may the national or regional network of any single Internet Service
-Provider (ISP). :numref:`Figure %s <fig-autonomous>` shows a simple
-internet with two autonomous systems.
+(ASes)*, each of which is assigned a unique AS number. An AS
+represents a single administrative entity that controls some set of
+networks. A corporation’s complex internal network might be a single
+AS, as may the national or regional network of any single Internet
+Service Provider (ISP). :numref:`Figure %s <fig-autonomous>` shows a
+simple internet with two autonomous systems.
 
 .. _fig-autonomous:
 .. figure:: policy/figures/autonomous.png
@@ -80,11 +81,11 @@ and don’t want their economic arrangements made public.
 There have been two major interdomain routing protocols in the history
 of the Internet. The first was the Exterior Gateway Protocol (EGP),
 which had several limitations, the most severe being that it assumed
-the Internet treelike topology, with a single backbone. Originally,
-that backbone was the ARPANET; later it was NSFNET. The Border Gateway
-Protocol (BGP) replaced EGP, and it has iterated through four versions
-(we're now on BGP-4). BGP is often regarded as one of the more complex
-technologies of the Internet.
+the Internet has treelike topology, with a single backbone at the root.
+Originally, that backbone was the ARPANET; later it was NSFNET. The
+Border Gateway Protocol (BGP) replaced EGP, and it has iterated
+through four versions (we're now on BGP-4). BGP is often regarded as
+one of the more complex technologies of the Internet.
 
 BGP makes virtually no assumptions about how autonomous systems are
 interconnected—they form an arbitrary graph. This model is clearly

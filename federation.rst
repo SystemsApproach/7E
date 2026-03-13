@@ -46,12 +46,12 @@ the Internet's design.
 
 This chapter addresses the challenges of heterogeneity and scale,
 which are substantial, but it is important to not lose sight of the
-bigger picture: that accommodating autonomy is the key enabler. Fully
-embracing that autonomy means the organizations responsible for the
-underlying networks retain the right to set policies about how their
-networks are used. The Internet's approach to specifying and enforcing
-such policies is a complex topic in its own right, and one we address
-in the next chapter.
+bigger picture: that supporting autonomy is the foundational premise.
+But fully embracing autonomy means the organizations responsible for
+the underlying networks retain the right to set policies about how
+their networks are used. The Internet's approach to specifying and
+enforcing such policies is a complex topic in its own right, and one
+we address in the next chapter.
 
 .. include:: federation/design.rst
 .. include:: federation/hetero.rst

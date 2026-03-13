@@ -7,12 +7,13 @@ Chapter 7: Managing Policy
 ========================================
 
 The previous chapter described the mechanisms that are used to
-assemble a set of independent networks into a logical internet that
-supports end-to-end packet delivery. This chapter looks at the
-question of how policy is specified and enforced, govering how that
-connectivity is actually used. This topic is intimately tied up with
-the question of how routers learn what paths are available, and decide
-which paths to use to deliver their traffic.
+assemble a set of independent networks into a logical internet. This
+makes end-to-end packet delivery possible, but doesn't say anything
+about the policies that govern how that connectivity is actually used.
+This chapter looks at this second issue by describing how usage
+policies are specified and enforced. The answer is intimately tied up
+with the mechanism routers use to learn what paths are available, and
+decide which paths to use to deliver their traffic.
 
 Calculating and sharing routes among autonomously operated networks
 has proven to be one of the greatest challenge facing the Internet.
