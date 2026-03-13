@@ -2,6 +2,7 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: CC-BY-4.0
 
+
 Chapter 13:  Message Transactions
 =====================================
 
@@ -81,8 +82,7 @@ ubiquity of Internet connectivity.
    transport protocol, even as it runs over UDP for practical deployment
    reasons. It very much matches the request/response paradigm, even
    though the stated motivation was largely about improving the performance
-   of web traffic in particular. 
-   
+   of web traffic in particular.
 
 
 That said, the first advantage should not be overlooked.  Making the
