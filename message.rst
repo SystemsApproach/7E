@@ -2,10 +2,12 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: CC-BY-4.0
 
+
 Chapter 13:  Message Transactions
 =====================================
 
-TCP's reliable byte stream abstraction has proven to be versatile, able
+TCP's reliable byte stream abstraction has proven to be versatile, and
+able
 to support a wide range of applications, but there are other
 possibilities. This chapter takes a look at two of them: *Remote
 Procedure Call (RPC)* and *Remote Direct Memory Access (RDMA)*.  The
@@ -43,7 +45,7 @@ we saw multiple examples in Chapter 2. But we also saw inefficiencies
 in having to first establish a connection before being able to use it
 for even the most trivial request/reply message exchange. Even
 ignoring the RTT overhead, TCP is a complex protocol, and the time it
-takes to send or receive a message adds up, impacting the latency
+takes to send or receive a message adds up, impacting the latency that
 applications experience.
 
 This chapter describes an alternative approach, in which a
@@ -62,11 +64,32 @@ Today, however, there is a convergence of both RPC and RDMA with the
 Internet, with the goal of supporting both high-performance and the
 ubiquity of Internet connectivity.
 
+
+.. sidebar:: The Third Transport
+
+   There are two well-known transport protocols in the Internet, TCP
+   and UDP. The first provides a reliable byte stream, the second a
+   simple multiplexing layer on top of IP. In this chapter we present
+   a third transport abstraction, the request/response message
+   paradigm. Whereas TCP and UDP are each defined by an RFC and are
+   the standard textbook material for transport protocols, our view
+   that the request/response paradigm is a third class of transport may
+   be a bit unconventional. Further complicating the picture is the
+   fact that RPC protocols are often layered on top of an existing
+   transport, either TCP or UDP, which would lead one to think that
+   RPC is some higher layer altogether. QUIC is an interesting example
+   that we cover later in this chapter: almost everyone agrees it is a
+   transport protocol, even as it runs over UDP for practical deployment
+   reasons. It very much matches the request/response paradigm, even
+   though the stated motivation was largely about improving the performance
+   of web traffic in particular.
+
+
 That said, the first advantage should not be overlooked.  Making the
 developer's job easier often requires auxiliary components, above and
 beyond the core protocol.  This includes APIs and other software
 tooling. These complementary components are part of the story for both
-RPC and RDMA, reenforcing one of the main lessons of Part III: that
+RPC and RDMA, reinforcing one of the main lessons of Part III: that
 the network edge is a robust software ecosystem, and not just one more
 layer on the protocol stack.
 

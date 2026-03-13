@@ -1,14 +1,14 @@
 13.1 Design Issues
 ----------------------
 
-A message transaction protocol faces many of the problems TCP
-addressed in Chapter 11, starting with a precise definition of the
+A message transaction protocol faces many of the same problems as TCP,
+starting with a precise definition of the
 semantics we want to support. In this case, we're aided by the fact
 that we're trying to emulate a local procedure call (in the case of
 RPC) and a local read/write of a memory address (in the case of RDMA).
 
 This is a good enough understanding to get started, with the caveat
-that we talk about a generic "message transaction protocol" without
+that for now we will talk about a generic "message transaction protocol" without
 being specific as to whether it supports RPC or RDMA. This is not to
 imply that there is a single protocol that supports both use
 cases. It's conceivable there could be, but it turns out each has
@@ -19,31 +19,42 @@ issues that require attention.
 
    Tell the story of VMTP (and using UDP as a counter argument).
 
-The first problem is how to identify the target procedure/address. An
+A key motivation for using a message transaction protocol is often to support
+latency-sensitive applications. In these cases, the design needs to aggressively
+look for opportunities to optimize performance. Eliminating network
+round-trips is an important part of that exercise, but as we will see
+with throughout this chapter, there are other opportunities to reduce
+delay. As with TCP, performance is an important design goal, but the
+emphasis is on the latency to complete transactions rather than the
+filling of the transport pipe.
+
+
+The next problem is how to identify the target procedure/address. An
 RPC mechanism needs a unique identifier for the remote procedure being
 called, and an RDMA mechanism needs to provide the memory address for
 the block of data to be read or written. In both cases, the mechanism
 first establishes a name space (or address space) that both senders
 and receivers understand, and then the request messages carry the
-specific target identifier as one of its header fields. The reply
+specific target identifier as one of their header fields. The reply
 message then needs to include an identifier for the transaction, so
-the response can be paired with the original caller. The TCP port
+the response can be paired with the original request. The TCP port
 fields played this role for TCP—with the server being assigned a
 well-known port—but this is just how TCP identifies communication end
 points. Every end-to-end protocol needs to define an analogous
 mechanism, tailored for the abstraction it provides; for example,
 calling procedures and accessing memory.
 
-The second problem is how to support reliable message delivery, and as
+A third problem is how to support reliable message delivery, and as
 with TCP, we assume an imperfect network substrate. One option is to
 "define the problem away" by choosing to run on top of a reliable
-protocol like TCP. Another option is for the message transaction
+protocol like TCP. That, however, might run counter to the goals of minimizing
+latency. Another option is for the message transaction
 protocol to implement its own reliable message delivery layer on top
 of an unreliable substrate, either directly on IP (as a peer of TCP)
 or as a user-level process running on top of UDP. Such a protocol
 would implement reliability using acknowledgments and timeouts,
 similar to TCP. It would also likely be optimized to have the response
-message implicitly acknowlege receipt of the request message (rather
+message implicitly acknowledge receipt of the request message (rather
 than send a separate ACK). One complication is that the sender does
 not know long it will take the receiver to produce the response; it
 may be asking the receiver to execute a time-consuming
@@ -63,10 +74,10 @@ do not need to protect against duplicate messages being delivered. We
 still want to try to execute the operation at least once—so reliable
 delivery is still a goal—but we do not need to worry about duplicates.
 
-The third challenge is how to deal with request/response messages
+The fourth challenge is how to deal with request/response messages
 that are larger than the underlying network packets. Again, a message
 transaction protocol could run on top of TCP and take advantage of
-it's ability to reassemble segments, or it could implement its own
+its ability to reassemble segments, or it could implement its own
 fragmentation/reassembly mechanism. Yet another option is to limit the
 size of messages the protocol is willing to deliver, which effectively
 moves responsibility for larger blocks of data onto the application.
@@ -74,7 +85,7 @@ As limiting as this sounds, if the message transaction protocol knows
 that 99% of the time applications deal with small chunks of data, it
 could be a reasonable design choice.
 
-A fourth consideration is how to deal with long network delays. From
+A fifth consideration is how to deal with long network delays. From
 the perspective of a protocol like TCP, this is usually viewed as the
 challenge of keeping the pipe full, but for the message transaction
 use case, we don't have an indefinite stream of data to send.
@@ -100,10 +111,10 @@ caller is allowed to proceed and will be notified when the reply
 arrives. As with the multi-threaded design, the caller may eventually
 have to block if it reaches a point where it needs to use the return
 value in a computation. This implies the message protocol needs to
-signal the application that the reply has arrived.
+signal to the application that the reply has arrived.
 
-A fifth design challenge concerns the format of the data being
-exchanged in the request/response pair. Transport protocols typically
+A final design challenge concerns the format of the data being
+exchanged in the request/response pair. Most transport protocols
 treat the payloads they carry as opaque blocks of data—leaving it to
 the application whether they contain ASCII-encoded email messages or
 MPEG-encoded video—but we raise the point because of how message
@@ -114,15 +125,4 @@ process reading a memory location that holds a data structure) makes
 assumptions about how that data structure is laid out in memory.  As
 a consequence, both RPC and RDMA make design choices about formatting.
 
-Finally, to the extent a key motivations for using a message
-transaction protocol in the first place is to support
-latency-sensitive applications, then the design needs to aggressively
-look for opportunities to optimize performance. Eliminating network
-round-trips is an important part of that exercise, but as we will see
-with our two two examples, there are other opportunities to reduce
-delay.
 
-.. Maybe move latency to the top. QUIC gets better latency over
-   wide-area and RDMA / RoCE gets better latency in datacenters.
-   Maybe this is the "lead" in the intro -- unifying theme (at least
-   one of them).
