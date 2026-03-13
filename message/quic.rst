@@ -143,7 +143,11 @@ two ends of the QUIC connection have all the state needed to transmit
 data such as HTTP messages. Furthermore, in the cases where 0-RTT data
 can be sent (because there are shared secrets cached from a
 previous connection), the first HTTP request can actually be sent at
-the same time as the client Hello message.
+the same time as the client Hello message. In this case, the sending of a
+request takes place in parallel with the
+establishement of a secure connection, enabling requests to be sent in
+the first round trip. This is quite an improvement over the old approach of
+TCP connection setup followed by TLS establishment followed by request. 
 
 14.3.2 QUIC Packets and Frames
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -352,8 +356,8 @@ follows:
 
    PTO = smoothed_rtt + max(4 x rttvar, kGranularity) + max_ack_delay
 
-where ``rttvar`` is the variance it measured RTT and ``max_ack_delay``
-is the most amount of time that a received can delay its ACK.
+where ``rttvar`` is the variance in measured RTT and ``max_ack_delay``
+is the most amount of time that a receiver can delay its ACK.
 
 Now that we know how losses are detected, what does the sender do when
 a loss occurs? It doesn't retransmit the packet that was
