@@ -543,7 +543,7 @@ This happens on the order of every 15 minutes. The set of mappings
 currently stored in a host is known as the ARP cache or ARP table.
 
 ARP takes advantage of the fact that many link-level network
-technologies, such as Ethernet and Wi-Fi (but also PON) support
+technologies, such as Ethernet and Wi-Fi support
 broadcast. If a host wants to send an IP packet to a host (or router)
 that it knows to be on the same network (i.e., the sending and
 receiving nodes have the same IP network number), it first checks for
