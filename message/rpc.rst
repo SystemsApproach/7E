@@ -71,7 +71,7 @@ standard Internet protocol under the name ONC RPC.
 
     A. Birrell and B. Nelson. `Implementing Remote Procedure Calls
     <http://birrell.org/andrew/papers/ImplementingRPC.pdf>`__. ACM
-    Transactions on Computer Systems, February 1984. 
+    Transactions on Computer Systems, February 1984.
 
     R. Thurlow. `RPC: Remote Procedure Call Protocol Specification
     Version 2 <https://www.rfc-editor.org/rfc/rfc5531>`__. RFC 5531,
@@ -129,7 +129,7 @@ size. Second, gRPC actually runs on top of *Transport Layer Security*
 means it also outsources responsibility for securing the communication
 channel so adversaries can’t eavesdrop or hijack the message
 exchange. Third, gRPC actually, actually runs on top of HTTP/2 (which
-is itself layered on top of TCP and TLS), meaning gRPC outsources 
+is itself layered on top of TCP and TLS), meaning gRPC outsources
 two further problems: (1) efficiently encoding/compressing binary data
 into a message, (2) multiplexing multiple concurrent remote procedure
 calls onto a single TCP connection.

@@ -147,7 +147,7 @@ the same time as the client Hello message. In this case, the sending of a
 request takes place in parallel with the
 establishement of a secure connection, enabling requests to be sent in
 the first round trip. This is quite an improvement over the old approach of
-TCP connection setup followed by TLS establishment followed by request. 
+TCP connection setup followed by TLS establishment followed by request.
 
 14.3.2 QUIC Packets and Frames
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -309,7 +309,7 @@ ACK frame can acknowledge a set of received packets even if there are
 gaps in the sequence, and allows for a larger number of gaps than the
 TCP SACK option. This is done using a set of ACK Ranges that describe
 a set of packets received in sequence and the gap in packet number between this
-sequence and the next set of packets received. 
+sequence and the next set of packets received.
 
 When an ACK frame acknowledges a packet that is sufficiently higher in
 number than a packet that has not been acknowledged, that is an
@@ -378,7 +378,7 @@ description of NewReno in Chapter 13.
 
 
 .. some wrap up
-   
+
 .. _reading_quic:
 .. admonition::  Further Reading
 

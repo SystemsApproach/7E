@@ -23,7 +23,7 @@ each others' memory. Functionally, RDMA can be viewed as a special
 case of an RPC, where only two "remote procedures" are supported:
 *Read( )* and *Write( )*. That perspective glosses over a lot of
 details, but it is helpful to see the similarities between the two
-abstrations.
+abstractions.
 
 .. _fig-rdma:
 .. figure:: message/figures/rdma.png
@@ -41,7 +41,7 @@ internal interconnects that were eventually replaced by external
 networks, but because of their focus on supporting low-latency
 communication among parallel tasks, they largely avoided the more
 ubiquitous Internet technology in favor of purpose-built networks.  Of
-these, Inifiniband—now a product of Nvidia—became the industry
+these, Infiniband—now a product of Nvidia—became the industry
 standard, and RDMA became the end-to-end communication abstraction
 running on top of Infiniband.\ [#]_ Today, RDMA is a key enabling
 technology for AI, which is why it is becoming mainstream.
@@ -99,11 +99,11 @@ for AI workloads the run in cloud datacenters. The Verbs API is
 low-level, and so is typically not directly used by application
 programs. Such applications are generally written to higher level
 interface, of which there are several options. They include *Message
-Passing Interface (MPI)* , *Open SHMEM* (for "shared memory"), and
-*Open Fabrics Enterprise Distribution (OFED)*.
+Passing Interface (MPI)* , *Global Address Space Programming Interface
+(GPI)*, and *Open Fabrics Interface (OFI)*.
 
 Second, Ethernet continues to evolve, and in this particular
-circumstance, offers an alternative to Inifiniband's "native" switches.
+circumstance, offers an alternative to Infiniband's "native" switches.
 This effort is known as *Converged Ethernet (CE)*, and it makes it
 possible to enjoy the best of both worlds: the performance of
 Infiniband and the ubiquity of Ethernet.  Putting these two outcomes
@@ -151,21 +151,14 @@ transaction protocol at the core of RDMA is in the NIC.
    libraries that directly interact with the HCA (Infiniband NIC).
 
 Much of the complexity in using RDMA is in setting up (managing) the
-shared state that the application processes need to communicate. For
-example, registering memory is a two-step process: (1) create a
-*protection domain* that identifies the set of nodes that are to
-collaboratively share access to each others' memory, and (2) bind the
-addresses of a set of buffers that may be remotely accessed by all
-those nodes. Once such a distributed pool of shared memory is
-established, all other RDMA operations are invoked in the context of
-that protection domain.
-
-In addition to registering memory, setup also involves creating
-*completion queues* that the RDMA subsystem uses to deliver
+shared state that the application processes need to communicate. This
+involves two general steps. The first is to register the set of memory
+buffers that may be remotely accessed on each host. The second is to
+create *completion queues* that the RDMA subsystem uses to deliver
 notifications that a transaction has taken place. This is best
 understood in terms of the familiar its DMA counterpart: a device
 driver registers with a device so it can receive interrupts signaling
-a transaction completing. (See the example code snippet below.)
+a transaction completing.
 
 All of this "communication management" overhead is conceptually
 simple, but tediously detailed. We refer you to the respective manual
@@ -182,7 +175,7 @@ based on *message passing*.  Students of concurrent systems will
 recognize the duality of these two approaches (i.e., a system
 constructed according to one model has a direct counterpart in the
 other), as articulated by Lauer and Needham in 1979. They also happen
-to match the patterns of the Open SHMEM and MPI libraries, respectively.
+to match the patterns of the GPI and MPI libraries, respectively.
 
 Because we have seen many examples of message passing, we focus here
 on the shared memory pattern, which the Verbs API refers to as
@@ -217,11 +210,12 @@ support, but outside the scope of this book. Here, we focus on the
 write operations, and in particular, *Write-with-Immedate*. The
 following code snippet shows the client side writing a "Hello, World"
 message to a remote address, along with the "immediate" value
-``42``. There's nothing magical about the number 42 (it's just an
-example of a value that get passed to the server), but in practice the
+``42``. There's nothing magical about the number 42; it's just an
+example of a value that get passed to the server). In practice, the
 immediate value might indicate something about the state of the
 calling process or what the caller expects the callee to do with the
-message.
+message. If nothing else, it is a signal to the local application that
+a remote write has completed.
 
 .. code-block:: c
 

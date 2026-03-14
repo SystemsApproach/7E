@@ -201,4 +201,4 @@ the connection would immediately initiate the termination of the later
 incarnation of that connection. Because there is a resource cost to
 staying in the TIME_WAIT state, and it would be exceptional for a
 packet to circulate in the modern Internet for 120 seconds, 60 seconds
-is a more common value for the timeout in modern systems. 
+is a more common value for the timeout in modern systems.
