@@ -66,10 +66,10 @@ in rough equivalency. This realization has led to an effort called
 *Converged Ethernet (CE)*, which has resulted in two versions of a
 standard known as *RoCE: RDMA over Converged Ethernet*.
 
-The first version, *RoCE.v1* encapsulates Infiniband packets in an
-Ethernet packet. In this case, the network is limited to an L2
+The first version, *RoCE.v1* encapsulates Infiniband packets in
+Ethernet packets. In this case, the network is limited to an L2
 broadcast domain. The second version, *RoCE.v2*, encapsulates
-Infiniband packets in a UDP datagram, meaning the full routing
+Infiniband packets in UDP datagrams, meaning the full routing
 capability of IP can be leveraged to interconnect nodes. Datacenters
 typically interconnect racks of servers at the IP layer, so we focus
 on v2 in the following. :numref:`Figure %s <fig-ib-encapsulate>` shows
@@ -86,17 +86,16 @@ transport header, plus the message payload, needs to be encapsulated.
    The Infiniband transport header and payload are encapsulated in a
    UDP datagram.
 
-There are two main options for how Ethernet switches emulate
-Infiniband behavior, although other approaches continue to be under
-consideration. The first is to simply replicate the Infiniband
-mechanism by adding support for Priority Flow Control to Ethernet.
-This approach has been standardized as IEEE 802.1Qbb.  The second is
-to take advantage of two existing mechanisms: the Explicit Congestion
-Notification (ECN) described in Chapter X and the Differentiated
-Services Code Point (DSCP) described in Chapter Y. Both are encoded in
-IP's TOS field, and so require no change to standards. The approach
-is also appealing to cloud providers because their datacenters already
-leverage ECN in their approach to TCP congestion control.
+The approach to augmenting Ethernet switches so they better emulate
+Infiniband behavior has two main parts. The first is to replicate
+Infiniband's flow control mechanism by adding support for Priority
+Flow Control to Ethernet.  This has been standardized as IEEE
+802.1Qbb.  The second is to take advantage of the existing Explicit
+Congestion Notification (ECN) mechanism described in Chapter X and the
+Differentiated Services Code Point (DSCP) described in Chapter Y. Both
+are encoded in IP's TOS field, and so require no change to standards.
+This is an appealing strategy for cloud providers because their
+datacenters already leverage ECN in support of TCP congestion control.
 
 .. _fig-soft-roce:
 .. figure:: message/figures/soft-roce.png
