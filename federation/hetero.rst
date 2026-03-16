@@ -1,13 +1,16 @@
+.. _artifact-ipv4:
+
 6.2 Heterogeneity
 -------------------
 
-To deal with the fact that the Internet supports heterogeneity in
-terms of the underlying networks that it can accommodate and the
-applications it will support, we need to come up with a *service
+The Internet aims to support heterogeneity in terms of both the
+underlying networks that it can accommodate and the applications it
+will support. To meet this goal, we need to come up with a *service
 model*. This is, what is the host-to-host service that our
-internetwork will provide? Once we have decided on the service, we can
-then define a set of protocols that enable that service to be
-delivered over heterogeneous networks.
+internetwork will provide? It needs to be general enough to
+accommodate the diverse needs of applications. Once we have decided on
+the service, we can then define a set of protocols that enable that
+service to be delivered over heterogeneous networks.
 
 6.2.1 Service Model
 ~~~~~~~~~~~~~~~~~~~~
@@ -29,10 +32,9 @@ internetwork, and a datagram (connectionless) model of data delivery.
 This service model is sometimes called *best effort* because, although
 IP makes every effort to deliver datagrams, it makes no guarantees. We
 postpone a discussion of the addressing scheme for now and look first at
-the data delivery model.
+the data delivery model. But before doing that, we explain a bit of history.
 
-Before looking at the details of the IP service model, we first
-explain a bit of history. At the time IP was defined, the decision to
+At the time IP was defined, the decision to
 make it connectionless was revolutionary. Telcos were the dominant
 communication providers, and they supported circuit-based service
 models. The circuit model defines a procedure to first establish an
@@ -111,7 +113,7 @@ positions marked at the top of the packet.
 
 .. _fig-iphead:
 .. figure:: introduction/figures/iphdr.png
-   :width: 400px
+   :width: 350px
    :align: center
 
    IPv4 packet header.
@@ -160,7 +162,7 @@ the sending host: Set it too high and packets could circulate rather a
 lot before getting dropped; set it too low and they may not reach their
 destination. The value 64 is the current default.
 
-The ``Protocol`` field is simply a demultiplexing key that identifies
+The ``Protocol`` field is a demultiplexing key that identifies
 the higher-level protocol to which this IP packet should be passed.
 There are values defined for the TCP (Transmission Control Protocol—6),
 UDP (User Datagram Protocol—17), and many other protocols that may sit
@@ -198,10 +200,10 @@ efficiently that normal "fast path" processing.
 .. sidebar:: Fragmentation Considered Harmful
 
    One of the problems of providing a uniform host-to-host service
-   model over a heterogeneous collection of networks is that each
-   network technology has its own idea of how large a packet
-   can be. For example, classic Ethernet can accept packets up to
-   1500 bytes long, but modern-day variants can deliver larger (jumbo)
+   model over heterogeneous networks is that each
+   network has its own idea of how large a packet
+   can be. For example, classic Ethernet accepts packets up to
+   1500 bytes long, but modern variants can deliver larger (jumbo)
    packets that carry up to 9000 bytes of payload. This leaves two
    choices for the IP service model: ensure that all IP datagrams are
    small enough to fit inside one packet on any network technology, or
@@ -211,24 +213,24 @@ efficiently that normal "fast path" processing.
    a few decades of experience, opted for a twist on the first option:
    path MTU discovery.
 
-   The central idea here is that every network type has a *maximum
+   The central idea is that every network type has a *maximum
    transmission unit* (MTU), which is the largest IP datagram that it
-   can carry in a frame. Note that this value is smaller than the
+   can carry in a frame. (This value is smaller than the
    largest packet size on that network because the IP datagram needs
-   to fit in the *payload* of the link-layer frame. When a host sends
-   an IP datagram, therefore, it can choose any size that it wants. A
+   to fit in the *payload* of the link-layer frame.) When a host sends
+   an IP datagram, it can choose any size that it wants. A
    reasonable choice is the MTU of the network to which the host is
-   directly attached. Then, fragmentation will only be necessary if
+   directly attached. Then, fragmentation is necessary only if
    the path to the destination includes a network with a smaller MTU.
 
    The downsides of fragmentation were identified as early as 1987 in
    a paper titled "Fragmentation Considered Harmful" by Mogul and
-   Kent. (That paper inspired an entire genre of future work on "X
+   Kent. (Their work is part of a long tradition of research on "X
    Considered Harmful.") Fragmentation consumes resources, is
    fragile—one lost fragment means an entire datagram is lost—and the
    reassembly process may degrade performance.
 
-   The way that fragmentation can be avoided is called Path
+   One approach to avoiding fragmentation is called Path
    MTU Discovery. In IPv4, this is done by setting a "don't fragment" bit in the
    header, and sending a packet using the MTU of the host's local
    network. In IPv6, routers do not perform fragmentation, so there is no
@@ -276,18 +278,16 @@ Thus, in the simple internetwork of :numref:`Figure %s <fig-inet>`,
 the addresses of the hosts on network 1, for example, would all have
 the same network part and different host parts.
 
-Note that the routers in :numref:`Figure %s <fig-inet>` are attached to two
-networks. They need to have an address on each network, one for each
-interface. For example, router R1, which sits between the wireless
-network and an Ethernet, has an IP address on the interface to the
-wireless network whose network part is the same as all the hosts on that
-network. It also has an IP address on the interface to the Ethernet that
-has the same network part as the hosts on that Ethernet. Thus, bearing
-in mind that a router might be implemented as a host with two network
-interfaces, it is more precise to think of IP addresses as belonging to
-interfaces than to hosts.
+Note that the routers in :numref:`Figure %s <fig-inet>` are attached
+to two networks. They need to have an address on each network, one for
+each interface. For example, router R3, which sits between two
+Ethernets, has an IP address on the interface to each of them; the
+network part of each address the same as all the hosts on that
+network. Thus, bearing in mind that a router might be implemented as a
+host with two network interfaces, it is more precise to think of IP
+addresses as belonging to interfaces than to hosts.
 
-Now, what do these hierarchical addresses look like? Unlike some other
+What do these hierarchical addresses look like? Unlike some other
 forms of hierarchical address, the sizes of the two parts are not the
 same for all addresses. Originally, IP addresses were divided into
 three different classes, as shown in :numref:`Figure %s <fig-class>`,
@@ -452,8 +452,8 @@ packet directly to H5.
 Note that it is possible to include the information about directly
 connected networks in the forwarding table. For example, we could
 label the network interfaces of router R2 as interface 0 for the
-Ethernet (network 3) and interface 1 for the PON
-(network 2). Then R2 would have the forwarding table shown in
+PON link (network 2) and interface 1 for the Ethernet link
+(network 3). Then R2 would have the forwarding table shown in
 :numref:`Table %s <tab-ipfwdtab2>`.
 
 .. _tab-ipfwdtab2:
@@ -466,9 +466,9 @@ Ethernet (network 3) and interface 1 for the PON
    +============+=============+
    | 1          | R1          |
    +------------+-------------+
-   | 2          | Interface 1 |
+   | 2          | Interface 0 |
    +------------+-------------+
-   | 3          | Interface 0 |
+   | 3          | Interface 1 |
    +------------+-------------+
    | 4          | R3          |
    +------------+-------------+
@@ -477,9 +477,7 @@ Thus, for any network number that R2 encounters in a packet, it knows
 what to do. Either that network is directly connected to R2, in which
 case the packet can be delivered to its destination over that network,
 or the network is reachable via some next hop router that R2 can reach
-over a network to which it is connected. In either case, R2 will use
-ARP, described below, to find the MAC address of the node to which the
-packet is to be sent next.
+over a network to which it is connected.
 
 The forwarding table used by R2 is simple enough that it could be
 manually configured. Usually, however, these tables are more complex and
@@ -512,7 +510,9 @@ by no means the last) in achieving scalability.
    packet to any node on a given network is represented by a single
    aggregated piece of information.
 
-6.2.5 Address Translation (ARP)
+.. _artifact-arp:
+
+6.2.5 Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have talked about how to get IP packets to the
@@ -533,7 +533,7 @@ address pairs; that is, a table mapping IP addresses into physical
 addresses. While this table could, in theory, be centrally managed by a system
 administrator and then distributed to each host on the network, a more robust
 approach is for each host to dynamically learn the contents of the
-table using the network. This is accomplished using the Address
+table using the network. This is accomplished for IP version 4 using the Address
 Resolution Protocol (ARP). ARP enables each host on a
 network to build up a table of mappings between IP addresses and
 link-level addresses. Since these mappings may change over time (e.g.,
@@ -543,18 +543,18 @@ This happens on the order of every 15 minutes. The set of mappings
 currently stored in a host is known as the ARP cache or ARP table.
 
 ARP takes advantage of the fact that many link-level network
-technologies, such as Ethernet and Wi-Fi, support broadcast. If a host wants to
-send an IP packet to a host (or router) that it knows to be on the
-same network (i.e., the sending and receiving nodes have the same IP
-network number), it first checks for a mapping in the cache. If no
-mapping is found, it needs to invoke the Address Resolution Protocol
-over the network. It does this by broadcasting an ARP query onto the
-network. This query contains the IP address in question (the target IP
-address). Each host receives the query and checks to see if it matches
-its IP address. If it does match, the host sends a response message that
-contains its link-layer address back to the originator of the query. The
-originator adds the information contained in this response to its ARP
-table.
+technologies, such as Ethernet and Wi-Fi, support
+broadcast. If a host wants to send an IP packet to a host (or router)
+that it knows to be on the same network (i.e., the sending and
+receiving nodes have the same IP network number), it first checks for
+a mapping in the cache. If no mapping is found, it needs to invoke the
+Address Resolution Protocol over the network. It does this by
+broadcasting an ARP query onto the network. This query contains the IP
+address in question (the target IP address). Each host receives the
+query and checks to see if it matches its IP address. If it does
+match, the host sends a response message that contains its link-layer
+address back to the originator of the query. The originator adds the
+information contained in this response to its ARP table.
 
 The query message also includes the IP address and link-layer address of
 the sending host. Thus, when a host broadcasts a query message, each

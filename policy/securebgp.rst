@@ -1,14 +1,14 @@
-6.5 Securing Routing
----------------------
+7.3 Securing Route Information
+--------------------------------------
 
-As we have seen, the division of the Internet into autonomous systems
-is an important architectural decision. It allows individual ASes the
-freedom to run their networks as they please, as long as the provide
-the IP service model and exchange routing information with other
-ASes. However, an important question arises around trust. How can one
-AS trust the routing advertisements from another AS, especially one
-with which it has no direct relationship? This problem has proven to
-be a long lasting challenge for the smooth running of the Internet.
+The division of the Internet into autonomous systems allows individual
+ASes the freedom to run their networks as they please, as long as they
+provide the IP service model and exchange routing information with
+other ASes. However, an important question arises around trust. How
+can one AS trust the routing advertisements from another AS,
+especially one with which it has no direct relationship? This problem
+has proven to be a long-lasting challenge for the smooth running of
+the Internet.
 
 In most respects, a router is just a special-purpose computer with
 some high-speed interfaces and specialized software to perform tasks
@@ -34,7 +34,7 @@ that speaker is reliable. In fact both honest mistakes and deliberate
 configuration decisions can and have resulted in false advertisements
 being made in BGP.
 
-6.5.1 Authentication and Integrity
+7.3.1 Authentication and Integrity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Since BGP runs over a TCP connection, it was recommended for many
@@ -83,7 +83,7 @@ advertisements.
    Security <https://www.rfc-editor.org/info/rfc7454>`__. RFC 7454,
    February 2015.
 
-6.5.2 Correctness of Routing Information
+7.3.2 Correctness of Routing Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a BGP speaker announces a path to a particular prefix, how do we
@@ -187,7 +187,7 @@ describe three different uses of the RPKI in the following sections.
    <https://faculty.cc.gatech.edu/~ctestart8/publications/RoutingSecTPRC.pdf>`__. TPRC
    48, February 2021.
 
-6.5.3 Route Origin Validation (ROV)
+7.3.3 Route Origin Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first use of RPKI is to allow an AS to prove that it is authorized
@@ -234,7 +234,7 @@ from the root to the leaves.
 
 
 .. _fig-rpki:
-.. figure:: federation/figures/rpki.png
+.. figure:: policy/figures/rpki.png
    :width: 600px
    :align: center
 
@@ -284,7 +284,7 @@ protect against bogus advertisements of more specific routes to a
 sub-prefix (as in the YouTube example above).
 
 .. _fig-roa:
-.. figure:: federation/figures/ROA-trust.png
+.. figure:: policy/figures/ROA-trust.png
    :width: 600px
    :align: center
 
@@ -322,7 +322,7 @@ detected as false information and discarded by any router receiving
 such an advertisement, not just the neighbors of the offending ISP.
 
 .. _fig-rpki-sys:
-.. figure:: federation/figures/RPKI-system.png
+.. figure:: policy/figures/RPKI-system.png
    :width: 600px
    :align: center
 
@@ -376,7 +376,7 @@ distributed using the same mechanisms as certificates.
 
 
 
-6.5.4 Path Validation (BGPsec)
+7.3.4 Path Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -503,7 +503,7 @@ in the following section.
    in partial deployment: is the juice worth the squeeze? <https://dl.acm.org/doi/10.1145/2534169.2486010>`__ ACM
    SIGCOMM, August 2013.
 
-6.5.5 AS Provider Authorization (ASPA)
+7.3.5 Provider Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At the time of writing, there is an effort underway at the IETF to
@@ -546,7 +546,7 @@ route leak. A database that establishes the customer-to-provider
 relationships gives us the ability to detect such anomalies.
 
 .. _fig-valleyfree:
-.. figure:: federation/figures/valleyfree.png
+.. figure:: policy/figures/valleyfree.png
    :width: 300px
    :align: center
 

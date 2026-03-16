@@ -3,7 +3,7 @@
 
 While it is easy enough to read the specifications for any Internet
 protocol, since they are all documented in *Requests For Comments*
-(RFCs), it can often be hard to understand the the overall
+(RFCs), it can often be hard to understand the overall
 architecture that is embodied by those protocols and the rationale
 behind it. Fortunately, the design philosophy of the Internet was
 described at length by David Clark, often referred to as "the
@@ -138,6 +138,13 @@ claim that it was meant to survive nuclear war seems to be a
 conflation of ideas from other research, according to the authoritative
 history by Leiner *et al*.
 
+.. _reading_inet:
+.. admonition:: Further Reading
+
+   B. Leiner, et al. `A Brief History of the Internet
+   <https://dl.acm.org/doi/10.1145/1629607.1629613>`__.
+   SIGCOMM CCR, October 2009.
+
 The second and third requirements are captured by the hourglass shape
 we saw in Chapter 1. Many types of communications
 service (or applications) can run over the Internet, and many
@@ -146,7 +153,7 @@ time) can be accommodated within the Internet's architecture. We refer
 to this property as heterogeneity.
 
 Distributed management of resources is one of the key problems that we
-will discuss further in this chapter. This captures the idea that
+discuss further in this and the next chapter. This captures the idea that
 individual networks are autonomously managed. The routing system of
 the Internet in particular has evolved to enable the
 operators of the autonomous networks to set policies about how the
