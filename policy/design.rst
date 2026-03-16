@@ -20,17 +20,18 @@ simple internet with two autonomous systems.
 
 The basic idea behind autonomous systems is (a) to allow the federated
 networks of the Internet to operate independently from each other
-while providing a global service, and (b) to support aggregation of routing
-information in a large internet, thus improving scalability. We can divide
-the global routing problem into two parts: routing within a single autonomous
-system (which we covered in Chapter 4) and routing between autonomous
-systems. Autonomous systems are also known as
-routing *domains*, so we refer to the two parts of the routing problem as
-interdomain routing and intradomain routing. The AS model decouples
-the intradomain routing that takes place in one AS from that taking
-place in another. Thus, each AS can run whatever intradomain routing
-protocols it chooses. An AS can even use static routes or multiple
-protocols in different parts of the AS, if desired.
+while providing a global service, and (b) to support aggregation of
+routing information in a large internet, thus improving
+scalability. We can divide the global routing problem into two parts:
+routing within a single autonomous system (which we covered in
+Chapter 4) and routing between autonomous systems. Autonomous systems
+are also known as routing *domains*, so we refer to the two parts of
+the routing problem as interdomain routing and intradomain
+routing. The AS model decouples the intradomain routing that takes
+place in one AS from that taking place in another. Thus, each AS can
+run whatever intradomain routing protocols it chooses, and use
+whatever system of link metrics it wants. An AS can even use static
+routes or multiple protocols in different parts of the AS, if desired.
 
 The first part of the interdomain routing problem is to enable
 different ASes to share reachability information—descriptions of the
@@ -56,14 +57,15 @@ A simple example routing policy implemented at a particular AS might
 look like this: *“Whenever possible, I prefer to send traffic via AS X
 than via AS Y, but I’ll use AS Y if it is the only path, and I never
 want to carry traffic from AS X to AS Y or vice versa.”* Such a
-policy would be typical when you have paid money to both AS X and AS Y
+policy would be typical when I have paid money to both AS X and AS Y
 to connect my AS to the rest of the Internet, and AS X is my preferred
 provider of connectivity, with AS Y being the fallback. Because I view
 both AS X and AS Y as providers (and presumably I paid them to play
 this role), I don’t expect to help them out by carrying traffic
 between them across my network (this is called *transit* traffic). The
 more autonomous systems an AS connects to, the more complex policies
-it might have, especially when you consider backbone providers, who may
+it might have, especially when you consider ``backbone'' providers
+(those closest to the core of the Internet), who may
 interconnect with dozens of other providers and hundreds of customers
 and have different economic arrangements (which affect routing
 policies) with each one.
@@ -81,7 +83,7 @@ and don’t want their economic arrangements made public.
 There have been two major interdomain routing protocols in the history
 of the Internet. The first was the Exterior Gateway Protocol (EGP),
 which had several limitations, the most severe being that it assumed
-the Internet has treelike topology, with a single backbone at the root.
+the Internet has a treelike topology, with a single backbone at the root.
 Originally, that backbone was the ARPANET; later it was NSFNET. The
 Border Gateway Protocol (BGP) replaced EGP, and it has iterated
 through four versions (we're now on BGP-4). BGP is often regarded as
@@ -116,12 +118,12 @@ terms. We define *local traffic* as traffic that originates at or
 terminates on nodes within an AS, and *transit traffic* as traffic that
 passes through an AS.
 
-As noted above, scaling the routing system has been a concern for at
-least three decades. An Internet backbone router must be
-able to forward any packet destined anywhere in the Internet. That means
+As noted above, scaling the routing system has been a concern for more
+than three decades. An Internet backbone router must be able to
+forward any packet destined anywhere in the Internet. That means
 having a routing table that will provide a match for any valid IP
 address. While CIDR has helped to control the number of distinct
-prefixes that are carried in the Internet’s backbone routing, there is
+prefixes that are carried in the Internet’s routing system, there is
 inevitably a lot of routing information to pass around—the number of
 prefixes now exceeds one million.
 

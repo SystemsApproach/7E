@@ -2,12 +2,12 @@
 --------------------------------------
 
 The division of the Internet into autonomous systems allows individual
-ASes the freedom to run their networks as they please, as long as the
+ASes the freedom to run their networks as they please, as long as they
 provide the IP service model and exchange routing information with
 other ASes. However, an important question arises around trust. How
 can one AS trust the routing advertisements from another AS,
 especially one with which it has no direct relationship? This problem
-has proven to be a long lasting challenge for the smooth running of
+has proven to be a long-lasting challenge for the smooth running of
 the Internet.
 
 In most respects, a router is just a special-purpose computer with

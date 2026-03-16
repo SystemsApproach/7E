@@ -3,37 +3,43 @@
 .. SPDX-License-Identifier: Apache-2.0
 
 
-Chapter 7: Managing Policy
+Chapter 7: Interdomain Routing
 ========================================
 
 The previous chapter described the mechanisms that are used to
 assemble a set of independent networks into a logical internet. This
 makes end-to-end packet delivery possible, but doesn't say anything
-about the policies that govern how that connectivity is actually used.
-This chapter looks at this second issue by describing how usage
-policies are specified and enforced. The answer is intimately tied up
-with the mechanism routers use to learn what paths are available, and
-decide which paths to use to deliver their traffic.
+about how routes among the independent networks are calculated and
+distributed. Whereas our discussion of routing in Chapter 4 focused on
+finding paths with the lowest cost according to some metric, routing
+among independent networks is largely about satisfying the policies
+that govern how networks are used.  This chapter looks at this issue
+by describing how routing policies are specified and enforced. The
+answer is intimately tied up with the mechanism routers use to learn
+what paths are available, and decide which paths to use to deliver
+their traffic.
 
 Calculating and sharing routes among autonomously operated networks
-has proven to be one of the greatest challenge facing the Internet.
+has proven to be one of the greatest challenges facing the Internet.
 The protocol responsible for providing a solution, the Border Gateway
 Protocol (BGP), now carries about one million pieces of routing
 information, and bears the responsibility of allowing Internet Service
 Providers and their customers to set and enforce business rules about
-whose traffic is carried by whom. Moreover, trusting that information,
-by providing defenses against attempts to hijack and "black hole"
-traffic, critical aspect of the solution.  We explore these challenges
-in this chapter.
+whose traffic is carried by whom. Moreover, establishing trust in that
+information, by providing defenses against attempts to hijack and
+"black hole" traffic, is a critical aspect of the solution.  We
+explore these challenges in this chapter.
 
-Note that the routing algorithms described in Chapter 4 are not up to
-the challenge. This is for two main reasons. The first is the issue of
+The routing algorithms described in Chapter 4 are not up to
+the challenge, for two main reasons. The first is the issue of
 scale. There are tens of thousands of autonomous organizations in the
 Internet and they span the globe, so its not clear that the routing
 protocols we have seen to date could scale to that level even if we
 treated each organization as a simple point in a graph. But more
 importantly, the problem definition is not "find the shortest path to
-destination X". Instead, it is "find a path to X that matches the
+destination X". "Shortest path" is not even well defined, since each
+network can use independent metrics for their internal
+routing. Instead, the problem is "find a path to X that matches the
 policies of the providers who can deliver traffic to X". Ever since
 the Internet transitioned from being a research network to a
 commercially viable communication substrate in the 1990s, BGP has been

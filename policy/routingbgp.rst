@@ -1,7 +1,7 @@
 .. _artifact-bpg:
 
-7.2 Sharing Routes
--------------------
+7.2 Sharing Routes and Routing Policy
+---------------------------------------
 
 Each AS has one or more *border routers* through which packets enter and
 leave the AS. In our simple example in :numref:`Figure %s <fig-autonomous>`,
