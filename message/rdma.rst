@@ -1,4 +1,4 @@
-13.4 Remote DMA
+14.4 Remote DMA
 ----------------------------
 
 .. A helpful RDMA Tutorial Slide Deck
@@ -68,7 +68,7 @@ delays and packet loss. We take up the case for whether this remains a
 valid concern in the next section, but it does explain why Infiniband
 exists and remains popular.
 
-13.4.1 Components
+14.4.1 Components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Infiniband defines an entire network architecture, one that is roughly
@@ -123,7 +123,7 @@ workloads).
    higher-layer APIs and is implemented by multiple lower-level
    technologies.
 
-13.4.2 Programming Interface
+14.4.2 Programming Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :numref:`Figure %s <fig-verbs>` highlights the centrality of the RDMA
@@ -261,7 +261,7 @@ AI workloads. We're now ready to look at the NIC in more detail.
    Systems Principles (SOSP).* December 1979.
 
 
-13.4.3 Protocol Details
+14.4.3 Protocol Details
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We conclude this overview of RDMA by looking at a few details of the

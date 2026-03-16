@@ -1,6 +1,6 @@
 .. _artifact-roce:
 
-13.5 Optimizing Ethernet for RDMA
+14.5 Optimizing Ethernet for RDMA
 ------------------------------------------
 
 The adoption of RDMA as the preferred transport protocol for HPC

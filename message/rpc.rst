@@ -1,6 +1,6 @@
 .. _artifact-grpc:
 
-13.2 Remote Procedure Call
+14.2 Remote Procedure Call
 --------------------------------
 
 RPC is a popular mechanism for structuring distributed systems, based
@@ -51,7 +51,7 @@ program.
 This section considers just the network-related aspects of an RPC
 mechanism, focusing on the protocol that transmits messages between
 client and server. The transformation of arguments into messages and
-*vice versa* is covered in Section 13.6. It is also important to keep
+*vice versa* is covered in Section 14.6. It is also important to keep
 in mind that the client and server programs are written in some
 programming language, meaning that a given RPC mechanism might support
 Python stubs, Java stubs, GoLang stubs, and so on, each of which
@@ -296,7 +296,7 @@ to the server are encoded into a message, which is in turn used to
 generate the stubs that sit between the underlying RPC mechanism and
 the actual functions being called (see :numref:`Figure %s
 <fig-rpc>`). This is how gRPC tackles the *argument marshalling*
-problem, to which we return in Section 13.6.
+problem, to which we return in Section 14.6.
 
 The bottom line is that complex mechanisms like RPC, once packaged as
 a monolithic bundle of software (as with SunRPC), are nowadays built by

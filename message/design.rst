@@ -1,4 +1,4 @@
-13.1 Design Issues
+14.1 Design Issues
 ----------------------
 
 A message transaction protocol faces many of the same problems as TCP,

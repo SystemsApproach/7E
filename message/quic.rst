@@ -374,10 +374,10 @@ similar to those in TCP and the NewReno variant specifically. A QUIC
 connection begins in slow start, moves into recovery phase upon a
 packet loss, then moves into congestion avoidance when a packet sent
 in the recovery period is acknowledged. The details are similar to the
-description of NewReno in Chapter 13.
+description of NewReno in Chapter 12.
 
 
-.. some wrap up
+.. TODO -- some wrap up
 
 .. _reading_quic:
 .. admonition::  Further Reading
