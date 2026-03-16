@@ -3,7 +3,7 @@
 
 While it is easy enough to read the specifications for any Internet
 protocol, since they are all documented in *Requests For Comments*
-(RFCs), it can often be hard to understand the the overall
+(RFCs), it can often be hard to understand the overall
 architecture that is embodied by those protocols and the rationale
 behind it. Fortunately, the design philosophy of the Internet was
 described at length by David Clark, often referred to as "the
@@ -141,7 +141,7 @@ history by Leiner *et al*.
 .. _reading_inet:
 .. admonition:: Further Reading
 
-   B. Leiner, et. al. `A Brief History of the Internet
+   B. Leiner, et al. `A Brief History of the Internet
    <https://dl.acm.org/doi/10.1145/1629607.1629613>`__.
    SIGCOMM CCR, October 2009.
 

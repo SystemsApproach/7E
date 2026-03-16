@@ -3,13 +3,14 @@
 6.2 Heterogeneity
 -------------------
 
-To deal with the fact that the Internet supports heterogeneity in
-terms of the underlying networks that it can accommodate and the
-applications it will support, we need to come up with a *service
+The Internet aims to support heterogeneity in terms of both the
+underlying networks that it can accommodate and the applications it
+will support. To meet this goal, we need to come up with a *service
 model*. This is, what is the host-to-host service that our
-internetwork will provide? Once we have decided on the service, we can
-then define a set of protocols that enable that service to be
-delivered over heterogeneous networks.
+internetwork will provide? It needs to be general enough to
+accommodate the diverse needs of applications. Once we have decided on
+the service, we can then define a set of protocols that enable that
+service to be delivered over heterogeneous networks.
 
 6.2.1 Service Model
 ~~~~~~~~~~~~~~~~~~~~
@@ -224,7 +225,7 @@ efficiently that normal "fast path" processing.
 
    The downsides of fragmentation were identified as early as 1987 in
    a paper titled "Fragmentation Considered Harmful" by Mogul and
-   Kent. (That paper inspired an entire genre of future work on "X
+   Kent. (Their work is part of a long tradition of research on "X
    Considered Harmful.") Fragmentation consumes resources, is
    fragile—one lost fragment means an entire datagram is lost—and the
    reassembly process may degrade performance.
@@ -532,7 +533,7 @@ address pairs; that is, a table mapping IP addresses into physical
 addresses. While this table could, in theory, be centrally managed by a system
 administrator and then distributed to each host on the network, a more robust
 approach is for each host to dynamically learn the contents of the
-table using the network. This is accomplished using the Address
+table using the network. This is accomplished for IP version 4 using the Address
 Resolution Protocol (ARP). ARP enables each host on a
 network to build up a table of mappings between IP addresses and
 link-level addresses. Since these mappings may change over time (e.g.,
