@@ -18,7 +18,7 @@ reading from that buffer, again without the host CPU being involved.
 As a communication abstraction, RDMA extends that model to
 network-connected machines, as shown in :numref:`Figure %s
 <fig-rdma>`.  As a consequence, it becomes possible for two
-application process to access (read and write) blocks of data from
+application processes to access (read and write) blocks of data from
 each others' memory. Functionally, RDMA can be viewed as a special
 case of an RPC, where only two "remote procedures" are supported:
 *Read( )* and *Write( )*. That perspective glosses over a lot of
@@ -54,7 +54,7 @@ technology for AI, which is why it is becoming mainstream.
    traction as a "supercomputer interconnect", which is our focus in
    this section.
 
-Why TCP/IP running over an Ethernet-based packet-switched network is
+Why TCP/IP running over an Ethernet-based packet-switched network is a
 poor match for HPC workloads was a hotly contested topic 20 years ago.
 The case essentially boiled down to two arguments. One is that TCP/IP
 is implemented in the OS kernel, which means the OS has to get
@@ -80,7 +80,7 @@ any detail, but it is instructive to understand the touchpoints it
 shares with the Internet architecture. For the purpose of this
 section, the main takeaway is that the transport layer—think of it as
 Infiniband's equivalent of TCP—runs in a network adaptor, or NIC,
-rather that being implemented in software on the end host. Infiniband
+rather than being implemented in software on the end host. Infiniband
 calls this NIC a *Host Channel Adaptor (HCA)*, but we'll use NIC and
 HCA interchangeably.
 
@@ -90,14 +90,14 @@ it avoids the overheads of executing TCP/IP in the OS kernel. The
 other advantage is that by also using its own switches, Infiniband is
 able to avoid the congestion-induced delays inherent in a best-effort
 technology like Ethernet.  We'll take up the question of whether these
-advantage still hold today in the next section, but for now, we focus
-on they key design decisions underpinning RDMA.
+advantages still hold today in the next section, but for now, we focus
+on the key design decisions underpinning RDMA.
 
 First, the RDMA programming interface, known as the *Verbs API*, has
 become a *de facto* standard for HPC programs, and most importantly,
-for AI workloads the run in cloud datacenters. The Verbs API is
+for AI workloads that run in cloud datacenters. The Verbs API is
 low-level, and so is typically not directly used by application
-programs. Such applications are generally written to higher level
+programs. Such applications are generally written to a higher level
 interface, of which there are several options. They include *Message
 Passing Interface (MPI)* , *Global Address Space Programming Interface
 (GPI)*, and *Open Fabrics Interface (OFI)*.
@@ -211,7 +211,7 @@ write operations, and in particular, *Write-with-Immedate*. The
 following code snippet shows the client side writing a "Hello, World"
 message to a remote address, along with the "immediate" value
 ``42``. There's nothing magical about the number 42; it's just an
-example of a value that get passed to the server). In practice, the
+example of a value that gets passed to the server). In practice, the
 immediate value might indicate something about the state of the
 calling process or what the caller expects the callee to do with the
 message. If nothing else, it is a signal to the local application that
@@ -236,11 +236,11 @@ And correspondingly on the server side:
     printf("[server] Message (via RDMA Write-with-Immediate, imm=%u): \"%s\"\n",
            imm, ctx.buf);
 
-For both sides, ``ctx`` is the context set up before hand. It includes
+For both sides, ``ctx`` is the context set up beforehand. It includes
 a local buffer (``buf``) that holds the message being sent or
 received, and a local completion queue (``cq``) where notifications
 are delivered. In this example, both sides block on this queue: the
-client waiting for notification its message has been successfully
+client waiting for notification that its message has been successfully
 written to the remote buffer, and the server waiting for notification
 that a message has arrived in its local buffer.
 
@@ -277,7 +277,7 @@ packet (rather than per-byte, as with TCP). It also fragments large
 messages into packet-sized fragments on the sending side, and
 reassembles those fragments into an application message on the
 receiving side. Each fragment is a separate packet, with its own
-sequence number. How we know that a sequence of packets need to be
+sequence number. How we know that a sequence of packets needs to be
 reassembled (because they are part of the same large message) will
 become clear in a moment.
 
@@ -295,7 +295,7 @@ contains information about the remote memory address that is to be
 read or written. This information includes a 64-bit memory address, a
 32-bit remote key (see the ``remote_key`` field in the code example),
 and a 32-bit field indicating the length of the DMA transfer. (This is
-how the receiver knows when a sequence of fragments need to be
+how the receiver knows when a sequence of fragments needs to be
 reassembled.)
 
 Finally, note that we have been focused on what Infiniband refers to

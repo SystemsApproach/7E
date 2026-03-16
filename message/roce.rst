@@ -46,7 +46,7 @@ Infiniband defines 16 lanes, and hence, 16 priority queues. Each
 end-to-end connection is assigned to one of the lanes according to the
 QoS parameters associated with that connection.  This is an indirect
 way of making a per-connection reservation (the weighted fair queuing
-algorithm described in Chapter X would be more direct), but is does
+algorithm described in Chapter X would be more direct), but it does
 provide more isolation between user flows than the single FIFO queue
 in a standard Ethernet switch.
 
@@ -86,16 +86,19 @@ transport header, plus the message payload, needs to be encapsulated.
    The Infiniband transport header and payload are encapsulated in a
    UDP datagram.
 
-The approach to augmenting Ethernet switches so they better emulate
-Infiniband behavior has two main parts. The first is to replicate
-Infiniband's flow control mechanism by adding support for Priority
-Flow Control to Ethernet.  This has been standardized as IEEE
-802.1Qbb.  The second is to take advantage of the existing Explicit
-Congestion Notification (ECN) mechanism described in Chapter X and the
-Differentiated Services Code Point (DSCP) described in Chapter Y. Both
-are encoded in IP's TOS field, and so require no change to standards.
-This is an appealing strategy for cloud providers because their
-datacenters already leverage ECN in support of TCP congestion control.
+.. TODO -- Revisit once Queing and CC chapters are done.
+
+The approach to augmenting Ethernet so it better emulates Infiniband
+has two main parts. The first is to replicate Infiniband's flow
+control mechanism by adding support for Priority Flow Control to
+Ethernet switches. This has been standardized as IEEE 802.1Qbb.  The
+second is to take advantage of the existing Explicit Congestion
+Notification (ECN) mechanism described in Chapter X. This is appealing
+for cloud providers because their datacenters already leverage ECN in
+support of TCP congestion control.  The two mechanisms work in
+concert, with ECN pacing the source host as a first response to
+congestion, and PFC serving as a more precise (but slower to take
+affect because it's hop-by-hop) backup response.
 
 .. _fig-soft-roce:
 .. figure:: message/figures/soft-roce.png
