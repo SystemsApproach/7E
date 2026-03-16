@@ -64,7 +64,7 @@ both AS X and AS Y as providers (and presumably I paid them to play
 this role), I don’t expect to help them out by carrying traffic
 between them across my network (this is called *transit* traffic). The
 more autonomous systems an AS connects to, the more complex policies
-it might have, especially when you consider ``backbone'' providers
+it might have, especially when you consider "backbone" providers
 (those closest to the core of the Internet), who may
 interconnect with dozens of other providers and hundreds of customers
 and have different economic arrangements (which affect routing
