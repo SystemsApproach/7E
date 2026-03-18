@@ -338,7 +338,10 @@ address. For example, ``128.112.155.172``.  This is called "dot
 notation" for the obvious reason. Note that there are situations where
 we only care about some prefix of an IP address, say the first 16 or
 24 bits, in which case we'll write ``128.112.0.0/16`` or
-``128.112.155.0/24``.
+``128.112.155.0/24``. We do this because the prefix identifies the
+network that a host is connected to, and that's the bit of
+information we want to know.
+
 
 
 
