@@ -31,9 +31,9 @@ challenges, we incude descriptions of the following artifacts:
    5G                           Section 5.4
    802.11                    Section 5.3
    ARP                         :ref:`Section 6.2.5 <artifact-arp>`
-   BGP                         :ref:`Section 6.4 <artifact-bpg>`
-   OSPF                       Section 4.3
+   BGP                         :ref:`Chapter 7 <artifact-bpg>`
    IPv4                        :ref:`Section 6.2 <artifact-ipv4>`
    IPv6                        :ref:`Section 6.3.3 <artifact-ipv6>`
-   RIP                          Section 4.4
+   OSPF                       :ref:`Section 4.3 <artifact-ospf>`
+   RIP                          :ref:`Section 4.4 <artifact-rip>`
    ===========   ===========
