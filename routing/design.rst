@@ -6,11 +6,11 @@ mean by that term. As pointed out in Chapter 3, *routing* refers to
 the process of finding a suitable path through a network. Routing is
 distinct from *forwarding*, which consists of receiving a packet,
 looking up its destination address in a table, and sending the packet
-in a direction determined by that table. As we also noted in Chapter
-3, forwarding is considered part of the network's *data plane*,
-whereas routing is the process by which forwarding tables are
-built. Routing often depends on a complex distributed algorithm, and
-is considered part of the network's *control plane.*
+in a direction determined by that table. Forwarding is considered part
+of the network's *data plane*, whereas routing is the process by which
+forwarding tables are built. Routing often depends on a complex
+distributed algorithm, and is considered part of the network's
+*control plane.*
 
 .. TODO -- Rethink next paragraph in terms of "switch as platform"
 
@@ -34,13 +34,13 @@ infrastructure that is used in the Internet today. Specifically, the
 protocols described in this chapter are collectively known as
 *intradomain* routing protocols, or *interior gateway protocols*
 (IGPs). A good working definition of a routing *domain* is an
-internetwork in which all the switches are under the same
+internetwork in which all the devices are under the same
 administrative control (e.g., a single university campus, an
 enterprise, or the network of a single Internet Service Provider). The
 relevance of this definition will become apparent in Chapter 7 when we
 look at *interdomain* routing protocols (specifically, BGP). For now,
 the important thing to keep in mind is that we are considering the
-problem of routing in the context of small to midsized networks, not
+problem of routing in the context of small to mid-sized networks, not
 for a network the size of the entire Internet.
 
 4.1.1 Network as a Graph
@@ -123,7 +123,7 @@ such packets will be stuck in a loop until the discrepancy is resolved,
 and it would be good to resolve it as soon as possible. This is just
 one example of the type of problem routing protocols must address.
 
-.. TODO -- DO we come back to this?
+.. TODO -- DO we come back to this? - yes, now noted in both linkstate and DV
 
 To begin our analysis, we assume that the edge costs in the network
 are known; they are often set statically when switches are

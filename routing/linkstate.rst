@@ -319,13 +319,15 @@ paths to all nodes.
 
 The link-state routing algorithm has many nice properties: It has been
 proven to stabilize quickly, it does not generate much traffic, and it
-responds rapidly to topology changes or node failures. On the downside,
+responds rapidly to topology changes or node failures. Quick response
+to topology changes is important both to minimize loss of traffic
+and to limit the duration of transient forwarding loops. On the downside,
 the amount of information stored at each node (one LSP for every other
 node in the network) can be quite large. This is one of the fundamental
 problems of routing and is an instance of the more general problem of
 scalability. Some solutions to both the specific problem (the amount of
 storage potentially required at each node) and the general problem
-(scalability) will be discussed in the next section.
+(scalability) are discussed in Chapter 6.
 
 .. sidebar:: The History Of Metrics
 
@@ -446,24 +448,19 @@ building block of link-state messages in OSPF is the link-state
 advertisement (LSA). One message may contain many LSAs. We provide a few
 details of the LSA here.
 
-Like any internetwork routing protocol, OSPF must provide information
-about how to reach networks.\ [#]_ Thus, OSPF must provide a little more
-information than the simple graph-based protocol described above.
-Specifically, a node running OSPF may generate link-state packets that
-advertise one or more of the networks that are directly connected to
-that node. In addition, a node that is connected to another node
-by some link must advertise the cost of reaching that node over the
-link. These two types of advertisements are necessary to enable all the
-nodes in a domain to determine the cost of reaching all networks in
-that domain and the appropriate next hop for each network.
-
-.. [#] Just as switch data planes are often general enough to forward
-       either Ethernet packets (L2) or IP packets (L3), the routing
-       protocols that implement the control plane are also general
-       enough to support both possibilities. The latter implies that
-       networks (in addition to switches and routers) are what we want
-       to route towards. Because OSPF refers to nodes as "routers", we
-       do the same in this section.
+So far we have talked about routing among nodes, but OSPF, as an
+Internet routing protocol, must provide information about how to reach
+*networks*. Thus, OSPF must provide a little more information than the
+simple graph-based protocol described above.  Specifically, a node
+running OSPF may generate link-state packets that advertise one or
+more of the networks that are directly connected to that node. In
+addition, a node that is connected to another node by some link must
+advertise the cost of reaching that node over the link. These two
+types of advertisements are necessary to enable all the nodes in a
+domain to determine the cost of reaching all networks in that domain
+and the appropriate next hop for each network. Because the OSPF
+specification refers to nodes as "routers", we do the same in this
+section.
 
 .. _fig-ospf-lsa:
 .. figure:: routing/figures/f03-35-9780123850591.png
@@ -476,7 +473,7 @@ that domain and the appropriate next hop for each network.
 type 1 link-state advertisement. Type 1 LSAs advertise the cost of
 links between nodes.  Type 2 LSAs are used to advertise *networks* to
 which the advertising node is connected, while other types are used
-to support additional hierarchy as described in the next section. Many
+to support additional hierarchy using areas as noted above. Many
 fields in the LSA should be familiar from the preceding
 discussion. The ``LS Age`` is the equivalent of a time to live, except
 that it counts up and the LSA expires when the age reaches a defined

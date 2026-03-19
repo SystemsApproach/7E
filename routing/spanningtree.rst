@@ -4,7 +4,7 @@
 The history of Ethernet switching goes back a long way, with the
 earliest switches being referred to as "bridges" because they
 connected two or more Ethernet segments. In its simplest
-form, a bridge would receive packets on one port and copy them out to
+form, a bridge receives packets on one port and copies them out to
 its other port(s), effectively broadcasting packets from one
 segment to another. Over time, a bridge could "learn" which hosts were
 reachable on which port by watching the source addresses of
@@ -85,20 +85,17 @@ The spanning tree algorithm, which was developed by Radia Perlman,
 then at the Digital Equipment Corporation, is a protocol used by a set
 of Ethernet switches to agree upon a spanning tree for a particular
 network. The IEEE 802.1 specification is based on this algorithm, and
-is specific to Ethernet.\ [#]_ In practice, this means that each switch
-decides the ports over which it is and is not willing to forward
-frames. In a sense, it is by removing ports from the topology that the
-network is reduced to an acyclic tree. It is even possible that an
-entire switch will not participate in forwarding frames, which seems
-strange at first glance. The algorithm is dynamic, however, meaning
-that the switches are always prepared to reconfigure themselves into a
-new spanning tree should some switch fail, and so those unused ports
-and switches provide the redundant capacity needed to recover from
-failures.
+is specific to Ethernet (and can also operate on wireless
+networks). In practice, this means that each switch decides the ports
+over which it is and is not willing to forward frames. In a sense, it
+is by removing ports from the topology that the network is reduced to
+an acyclic tree. It is even possible that an entire switch will not
+participate in forwarding frames, which seems strange at first
+glance. The algorithm is dynamic, however, meaning that the switches
+are always prepared to reconfigure themselves into a new spanning tree
+should some switch or link fail, and so those unused ports and switches
+provide the redundant capacity needed to recover from failures.
 
-.. [#] Every time you see the word "switch" in this section, you
-       should read it as shorthand for "Ethernet switch". The protocol
-       does not work for switches configured to forward IP packets.
 
 The main idea of the spanning tree is for the switches to select the
 ports over which they will forward frames. The algorithm selects ports
