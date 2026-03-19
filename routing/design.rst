@@ -24,24 +24,29 @@ only forwarded based on the Ethernet header, but today
 there are Ethernet switches that combine traditional switching functions with
 those of a router, so it's harder to make a strong distinction.
 
-One key question we should be asking anytime we try to build a
-mechanism for the Internet is: “Does this solution scale?” The answer
-for the algorithms and protocols described in this chapter is
-“moderately.”  They are designed for networks of fairly modest size—up
-to a few thousand switches, in practice. However, the solutions we
-describe serve as a building block for the hierarchical routing
-infrastructure that is used in the Internet today. Specifically, the
-protocols described in this chapter are collectively known as
-*intradomain* routing protocols, or *interior gateway protocols*
-(IGPs). A good working definition of a routing *domain* is an
-internetwork in which all the devices are under the same
+One question we need to ask anytime we try to build a mechanism for
+the Internet is how well it scales. The answer for the algorithms and
+protocols described in this chapter is “moderately.”  They are
+designed for networks of fairly modest size—up to a few thousand
+switches. That's not nearly enough if our ambition is to have a single
+routing mechanism work across the millions of switches in today's
+Internet, but that's not actually our goal. This is because the
+Internet has naturally self-organized into a set of *routing domains*,
+where a domain includes only those the devices are under the same
 administrative control (e.g., a single university campus, an
-enterprise, or the network of a single Internet Service Provider). The
-relevance of this definition will become apparent in Chapter 7 when we
-look at *interdomain* routing protocols (specifically, BGP). For now,
-the important thing to keep in mind is that we are considering the
-problem of routing in the context of small to mid-sized networks, not
-for a network the size of the entire Internet.
+enterprise, or the network of one Internet Service Provider). If we
+can solve the routing problem within a routing domain, then we have a
+building block that can be used—hierarchically—to solve the global
+routing problem.
+
+The mechanisms described in this chapter target individual routing
+domains. They are collectively known as *intradomain* routing
+protocols, or alternatively, as *interior gateway protocols (IGPs)*.
+In Chapter 7 we take up the issue of *interdomain* routing,
+specifically, BGP. For now, the important thing to keep in mind is
+that we are considering the problem of routing in the context of small
+to mid-sized networks, not for a network the size of the entire
+Internet.
 
 4.1.1 Network as a Graph
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
