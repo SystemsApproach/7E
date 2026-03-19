@@ -14,11 +14,11 @@ was proprietary and vendor-specific.
 
 There were a few efforts to open up this interface so that the
 implementation of the control plane and data plane could be undertaken by
-indpendent teams. The approach that finally started to gain traction
+independent teams. The approach that finally started to gain traction
 around 2009 was the Software-Defined Networking (SDN) movement.
 
 Not only did SDN define a standard interface between the data and
-control planes, but it also advanced the idea of using a centalized
+control planes, but it also advanced the idea of using a centralized
 control plane to push forwarding rules to many devices implementing
 the data plane. A conceptual picture of an SDN system is shown in
 :numref:`Figure %s <fig-nos>`.
@@ -45,7 +45,7 @@ shortest path calculation from the perspective of any switch. Thus it
 could calculate forwarding tables for every switch and push them down
 to the forwarding plane as a set of flow rules.
 
-Simply replacing the standardrd fully distributed version of OSPF with
+Simply replacing the standard fully distributed version of OSPF with
 a centralized equivalent may not seem much of a step forward. What is
 more powerful is the capability to run *new* routing algorithms
 centrally, without needing to solve the challenges of getting a

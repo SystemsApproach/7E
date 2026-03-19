@@ -1,4 +1,6 @@
-4.3 Link-State Routing (OSPF)
+.. _artifact-ospf:
+
+4.3 Link-State Routing
 -----------------------------
 
 Link-state routing is the most widely used class of intradomain
@@ -6,21 +8,20 @@ routing protocol, at least in the service provider networks that make
 up most of the Internet. Distance-vector routing, which we discuss
 below, continues to be used in many enterprise networks.
 
-To start with, link-state routing assumes that every node (router) can
-determine the state of links to each of its neighbors: the state can
-be up or down. Determining the state is usually achieved by sending
-periodic probes along the link to the neighbor; the specifics of these
-probes depend on the link type and the particular routing
+To start with, link-state routing assumes that every node
+can determine the state of links to each of its neighbors: the
+state can be up or down. Determining the state is usually achieved by
+sending periodic probes along the link to the neighbor; the specifics
+of these probes depend on the link type and the particular routing
 protocol. But somehow, the link state is determined and changes from
 up to down or *vice versa* can be detected the same way.
-
 
 Each link also has a *cost* or *metric*, which is usually a configured
 value. Often it is based on the bandwidth of a link, so that higher
 bandwidth links have lower cost than low bandwidth links, making them
-preferable when calculating paths. We will return to this topic later;
+preferable when calculating paths. We return to this topic later;
 for now, we can just assume that every link has *some* cost assigned to
-it and a router knows the cost of each of its connected links.
+it and each node knows the cost of each of its connected links.
 
 Our goal is to enable each node to obtain enough information to enable
 it to find the least-cost path to any destination. The basic idea
@@ -70,14 +71,14 @@ link-state routing used in the ARPANET caused that network to fail in
 1981.)
 
 Flooding works in the following way. First, the transmission of LSPs
-between adjacent routers is made reliable using acknowledgments and
+between adjacent nodes is made reliable using acknowledgments and
 retransmissions, similar to what is done in reliable transport
 protocols like TCP. However, it takes more than just getting the
 packets to your immediate neighbor to reliably flood an LSP to all nodes
 in a network.
 
 Consider a node X that receives a copy of an LSP that originated at some
-other node Y. Note that Y may be any other router in the same routing
+other node Y. Note that Y may be any other node in the same routing
 domain as X. X checks to see if it has already stored a copy of an LSP
 from Y. If not, it stores the LSP. If it already has a copy, it compares
 the sequence numbers; if the new LSP has a larger sequence number, it is
@@ -203,9 +204,9 @@ of going from the source to w and then following the link from w to n is
 less than the old route we had to n. This procedure is repeated until
 all nodes are incorporated in M.
 
-In practice, each switch computes its routing table directly from the
+In practice, each node computes its routing table from the
 LSPs it has collected using a realization of Dijkstra’s algorithm called
-the *forward search* algorithm. Specifically, each switch maintains two
+the *forward search* algorithm. Specifically, each node maintains two
 lists, known as ``Tentative`` and ``Confirmed``. Each of these lists
 contains a set of entries of the form ``(Destination, Cost, NextHop)``.
 The algorithm works as follows:
@@ -318,13 +319,15 @@ paths to all nodes.
 
 The link-state routing algorithm has many nice properties: It has been
 proven to stabilize quickly, it does not generate much traffic, and it
-responds rapidly to topology changes or node failures. On the downside,
+responds rapidly to topology changes or node failures. Quick response
+to topology changes is important both to minimize loss of traffic
+and to limit the duration of transient forwarding loops. On the downside,
 the amount of information stored at each node (one LSP for every other
 node in the network) can be quite large. This is one of the fundamental
 problems of routing and is an instance of the more general problem of
 scalability. Some solutions to both the specific problem (the amount of
 storage potentially required at each node) and the general problem
-(scalability) will be discussed in the next section.
+(scalability) are discussed in Chapter 6.
 
 .. sidebar:: The History Of Metrics
 
@@ -401,7 +404,7 @@ basic link-state algorithm described above, including the following:
 -  *Additional hierarchy*—Hierarchy is one of the fundamental tools used
    to make systems more scalable. OSPF introduces another layer of
    hierarchy into routing by allowing a domain to be partitioned into
-   *areas*. This means that a router within a domain does not
+   *areas*. This means that a node within a domain does not
    necessarily need to know how to reach every network within that
    domain—it may be able to get by knowing only how to get to the right
    area. Thus, there is a reduction in the amount of information that
@@ -438,23 +441,26 @@ authentication checksum is used. In the latter cases, the
 checksum.
 
 Of the five OSPF message types, type 1 is the “hello” message, which a
-router sends to its peers to notify them that it is still alive and
+node sends to its peers to notify them that it is still alive and
 connected as described above. The remaining types are used to request,
 send, and acknowledge the receipt of link-state messages. The basic
 building block of link-state messages in OSPF is the link-state
 advertisement (LSA). One message may contain many LSAs. We provide a few
 details of the LSA here.
 
-Like any internetwork routing protocol, OSPF must provide information
-about how to reach networks. Thus, OSPF must provide a little more
-information than the simple graph-based protocol described above.
-Specifically, a router running OSPF may generate link-state packets that
-advertise one or more of the networks that are directly connected to
-that router. In addition, a router that is connected to another router
-by some link must advertise the cost of reaching that router over the
-link. These two types of advertisements are necessary to enable all the
-routers in a domain to determine the cost of reaching all networks in
-that domain and the appropriate next hop for each network.
+So far we have talked about routing among nodes, but OSPF, as an
+Internet routing protocol, must provide information about how to reach
+*networks*. Thus, OSPF must provide a little more information than the
+simple graph-based protocol described above.  Specifically, a node
+running OSPF may generate link-state packets that advertise one or
+more of the networks that are directly connected to that node. In
+addition, a node that is connected to another node by some link must
+advertise the cost of reaching that node over the link. These two
+types of advertisements are necessary to enable all the nodes in a
+domain to determine the cost of reaching all networks in that domain
+and the appropriate next hop for each network. Because the OSPF
+specification refers to nodes as "routers", we do the same in this
+section.
 
 .. _fig-ospf-lsa:
 .. figure:: routing/figures/f03-35-9780123850591.png
@@ -465,9 +471,9 @@ that domain and the appropriate next hop for each network.
 
 :numref:`Figure %s <fig-ospf-lsa>` shows the packet format for a
 type 1 link-state advertisement. Type 1 LSAs advertise the cost of
-links between routers.  Type 2 LSAs are used to advertise networks to
-which the advertising router is connected, while other types are used
-to support additional hierarchy as described in the next section. Many
+links between nodes.  Type 2 LSAs are used to advertise *networks* to
+which the advertising node is connected, while other types are used
+to support additional hierarchy using areas as noted above. Many
 fields in the LSA should be familiar from the preceding
 discussion. The ``LS Age`` is the equivalent of a time to live, except
 that it counts up and the LSA expires when the age reaches a defined

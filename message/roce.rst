@@ -126,6 +126,9 @@ translate to worse message latency. This configuration is shown in
     Converged Ethernet
     https://dl.acm.org/doi/pdf/10.1145/3718958.3754353
 
+    RDMA over Ethernet at Scale (SIGCOMM 2016)
+    https://dl.acm.org/doi/10.1145/2934872.2934908
+
     RDMA over Heterogeneous NICS
     https://www.usenix.org/system/files/osdi23-li-qiang.pdf
 

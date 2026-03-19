@@ -1,5 +1,3 @@
-.. _artifact-bpg:
-
 7.2 Sharing Routes and Routing Policy
 ---------------------------------------
 

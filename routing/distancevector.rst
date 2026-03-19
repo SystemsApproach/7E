@@ -1,3 +1,5 @@
+.. _artifact-rip:
+
 4.4 Distance Vector Routing
 ---------------------------------
 
@@ -9,7 +11,7 @@ all other nodes and distributes that vector to its immediate
 neighbors. The starting assumption for distance-vector routing, as
 with link-state, is that each node knows the cost of the link to each
 of its directly connected neighbors. These costs may be provided when
-the router is configured by a network manager. A link that is down is
+the node is configured by a network manager. A link that is down is
 assigned an infinite cost.
 
 .. _fig-dvroute:
@@ -160,12 +162,12 @@ network.
    +---+---+---+---+---+---+---+---+
 
 There are a few details to fill in before our discussion of
-distance-vector routing is complete. First we note that routers send
+distance-vector routing is complete. First we note that nodes send
 updates to their neighbors periodically based on a timer (from seconds
 to minutes) but also send them immediately if they detect a change in
 the topology. That change may be the result of a local link failure or
 restoration, or a change in the local routing table due to an update
-received from another router. Thus changes to the state of a link will
+received from another node. Thus changes to the state of a link will
 ripple through the network until routing converges again.
 
 To understand what happens when a node detects a link failure, consider
@@ -227,7 +229,15 @@ advantages of link-state routing.
 The code that implements this algorithm is very straightforward; we give
 only some of the basics here. Structure ``Route`` defines each entry in
 the routing table, and constant ``MAX_TTL`` specifies how long an entry
-is kept in the table before it is discarded.
+is kept in the table before it is discarded.\ [#]_
+
+.. [#] You may have noticed we have been talking about how to build a
+       "routing table", rather than a "forwarding table", throughout
+       this chapter. This is because the table we are building is
+       structured to support discovering routes, and not for doing
+       fast lookup operations. Once we have decided on a route,
+       information from the routing table is installed in the
+       forwarding table, as outlined in Chapter 3.
 
 .. code-block:: c
 
@@ -321,26 +331,16 @@ popular Berkeley Software Distribution (BSD) version of Unix, from
 which many commercial versions of Unix were derived. It is also
 extremely simple. RIP is the canonical example of a routing protocol
 built on the distance-vector algorithm just described. Today it is
-less common. A commercial implementation of distance-vector known as
-EIGRP (Enhanced Interior Gateway Routing Protocol) remains popular in
-enterprise networks.
+less common, although a commercial implementation of distance-vector
+known as EIGRP (Enhanced Interior Gateway Routing Protocol) remains
+popular in enterprise networks.
 
 Routing protocols in real networks differ very slightly from the
 idealized graph model described above. In an internetwork, the goal of
 the routers is to learn how to forward packets to various *networks*.
 Thus, rather than advertising the cost of reaching other routers, the
 routers advertise the cost of reaching networks, which are identified by
-prefixes. For example, in :numref:`Figure %s <fig-rip-eg>`, router C
-would advertise to router A the fact that it can reach networks 2 and
-3 (to which it is directly connected) at a cost of 0, networks 5 and 6
-at cost 1, and network 4 at cost 2.
-
-.. _fig-rip-eg:
-.. figure:: routing/figures/f03-30-9780123850591.png
-   :width: 300px
-   :align: center
-
-   Example network running RIP.
+prefixes.
 
 .. _fig-rip:
 .. figure:: routing/figures/f03-31-9780123850591.png
@@ -365,7 +365,7 @@ update from another router causes it to change its routing table.
 As we have discussed, it is generally possible to use a range of
 different metrics or costs for the links in a routing protocol. RIP
 takes the simplest approach, with all link costs being equal to 1,
-just as in our example above. (EIGRP, by contast, has a fairly complex
+just as in our example above. (EIGRP, by contrast, has a fairly complex
 approach to calculating costs that includes both bandwidth and latency as
 inputs.) Thus, RIP always tries to find the
 minimum hop route. Valid distances are 1 through 15, with 16

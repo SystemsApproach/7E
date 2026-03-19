@@ -2,6 +2,7 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: Apache-2.0
 
+.. _artifact-bpg:
 
 Chapter 7: Interdomain Routing
 ========================================

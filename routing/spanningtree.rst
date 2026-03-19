@@ -2,10 +2,10 @@
 ---------------------------
 
 The history of Ethernet switching goes back a long way, with the
-earliest switches being referred to as "bridges" because they just
-connected together a couple of ethernet segments. In its simplest
-form, a bridge would receive packets on one port and copy them out to
-its other port or ports, effectively broadcasting packets from one
+earliest switches being referred to as "bridges" because they
+connected two or more Ethernet segments. In its simplest
+form, a bridge receives packets on one port and copies them out to
+its other port(s), effectively broadcasting packets from one
 segment to another. Over time, a bridge could "learn" which hosts were
 reachable on which port by watching the source addresses of
 received packets, so a "learning bridge" would not waste resources
@@ -19,11 +19,11 @@ capacity and link capacity. This is particularly bad in the case of
 Ethernet which has no way to tell when a packet is circulating in a
 loop. (The Internet Protocol does have such a mechanism, although
 loops remain undesirable). Consider the example depicted in
-:numref:`Figure %s <fig-elan3>`, where switches S1, S4, and S6 form
+:numref:`Figure %s <fig-loops>`, where switches S1, S4, and S6 form
 a loop.
 
-.. _fig-elan3:
-.. figure:: routing/figures/Slide5.png
+.. _fig-loops:
+.. figure:: routing/figures/loops.png
    :width: 500px
    :align: center
 
@@ -31,7 +31,7 @@ a loop.
 
 
 
-In our example switched network, suppose that a packet addressed to
+In our example network, suppose that a packet addressed to
 Host A enters switch S4
 from Host C and that the destination address (Host A) has never been
 seen before on this network. So that address is not yet in any
@@ -43,7 +43,7 @@ destination in its table, so it forwards the packet out its two other
 ports. There is nothing to stop this cycle from repeating endlessly,
 with packets looping in both directions among S1, S4, and S6.
 
-Why would a switched Ethernet (or extended LAN) come to have a loop in
+Why would a switched Ethernet come to have a loop in
 it? One possibility is that the network is managed by more than one
 administrator, for example, because it spans multiple departments in an
 organization. In such a setting, it is possible that no single person
@@ -51,7 +51,7 @@ knows the entire configuration of the network, meaning that a switch
 that closes a loop might be added without anyone knowing. A second, more
 likely scenario is that loops are built into the network on purpose—to
 provide redundancy in case of failure. After all, a network with no
-loops needs only one link failure to become split into two separate
+loops needs only one link or switch failure to become split into two separate
 partitions.
 
 Whatever the cause, switches must be able to correctly handle loops.
@@ -66,7 +66,7 @@ graph on the left and one of possibly many spanning trees on the
 right.
 
 .. _fig-graphs:
-.. figure:: routing/figures/f03-11-9780123850591.png
+.. figure:: routing/figures/graphs.png
    :width: 500px
    :align: center
 
@@ -79,21 +79,23 @@ devices in the network. The hard part is the distributed algorithm:
 how all of the switches coordinate their decisions to arrive at a
 single view of the spanning tree. After all, one topology is typically
 able to be covered by multiple spanning trees. The answer lies in the
-spanning tree protocol, which we’ll describe now.
+spanning tree protocol, which we describe now.
 
-The spanning tree algorithm, which was developed by Radia Perlman, then
-at the Digital Equipment Corporation, is a protocol used by a set of
-switches to agree upon a spanning tree for a particular network. (The
-IEEE 802.1 specification is based on this algorithm.) In practice, this
-means that each switch decides the ports over which it is and is not
-willing to forward frames. In a sense, it is by removing ports from the
-topology that the network is reduced to an acyclic tree. It is even
-possible that an entire switch will not participate in forwarding
-frames, which seems kind of strange at first glance. The algorithm is
-dynamic, however, meaning that the switches are always prepared to
-reconfigure themselves into a new spanning tree should some switch fail,
-and so those unused ports and switches provide the redundant capacity
-needed to recover from failures.
+The spanning tree algorithm, which was developed by Radia Perlman,
+then at the Digital Equipment Corporation, is a protocol used by a set
+of Ethernet switches to agree upon a spanning tree for a particular
+network. The IEEE 802.1 specification is based on this algorithm, and
+is specific to Ethernet (and can also operate on wireless
+networks). In practice, this means that each switch decides the ports
+over which it is and is not willing to forward frames. In a sense, it
+is by removing ports from the topology that the network is reduced to
+an acyclic tree. It is even possible that an entire switch will not
+participate in forwarding frames, which seems strange at first
+glance. The algorithm is dynamic, however, meaning that the switches
+are always prepared to reconfigure themselves into a new spanning tree
+should some switch or link fail, and so those unused ports and switches
+provide the redundant capacity needed to recover from failures.
+
 
 The main idea of the spanning tree is for the switches to select the
 ports over which they will forward frames. The algorithm selects ports
@@ -101,31 +103,38 @@ as follows. Each switch has a unique identifier; for our purposes, we
 use the labels S1, S2, S3, and so on. The algorithm first elects the
 switch with the smallest ID as the root of the spanning tree; exactly
 how this election takes place is described below. The root switch always
-forwards frames out over all of its ports. Next, each switch computes
-the shortest path to the root and notes which of its ports is on this
-path. This port is also selected as the switch’s preferred path to the
-root. Finally, to account for the possibility there could be another
-switch connected to its ports, the switch elects a single *designated*
-switch that will be responsible for forwarding frames toward the root.
-Each designated switch is the one that is closest to the root. If two or
-more switches are equally close to the root, then the switches’
-identifiers are used to break ties, and the smallest ID wins. Of course,
-each switch might be connected to more than one other switch, so it
-participates in the election of a designated switch for each such port.
-In effect, this means that each switch decides if it is the designated
-switch relative to each of its ports. The switch forwards frames over
-those ports for which it is the designated switch.
+forwards frames out over all of its ports.
 
-.. _fig-elan4:
-.. figure:: routing/figures/Slide6.png
+Next, each switch computes the shortest path to the root and notes
+which of its ports is on this path. This port is also selected as the
+switch’s preferred path to the root. To account for the possibility
+there could be another switch connected to its ports, the switch
+elects a single *designated* switch that will be responsible for
+forwarding frames toward the root.  Each designated switch is the one
+that is closest to the root. If two or more switches are equally close
+to the root, then the switches’ identifiers are used to break ties,
+and the smallest ID wins. Each switch forwards frames over those ports
+for which it is the designated switch.
+
+Note that the algorithm is general enough to account for the
+possibility that an Ethernet segment is multi-access rather than
+point-to-point. In the former case there could be many switches on a
+given link. In the latter case, there can be only one other switch on
+the other end of a point-to-point link, so picking the designated
+switch is equivalent to deciding whether I'm closer to the root or the
+switch on the other end of the link is closer, and using our
+identifiers to break a tie.
+
+.. _fig-tree:
+.. figure:: routing/figures/tree.png
    :width: 500px
    :align: center
 
    Spanning tree with some ports not selected.
 
-:numref:`Figure %s <fig-elan4>` shows the spanning tree that
+:numref:`Figure %s <fig-tree>` shows the spanning tree that
 corresponds to the network shown in :numref:`Figure %s
-<fig-elan3>`. In this example, S1 is the root, since it has the
+<fig-loops>`. In this example, S1 is the root, since it has the
 smallest ID. Notice that S3 and S5 are connected to each other, but S5
 is the designated switch since it is closer to the root. Similarly, S5
 and S7 are connected to each other, but in this case S5 is the
@@ -133,8 +142,8 @@ designated switch since it has the smaller ID; both are an equal
 distance from S1.
 
 While it is possible for a human to look at the network given in
-:numref:`Figure %s <fig-elan3>` and to compute the spanning tree given
-in the :numref:`Figure %s <fig-elan4>` according to the rules given
+:numref:`Figure %s <fig-loops>` and to compute the spanning tree given
+in the :numref:`Figure %s <fig-tree>` according to the rules given
 above, the switches do not have the luxury of being able to see the
 topology of the entire network, let alone peek inside other switches
 to see their ID. Instead, they have to exchange configuration messages
@@ -195,7 +204,7 @@ for the spanning tree. Only those ports may be used for forwarding data
 packets.
 
 Let’s see how this works with an example. Consider what would happen in
-:numref:`Figure %s <fig-elan4>` if the power had just been restored to a campus,
+:numref:`Figure %s <fig-tree>` if the power had just been restored to a campus,
 so that all the switches boot at about the same time. All the switches
 would start off by claiming to be the root. We denote a configuration
 message from node X in which it claims to be distance d from root node Y
@@ -218,7 +227,7 @@ unfold as follows:
    the root than it is, but S2 has the smaller id, so it remains on S3’s
    path to the root.
 
-This leaves S3 with active ports as shown in :numref:`Figure %s <fig-elan4>`.
+This leaves S3 with active ports as shown in :numref:`Figure %s <fig-tree>`.
 Note that Hosts A and B are not able to communicate over the shortest
 path (via S5) because frames have to “flow up the tree and back down,”
 but that’s the price you pay to avoid loops.
@@ -230,8 +239,6 @@ fail, the downstream switches will not receive these configuration
 messages, and after waiting a specified period of time they will once
 again claim to be the root, and the algorithm will kick in again to
 elect a new root and new designated switches.
-
-
 
 One important thing to notice is that although the algorithm is able
 to reconfigure the spanning tree whenever a switch fails, there is
