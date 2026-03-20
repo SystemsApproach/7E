@@ -4,7 +4,7 @@
 .. A helpful RDMA Tutorial Slide Deck
    https://www.doc.ic.ac.uk/~jgiceva/teaching/ssc18-rdma.pdf
 
-RDMA is a remote variant of DMA, an architectural feature commonly
+RDMA is a remote variant of DMA (direct memory access), an architectural feature commonly
 used for device/host communication over a computer's I/O bus. A
 network adaptor (i.e., NIC) is an example device that uses DMA to pass
 frames between the NIC and the host. For example, a host passes an
@@ -35,27 +35,27 @@ abstractions.
 
 The history of RDMA traces back to early parallel computers used in
 *High Performance Computing (HPC)*, which typically ran parallel
-codes, such as weather forecasting, financial modeling, aerodynamic
-design, atomic bomb simulations, and so on. Those machines had
+applications, such as weather forecasting, financial modeling, aerodynamic
+design, physics simulations, and so on. Those machines had
 internal interconnects that were eventually replaced by external
 networks, but because of their focus on supporting low-latency
 communication among parallel tasks, they largely avoided the more
 ubiquitous Internet technology in favor of purpose-built networks.  Of
-these, Infiniband—now a product of Nvidia—became the industry
+these, InfiniBand became the industry
 standard, and RDMA became the end-to-end communication abstraction
-running on top of Infiniband.\ [#]_ Today, RDMA is a key enabling
-technology for AI, which is why it is becoming mainstream.
+running on top of InfiniBand.\ [#]_ Today, RDMA is a key enabling
+technology for many AI applications, which has pushed it further into the mainstream.
 
-.. [#] There is a second thread to this history. Infiniband was
+.. [#] There is a second thread to this history. InfiniBand was
    originally designed as a system-area bus, intended to replace
    internal I/O buses like PCI, and supporting network-attached
    storage. This explains why RDMA would be a natural fit as its
-   communication primitive. Over time, however, Infiniband gained
+   communication primitive. Over time, however, InfiniBand gained
    traction as a "supercomputer interconnect", which is our focus in
    this section.
 
-Why TCP/IP running over an Ethernet-based packet-switched network is a
-poor match for HPC workloads was a hotly contested topic 20 years ago.
+The claim that TCP/IP running over an Ethernet-based packet-switched network is a
+poor match for HPC workloads was a hotly contested topic 20+ years ago.
 The case essentially boiled down to two arguments. One is that TCP/IP
 is implemented in the OS kernel, which means the OS has to get
 involved in sending and receiving every packet. With RDMA, the NIC
@@ -65,13 +65,13 @@ throughput penalty of copying packets from one buffer to another. The
 second argument is that Ethernet-based networks are best effort,
 meaning that the potential for congestion can lead to both queuing
 delays and packet loss. We take up the case for whether this remains a
-valid concern in the next section, but it does explain why Infiniband
+valid concern in the next section, but it does explain why InfiniBand
 exists and remains popular.
 
 14.4.1 Components
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Infiniband defines an entire network architecture, one that is roughly
+InfiniBand defines an entire network architecture, one that is roughly
 parallel to the Internet architecture. It includes physical and link
 layer technologies, a network layer based on packet switching, and a
 transport layer that implements the RDMA abstractions (plus other
@@ -79,22 +79,22 @@ optional behaviors). We're not going to describe that architecture in
 any detail, but it is instructive to understand the touchpoints it
 shares with the Internet architecture. For the purpose of this
 section, the main takeaway is that the transport layer—think of it as
-Infiniband's equivalent of TCP—runs in a network adaptor, or NIC,
-rather than being implemented in software on the end host. Infiniband
+InfiniBand's equivalent of TCP—runs in a network adaptor, or NIC,
+rather than being implemented in software on the end host. InfiniBand
 calls this NIC a *Host Channel Adaptor (HCA)*, but we'll use NIC and
 HCA interchangeably.
 
 Implementing the message transaction transport mechanism in hardware
-is one of the professed advantages of the Infiniband architecture, as
+is one of the professed advantages of the InfiniBand architecture, as
 it avoids the overheads of executing TCP/IP in the OS kernel. The
-other advantage is that by also using its own switches, Infiniband is
+other advantage is that by also using its own switches, InfiniBand is
 able to avoid the congestion-induced delays inherent in a best-effort
-technology like Ethernet.  We'll take up the question of whether these
-advantages still hold today in the next section, but for now, we focus
-on the key design decisions underpinning RDMA.
+technology like Ethernet.  In the next section we revisit these
+assumptions, but for now, we focus on the key design decisions
+underpinning RDMA.
 
 First, the RDMA programming interface, known as the *Verbs API*, has
-become a *de facto* standard for HPC programs, and most importantly,
+become a *de facto* standard for HPC programs, and most recently,
 for AI workloads that run in cloud datacenters. The Verbs API is
 low-level, and so is typically not directly used by application
 programs. Such applications are generally written to a higher level
@@ -103,12 +103,12 @@ Passing Interface (MPI)* , *Global Address Space Programming Interface
 (GPI)*, and *Open Fabrics Interface (OFI)*.
 
 Second, Ethernet continues to evolve, and in this particular
-circumstance, offers an alternative to Infiniband's "native" switches.
+circumstance, offers an alternative to InfiniBand's "native" switches.
 This effort is known as *Converged Ethernet (CE)*, and it makes it
 possible to enjoy the best of both worlds: the performance of
-Infiniband and the ubiquity of Ethernet.  Putting these two outcomes
+InfiniBand and the ubiquity of Ethernet.  Putting these two outcomes
 together, :numref:`Figure %s <fig-verbs>` shows the central role RDMA
-(the abstraction) and Verbs (the API for that abstraction) play to
+(the abstraction) and Verbs (the API for that abstraction) play in
 today's datacenter networks. The rest of this section looks at this
 middle layer (RDMA-based message transactions) and the next section
 looks at the bottom layer of the diagram (optimizing Ethernet for RDMA
@@ -132,7 +132,7 @@ practice, it is helpful to redraw it with the additional detail shown
 in :numref:`Figure %s <fig-libibverbs>`. Here, we see the application
 loads two libraries: ``libibverbs`` and ``librdmacm``.  The
 first—which you can read as "lib-ib-verbs", with the "ib" standing for
-Infiniband—is effectively a low-level interface to an RDMA-capable
+InfiniBand—is effectively a low-level interface to an RDMA-capable
 device. The second—which you can read as "lib-rdma-cm", with the "cm"
 standing for "Communication Manager"—defines high-level wrapper
 functions that make the Verbs API easier to use. The other thing to
@@ -148,7 +148,7 @@ transaction protocol at the core of RDMA is in the NIC.
    :align: center
 
    Software components that implement RDMA, including user-level
-   libraries that directly interact with the HCA (Infiniband NIC).
+   libraries that directly interact with the HCA (InfiniBand NIC).
 
 Much of the complexity in using RDMA is in setting up (managing) the
 shared state that the application processes need to communicate. This
@@ -156,7 +156,7 @@ involves two general steps. The first is to register the set of memory
 buffers that may be remotely accessed on each host. The second is to
 create *completion queues* that the RDMA subsystem uses to deliver
 notifications that a transaction has taken place. This is best
-understood in terms of the familiar its DMA counterpart: a device
+understood in terms of its familiar DMA counterpart: a device
 driver registers with a device so it can receive interrupts signaling
 a transaction completing.
 
@@ -170,8 +170,8 @@ definitely *not* want to go to this trouble for every web server it
 connects to, so RDMA is not a candidate replacement for, say QUIC.
 
 Once everything is set up, there are two usage patterns for RDMA,
-which we broadly characterize as either *shared memory* oriented or
-based on *message passing*.  Students of concurrent systems will
+which we broadly characterize as either *shared memory* or
+*message passing*.  Students of concurrent systems will
 recognize the duality of these two approaches (i.e., a system
 constructed according to one model has a direct counterpart in the
 other), as articulated by Lauer and Needham in 1979. They also happen
@@ -180,7 +180,7 @@ to match the patterns of the GPI and MPI libraries, respectively.
 Because we have seen many examples of message passing, we focus here
 on the shared memory pattern, which the Verbs API refers to as
 *one-sided* operations. The *two-sided* counterpart provides
-operations that allow processes to send/receive messages in both
+operations that allow processes to send and receive messages in both
 directions. In the one-sided pattern, there are three categories of
 operations:
 
@@ -203,11 +203,11 @@ operations:
    address with a specified value and if they are equal, a specified
    value will be stored at the address.
 
-The two atomic operations are familiar to anyone that has written
+The two atomic operations are familiar to anyone who has written
 programs that must synchronize concurrent processes. This is a common
 activity in the kinds of parallel programs RDMA is designed to
 support, but outside the scope of this book. Here, we focus on the
-write operations, and in particular, *Write-with-Immedate*. The
+write operations, and in particular, *Write-with-Immediate*. The
 following code snippet shows the client side writing a "Hello, World"
 message to a remote address, along with the "immediate" value
 ``42``. There's nothing magical about the number 42; it's just an
@@ -267,8 +267,7 @@ AI workloads. We're now ready to look at the NIC in more detail.
 We conclude this overview of RDMA by looking at a few details of the
 HCA, which is effectively where the message transaction protocol is
 implemented. The description is relatively brief because RDMA uses
-techniques we have already covered; only the details are protocol
-specific.
+techniques we have already covered; only the details are protocol-specific.
 
 The transport layer implemented by the HCA is responsible for in-order
 packet delivery. It accomplishes this by implementing the sliding
@@ -298,7 +297,7 @@ and a 32-bit field indicating the length of the DMA transfer. (This is
 how the receiver knows when a sequence of fragments needs to be
 reassembled.)
 
-Finally, note that we have been focused on what Infiniband refers to
+Finally, note that we have been focused on what InfiniBand refers to
 as its *Reliable Connection (RC)* class of service. There are other
 options, including both unreliable connections and unreliable
 datagrams. The set supports the full breadth of possible use cases,
