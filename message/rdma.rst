@@ -102,6 +102,12 @@ interface, of which there are several options. They include *Message
 Passing Interface (MPI)* , *Global Address Space Programming Interface
 (GPI)*, and *Open Fabrics Interface (OFI)*.
 
+.. TODO possible sidebar on Networking for AI workloads. AI workloads
+   are brutal for the network because training goes in steps, where
+   there is collective communication per step, and the last flow to
+   complete in a collective gates when execution continues with the
+   next step 100th %ile FCT determines performance.
+
 Second, Ethernet continues to evolve, and in this particular
 circumstance, offers an alternative to InfiniBand's "native" switches.
 This effort is known as *Converged Ethernet (CE)*, and it makes it
