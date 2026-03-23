@@ -2,8 +2,9 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: Apache-2.0
 
+.. include:: chapters.rst
 
-Chapter 4: Routing
+Chapter |Routing|: Routing
 ========================================
 
 As we saw in Chapter 3, you can build a network from a set of links
@@ -37,11 +38,13 @@ routing*. We cover each of these in this chapter, along with a third
 approach, known a the *spanning tree protocol*.  While the spanning
 tree protocol is not typically referred to as a routing algorithm (for
 historical reasons), it is a distributed algorithm for finding
-loop-free paths in a network of Ethernet switches.
+loop-free paths in a network of Ethernet switches. We conclude this
+chapter by looking at how routing works in a very different setting:
+datacenter switching fabrics.
 
 
 .. include:: routing/design.rst
 .. include:: routing/spanningtree.rst
 .. include:: routing/linkstate.rst
 .. include:: routing/distancevector.rst
-.. include:: routing/sdn.rst
+.. include:: routing/fabric.rst
