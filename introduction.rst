@@ -2,9 +2,10 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. include:: chapters.rst
 
-Chapter 1:  Introduction
-=============================
+Chapter |Intro|:  Introduction
+==============================
 
 Suppose you want to build a computer network, one that has the
 potential to grow to global scale and support applications as diverse

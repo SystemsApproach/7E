@@ -1,5 +1,5 @@
-11.5 Triggering Transmission
------------------------------
+|TCP|.5 Triggering Transmission
+--------------------------------
 
 We next consider a surprisingly subtle issue: how TCP decides to
 transmit a segment. As described earlier, TCP supports a byte-stream
@@ -25,7 +25,7 @@ fires; the resulting segment contains as many bytes as are currently
 buffered for transmission. However, as we will soon see, this “timer”
 isn’t exactly what you expect.
 
-11.5.1 Silly Window Syndrome
+|TCP|.5.1 Silly Window Syndrome
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Of course, we can’t just ignore flow control, which plays an obvious
@@ -94,7 +94,7 @@ read more data (thus opening the window). The ultimate solution falls to
 the sender, which brings us back to our original issue: When does the
 TCP sender decide to transmit a segment?
 
-11.5.2 Nagle’s Algorithm
+|TCP|.5.2 Nagle’s Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Returning to the TCP sender, if there is data to send but the window

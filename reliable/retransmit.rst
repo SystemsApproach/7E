@@ -1,5 +1,5 @@
-11.6 Adaptive Retransmission
------------------------------
+|TCP|.6 Adaptive Retransmission
+--------------------------------
 
 Because TCP guarantees the reliable delivery of data, it retransmits
 each segment if an ACK is not received in a certain period of time. TCP
@@ -12,7 +12,7 @@ adaptive retransmission mechanism. We now describe this mechanism and
 how it has evolved over time as the Internet community has gained more
 experience using TCP.
 
-11.6.1 Original Algorithm
+|TCP|.6.1 Original Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We begin with a simple algorithm for computing a timeout value between a
@@ -44,7 +44,7 @@ setting of ``alpha`` between 0.8 and 0.9. TCP then uses
 
    TimeOut = 2 x EstimatedRTT
 
-11.6.2 Karn/Partridge Algorithm
+|TCP|.6.2 Karn/Partridge Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After several years of use on the Internet, a rather obvious flaw was
@@ -86,7 +86,7 @@ out, the more cautious the source should become. We will see this idea
 again, embodied in a much more sophisticated mechanism, in the next
 chapter.
 
-11.6.3 Jacobson/Karels Algorithm
+|TCP|.6.3 Jacobson/Karels Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Karn/Partridge algorithm was introduced at a time when the Internet
@@ -140,8 +140,8 @@ set to 4.  Thus, when the variance is small, ``TimeOut`` is close to
 ``EstimatedRTT``; a large variance causes the ``Deviation`` term to
 dominate the calculation.
 
-11.6.4 Implementation
-~~~~~~~~~~~~~~~~~~~~~~~
+|TCP|.6.4 Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two items of note regarding the implementation of timeouts in
 TCP. The first is that it is possible to implement the calculation for

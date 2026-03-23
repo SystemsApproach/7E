@@ -1,10 +1,10 @@
-11.3 Connection Establishment
+|TCP|.3 Connection Establishment
 -------------------------------------
 
 A TCP connection begins with a client (caller) doing an active open to a
 server (callee). Assuming that the server had earlier done a passive
 open, the two sides engage in an exchange of messages to establish the
-connection. (Recall from Chapter 2 that a party wanting to initiate a
+connection. (Recall from Chapter |Apps| that a party wanting to initiate a
 connection performs an active open, while a party willing to accept a
 connection does a passive open.\ [#]_) Only after this connection
 establishment phase is over do the two sides begin sending data.
@@ -23,7 +23,7 @@ connection open and to continue sending data.
        common case is for one side to do an active open and the other
        side to do a passive open.
 
-11.3.1 Three-Way Handshake
+|TCP|.3.1 Three-Way Handshake
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The algorithm TCP uses to establish and terminate a connection is
@@ -71,7 +71,7 @@ while there is still a chance that a segment from an earlier incarnation
 of a connection might interfere with a later incarnation of the
 connection.
 
-11.3.2 State-Transition Diagram
+|TCP|.3.2 State-Transition Diagram
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TCP is complex enough that its specification includes a state-transition
@@ -108,7 +108,7 @@ and its service interface. The *syntax* of the peer interface is given
 by the segment format (as illustrated in :numref:`Figure %s
 <fig-tcp-format>`), while the service interface is defined by an
 application programming interface, such as the socket API described in
-Chapter 2.
+Chapter |Apps|.
 
 Now let’s trace the typical transitions taken through the diagram in
 :numref:`Figure %s <fig-tcp-std>`. Keep in mind that TCP makes

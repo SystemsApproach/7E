@@ -2,8 +2,9 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. include:: chapters.rst
 
-Chapter 11:  Reliable Byte Stream
+Chapter |TCP|:  Reliable Byte Stream
 ====================================
 
 In Part II we described how to build a best-effort packet delivery service,

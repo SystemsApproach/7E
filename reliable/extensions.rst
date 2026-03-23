@@ -1,4 +1,4 @@
-11.8 TCP Extensions
+|TCP|.8 TCP Extensions
 ---------------------------------
 
 We have mentioned at four different points in this chapter that there

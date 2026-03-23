@@ -1,5 +1,5 @@
-11.7 Record Boundaries
------------------------
+|TCP|.7 Record Boundaries
+-------------------------
 
 Since TCP is a byte-stream protocol, the number of bytes written by the
 sender are not necessarily the same as the number of bytes read by the

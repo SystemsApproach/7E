@@ -1,7 +1,7 @@
 .. _artifact-quic:
 
-14.3 Optimizing RPC
------------------------
+|Message|.3 Optimizing RPC
+--------------------------
 
 RPC has long been a popular communication primitive for building
 distributed systems, with gRPC expanding on that history to support
@@ -9,12 +9,12 @@ scalable cloud services. But the designers of gRPC make a calculated
 tradeoff, favoring the convenience of RPC over the known performance
 limitations of running HTTP over TCP. Their experience building and
 supporting gRPC, coupled with the broader Internet's experience
-building RESTful applications directly on top of HTTP/TCP, led to
+building the World Wide Web and RESTful applications directly on top of HTTP, led to
 insights about how both HTTP and the the underlying transport protocol
 could be improved.  These insights, in turn, led to the development of
 new version of HTTP, known as HTTP/3, and a new transport protocol,
-called QUIC.  The two protocols are co-designed to better support both
-REST-based or RPC-based distributed/cloud systems. This section
+called QUIC.  The two protocols are co-designed to better support the
+Web and REST-based or RPC-based distributed systems. This section
 describes the resulting design.
 
 .. Cut-and-pasted from TCP chapter in 6E
@@ -29,7 +29,7 @@ noticeable over time, due to factors such as the rise of high-latency
 wireless networks, the availability of multiple networks for a single
 device (e.g., Wi-Fi and cellular), and the increasing use of
 encrypted, authenticated connections on the Web (as discussed in
-Chapter 12).
+Chapter |TLS|).
 
 If network latency is high—say 100 milliseconds or more—then a few
 RTTs can quickly add up to a visible annoyance for an end user. It's
@@ -78,7 +78,8 @@ first appeared to be.
 
 QUIC implements fast connection establishment with encryption and
 authentication in the first RTT. It provides a connection identifier
-that persists across changes in the underlying network. It supports
+that persists across changes in the underlying network, so a
+connection can migrate from from one network to another. It supports
 the multiplexing of several streams onto a single transport
 connection, to avoid the head-of-line blocking that may arise when a
 single packet is dropped while other useful data continues to
@@ -86,7 +87,7 @@ arrive. And it preserves (and in some ways improves on) the congestion
 avoidance properties of TCP.
 
 HTTP went through a number of versions in an effort to map its requirements more cleanly onto
-the capabilities of TCP as we noted in Chapter 2. With the arrival of QUIC, HTTP/3 is now able
+the capabilities of TCP as we noted in Chapter |Apps|. With the arrival of QUIC, HTTP/3 is now able
 to leverage a transport layer that was explicitly designed to meet the
 application requirements of the Web. And in meeting the requirements
 for web traffic, QUIC provides a better match for RPC as well.
@@ -100,8 +101,8 @@ TCP was well established in the Internet—it presents a fascinating
 case study in the unforeseen consequences of layered designs and in
 the evolution of the Internet.
 
-14.3.1 Rethinking Layering
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.1 Rethinking Layering
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first important design choice in QUIC from the perspective of
 performance is that it doesn't treat the transport and security
@@ -145,12 +146,12 @@ can be sent (because there are shared secrets cached from a
 previous connection), the first HTTP request can actually be sent at
 the same time as the client Hello message. In this case, the sending of a
 request takes place in parallel with the
-establishement of a secure connection, enabling requests to be sent in
+establishment of a secure connection, enabling requests to be sent in
 the first round trip. This is quite an improvement over the old approach of
 TCP connection setup followed by TLS establishment followed by request.
 
-14.3.2 QUIC Packets and Frames
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.2 QUIC Packets and Frames
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 QUIC differs from TCP in dozens of ways, but beyond the incorporation
 of TLS discussed above, the most important is the addition of streams
@@ -181,8 +182,12 @@ align on 32 bit boundaries.
    time and the short header (bottom) is used for subsequent packets.
 
 The Source and Destination Connection IDs perform a function similar
-to port numbers in TCP and UDP, with some important
-differences. Firstly, they are variable length, hence the ``CID
+to port numbers in TCP and UDP, with some important differences.
+Firstly, a Connection ID completely identifies the connection, in
+contrast to port numbers, which must be combined with the IP addresses
+of the endpoints to uniquely identify a connection. This simplifies the
+task of migrating a connection to another network, as described below.
+The Connection IDs are variable length, hence the ``CID
 length`` fields. In QUIC version 1, they may be up to 20 bytes
 long. The client opening a connection picks its Source Connection ID,
 which will be used by the server as the Destination Connection ID when
@@ -280,13 +285,13 @@ There are many other types of frames and you can refer to the QUIC RFC
 acknowledgement of received packets. We discuss its role in the next
 section.
 
-14.3.3 Loss Detection, Recovery, and Congestion Control
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.3 Loss Detection, Recovery, and Congestion Control
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In many respects, QUIC builds on the best practices learned over
 decades of development of TCP congestion control. The default
 congestion control algorithm is TCP NewReno, which we covered in
-Chapter 13. But there are some important differences in the details
+Chapter |CC|. But there are some important differences in the details
 which provide some incremental performance benefits over TCP.
 
 As we noted above, QUIC never reuses a packet number, so a
@@ -374,10 +379,53 @@ similar to those in TCP and the NewReno variant specifically. A QUIC
 connection begins in slow start, moves into recovery phase upon a
 packet loss, then moves into congestion avoidance when a packet sent
 in the recovery period is acknowledged. The details are similar to the
-description of NewReno in Chapter 12.
+description of NewReno in Chapter |CC|.
+
+|Message|.3.4 Connection Migration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The process by which QUIC allows for connections to migrate from one
+network path to another warrants a little discussion. Compared to TCP,
+which uses source and destination addresses and ports to distinguish
+connections, QUIC is much simpler: a connection is uniquely identified
+by a Connection ID. There is one connection ID in each direction for a
+bidirectional connection, and it is chosen by the destination, so it
+can ensure that these IDs are unique across all connections. So, at
+first glance, you might think that if a client wants to migrate a
+connection from one network to another (such as switching from Wi-Fi
+to a cellular network) it would "just work". Keep on using the same
+connection ID on the new network, with a new source address and UDP
+port, and the sender could reply to the new address.
+
+The problem with the approach just described is that it opens up a
+number of security issues. For example, a denial of service attack
+could be launched by a malicious client providing the address of a target as the
+new source IP address, and a small request from the client might
+elicit a large response from the server, thus magnifying the scale of
+the attack. Another attack is on-path address spoofing: an attacker
+who sees the traffic on a connection can send a packet with a spoofed
+source address that is otherwise a copy of a legitimate packet. If
+this packet arrives before the original, it will appear to be a
+connection migration.
+
+The way QUIC protects against these migration attacks is to require
+*path validation* when connections are migrated. The client does
+simply start using a new source address with the old
+connection ID. The server then sends a
+PATH_CHALLENGE frame to the new address. The frame contains a chunk of
+random data. The recipient of the challenge responds with the same
+set of data. This proves that the new path works in both directions
+and that the responding client has the cryptographic material
+necessary to communicate with the server, thus ruling out the
+possibility of the spoofing attacks above.
 
 
-.. TODO -- some wrap up
+This overview of QUIC necessarily leaves out a fair number of
+details. The protocol specification spans four RFCs and many hundreds
+of pages. For a good overview of the design philosophy and benefits of
+QUIC we recommend the SIGCOMM paper from 2017. The main specification
+is RFC 9000 which links to the companion RFCs that cover topics such
+as the interactions with TLS and congestion control.
 
 .. _reading_quic:
 .. admonition::  Further Reading

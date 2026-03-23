@@ -1,7 +1,7 @@
 .. _artifact-grpc:
 
-14.2 Remote Procedure Call
---------------------------------
+|Message|.2 Remote Procedure Call
+---------------------------------
 
 RPC is a popular mechanism for structuring distributed systems, based
 on the semantics of a local procedure call—the application program
@@ -51,7 +51,7 @@ program.
 This section considers just the network-related aspects of an RPC
 mechanism, focusing on the protocol that transmits messages between
 client and server. The transformation of arguments into messages and
-*vice versa* is covered in Section 14.6. It is also important to keep
+*vice versa* is covered in Section |Message|.6. It is also important to keep
 in mind that the client and server programs are written in some
 programming language, meaning that a given RPC mechanism might support
 Python stubs, Java stubs, GoLang stubs, and so on, each of which
@@ -79,7 +79,7 @@ standard Internet protocol under the name ONC RPC.
 
 The emergence of the cloud led to another seismic shift in RPC design,
 in part corresponding to the wide-spread adoption of HTTP as discussed
-in Chapter 2. This is where we pick up the story by turning our
+in Chapter |Apps|. This is where we pick up the story by turning our
 attention to gRPC, a popular open source RPC mechanism. gRPC is based
 on an RPC mechanism that Google had been using internally to implement
 cloud services in their datacenters.
@@ -100,7 +100,7 @@ Before getting into the details, there is a major difference between
 gRPC and other RPC mechanisms—such as SunRPC—that came before it.
 The difference is that gRPC was explicitly designed for cloud services
 rather than the simpler client/server paradigm that preceded it. As we
-introduced in Chapter 2, this results in an extra level of indirection.
+introduced in Chapter |Apps|, this results in an extra level of indirection.
 
 In the client/server world, the client invokes a method on a specific
 server process running on a specific server machine. One server
@@ -296,14 +296,14 @@ to the server are encoded into a message, which is in turn used to
 generate the stubs that sit between the underlying RPC mechanism and
 the actual functions being called (see :numref:`Figure %s
 <fig-rpc>`). This is how gRPC tackles the *argument marshalling*
-problem, to which we return in Section 14.6.
+problem, to which we return in Section |Message|.6.
 
 The bottom line is that complex mechanisms like RPC, once packaged as
 a monolithic bundle of software (as with SunRPC), are nowadays built by
 assembling an assortment of smaller pieces, each of which solves a
 narrow problem. gRPC is both an example of that approach, and a tool
 that enables further adoption of the approach.  The microservices
-architecture mentioned Chapter 2 applies the “built from small parts”
+architecture mentioned Chapter |Apps| applies the “built from small parts”
 strategy to entire cloud applications (e.g., the services provided by Uber, Lyft, Netflix,
 Yelp, Spotify, etc.), where gRPC is often the communication mechanism used
 by those small pieces to exchange messages with each other.
