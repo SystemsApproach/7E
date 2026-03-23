@@ -220,7 +220,7 @@ variable-length arrays. In such a case, a length tag is commonly used
 to indicate how long the array is.
 
 It is also worth noting that the untagged approach means that the
-presentation formatting is truly end to end. It is not possible for some
+presentation formatting is truly end-to-end. It is not possible for some
 intermediate agent to interpret the message unless the data is tagged.
 Why would an intermediate agent need to interpret a message, you might
 ask? Stranger things have happened, mostly resulting from *ad hoc*
@@ -261,7 +261,7 @@ are more common in practice.
 
 Protocol Buffers (Protobufs, for short) provide a language-neutral and
 platform-neutral way of serializing structured data, commonly used
-with gRPC. It uses a tagged strategy with a canonical intermediate
+with gRPC. They use a tagged strategy with a canonical intermediate
 form, where the stub on both sides is generated from a shared
 ``.proto`` file.  This specification uses a simple C-like syntax, as
 the following example illustrates:
