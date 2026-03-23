@@ -1,5 +1,5 @@
-14.1 Design Issues
-----------------------
+|Message|.1 Design Issues
+-------------------------
 
 A message transaction protocol faces many of the same problems as TCP,
 starting with a precise definition of the
@@ -104,7 +104,7 @@ data in the reply message.) But if a program is multi-threaded, then
 it is possible that more than one thread will initiate its own message
 transaction, meaning that multiple request/response transactions may
 happen in parallel. The protocol would need to accommodate such
-parallelism. The *stream id* in HTTP/2 (as described in Chapter 2)
+parallelism. The *stream id* in HTTP/2 (as described in Chapter |Apps|)
 supports exactly such a situation. Another design option is that
 request messages do not block waiting for a reply, but instead, the
 caller is allowed to proceed and will be notified when the reply

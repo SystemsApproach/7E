@@ -3,8 +3,10 @@
 .. SPDX-License-Identifier: CC-BY-4.0
 
 
-Chapter 14:  Message Transactions
-=====================================
+.. include:: chapters.rst
+
+Chapter |Message|:  Message Transactions
+========================================
 
 TCP's reliable byte stream abstraction has proven to be versatile, and
 able

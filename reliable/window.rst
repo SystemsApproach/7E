@@ -1,4 +1,4 @@
-11.4 Sliding Window
+|TCP|.4 Sliding Window
 ------------------------------
 
 We are now ready to discuss TCP’s variant of the sliding window
@@ -6,7 +6,7 @@ algorithm, which serves several purposes: (1) it guarantees the reliable
 delivery of data, (2) it ensures that data is delivered in order, and
 (3) it enforces flow control between the sender and the
 receiver. TCP’s use of the sliding window algorithm is similar to the
-simple example in Section 11.1 in the case of the first two of these
+simple example in Section |TCP|.1 in the case of the first two of these
 three functions.  Where TCP differs from the simple example is that it
 folds the flow-control function in as well. In particular, rather than
 having a fixed-size sliding window, the receiver *advertises* a window
@@ -19,7 +19,7 @@ purpose of buffering data. The idea is to keep the sender from
 over-running the receiver’s buffer. We discuss this at greater length
 below.
 
-11.4.1 Reliable and Ordered Delivery
+|TCP|.4.1 Reliable and Ordered Delivery
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To see how the sending and receiving sides of TCP interact with each
@@ -95,7 +95,7 @@ data, as in :numref:`Figure %s <fig-tcp-fc>`. Note that bytes to the left of
 read by the local application process, and bytes to the right of
 ``LastByteRcvd`` need not be buffered because they have not yet arrived.
 
-11.4.2 Flow Control
+|TCP|.4.2 Flow Control
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 Most of the above discussion is similar to that found in the standard
@@ -225,7 +225,7 @@ rule, which, for lack of a better name, we call the *smart sender/
 dumb receiver* rule.
 
 
-11.4.3 Protecting Against Wraparound
+|TCP|.4.3 Protecting Against Wraparound
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This subsection and the next consider the size of the ``SequenceNum``
@@ -289,7 +289,7 @@ extension to TCP that effectively extends the sequence number space to
 protect against the sequence number wrapping around. This and related
 extensions are described in a later section.
 
-11.4.5 Keeping the Pipe Full
+|TCP|.4.5 Keeping the Pipe Full
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The relevance of the 16-bit ``AdvertisedWindow`` field is that it must

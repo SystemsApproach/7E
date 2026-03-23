@@ -1,10 +1,10 @@
-14.6 Argument Marshalling
+|Message|.6 Argument Marshalling
 ----------------------------------
 
 We conclude by looking at the issue of how RPC and RDMA deal with the
 format of the payload carried in request and response messages. The
 short answer is that data formatting is a fundamental aspect of RPC
-(half of the two-part mechanism outlined in Section 14.2), and largely
+(half of the two-part mechanism outlined in Section |Message|.2), and largely
 ignored by RDMA. This is an explicit design choice. RPC makes no
 assumptions about the process on the other end of a message exchange,
 and so has to account for wide variation. The rest of this section
@@ -77,7 +77,7 @@ matter of bit twiddling—there are a surprising number of design
 choices to address. This section gives a simple taxonomy for argument
 marshalling, and concludes by showing how gRPC addresses the problem.
 
-14.6.1 Data Types
+|Message|.6.1 Data Types
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first question is what data types the system is going to support. In
@@ -125,7 +125,7 @@ network. :numref:`Figure %s <fig-marshal2>` illustrates this task.
 
    Argument marshalling: converting, packing, and linearizing
 
-14.6.2 Conversion Strategy
+|Message|.6.2 Conversion Strategy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once the type system is established, the next issue is what conversion
@@ -179,7 +179,7 @@ would a sender learn the receiver’s architecture? It could learn this
 information either from a name server or by first using a simple test
 case to see if the appropriate result occurs.
 
-14.6.3 Tags
+|Message|.6.3 Tags
 ~~~~~~~~~~~~~~~~~~
 
 The third issue in argument marshalling is how the receiver knows what
@@ -227,8 +227,8 @@ ask? Stranger things have happened, mostly resulting from *ad hoc*
 solutions to unexpected problems that the system was not engineered to
 handle. Poor network design is beyond the scope of this book.
 
-14.6.4 Stubs
-~~~~~~~~~~~~~~~~~~
+|Message|.6.4 Stubs
+~~~~~~~~~~~~~~~~~~~
 
 A stub is the piece of code that implements argument marshalling. Stubs
 are typically used to support RPC. On the client side, the stub marshals
@@ -256,8 +256,8 @@ are more common in practice.
    Stub compiler takes interface description as input and outputs client
    and server stubs.
 
-14.6.5 ProtoBuf Example
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.6.5 ProtoBuf Example
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Protocol Buffers (Protobufs, for short) provide a language-neutral and
 platform-neutral way of serializing structured data, commonly used

@@ -1,4 +1,4 @@
-11.2 Segments
+|TCP|.2 Segments
 -----------------------------
 
 When we describe TCP as a byte-oriented protocol, we are describing

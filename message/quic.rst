@@ -1,7 +1,7 @@
 .. _artifact-quic:
 
-14.3 Optimizing RPC
------------------------
+|Message|.3 Optimizing RPC
+--------------------------
 
 RPC has long been a popular communication primitive for building
 distributed systems, with gRPC expanding on that history to support
@@ -29,7 +29,7 @@ noticeable over time, due to factors such as the rise of high-latency
 wireless networks, the availability of multiple networks for a single
 device (e.g., Wi-Fi and cellular), and the increasing use of
 encrypted, authenticated connections on the Web (as discussed in
-Chapter 12).
+Chapter |TLS|).
 
 If network latency is high—say 100 milliseconds or more—then a few
 RTTs can quickly add up to a visible annoyance for an end user. It's
@@ -87,7 +87,7 @@ arrive. And it preserves (and in some ways improves on) the congestion
 avoidance properties of TCP.
 
 HTTP went through a number of versions in an effort to map its requirements more cleanly onto
-the capabilities of TCP as we noted in Chapter 2. With the arrival of QUIC, HTTP/3 is now able
+the capabilities of TCP as we noted in Chapter |Apps|. With the arrival of QUIC, HTTP/3 is now able
 to leverage a transport layer that was explicitly designed to meet the
 application requirements of the Web. And in meeting the requirements
 for web traffic, QUIC provides a better match for RPC as well.
@@ -101,8 +101,8 @@ TCP was well established in the Internet—it presents a fascinating
 case study in the unforeseen consequences of layered designs and in
 the evolution of the Internet.
 
-14.3.1 Rethinking Layering
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.1 Rethinking Layering
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first important design choice in QUIC from the perspective of
 performance is that it doesn't treat the transport and security
@@ -150,8 +150,8 @@ establishment of a secure connection, enabling requests to be sent in
 the first round trip. This is quite an improvement over the old approach of
 TCP connection setup followed by TLS establishment followed by request.
 
-14.3.2 QUIC Packets and Frames
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.2 QUIC Packets and Frames
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 QUIC differs from TCP in dozens of ways, but beyond the incorporation
 of TLS discussed above, the most important is the addition of streams
@@ -285,13 +285,13 @@ There are many other types of frames and you can refer to the QUIC RFC
 acknowledgement of received packets. We discuss its role in the next
 section.
 
-14.3.3 Loss Detection, Recovery, and Congestion Control
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.3 Loss Detection, Recovery, and Congestion Control
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In many respects, QUIC builds on the best practices learned over
 decades of development of TCP congestion control. The default
 congestion control algorithm is TCP NewReno, which we covered in
-Chapter 13. But there are some important differences in the details
+Chapter |CC|. But there are some important differences in the details
 which provide some incremental performance benefits over TCP.
 
 As we noted above, QUIC never reuses a packet number, so a
@@ -379,10 +379,10 @@ similar to those in TCP and the NewReno variant specifically. A QUIC
 connection begins in slow start, moves into recovery phase upon a
 packet loss, then moves into congestion avoidance when a packet sent
 in the recovery period is acknowledged. The details are similar to the
-description of NewReno in Chapter 12.
+description of NewReno in Chapter |CC|.
 
-14.3.4 Connection Migration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Message|.3.4 Connection Migration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The process by which QUIC allows for connections to migrate from one
 network path to another warrants a little discussion. Compared to TCP,

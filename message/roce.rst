@@ -1,6 +1,6 @@
 .. _artifact-roce:
 
-14.5 Optimizing Ethernet for RDMA
+|Message|.5 Optimizing Ethernet for RDMA
 ------------------------------------------
 
 The adoption of RDMA as the preferred transport protocol for HPC
@@ -47,7 +47,7 @@ InfiniBand defines 16 lanes, and hence, 16 priority queues. Each
 end-to-end connection is assigned to one of the lanes according to the
 QoS parameters associated with that connection.  This is an indirect
 way of making a per-connection reservation (the weighted fair queuing
-algorithm described in Chapter X would be more direct), but it does
+algorithm described in Chapter |Capacity| would be more direct), but it does
 provide more isolation between user flows than the single FIFO queue
 in a standard Ethernet switch.
 
@@ -94,7 +94,7 @@ has two main parts. The first is to replicate InfiniBand's flow
 control mechanism by adding support for Priority Flow Control to
 Ethernet switches. This has been standardized as IEEE 802.1Qbb.  The
 second is to take advantage of the existing Explicit Congestion
-Notification (ECN) mechanism described in Chapter X. This is appealing
+Notification (ECN) mechanism described in Chapter |Capacity|. This is appealing
 for cloud providers because their datacenters already leverage ECN in
 support of TCP congestion control.  The two mechanisms work in
 concert, with ECN pacing the source host as a first response to

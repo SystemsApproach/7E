@@ -120,7 +120,7 @@ focus was on getting it to work in the first place. As the Internet
 became more successful, attracting more and more users and
 applications, security moved up in importance. Today it is one of the
 topmost concerns. We address security in multiple places throughout
-the book, with the most detailed discussion in Chapter 12. For a more
+the book, with the most detailed discussion in Chapter |TLS|. For a more
 comprehensive look at network security, we recommend a companion book.
 
 .. admonition:: Further Reading
