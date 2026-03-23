@@ -52,6 +52,9 @@ conceptual picture of an SDN system is shown in :numref:`Figure %s
     applications and providing a logically centralized point of
     control for an underlying network data plane.
 
+.. TODO -- We may want to drop the NOC angle, and just focus
+   on a single "Control Program".
+
 Centralized control opens up the possibility to rethink how routing
 works in a network.  Rather than a fully distributed algorithm of the
 sort described in the preceding sections, we now have the option of
@@ -220,6 +223,9 @@ There are two standardized approaches. One, called SR-MPLS, takes
 advantage of labels already being an integral part of *Multi-Protocol
 Label Switching (MPLS)*. We refer you to Chapter |Capacity| for more
 information about MPLS. The second, called SRv6, is an SR-specific
-extension to IPv6, which we discuss in Chapter |Fed|. In both cases,
-the details are important if you to implement segment routing, but
-conceptually, they are equivalent.
+extension to IPv6. We discuss in Chapter |Fed|, but for the purposes
+of this discussion, SRv6 attaches a list of 128-bit *Segment IDs* to
+the end of the IPv6 header, plus a *Segments Left* field that points
+to the current active segment.
+
+.. TODO -- Probably ought to give an example layout diagram
