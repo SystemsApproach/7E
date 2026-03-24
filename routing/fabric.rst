@@ -53,7 +53,8 @@ conceptual picture of an SDN system is shown in :numref:`Figure %s
     control for an underlying network data plane.
 
 .. TODO -- We may want to drop the NOC angle, and just focus
-   on a single "Control Program".
+   on a single "Control Program". Or at least equate NOS with
+   "library"  and note that it's not multi-tenant.
 
 Centralized control opens up the possibility of rethinking how routing
 works in a network.  Rather than a fully distributed algorithm of the
@@ -73,16 +74,15 @@ algorithms centrally, without needing to solve the challenges of
 getting a consistent view of the network at every node in a
 distributed system.
 
-Some famous examples of novel approaches to routing enabled by SDN
+Two famous examples of novel approaches to routing enabled by SDN
 include the work at Google on B4 and Microsoft on SWAN. In both cases,
-the aim was to pick paths through their respective backbone networks
-that were sufficient in terms of capacity to support the expected
-matrix of traffic applied to the network. This problem of mapping a
-traffic matrix onto a set of links is hard to solve efficiently in a
-fully distributed manner; centralizing it makes the problem much
-easier. Thus one of the early successes of SDN was to solve these
-*traffic engineering* problems in the large backbones interconnecting
-hyperscale datacenters.
+the aim is to pick paths through their respective backbone networks
+that provide sufficient capacity for the expected matrix of network
+traffic.  This problem of mapping a traffic matrix onto a set of links
+is hard to solve efficiently in a fully distributed manner;
+centralizing it makes the problem much easier. Thus, one of the early
+successes of SDN was to solve these *traffic engineering* problems in
+the large backbones interconnecting hyperscale datacenters.
 
 In this section we look at a related example—how to route *within* a
 single datacenter—and the specific method we describe is call *segment
@@ -115,13 +115,14 @@ logical NIC across the two physical NICs.
 
 Switches support a similar mechanism, in this case known as *ECMP
 groups*. ECMP stands for *Equal-Cost Multi-Path*, which is a bit more
-general than server link bonding in that it makes it possible for
-a switch to spread traffic across multiple equal-cost *paths* rather
+general than server link bonding in that it makes it possible for a
+switch to spread traffic across multiple equal-cost *paths* rather
 than just equivalent links. This is necessary for traffic crossing the
 spine from one rack (leaf switch) to another; there are multiple spine
 switches traffic can follow. For example, there is an ECMP Group in
-:numref:`Figure %s <fig-ecmp>` containing the four links Leaf 1
-can use to reach either of Spine 1 or Spine 2.
+:numref:`Figure %s <fig-ecmp>` containing the four links Leaf 1 can
+use to reach either of Spine 1 or Spine 2; switch Leaf 1 treats those
+four links as equivalent.
 
 .. _fig-ecmp:
 .. figure:: routing/figures/ecmp.png
@@ -187,11 +188,12 @@ as needed.
 :numref:`Figure %s <fig-sr>` illustrates how SR works using a simple
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
-subnet 10.0.1/24, the servers connected to Leaf 2 are on subnet
-10.0.2/24, and each of the switches has an assigned id: 101, 103, 102,
-and 104. (In our simple example, only one segment label is needed, and
-we can think of it as labeling either the segment or the target
-switch; they are effectively the same.)
+subnet 10.0.1/24 and the servers connected to Leaf 2 are on subnet
+10.0.2/24. We also assign labels 101 and 102 to Leaf 1 and Leaf 2,
+respectively. You can think of these identifiers as labeling either
+the segment or the target pair of leaf switches, but it also works to
+think of each label as being assigned to the rack served by the leaf
+pair.
 
 .. _fig-sr:
 .. figure:: routing/figures/sr.png
@@ -214,21 +216,25 @@ forwards the packet along to Host 2.
 What you should take away from this example is that SR is highly
 stylized. For a given combination of leaf and spine switches, the
 mechanism first assigns all identifiers, with each rack configured to
-share an IP prefix. The fabric control app then pre-computes the
-possible paths and installs the corresponding match/action rules in
-the underlying switches. The complexity having to do with balancing
-load across multiple paths is delegated to ECMP, which is similarly
-unaware of any end-to-end paths.
+share an IP prefix and a segment label. The fabric control app then
+pre-computes the possible paths and installs the corresponding
+match/action rules in the underlying switches. The complexity having
+to do with balancing load across multiple paths is delegated to ECMP,
+which is similarly unaware of any end-to-end paths.
 
 Finally, we answer the question about how labels are added to packets.
 There are two standardized approaches. One, called SR-MPLS, takes
 advantage of labels already being an integral part of *Multi-Protocol
 Label Switching (MPLS)*. We refer you to Chapter |Capacity| for more
 information about MPLS. The second, called SRv6, is an SR-specific
-extension to IPv6. We discuss in Chapter |Fed|, but for the purposes
-of this discussion, SRv6 attaches a list of 128-bit *Segment IDs* to
-the end of the IPv6 header, plus a *Segments Left* field that points
-to the current active segment.
+extension to IPv6. We discuss IPv6 in Chapter |Fed|, but for the
+purposes of this discussion, SRv6 attaches a list of 128-bit *Segment
+IDs* to the end of the IPv6 header, plus a *Segments Left* field that
+points to (is an index for) the current active segment. Our example
+pushes only one label onto the list (by Leaf 1), and once that label
+is popped off the list (by one of the spine switches), Leaf 2 is left
+to match the original destination address in the IPv6 header to
+implement its forwarding decision.
 
 .. TODO -- Probably ought to give an example layout diagram
 
