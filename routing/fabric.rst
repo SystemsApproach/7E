@@ -1,28 +1,28 @@
 4.5 Routing in Datacenters
 -------------------------------
 
-We conclude our discussion of routing by looking at a very different
+We conclude our discussion of routing by looking at a different
 scenario: how routes are managed in datacenter networks. Recall from
-Chapter 2 that datacenters typically interconnect racks of servers
+Chapter |Tech| that datacenters typically interconnect racks of servers
 using a leaf-spine network topology. :ref:`Figure 22 <fig-leaf-spine>`
 shows a simple four-rack example using a two-level switching fabric.
 Hyperscaler datacenters are much larger—and often use three-level
 fabrics—but the same idea applies.
 
-Several things are unique about this particular use case. For one,
+Several things are distinctive about this particular use case. For one,
 instead of using one of the distributed algorithms described in the
-previous sections, datacenters often adopt a centralized approach to
+previous sections, many datacenters adopt a centralized approach to
 routing based on the principles of *Software-Defined Networking
 (SDN)*. For another, the uniform structure of a leaf-spine fabric
-lends itself other routing techniques, including an approach known as
+lends itself to other routing techniques, including an approach known as
 *segment routing*.  This sections gives an overview of SDN, and
-explains the role it plays implementing segment routing.
+explains the role it plays in implementing segment routing.
 
 
 4.5.1 Software-Defined Networking
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As discussed in Chapter 3, switches and routers have a control plane
+As discussed in Chapter |Tech|, switches and routers have a control plane
 and a data plane, with some interface between them to allow forwarding
 rules to be installed in the data plane as the result of routing
 calculations made in the control plane. For most of the history of the
@@ -55,7 +55,7 @@ conceptual picture of an SDN system is shown in :numref:`Figure %s
 .. TODO -- We may want to drop the NOC angle, and just focus
    on a single "Control Program".
 
-Centralized control opens up the possibility to rethink how routing
+Centralized control opens up the possibility of rethinking how routing
 works in a network.  Rather than a fully distributed algorithm of the
 sort described in the preceding sections, we now have the option of
 using centralized algorithms. As a simple example, a controller could
@@ -140,14 +140,16 @@ Some end-to-end protocols, most notably TCP, work best when all the
 packets belonging to the same stream follow the same path.
 Out-of-order packets are handled correctly, but performance may
 suffer. To address this, both aggregation techniques keep all packets
-belonging to the same end-to-end flow on the same physical path.
+belonging to the same end-to-end flow on the same physical path. This
+is often done by taking the TCP or UDP port numbers into account when
+forwarding packets along equal-cost paths.
 
 There are two takeaways from this overview of link aggregation, First,
 with respect to routing, it is important to note that while routing
-algorithms are adaptive to load—i.e., able to shift from bad links to
-good links—they are not designed to balance load across equivalent
-paths. Such a fine-grain mechanism needs to operate "below" the
-routing decision.
+algorithms are capable of determining which paths are best by some
+metric, they are not designed to balance load across equivalent
+paths. Such a fine-grain mechanism is left to the data plane after the
+routing decision has determined the equal-cost paths.
 
 Second, ECMP is a forwarding strategy that is applies uniformly across
 all the switches in a fabric. The SDN control application knows the
