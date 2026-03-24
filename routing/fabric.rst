@@ -231,3 +231,15 @@ the end of the IPv6 header, plus a *Segments Left* field that points
 to the current active segment.
 
 .. TODO -- Probably ought to give an example layout diagram
+
+
+For a useful overview of one hyperscale data center design that
+leverages SDN, we recommend the paper on Google's Jupiter
+architecture.
+
+.. admonition:: Further Reading
+
+   L. Poutievski et al. `Jupiter evolving: transforming Google's
+      datacenter network via optical circuit switches and
+      software-defined networking
+      <https://doi.org/10.1145/3544216.3544265>`__. Proc. SIGCOMM 2022.
