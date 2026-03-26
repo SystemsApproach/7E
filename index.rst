@@ -33,6 +33,7 @@ Larry Peterson and Bruce Davie
    federation.rst
    policy.rst
    virtual.rst
+   capacity.rst
    part_three.rst
    reliable.rst
    secure.rst
