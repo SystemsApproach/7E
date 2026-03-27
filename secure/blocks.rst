@@ -43,7 +43,7 @@ cryptographic system designs themselves should not be secret, but
 should be parameterized by an easily changeable *key*; only the key
 should need to be secret. Open designs and minimizing secrets are
 among the widely
-accepted principles of security.
+accepted principles of system security today.
 
 One reason for open design is that, if you were to depend on the
 cipher being kept secret, then you would have to retire the cipher
@@ -68,11 +68,11 @@ deprecated.
 One of the best ways to know that a cipher is secure is to use
 it for a long time—the longer it goes unbroken, the better the chance
 that is is secure. As with security in general, proving that a
-cryptographic algorithm cannot be broken is a bit of a negative goal,
+cryptographic algorithm cannot be broken is a negative goal,
 and thus hard to do with complete confidence.  Sometimes we may be
 able to prove that breaking a cipher is as hard as solving some
 well-studied mathematical problem such as factoring large numbers.
-Even then there may be problems of implementation that will only get
+Even then, there may be problems of implementation that will only get
 discovered by the scrutiny of those looking at and using the
 algorithm. And in many cases, we just have to rely on the fact that
 no-one has yet found a viable way to break the cipher. Fortunately,
@@ -195,13 +195,13 @@ to be an issue is available at the "Sweet32" website.
 -----------------------------
 
 In a secret-key cipher, both participants in a communication share the
-same key.\ [#]_ In other words, if a message is encrypted using a particular
-key, the same key is required for decrypting the message. If the
-cipher illustrated in :numref:`Figure %s <fig-genericCrypto>` were a
-secret-key cipher, then the encryption and decryption keys would be
-identical. Secret-key ciphers are also known as symmetric-key ciphers
-since the secret is shared with both participants. We’ll take a look
-at the alternative, public-key ciphers, in which the keys are
+same key.\ [#]_ In other words, if a message is encrypted using a
+particular key, the same key is required for decrypting the message.
+Secret-key ciphers are also known as symmetric-key ciphers since the
+secret is shared with both participants. If the cipher illustrated in
+:numref:`Figure %s <fig-genericCrypto>` were a secret-key cipher, then
+the encryption and decryption keys would be identical. We’ll take a
+look at the alternative, public-key ciphers, in which the keys are
 asymmetrical, shortly.
 
 .. [#] We use *participants* as a generic term for the endpoints of a
@@ -223,11 +223,12 @@ DES keys have 56 independent bits (although they have 64 bits
 in total; the last bit of every byte is a parity bit). As noted above,
 you would, on average, have to search half of the space of 2\
 :sup:`56` possible keys to find the right one, giving 2\ :sup:`55` =
-3.6 × 10\ :sup:`16` keys.  That may sound like a lot, but  by the late 1990s, it was
+3.6 × 10\ :sup:`16` keys.  By the late 1990s, it was
 already possible to recover a DES key after a few hours. Consequently,
 NIST updated the DES standard in 1999 to indicate that DES should only
-be used for legacy systems. Importantly, DES was never shown to be
-vulnerable to any attack other than brute force.
+be used for legacy systems. DES was never shown to be
+vulnerable to any attack other than brute force, but brute force
+became a big enough threat to warrant deprecation.
 
 DES was initially replaced by *Triple DES* (3DES). A 3DES key has 168
 (= 3 × 56) independent bits. Unfortunately, the computational cost of
@@ -265,13 +266,13 @@ Bruce Schneier puts it this way:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 An alternative to secret-key ciphers is public-key ciphers. Instead of
-a single key shared by two participants, a public-key cipher uses a pair
-of related keys, one for encryption and a different one for decryption.
-The pair of keys is “owned” by just one participant. The owner keeps
-one key of the pair secret. That key is the *private key*. The owner makes the second key
-public; that key is called the *public key*.
-Obviously, it must
-not be possible to deduce the private key from the public key.
+a single key shared by two participants, a public-key cipher uses a
+pair of related keys, one for encryption and a different one for
+decryption.  The pair of keys is “owned” by just one participant. The
+owner keeps one key of the pair secret. That key is the *private
+key*. The owner makes the second key public; that key is called the
+*public key*.  Obviously, it must not be possible to deduce the
+private key from the public key.
 
 Anyone can get the public key and then use it to encrypt a message
 before sending it to the owner of the keys. Only the owner has the

@@ -49,7 +49,7 @@ end-to-end communication over the Internet. Chief among these is the
 development of Transport Layer Security (TLS) and its predecessor, the
 Secure Socket Layer (SSL). As you might gather from this pair of
 names, the design goal was to provide a layer of security to accompany
-the reliable byte stream abstraction provided by TCP and its
+the reliable byte-stream abstraction provided by TCP and its
 corresponding socket API. While initially motivated by the need to
 support secure transactions on the World Wide Web, TLS was designed as
 a general-purpose set of mechanisms to provide a secure byte-stream
@@ -58,14 +58,24 @@ abstraction to any higher layer protocol that needed it.
 TLS provides mechanisms to authenticate end-points, to protect the
 integrity of traffic, and to ensure its confidentiality. These
 capabilities are as useful for remote procedure calls (a topic we
-cover the next chapter) as they are for web traffic.
+cover in the next chapter) as they are for web traffic.
 
-One measure of the success of TLS it that the overwhelming majority of
+One measure of the success of TLS is that the overwhelming majority of
 web sites now use HTTPS (i.e., HTTP running over TLS) by default. In
-this chapter we explore the various components that are have been
+this chapter we explore the various components that have been
 assembled to deploy a secure byte-stream abstraction that is now the
 default for most web traffic.
 
+Network Security is a big enough field that we have an entire
+companion book on it. In this chapter we will illustrate many of the
+important principles of network security by focusing on the example
+system of TLS.
+
+.. admonition:: Further Reading
+
+   Larry Peterson and Bruce Davie. `Network Security: A Systems
+   Approach <https://security.systemsapproach.org>`__. Systems
+   Approach, 2025.
 
 
 .. include:: secure/design.rst
