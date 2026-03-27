@@ -27,10 +27,7 @@ much traffic being offered to a bottleneck link. To see this, we need
 look no further than the simple network depicted in :numref:`Figure %s
 <fig-congestion>`, where all traffic has to flow through the same
 router to reach the destination. Although this is an extreme example,
-it is common to have at least one link that it is not possible to
-route around. This link, and the router that feeds packets into it,
-can become congested, and there is nothing the routing mechanism
-can do about it.
+it is not uncommon to have bottleneck link that you can't route around.
 
 So how do we address congestion? As originally deployed, the Internet
 didn't do anything. Users (or more precisely, TCP running on their
@@ -50,13 +47,13 @@ rest of this section explores the design space.
    of this chapter, but it does set up TE as a topic.
 
 In principle, the first design decision is whether a network's
-approach to resource allocation is centralized or distributed. In
-practice, the Internet's scale—along with the autonomy of the
-organizations that connect to it—dictated a distributed
-approach. Indeed, distributed management of resources was an
-explicitly stated goal of the Internet's design, as articulated by
-Dave Clark. But acknowledging this default decision is important for
-two reasons.
+approach to resource allocation is centralized (based on global
+information) or distributed (based on local information). In practice,
+the Internet's scale—along with the autonomy of the organizations that
+connect to it—dictated a distributed approach. Indeed, distributed
+management of resources was an explicitly stated goal of the
+Internet's design, as articulated by Dave Clark. But acknowledging
+this default decision is important for two reasons.
 
 .. _reading_design:
 .. admonition:: Further Reading
@@ -71,57 +68,48 @@ think of them as cooperatively trying to achieve a globally optimal
 solution.  From this perspective, there is a shared objective
 function, and all the elements are implementing a distributed
 algorithm to optimize that function. The various mechanisms described
-in this Chapter—and its counterpart Chapter |CC| in Part III—are
-simply defining different objective functions. A persistent challenge
-has been how to think about competing objective functions when
-multiple mechanisms have been deployed.
+in this Chapter—and their edge counterparts Chapter |CC| in Part
+III—are simply defining different objective functions. A persistent
+challenge has been how to think about competing objective functions
+when multiple mechanisms have been deployed.
 
 Second, while a centralized approach is not practical for the Internet
-as a whole, it can be appropriate for limited domains. For example, a
-logically centralized controller could collect information about the
-state of the network's links and switches, compute a globally optimal
-allocation, and then advise (or even police) end hosts as to how much
-capacity is available to each of them. Such an approach would
-certainly be limited by the time-scale in which the centralized
-controller could be responsive to changes in the network, but it has
-been successfully applied to the coarse-grained allocation decisions
-made by traffic engineering mechanisms, such as those described in
-Section |Capacity|.4.  Exactly where one draws a line between
-coarse-grain traffic engineering decisions and fine-grain congestion
-control decisions is not clear, but it's good to keep an open mind
-about the spectrum of options that are available.
-
-Centralized control has also been used effectively in datacenters,
-which are an interesting environment for congestion control. First,
-they have very low RTTs (for traffic between servers in the
-datacenter, if not for flows heading in or out of the datacenter).
-Second, in many cases a datacenter can be treated as a greenfield,
-raising the possibility to try new approaches that don't have to
-coexist fairly with incumbent algorithms.
+as a whole, it can be appropriate for limited domains; backbone
+networks connecting cloud datacenters are one example.  In such
+domains, a logically centralized controller could collect information
+about the state of the network's links and switches, compute a
+globally optimal allocation, and then advise (or even police) end
+hosts as to how much capacity is available to each of them. Such an
+approach would certainly be limited by the time-scale in which the
+centralized controller could be responsive to changes in the network,
+but it has been successfully applied to the coarse-grained allocation
+decisions made by traffic engineering mechanisms, such as those
+described in Section |Capacity|.4.  Exactly where one draws a line
+between coarse-grain traffic engineering decisions and fine-grain
+congestion control decisions is not clear, but it's good to keep an
+open mind about the spectrum of options that are available.
 
 |Capacity|.1.2 Router-Centric versus Host-Centric
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Given a distributed approach to resource allocation, the next question
-is whether to implement the mechanism inside the network (i.e., at
-the routers or switches) or at the edges of the network (i.e., in the
-hosts, perhaps as part of the transport protocol). This is not
-strictly an either/or situation. Both locations are involved, and the
-real issue is where the majority of the burden falls. Individual
-routers always take responsibility for deciding which packets to
-forward and which packets to drop. However, there is a range of options
-in how much the router involves the end hosts in specifying how this
-decision is made, or learning how this decision was made.
+is whether to implement the mechanism inside the network (i.e., at the
+routers or switches), at the edges of the network (i.e., in the hosts,
+perhaps as part of the transport protocol), or some combination of the
+two. Individual routers always take responsibility for deciding which
+packets to forward and which packets to drop. However, there is a
+range of options in how much the router involves the end hosts in
+specifying how this decision is made, or learning how this decision
+was made.
 
 At one end of the spectrum, routers can allow hosts to reserve
 capacity and then ensure each flow's packets are delivered
-accordingly. They might do this, for example, by implementing a
-signalling protocol along with Fair Queuing, accepting new flows only
-when there is sufficient capacity, and policing hosts to make sure
-their flows stay within their reservations. This would correspond to a
-reservation-based approach in which the network is able to make QoS
-guarantees. We postpone this possibility until Chapter |Stream|, and
-keep our focus on the best-effort service model for now.
+accordingly. They might do this, for example, by accepting new flows
+only when there is sufficient capacity, and policing hosts to make
+sure their flows stay within their reservations. This would correspond
+to a reservation-based approach in which the network is able to make
+QoS guarantees. We postpone this possibility until Chapter |Stream|,
+and keep our focus on the best-effort service model for now.
 
 At the other end of the spectrum is a host-centric approach. The
 router makes no guarantees and offers no explicit feedback about the
@@ -142,10 +130,10 @@ mechanisms work.
 Because the Internet assumes a connectionless model, any
 connection-oriented service is implemented by an end-to-end transport
 protocol running on the end hosts (such as TCP). There is no
-connection setup phase implemented within the network (in contrast to
-circuit based networks), and as a consequence, there is no mechanism
-for individual routers to pre-allocate buffer space or link bandwidth
-to active connections.
+connection setup phase implemented *within* the network (in contrast
+to circuit based networks), and as a consequence, there is no
+mechanism for individual routers to pre-allocate buffer space or link
+bandwidth to active connections.
 
 The lack of an explicit connection setup phase does not imply that
 routers must be completely unaware of end-to-end connections.  Packets
@@ -163,9 +151,9 @@ at different granularities. For example, a flow can be host-to-host
 (i.e., have the same source/destination IP addresses), or
 process-to-process (i.e., have the same source/destination host/port
 pairs). Flows can also be broadly defined, for example, according to a
-class of application or type of traffic (e.g., video stream).
-:numref:`Figure %s <fig-flow>` illustrates several flows passing
-through a series of routers.
+class of application or type of traffic, such as a video stream or
+packets tagged as "high priority".  :numref:`Figure %s <fig-flow>`
+illustrates several flows passing through a series of routers.
 
 .. _fig-flow:
 .. figure:: capacity/figures/Slide8.png
@@ -193,16 +181,16 @@ handle the packet.
 |Capacity|.1.3 Persistent Queues
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-So far this section has focused on the relationship between queues and
-congestion, where overflowing a queue implies congestion, but if it
-were that simple, we'd just allocate enormous queues at every router
-so congestion would never occur. After all, memory is relatively
-inexpensive.  But that's not the full story.
+Finally, while the discussion up to this point has focused on the
+worst-case scenario—an overflowing queue implying congestion—there is
+something more fundamental going on. The whole point of buffering is
+to absorb *packet bursts*, that is, to accomodate the time-varying
+nature of data communication.
 
-The key insight is that queues are are expected to build up from time
-to time. For example, a newly opened connection may dump a burst of
-packets into the network, and these are likely to form a queue at the
-bottleneck link. This is not in itself a problem. There should be
+The key observation is that queues are are expected to build up from
+time to time. For example, a newly opened connection may dump a burst
+of packets into the network, and these are likely to form a queue at
+the bottleneck link. This is not in itself a problem. There should be
 enough buffer capacity to absorb such bursts. Problems arise when
 there is not enough buffer capacity to absorb bursts, leading to
 excessive loss. This came to be understood in the 1990s as a

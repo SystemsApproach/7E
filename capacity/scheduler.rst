@@ -4,12 +4,12 @@
 Regardless of how simple or how sophisticated the rest of the resource
 allocation mechanism, each router implements a packet scheduler that
 decides the order in which queued packets are transmitted. This
-scheduler is closely related to the *queuing discipline*, so much so
+scheduler is closely related to the *queuing discipline*, so much so,
 that it is not uncommon to name the scheduler after the queuing
 discipline (as is the case for the three examples given in this
-section). Despite the name, this section is primarily concerned with
-deciding which packets to transmit next; the next section looks at
-other queue-related issues.
+section). Whichever name we choose, the mechanism is primarily
+concerned with deciding which packet to transmit next on each link;
+the next section looks at other queue-related issues.
 
 |Capacity|.2.1 FIFO Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,28 +37,28 @@ Note that tail drop and FIFO are two separable ideas. FIFO is a
 transmitted. Tail drop is a *drop policy*—it determines which packets
 get dropped. Because FIFO and tail drop are the simplest instances of
 scheduling discipline and drop policy, respectively, they are
-sometimes viewed as a bundle—the vanilla queuing
-implementation. Unfortunately, the bundle is often referred to simply
-as *FIFO queuing*, when it should more precisely be called *FIFO with
-tail drop*. The next section provides an example of other drop
-policies, which uses a more complex algorithm than “Is there a free
-buffer?” to decide when to drop packets. Such a drop policy may be
-used with FIFO, or with one of the following more complex schedulers.
+sometimes viewed as a bundle—the vanilla queuing implementation.
+Unfortunately, the bundle is often referred to simply as *FIFO
+queuing*, when it should more precisely be called *FIFO with tail
+drop*. The next section provides an example of other drop policies,
+which uses a more complex algorithm than “Is there a free buffer?” to
+decide when to drop packets. Such a drop policy may be used with FIFO,
+or with one of the following more sophisticated schedulers.
 
 |Capacity|.2.2 Priority Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A simple variation on basic FIFO queuing is priority queuing. The idea
-is to mark each packet with a priority; the mark could be carried, for
+A simple variation on FIFO queuing is priority queuing. The idea is to
+mark each packet with a priority; the mark could be carried, for
 example, in the IP header, as we discuss in a moment. The routers then
 implement multiple FIFO queues, one for each priority class. The
 router always transmits packets out of the highest-priority queue if
-that queue is nonempty before moving on to the next priority
-queue. Within each priority, packets are still managed in a FIFO
-manner.  This idea is a small departure from the best-effort delivery
-model, but it does not go so far as to make guarantees to any
-particular priority class. It just allows high-priority packets to cut
-to the front of the line.
+that queue is nonempty before moving on to the next priority queue.
+Within each priority, packets are still managed in a FIFO manner.
+This idea is a small departure from the best-effort delivery model,
+but it does not go so far as to make guarantees to any particular
+priority class. It just allows high-priority packets to cut to the
+front of the line.
 
 The problem with priority queuing, of course, is that the
 high-priority queue can starve out all the other queues; that is, as
@@ -96,8 +96,7 @@ The main problem with FIFO queuing (with or without priorities) is
 that it does not discriminate between different traffic sources, or,
 in the language introduced in the previous section, it does not
 separate packets according to the flow to which they belong. This
-means it is possible for a greedy (misbehaving) flow to starve all the
-other flows.
+means it is possible for a greedy flow to starve all the other flows.
 
 Fair queuing (FQ) is an algorithm that has been designed to address
 this problem. The idea of FQ is to maintain a separate queue for each
@@ -276,5 +275,5 @@ but does not know (or care) about how the policy is implemented.  In
 this case, the mechanism in question is the queuing discipline, and
 the policy is a particular setting of which flow gets what level of
 service (e.g., priority or weight). We discuss some policies that can
-be used with the WFQ mechanism in a later section.
+be used with the WFQ mechanism in later chapters.
 
