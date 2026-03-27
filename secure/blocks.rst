@@ -192,7 +192,7 @@ to be an issue is available at the "Sweet32" website.
    <https://sweet32.info>`__.
 
 |TLS|.2.2 Secret-Key Ciphers
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In a secret-key cipher, both participants in a communication share the
 same key.\ [#]_ In other words, if a message is encrypted using a
