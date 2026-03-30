@@ -22,14 +22,17 @@ it is received at a time when it is no longer appropriate. For
 example, an adversary could delay your order to buy stock from an
 auspicious time to a time when you would not have wanted to
 buy. Although this message would in a sense be fresh (it hasn't been
-sent before), it wouldn’t be timely.  Freshness and timeliness may be
-considered aspects of integrity. Ensuring them will in most cases
-require a nontrivial, back-and-forth protocol.
+sent before), it wouldn’t be timely.
 
-What these two issues have in common is authentication. If a message is
-not fresh and timely, then from a practical standpoint we want to
-consider it as not being authentic, i.e., not being from whom it
-claims to be.
+Freshness and timeliness may be considered aspects of
+integrity. Ensuring them usually requires a nontrivial, back-and-forth
+protocol. The TLS Handshake Protocol is such a protocol. There is,
+however, one opportunity for replay attacks in TLS, when data is sent
+before the handshake is complete. This is known as 0-RTT data because
+it avoids the round-trip time associated with connection
+establishement before sending data. It is an optional performance
+enhancement that we cover in the next section.
+
 
 .. TODO need to explain how these issues are addressed in TLS
 
