@@ -34,6 +34,7 @@ Larry Peterson and Bruce Davie
    policy.rst
    part_three.rst
    reliable.rst
+   secure.rst
    message.rst
    README.rst
    authors.rst
