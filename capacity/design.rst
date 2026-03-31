@@ -38,7 +38,7 @@ eventually catch up with the Internet. The ultimate response has to be
 for edge hosts to send less traffic (exactly how much less is the
 essence of Congestion Control), but responsibility doesn't fall solely
 to the edge hosts. Network nodes have a role to play, as well.  The
-rest of this section explores the design space.
+rest of this section explores that part of the design space.
 
 |Capacity|.1.1 Centralized versus Distributed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,9 +69,9 @@ solution.  From this perspective, there is a shared objective
 function, and all the elements are implementing a distributed
 algorithm to optimize that function. The various mechanisms described
 in this Chapter—and their edge counterparts Chapter |CC| in Part
-III—are simply defining different objective functions. A persistent
-challenge has been how to think about competing objective functions
-when multiple mechanisms have been deployed.
+III—are simply defining some objective function. A persistent
+challenge has been how to judge competing objective functions when
+multiple mechanisms have been deployed.
 
 Second, while a centralized approach is not practical for the Internet
 as a whole, it can be appropriate for limited domains; backbone
@@ -124,68 +124,15 @@ involves the router sending *feedback* to the end hosts when its
 buffers are full. Section |Capacity|.3 describes how such AQM
 mechanisms work.
 
-|Capacity|.1.3 Flows and Soft State
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Because the Internet assumes a connectionless model, any
-connection-oriented service is implemented by an end-to-end transport
-protocol running on the end hosts (such as TCP). There is no
-connection setup phase implemented *within* the network (in contrast
-to circuit based networks), and as a consequence, there is no
-mechanism for individual routers to pre-allocate buffer space or link
-bandwidth to active connections.
-
-The lack of an explicit connection setup phase does not imply that
-routers must be completely unaware of end-to-end connections.  Packets
-are switched independently, but it is often the case that a given pair
-of hosts exchange many packets consecutively, e.g. as a large video
-file is downloaded by a client from a server. Furthermore, a given
-stream of packets between a pair of hosts often flows through a
-consistent set of routers. This idea of a *flow*—a sequence of packets
-sent between a source/destination pair and following the same route
-through the network—is an important abstraction that we take advantage
-of.
-
-One of the powers of the flow abstraction is that flows can be defined
-at different granularities. For example, a flow can be host-to-host
-(i.e., have the same source/destination IP addresses), or
-process-to-process (i.e., have the same source/destination host/port
-pairs). Flows can also be broadly defined, for example, according to a
-class of application or type of traffic, such as a video stream or
-packets tagged as "high priority".  :numref:`Figure %s <fig-flow>`
-illustrates several flows passing through a series of routers.
-
-.. _fig-flow:
-.. figure:: capacity/figures/Slide8.png
-   :width: 450px
-   :align: center
-
-   Multiple flows passing through a set of routers.
-
-Because multiple related packets flow through each router, it
-sometimes makes sense to maintain some state information for each
-flow, which can be used to make resource allocation decisions about
-the packets of that flow. This is called *soft state*, where the main
-difference between soft and hard state is that the former is not
-explicitly created and removed by signalling. Soft state represents a
-middle ground between a purely connectionless network that maintains
-*no* state at the routers and a purely connection-oriented network
-that maintains hard state at the routers. In general, the correct
-operation of the network does not depend on soft state being present
-(each packet is still routed correctly without regard to this state),
-but when a packet happens to belong to a flow for which the router is
-currently maintaining soft state, then the router is better able to
-handle the packet.
-
-
 |Capacity|.1.3 Persistent Queues
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Finally, while the discussion up to this point has focused on the
-worst-case scenario—an overflowing queue implying congestion—there is
-something more fundamental going on. The whole point of buffering is
-to absorb *packet bursts*, that is, to accomodate the time-varying
-nature of data communication.
+worst-case scenario of overflowing queues, there is something more
+fundamental going on. The whole point of buffering is to absorb
+*packet bursts*, that is, to accomodate the time-varying nature of
+data communication. We need to understand burstiness to know how
+to best manage queues.
 
 The key observation is that queues are are expected to build up from
 time to time. For example, a newly opened connection may dump a burst
@@ -214,7 +161,7 @@ network. To compound the problem, a queue is less able to absorb
 future bursts if it never drains fully. The combination of large
 buffers and persistent queues within those buffers is a phenomenon
 that Jim Gettys has named *Bufferbloat*. It is clear that persistently
-full queues are what a well-designed AQM mechanism would seek to
+full queues are what a well-designed AQM mechanism should seek to
 avoid. Queues that stay full for long periods without draining are
 referred to, unsurprisingly, as \"bad queue\", as shown in
 :numref:`Figure %s <fig-good-bad>` (b).
@@ -225,3 +172,91 @@ referred to, unsurprisingly, as \"bad queue\", as shown in
    J. Gettys. `Bufferbloat: Dark Buffers in the Internet
    <https://ieeexplore.ieee.org/document/5755608>`__. IEEE
    Internet Computing, April 2011.
+
+
+|Capacity|.1.4 Flows and Soft State
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Because the Internet assumes a connectionless model, any
+connection-oriented service is implemented by an end-to-end transport
+protocol running on the end hosts (such as TCP). There is no
+connection setup phase implemented *within* the network (in contrast
+to circuit based networks), and as a consequence, there is no
+mechanism for individual routers to pre-allocate buffer space or link
+bandwidth to active connections.
+
+The lack of an explicit connection setup phase does not imply that
+routers must be completely unaware of end-to-end connections.  Packets
+are switched independently, but it is often the case that a given pair
+of hosts exchange many packets consecutively, e.g. as a large video
+file is downloaded by a client from a server. Furthermore, a given
+stream of packets between a pair of hosts often flows through a
+consistent set of routers. This idea of a *flow*—a sequence of packets
+sent between a source/destination pair and following the same route
+through the network—is an important abstraction that we take advantage
+of.
+
+.. TODO -- Is it ok to treat flows and traffic classes as similar
+   ideas (differing only in granularity), or should we introduce them
+   separately?
+
+One of the powers of the flow abstraction is that flows can be defined
+at different granularities. For example, a flow can be host-to-host
+(i.e., have the same source/destination IP addresses), or
+process-to-process (i.e., have the same source/destination host/port
+pairs). :numref:`Figure %s <fig-flow>` illustrates several flows
+passing through a series of routers.
+
+.. _fig-flow:
+.. figure:: capacity/figures/Slide8.png
+   :width: 450px
+   :align: center
+
+   Multiple flows passing through a set of routers.
+
+Because multiple related packets flow through each router, it
+sometimes makes sense to maintain some state information for each
+flow, which can be used to make resource allocation decisions about
+the packets of that flow. This is called *soft state*, where the main
+difference between soft and hard state is that the former is not
+explicitly created and removed by signalling. Soft state represents a
+middle ground between a purely connectionless network that maintains
+*no* state at the routers and a purely connection-oriented network
+that maintains hard state at the routers. In general, the correct
+operation of the network does not depend on soft state being present
+(each packet is still routed correctly without regard to this state),
+but when a packet happens to belong to a flow for which the router is
+currently maintaining soft state, then the router is better able to
+handle the packet.
+
+|Capacity|.1.5 Type of Service
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The final design question is one the original IP specification raised,
+but didn't fully address: Should routers treat all traffic the same,
+or should it be possible to offer different levels of service to
+different classes of traffic? The original spec, RFC 791, defines an
+8-bit *Type of Service* field (``ToS``), along with abstract settings
+that can be summarized as a 3-bit "Priority" subfield and a 3-bit "
+"Quality-of-Service" subfield. The former is used to identify
+important packets, such as routing updates, and the latter supports a
+three-way tradeoff between low-delay, high-reliability, and
+high-throughput.  The other two bits were saved for future use.
+
+The main reason for the ``ToS`` field was to allow routers to properly
+set parameters on the underlying physical networks they forwarded
+packets over, some of which offered different levels of service to
+different types of traffic. It was not intended that the router would
+change its own packet forwarding based on the setting; routers
+remained purely best-effort, without favoring one class of traffic
+over another. To further complicate things, different vendors used the
+``ToS`` bit for different purposes, and so there wasn't universal
+agreement on what the bits meant.
+
+All of that changed many years after IP becamse ubiquitous, in ways
+that we explain in this chapter. The main takeway for now is that the
+Internet architecture leaves the door open for edge hosts and Internet
+routers to pass information to each other on a per-packet basis, using
+the ``ToS`` bits. Today, that information is used to enhance the base
+best-effort behavior described in Chapter |Fed|.
+

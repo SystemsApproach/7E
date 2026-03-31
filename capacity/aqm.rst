@@ -311,20 +311,19 @@ queues, and to trigger packet loss only when the queue is determined
 to be \"bad\". Indeed, this is what RED is trying to do with its
 ``Weight`` parameter (which filters out transient queue length).
 
-With this background one of the innovations of CoDel is to focus on
-*sojourn time*, the time that any given packet waits in the queue.
-Sojourn time is independent of the bandwidth of a link and provides
-useful indication of congestion even on links whose bandwidth varies
-over time, such as wireless links. A queue that is behaving well will
-frequently drain to zero, and thus, some packets will experience a
-sojourn time close to zero, as in :numref:`Figure %s <fig-good-bad>`
-(a). Conversely, a congested queue will delay every packet, and the
-minimum sojourn time will never be close to zero, as seen in
-:numref:`Figure %s <fig-good-bad>` (b). CoDel therefore measures the
-sojourn time—something that is easy to do for every packet—and tracks
-whether it is consistently sitting above some small
-target. \"Consistently\" is defined as \"lasting longer than a typical
-RTT\".
+One of the innovations of CoDel is to focus on *sojourn time*, the
+time that any given packet waits in the queue.  Sojourn time is
+independent of the bandwidth of a link and provides useful indication
+of congestion even on links whose bandwidth varies over time, such as
+wireless links. A queue that is behaving well will frequently drain to
+zero, and thus, some packets will experience a sojourn time close to
+zero, as in :numref:`Figure %s <fig-good-bad>` (a). Conversely, a
+congested queue will delay every packet, and the minimum sojourn time
+will never be close to zero, as seen in :numref:`Figure %s
+<fig-good-bad>` (b). CoDel therefore measures the sojourn
+time—something that is easy to do for every packet—and tracks whether
+it is consistently sitting above some small target. \"Consistently\"
+is defined as \"lasting longer than a typical RTT\".
 
 Rather than asking operators to determine the parameters to make
 CoDel work well, the algorithm chooses reasonable defaults. A target
@@ -423,12 +422,3 @@ requirements a good AQM algorithm should meet. As is the case with
 congestion control algorithms, every AQM algorithm has its advantages
 and disadvantages, and so we need a lot of them to argue about.
 
-
-|Capacity|.3.4 Datacenter Networks
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   
-While RED and EQN have not enjoyed wide-spread usage in the Internet
-at large, they do serve as the foundation for AQM in datacenter networks.
-
-.. TODO -- Just a placeholder for now. I need to do a bit more
-   research.
