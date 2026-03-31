@@ -19,21 +19,20 @@ buffer capacity. (The third resource described in Section
 |Intro|.4.3—internal forwarding capacity—could in principle be managed
 dynamically, but in practice is not.) With respect to link bandwidth,
 statistical multiplexing is the main factor, with packets scheduled
-for transmission based on demand. There are no reservations that set
-aside bandwidth for particular flows, but there are ways to augment
+for transmission based on demand. But there are ways to augment
 statistical multiplexing to be more fair, that is, to keep greedy
 flows from starving well-behaved flows. Such algorithms, known as
-*packet schedulers*, effectively allocate link capacity.
+*packet schedulers*, effectively allocate link capacity by deciding
+which packet to send next.
 
-Managing buffer capacity is closely related to packet scheduling in
-that the scheduler decides which packet to dequeue for transmission.
-But there are a set of other techniques for managing packet queues,
-collectively known as *Active Queue Mangement (AQM)*, and they
-generally decide which packet(s) to drop as the buffer fills up. AQM
-plays an especially important role in the Internet because dropping a
-packet is an indirect way for a network node to "signal" an edge
-host—the entity responsible for injecting the packet into the
-network—that something is amiss.
+Packet scheduling is an aspect of buffer management—the scheduler
+decides which packet to dequeue—but there are additional techniques
+for managing packet queues, collectively known as *Active Queue
+Mangement (AQM)*. Generally, these techniques decide which packet(s)
+to drop as the buffer fills up. AQM plays an especially important role
+in the Internet because dropping a packet is an indirect way for a
+network node to "signal" an edge host—the entity responsible for
+injecting the packet into the network—that something is amiss.
 
 Ultimately, responsibility for managing congestion is shared between
 routers inside the network (they detect the onset of congestion) and
@@ -42,8 +41,8 @@ congestion).  This chapter focuses on the router side of this
 interaction, and we cover the edge host side of the this interaction
 in Chapter |CC|. For the purpose of this chapter, all we need to know
 about edge hosts is that they react to whatever signal the routers
-send them by adapting the rate at which they send packets into
-the network.
+send them by adapting the rate at which they inject packets into the
+network.
 
 These node-level mechanisms have to make local decisions in real-time,
 but there are also network-wide actions that dictate how to place that
@@ -55,4 +54,5 @@ capacity management.
 .. include:: capacity/design.rst
 .. include:: capacity/scheduler.rst
 .. include:: capacity/aqm.rst
+.. include:: capacity/datacenter.rst
 .. include:: capacity/traffic.rst

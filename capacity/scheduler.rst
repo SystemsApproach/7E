@@ -60,34 +60,31 @@ but it does not go so far as to make guarantees to any particular
 priority class. It just allows high-priority packets to cut to the
 front of the line.
 
-The problem with priority queuing, of course, is that the
-high-priority queue can starve out all the other queues; that is, as
-long as there is at least one high-priority packet in the
-high-priority queue, lower-priority queues do not get served. For this
-to be viable, there needs to be limits on how much high-priority
-traffic is inserted in the queue. It should be immediately clear that
-we can’t allow users to set their own packets to high priority in an
-uncontrolled way; we must either prevent them from doing this
-altogether or provide some form of “pushback” on users. One obvious
-way to do this is to use economics—the network could charge more to
-deliver high-priority packets than low-priority packets. However,
-there are significant challenges to implementing such a scheme in a
-decentralized environment such as the Internet.
+The problem with priority queuing is that the high-priority queue can
+starve out all the other queues; that is, as long as there is at least
+one high-priority packet in the high-priority queue, lower-priority
+queues do not get served. For this to be viable, there needs to be
+limits on how much high-priority traffic is inserted in the queue. It
+should be immediately clear that we can’t allow users to set their own
+packets to high priority in an uncontrolled way; we must either
+prevent them from doing this altogether or provide some form of
+“pushback” on users. One obvious way to do this is to use
+economics—the network could charge more to deliver high-priority
+packets than low-priority packets. However, there are significant
+challenges to implementing such a scheme in a decentralized
+environment such as the Internet.
 
 Another approach is to enforce good behavior at a network-managed
-ingress node, such as the first router inside an ISP. End users can
-set the priority as desired, but the ingress node *polices* the flow
-of packet to ensure they stay below some target rate. This is the
-essence of *Differentiated Services*, also known as *DiffServ*, a
-topic we cover in Chapter |Stream|. For the purposes of this chapter,
-the key is recognize the potential value of priority queues.
-
-One situation in which priority queuing is used in the Internet is to
-protect the most important packets—typically, the routing updates that
-are necessary to stabilize the routing tables after a topology change.
-Often there is a special queue for such packets, which can be
-identified by the Differentiated Services Code Point (formerly the TOS
-field) in the IP header. This is in fact a special instance of DiffServ.
+ingress node, such as the first router that connects an ISP to a set
+of its customers. End users can set the priority as desired, but the
+ingress node *polices* the flow of packet to ensure they stay below
+some target rate. This is the essence of *Differentiated Services*,
+also known as *DiffServ*. Although DiffServ was originally conceived
+as a general-pupose mechanism, today it is most widely used inside
+datacenter networks, and so we discuss it in that context (see Section
+|Capacity|.4). For the purposes of this section, the key is to
+recognize the potential value of priority queues, and the
+complications in using them.
 
 |Capacity|.2.3 Fair Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,18 +92,19 @@ field) in the IP header. This is in fact a special instance of DiffServ.
 The main problem with FIFO queuing (with or without priorities) is
 that it does not discriminate between different traffic sources, or,
 in the language introduced in the previous section, it does not
-separate packets according to the flow to which they belong. This
+separate packets according to the flow tno which they belong. This
 means it is possible for a greedy flow to starve all the other flows.
 
 Fair queuing (FQ) is an algorithm that has been designed to address
-this problem. The idea of FQ is to maintain a separate queue for each
-flow currently being handled by the router. The router then services
-these queues in round-robin order, as illustrated in :numref:`Figure
-%s <fig-fq>`.  When a flow sends packets too quickly, then its queue
-fills up. When a queue reaches a particular length, additional packets
-belonging to that flow’s queue are discarded. In this way, a given
-source cannot arbitrarily increase its share of the network’s capacity
-at the expense of other flows.
+this problem. FQ is designed to isolate flows, which it does by
+maintaining a separate queue for each flow currently being handled by
+the router. The router then services these queues in round-robin
+order, as illustrated in :numref:`Figure %s <fig-fq>`.  When a flow
+sends packets too quickly, then its queue fills up. When a queue
+reaches a particular length, additional packets belonging to that
+flow’s queue are discarded. In this way, a given source cannot
+arbitrarily increase its share of the network’s capacity at the
+expense of other flows.
 
 .. _fig-fq:
 .. figure:: capacity/figures/f06-06-9780123850591.png

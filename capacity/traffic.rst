@@ -1,4 +1,4 @@
-|Capacity|.4  Traffic Engineering
+|Capacity|.5  Traffic Engineering
 -----------------------------------------
 
 Another cloud-inspired use case is traffic engineering applied to the
