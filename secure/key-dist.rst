@@ -60,7 +60,7 @@ Bob. (Remember that to digitally sign the statement Bob would append a
 cryptographic hash of it that has been encrypted using his private key.)
 Since you trust Bob to tell the truth, you would now know that Alice’s
 key is *x*, even though you had never met her or exchanged a single
-message with her. 
+message with her.
 
 Bob wouldn’t even have to
 send you a message; he could simply create and publish a digitally
@@ -231,7 +231,7 @@ limit the amount of information available to attackers and to limit
 the damage caused when a key is compromised. And they are symmetric to
 provide higher performance for the common-case data transfers; we
 limit the use of public key operations to relatively infrequent tasks
-such as session establishment. 
+such as session establishment.
 
 Distribution of these secret keys differs from public key distribution
 for two obvious reasons:

@@ -91,7 +91,7 @@ provided by the socket layer (b) the application must know how to deal
 with replays of data sent as 0-RTT, e.g., by only sending 0-RTT
 data for operations that are idempotent. For example, sending the
 initial GET request in HTTP would usually be an operation that is
-idempotent. 
+idempotent.
 
 The other drawback of 0-RTT data is that it depends on a potentially
 long-lived secret. The resumption key used to encrypt 0-RTT data is
@@ -113,7 +113,7 @@ full of issues with excessive setup times. The very first
 implementations of HTTP were quite wasteful of TCP connections,
 setting up a new connection for every object on a requested web
 page. While this was addressed with persistent TCP connections, the
-addition of TLS brought its own latency impact.  The next step in the process
+addition of TLS brought its own latency impact. The next step in the process
 of reducing the latency of TLS session establishment involves
 rethinking the choice of TCP as the underlying transport. We return to
 this topic in Chapter |Message|, in which QUIC is discussed as an

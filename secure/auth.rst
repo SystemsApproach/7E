@@ -44,7 +44,7 @@ key, or more generally a set of secret key material, which the
 participants can then use for encryption and mutual authentication
 going forward. Even though the client may not be initially
 authenticated, it is important that the server knows it remains
-connected to the same client that established the connection. 
+connected to the same client that established the connection.
 
 TLS defines a handshake protocol to handle the issues of
 authentication and session key establishment. We now turn our attention to
@@ -54,13 +54,13 @@ the details of that protocol.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The TLS handshake protocol performs a set of functions to establish a
-secure connection among a pair of participants.   It 
-allows the client to authenticate the server, and, optionally, for
-the client to be authenticated as well. It establishes a shared secret
-key and allows them to negotiate at runtime
-the set of cryptographic algorithms to use. It also allows for version
-negotiation, so that, for example, a client running TLS version 1.2
-can talk to a server that supports both version 1.2 and 1.3.
+secure connection among a pair of participants. It allows the client
+to authenticate the server, and, optionally, for the client to be
+authenticated as well. It establishes a shared secret key and allows
+them to negotiate at runtime the set of cryptographic algorithms to
+use. It also allows for version negotiation, so that, for example, a
+client running TLS version 1.2 can talk to a server that supports both
+version 1.2 and 1.3.
 
 The handshake protocol needs to be resistant to man-in-the-middle
 (MITM) attacks, which go beyond those we discussed in the last

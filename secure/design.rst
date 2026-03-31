@@ -71,7 +71,7 @@ have been developed to meet the requirements just outlined. While
 cryptography provides us with some building blocks to meet these
 requirements, which we discuss in the next section, there is more to
 building a secure system than just adding some cryptographic
-operations. 
+operations.
 
 The designers of SSL and TLS recognized that a requirement for secure
 communication was not

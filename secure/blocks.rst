@@ -119,19 +119,18 @@ the correct value is halfway between those extremes,
 
 This can be made computationally impractical by choosing a
 sufficiently large key space and by making the operation of checking a
-key reasonably costly. Computing
-speeds keep increasing, however, making formerly infeasible computations
-feasible. Furthermore, such brute-force searches are easily
-parallelized, meaning that an attacker can use general purpose GPUs
-(GPGPUs) or other machines operating in parallel to speed up the
-attack. For this reason key sizes are often chosen to be much larger
-than what is required to make brute-force attacks expensive on the
-hardware of today. We should also consider the
-possibility that data might be captured for later analysis, or that
-some data might be stored in archives for tens of years. At the same
-time, increasing key size adds cost in terms of computation and
+key reasonably costly. Computing speeds keep increasing, however,
+making formerly infeasible computations feasible. Furthermore, such
+brute-force searches are easily parallelized, meaning that an attacker
+can use general purpose GPUs (GPGPUs) or other machines operating in
+parallel to speed up the attack. For this reason key sizes are often
+chosen to be much larger than what is required to make brute-force
+attacks expensive on the hardware of today. We should also consider
+the possibility that data might be captured for later analysis, or
+that some data might be stored in archives for tens of years. At the
+same time, increasing key size adds cost in terms of computation and
 bandwidth required to distribute keys, so there is a tradeoff to be
-made. 
+made.
 
 Block Ciphers
 ++++++++++++++++++++
@@ -365,7 +364,7 @@ when the input is an elliptic curve, that is thought to be even more
 difficult to compute; cryptographic schemes based on this problem are
 referred to as *elliptic curve cryptography* (ECC). ECC can
 provide equivalent security to RSA with considerably smaller
-keys. 
+keys.
 
 Public-key ciphers are, unfortunately, several orders of magnitude
 slower than secret-key ciphers. Consequently, secret-key ciphers are
