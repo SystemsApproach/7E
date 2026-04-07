@@ -155,21 +155,21 @@ dropped. Specifically, it is computed as follows:
 
 .. math:: \mathsf{P = TempP\ /\ (1 - count\ x\ TempP)}
 
-``TempP`` is the variable that is plotted on the y-axis in :numref:`Figure
-%s <fig-red-prob>`, ``count`` keeps track of how many newly arriving
-packets have been queued (not dropped), and ``AvgLen`` has been between
-the two thresholds. ``P`` increases slowly as ``count`` increases,
-thereby making a drop increasingly likely as the time since the last
-drop increases. This makes closely spaced drops relatively less likely
-than widely spaced drops. This extra step in calculating ``P`` was
-introduced by the inventors of RED when they observed that, without it,
-the packet drops were not well distributed in time but instead tended to
-occur in clusters. Because packet arrivals from a certain connection are
-likely to arrive in bursts, this clustering of drops is likely to cause
-multiple drops in a single connection. This is not desirable, since only
-one drop per round-trip time is enough to cause a connection to reduce
-its window size, whereas multiple drops might send it back into slow
-start.
+``TempP`` is the variable that is plotted on the y-axis in
+:numref:`Figure %s <fig-red-prob>`, ``count`` keeps track of how many
+newly arriving packets have been queued (not dropped), and ``AvgLen``
+has been between the two thresholds. ``P`` increases slowly as
+``count`` increases, thereby making a drop increasingly likely as the
+time since the last drop increases. This makes closely spaced drops
+relatively less likely than widely spaced drops. This extra step in
+calculating ``P`` was introduced by the inventors of RED when they
+observed that, without it, the packet drops were not well distributed
+in time but instead tended to occur in clusters. Because packet
+arrivals from a certain connection are likely to arrive in bursts,
+this clustering of drops is likely to cause multiple drops in a single
+connection. This is not desirable, since only one drop per round-trip
+time is enough to cause a connection to reduce its window size,
+whereas multiple drops might cause it to slow down too much.
 
 As an example, suppose that we set ``MaxP`` to 0.02 and ``count`` is
 initialized to zero. If the average queue length were halfway between
@@ -220,15 +220,15 @@ constitutes an optimal queue length depends on the traffic mix and is
 a subject of ongoing study.
 
 Consider the setting of the two thresholds, ``MinThreshold`` and
-``MaxThreshold``. If the traffic is fairly bursty, then ``MinThreshold``
-should be sufficiently large to allow the link utilization to be
-maintained at an acceptably high level. Also, the difference between the
-two thresholds should be larger than the typical increase in the
-calculated average queue length in one RTT. Setting ``MaxThreshold`` to
-twice ``MinThreshold`` seems to be a reasonable rule of thumb given the
-traffic mix on today’s Internet. In addition, since we expect the
-average queue length to hover between the two thresholds during periods
-of high load, there should be enough free buffer space *above*
+``MaxThreshold``. If the traffic is fairly bursty, then
+``MinThreshold`` should be sufficiently large to allow the link
+utilization to be maintained at an acceptably high level. Also, the
+difference between the two thresholds should be larger than the
+typical increase in the calculated average queue length in one
+RTT. Setting ``MaxThreshold`` to twice ``MinThreshold`` was deemed to
+be a reasonable rule of thumb.  In addition, since we expect the
+average queue length to hover between the two thresholds during
+periods of high load, there should be enough free buffer space *above*
 ``MaxThreshold`` to absorb the natural bursts that occur in Internet
 traffic without forcing the router to enter tail drop mode.
 
@@ -245,7 +245,9 @@ than the round-trip time of the connections passing through it. As
 noted previously, 100 ms is not a bad estimate of average round-trip
 times in the Internet. Thus, ``Weight`` should be chosen such that
 changes in queue length over time scales much less than 100 ms are
-filtered out.
+filtered out. Of course this only applied to the larger Internet. When
+RED is applied to a datacenter network, for example, we can expect
+much shorter RTTs. We revisit this issue in Section |Capacity|.4.
 
 Since RED works by sending signals to end-to-end flows to tell them to
 slow down, you might wonder what would happen if those signals are
@@ -393,13 +395,13 @@ specified in RFC 3168.
    <https://datatracker.ietf.org/doc/html/rfc3168>`__.
    RFC 3168, September 2001.
 
-Specifically, this feedback is implemented by treating two bits in the
-IP ``TOS`` field as ECN bits. One bit is set by the source to indicate
-that it is ECN-capable, that is, able to react to a congestion
-notification. This is called the ``ECT`` bit (ECN-Capable Transport).
-The other bit is set by routers along the end-to-end path when
-congestion is encountered, as computed by whatever AQM algorithm it is
-running. This is called the ``CE`` bit (Congestion Encountered).
+Specifically, this feedback is implemented by use the two "unused"
+bits in the IP ``TOS`` field as ECN bits. One bit is set by the source
+to indicate that it is ECN-capable, that is, able to react to a
+congestion notification. This is called the ``ECT`` bit (ECN-Capable
+Transport).  The other bit is set by routers along the end-to-end path
+when congestion is encountered, as computed by whatever AQM algorithm
+it is running. This is called the ``CE`` bit (Congestion Encountered).
 
 .. Well, this breaks our split, but maybe it's simple enough to be ok.
 
@@ -409,10 +411,10 @@ flags to the TCP header. The first, ``ECE`` (ECN-Echo), communicates
 from the receiver to the sender that it has received a packet with the
 ``CE`` bit set. The second, ``CWR`` (Congestion Window Reduced)
 communicates from the sender to the receiver that it has reduced the
-congestion window. (The exact meaning of "congestion window reduced"
+congestion window. The exact meaning of "congestion window reduced"
 will be clear when we get to TCP in Chapter |TCP|, but for now you can
 think of this bit as indicating that the source is slowing its sending
-rate in response to a congestion notification.)
+rate in response to a congestion notification.
 
 While ECN is now the standard interpretation of two of the eight bits
 in the ``TOS`` field of the IP header and support for ECN is highly

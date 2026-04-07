@@ -21,7 +21,7 @@ congestion.
 
 Note that avoiding congestion is not a problem that can be fully
 addressed by routing.  While it is true that a congested link could be
-assigned a large "cost" by a routing protocol, in an effort to make
+assigned a large cost by a routing protocol, in an effort to make
 traffic avoid that link, this can't solve the overall problem of too
 much traffic being offered to a bottleneck link. To see this, we need
 look no further than the simple network depicted in :numref:`Figure %s
@@ -32,15 +32,15 @@ it is not uncommon to have bottleneck link that you can't route around.
 So how do we address congestion? As originally deployed, the Internet
 didn't do anything. Users (or more precisely, TCP running on their
 behalf) were free to send as many packets into the network as they
-could generate. A phenomenon known as *tragedy of the commons*
-(selfish behavior degrading shared resources) was predictable, and did
-eventually catch up with the Internet. The ultimate response has to be
-for edge hosts to send less traffic (exactly how much less is the
-essence of Congestion Control), but responsibility doesn't fall solely
-to the edge hosts. Network nodes have a role to play, as well.  The
-rest of this section explores that part of the design space.
+could generate. A phenomenon known as *tragedy of the commons*,
+whereby selfish behavior degrades shared resources, was predictable,
+and did eventually catch up with the Internet. The response is for
+edge hosts to send less traffic (exactly how much less is the essence
+of Congestion Control), but responsibility doesn't fall solely to the
+edge hosts. Network nodes have a role to play, as well.  The rest of
+this section explores that part of the design space.
 
-|Capacity|.1.1 Centralized versus Distributed
+|Capacity|.1.1 Centralized vs Distributed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. TODO -- This subsection may be a little too broad for the purposes
@@ -78,18 +78,18 @@ as a whole, it can be appropriate for limited domains; backbone
 networks connecting cloud datacenters are one example.  In such
 domains, a logically centralized controller could collect information
 about the state of the network's links and switches, compute a
-globally optimal allocation, and then advise (or even police) end
-hosts as to how much capacity is available to each of them. Such an
-approach would certainly be limited by the time-scale in which the
-centralized controller could be responsive to changes in the network,
-but it has been successfully applied to the coarse-grained allocation
-decisions made by traffic engineering mechanisms, such as those
-described in Section |Capacity|.4.  Exactly where one draws a line
-between coarse-grain traffic engineering decisions and fine-grain
-congestion control decisions is not clear, but it's good to keep an
-open mind about the spectrum of options that are available.
+globally optimal allocation, and then advise end hosts as to how much
+capacity is available to each of them. Such an approach would
+certainly be limited by the time-scale in which the centralized
+controller could be responsive to changes in the network, but it has
+been successfully applied to the coarse-grained allocation decisions
+made by traffic engineering mechanisms, such as those described in
+Section |Capacity|.4.  Exactly where one draws a line between
+coarse-grain traffic engineering decisions and fine-grain congestion
+control decisions is not clear, but it's good to keep an open mind
+about the spectrum of options that are available.
 
-|Capacity|.1.2 Router-Centric versus Host-Centric
+|Capacity|.1.2 Router-Centric vs Host-Centric
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Given a distributed approach to resource allocation, the next question
@@ -127,12 +127,11 @@ mechanisms work.
 |Capacity|.1.3 Persistent Queues
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Finally, while the discussion up to this point has focused on the
-worst-case scenario of overflowing queues, there is something more
-fundamental going on. The whole point of buffering is to absorb
-*packet bursts*, that is, to accomodate the time-varying nature of
-data communication. We need to understand burstiness to know how
-to best manage queues.
+While the discussion up to this point has focused on the worst-case
+scenario of overflowing queues, there is something more subtle
+going on. The whole point of buffering is to absorb *packet bursts*,
+that is, to accommodate the time-varying nature of data communication.
+We need to understand burstiness to know how to best manage queues.
 
 The key observation is that queues are are expected to build up from
 time to time. For example, a newly opened connection may dump a burst
@@ -155,8 +154,9 @@ as illustrated in :numref:`Figure %s <fig-good-bad>` (a).
 
    Good and Bad Queue Scenarios
 
-Queues become a problem when they are persistently full. A
-persistently full queue is doing nothing except adding delay to the
+On the flip side, over-provisioning queues (i.e., making them too
+large) can be a problem if they end up being persistently full. A
+persistently full queue does nothing except adding delay to the
 network. To compound the problem, a queue is less able to absorb
 future bursts if it never drains fully. The combination of large
 buffers and persistent queues within those buffers is a phenomenon
@@ -196,10 +196,6 @@ sent between a source/destination pair and following the same route
 through the network—is an important abstraction that we take advantage
 of.
 
-.. TODO -- Is it ok to treat flows and traffic classes as similar
-   ideas (differing only in granularity), or should we introduce them
-   separately?
-
 One of the powers of the flow abstraction is that flows can be defined
 at different granularities. For example, a flow can be host-to-host
 (i.e., have the same source/destination IP addresses), or
@@ -229,7 +225,7 @@ but when a packet happens to belong to a flow for which the router is
 currently maintaining soft state, then the router is better able to
 handle the packet.
 
-|Capacity|.1.5 Type of Service
+|Capacity|.1.5 Differentiated Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The final design question is one the original IP specification raised,
@@ -243,20 +239,35 @@ important packets, such as routing updates, and the latter supports a
 three-way tradeoff between low-delay, high-reliability, and
 high-throughput.  The other two bits were saved for future use.
 
-The main reason for the ``ToS`` field was to allow routers to properly
-set parameters on the underlying physical networks they forwarded
-packets over, some of which offered different levels of service to
-different types of traffic. It was not intended that the router would
-change its own packet forwarding based on the setting; routers
-remained purely best-effort, without favoring one class of traffic
-over another. To further complicate things, different vendors used the
-``ToS`` bit for different purposes, and so there wasn't universal
-agreement on what the bits meant.
+The existence of the ``ToS`` field indicates a recognition that there
+are good reasons to treat packets differently, but the actual purpose
+of the field was to provide routers the information the might need to
+properly set parameters on the underlying physical networks they
+forwarded packets over. It was assumed those physical networks offered
+different levels of service to different types of traffic; it was not
+intended that the router itself would change its own packet forwarding
+based on the setting, Routers remained purely best-effort, without
+favoring one class of traffic over another. To further complicate
+things, different vendors ended up using the ``ToS`` bit for different
+purposes, and so there wasn't universal agreement on what the bits
+meant.
 
-All of that changed many years after IP becamse ubiquitous, in ways
-that we explain in this chapter. The main takeway for now is that the
-Internet architecture leaves the door open for edge hosts and Internet
-routers to pass information to each other on a per-packet basis, using
-the ``ToS`` bits. Today, that information is used to enhance the base
-best-effort behavior described in Chapter |Fed|.
+All of that changed many years after IP became ubiquitous, in ways
+that we explore in this chapter. The general approach is often
+referred to as *differentiated services*, indicating that not all
+packets are treated exactly the same. We are still squarely in the
+best-effort domain in that no promises are made, but short of
+guaranteeing a throughput rate for an upper bound on jitter, there are
+steps the network can to differentiate the level of service various
+classes of traffic receive.
 
+The following sections show how this is done by repurposing the
+``ToS`` field already included in the IP headers. But finding the
+header bits to denote how packets are to be treated is the easy
+part. The challenge is that, once you decide to differentiate among
+different classes of traffic, you need to decide (a) what classes to
+support, and (b) how to modify packet forwarding so each class
+receives the desired performance. This is a multi-faceted problem,
+involving coordination among multiple mechanisms. We address it in the
+context of a specific use case—datacenter networks—in Section
+|Capacity|.4.
