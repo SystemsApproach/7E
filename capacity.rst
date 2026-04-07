@@ -18,17 +18,18 @@ Each node has two resources that need attention: link bandwidth and
 buffer capacity. (The third resource described in Section
 |Intro|.4.3—internal forwarding capacity—could in principle be managed
 dynamically, but in practice is not.) With respect to link bandwidth,
-statistical multiplexing is the main factor, with packets scheduled
+statistical multiplexing is the starting point, with packets scheduled
 for transmission based on demand. But there are ways to augment
-statistical multiplexing to be more fair, that is, to keep greedy
-flows from starving well-behaved flows. Such algorithms, known as
-*packet schedulers*, effectively allocate link capacity by deciding
-which packet to send next.
+statistical multiplexing both to be more fair (i.e., to keep greedy
+flows from starving well-behaved flow) and to ensure that important
+packets don't get stuck behind unimportant packets. Such algorithms,
+known as *packet schedulers*, effectively allocate link capacity by
+deciding which packet to send next.
 
 Packet scheduling is an aspect of buffer management—the scheduler
 decides which packet to dequeue—but there are additional techniques
-for managing packet queues, collectively known as *Active Queue
-Mangement (AQM)*. Generally, these techniques decide which packet(s)
+for managing packet queues. They are collectively known as *Active Queue
+Mangement (AQM)*, and they generally decide which packet(s)
 to drop as the buffer fills up. AQM plays an especially important role
 in the Internet because dropping a packet is an indirect way for a
 network node to "signal" an edge host—the entity responsible for
@@ -46,9 +47,13 @@ network.
 
 These node-level mechanisms have to make local decisions in real-time,
 but there are also network-wide actions that dictate how to place that
-traffic onto links and nodes in the first place. The problem is known
-as *Traffic Engineering (TE)*, it is increasingly being done as a
-continuous (but coarse-grain) part of a network's overall approach to
+traffic onto links and nodes in the first place. This network-wide
+decision making process is known as *Traffic Engineering (TE)*, and it
+comes into play when per-node capacity is chronically underprovisioned
+due to long-term changes in the volume of traffic flowing between
+various nodes. TE was originally an off-line processes, requiring
+adminstrator intervention, but it is increasingly being done as an
+automated (but coarse-grain) part of a network's overall approach to
 capacity management.
 
 .. include:: capacity/design.rst

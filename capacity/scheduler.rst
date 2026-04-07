@@ -1,15 +1,14 @@
 |Capacity|.2 Packet Schedulers
 --------------------------------
 
-Regardless of how simple or how sophisticated the rest of the resource
-allocation mechanism, each router implements a packet scheduler that
-decides the order in which queued packets are transmitted. This
-scheduler is closely related to the *queuing discipline*, so much so,
-that it is not uncommon to name the scheduler after the queuing
-discipline (as is the case for the three examples given in this
-section). Whichever name we choose, the mechanism is primarily
-concerned with deciding which packet to transmit next on each link;
-the next section looks at other queue-related issues.
+Each router implements a packet scheduler that decides the order in
+which queued packets are transmitted. This scheduler is closely
+related to the *queuing discipline*, so much so, that it is not
+uncommon to name the scheduler after the queuing discipline (as is the
+case for the three examples given in this section). Whichever name we
+choose, the mechanism is primarily concerned with deciding which
+packet to transmit next on each link; the next section looks at other
+queue-related issues.
 
 |Capacity|.2.1 FIFO Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -78,11 +77,9 @@ Another approach is to enforce good behavior at a network-managed
 ingress node, such as the first router that connects an ISP to a set
 of its customers. End users can set the priority as desired, but the
 ingress node *polices* the flow of packet to ensure they stay below
-some target rate. This is the essence of *Differentiated Services*,
-also known as *DiffServ*. Although DiffServ was originally conceived
-as a general-pupose mechanism, today it is most widely used inside
-datacenter networks, and so we discuss it in that context (see Section
-|Capacity|.4). For the purposes of this section, the key is to
+some target rate. Policing traffic is one aspect differentiated
+introduced in the previous section. We'll see an example of how
+policing is managed in a later section, but for now, the key is to
 recognize the potential value of priority queues, and the
 complications in using them.
 
@@ -92,7 +89,7 @@ complications in using them.
 The main problem with FIFO queuing (with or without priorities) is
 that it does not discriminate between different traffic sources, or,
 in the language introduced in the previous section, it does not
-separate packets according to the flow tno which they belong. This
+separate packets according to the flow to which they belong. This
 means it is possible for a greedy flow to starve all the other flows.
 
 Fair queuing (FQ) is an algorithm that has been designed to address
@@ -129,6 +126,10 @@ fragmentation upstream from this router), then a simple round-robin
 servicing of packets from each flow’s queue will give the first flow
 two-thirds of the link’s bandwidth and the second flow only one-third
 of its bandwidth.
+
+.. TODO -- Probably should update the algorithm to DWRR rather
+   FQ/WFQ. Keep the bit-by-bit story as motivation, mention that there
+   are multiple algorithms, but then present DWRR's approximation.
 
 What we really want is bit-by-bit round-robin, where the router
 transmits a bit from flow 1, then a bit from flow 2, and so on. Clearly,
