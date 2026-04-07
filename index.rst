@@ -34,6 +34,7 @@ Larry Peterson and Bruce Davie
    policy.rst
    virtual.rst
    capacity.rst
+   virtual.rst
    part_three.rst
    reliable.rst
    congestion.rst
