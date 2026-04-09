@@ -1,4 +1,4 @@
-5.4 Mobile Cellular Network
+|Shared|.4 Mobile Cellular Network
 --------------------------------------------
 
 The Mobile Cellular Network, which has a 40-year history that
@@ -40,10 +40,10 @@ occupies a different frequency band. The high-level summary is that
 traditional cellular technologies range from 700-2400 MHz, with new
 mid-spectrum allocations now happening at 6 GHz, and millimeter-wave
 (mmWave) allocations opening above 24 GHz. We'll see how these new
-bands are being exploited for different purposes in Section 5.4.4.
+bands are being exploited for different purposes in Section |Shared|.4.4.
 
 
-5.4.1 Overview
+|Shared|.4.1 Overview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :numref:`Figure %s <fig-cellular>` gives a high-level view of the
@@ -94,7 +94,7 @@ There are two more architectural concepts to introduce. First,
 %s <fig-cellular>` to highlight the fact that a base station has an
 analog component (depicted by an antenna) and a digital component
 (depicted by a processor pair). This section primarily focuses on the
-latter, and assumes the building blocks outlined in Section 5.2 for
+latter, and assumes the building blocks outlined in Section |Shared|.2 for
 the over-the-air radio transmissions.
 
 .. _fig-cups:
@@ -114,8 +114,8 @@ Control and User Plane Separation*—to denote this idea. One motivation
 for CUPS is to enable control plane resources and data plane resources
 to be scaled independently of each other.
 
-5.4.2 Radio Access Network
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Shared|.4.2 Radio Access Network
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We now describe the RAN by sketching the role each base station plays,
 but keep in mind that the collection of base stations in a RAN are
@@ -196,7 +196,7 @@ like the station-to-core connectivity shown in the previous figure,
 this communication uses the same control plane (SCTP over IP) and user
 plane (GTP over UDP/IP) packets. The decision as to when to do a
 handover is part of the scheduling decision described in Section
-5.4.4.
+|Shared|.4.4.
 
 .. _fig-handover:
 .. figure:: shared/figures/handover.png
@@ -240,7 +240,7 @@ possible to forward traffic to a different base station (or to
 multiple base stations) in an effort to make efficient use of the
 radio spectrum over a larger geographic area.
 
-5.4.3 Mobile Core
+|Shared|.4.3 Mobile Core
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The function of the Mobile Core is to provide
@@ -369,7 +369,7 @@ discussion, any UE that becomes inactive for a period of time also
 loses its session, with a new session established and a new IP address
 assigned when the UE becomes active again.
 
-5.4.4  Scheduling Transmission
+|Shared|.4.4  Scheduling Transmission
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Responsibility for scheduling transmission is centered at the base
@@ -458,7 +458,7 @@ are reassembled back into complete packets at the receiver, before
 being passed up to the device (for downstream traffic) or on to the
 Mobile Core (for upstream traffic). Finally, note that one possible
 decision the scheduler might make is to "hand-off" the user to another
-base station, as outlined in Section 5.4.2. In this way, a collection
+base station, as outlined in Section |Shared|.4.2. In this way, a collection
 of base stations effectively collaborate to allocate spectrum across a
 set of radio cells.
 

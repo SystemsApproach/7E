@@ -1,4 +1,4 @@
-5.3 Wi-Fi
+|Shared|.3 Wi-Fi
 ------------------------------
 
 Most users access the Internet using a wireless network based on the
@@ -18,7 +18,7 @@ and achieving per-device data rates of 150 Mbps to 450 Mbps.  As of
 this writing, 802.11ax (this is the variant that corresponds to Wi-Fi
 6) is becoming mainstream. It  provides yet another substantial improvement in
 throughput, in part by adopting the OFDMA framework described in
-Section 5.2, and in part by adding spectrum in the 6-GHz band.
+Section |Shared|.2, and in part by adding spectrum in the 6-GHz band.
 802.11be (Wi-Fi 7) incrementally improves on 802.11ax and is also becoming
 available.
 
@@ -29,7 +29,7 @@ section primarily focuses on 802.11ax, but as we will see, the
 starting point for any legacy technology often colors the solution you
 see today.
 
-5.3.1 Collision Avoidance
+|Shared|.3.1 Collision Avoidance
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To a first approximation, 802.11 follows the same algorithm as the
@@ -133,10 +133,10 @@ Finally, the CA mechanism just described is the basic process that has
 been used across multiple generations of 802.11. The latest versions
 augment this RTS-CTS exchange with additional information that is used
 by the scheduler to improve throughput. We highlight these in Section
-5.3.5, but note that 802.11 is designed to be backward compatible, so
+|Shared|.3.5, but note that 802.11 is designed to be backward compatible, so
 devices with older technology still work side-by-side with enhanced APs.
 
-5.3.2 Distribution System
+|Shared|.3.2 Distribution System
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 802.11 provides extensions for a mesh (*ad hoc*) topology, in which
@@ -148,7 +148,7 @@ to each other by a so-called *distribution system*. :numref:`Figure %s
 <fig-wireless2>` illustrates a distribution system that connects three
 access points, each of which services the nodes in some region. Each
 access point operates on some channel in the appropriate frequency
-range (e.g., a 20-MHz frequency band as introduced in Section 5.2),
+range (e.g., a 20-MHz frequency band as introduced in Section |Shared|.2),
 with each AP typically on a different channel from its neighbors.
 
 .. _fig-wireless2:
@@ -218,7 +218,7 @@ is called *passive scanning*, and a node can change to this AP based
 on the ``Beacon`` frame simply by sending an ``Association Request``
 frame back to the access point.
 
-5.3.3 Frame Format
+|Shared|.3.3 Frame Format
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Most of the 802.11 frame format, as depicted in :numref:`Figure %s
@@ -262,7 +262,7 @@ corresponds to E, ``Addr2`` identifies AP-3, ``Addr3`` corresponds to
 AP-1, and ``Addr4`` identifies
 A.
 
-5.3.4 Security of Wireless Links
+|Shared|.3.4 Security of Wireless Links
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One obvious problem wireless networks face compared to wires or fibers
@@ -362,10 +362,10 @@ is subsequently encrypted along with the plaintext in order to prevent
 birthday attacks, which depend on finding different messages with the
 same authenticator.
 
-5.3.5 Scheduling Transmission
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Shared|.3.5 Scheduling Transmission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We indicated in Section 5.2 that Wi-Fi and 5G use different strategies
+We indicated in Section |Shared|.2 that Wi-Fi and 5G use different strategies
 for (a) deciding how to allocate transmission resources to different
 users, and (b) determining how to adapt transmission parameters based
 on feedback. In both cases, the Wi-Fi approach is minimal (especially
@@ -386,7 +386,7 @@ Wi-Fi does not make quality-of-service guarantees; like the Internet
 as a whole, Wi-Fi is a best-effort solution. This means packets
 enqueued at the MAC layer are transmitted in FIFO order. Initiating a
 transmission first involves the CA mechanism described in Section
-5.3.1. The main difference from earlier versions is that in Wi-Fi 6,
+|Shared|.3.1. The main difference from earlier versions is that in Wi-Fi 6,
 the APs take on additional responsibility coordinating with other
 devices as to when transmissions should happen. They do this by
 piggybacking RU assignments on RTS messages sent to devices, notifying
