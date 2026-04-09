@@ -2,9 +2,10 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: Apache-2.0
 
+.. include:: chapters.rst
 
-Chapter 5:  Mediating Shared Access
-========================================
+Chapter |Shared|:  Mediating Shared Access
+==============================================
 
 Chapter 1 highlights the challenge of multiplexing multiple users on a
 shared network, but focuses on how that problem manifests on switches.

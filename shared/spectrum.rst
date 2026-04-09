@@ -1,4 +1,4 @@
-5.2 Managing Spectrum
+|Shared|.2 Managing Spectrum
 ----------------------------------
 
 Wireless transmission is full of challenges that don't arise in wired
@@ -42,7 +42,7 @@ of Wi-Fi, known as Wi-Fi 6 and Wi-Fi 7 (also called 802.11ax and
 inherent challenges of using wireless spectrum and describes the
 technology used to address them.
 
-5.2.1 Transmission Challenges
+|Shared|.2.1 Transmission Challenges
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Radio-based data transmission has to deal with several impairments,
@@ -111,7 +111,7 @@ can be configured to match the environment (indoor, urban, suburban)
 and dynamically reconfigured to match changing conditions. (noise,
 mobility).
 
-5.2.2  Multiplexing Technique
+|Shared|.2.2  Multiplexing Technique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We saw an overview of multiplexing strategies in Chapter 1, and both

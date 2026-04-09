@@ -1,4 +1,4 @@
-5.1  Design Issues
+|Shared|.1  Design Issues
 ------------------------------
 
 Mediating access to a shared medium is a resource allocation

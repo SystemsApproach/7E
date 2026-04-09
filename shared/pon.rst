@@ -1,5 +1,5 @@
-5.4 Passive Optical Network
------------------------------
+|Shared|.4 Passive Optical Network
+-----------------------------------------
 
 PON (Passive Optical Network) is the technology most commonly used to
 deliver fiber-based broadband to homes and businesses. PON adopts a
@@ -15,18 +15,19 @@ happens at the source in the ISP’s premises, in a device called an
 homes, in a device called an *Optical Network Unit* (ONU).
 
 :numref:`Figure %s <fig-pon>` shows an example PON, simplified to
-depict just one
-ONU and one OLT. In practice, a Central Office would include multiple
-OLTs connecting to thousands of customer homes. For completeness,
-:numref:`Figure %s <fig-pon>` also includes two other details about
-how the PON is
-connected to the ISP’s backbone (and hence, to the rest of the
-Internet). The *Agg Switch* aggregates traffic from a set of OLTs, and
-the *BNG* (Broadband Network Gateway) is a piece of Telco equipment
-that, among many other things, meters Internet traffic for the sake of
-billing. As its name implies, the BNG is effectively the gateway between
-the access network (everything to the left of the BNG) and the Internet
-(everything to the right of the BNG).
+depict just one ONU and one OLT. In practice, a Central Office would
+include multiple OLTs connecting to thousands of customer homes. For
+completeness, :numref:`Figure %s <fig-pon>` also includes a piece of
+Telco equipment known as a *Broadband Network Gateway (BNG)*. As its
+name implies, the BNG is effectively the gateway between the access
+network (everything to the left of the BNG) and the Internet
+(everything to the right of the BNG). The BNG serves much the same
+role as the Mobile Core in the mobile cellular network: it manages
+subscribers as they connect to the network. This includes metering
+usage for billing purposes, and when necessary, throttling user
+traffic according to the level of service the subscriber is paying for
+(e.g., did they sign up for 1Gbps or some lesser tier). Exactly how
+"throttling" is implemented is a topic we cover in Chapter |Capacity|.
 
 .. _fig-pon:
 .. figure:: shared/figures/pon.png
