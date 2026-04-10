@@ -21,10 +21,15 @@ dynamically, but in practice is not.) With respect to link bandwidth,
 statistical multiplexing is the starting point, with packets scheduled
 for transmission based on demand. But there are ways to augment
 statistical multiplexing both to be more fair (i.e., to keep greedy
-flows from starving well-behaved flow) and to ensure that important
-packets don't get stuck behind unimportant packets. Such algorithms,
+flows from starving well-behaved flows) and to ensure that important
+packets don't get stuck behind unimportant packets.\ [#]_ Such algorithms,
 known as *packet schedulers*, effectively allocate link capacity by
 deciding which packet to send next.
+
+.. [#] The idea that some packets are more important than others raises a
+       set of issues to be discussed later, such as who decides which packets
+       are important. 
+
 
 Packet scheduling is an aspect of buffer management—the scheduler
 decides which packet to dequeue—but there are additional techniques
@@ -45,7 +50,7 @@ about edge hosts is that they react to whatever signal the routers
 send them by adapting the rate at which they inject packets into the
 network.
 
-These node-level mechanisms have to make local decisions in real-time,
+These node-level mechanisms have to make local decisions in real time,
 but there are also network-wide actions that dictate how to place that
 traffic onto links and nodes in the first place. This network-wide
 decision making process is known as *Traffic Engineering (TE)*, and it
@@ -53,7 +58,7 @@ comes into play when per-node capacity is chronically underprovisioned
 due to long-term changes in the volume of traffic flowing between
 various nodes. TE was originally an off-line processes, requiring
 adminstrator intervention, but it is increasingly being done as an
-automated (but coarse-grain) part of a network's overall approach to
+automated (but coarse-grained) part of a network's overall approach to
 capacity management.
 
 .. include:: capacity/design.rst

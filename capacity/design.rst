@@ -19,6 +19,9 @@ congestion.
 
    Congestion at a bottleneck router.
 
+
+.. TODO change bottleneck to something realistic like 100 Mbps
+
 Note that avoiding congestion is not a problem that can be fully
 addressed by routing.  While it is true that a congested link could be
 assigned a large cost by a routing protocol, in an effort to make
@@ -27,7 +30,9 @@ much traffic being offered to a bottleneck link. To see this, we need
 look no further than the simple network depicted in :numref:`Figure %s
 <fig-congestion>`, where all traffic has to flow through the same
 router to reach the destination. Although this is an extreme example,
-it is not uncommon to have bottleneck link that you can't route around.
+it is not uncommon to have bottleneck link that you can't route
+around. The access link to an enterprise or residential network is a
+common example of such a bottleneck.
 
 So how do we address congestion? As originally deployed, the Internet
 didn't do anything. Users (or more precisely, TCP running on their
@@ -68,7 +73,7 @@ think of them as cooperatively trying to achieve a globally optimal
 solution.  From this perspective, there is a shared objective
 function, and all the elements are implementing a distributed
 algorithm to optimize that function. The various mechanisms described
-in this Chapter—and their edge counterparts Chapter |CC| in Part
+in this Chapter—and their edge counterparts in Chapter |CC| in Part
 III—are simply defining some objective function. A persistent
 challenge has been how to judge competing objective functions when
 multiple mechanisms have been deployed.
@@ -78,16 +83,18 @@ as a whole, it can be appropriate for limited domains; backbone
 networks connecting cloud datacenters are one example.  In such
 domains, a logically centralized controller could collect information
 about the state of the network's links and switches, compute a
-globally optimal allocation, and then advise end hosts as to how much
-capacity is available to each of them. Such an approach would
-certainly be limited by the time-scale in which the centralized
-controller could be responsive to changes in the network, but it has
-been successfully applied to the coarse-grained allocation decisions
-made by traffic engineering mechanisms, such as those described in
-Section |Capacity|.4.  Exactly where one draws a line between
-coarse-grain traffic engineering decisions and fine-grain congestion
-control decisions is not clear, but it's good to keep an open mind
-about the spectrum of options that are available.
+globally optimal (or near-optimal) allocation, and then advise end
+hosts as to how much capacity is available to each of them. Such an
+approach would certainly be limited in either the geographic scope or
+the time-scale in which the centralized controller could be responsive
+to changes in the network. There are examples of centralized
+approaches being successfully applied at
+data center scale and in the longer timescale
+allocation decisions made by traffic engineering
+mechanisms, such as those described in Section |Capacity|.4. There
+have been enough challenges to the distributed model that dominated
+the first few decades of the Internet's history to suggest that this
+design decision is not yet entirely settled.
 
 |Capacity|.1.2 Router-Centric vs Host-Centric
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -133,7 +140,7 @@ going on. The whole point of buffering is to absorb *packet bursts*,
 that is, to accommodate the time-varying nature of data communication.
 We need to understand burstiness to know how to best manage queues.
 
-The key observation is that queues are are expected to build up from
+The key observation is that queues are expected to build up from
 time to time. For example, a newly opened connection may dump a burst
 of packets into the network, and these are likely to form a queue at
 the bottleneck link. This is not in itself a problem. There should be
@@ -156,7 +163,7 @@ as illustrated in :numref:`Figure %s <fig-good-bad>` (a).
 
 On the flip side, over-provisioning queues (i.e., making them too
 large) can be a problem if they end up being persistently full. A
-persistently full queue does nothing except adding delay to the
+persistently full queue does nothing except add delay to the
 network. To compound the problem, a queue is less able to absorb
 future bursts if it never drains fully. The combination of large
 buffers and persistent queues within those buffers is a phenomenon
@@ -195,6 +202,8 @@ consistent set of routers. This idea of a *flow*—a sequence of packets
 sent between a source/destination pair and following the same route
 through the network—is an important abstraction that we take advantage
 of.
+
+.. TODO deal with the forward reference to TCP port numbers?
 
 One of the powers of the flow abstraction is that flows can be defined
 at different granularities. For example, a flow can be host-to-host
@@ -257,7 +266,7 @@ that we explore in this chapter. The general approach is often
 referred to as *differentiated services*, indicating that not all
 packets are treated exactly the same. We are still squarely in the
 best-effort domain in that no promises are made, but short of
-guaranteeing a throughput rate for an upper bound on jitter, there are
+guaranteeing a throughput rate or an upper bound on jitter, there are
 steps the network can to differentiate the level of service various
 classes of traffic receive.
 

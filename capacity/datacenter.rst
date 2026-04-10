@@ -1,12 +1,15 @@
 |Capacity|.4 Datacenter Networks
 --------------------------------------
 
-While RED and EQN have not enjoyed wide-spread adoption in the
+While RED and ECN have not enjoyed wide-spread adoption in the
 Internet at large, and FIFO with tail drop continues to be the default
 queuing discipline, the mechanisms described in the previous two
 sections have proven useful in narrow settings. Datacenter networks
 are a noteworthy example, and so we use them to illustrate how these
 mechanisms are used in practice.
+
+.. TODO Suggest reworking this to make Datacenter one example out of 2
+   or 3, including VOIP and perhaps access networks
 
 Datacenter networks have two properties that make them an ideal
 candidate for enhanced resource management. One is that they are
@@ -32,7 +35,7 @@ First, we need a way for edge hosts and routers to exchange
 information with each other. The ``ToS`` bits introduced in Section
 |Capacity|.1.5, which has been replaced by an interpretation known as
 *Differentiated Services Code Point (DSCP)*, plays this role. DSCP is
-defined in RFC 2474, which was written in 1998, predates modern
+defined in RFC 2474, which was written in 1998, and predates modern
 datacenters. But it prescribes a general mechanism that works across
 many use cases, including datacenters.  Specifically, DSCP allows
 networks to distinguish between different *classes* of traffic, where
@@ -68,6 +71,7 @@ control class and default best-effort class.
 .. TODO -- Verify that the above paragraph is correct. It suggests a
    thread that is of minimal value (except perhaps as a negative
    example).
+   The Google Cloud docs suggest a larger number of AF classes
 
 Second, instead of probabilistically dropping packets, datacenters use
 ECN to provide direct feedback. Given the low round-trip times, ECN

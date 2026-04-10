@@ -13,7 +13,7 @@ queue-related issues.
 |Capacity|.2.1 FIFO Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The idea of a FIFO scheduler (or FIFO queuing) is simple: The first
+The idea of a FIFO scheduler (or FIFO queuing) is simple: the first
 packet that arrives at a router is the first packet to be transmitted.
 This is illustrated in :numref:`Figure %s(a) <fig-fifo>`, which shows
 a FIFO with “slots” to hold up to eight packets. Given that the amount
@@ -86,20 +86,26 @@ complications in using them.
 |Capacity|.2.3 Fair Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The main problem with FIFO queuing (with or without priorities) is
+The main problem with FIFO queuing is
 that it does not discriminate between different traffic sources, or,
 in the language introduced in the previous section, it does not
 separate packets according to the flow to which they belong. This
-means it is possible for a greedy flow to starve all the other flows.
+means it is possible for a greedy flow to starve all the other
+flows. While priority queueing can serve some flows in preference to
+others, it still doesn't prevent starvation; high-priority flows can
+starve low-priority flows, and within a single priority, a greedy flow
+can starve out other flows at the same priority. 
 
 Fair queuing (FQ) is an algorithm that has been designed to address
 this problem. FQ is designed to isolate flows, which it does by
 maintaining a separate queue for each flow currently being handled by
-the router. The router then services these queues in round-robin
+the router. The definition of a "flow" can be quite varied; it could
+be a single application's traffic, or it could be an entire class of
+traffic. The router then services these queues in round-robin
 order, as illustrated in :numref:`Figure %s <fig-fq>`.  When a flow
 sends packets too quickly, then its queue fills up. When a queue
 reaches a particular length, additional packets belonging to that
-flow’s queue are discarded. In this way, a given source cannot
+flow’s queue are discarded. In this way, a given flow cannot
 arbitrarily increase its share of the network’s capacity at the
 expense of other flows.
 
@@ -115,14 +121,13 @@ anything about the state of the router or in any way limiting how
 quickly a given source sends packets. How edge hosts do or do not
 react to packet loss is an orthogonal issue.
 
-As simple as the basic idea is, there are still a modest number of
-details that you have to get right. The main complication is that the
+As simple as the basic idea is, there are still a number of
+details to get right. The main complication is that the
 packets being processed at a router are not necessarily the same
 length.  To truly allocate the bandwidth of the outgoing link in a
 fair manner, it is necessary to take packet length into consideration.
 For example, if a router is managing two flows, one with 1000-byte
-packets and the other with 500-byte packets (perhaps because of
-fragmentation upstream from this router), then a simple round-robin
+packets and the other with 500-byte packets, then a simple round-robin
 servicing of packets from each flow’s queue will give the first flow
 two-thirds of the link’s bandwidth and the second flow only one-third
 of its bandwidth.
@@ -257,13 +262,16 @@ transmitted, the first flow will get one-third of the available
 bandwidth, the second will get one-sixth of the available bandwidth,
 and the third will get one-half of the available bandwidth.
 
-While we have described WFQ in terms of flows, note that it could be
-implemented on *classes* of traffic, where classes are defined in some
+While we have described WFQ in terms of flows, we noted above that a
+"flow" can be defined in many different ways. In particular we could
+replace flows with  *classes* of traffic, where classes are defined in some
 other way than the simple host-to-host or process-to-process flows.
-For example, we could use some bits in the IP header to identify
+One practical example of this is to use some bits in the IP header to identify
 classes and allocate a queue and a weight to each class. This is
-exactly what is proposed as part of the Differentiated Services
+exactly what is defined as part of the Differentiated Services
 mechanism described in Chapter |Stream|.
+
+.. TODO not sure where we are covering Diff Serv yet, so check that reference.
 
 Finally, we observe that this whole discussion of queue management
 illustrates an important system design principle known as *separating
