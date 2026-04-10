@@ -32,6 +32,7 @@ Larry Peterson and Bruce Davie
    shared.rst
    federation.rst
    policy.rst
+   capacity.rst
    part_three.rst
    reliable.rst
    secure.rst
