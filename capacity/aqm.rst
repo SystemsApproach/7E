@@ -41,11 +41,12 @@ notification message to the source, but instead *implicitly* notified
 the source of congestion by dropping one of its packets. The source
 effectively learns about the dropped packet when a subsequent timeout
 happens. As the “early” part of the RED acronym suggests, the router
-drops the packet earlier than it would have to, so as to notify the
-source that it should decrease its sending rate sooner than it would
-normally have. In other words, the router drops a few packets before
-it has exhausted its buffer space completely, so as to cause the
-source to slow down, with the hope that this will mean it does not
+drops the packet earlier than it would have to—before it is completely
+out of buffer space—so as to notify the
+source that it should decrease its sending rate before tail drop sets
+in. By dropping a few packets before
+it has exhausted its buffer space completely, the router causes the
+source(s) to slow down, with the hope that this will mean it does not
 have to drop lots of packets later on.
 
 .. TODO -- Is it ok to assume the reader understands the timeout reference?
@@ -277,6 +278,8 @@ in datacenters.
       <https://tools.ietf.org/html/rfc2309>`__.
       RFC 2309, April 1998.
 
+.. TODO: this has been replaced by RFC 7567 which still asks for AQM
+   but admits that RED might not be the best choice
 
 |Capacity|.3.2 Controlled Delay
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -306,7 +309,7 @@ AQM.
       ACM Queue, 10(5), May 2012.
 
 First, the CoDel authors were the ones that articulated the difference
-between \"good queues\", as and \"bad queues\" as illustrated in
+between \"good queues\" and \"bad queues\" as illustrated in
 :numref:`Figure %s <fig-good-bad>`. In a sense, then, the challenge
 for an AQM algorithm is to distinguish between \"good\" and \"bad\"
 queues, and to trigger packet loss only when the queue is determined
@@ -372,6 +375,9 @@ the Linux kernel, which has aided in its deployment. In particular,
 CoDel provides value in home routers (which are often Linux-based), a
 point along the end-to-end path (see :numref:`Figure %s <fig-codel>`)
 that commonly experiences bufferbloat.
+
+.. TODO: I would update this to cover fq_codel and RFC 8290
+   https://blog.cerowrt.org/post/state_of_fq_codel/ 
 
 |Capacity|.3.3 Explicit Congestion Notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
