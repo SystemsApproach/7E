@@ -36,6 +36,7 @@ Larry Peterson and Bruce Davie
    capacity.rst
    part_three.rst
    reliable.rst
+   congestion.rst
    secure.rst
    message.rst
    README.rst
