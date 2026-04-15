@@ -12,7 +12,9 @@ packets according to its current estimate of the available bandwidth,
 a TCP sender reacts to two signals from the network. On the one hand,
 the arrival of an ACK signals that one of its packets has left the
 network and that it is therefore safe to transmit a new packet without
-adding to the level of congestion.
+adding to the level of congestion. On the other hand, a timeout
+signals that a packet was lost, potentially implying that the network
+is congested, and that TCP needs to reduce its sending rate.
 
 There are many subtle issues that must be addressed to make this a
 practical approach to congestion control.  This second describes the
