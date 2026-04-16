@@ -1,4 +1,4 @@
-|CC|.3:  Loss-Based Algorithms
+|CC|.3  Loss-Based Algorithms
 -------------------------------------------
 
 This section describes the dominant congestion-control algorithm in
@@ -17,14 +17,14 @@ signals that a packet was lost, potentially implying that the network
 is congested, and that TCP needs to reduce its sending rate.
 
 There are many subtle issues that must be addressed to make this a
-practical approach to congestion control.  This second describes the
+practical approach to congestion control.  This section describes the
 collection of techniques that address these issues, and as such, can
 be read as a case study of the experience of identifying and solving a
 sequence of problems. We will trace the historical context as we visit
 each of the techniques in the subsections that follow.
 
 |CC|.3.1 Additive Increase/Multiplicative Decrease
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The central challenge is computing an estimate of how much traffic
 this sender can safely transmit. To this end, TCP maintains a new
@@ -245,7 +245,16 @@ packet per RTT.
 In other words, TCP increases the congestion window as defined by the
 following code fragment:
 
-.. literalinclude:: code/cwin.c
+::
+
+   {
+      u_int    cw = state->CongestionWindow;
+      u_int    incr = state->maxseg;
+
+      if (cw > state->CongestionThreshold)
+          incr = incr * incr / cw;
+      state->CongestionWindow = MIN(cw + incr, TCP_MAXWIN);
+   }
 
 where ``state`` represents the state of a particular TCP connection and
 defines an upper bound on how large the congestion window is allowed to
@@ -358,7 +367,7 @@ into the Internet; for now, they are more likely to be used in
 controlled network environments (e.g., research networks).
 
 |CC|.3.3 Fast Retransmit and Fast Recovery
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The mechanisms described so far were part of the original proposal to
 add congestion control to TCP, and they have collectively become known

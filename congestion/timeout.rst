@@ -22,7 +22,7 @@ been through multiple refinements over the years. This section
 revisits that experience.
 
 |CC|.2.1 Original Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We begin with the simple algorithm that was originally described in
 the TCP specification.  The idea is to keep a running average of the
@@ -50,7 +50,7 @@ setting of :math:`\alpha` between 0.8 and 0.9. TCP then uses
    \mathsf{TimeOut = 2} \times \mathsf{EstimatedRTT}
 
 |CC|.2.2 Karn/Partridge Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After several years, a rather obvious flaw was discovered in this
 simple approach: An ACK does not really acknowledge a transmission,
@@ -94,7 +94,7 @@ idea of exponential backoff again, embodied in a much
 more sophisticated mechanism, in a later section.
 
 |CC|.2.3 Jacobson/Karels Algorithm
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Karn/Partridge algorithm was an improvement to RTT estimation, but it did not
 eliminate congestion. The 1988 congestion-control mechanism proposed
@@ -132,7 +132,7 @@ set to 4.  Thus, when the variance is small, ``TimeOut`` is close to
 dominate the calculation.
 
 |CC|.2.4 Implementation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two items of note regarding the implementation of timeouts
 in TCP. The first is that it is possible to implement the calculation
@@ -149,7 +149,17 @@ values. If you find the code hard to follow, you might want to try
 plugging some real numbers into it and verifying that it gives the
 same results as the equations above.
 
-.. literalinclude:: code/timeout.c
+::
+
+   {
+       SampleRTT -= (EstimatedRTT >> 3);
+       EstimatedRTT += SampleRTT;
+       if (SampleRTT < 0)
+           SampleRTT = -SampleRTT;
+       SampleRTT -= (Deviation >> 3);
+       Deviation += SampleRTT;
+       TimeOut = (EstimatedRTT >> 3) + (Deviation >> 1);
+   }
 
 The second is that the algorithm is only as good as the clock used to
 read the current time. On typical Unix implementations at the time,
@@ -160,11 +170,9 @@ checked to see if a timeout should happen every time this 500-ms clock
 ticked and would only take a sample of the round-trip time once per
 RTT. The combination of these two factors could mean that a timeout
 would happen 1 second after the segment was transmitted. An extension
-to TCP, described in the next section, makes this RTT calculation a
-bit more precise.
-
+to TCP, described next, makes this RTT calculation a bit more precise.
 For additional details about the implementation of timeouts in TCP, we
-refer the reader to the authoritative RFC:
+refer the reader to the authoritative RFC.
 
 .. _reading_timeout:
 .. admonition::  Further Reading
@@ -173,28 +181,31 @@ refer the reader to the authoritative RFC:
    <https://tools.ietf.org/html/rfc6298>`__. June 2011.
 
 |CC|.2.5 TCP Timestamp Extension
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The changes to TCP described up to this point have been adjustments to
 how the sender computes timeouts, with no changes to the over-the-wire
 protocol. But there are also extensions to the TCP header that help
 improve its ability to manage timeouts and retransmissions. We discuss
-one that relates to RTT estimation here. Another extension, establishing a scaling factor for
-``AdvertisedWindow``, was described in Section 2.3., and a third,
-selective acknowledgment or SACK is discussed below.
+one that relates to RTT estimation here. Another extension,
+establishing a scaling factor for ``AdvertisedWindow``, was described
+in Section |TCP|.8, and a third, selective acknowledgment or SACK is
+discussed below.
 
-The TCP timestamp extension helps to improve TCP’s timeout mechanism. Instead of
-measuring the RTT using a coarse-grained event, TCP can read the actual
-system clock when it is about to send a segment, and put this time—think
-of it as a 32-bit *timestamp*\ —in the segment’s header. The receiver then
-echoes this timestamp back to the sender in its acknowledgment, and the
-sender subtracts this timestamp from the current time to measure the
-RTT. In essence, the timestamp option provides a convenient place for
-TCP to store the record of when a segment was transmitted; it stores the
-time in the segment itself. Note that the endpoints in the connection do
-not need synchronized clocks, since the timestamp is written and read at
-the same end of the connection. This improves the measurement of RTT
-and hence reduces the risk of incorrect timeouts due to poor RTT estimates.
+The TCP timestamp extension helps to improve TCP’s timeout
+mechanism. Instead of measuring the RTT using a coarse-grained event,
+TCP can read the actual system clock when it is about to send a
+segment, and put this time—think of it as a 32-bit *timestamp*\ —in
+the segment’s header. The receiver then echoes this timestamp back to
+the sender in its acknowledgment, and the sender subtracts this
+timestamp from the current time to measure the RTT. In essence, the
+timestamp option provides a convenient place for TCP to store the
+record of when a segment was transmitted; it stores the time in the
+segment itself. Note that the endpoints in the connection do not need
+synchronized clocks, since the timestamp is written and read at the
+same end of the connection. This improves the measurement of RTT and
+hence reduces the risk of incorrect timeouts due to poor RTT
+estimates.
 
 This timestamp extension serves a second purpose, in that it also
 provides a way to create a 64-bit sequence number field, addressing

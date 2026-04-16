@@ -11,7 +11,7 @@ As introduced Chapter |Intro|, a packet-switched network based on
 statistical multiplexing risks congestion at various routers and
 switches throughout the network. Chapter |Capacity| looks at the
 router-side of the problem, where the immediate concern is that
-buffers fill up, and eventually packets have to be dropped. We now
+buffers fill up, and packets may eventually have to be dropped. We now
 turn our attention to the role played by the edge hosts, which are
 responsible for the volume of traffic flowing through those nodes.
 
@@ -42,10 +42,6 @@ research and implementation have built on the early foundations, and
 it seems fair to assume that new approaches or refinements to the
 existing approaches will continue to appear for as long as the
 Internet exists.
-
-In this chapter, we explore the design space for congestion control in
-the Internet and describe the major approaches to managing or avoiding
-congestion that have been developed over the last three decades.
 
 .. _reading_vj:
 .. admonition:: Further Reading

@@ -204,6 +204,7 @@ Cardwell
 CAs
 Casado
 Cascone
+Casetti 
 CBRS
 CCN
 CCR
@@ -555,6 +556,7 @@ Geneve
 Geng
 GENI
 geoscience
+Gerla 
 Gerrit
 gethostbyname
 GetRequest
@@ -894,6 +896,7 @@ mapResolve
 Marcin
 Marko
 Markovian
+Mascolo
 marshaller
 marshalling
 Mastership
@@ -961,6 +964,7 @@ MNC
 MNO
 MNO's
 MNOs
+Mobicom
 modelling
 modularity
 modularize
@@ -1450,6 +1454,7 @@ Sámi
 SamKnows
 SampleLen
 SampleRTT
+Sanadidi
 Sanjeewa
 Sarvesh
 SAs
