@@ -1,18 +1,16 @@
-|CC|.5  Variants
-------------------------
-
-.. include:: <isogrk3.txt>
+|CC|.5  Domain-Specific Variants
+-------------------------------------------
 
 As exploration of the design space for congestion control has
 continued, a number of new algorithms and protocols have emerged.
-These differ from what we've seen in earlier chapters mostly in that
-they target specific use cases, rather than the arbitrarily complex
-and heterogeneous network environments that TCP supports.
+These differ from what we've seen earlier in this chapter mostly in
+that they target specific use cases, rather than the arbitrarily
+complex and heterogeneous network environments that TCP supports.
 
 This section surveys two specific use cases: tuning TCP performance
 for datacenters and accommodating mobile cellular networks with unique
-radio-induced behavior. Additional variants are described in a
-companion book.
+radio-induced behavior. Additional domain-specific solutions are
+described in a companion book.
 
 .. _reading_tcp_variants:
 .. admonition:: Further Reading
@@ -45,20 +43,20 @@ rather, a system design that changes both the switch behavior and the
 end host response to congestion information received from switches.
 
 The central insight in DCTCP is that using loss as the main signal of
-congestion in the datacenter environment is insufficient. By the time a queue
-has built up enough to overflow, low latency traffic is already failing
-to meet its deadlines, negatively impacting performance. Thus DCTCP
-uses a version of ECN to provide an early signal of congestion. But
-whereas the original design of ECN treated an ECN marking much like a
-dropped packet, and cut the congestion window in half, DCTCP takes a
-more finely-tuned approach. DCTCP tries to estimate the fraction
-of bytes that are encountering congestion rather than making the simple
-binary decision that congestion is present. It then scales
-the congestion window based on this estimate. The standard TCP algorithm
-still kicks in should a packet actually be lost. The approach is
-designed to keep queues short by reacting early to congestion while
-not over-reacting to the point that they run empty and sacrifice
-throughput.
+congestion in the datacenter environment is insufficient. By the time
+a queue has built up enough to overflow, low latency traffic is
+already failing to meet its deadlines, negatively impacting
+performance. Thus DCTCP uses a version of ECN to provide an early
+signal of congestion. But whereas the original design of ECN treated
+an ECN marking much like a dropped packet, and cut the congestion
+window in half, DCTCP takes a more finely-tuned approach. DCTCP tries
+to estimate the fraction of bytes that are encountering congestion
+rather than making the simple binary decision that congestion is
+present. It then scales the congestion window based on this
+estimate. The standard TCP algorithm still kicks in should a packet
+actually be lost. The approach is designed to keep queues short by
+reacting early to congestion while not over-reacting to the point that
+they run empty and sacrifice throughput.
 
 The key challenge in this approach is to estimate the fraction of bytes
 encountering congestion. Each switch is simple. If a packet arrives and
@@ -92,12 +90,11 @@ performance.
 
 At the end of each observation window (a period usually chosen to be
 approximately the RTT), the sender computes the fraction of bytes that
-encountered congestion during that window as the
-ratio of the bytes marked with CE to total bytes transmitted. DCTCP
-grows the congestion window in exactly the
-same way as the standard algorithm, but it reduces the window in
-proportion to how many bytes encountered congestion during the last
-observation window.
+encountered congestion during that window as the ratio of the bytes
+marked with CE to total bytes transmitted. DCTCP grows the congestion
+window in exactly the same way as the standard algorithm, but it
+reduces the window in proportion to how many bytes encountered
+congestion during the last observation window.
 
 Specifically, a new variable called ``DCTCP.Alpha`` is initialized to
 1 and updated at the end of the observation window as follows:
@@ -105,14 +102,14 @@ Specifically, a new variable called ``DCTCP.Alpha`` is initialized to
 .. math:: \mathsf{DCTCP.Alpha} = \mathsf{DCTCP.Alpha} \times
           \mathsf{(1 - g) + g} \times \mathsf{M}
 
-``M`` is the faction of bytes marked, and ``g`` is the estimation gain, a
-constant (set by the implementation) that determines how rapidly
-``DCTCP.Alpha`` changes in response to marking of packets. When there
-is sustained congestion, ``DCTCP.Alpha`` approaches 1, and when there
-is sustained lack of congestion, ``DCTCP.Alpha`` decays to zero. This
-causes gentle reaction to newly arrived congestion and more severe
-reaction to sustained congestion, as the congestion window is calculated
-as follows:
+``M`` is the faction of bytes marked, and ``g`` is the estimation
+gain, a constant (set by the implementation) that determines how
+rapidly ``DCTCP.Alpha`` changes in response to marking of
+packets. When there is sustained congestion, ``DCTCP.Alpha``
+approaches 1, and when there is sustained lack of congestion,
+``DCTCP.Alpha`` decays to zero. This causes gentle reaction to newly
+arrived congestion and more severe reaction to sustained congestion,
+as the congestion window is calculated as follows:
 
 .. math:: \mathsf{CongestionWindow} = \mathsf{CongestionWindow} \times \mathsf{(1 - DCTCP.Alpha\ /\ 2)}
 
@@ -208,15 +205,14 @@ hardware, making On-Ramp easy to deploy.
 |CC|.5.2 Mobile Cellular Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We conclude with a use case that continues to attract attention from
-the research community: the interplay between congestion control and
-the mobile cellular network.  Historically, the TCP/IP Internet and
-the mobile cellular network evolved independently, with the latter
-serving as the "last mile" for end-to-end TCP connections since the
-introduction of broadband service with 3G. With the rollout of 5G now
-ramping up, we can expect the mobile network will play an increasingly
-important role in providing Internet connectivity, putting increased
-focus on how it impacts congestion control.
+A second use case that continues to attract attention from the
+research community is the interplay between congestion control and the
+mobile cellular network.  Historically, the TCP/IP Internet and the
+mobile cellular network evolved independently, with the latter serving
+as the "last mile" for end-to-end TCP connections since the
+introduction of broadband service with 3G. Today, the mobile network
+plays a significant role in providing Internet connectivity, putting
+increased focus on how it impacts congestion control.
 
 While a mobile wireless connection could be viewed as no different
 than any other hop along an end-to-end path through the Internet, for
@@ -249,46 +245,18 @@ colleagues in their 2012 CellNet workshop paper, this large buffer is
 problematic for TCP congestion control because it causes the sender to
 overshoot the actual bandwidth available on the radio link, and in the
 process, introduces significant delay and jitter. This is another
-example of the bufferbloat problem identified in Section 6.3.
-
-.. _reading_basestation:
-.. admonition::  Further Reading
-
-   H. Jiang, Z. Liu, Y. Wang, K. Lee and I. Rhee.
-   `Understanding Bufferbloat in Cellular Networks
-   <https://conferences.sigcomm.org/sigcomm/2012/paper/cellnet/p1.pdf>`__
-   ACM SIGCOMM Workshop on Cellular Networks, August 2012.
+example of the bufferbloat problem identified in Section |Capacity|.1.3.
 
 The Jiang paper suggests possible solutions, and generally observes
 that delay-based approaches like Vegas outperform loss-based
-approaches like Reno or CUBIC, but the problem has remained largely
-unresolved for nearly a decade. With the promise of open source
-software-based implementations of the RAN now on the horizon (see our
-companion 5G and SDN books for more details), it might soon be
-possible to take a cross-layer approach, whereby the RAN provides an
-interface that give higher layers of the protocol stack (e.g., the AQM
-mechanisms described in Chapter 6) visibility into what goes on inside
-the base station. Recent research by Xie, Yi, and Jamieson suggests
-such an approach might prove effective, although their implementation
-uses end-device feedback instead of getting the RAN directly involved.
-How ever it's implemented, the idea is to have the receiver explicitly
-tell the sender how much bandwidth is available on the last hop, with
-the sender then having to judge whether the last-hop or some other
-point along the Internet segment is the actual bottleneck.
-
-.. _reading_ran:
-.. admonition::  Further Reading
-
-   Y. Xie, F. Yi, and K. Jamieson. `PBE-CC: Congestion Control via
-   Endpoint-Centric, Physical-Layer Bandwidth Measurements
-   <https://arxiv.org/abs/2002.03475>`__. SIGCOMM 2020.
-
-   L. Peterson and O. Sunay. `5G Mobile Networks: A Systems Approach
-   <https://5G.systemsapproach.org>`__.  January 2020.
-
-   L. Peterson, C. Cascone, B. O'Connor, T. Vachuska,
-   and B. Davie. `Software-Defined Networks: A Systems Approach
-   <https://sdn.systemsapproach.org>`__.  November 2021.
+approaches like Reno or CUBIC. This result is consistent with research
+on a variant of TCP Vegas, known as TCP Westwood (TCPW), dating back
+to the early 2000s. TCPW was motivated primarily by the realization
+that packet loss is not always a reliable indicator of congestion.
+This is particularly noticeable with wireless links, and so TCPW
+tries to determine the bottleneck bandwidth by looking at the rate at
+which ACKs are coming back for those packets that were delivered
+successfully.
 
 The other aspect of cellular networks that makes them a novel
 challenge for TCP congestion control is that the bandwidth of a link
@@ -298,38 +266,32 @@ BBR authors, the (currently opaque) scheduler for this wireless link
 can use the number of queued packets for a given client as an input to
 its scheduling algorithm, and hence the "reward" for building up a
 queue can be an increase in bandwidth provided by the scheduler. BBR
-has attempted to address this in its design by ensuring that it is
+attempts to address this in its design by ensuring that it is
 aggressive enough to queue at least some packets in the buffers of
 wireless links.
 
-Past research inquiries aside, it's interesting to ask if the wireless
-link will remain all that unique going forward. If you take a
-compartmentalized view of the world, and you're a mobile network
-operator, then your goal has historically been to maximize utilization
-of the scarce radio spectrum under widely varying conditions. Keeping
-the offered workload as high as possible, with deep queues, is a
-proven way to do that. This certainly made sense when broadband
-connectivity was the new service and voice and text were the dominant
-use cases, but today 5G is all about delivering good TCP performance.
-The focus should be on end-to-end goodput and maximizing the
-throughput/latency ratio (i.e., the power curve discussed in Section
-3.2). But is there an opportunity for improvement?
+Yet another approach, as exemplified by research by Xie, Yi, and
+Jamieson, suggests such that modifying the receiver to provide
+end-device feedback may be effective. The idea is to have the receiver
+explicitly tell the sender how much bandwidth is available on the last
+hop, with the sender then having to judge whether the last-hop or some
+other point along the Internet segment is the actual bottleneck.
 
-We believe the answer to this question is yes. In addition to
-providing more visibility into the RAN scheduler and queues mentioned
-earlier, three other factors have the potential to change the
-equation. First, 5G deployments will likely support *network slicing*,
-a mechanism that isolates different classes of traffic. This means
-each slice has its own queue that can be sized and scheduled in a
-traffic-specific way. Second, the proliferation of *small cells* will
-likely reduce the number of flows competing for bandwidth at a given
-base station. How this impacts the scheduler's approach to maximizing
-spectrum utilization is yet to be seen. Third, it will become
-increasingly common for 5G-connected devices to be served from a
-nearby edge cloud rather than from the other side of the Internet.
-This means end-to-end TCP connections will have much shorter
-round-trip times, which will make the congestion control algorithm
-more responsive to changes in the available capacity in the RAN. There
-are no guarantees, of course, but all these factors should provide
-ample opportunities to tweak congestion control algorithms well into
-the future.
+.. _reading_ran:
+.. admonition::  Further Reading
+
+   S. Mascolo, C. Casetti, M. Gerla, M. Sanadidi, and R. Wang.
+   `TCP Westwood: Bandwidth Estimation for Enhanced Transport over Wireless
+   Links <https://dl.acm.org/doi/abs/10.1023/A%3A1016590112381>`__,
+   Proc. of the ACM Mobicom 2001, Rome, Italy, July 16-21 2001
+
+   H. Jiang, Z. Liu, Y. Wang, K. Lee and I. Rhee.
+   `Understanding Bufferbloat in Cellular Networks
+   <https://conferences.sigcomm.org/sigcomm/2012/paper/cellnet/p1.pdf>`__
+   ACM SIGCOMM Workshop on Cellular Networks, August 2012.
+
+   Y. Xie, F. Yi, and K. Jamieson. `PBE-CC: Congestion Control via
+   Endpoint-Centric, Physical-Layer Bandwidth Measurements
+   <https://arxiv.org/abs/2002.03475>`__. SIGCOMM 2020.
+
+

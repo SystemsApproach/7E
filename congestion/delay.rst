@@ -1,8 +1,6 @@
 |CC|.4 Delay-Based Algorithms
 ------------------------------------------
 
-.. include:: <isogrk3.txt>
-
 A review of the academic literature on TCP congestion control shows a
 notable gap between the original TCP Tahoe and Reno mechanisms
 introduced in 1988 and 1990, respectively, and the next major flurry
@@ -10,6 +8,17 @@ of activity starting in 1994, marked by the introduction of an
 alternative approach known as TCP Vegas. This triggered an avalanche
 of comparative studies and alternative designs that would persist for
 the next 25+ years.
+
+Whereas every approach described to date sees packet loss as a
+congestion signal and tries to react to *control* congestion after the
+onset, TCP Vegas takes an *avoidance-based* approach to congestion: it
+tries to detect changes in the measured throughput rate, and adjust
+the sending rate *before* congestion becomes severe enough to cause
+packet loss. This section describes the general "Vegas strategy"—which
+is generally referred to as being either delay-based or
+rate-based—along with three example variations to that strategy
+introduced over time. This case study culminates in the BBR algorithm
+championed by Google today.
 
 .. _reading_vegas:
 .. admonition:: Further Reading
@@ -20,16 +29,6 @@ the next 25+ years.
       ACM SIGCOMM '94 Symposium. August 1994. (Reprinted in IEEE/ACM Transactions
       on Networking, October 1995).
 
-Whereas every approach described to date sees packet loss as a
-congestion signal and tries to react to *control* congestion after the
-onset, TCP Vegas takes an *avoidance-based* approach to congestion: it
-tries to detect changes in the measured throughput rate, and adjust
-the sending rate *before* congestion becomes severe enough to cause
-packet loss. This chapter describes the general "Vegas strategy",
-along with three example variations to that strategy introduced over
-time. This case study culminates in the BBR algorithm championed by
-Google today.
-
 |CC|.4.1 TCP Vegas
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -38,7 +37,7 @@ on a comparison of the *measured* throughput rate with the *expected*
 throughput rate. The intuition can be seen in the trace of TCP Reno
 given in :numref:`Figure %s <fig-trace3>`. The top graph traces the
 connection’s congestion window; it shows the same information as the
-traces given in the previous chapter.  The middle and bottom graphs
+traces given in the previous section.  The middle and bottom graphs
 depict new information: the middle graph shows the average sending
 rate as measured at the source, and the bottom graph shows the average
 queue length as measured at the bottleneck router. All three graphs
@@ -183,15 +182,15 @@ dropped.
 |CC|.4.2 Varied Assumptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-TCP Vegas—and Vegas-like approaches to avoiding congestion—have been
-adapted over time, often in response to different assumptions about
-the network.  Vegas was never as widely deployed as Reno, so the
+TCP Vegas—and other delay-based approaches to avoiding congestion—have
+been adapted over time, often in response to different assumptions
+about the network.  Vegas was never as widely deployed as Reno, so the
 modifications were often driven more by lab studies than extensive
 real-world experience, but they have collectively refined and
 contributed to our understanding of avoidance-based algorithms. We
 summarize some of those insights here, but return to the general topic
 of customizing the congestion control algorithm for specific use cases
-in Chapter 7.
+in Section |CC|.5.
 
 FAST TCP
 +++++++++++++++
@@ -223,48 +222,13 @@ solution.
      Journal of the ACM, Volume 49, Issue 2, March 2002.
 
 
-TCP Westwood
-+++++++++++++++++++
-
-While Vegas was motivated by the idea that congestion can be detected
-and averted *before* a loss occurs, TCP Westwood (TCPW) is motivated
-primarily by the realization that packet loss is not always a reliable
-indicator of congestion. This is particularly noticeable with wireless
-links, which were a novelty at the time of Vegas but becoming common
-by the time of TCPW. Wireless links often lose packets due to
-uncorrected errors on the wireless channel, which are unrelated to
-congestion. Hence, congestion needs to be detected another
-way. Interestingly, the end result is somewhat similar to Vegas, in
-that TCPW also tries to determine the bottleneck bandwidth by looking
-at the rate at which ACKs are coming back for those packets that were
-delivered successfully.
-
-When a packet loss occurs, TCPW does not immediately cut the
-congestion window in half, as it does not yet know if the loss was due
-to congestion or a link-related packet loss. So instead it estimates
-the rate at which traffic was flowing right before the packet loss
-occurred. This is a less aggressive form of backoff than TCP Reno. If
-the loss was congestion-related, TCPW should send at the rate that was
-acceptable before the loss. And if the loss was caused by a wireless
-error, TCPW has not backed off so much, and will start to ramp up
-again to fully utilize the network. The result was a protocol which
-performed similarly to Reno for fixed links but outperformed it by
-substantial margins when lossy links were involved.
-
-Tuning the congestion control algorithm to deal with wireless links
-continues to be a challenging problem, and to complicate matters, WiFi
-and the Mobile Cellular network have different properties. We return
-to this issue in Section |CC|.5.
-
-
 New Vegas
 ++++++++++++++++++
 
-Our final example is New Vegas (NV), an adaptation of Vegas's
+Our second example is New Vegas (NV), an adaptation of Vegas's
 delay-based approach to datacenters, where link bandwidths are 10Gbps
 or higher and RTTs are typically measured in the tens of
-microseconds. This is an important use case that we return to in
-Chapter 7; our goal here is to build some intuition.
+microseconds.
 
 To understand the basic idea of NV, suppose that we plot ``Rate``
 versus ``CongestionWindow`` for every packet for which an ACK is
@@ -304,7 +268,6 @@ performance with ``CongestionWindow=12``, so we decrease
 than instantaneously, in case the new measurement is noisy. To filter
 out bad measurements, NV collects many measurements and then use the
 best one before making a congestion determination.
-
 
 |CC|.4.3 TCP BBR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
