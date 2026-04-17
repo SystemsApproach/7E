@@ -8,9 +8,9 @@ indicates the likelihood of congestion. In other words, TCP's timeout
 mechanism is a building block for its overall approach to congestion
 control.
 
-Note that a timeout can happen because a packet was lost, or
-because the corresponding acknowledgment was lost, or because nothing
-was lost but the ACK took longer to arrive than we were
+Note that a timeout can happen because a packet was lost, or because
+the corresponding acknowledgment was lost. It's also possible that
+nothing was lost, but the ACK took longer to arrive than we were
 expecting. Hence it is important to know how long it might take an ACK
 to arrive, because otherwise we risk responding as if there was
 congestion when there was not.
@@ -48,6 +48,12 @@ setting of :math:`\alpha` between 0.8 and 0.9. TCP then uses
 .. math::
 
    \mathsf{TimeOut = 2} \times \mathsf{EstimatedRTT}
+
+.. TODO -- Need to reconcile with TCP chapter. We could give the
+   original algorithm there (it's sufficient to understand how
+   retransmissions work), and the talk about the more sophisicated
+   variants here. This split also works because Karn/Partridge was
+   the very first attempt to deal with congestion.
 
 |CC|.2.2 Karn/Partridge Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,17 +95,16 @@ exponential backoff is that timeouts cause retransmission, and
 retransmitted segments are no longer contributing to an update in the
 RTT estimate. So the idea is to be more cautious in declaring that a
 packet has been lost, rather than getting into a possible cycle of
-aggressively timing out and then retransmitting.  We will see this
-idea of exponential backoff again, embodied in a much
-more sophisticated mechanism, in a later section.
+aggressively timing out and then retransmitting.
 
 |CC|.2.3 Jacobson/Karels Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Karn/Partridge algorithm was an improvement to RTT estimation, but it did not
-eliminate congestion. The 1988 congestion-control mechanism proposed
-by Jacobson and Karels includes (along with several other components) a new way to decide when to time out
-and retransmit a segment.
+The Karn/Partridge algorithm was an improvement to RTT estimation, but
+it did not eliminate congestion. The 1988 congestion-control mechanism
+proposed by Jacobson and Karels includes (along with several other
+components) a new way to decide when to time out and retransmit a
+segment.
 
 The main problem with the original computation is that it does not
 take the variance of the sample RTTs into account. Intuitively, if the
@@ -190,7 +195,7 @@ improve its ability to manage timeouts and retransmissions. We discuss
 one that relates to RTT estimation here. Another extension,
 establishing a scaling factor for ``AdvertisedWindow``, was described
 in Section |TCP|.8, and a third, selective acknowledgment or SACK is
-discussed below.
+discussed later in this chapter.
 
 The TCP timestamp extension helps to improve TCP’s timeout
 mechanism. Instead of measuring the RTT using a coarse-grained event,
@@ -209,12 +214,12 @@ estimates.
 
 This timestamp extension serves a second purpose, in that it also
 provides a way to create a 64-bit sequence number field, addressing
-the shortcomings of TCP's 32-bit sequence number outlined in Section 2.3.
-Specifically, TCP decides whether to accept or reject a segment based
-on a logical 64-bit identifier that has the ``SequenceNum`` field in
-the low-order 32 bits and the timestamp in the high-order 32 bits.
-Since the timestamp is always increasing, it serves to distinguish
-between two different incarnations of the same sequence number. Note
-that the timestamp is being used in this setting only to protect
-against wraparound; it is not treated as part of the sequence number
-for the purpose of ordering or acknowledging data.
+the shortcomings of TCP's 32-bit sequence number outlined in Section
+|TCP|.8. Specifically, TCP decides whether to accept or reject a
+segment based on a logical 64-bit identifier that has the
+``SequenceNum`` field in the low-order 32 bits and the timestamp in
+the high-order 32 bits.  Since the timestamp is always increasing, it
+serves to distinguish between two different incarnations of the same
+sequence number. Note that the timestamp is being used in this setting
+only to protect against wraparound; it is not treated as part of the
+sequence number for the purpose of ordering or acknowledging data.

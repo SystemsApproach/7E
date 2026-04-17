@@ -299,15 +299,14 @@ congestion phase. This graph is really a simplified version of what we
 see in the 4.5 to 6.0 second timeframe in :numref:`Figure %s
 <fig-trace3>`.
 
-Like Vegas, BBR aims to accurately determine that point where the
-queue has just started to build, as opposed to continuing all the way
-to the point of filling the buffer and causing packet drops as Reno
-does. A lot of the work in BBR has been around improving the
-sensitivity of the mechanisms that locate that sweet spot. There are
-numerous challenges: measurements of bandwidth and delay are noisy;
-network conditions are not static; and the perennial quest for
-fairness when competing for bandwidth against both BBR and non-BBR
-flows.
+BBR aims to accurately determine that point where the queue has just
+started to build, as opposed to continuing all the way to the point of
+filling the buffer and causing packet drops as Reno does. A lot of the
+work in BBR has been around improving the sensitivity of the
+mechanisms that locate that sweet spot. There are numerous challenges:
+measurements of bandwidth and delay are noisy; network conditions are
+not static; and the perennial quest for fairness when competing for
+bandwidth against both BBR and non-BBR flows.
 
 One striking feature of BBR compared to the other approaches we have
 seen is that it does not rely solely on ``CongestionWindow`` to
@@ -368,18 +367,23 @@ estimates. Hence flows show a tendency to synchronize their RTT
 estimation at times when the queue is actually empty or close to it,
 improving the accuracy of this estimate.
 
-BBR is actively being worked on and rapidly evolving, with version 2
-in use at the time of writing. One major focus is fairness. For
+BBR is actively being worked on and rapidly evolving, with version 3
+now nearing official adoption. One major focus is fairness. For
 example, some early experiments showed CUBIC flows getting 100x less
 bandwidth when competing with BBR flows, and other experiments show
-that unfairness among BBR flows is possible. BBR version 1 was
-insensitive to loss, which could lead to high loss rates particularly
-when the amount of buffering on the path was relatively low. As
-several implementations of BBR are now being tried in different
-environments, including within Google's internal backbone and in the
-broader Internet, experience is being gathered to further refine the
-design. The IETF's Congestion Control Working Group is hosting
-discussions on the ongoing design and experimentation.
+that unfairness among BBR flows is possible. Earlier versions of BBR
+were less sensitive to loss, which could lead to high loss rates
+particularly when the amount of buffering on the path was relatively
+low. As several implementations of BBR are now being tried in
+different environments, including within Google's internal backbone
+and in the broader Internet, experience is being gathered to further
+refine the design. The IETF's Congestion Control Working Group is
+hosting discussions on the ongoing design and experimentation.
+
+.. TODO -- Previous paragraph has been updated to reflect v3, and
+   while continued improvement is generally about fairness and
+   fine-tuning the model of available bw, at the level of detail we're
+   describing the mechanism, I think we're ok.
 
 
 .. _reading_bbr:

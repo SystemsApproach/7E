@@ -19,8 +19,12 @@ described in a companion book.
    Systems Approach <https://tcpcc.systemsapproach.org>`__.
    May 2022.
 
-|CC|.5.1 Datacenters
+|CC|.5.1 Datacenter Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. TODO -- I believe the DCTCP description is up-to-date.
+   I have added a citation for the NSDI paper on operational
+   experinece. Bramko was a co-author on that paper.
 
 There have been several efforts to optimize TCP for cloud datacenters,
 where *Data Center TCP* was one of the first. There are several
@@ -119,8 +123,10 @@ than in standard TCP, to avoid the over-reaction that would lead to
 queues running empty.
 
 The paper that lays out all the arguments for DCTCP including a study
-of the datacenter traffic characteristics that motivated its design
-is a "test of time" award winner from SIGCOMM.
+of the datacenter traffic characteristics that motivated its design is
+a "test of time" award winner from SIGCOMM. A more recent NSDI paper
+revisits DCTCP, and reports on operational experience using it in
+datacenters.
 
 .. _reading_dctcp:
 .. admonition::  Further Reading
@@ -129,6 +135,10 @@ is a "test of time" award winner from SIGCOMM.
    Center TCP (DCTCP)
    <http://dl.acm.org/citation.cfm?doid=1851182.1851192>`__.
    ACM SIGCOMM, August 2010.
+
+   A. Dhamija  *et al*. `A Large-Scale Deployment of DCTCP
+   <https://www.usenix.org/system/files/nsdi24-dhamija.pdf>`__.
+   Usenix NSDI, April 2024.
 
 There has been considerable research since DCTCP to optimize TCP for
 datacenters, with the general approach being to introduce ever-more
