@@ -204,6 +204,7 @@ Cardwell
 CAs
 Casado
 Cascone
+Casetti
 CBRS
 CCN
 CCR
@@ -368,6 +369,7 @@ deterministically
 devops
 DevOps
 dgram
+Dhamija
 dhcp
 DHCP
 DHCPDISCOVER
@@ -555,6 +557,7 @@ Geneve
 Geng
 GENI
 geoscience
+Gerla
 Gerrit
 gethostbyname
 GetRequest
@@ -894,6 +897,7 @@ mapResolve
 Marcin
 Marko
 Markovian
+Mascolo
 marshaller
 marshalling
 Mastership
@@ -961,6 +965,7 @@ MNC
 MNO
 MNO's
 MNOs
+Mobicom
 modelling
 modularity
 modularize
@@ -1450,6 +1455,7 @@ Sámi
 SamKnows
 SampleLen
 SampleRTT
+Sanadidi
 Sanjeewa
 Sarvesh
 SAs
