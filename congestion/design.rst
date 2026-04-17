@@ -3,13 +3,21 @@
 
 Chapter |Capacity| outlines part of the design space for congestion
 control, focusing what routers may (or may not) do to help manage
-congestion; e.g., do they isolate flows, do they implement tail-drop
-or some more sophisticated queue management mechanism, do they
-drop packets silently or to they send explicit notifications.  There are
-other questions that only the sources of those packets can answer. We
-start by identifying what those questions are, and exploring the
-options available to TCP (and other transport protocols running on
-edge hosts) to address them.
+congestion; e.g., isolate flows, perform active queue management, send
+explicit congestion notifications.  There are other questions that
+only the sources of those packets can answer. We start by identifying
+what those questions are, and exploring the options available to TCP
+(and other transport protocols running on edge hosts) to address them.\ [#]_
+
+.. [#] Although the concepts underlying congestion control algorithms
+       are protocol-independent, the history of congestion control in
+       the Internet is strongly tied to TCP. This includes several
+       implementation details that leverage existing TCP header
+       fields. This chapter uses this TCP-centric terminology, but as
+       we will see in Chapter |Message|, other transport
+       protocols—most notably QUIC—adapt these algorithms to their
+       particular circumstances.
+
 
 |CC|.1.1 Load Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,35 +108,37 @@ them in that context.)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The sender's decision to increase or decrease its sending rate is
-based on different signals it receives or detects. There are several
-types of signals, but the most important is the arrival of an ACK,
-indicating that one of its packets has been received by the
-destination. If the destination received the packet, it must have made
-it through the network. By using ACKs to pace the transmission of
-packets, TCP is said to be *self-clocking*.  On the other hand, a
-timeout signals that a packet was lost, potentially implying that the
-network is congested, and that TCP needs to reduce its sending
-rate. Because using packet loss as a signal means congestion has
-already occurred and we are reacting after the fact, we sometimes
-refer to this approach as *control-based*, or alternatively,
-*loss-based*.
+based on different signals it detects or explicitly receives. There
+are several types of signals, but the most important is the arrival of
+an ACK, indicating that one of its packets has been received by the
+destination. If the destination received the packet, it must have
+exited the network, meaning there should now be capacity for another
+packet. By using ACKs to pace the transmission of packets, TCP is said
+to be *self-clocking*.  In contrast, a timeout signals that a packet
+was lost, potentially implying that the network is congested, and that
+TCP needs to reduce its sending rate. Because using packet loss as a
+signal means congestion has already occurred and we are reacting after
+the fact, we sometimes refer to this approach as *control-based*, or
+alternatively, *loss-based*.
 
-Waiting packet loss to signal congestion, and then reacting to that
-loss after the onset of congestion, is one approach. But it is
-possible adopt a more proactive strategy, by watching for changes in
-the measured throughput rate, and adjusting the sending rate *before*
+Waiting for packet loss to signal the onset of congestion, and then
+reacting to that loss, is not the only option. It is possible adopt a
+more proactive strategy, for example, by watching for changes in the
+measured throughput rate, and adjusting the sending rate *before*
 congestion becomes severe enough to cause packet loss.  Such
 algorithms are said to be *avoidance-based*, or alternatively, either
-*delay-based* or *rate-based*. Delay and rate are directly related,
-providing two ways of looking at the same information. The key is that
-the sender observes how much data is successfully sent during some
-period of time, where the time interval is either shrinking or
-growing.
+*delay-based* or *rate-based*. Delay and rate are directly related, in
+that the sender records how much data is successfully sent during some
+time interval, such as its current estimate of the RTT. The key is
+whether the observed round-trip delay is shrinking or growing. Note
+that while we sometimes differentiate between the two approaches a
+control-based versus avoidance-based, we always refer to the general
+concept as "congestion control".
 
 Both strategies depend on having an accurate timeout mechanism, which
 in turn depends on the heuristic used to calculate round-trip times;
-i.e., the timeout is set a bit larger than the estimated RTT.  The
-next section looks at this issue, and the following two sections then
+the timeout is set a bit larger than the estimated RTT.  The next
+section looks at this issue, and the following two sections then
 describe various loss-based and delay-based algorithms, respectively.
 
 |CC|.1.3 Fairness and Stability
@@ -142,8 +152,8 @@ send less. It is clearly worth asking: which flows should send less?
 Should all flows share the pain equally? And what happens if some
 flows pay more attention to congestion signals than others? These
 questions are at the heart of the fairness issue. Jain's *fairness
-index* is one of the widely accepted ways to measure how fair a
-network is. We briefly look at it here.
+index*, which we now describe, is a widely accepted way to measure how
+fair a network is.
 
 When several flows share a particular link, we would like for each
 flow to receive an equal share of the bandwidth. This definition
@@ -205,7 +215,7 @@ and the remaining *n-k* users receive zero throughput, in which case the
 fairness index drops to \ *k/n*.
 
 Stability is another critical property for any sort of control system,
-which is what congestion control is. Congestion is detected, some
+which is what congestion control is. When congestion is detected, some
 action is taken to reduce the total amount of traffic, causing
 congestion to ease, at which point it would seem reasonable to start
 sending more traffic again, leading back to more congestion. You can
@@ -220,24 +230,22 @@ features heavily in the early work of Jacobson and Karels and
 stability remains a requirement that subsequent approaches have to
 meet.
 
-Finally, much of the theoretical work on congestion control has framed
-the problem as *"a distributed algorithm to share network resources
-among competing sources, where the goal is to choose source rate so as
-to maximize aggregate source utility subject to capacity
-constraints."* Formulating a congestion-control mechanism as an
-algorithm to optimize an objective function is traceable to a paper by
-Frank Kelly in 1997, and later extended by Sanjeewa Athuraliya and
-Steven Low to take into account both traffic sources (TCP) and router
-queuing techniques (AQM).
+Finally, much of the theoretical work on congestion control frames the
+problem as
 
-We do not pursue the mathematical formulation outlined in these papers
-(and the large body of work that followed), but we do find it helpful
-to recognize that there is an established connection between
+  *"a distributed algorithm to share network resources among competing
+  sources, where the goal is to choose source rate so as to maximize
+  aggregate source utility subject to capacity constraints."*
+
+Formulating a congestion-control mechanism as an algorithm to optimize
+an objective function is traceable to a paper by Frank Kelly in 1997,
+and later extended by Sanjeewa Athuraliya and Steven Low to take into
+account both traffic sources (TCP) and router queuing techniques
+(AQM). We do not pursue the mathematical formulation outlined in these
+papers (and the large body of work that followed), but we do find it
+helpful to recognize that there is an established connection between
 optimizing a utility function and the pragmatic aspects of the
-mechanisms described in this chapter. Congestion control is an area of
-networking in which theory and practice have been productively linked
-to explore the solution space and develop robust approaches to the
-problem.
+mechanisms described in this chapter.
 
 .. _reading_kelly_low:
 .. admonition:: Further Reading

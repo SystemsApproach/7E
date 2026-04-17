@@ -204,7 +204,7 @@ Cardwell
 CAs
 Casado
 Cascone
-Casetti 
+Casetti
 CBRS
 CCN
 CCR
@@ -369,6 +369,7 @@ deterministically
 devops
 DevOps
 dgram
+Dhamija
 dhcp
 DHCP
 DHCPDISCOVER
@@ -556,7 +557,7 @@ Geneve
 Geng
 GENI
 geoscience
-Gerla 
+Gerla
 Gerrit
 gethostbyname
 GetRequest
