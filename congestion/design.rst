@@ -24,12 +24,11 @@ what those questions are, and exploring the options available to TCP
 
 At its core, congestion control is networking's version of a general
 system problem: *load control*. No matter how sophisticated or
-simple-minded a system's scheduler or resource allocation mechanism—the
-algorithm that decides which user gets to use system resources
-next—there is a complementary question of how many users are allowed
-into the system in the first place. One answer is that there is no
-load control mechanism; if you show up and want service, you get to
-compete for it.
+simple-minded a system's scheduler—the algorithm that decides how to
+allocate system resources to users—there is a complementary question
+of how many users are allowed into the system in the first place. One
+answer is that there is no load control mechanism; if you show up and
+want service, you get to compete for resources.
 
 This is what leads to congestion, and anyone who has driven on a
 highway at rush hour has experienced it. There is a limited
@@ -88,8 +87,8 @@ many bytes may be in transit in any given period of time. For ongoing
 connections, you know your recent history. This is a good place to
 start, but you need a heuristic to tell you if you should try to go
 faster (because the network has unused capacity), or if there are
-warning signs, that perhaps you should slow down. For new connections,
-you need a heuristic to tell you have aggressively you can start
+warning signs that perhaps you should slow down. For new connections,
+you need a heuristic to tell you how aggressively you can start
 dumping packets into the network at the start.
 
 As an aside, since we have already seen the idea of *flow control*, it
