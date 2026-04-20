@@ -377,7 +377,7 @@ point along the end-to-end path (see :numref:`Figure %s <fig-codel>`)
 that commonly experiences bufferbloat.
 
 .. TODO: I would update this to cover fq_codel and RFC 8290
-   https://blog.cerowrt.org/post/state_of_fq_codel/ 
+   https://blog.cerowrt.org/post/state_of_fq_codel/
 
 |Capacity|.3.3 Explicit Congestion Notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
