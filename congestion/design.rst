@@ -7,7 +7,10 @@ congestion; e.g., isolate flows, perform active queue management, send
 explicit congestion notifications.  There are other questions that
 only the sources of those packets can answer. We start by identifying
 what those questions are, and exploring the options available to TCP
-(and other transport protocols running on edge hosts) to address them.\ [#]_
+(and other transport protocols running on edge hosts) to address
+them.\ [#]_ Until we get to domain-specific use cases in Section
+|CC|.5, you can assume the routers implement FIFO queues with
+tail-drop.
 
 .. [#] Although the concepts underlying congestion control algorithms
        are protocol-independent, the history of congestion control in
