@@ -28,7 +28,7 @@ deciding which packet to send next.
 
 .. [#] The idea that some packets are more important than others raises a
        set of issues to be discussed later, such as who decides which packets
-       are important. 
+       are important.
 
 
 Packet scheduling is an aspect of buffer management—the scheduler

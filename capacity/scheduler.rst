@@ -94,7 +94,7 @@ means it is possible for a greedy flow to starve all the other
 flows. While priority queueing can serve some flows in preference to
 others, it still doesn't prevent starvation; high-priority flows can
 starve low-priority flows, and within a single priority, a greedy flow
-can starve out other flows at the same priority. 
+can starve out other flows at the same priority.
 
 Fair queuing (FQ) is an algorithm that has been designed to address
 this problem. FQ is designed to isolate flows, which it does by
