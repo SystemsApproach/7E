@@ -1,6 +1,8 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. include:: chapters.rst
+
 Preface
 ==========
 
@@ -21,8 +23,9 @@ important concepts and practices in networking, and show—by
 example—how computer systems are designed and built in practice. If
 you work in the software industry (or hope to), mastering the latter
 is likely to be a requirement for participating in the design process.
-This is true whether you work on low-level systems or high-level
-applications and services.
+It is also becoming a requirement for anyone that wants to take
+advantage of AI rather than be replaced by AI.  This is true whether
+you work on low-level systems or high-level applications and services.
 
 When applying the Systems Approach to networking in earlier editions,
 we started each chapter with the problem to be solved in that chapter.
@@ -39,7 +42,7 @@ requires looking at the whole end-to-end system and the interaction of
 components within that system; you can’t just optimize a single
 component (or layer) and declare success.
 
-The 7th edition will continue this approach, but after 30 years, we
+The 7th edition continues this approach, but after 30 years, we
 believe it is time for a generational revision rather than an
 incremental update. The following highlights the most important
 changes.
@@ -55,6 +58,35 @@ organizing principle revolves around the third bullet from above:
 much different than it was in 1995, and this needs to be reflected in
 how the topics are organized.
 
+The new organization is neither top-down nor bottom-up. Instead, we
+started with the essential set of “big ideas” at the heart of computer
+networking. There are many topics we could talk about—some bordering
+on information theory, others bordering on cloud computing, and still
+others involving policy and economics—but there is also a set of
+topics that we can probably all agree represent the intellectual core
+of the discipline (e.g., how to achieve scalable connectivity, how to
+decentralize resource sharing, how to achieve high performance in the
+face of large delays). For this set, our goal was to address each
+topic in as self-contained way as possible, without leaning too
+heavily into layering.
+
+Of those "big ideas", the narrow waist of the Internet architecture
+plays an outsized role in how we organize the topics. We divided the
+topics (chapters) into two parts: Part II covers topics *inside the
+network* (describing how to turn the underlying building blocks into a
+best-effort packet delivery service of global scale) and Part III
+covers topics *at the edge of the network* (describing the software
+ecosystem that applications leverage to make effective use of a
+best-effort packet delivery service). We had to pick an order for the
+book, but Parts II and III can be read in either order. This is because
+Part I sets the stage, defining the foundational concepts of
+networking. This includes introducing the building block technologies
+assumed by Part II and the target set of applications assumed by
+Part III.
+
+Role of Artifacts
+-------------------------
+
 The new organization also changes how we balance “general concepts”
 and “concrete artifacts”. On the one hand, every topic is framed in
 terms of a general challenge any network must address. The concepts
@@ -62,10 +94,7 @@ are the main theme and the chapters are titled accordingly. On the
 other hand, three key artifacts—IP, Ethernet, and HTTP—play an
 oversized role in how we organize the material. The new organization
 breaks the book into two parts, and introduces an anchor artifact for
-each part. More on this below.
-
-Role of Artifacts
--------------------------
+each part.
 
 Because networks are constantly evolving, it is important to be able
 to think beyond today’s protocol standards and commercial
@@ -77,8 +106,9 @@ encounter in its full glory, but seeing the details of select examples
 helps you digest the next protocol you encounter. Seeing concrete
 examples is also essential to understanding the general concepts in
 depth, and satisfies the expectation that this book covers widely used
-protocols in detail. The set includes usual suspects (TCP, DNS, BGP,
-SMTP, TLS), but also new examples, most notably QUIC and DASH.
+protocols in detail. For readers that want to jump directly to
+descriptions of specific protocols, the introduction to each Part
+includes an "artifact index" its chapters.
 
 One insight driving the refactoring of the book is that some artifacts
 are more important than others. They represent years of experience
@@ -89,26 +119,89 @@ evolves. Other problems are solved under the assumption that that
 particular protocol defines a fixed point. We identify three such
 protocols, and they have a prominent place in this book.
 
-IP has played that role throughout much of the Internet’s history. It
-didn’t pretend to be the only viable networking technology, but
-instead positioned itself as a logical network that can be overlaid on
-top of *any technology*\—those known today, or yet to be invented. That
-approach worked so well that for all practical purposes, “IP Internet”
-is now synonymous with “global internet”, with IP providing a
-universal, best-effort packet delivery service that makes it possible
-to communicate with every connected device in the world. This “narrow
-waist” defines the dividing line between Part One and Part Two.
+We have already talked about one—IP—which has played that role
+throughout much of the Internet’s history. It didn’t pretend to be the
+only viable networking technology, but instead positioned itself as a
+logical network that can be overlaid on top of *any technology*\—those
+known today, or yet to be invented. That approach worked so well that
+for all practical purposes, “IP Internet” is now synonymous with
+“global internet”, with IP providing a universal, best-effort packet
+delivery service that makes it possible to communicate with every
+connected device in the world. This “narrow waist” defines the
+dividing line between Part II and Part III.
 
-In our view, two other artifacts play a similar role today: (1)
-Ethernet switches (which we introduce in the first chapter of Part
-One), and (2) the HTTP protocol (which we introduce in the first
-chapter of Part Two). We lead with these examples because they provide
-an anchor for the rest of the chapters that follow. Building a packet
-switched network is a tractable problem when you start with a hardened
-building block like an Ethernet switch. Similarly, how we build
-network applications—and the collection of sub-modules that enable
-them—owes a great deal to HTTP (and the World Wide Web) as the
-framework.
+In our view, two other artifacts play a similar role today: the HTTP
+protocol (which we introduce in Chapter 2), and Ethernet switches
+(which we introduce in Chapter 3). We lead with these examples because
+they provide an anchor for the rest of the chapters that
+follow. Building a packet switched network is a tractable problem when
+you start with a hardened building block like an Ethernet
+switch. Similarly, how we build network applications—and the
+collection of sub-modules that enable them—owes a great deal to HTTP
+(and the World Wide Web) as the framework.
+
+
+New Focus / New Topics
+-------------------------
+
+The reorganization is, in part, a response to the emergence of the
+cloud as the “center of gravity” for the language we use to talk about
+and describe networks. That language comes primarily from research
+papers published by Google, Microsoft, Meta, and other cloud
+providers. In contrast, the first six editions of our book were
+heavily influenced by the language of RFCs, which were often written
+by network vendors. Those RFCs still serve a purpose, but the
+Internet’s continued evolution is no longer entirely gated by the
+IETF.  The cloud providers are supplanting the router vendors as
+thought leaders, and putting their stamp on today’s RFCs in the
+process.
+
+This focus brings new topics to the forefront. These include:
+
+ o Applications implemented as scalable cloud services: Throughout,
+ but primarily Chapter |Apps|.
+
+ o QUIC as an alternative to TCP: Section |Message|.3.
+
+ o Datacenter switching fabrics: Sections |Routing|.5,
+ |Capacity|.4, and |CC|.5.
+
+ o Traffic engineering for datacenter interconnects: Section |Capacity|.5.
+
+ o Datacenter networking in support for AI workloads: Sections
+ |Message|.4 and |Message|.5.
+
+ o SDN and programmable switches: Sections |Tech|.2 and |Routing|.5.
+
+Of particular note, because the book is organized around the
+fundamental problems of networking, a topic like "Datacenter Networks"
+appears in multiple places (rather than a single chapter). This is
+because datacenters face the same set of problems as any network; they
+have just tailored the solutions to their specific circumstances.
+
+Layering Revisited
+--------------------------
+
+Earlier editions of this book emphasized our attitude towards
+layering, which is that it can be a helpful tool to managing
+complexity, but layers are not axiomatic. The new organization is even
+less "layerist" than earlier editions. While is true that Parts II and
+III roughly divide the topics into two broad layers (which as noted
+above, can be read in either order), the topics within each Part are
+largely orthogonal; each covers a self-contained challenge.
+
+This does not mean that there are no dependencies. By their nature,
+each Part describes a multi-faceted ecosystem, with many interrelated
+ideas with subtle implications. We include generous cross-references
+to adjacent topics that readers can follow, representing these
+interweaving threads (up and down the software stack). Following these
+threads is not a requirement for understanding each topic, but it does
+help the reader appreciate that everything is connected (just not
+always in a strictly top-down order).
+
+.. TODO -- Previous paragraph is rough, but a first attempt at calling
+   attention to what I believe is a feature we should highlight.
+
 
 Emphasis on Perspective
 --------------------------------
@@ -152,3 +245,20 @@ We reference these books for students who want to go deeper on these
 important topics, which allows us to focus on more introductory
 material (and keep the length of this book in check).
 
+Another source of supplemental information is our bi-weekly
+newsletter, where among other things, we sometimes talk about
+book-related issues that we're wrestling with. For insight into our
+thinking as we worked on 7E, you might find the following posts
+informative:
+
+ o `Fitting It All in Your Head <https://systemsapproach.org/2025/10/06/fitting-it-all-in-your-head/>`__. October 2025.
+
+ o `No Skyhooks <https://systemsapproach.org/2026/01/26/no-skyhooks/>`__.  January 2026
+
+ o `Not Your Father's
+ Internet <https://systemsapproach.org/2026/04/20/not-your-fathers-internet/>`__
+ April 2026.
+
+.. TODO -- We could include posts that discuss various topics, but I
+   limited this list to "supplemental to helping you decipher the Preface."
+ 
