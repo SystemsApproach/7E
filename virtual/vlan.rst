@@ -1,15 +1,16 @@
 |Virt|.2 Virtual LANs (VLANs)
 -----------------------------------------------
 
-One of the simplest forms of virtual networking is the *virtual LAN* (VLAN).
-VLANs allow a single extended LAN to be partitioned into several
-seemingly separate LANs. Each virtual LAN is assigned an identifier, and packets can only travel from one
-segment to another if both segments have the same identifier. This has
-the effect of limiting the number of segments in an extended LAN that
-will receive any given broadcast packet. An analogy can be made to
-virtual memory: just as every process sees its own private memory
-address range, every device on a VLAN sees only the other devices on
-the same VLAN, even if physical links are shared with other devices on
+One of the oldest and simplest forms of virtual networking is the
+*virtual LAN* (VLAN).  VLANs allow a single extended LAN to be
+partitioned into several seemingly separate LANs. Each virtual LAN is
+assigned an identifier, and packets can only travel from one segment
+to another if both segments have the same identifier. This has the
+effect of limiting the number of segments in an extended LAN that will
+receive any given broadcast packet. An analogy can be made to virtual
+memory: just as every process sees its own private memory address
+range, every device on a VLAN sees only the other devices on the same
+VLAN, even if physical links are shared with other devices on
 different VLANs. VLANs are often used to provide a basic form of
 traffic isolation in enterprise networks and datacenters; for example,
 they can be used to provide isolation between different departments or
@@ -52,8 +53,17 @@ of VLAN 100 and thus enable X, W, and Z to be on the same virtual LAN,
 then we would just need to change one piece of configuration on switch
 S2.
 
-Supporting VLANs requires a fairly simple extension to the
-original 802.1 header specification, inserting a 12-bit VLAN ID
+And important benefit of VLANs is the reduction in size of broadcast
+domains compared to the equivalent physical network if VLANs were not
+used. Broadcast storms, caused by misbehaving or malfunctioning hosts,
+can be a serious issue in networks that support broadcast such as
+Ethernet; VLANs at least limit the number of hosts that will be
+affected if a broadcast storm occurs, as it is contained to a single VLAN.
+
+As with any sort of network virtualization, we need a way to identify
+the virtual instance to which any given packet belongs. In the case of
+VLANs, this is done using a small extension to the
+original 802.3 header specification, inserting a 12-bit VLAN ID
 (``VID``) field between the ``SrcAddr`` and ``Type`` fields, as shown in
 :numref:`Figure %s <fig-vlan-tag>`. (This VID is typically referred to as
 a *VLAN Tag*.) There are actually 32-bits inserted in the middle of
@@ -61,7 +71,7 @@ the header, but the first 16-bits are used to preserve backwards
 compatibility with the original specification (they use ``Type =
 0x8100`` to indicate that this frame includes the VLAN extension); the
 other four bits hold control information used to prioritize
-frames. This means it is possible to map :math:`2^{12} = 4096` virtual
+frames. With 12 bits of VLAN ID, it is possible to map :math:`2^{12} = 4096` virtual
 networks onto a single physical LAN.
 
 .. _fig-vlan-tag:

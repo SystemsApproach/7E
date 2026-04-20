@@ -35,17 +35,17 @@ different ways to virtualize networks, just as there are many ways to
 virtualize computing resources. In this chapter we look at some of the
 most common approaches to virtualizing networks.
 
-One widely used approach to virtualization is the virtual LAN
+One early and widely used approach to virtualization is the virtual LAN
 (VLAN). Each VLAN is a separate broadcast domain from any other VLAN,
 even if it runs on the same physical Ethernet segment as other
-VLANs. In this sense VLANs resemble the virtualization of address
-space that is provided in modern virtual memory systems.
+VLANs. By providing isolation among different tenants on shared
+infrastructure, VLANs are analogous to virtual memory systems.
 
 Virtual Private Networks (VPNs) provide something similar to VLANs but
 with wide-area network capabilities. There are quite a few different
 ways to deliver a VPN service but they are commonly offered as a
 private IP network to interconnect the sites of a large business with
-multiple offices, as well as the devices of remote workers.
+multiple offices, as well allowing connections to the devices of remote workers.
 
 Network virtualization for datacenters is most closely analogous to
 virtual machines on the computing side. The idea is to create in
