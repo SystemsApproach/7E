@@ -56,7 +56,36 @@ chapters. This is the first significant re-org of the book since the
 organizing principle revolves around the third bullet from above:
 *identify the available building blocks.* The networking landscape is
 much different than it was in 1995, and this needs to be reflected in
-how the topics are organized.
+where the story begins and how the how the narrative flows.
+
+The new organization is neither top-down nor bottom-up. Instead, we
+started with the essential set of “big ideas” at the heart of computer
+networking. There are many topics we could talk about—some bordering
+on information theory, others bordering on cloud computing, and still
+others involving policy and economics—but there is also a set of
+topics that we can probably all agree represent the intellectual core
+of the discipline (e.g., how to achieve scalable connectivity, how to
+decentralize resource sharing, how to achieve high performance in the
+face of large delays). For this set, our goal was to address each
+topic in as self-contained way as possible, without leaning too
+heavily into layering.
+
+Of those "big ideas", the narrow waist of the Internet architecture
+is at the center of how we organize the book. We divided the
+topics (chapters) into two parts: Part II covers topics *inside the
+network* (describing how to turn the underlying building blocks into a
+best-effort packet delivery service of global scale) and Part III
+covers topics *at the edge of the network* (describing the software
+ecosystem that applications leverage to make effective use of a
+best-effort packet delivery service). We had to pick an order for the
+book, but Parts II and III can be read in either order. This is because
+Part I sets the stage, defining the foundational concepts of
+networking. This includes introducing the building block technologies
+assumed by Part II and the target set of applications assumed by
+Part III.
+
+Role of Artifacts
+-------------------------
 
 The new organization is neither top-down nor bottom-up. Instead, we
 started with the essential set of “big ideas” at the heart of computer
@@ -133,12 +162,12 @@ dividing line between Part II and Part III.
 In our view, two other artifacts play a similar role today: the HTTP
 protocol (which we introduce in Chapter 2), and Ethernet switches
 (which we introduce in Chapter 3). We lead with these examples because
-they provide an anchor for the rest of the chapters that
-follow. Building a packet switched network is a tractable problem when
-you start with a hardened building block like an Ethernet
-switch. Similarly, how we build network applications—and the
-collection of sub-modules that enable them—owes a great deal to HTTP
-(and the World Wide Web) as the framework.
+they provide an anchor for the rest of the chapters that follow.
+Building a packet switched network is a tractable problem when you
+start with a hardened building block like an Ethernet switch. Similarly,
+how we build network applications—and the collection of sub-modules
+that enable them—owes a great deal to HTTP (and the World Wide Web) as
+the framework.
 
 
 New Focus / New Topics
@@ -158,15 +187,15 @@ process.
 
 This focus brings new topics to the forefront. These include:
 
- o Applications implemented as scalable cloud services: Throughout,
- but primarily Chapter |Apps|.
+ o Applications implemented as scalable cloud services: Sections
+ |Apps|.1 and |Apps|.2.
 
  o QUIC as an alternative to TCP: Section |Message|.3.
 
  o Datacenter switching fabrics: Sections |Routing|.5,
  |Capacity|.4, and |CC|.5.
 
- o Traffic engineering for datacenter interconnects: Section |Capacity|.5.
+ o Traffic engineering for datacenter backbones: Section |Capacity|.5.
 
  o Datacenter networking in support for AI workloads: Sections
  |Message|.4 and |Message|.5.
@@ -192,9 +221,9 @@ largely orthogonal; each covers a self-contained challenge.
 
 This does not mean that there are no dependencies. By their nature,
 each Part describes a multi-faceted ecosystem, with many interrelated
-ideas with subtle implications. We include generous cross-references
+ideas with subtle dependencies. We include generous cross-references
 to adjacent topics that readers can follow, representing these
-interweaving threads (up and down the software stack). Following these
+interweaving threads across the software stack. Following these
 threads is not a requirement for understanding each topic, but it does
 help the reader appreciate that everything is connected (just not
 always in a strictly top-down order).
