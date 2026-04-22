@@ -87,35 +87,6 @@ Part III.
 Role of Artifacts
 -------------------------
 
-The new organization is neither top-down nor bottom-up. Instead, we
-started with the essential set of “big ideas” at the heart of computer
-networking. There are many topics we could talk about—some bordering
-on information theory, others bordering on cloud computing, and still
-others involving policy and economics—but there is also a set of
-topics that we can probably all agree represent the intellectual core
-of the discipline (e.g., how to achieve scalable connectivity, how to
-decentralize resource sharing, how to achieve high performance in the
-face of large delays). For this set, our goal was to address each
-topic in as self-contained way as possible, without leaning too
-heavily into layering.
-
-Of those "big ideas", the narrow waist of the Internet architecture
-plays an outsized role in how we organize the topics. We divided the
-topics (chapters) into two parts: Part II covers topics *inside the
-network* (describing how to turn the underlying building blocks into a
-best-effort packet delivery service of global scale) and Part III
-covers topics *at the edge of the network* (describing the software
-ecosystem that applications leverage to make effective use of a
-best-effort packet delivery service). We had to pick an order for the
-book, but Parts II and III can be read in either order. This is because
-Part I sets the stage, defining the foundational concepts of
-networking. This includes introducing the building block technologies
-assumed by Part II and the target set of applications assumed by
-Part III.
-
-Role of Artifacts
--------------------------
-
 The new organization also changes how we balance “general concepts”
 and “concrete artifacts”. On the one hand, every topic is framed in
 terms of a general challenge any network must address. The concepts
@@ -193,7 +164,7 @@ This focus brings new topics to the forefront. These include:
  o QUIC as an alternative to TCP: Section |Message|.3.
 
  o Datacenter switching fabrics: Sections |Routing|.5,
- |Capacity|.4, and |CC|.5.
+ |Capacity|.4, |CC|.5, and |Virt|.4.
 
  o Traffic engineering for datacenter backbones: Section |Capacity|.5.
 
@@ -202,11 +173,17 @@ This focus brings new topics to the forefront. These include:
 
  o SDN and programmable switches: Sections |Tech|.2 and |Routing|.5.
 
+ o SDN's role managing virtual networks: Sections |Virt|.3 and
+ |Virt|.4.
+
 Of particular note, because the book is organized around the
-fundamental problems of networking, a topic like "Datacenter Networks"
-appears in multiple places (rather than a single chapter). This is
-because datacenters face the same set of problems as any network; they
-have just tailored the solutions to their specific circumstances.
+fundamental problems of networking, topics like "Datacenter Networks"
+and "Software-Defined Networks" appear in multiple places (rather than
+a single chapter). For datacenter networks, this is because
+datacenters face the same set of problems as any network; they just
+tailor their solutions to their specific circumstances. For SDN, this
+is because leveraging a centralized control plane is a design strategy
+that can be applied to many different subsystems.
 
 Layering Revisited
 --------------------------
