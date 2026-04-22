@@ -482,7 +482,7 @@ possible.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There have been several successful implementations of network
-virtualization systems, including VL2 and several commmercial systems.
+virtualization systems, including VL2 and several commercial systems.
 This section describes *Open Virtual Network (OVN)*, a well-documented
 open source project, as an example of a network virtualization system.
 
@@ -623,7 +623,7 @@ delivering infrastructure as a service.
 
 ..
   TODO We are talking about firewalls for the first time in this chapter -
-  do they need to appear elsewhere in the book? Is it sufficent to add
+  do they need to appear elsewhere in the book? Is it sufficient to add
   a bit more on firewalls at their first appearance here
 
 One of the interesting side-effects of network virtualization is that

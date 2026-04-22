@@ -148,16 +148,25 @@ client software performs this task, with WireGuard and OpenVPN being
 two examples of open source, multi-platform clients. There are plenty
 of proprietary options as well.
 
-OpenVPN leverages TLS (described in Chapter |TLS|) to build the encrypted tunnels from client to
-server. While this mostly follows the same protocol as described in
-Chapter |TLS|, the additional step of authenticating the client is almost
-always required in VPN use cases, unlike most Web usages of
-TLS. Client certificates may be used, but this raises the issue of how
-certificates can be reliably distributed to client devices. One option
-is that they are provisioned by a corporate IT department as part of
-setting up client devices. OpenVPN also allows for other
-authentication methods, including username plus password and optionally
-multi-factor authentication.
+An encrypted tunnel is just like the tunnels described above, with the
+additional twist that everything that is sent as a payload in the
+outer header is encrypted using some cryptographic algorithm. We
+discuss encryption in more detail in Chapter |TLS|. In order for the
+traffic to be *decrypted* at the far end of the tunnel, the two ends
+of the tunnel have to share some secret, and distributing those
+secrets is part of the process of establishing a VPN. The details are
+closely tied up with the choice of encryption technique.
+
+OpenVPN leverages TLS (described in Chapter |TLS|) to build the
+encrypted tunnels from client to server. While this mostly follows the
+same protocol as described in Chapter |TLS|, the additional step of
+authenticating the client is almost always required in VPN use cases,
+unlike most Web usages of TLS. Client certificates may be used, but
+this raises the issue of how certificates can be reliably distributed
+to client devices. One option is that they are provisioned by a
+corporate IT department as part of setting up client devices. OpenVPN
+also allows for other authentication methods, including username plus
+password and optionally multi-factor authentication.
 
 WireGuard is a more recent implementation of encrypted tunnels that
 aims to address some shortcomings that have emerged over years of
@@ -374,17 +383,24 @@ each site, and a centralized control plane is used to simplify
 configuration. An enterprise wants its sites—and only its authorized
 sites—to be interconnected by the VPN, and it typically wants to apply
 a set of policies regarding security, traffic prioritization, access
-to shared services, and so on. These policies are input to a central
-controller, which can then push out all the necessary configuration to
-the edge router located at the appropriate office. Rather than
-manually configuring a router or (multiple routers) every time a new site is added, or
-configuring tunnels by hand, it is possible to achieve "zero-touch"
-provisioning: an appliance is shipped to the new site with nothing
-more than a certificate and an address to contact, which it then uses
-to contact the central controller and obtain all the configuration it
-needs.  Anything that is necessary to build site-to-site tunnels—IP
-addresses, routing configuration, secrets, etc.—can be pushed out from
-the central controller to the edge router. Changes to configuration or
+to shared services, and so on. The abstraction is very similar to that
+provided by MPLS VPNs: a private IP network connecting the sites of a
+company, provided over shared infrastructure. The shared
+infrastructure just happens to be the public Internet, which implies
+encrypted tunnels are required.
+
+The policies regarding connectivity among the sites of a single VPN
+are input to a central controller, which can then push out all the
+necessary configuration to the edge routers located at each
+office. Rather than manually configuring a router or (multiple
+routers) every time a new site is added, or configuring tunnels by
+hand, it is possible to achieve "zero-touch" provisioning: an
+appliance is shipped to the new site with nothing more than a
+certificate and an address to contact, which it then uses to contact
+the central controller and obtain all the configuration it needs.
+Anything that is necessary to build site-to-site tunnels—IP addresses,
+routing configuration, secrets, etc.—can be pushed out from the
+central controller to the edge router. Changes to configuration or
 policies, which might affect many sites, are input centrally and
 pushed out to all affected sites.  The idea is illustrated in
 :numref:`Figure %s <fig-sd-wan>`.
