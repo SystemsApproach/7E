@@ -45,8 +45,7 @@ virtual network from the shared physical network on which the service
 is delivered. We sometimes refer to *decoupling* the virtual network
 from the physical. For example, when allowing end points of a virtual
 network to move within a datacenter, we need to decouple the addresses
-of the virtual end points from the underlying
-physical addressing. 
+of the virtual end points from the underlying physical addressing.
 
 Encryption is another common, but not universal, element of virtual
 private network data planes. When the abstraction presented is
@@ -56,12 +55,12 @@ of the shared infrastructure.
 
 Control planes for virtual networks range from the very basic to
 elaborate, SDN-based controllers. VLANs operate at the basic end: the
-creation of a VLAN and the assignment of certain network links with
+creation of a VLAN and the association of certain network links with
 particular VLAN instances is performed by manual configuration on a
-switch-by-switch basis. VPNs that interconnect many sites of an
+switch-by-switch and port-by-port basis. VPNs that interconnect many sites of an
 organization rely on relatively complex control planes, such as
-VPN-specific additions to BGP or the use of SDN controllers. And SDN
-controllers find extensive use in the creation of virtual networks for
+VPN-specific additions to BGP or the use of SDN controllers.  SDN
+controllers also find extensive use in the creation of virtual networks for
 cloud data centers.
 
 As with much of networking, scalability is a common concern for

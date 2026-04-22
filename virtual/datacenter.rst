@@ -8,7 +8,7 @@ tasks. These datacenters are common for both large cloud providers
 (e.g., AWS, Azure, Google), as well as many enterprise organizations.
 Some of the challenges involved in building networks for such
 datacenters were laid out in the VL2 paper from Microsoft Research back
-in 2009 (see :ref:`Further Reading <reading-VL2>`). 
+in 2009 (see :ref:`Further Reading <reading-VL2>`).
 
 In such datacenters, there is a substantial amount of “east-west”
 traffic; that is, server-to-server traffic, as distinct from
@@ -467,7 +467,7 @@ userspace daemon ``ovs-vswitchd``, which looks up the flow in a set of
 tables. This set of tables, being implemented in software, can be
 effectively unlimited in number, a distinct advantage over hardware
 implementations of OpenFlow switching. This enables the high degree of
-flexibility that is required in network virtualization. 
+flexibility that is required in network virtualization.
 
 
 Note that OVS can be used not only to forward packets between VMs and

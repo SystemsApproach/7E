@@ -32,7 +32,7 @@ define the segments that connect to hosts Y and Z as being in
 VLAN 200. To do this, we need to configure a VLAN ID on each port of
 switches S1 and S2. The link between S1 and S2 is considered to be in
 both VLANs. It is sometimes referred to as a *trunk* interface, while
-the links facing towards the hosts are *access* interfaces. 
+the links facing towards the hosts are *access* interfaces.
 
 When a packet sent by host X arrives at switch S2, the switch observes
 that it came in a port that was configured as being in VLAN 100. It
