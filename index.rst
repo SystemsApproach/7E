@@ -33,6 +33,7 @@ Larry Peterson and Bruce Davie
    federation.rst
    policy.rst
    capacity.rst
+   virtual.rst
    part_three.rst
    reliable.rst
    congestion.rst
