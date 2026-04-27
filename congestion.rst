@@ -7,10 +7,10 @@
 Chapter |CC|: Congestion Control
 ========================================
 
-As introduced Chapter |Intro|, a packet-switched network based on
+As introduced in Chapter |Intro|, a packet-switched network based on
 statistical multiplexing risks congestion at various routers and
 switches throughout the network. Chapter |Capacity| looks at the
-router-side of the problem, where the immediate concern is that
+router side of the problem, where the immediate concern is that
 buffers fill up, and packets may eventually have to be dropped. We now
 turn our attention to the role played by the edge hosts, which are
 responsible for the volume of traffic flowing through those nodes.
