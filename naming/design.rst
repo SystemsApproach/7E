@@ -1,6 +1,10 @@
 |Naming|.1 Design Issues
 ---------------------------------
 
+.. TODO -- As currently written, this section introduces a set of
+   concepts, but only weakly links them to "requirements". It probably
+   could be rewritten to be more requirement-centric.
+
 A naming system maintains a collection of *bindings* of names to
 values. The value can be anything we want the naming system to return
 when presented with a name; it might be an address, or another
@@ -8,15 +12,15 @@ name. Each name is said to be drawn from a *name space* that
 establishes the rules for what constitutes a legitimate identifier.
 These rules—often included as part of a protocol spec—establish the
 syntax for names, what types of value(s) each name may be bound to,
-how new name/value pairs are added to the set of bindings, and the
-process by which names are resolved and the corresponding value
-returned.
+how new name/value pairs are added to the set of bindings, various
+properties those bindings should preserve, and the process by which
+names are resolved and the corresponding value returned.
 
 The best way to understand the "rules" that define a name or address
 space is by example. Fortunately, we have seen several examples
 throughout this book, most of which are probably familiar. This
-collection is diverse enough to illustrate the range of design
-decisions that go into a particular naming scheme.
+collection is diverse enough to illustrate the set of requirements
+that may be established for a particular naming scheme.
 
   * Domain name: ``cicada.cs.princeton.edu``
   * IP address: ``128.112.155.72``
@@ -46,8 +50,7 @@ an Internet-sanctioned authority assigning prefixes to organizations
 (e.g., ``128.112.0.0/16``), which in turn assign addresses to their
 hosts. As we saw in Chapters |Routing| and |BGP|, this hierarchy
 encodes topology information into the address, and that information is
-then used to derive the route. Something similar happens when
-resolving domain names, as we'll see in the next section.
+then used to determine the route.
 
 .. TODO -- Identify the "Internet-sanctioned authority". Right
    terminology for Ethernet too.
@@ -74,7 +77,7 @@ recursively resolve into other IP addresses instead of into
 lower-level Ethernet addresses. IP addresses are unique within some
 context, but they are not universally unique. By convention, private
 IP addresses typically use certain prefixes, such as
-`192.168.0.0/16``, so as to imply a local context. The more general
+``192.168.0.0/16``, so as to imply a local context. The more general
 takeaway is that names are always resolved in some context. The
 context is usually implied (e.g., the context is "the Internet"). In
 other cases, such as URIs, the context is explicitly identified in the
@@ -118,7 +121,21 @@ a feature, which is an idea borrowed from Unix, where "everything is a
 file" means file names can be used to name all sorts of resources; for
 example, files (``/user/llp/file.txt``), directories
 (``/user/llp/tmp``), devices (``/dev/disk0``), or the system's host
-name (``/proc/sys/kernel/hostname``).
+name (``/proc/sys/kernel/hostname``). The next section describes how
+domain names achieve a similar goal.
+
+Another question to ask about a naming scheme is whether name-to-value
+bindings are permanent, or if they are allowed to change over time.
+It's common to buy a new server and reassign an old (previously used)
+name or address to it, but that can be problematic for som objects.
+Imagine if the object that changes is a digital document, for example,
+a legal contract. Such an object might be immutable, making it a
+requirement that its name change if the object changes; the original
+name is permanently bound to the original document. There can always
+be multiple *aliases* for an object—so called many-to-one bindings may
+be allowed—but at least one name is designated as permanent. The URN
+included in the list of names at the beginning of this section is an
+example of such a name.
 
 Finally, we have been referring to name resolution as an abstract
 process, but it is implemented by a program. The resolver that maps IP
