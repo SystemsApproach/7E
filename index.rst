@@ -35,6 +35,7 @@ Larry Peterson and Bruce Davie
    capacity.rst
    virtual.rst
    part_three.rst
+   naming.rst
    reliable.rst
    congestion.rst
    secure.rst
