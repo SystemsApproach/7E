@@ -2,7 +2,7 @@
 ------------------------------
 
 Chapter |Capacity| outlines part of the design space for congestion
-control, focusing what routers may (or may not) do to help manage
+control, focusing on what routers may (or may not) do to help manage
 congestion; e.g., isolate flows, perform active queue management, send
 explicit congestion notifications.  There are other questions that
 only the sources of those packets can answer. We start by identifying
@@ -48,12 +48,13 @@ capacity, there is actually less capacity to move traffic.
 This is the situation depicted in :numref:`Figure %s <fig-collapse>`,
 and while the right side of the load curve is labeled *congestion
 collapse*, the general shape of the graph is the same in any system
-with finite resources. If you've ever access a multi-user computer
-system during peak load (e.g., just before an assignment is due),
-you've likely suffered from the same experience. The same thing
-happens when you try to log into a ticketing system for a popular
-concert or a software site to download the latest release of a popular
-game.
+with finite resources. A multi-user computer system trying to allocate
+resources to an excessive number of tasks faces a similar
+problem. Perhaps the most familiar example today is trying to purchase
+tickets to a popular concert from a web site, or attempting to
+download the latest release of a popular game. If there isn't enough
+capacity to handle the load, the service degrades in an ungraceful
+manner.
 
 .. _fig-collapse:
 .. figure:: congestion/figures/Slide1.png
@@ -154,7 +155,7 @@ send less. It is clearly worth asking: which flows should send less?
 Should all flows share the pain equally? And what happens if some
 flows pay more attention to congestion signals than others? These
 questions are at the heart of the fairness issue. Jain's *fairness
-index*, which we now describe, is a widely accepted way to measure how
+index* is one widely accepted way to measure how
 fair a network is.
 
 When several flows share a particular link, we would like for each

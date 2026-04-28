@@ -59,7 +59,7 @@ setting of :math:`\alpha` between 0.8 and 0.9. TCP then uses
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 After several years, a rather obvious flaw was discovered in this
-simple approach: An ACK does not really acknowledge a transmission,
+simple approach: an ACK does not really acknowledge a transmission,
 but rather, it acknowledges the receipt of data. In other words,
 whenever a segment is retransmitted and then an ACK arrives at the
 sender, it is impossible to determine if this ACK should be associated
@@ -96,6 +96,12 @@ retransmitted segments are no longer contributing to an update in the
 RTT estimate. So the idea is to be more cautious in declaring that a
 packet has been lost, rather than getting into a possible cycle of
 aggressively timing out and then retransmitting.
+
+Note that the root cause of the issue here, the lack of distinction between the
+first and subsequent transmissions, is inherent to the design of
+TCP. The TCP Timestamp option, described below, provides one solution
+to that problem. In the newer protocol QUIC, which we cover in Chapter
+|Message|, the problem is solve by avoiding reuse of sequence numbers entirely.
 
 |CC|.2.3 Jacobson/Karels Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -220,6 +226,10 @@ segment based on a logical 64-bit identifier that has the
 ``SequenceNum`` field in the low-order 32 bits and the timestamp in
 the high-order 32 bits.  Since the timestamp is always increasing, it
 serves to distinguish between two different incarnations of the same
-sequence number. Note that the timestamp is being used in this setting
-only to protect against wraparound; it is not treated as part of the
-sequence number for the purpose of ordering or acknowledging data.
+sequence number. This also addresses the issue of distinguishing the
+ACK for a first transmission from one acknowledging a retransmission,
+raised in Section |CC|.2.3. Note that the timestamp is being used in
+this setting to protect against wraparound and sequence number reuse;
+it is not treated as part of the sequence number for the purpose of
+ordering or acknowledging data.
+

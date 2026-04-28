@@ -256,7 +256,8 @@ following code fragment:
       state->CongestionWindow = MIN(cw + incr, TCP_MAXWIN);
    }
 
-where ``state`` represents the state of a particular TCP connection and
+where ``state`` represents the state of a particular TCP connection
+and ``TCP_MAXWIN``
 defines an upper bound on how large the congestion window is allowed to
 grow.
 
@@ -400,7 +401,7 @@ possible that the earlier packet has only been delayed rather than
 lost, the sender waits until it sees some number of duplicate ACKs (in
 practice, three) and then retransmits the missing packet. The built-in
 assumption here, which is well tested in practice, is that
-out-of-order packets are less common by far than lost packets.
+out-of-order packets are less common by far than lost packets.\ [#]_
 
 .. _fig-tcp-fast:
 .. figure:: congestion/figures/f06-12-9780123850591.png
@@ -408,6 +409,14 @@ out-of-order packets are less common by far than lost packets.
    :align: center
 
    Fast retransmit based on duplicate ACKs.
+
+.. [#] Once TCP's expectation that out-of-order packets indicate loss
+       rather than re-ordering became entrenched, the penalty for
+       reordering of packets in the network became a noticeable
+       reduction in performance. This led to a strong desire not to cause
+       reordering under normal operation. This had an impact on the
+       design of routers and on the approaches taken to load-balance
+       traffic across multiple paths. 
 
 :numref:`Figure %s <fig-tcp-fast>` illustrates how duplicate ACKs lead
 to a fast retransmit. In this example, the destination receives
@@ -538,10 +547,11 @@ NewReno
 
 Starting with some research by Janey Hoe at MIT in the mid-1990s, the
 enhancement known as *NewReno* incrementally improves the performance
-of TCP by making more intelligent decisions about which packets to
+of TCP Reno by making more intelligent decisions about which packets to
 retransmit under certain packet loss conditions. NewReno is also
 noteworthy because it is the variant of TCP congestion control that
-has been adopted by QUIC, as described in Chapter |Message|.
+has been specified as the default for QUIC (while other options are
+permitted). We return to QUIC in Chapter |Message|.
 
 .. _reading_newreno:
 .. admonition::  Further Reading
