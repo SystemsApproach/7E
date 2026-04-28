@@ -267,4 +267,3 @@ informative:
 
 .. TODO -- We could include posts that discuss various topics, but I
    limited this list to "supplemental to helping you decipher the Preface."
- 
