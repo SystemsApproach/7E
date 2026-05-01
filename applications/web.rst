@@ -305,7 +305,7 @@ events for fetching a page that has just a single embedded object.
 Blue lines indicate TCP and TLS messages, while black lines indicate
 the HTTP requests and responses. The figure is purposely vague about
 the exact TCP/TLS messages being exchanged (we'll fill in the details
-in Chapters 11 and 12), but the key takeaway is clear: multiple round
+in Chapters |TCP| and |TLS|), but the key takeaway is clear: multiple round
 trips are required to download even the simplest web page.  This is a
 striking example of how passing off functionality to be implemented in
 another layer without looking at the details can have negative
@@ -329,7 +329,7 @@ delay perceived by the user. Second, because a client can send
 multiple request messages down a single TCP connection, TCP’s
 is able to operate more efficiently. (TCP includes a congestion
 control mechanism that paces traffic so as to not overload the
-network; that mechanism is described in Chapter 14.)
+network; that mechanism is described in Chapter |CC|.)
 :numref:`Figure %s <fig-persist>` shows the transaction
 from :numref:`Figure %s <fig-oldhttp>` using a persistent connection
 in the case where the connection is already open (presumably due to
@@ -399,7 +399,7 @@ effort has resulted in a new version of HTTP (known as HTTP/3) and a
 new transport protocol to be used in place of TCP (that protocol is
 called QUIC). Since understanding QUIC requires a deeper look at
 transport layer issues—including how we secure end-to-end
-communication—we postpone it until Chapter 13. For the purposes or
+communication—we postpone it until Chapter |Message|. For the purposes or
 this discussion, the big takeaway is that it is sometimes necessary to
 look across protocol layer boundaries, in this case, across the
 transport/application boundary.
@@ -435,25 +435,28 @@ part, as in the URIs ``mailto:santa@northpole.org`` and
 For URIs that most people are familiar with—where the scheme is
 ``http``, ``https``, ``mailto`` or ``file``\ —the scheme-specific part
 includes information that can be used to *locate* the resource. The
-domain name for a web server or an email server is a common example.  This
-locator information is what qualifies a URI as a URL. Another type of
-URI, known as a *Uniform Resource Name (URN)* , is used to specify a
-unique name for a resource, but without giving any hint as to its
-location. For URNs, we can think of the scheme as specifying a *name
-space* and the scheme-specific part as specifying a unique name within
-that name space.
+domain name for a web server or an email server are common examples.
+This locator information is what qualifies a URI as a URL. Another
+type of URI, known as a *Uniform Resource Name (URN)* , is used to
+specify a unique name for a resource, but without giving any hint as
+to its location. For URNs, we can think of the scheme as specifying a
+*name space* and the scheme-specific part as specifying a unique name
+within that name space.
 
 For example, the *DOI Foundation* (where DOI stands for *Digital
 Object Identifier*) manages an effort to assign a unique and
 persistent (never changing) identifier to every object in the
 Internet. A URN corresponding to the DOI name space would look
-something like this: ``doi:10.1000/456%23789``. If you want to learn
-more about the DOI effort, and how to interpret the name
-``10.1000/456%23789``, you can visit the DOI web site using the
-following URL: ``https://doi.org``. As this example illustrates,
-discussions about naming can easily descend into an an abstruse
-philosophical debate. We'll venture back into that discussion in
-Chapter 7 when we take a look at DNS.
+something like this: ``doi:10.17487/RFC0791``. This example happens to
+be a URN for the RFC that specifies the IP protocol. If you want to
+learn more about the DOI effort, and how to interpret names like
+``doi:10.17487/RFC0791``, you can visit the DOI web site using the
+following URL: ``https://doi.org``. If you want to read RFC 791, you
+can type the following URL into your browser:
+``https://doi.org/10.17487/RFC0791``. As this example illustrates,
+discussions about naming can easily become abstruse. We'll venture
+back into that discussion in Chapter |Naming| when we take a closer look
+at naming systems.
 
 2.2.3 Caching
 ~~~~~~~~~~~~~~
@@ -513,7 +516,7 @@ there are a set of *cache directives* that must be obeyed by all caching
 mechanisms along the request/response chain. These directives specify
 whether or not a document can be cached, how long it can be cached, how
 fresh a document must be, and so on. We’ll return to the subject of
-CDNs in Chapter 15.
+CDNs in Chapter |Overlay|.
 
 2.2.3 RESTful API
 ~~~~~~~~~~~~~~~~~~~~~

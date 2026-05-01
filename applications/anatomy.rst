@@ -395,7 +395,7 @@ is simultaneously a platform for implementing network applications and
 a use case for the underlying network.  :numref:`Figure %s
 <fig-leaf-spine>` shows a simplified schematic of how a modern
 datacenter is structured, with a switching fabric built from the same
-commodity switches described in Chapter 3 arranged according to a
+commodity switches described in Chapter |Tech| arranged according to a
 *leaf-spine* topology. For the small 4-rack example in the figure, each
 rack has a Top-of-Rack (ToR) switch that interconnects the servers in
 that rack; these are referred to as the leaf switches of the
@@ -432,7 +432,7 @@ improving the average latency of all requests). Just as importantly,
 replicating an application across multiple sites improves its
 availability should a site fail.
 
-We’ll see concrete examples of how this is done in Chapter 13, but for
+We’ll see concrete examples of how this is done in Chapter |Overlay|, but for
 now it is easy to understand the general idea. The key is to recognize
 that the clouds that host applications are themselves widely
 distributed. It is estimated that cloud datacenters are positioned at

@@ -2,6 +2,8 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: CC-BY-4.0
 
+.. include:: chapters.rst
+
 Chapter 2: Network Applications
 ==============================================
 
@@ -13,7 +15,7 @@ video—the Internet was designed to be application agnostic. It’s able
 to deliver packets carrying keystrokes, voice, video, images,
 financial transactions, and any other kind of information that can be
 digitized. That generality is one of the driving motivations for the
-design described in Chapter 1, and as we now know, that generality is
+design described in Chapter |Intro|, and as we now know, that generality is
 what allowed the Internet to grow to subsume those earlier
 purpose-built networks.
 
