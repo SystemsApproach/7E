@@ -188,7 +188,7 @@ you to the paper.
 Encrypted tunnels, client authentication, and a gateway or
 concentrator to terminate the tunnels is pretty much all that is
 needed to deliver a remote access VPN. A concentrator is just an
-appliance that can handle a large number of VPN tunnels at once, and
+appliance that can handle a large number of VPN tunnels at once,
 provides the necessary administrative controls for managing user
 accounts and authentication, and forwards the VPN traffic between
 tunnels and the corporate network. Note that a remote access VPN will
@@ -218,7 +218,7 @@ become difficult, especially if the router becomes unreachable for
 some reason. On top of this, if the connectivity among sites is
 anything other than a hub and spoke, then the issue of correctly
 configuring routing protocols to forward traffic across the mesh of
-tunnels becomes significant. MPLS VPNs, discussed below, arose as one
+tunnels becomes significant. MPLS/BGP VPNs, discussed below, arose as one
 solution to the challenges of building site-to-site VPNs.
 
 
@@ -249,16 +249,17 @@ generate and distribute those keys.
 One notable aspect of Tailscale is that it assumes that client devices
 are likely to be sitting in networks that use private addresses and
 are connected to the Internet through a NAT (network address
-translation) device. This problem doesn't exist when building a tunnel
-to a VPN concentrator with a public IP address, or between a pair of
-edge routers, but it has to be solved if you want to build
-client-to-client tunnels. There are quite a few details to getting
-this to work, especially given that NAT devices don't all behave the
-same way, and there may be firewalls to traverse as well. An IETF
-standard called STUN (Session Traversal Utilities for NAT) plays an
-important part, and the centralized control plane helps to resolve
-some of the more difficult corner cases. You can read more about the
-issues to be solved in the blog post listed below.
+translation) device. (See Section |Fed|.3 for a discussion of NAT.)
+This problem doesn't exist when building a tunnel to a VPN
+concentrator with a public IP address, or between a pair of edge
+routers, but it has to be solved if you want to build client-to-client
+tunnels. There are quite a few details to getting this to work,
+especially given that NAT devices don't all behave the same way, and
+there may be firewalls to traverse as well. An IETF standard called
+STUN (Session Traversal Utilities for NAT) plays an important part,
+and the centralized control plane helps to resolve some of the more
+difficult corner cases. You can read more about the issues to be
+solved in the blog post listed below.
 
 
 Because mesh VPNs build tunnels all the way from client to client,
@@ -292,25 +293,25 @@ Internet.
 
 
 .. _fig-mpls-vpn:
-.. figure:: virtual/figures/f04-25-9780123850591.png
+.. figure:: virtual/figures/MPLS-VPN.png
    :width: 600px
    :align: center
 
-   Example of a layer 3 VPN. Customers A and B each
-   obtain a virtually private IP service from a single
+   Example of a layer 3 VPN. Four sites from an organization receive a virtually private IP service from a
    provider.
 
 
-MPLS/BGP VPNs are reasonably complex, but the abstraction that they offer
+MPLS/BGP VPNs are reasonably complex, but the abstraction that they
+offer in the common case
 is easy to describe. Each customer is presented with a private IP
 network that interconnects the sites of that customer. In a simple
 configuration, the edge router at each customer site has a default
-route pointing to the provider network. All the sites of VPN A in
+route pointing to the provider network. All the sites of the customer VPN in
 :numref:`Figure %s <fig-mpls-vpn>` can send traffic to each other, and
-the sites of VPN B can similarly send traffic to each other, but no
-traffic can flow from sites of VPN A to VPN B and vice versa.
+the sites of other customers connected to the same provider can similarly send traffic to each other, but no
+traffic can flow from sites of one customer to the other.
 
-The enforcement of isolation between VPN A and VPN B starts by
+The enforcement of isolation between different customers starts by
 configuring the interfaces on the routers at the provider edge that
 connect to customer VPN sites. An interface is associated with a
 particular *virtual routing and forwarding table* (VRF). So in the
@@ -330,21 +331,41 @@ information in the BGP messages (known as *route targets*) to ensure that the ro
 customer A are placed into the correct VRF for customer A and likewise
 for customer B.
 
-When it comes time to send a packet from one site in VPN A to another
-site in VPN A, the provider edge router looks up the destination
+When it comes time to send a packet from one site to another
+site in the same organization, the provider edge router looks up the destination
 address in the appropriate VRF. The appropriate VRF is determined by
 the interface on which the packet arrived. This contrasts with the
 forwarding model described previously for typical IP routers, which is
-the same no matter which interface the packet arrives on.
+the same no matter which interface the packet arrives on. The
+forwarding table not only tells the router where to send the packet
+next, but also contains the information required to correctly
+encapsulate it for its trip across the backbone.
 
-In order to send the packet across the
-provider's backbone, the packet is encapsulated with an MPLS header
-which represents a path to the correct egress router and onwards to the
-destination site. This header functions much like a tunnel
+
+.. _fig-mpls-hdr:
+.. figure:: virtual/figures/mpls-hdr.png
+   :width: 600px
+   :align: center
+
+   A customer IP packet is encapsulated with two MPLS labels to allow
+   it to be forwarded correctly across the provider's backbone.
+
+In order to send the packet across the provider's backbone, the packet
+is encapsulated with an MPLS header as shown in :numref:`Figure %s
+<fig-mpls-hdr>`.  This header functions much like a tunnel
 encapsulation, and is removed as the packet leaves the provider
-network on its way to the destination VPN site.
+network on its way to the destination VPN site. Usually, a pair of
+MPLS labels are used. The outer label, which we have indicated as the
+Provider Path Label, is associated with a path across the provider's
+network to a particular egress provider router. The second label maps
+to the customer route that was passed around in BGP. So the outer
+label serves to tunnel the packet across the provider backbone, and
+the ``VPN label`` allows it to be forwarded to the current customer
+site upon egress. Both labels are removed before the packet is passed
+off to the customer, so they only see IP packets passing between
+sites.
 
-We have glossed over a lot of detail here, but you can think of MPLS
+We have glossed over a lot of detail here, but you can think of MPLS/BGP
 VPNs as having both a control plane and a data plane that support the
 abstraction of private networks for multiple customers.  The control
 plane is based on BGP, enhanced to support the

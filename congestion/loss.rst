@@ -416,7 +416,7 @@ out-of-order packets are less common by far than lost packets.\ [#]_
        reduction in performance. This led to a strong desire not to cause
        reordering under normal operation. This had an impact on the
        design of routers and on the approaches taken to load-balance
-       traffic across multiple paths. 
+       traffic across multiple paths.
 
 :numref:`Figure %s <fig-tcp-fast>` illustrates how duplicate ACKs lead
 to a fast retransmit. In this example, the destination receives
