@@ -168,7 +168,7 @@ is sent across the network to the available capacity. If congestion is
 detected, TCP reduces its sending rate; in the absence of congestion,
 it periodically tries to increase its sending rate to take advantage
 of the available capacity. We'll explore these mechanisms in much more
-detail in Chapter 14. For now, we can just accept that TCP is going to
+detail in Chapter |CC|. For now, we can just accept that TCP is going to
 deliver packets at a rate that varies over time depending on the available
 network capacity.
 
@@ -245,7 +245,7 @@ milliseconds of it being sent or you will be unable to have a
 conversation. Even at 300ms the delay becomes noticeable and
 annoying. So this demands a different approach that doesn't rely on
 TCP for congestion control and reliable delivery. We will
-examine this problem space in Chapter 16.
+examine this problem space in Chapter |Stream|.
 
 Finally, it is worth noting that video streaming involves a complex
 interplay between the application protocol and the underlying

@@ -52,7 +52,7 @@ API for email, and use HTTPS to both write messages to a mailbox and
 read messages from a mailbox. In fact, the same could be said for many
 applications that pre-date the web—their protocols are just
 purpose-built Request/Reply protocols. This is a topic we address in
-Chapter 13.
+Chapter |Message|.
 
 .. [#] IMAP is still supported to allow standard email clients to
        access Gmail mailboxes.
