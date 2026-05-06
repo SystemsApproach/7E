@@ -20,11 +20,11 @@ in fact the acknowledgment just hasn't arrived yet. This leads to
 needless retransmissions, wasting network resources and potentially
 leading to congestion. Furthermore, as we discuss in the next chapter,
 a false indication of loss can be interpreted as a signal that
-congestion has *already* occured, which undermines the effectiveness
+congestion has *already* occurred, which undermines the effectiveness
 of congestion control algorithms.
 
 
-Given then importnance of getting timeouts right, there has been a
+Given then importance of getting timeouts right, there has been a
 wealth of work to make them accurate. We now describe the timeout mechanism and
 how it has evolved over time as the Internet community has gained more
 experience using TCP.
