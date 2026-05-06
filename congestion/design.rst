@@ -136,12 +136,7 @@ time interval, such as its current estimate of the RTT. The key is
 whether the observed round-trip delay is shrinking or growing. Note
 that while we sometimes differentiate between the two approaches a
 control-based versus avoidance-based, we always refer to the general
-concept as "congestion control".
-
-Both strategies depend on having an accurate timeout mechanism, which
-in turn depends on the heuristic used to calculate round-trip times;
-the timeout is set a bit larger than the estimated RTT.  The next
-section looks at this issue, and the following two sections then
+concept as "congestion control". The following two sections
 describe various loss-based and delay-based algorithms, respectively.
 
 |CC|.1.3 Fairness and Stability
@@ -217,6 +212,67 @@ consider is where only *k* of the *n* flows receive equal throughput,
 and the remaining *n-k* users receive zero throughput, in which case the
 fairness index drops to \ *k/n*.
 
+.. sidebar:: Fairness vs. Deployment
+
+   Over the decades of development of congestion control, algorithms,
+   the question has often arisen of whether a given mechanism A is
+   fair to flows managed by mechanism B. If mechanism A is able to
+   measure improved throughput over B, but it does so by being more
+   aggressive, and hence, stealing bandwidth from B's flows, then A's
+   improvement is not fairly gained and may be discounted. The
+   Internet's highly decentralized approach to congestion control
+   works because a large number of flows respond in a cooperative way
+   to congestion, which opens the door to more aggressive flows
+   improving their performance at the expense of those which implement
+   the accepted, less aggressive algorithms.
+
+   Arguments like this have been made many times, which has raised a
+   high bar to the deployment of new algorithms. Even if global
+   deployment of a new algorithm would be a net positive, incremental
+   deployment (which is the only real option) could negatively impact
+   flows using existing algorithms, leading to a reluctance to deploy
+   new approaches. But such analysis suffers from three problems, as
+   identified by Ranysha Ware and colleagues (see Further Reading below):
+
+   * **Ideal-Driven Goalposting:**
+     A fairness-based threshold asserts that new
+     mechanism B should equally share the bottleneck link with
+     deployed mechanism A. This goal is too idealistic in
+     practice, especially when A is sometimes unfair to its own
+     flows.
+
+   * **Throughput-Centricity:**
+     A fairness-based threshold focuses on
+     how new mechanism B impacts a competitor flow using mechanism A
+     by focusing on A’s achieved throughput.  However, this ignores
+     other important figures of merit for good performance, such as
+     latency, flow completion time, or loss rate.
+
+   * **Assumption of Balance:**
+     Inter-mechanism interactions often
+     have some bias, but a fairness metric cannot tell whether the
+     outcome is biased for or against the status quo. It makes a
+     difference in terms of deployability whether a new mechanism B
+     takes a larger share of bandwidth than legacy mechanism A or
+     leaves a larger share for A to consume: the former might elicit
+     complaints from legacy users of A, where the latter would
+     not. Jain’s Fairness Index assigns an equivalent score to both
+     scenarios.
+
+   Instead of a simple calculation of Jain's fairness index, Ware
+   advocates for a threshold based on *harm*, as measured by a
+   reduction in throughput or an increase in latency or
+   jitter. Intuitively, if the amount of harm caused by flows using a
+   new mechanism B on flows using existing mechanism A is within a
+   bound derived from how much harm A-managed flows cause other
+   A-managed flows, we can consider B deployable alongside A without
+   harm. Even with a single congestion control algorithm, the amount
+   of harm that one flow causes another depends on factors such as its
+   RTT, start time, and duration. Thus measures of harm need to take
+   into account the range of impacts that different flows have on each
+   other under the existing regime and aim to do no worse with a new
+   algorithm.
+
 Stability is another critical property for any sort of control system,
 which is what congestion control is. When congestion is detected, some
 action is taken to reduce the total amount of traffic, causing
@@ -267,7 +323,11 @@ mechanisms described in this chapter.
    <https://ieeexplore.ieee.org/document/977445>`__.  Proceedings of the
    Winter Simulation Conference, 2001.
 
+   R. Ware, *et al*. `Beyond Jain's Fairness Index: Setting the Bar for
+   the Deployment of Congestion Control Algorithms
+   <https://www.cs.cmu.edu/~rware/assets/pdf/ware-hotnets19.pdf>`__.
+   ACM SIGCOMM HotNets. November 2019.
+
 
 .. TODO -- Possibly include a sidebar on BSD/Linux as the reference
-   implementation. Might also talk about Ware's fairness research in a
-   sidebar.
+   implementation.

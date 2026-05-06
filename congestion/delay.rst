@@ -1,4 +1,4 @@
-|CC|.4 Delay-Based Algorithms
+|CC|.3 Delay-Based Algorithms
 ------------------------------------------
 
 A review of the academic literature on TCP congestion control shows a

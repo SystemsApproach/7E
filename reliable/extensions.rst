@@ -28,17 +28,20 @@ time in the segment itself. Note that the endpoints in the connection do
 not need synchronized clocks, since the timestamp is written and read at
 the same end of the connection.
 
-The second extension addresses the problem of TCP’s 32-bit
-``SequenceNum`` field wrapping around too soon on a high-speed network.
-Rather than define a new 64-bit sequence number field, TCP uses the
-32-bit timestamp just described to effectively extend the sequence
-number space. In other words, TCP decides whether to accept or reject a
-segment based on a 64-bit identifier that has the ``SequenceNum`` field
-in the low-order 32 bits and the timestamp in the high-order 32 bits.
-Since the timestamp is always increasing, it serves to distinguish
-between two different incarnations of the same sequence number. Note
-that the timestamp is being used in this setting only to protect against
-wraparound; it is not treated as part of the sequence number for the
+The timestamp field also provides a way to address the problem of TCP’s 32-bit
+``SequenceNum`` field wrapping around too soon on a high-speed
+network.  Rather than define a new 64-bit sequence number field, TCP
+uses the 32-bit timestamp just described to effectively extend the
+sequence number space. In other words, TCP decides whether to accept
+or reject a segment based on a 64-bit identifier that has the
+``SequenceNum`` field in the low-order 32 bits and the timestamp in
+the high-order 32 bits.  Since the timestamp is always increasing, it
+serves to distinguish between two different incarnations of the same
+sequence number.  This also addresses the issue of distinguishing the
+ACK for a first transmission from one acknowledging a retransmission,
+raised in Section |TCP|.6.2. Note that the timestamp is being
+used in this setting only to protect against wraparound and sequence
+number reuse; it is not treated as part of the sequence number for the
 purpose of ordering or acknowledging data.
 
 The third extension allows TCP to advertise a larger window, thereby
@@ -90,4 +93,12 @@ congestion. The Internet Assigned Numbers Authority (IANA) keeps track
 of all the options that are defined for TCP (and for many other Internet
 protocols).
 
-.. Should reference the updated TCP spec.
+The definitive reference for TCP is its RFC, which, after decades of
+experimentation and extensions, was fully updated in 2022.
+
+
+.. _reading_TCPSTD:
+.. admonition::  Further Reading
+
+   `RFC 9293: Transmission Control Protocol
+   <https://www.rfc-editor.org/info/rfc9293>`__. September 2022.

@@ -51,7 +51,6 @@ Internet exists.
    ACM SIGCOMM '88 Symposium, August 1988.
 
 .. include:: congestion/design.rst
-.. include:: congestion/timeout.rst
 .. include:: congestion/loss.rst
 .. include:: congestion/delay.rst
 .. include:: congestion/variants.rst
