@@ -1,4 +1,4 @@
-|CC|.3  Loss-Based Algorithms
+|CC|.2  Loss-Based Algorithms
 -------------------------------------------
 
 This section describes the dominant congestion-control algorithm in

@@ -1,4 +1,4 @@
-|CC|.5  Domain-Specific Variants
+|CC|.4  Domain-Specific Variants
 -------------------------------------------
 
 As exploration of the design space for congestion control has

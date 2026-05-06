@@ -136,12 +136,7 @@ time interval, such as its current estimate of the RTT. The key is
 whether the observed round-trip delay is shrinking or growing. Note
 that while we sometimes differentiate between the two approaches a
 control-based versus avoidance-based, we always refer to the general
-concept as "congestion control".
-
-Both strategies depend on having an accurate timeout mechanism, which
-in turn depends on the heuristic used to calculate round-trip times;
-the timeout is set a bit larger than the estimated RTT.  The next
-section looks at this issue, and the following two sections then
+concept as "congestion control". The following two sections
 describe various loss-based and delay-based algorithms, respectively.
 
 |CC|.1.3 Fairness and Stability
