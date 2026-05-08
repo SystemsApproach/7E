@@ -26,7 +26,7 @@ that may be established for a particular naming scheme.
   * IP address: ``128.112.155.72``
   * Ethernet address: ``40:4d:7f:b5:62:b0``
   * URL: ``http://www.cs.princeton.edu/index.html``
-  * URN: ``doi:10.1000/456%23789``
+  * URN: ``urn:doi:10.17487/RFC0791``
   * Email address: ``alice@systemsapproach.org``
 
 Starting with Shoch's definition, domain names, IP addresses, and
@@ -126,20 +126,20 @@ domain names achieve a similar goal.
 
 Another question to ask about a naming scheme is whether name-to-value
 bindings are permanent, or if they are allowed to change over time.
-It's common to buy a new server and reassign an old (previously used)
-name or address to it, but that can be problematic for som objects.
-Imagine if the object that changes is a digital document, for example,
-a legal contract. Such an object might be immutable, making it a
-requirement that its name change if the object changes; the original
-name is permanently bound to the original document. There can always
-be multiple *aliases* for an object—so called many-to-one bindings may
-be allowed—but at least one name is designated as permanent. The URN
-included in the list of names at the beginning of this section is an
-example of such a name.
+It's not uncommon to buy a new server and reassign an old (previously
+used) name or address to it, but that can be problematic for some
+objects.  Imagine if the object that changes is a digital document,
+for example, a legal contract. Such an object might be immutable,
+making it a requirement that its name change if the object changes;
+the original name is permanently bound to the original document.
+There can always be multiple *aliases* for an object—known as a
+many-to-one binding—but at least one name is designated as
+permanent. The URN included in the list of names at the beginning of
+this section is an example of such a name.
 
 Finally, we have been referring to name resolution as an abstract
 process, but it is implemented by a program. The resolver that maps IP
-Ethernet into Ethernet addresses is implemented by ARP, as we saw in
+addresses into Ethernet addresses is implemented by ARP, as we saw in
 Chapter |Fed|.2.5. The resolution process for domain names is
 described in the next section, where as we'll see, the name resolver
 is a network application, just like those described in Chapter |Apps|.
