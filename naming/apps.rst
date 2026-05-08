@@ -265,27 +265,22 @@ search for a printer as the basis for concrete query using
 gives an example invocation, where the first line gives three command
 options: ``-h`` says which server to contact, ``-x`` says to use
 simple authentication and ``-b`` gives the base *distinguished name*
-for the search (an important concept we explain below). The next five
-lines give the actual query; the ``&`` indicates that we want printers
-that match the intersection of the five attributes. Also note the
-``*`` (wildcard) and ``!`` (negation) operators. The final six lines
+for the search (an important concept we explain below). The second
+line give the actual query; the ``&`` indicates that we want printers
+that match the intersection of the three attributes; note the ``*``
+(wildcard) operator for the location value. The final six lines
 specify the attributes we want returned for the matched devices.
 
  .. code::
 
-        ldapsearch -h ldap.princeton.edu -x -b "ou=Printers,dc=princeton,dc=edu" \
-                 "(& \
-                     (printer-location=CS-Building*) \
-                     (printer-color-supported=TRUE) \
-                     (printer-duplex-supported=TRUE) \
-                     (!(printer-is-accepting-jobs=FALSE)) \
-                )" \
-               printer-name \
-               printer-location \
-               printer-uri \
-               printer-color-supported \
-               printer-duplex-supported \
-               printer-pages-per-minute
+    ldapsearch -h ldap.princeton.edu -x -b "ou=Printers,dc=princeton,dc=edu" \
+       "(&(printer-location=CS-Building*)(printer-color=TRUE)(printer-duplex=TRUE))" \
+       printer-name \
+       printer-location \
+       printer-uri \
+       printer-color \
+       printer-duplex \
+       printer-pages-per-minute
 
 The result ``ldapsearch`` returns might look like the one shown below,
 which includes two printers located in the CS Building. The ``uri``
@@ -294,21 +289,21 @@ attribute gives the address one would pass along to the print command;
 
  .. code::
 
-        dn: cn=ColorPrinter-A3,ou=Printers,dc=princeton,dc=edu
-        printer-name: ColorPrinter-A3
-        printer-location: CS-Building, Floor-3, Room-312
-        printer-uri: ipp://192.168.1.45/printers/ColorPrinter-A3
-        printer-color-supported: TRUE
-        printer-duplex-supported: TRUE
-        printer-pages-per-minute: 40
+    dn: cn=ColorPrinter-A3,ou=Printers,dc=princeton,dc=edu
+    printer-name: ColorPrinter-A3
+    printer-location: CS-Building, Floor-3, Room-312
+    printer-uri: ipp://192.168.1.45/printers/ColorPrinter-A3
+    printer-color: TRUE
+    printer-duplex: TRUE
+    printer-pages-per-minute: 40
 
-        dn: cn=ColorPrinter-A1,ou=Printers,dc=princeton,dc=edu
-        printer-name: ColorPrinter-A1
-        printer-location: CS-Building, Floor-1, Room-102
-        printer-uri: ipp://192.168.1.23/printers/ColorPrinter-A1
-        printer-color-supported: TRUE
-        printer-duplex-supported: TRUE
-        printer-pages-per-minute: 25
+    dn: cn=ColorPrinter-A1,ou=Printers,dc=princeton,dc=edu
+    printer-name: ColorPrinter-A1
+    printer-location: CS-Building, Floor-1, Room-102
+    printer-uri: ipp://192.168.1.23/printers/ColorPrinter-A1
+    printer-color: TRUE
+    printer-duplex: TRUE
+    printer-pages-per-minute: 25
 
 The query and result are straightforward to understand, but the ``dn``
 attribute in the output (which also corresponds to the ``-b`` option
