@@ -1,19 +1,20 @@
-|Naming|.3 Other Naming Schemes
+|Naming|.3 Application Naming Schemes
 --------------------------------------------
 
 DNS is a general-purpose naming system—it both scales and supports
-typed values—so in principle, it could be used to name any Internet
-resource. But other naming schemes also exist, most notably, the
-Uniform Resource Identifiers (URIs) introduced in Chapter |Apps|.
-This section describes three such systems, with a focus on how they
-differ from DNS (i.e., what makes them unique).
+typed values. In principle, it could be used to name any Internet
+resource, including those that application programs define and
+manage. But applications have adopted their own naming schemes, the
+most notable of which is the Uniform Resource Identifiers (URIs)
+introduced in Chapter |Apps|.  This section describes three such
+naming systems, with a focus on what value they provide beyond DNS.
 
 |Naming|.3.1 Federated Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In contrast to DNS, which provides a self-contained naming system,
 URIs define a federated name space that encompasses one or more
-existing name spaces. The specification for URIs, defined in RFC 3968,
+existing name spaces. The specification for URIs, defined in RFC 3986,
 includes a *syntax* for identifiers and an extensible process for
 resolving those identifiers. The process is extensible in the sense
 that it takes advantage of resolution mechanisms defined by other name
@@ -29,7 +30,7 @@ the form:\ [#]_
 The square brackets "[ ]" indicate that the query part is optional. The
 hierarchical-part is, by definition, scheme-specific, but the two
 examples shown in :numref:`Figure %s <fig-uri-format>` illustrate the
-most common formats. Note that the full grammar defined in RFC 3968
+most common formats. Note that the full grammar defined in RFC 3986
 includes other definitions that all schemes adhere to (e.g., how to
 specify a *port* or a *user*) so the hierarchical-part is not
 arbitrary.
@@ -107,7 +108,7 @@ in turn identifies the ``10.17487`` context, which in turn identifies
 the unique resource ``RFC3986``. This works in the same way that DNS
 name ``cicada.cs.princeton.edu`` identifies a hierarachy of domains,
 where "domain" and "context"—as well as terms like "registry" and
-"directory"—are often used interchangeably to denote the same concept.
+"directory"—are often used interchangeably to denote the same abstraction.
 
 One might ask then, how is the root context established? For URIs, the
 top-level schemes ``https`` and ``urn`` (along with ``http``, ``ftp``,
@@ -147,7 +148,7 @@ object. Where an object is located and how it is accessed—and hence,
 its URL—may change, but there are circumstances in which we need to
 officially record that the object remains the same.
 
-The physical world is full of objects—such as documents—that for legal
+The physical world is full of documents and other objects thaty for legal
 and other reasons need to be uniquely identifiable over time. A great
 example is the ISBN (International Standard Book Number) assigned to
 books and other published material. ISBNs were established in 1970,
