@@ -30,45 +30,55 @@ that may be established for a particular naming scheme.
   * Email address: ``alice@systemsapproach.org``
 
 Starting with Shoch's definition, domain names, IP addresses, and
-Ethernet addresses are appropriately named: the first is a
+Ethernet addresses are, at first glance, appropriately named: the first is a
 human-readable string used to identify what host you want to connect
 to and the latter two are 32-bit and 48-bit variables, respectively,
 that routers and switches use to locate (forward packets towards) that
-host. That we also have a readable representation for the two
-addresses (e.g, dot notation for IP) is a convenience; it does not
+host. You can argue that Ethernet addresses, which contain no
+topological information, do not exactly match Shoch's definition, but
+it is true that they are used to forward packets towards the intended
+host.
+
+The fact that we also have a readable representation for the two
+addresses (e.g, dot notation for IP) is a convenience. It does not
 play a role in how switches process addresses.
 
 Dealing with scale is an important consideration for any Internet
 naming system, and as we have seen in other situations, a hierarchy
 can be introduced to improve scalability. Consider the specific
 problem of how names and addresses are assigned to objects. Domain
-names come from a *hierarchical* name space, where an
-Internet-sanctioned registrar is responsible for the top-level domains
-(.e.g., ``.edu``, ``.com``), and local administrators assign names to
-the hosts they manage. The IP address space is also hierarchical, with
-an Internet-sanctioned authority assigning prefixes to organizations
-(e.g., ``128.112.0.0/16``), which in turn assign addresses to their
-hosts. As we saw in Chapters |Routing| and |BGP|, this hierarchy
-encodes topology information into the address, and that information is
-then used to determine the route.
+names come from a *hierarchical* name space, where IANA, the Internet
+Assigned Numbers Authority, is responsible for the top-level domains
+(.e.g., ``.edu``, ``.com``, ``.uk``) and delegates management of those
+domains to registrars who allocate subdomains, and so on. At the
+lowest level of hierarchy, local administrators assign names to the
+hosts they manage. The IP address space is also hierarchical, with
+IANA assigning prefixes to regional registrars (e.g.,
+``128.0.0.0/8``), which in turn assign prefixes to other registrars or
+organizations.  At the lowest level, organizations assign individual
+addresses to hosts from their assigned prefixes. As we saw in Chapters
+|Routing| and |BGP|, this hierarchy usually encodes topology information into
+the address, and that information is then used to determine the route.
 
-.. TODO -- Identify the "Internet-sanctioned authority". Right
-   terminology for Ethernet too.
 
 In contrast, Ethernet addresses are drawn from a *flat* address space,
-in the sense that there is no topologically meaning information
+in the sense that there is no topologically meaningful information
 embedded in them. When you resolve a MAC address, you use the full 48
 bits as a lookup key. But MAC addresses are allocated to network
-adaptors using a two-layer process: a unique prefix is assigned to
-each vendor (e.g., ``40:4d:7f`` is one of the prefixes assigned to
-Apple), and the vendor then assigns a unique 48-bit address to each of
-the devices it manufactures and ships using that prefix.
+adaptors using a two-layer hierarchy that is administered by the IEEE:
+a unique prefix is assigned to each vendor (e.g., ``40:4d:7f`` is one
+of the prefixes assigned to Apple), and the vendor then assigns a
+unique 48-bit address to each of the devices it manufactures and ships
+using that prefix.
 
 One might conclude that hierarchical name and address assignment
 insures that all identifiers are *unique*, so that any entity that
 tries to resolves a given identifier will get back the same value.
 This is true for domain names and Ethernet addresses—for which global
 uniqueness is a requirement—but not for IP addresses. This is because
+IP has long had a concept of "private" IP addresses that need not be
+globally unique, and specific prefixes are set aside for this
+purpose. NAT (described in Section |Fed|.3) and
 virtual networks like the ones described in Chapter |Virt| create a
 situation in which IP addresses are interpreted in the context of a
 private network rather than the public Internet. By looking at private
@@ -90,9 +100,9 @@ name.
    the Looking Glass", in which the White Knight explains the
    important differences between what a song* **is**, *what it* **is
    called**, *what it* **is named**, *and what* **the name is called**.
-   *Carroll was a pen name for Oxford Mathematitian Charles Dodgson,
+   *Carroll was a pen name for Oxford Mathematician Charles Dodgson,
    and so he surely understood the nuances of that statement. For our
-   purposes, looking at protocols and layers of abstration through the
+   purposes, looking at protocols and layers of abstraction through the
    "naming lens" is lesson in being precise about the language that
    we use use to talk about (and think about) networked systems.*
 
@@ -101,7 +111,7 @@ name.
    the naming problem. But if you start from the perspective that all
    systems are just a combination of objects, references to objects,
    and bindings from one object reference to another, then you can see
-   a route as a sequence of "link objects; those link objects also
+   a route as a sequence of "link objects"; those link objects also
    have to be named and routing tables are filled with bindings
    necessary to discover them. This perspective proves more important
    as we build layer upon layer of abstract (virtualized) objects. In
@@ -141,7 +151,7 @@ Finally, we have been referring to name resolution as an abstract
 process, but it is implemented by a program. The resolver that maps IP
 addresses into Ethernet addresses is implemented by ARP, as we saw in
 Chapter |Fed|.2.5. The resolution process for domain names is
-described in the next section, where as we'll see, the name resolver
+described in the next section, where, as we'll see, the name resolver
 is a network application, just like those described in Chapter |Apps|.
 The domain name resolver is used by all other applications, and those
 applications in turn, have their own naming systems. For example, URLs
