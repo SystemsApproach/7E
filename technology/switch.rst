@@ -1,4 +1,4 @@
-3.2 Packet Switches
+|Tech|.2 Packet Switches
 ---------------------------------
 
 Packet switches are devices that interconnect point-to-point links,
@@ -22,7 +22,7 @@ underlie both designs. Keep in mind that our goal is to understand
 switches in enough depth so we can use them as the primary building
 block for the best-effort message delivery system covered in Part II.
 
-3.2.1 Control and Data Planes
+|Tech|.2.1 Control and Data Planes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Switch forwarding logic is straightforward. Every switch maintains a
@@ -30,7 +30,7 @@ table that maps addresses to output ports. For every packet received
 on one of its input ports, the switch extracts the destination address
 from the packet header, looks it up in the table, and then enqueues
 the packet for transmission on the specified output port. Looking back
-at the IP and ETH headers in Section 1.1.3, for example, this would
+at the IP and ETH headers in Section |Intro|.1.3, for example, this would
 mean a switch configured to forward IP packets would use the 32-bit
 ``DestinationAddr`` found at an offset of 20 bytes from the beginning
 of the IP header as its lookup key, while a switch configured to
@@ -73,7 +73,7 @@ As shown in :numref:`Figure %s <fig-fib>`, the control plane runs a
 *routing algorithm* that collects the information about the network's
 topology so it can select the best route to each destination at a
 given point in time. This includes available paths, their respective
-costs, and any policy constraints. Chapter 4 looks at several widely
+costs, and any policy constraints. Chapter |Routing| looks at several widely
 used routing algorithms, and while the exact set of information it
 collects is algorithm-specific, it is commonly referred to as the
 *Routing Information Base (RIB)*.
@@ -89,7 +89,7 @@ data structure needs to support multiple possible lookup keys; we have
 already seen 32-bit IP address and 48-bit Ethernet address, but there
 are others.  For now you can think of the FIB as being implemented by
 multiple lookup tables—one per type of key—but we postpone an in-depth
-description until subsection 3.2.4.
+description until subsection |Tech|.2.4.
 
 :numref:`Figure %s <fig-fib>` also shows an interface between the
 control and data planes, with the former periodically loading new
@@ -101,10 +101,10 @@ historically been closed. Over the last several years, however, a
 open interface for installing routes in the data plane, with the goal
 of giving network owners (as opposed to switch vendors) more
 control. The exact nature of this interface is related to the FIB data
-structure, so we cover it in subsection 3.2.4, after seeing how switches
+structure, so we cover it in subsection |Tech|.2.4, after seeing how switches
 are implemented in both software and hardware.
 
-3.2.2 Software Switch
+|Tech|.2.2 Software Switch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :numref:`Figure %s <fig-softswitch>` shows a software switch built
@@ -179,7 +179,7 @@ likely to execute on a per-packet basis is a table lookup, for
 example, looking up an IP address in an L3 forwarding table, or an
 Ethernet address in an L2 forwarding table.
 
-3.2.3 Hardware Switch
+|Tech|.2.3 Hardware Switch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Throughout much of the Internet’s history, high-performance switches
@@ -276,9 +276,9 @@ speeds. As of this writing, the state of the art is 102.4 Tbps.
 Finally, :numref:`Figure %s <fig-baremetal>` includes other commodity
 components that make this all practical. In particular, it is now
 possible to buy pluggable *transceiver* modules that take care of all
-the media access details described in Section 3.1, be it Gigabit
+the media access details described in Section |Tech|.1, be it Gigabit
 Ethernet, 10-Gigabit Ethernet, or some non-Ethernet technology such as
-SONET (see Section 3.3). These transceivers all conform to
+SONET (see Section |Tech|.3). These transceivers all conform to
 standardized form factors, such as SFP+ (small form-factor pluggable),
 that can in turn be connected to other components over a standardized
 bus (e.g., SFI, the Serial Framing Interface). Again, the key takeaway
@@ -286,7 +286,7 @@ is that the networking industry is just now entering into the same
 commoditized world that the computing industry has enjoyed for
 decades.
 
-3.2.4 Flow Rules
+|Tech|.2.4 Flow Rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Having seen a high-level schematic of a hardware switch, and knowing
@@ -337,7 +337,7 @@ visit along its route to the ultimate destination. The ETH source
 address would also need to be changed accordingly.
 
 There are two other noteworthy aspects of flow rules. First, as we saw
-in Section 3.2.3, hardware switches employ a forwarding pipeline that
+in Section |Tech|.2.3, hardware switches employ a forwarding pipeline that
 makes it possible to do multiple lookups in parallel. :numref:`Figure
 %s <fig-pipeline>` takes a closer look at this pipeline, this time
 with the knowledge that it is being used to execute flow rules. The
