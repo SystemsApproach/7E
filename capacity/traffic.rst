@@ -12,7 +12,7 @@ according to the needs of various classes of applications.
 
 The idea of traffic engineering for packet-switched networks is almost
 as old as packet switching itself, with some ideas of traffic-aware
-routing having been tried in the Arpanet. However, traffic engineering
+routing having been tried in the ARPANET. However, traffic engineering
 only really became mainstream for the Internet backbone with the
 advent of MPLS, which provides a set of tools to steer traffic to
 balance load across different paths. However, a notable shortcoming of

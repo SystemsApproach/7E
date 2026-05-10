@@ -1,4 +1,4 @@
-3.3 Circuit Switching
+|Tech|.3 Circuit Switching
 ------------------------------------
 
 This book squarely focuses on packet-switched networks, in which
@@ -34,11 +34,11 @@ switching technology, which would sound like science fiction to that
 1900 operator. This section briefly looks at two examples, both of
 which play a role in providing the cross-country links used to build
 wide-area networks. Note that the two examples illustrate the
-alternative multiplexing strategies mentioned in Section 1.4:
+alternative multiplexing strategies mentioned in Section |Intro|.4:
 frequency-division multiplexing (FDM) and synchronous time-division
 multiplexing (STDM).
 
-3.3.1  All-Optical Networks
+|Tech|.3.1  All-Optical Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While it's possible to send and receive Ethernet frames over optical
@@ -79,7 +79,7 @@ possible to change these underlying end-to-end paths, effectively
 creating a new topology when viewed from the perspective of the
 packet-switching layer.
 
-3.3.2 SONET
+|Tech|.3.2 SONET
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Synchronous Optical Network (SONET)* is a standard for transmitting

@@ -1,4 +1,4 @@
-3.1 Communication Links
+|Tech|.1 Communication Links
 -------------------------------------------
 
 All network communication depends on transmitting and receiving
@@ -41,12 +41,12 @@ that task can be performed. We consider both Information Theory and
 the details of modulation techniques out of scope for this book, and
 refer the reader to authoritative sources on the topic. We will,
 however, come back to modulation when we look at transmitting wireless
-signals in Chapter 5.
+signals in Chapter |Shared|.
 
 That still leaves us with plenty of work to do, corresponding to what
 is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
 —terms originally coined by the OSI reference model presented in
-Chapter 1.  Another term you will often see is *Medium Access Control
+Chapter |Intro|.  Another term you will often see is *Medium Access Control
 (MAC)*, indicating that the focus is on controlling on how the sending
 and receiving nodes access a physical medium. The MAC layer is usually
 implemented in a *network adaptor*, otherwise known as a *Network
@@ -60,7 +60,7 @@ transmit Ethernet packets over fiber optic links at bandwidths
 approaching 1-Tbps, many orders of magnitude greater than the original
 2.94-Mbps rate over coaxial cable. We focus on the modern version of
 Ethernet in the next three subsections, and then fill in some of the
-historical background in Section 2.1.4.
+historical background in Section |Tech|.1.4.
 
 .. sidebar:: Ethernet Standards
 
@@ -90,7 +90,7 @@ historical background in Section 2.1.4.
    focus on point-to-point links rather than their multi-access
    predecessors.
 
-2.1.1 Encoding
+|Tech|.1.1 Encoding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first task is to encode the binary data that the source node wants
@@ -195,7 +195,7 @@ amplitude—for a fixed frequency band—making it possible to encode 16,
 interval. If we have 64 different symbols, we can encode 6 bits per
 symbol. *QAM (Quadrature Amplitude Modulation)* is widely used example
 of such a modulation scheme, which we will see again in
-Chapter 5.
+Chapter |Shared|.
 
 A more efficient alternative to Manchester encoding, called *4B/5B*,
 avoids doubling the baud rate while also ensuring there are no
@@ -272,7 +272,7 @@ Ethernet (also called 1GE or 1GigE) was coupled with a change to
 recently, 10GE and above uses a 64B/66B encoding.
 
 
-2.1.2 Framing
+|Tech|.1.2 Framing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that we have seen how to transmit a sequence of bits over a
@@ -281,7 +281,7 @@ bit-stream into a sequence of *frames*, each of which is a
 self-contained block of data being sent through a packet-switched
 network to some destination host. While purely bit-oriented networks
 exist, the goal of efficiently sharing network infrastructure, as
-described in Section 1.4, is best met through statistical
+described in Section |Intro|.4, is best met through statistical
 multiplexing. Packets define the unit of data that allows statistical
 multiplexing. A frame is just a name for a packet at the link layer, and
 *framing* is the problem of determining exactly what set of bits
@@ -319,7 +319,7 @@ operands from an executable file. Specifically, it appends a special
 bit pattern to demarc the beginning of a frame: a 64-bit preamble
 consisting of a sequence of alternating 0s and 1s.  Other than that
 preamble, the rest of the frame format is exactly as shown in Section
-1.3.3; it includes a 48-bit source address, a 48-bit destination
+|Intro|.3.3; it includes a 48-bit source address, a 48-bit destination
 address, and a 16-bit type field; followed by the payload; followed by
 a 32-bit CRC code; and finally the end-of-frame code. The sending and
 receiving host do not see the preamble, CRC code, or any of the
@@ -331,7 +331,7 @@ middle of a frame because the encoding scheme (see the previous
 subsection) ensures that sequence of bits does not occur in the
 message itself.
 
-2.1.3 Error Detection
+|Tech|.1.3 Error Detection
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Bit errors are sometimes introduced into frames during transmission.
@@ -554,7 +554,7 @@ front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
    CRC calculation using shift register.
 
 
-2.1.4 Historical Background
+|Tech|.1.4 Historical Background
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ethernet has been the dominant link technology for nearly 50 years,
@@ -571,9 +571,9 @@ send messages—i.e., messages sent from two hosts at the same time
 would interfere with each other—early Ethernet shared much more with
 wireless networks than today's wired networks. In fact, Ethernet's
 media access control algorithm was inspired by an earlier wireless
-network, called Aloha, which interconnected computers on the Hawaiian
+network, called ALOHA, which interconnected computers on the Hawaiian
 Islands. And that Ethernet algorithm, in turn, inspired the approach
-used by today's Wi-Fi. We describe that algorithm in Chapter 5.
+used by today's Wi-Fi. We describe that algorithm in Chapter |Shared|.
 
 One consequence of multiple nodes having access to a shared medium is
 that all the nodes have to be in relatively close proximity to each

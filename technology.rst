@@ -2,11 +2,13 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: Apache-2.0
 
+.. include:: chapters.rst
 
-Chapter 3:  Network Technology
-==================================
+Chapter |Tech|:  Network Technology
+=======================================
 
-We started Chapter 1 by asking one of the first questions any system architect must ask:
+We started Chapter |Intro| by asking one of the first questions any
+system architect must ask:
 
   *What available technologies will serve as the underlying building blocks?*
 
