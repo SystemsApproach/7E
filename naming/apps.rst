@@ -163,7 +163,7 @@ When it became clear that the Internet had the potential to support
 arbitrary digital objects, it followed that the Internet also needed
 to establish a digital identifier for those objects. Bob Kahn, who
 along with Vint Cerf is considered the father of the Internet,
-designed such a naming service, called the *Handles System*, which
+designed such a naming service, called the *Handle System*, which
 eventually influenced the inclusion of URNs in the URI syntax. It also
 led to the creation of organizations like the DOI to register and
 manage these persistent names. The Handle System calls such

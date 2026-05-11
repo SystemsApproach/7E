@@ -38,14 +38,21 @@ The rest of this section outlines the details.
 DNS implements a hierarchical name space for Internet objects. Unlike
 Unix file names, which are processed from left to right with the naming
 components separated with slashes, DNS names are processed from right to
-left and use periods as the separator. (Although they are processed from
-right to left, humans still read domain names from left to right.) An
+left and use periods as the separator.\ [#]_  An
 example domain name for a host is ``cicada.cs.princeton.edu``. Notice
 that we said domain names are used to name Internet “objects.” What we
 mean by this is that DNS is not strictly used to map host names into
 host addresses. It is more accurate to say that DNS maps domain names
 into values. For the time being, we assume that these values are IP
 addresses; we will come back to this issue later in this section.
+
+.. [#] While machines process domain names from right to left, humans
+       read them as text strings, which means the direction of
+       processing for humans depends on the language and character set. While
+       originally the DNS only allowed for latin characters, and would
+       always be read left to right by humans, today it supports a
+       wide range of character sets and languages that are read right
+       to left.
 
 .. _fig-domains:
 .. figure:: naming/figures/f09-15-9780123850591.png
@@ -69,7 +76,7 @@ There was actually a substantial amount of discussion that took place
 when the domain name hierarchy was first being developed as to what
 conventions would govern the names that were to be handed out near the
 top of the hierarchy. Without going into that discussion in any detail,
-notice that the hierarchy is not very wide at the first level. There are
+the hierarchy in the early days was not very wide at the first level. There are
 domains for each country, plus the “big six” domains: ``.edu``,
 ``.com``, ``.gov``, ``.mil``, ``.org``, and ``.net``. These six domains
 were all originally based in the United States (where the Internet and
@@ -77,8 +84,8 @@ DNS were invented); for example, only U.S.-accredited educational
 institutions can register an ``.edu`` domain name. In recent years, the
 number of top-level domains has been expanded, partly to deal with the
 high demand for ``.com`` domains names. The newer top-level domains
-include ``.biz``, ``.coop``, and ``.info``. There are now over 1200
-top-level domains.
+include ``.biz``, ``.coop``, and ``.systems``. There are over 1400
+top-level domains at the time of writing.
 
 |Naming|.2.2 Name Servers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
