@@ -88,7 +88,7 @@ limit ourselves to the syntactic issues. The first thing to notice
 about the example URN in :numref:`Figure %s <fig-uri-format>` is that
 it uses ``urn`` to identify the scheme. This is an example of a
 URN-compliant scheme (there are others, as we'll see in a moment), but
-the ``urn`` scheme was established as an examplar for other schemes to
+the ``urn`` scheme was established as an exemplar for other schemes to
 follow.
 
 As shown in :numref:`Figure %s <fig-uri-format>`, the
@@ -106,7 +106,7 @@ Stepping back a bit, you can think of a URN as specifying a hierarchy
 of contexts: the ``urn`` context identifies the ``doi`` context, which
 in turn identifies the ``10.17487`` context, which in turn identifies
 the unique resource ``RFC3986``. This works in the same way that DNS
-name ``cicada.cs.princeton.edu`` identifies a hierarachy of domains,
+name ``cicada.cs.princeton.edu`` identifies a hierarchy of domains,
 where "domain" and "context"—as well as terms like "registry" and
 "directory"—are often used interchangeably to denote the same abstraction.
 
@@ -148,7 +148,7 @@ object. Where an object is located and how it is accessed—and hence,
 its URL—may change, but there are circumstances in which we need to
 officially record that the object remains the same.
 
-The physical world is full of documents and other objects thaty for legal
+The physical world is full of documents and other objects that for legal
 and other reasons need to be uniquely identifiable over time. A great
 example is the ISBN (International Standard Book Number) assigned to
 books and other published material. ISBNs were established in 1970,
@@ -189,7 +189,7 @@ provide the infrastructure needed to map a handle into the
 corresponding object. It uses URLs to locate the object, or more
 specifically, an object's handle is mapped into a set of values
 (*metadata* associated with the object), where one of the values is a
-URL that can be used to access the object. Another piece of metatdata
+URL that can be used to access the object. Another piece of metadata
 is the document's publication date, which is likely fixed, but the
 handle-to-URL binding has to be kept up-to-date should the object move.
 
