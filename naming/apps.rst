@@ -108,7 +108,8 @@ in turn identifies the ``10.17487`` context, which in turn identifies
 the unique resource ``RFC3986``. This works in the same way that DNS
 name ``cicada.cs.princeton.edu`` identifies a hierarchy of domains,
 where "domain" and "context"—as well as terms like "registry" and
-"directory"—are often used interchangeably to denote the same abstraction.
+"directory"—are often used interchangeably to denote the same
+abstraction: a set of name/value bindings.
 
 One might ask then, how is the root context established? For URIs, the
 top-level schemes ``https`` and ``urn`` (along with ``http``, ``ftp``,
@@ -130,12 +131,17 @@ case, one for URI schemes and one for URN name spaces.
    `Uniform Resource Names (URN) Namespaces.
    <https://www.iana.org/assignments/urn-namespaces/urn-namespaces.xhtml>`__
 
-.. TODO -- Discuss how URLs ~ Addresses and how redirection works.
-   Revisit application names, especially URIs, URLs, URNs in light of
-   the discussion in this chapter. Emphasizing how application names
-   impact routing (at the application/overlay level). We'll likely
-   need a forward reference CDNs, but applying the "naming lens" is
-   still within scope.
+Finally, in the same way URNs name objects at the application level,
+we can think of URLs as a kind of application address. Does this mean
+they are used to route messages to the appropriate destination? In a
+sense, yes. We're now talking about application messages, such as an
+HTTP request, and not individual packets, but it is by interpreting
+the naming authority part of a URL that a request messag is forwarded
+to the appropriate server. DNS plays a role selecting this part of the
+route. Moreover, that server might "reroute" the request to another
+server by returning a 302 code. This sort of application-level routing,
+involving both DNS and HTTP, plays an important roll in distributed
+services, such as CDNs. We return to this topic in Chapter |Overlay|.
 
 |Naming|.3.2 Persistent Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -197,7 +203,7 @@ All of this results in the following being legitimate URIs for the
 example digital object we've been using as a running example in
 this section: RFC 3986:
 
- * ``urn:doi:10.17487/RFC3968`` — a URN, with ``urn`` as scheme and ``doi`` namespace
+ * ``urn:doi:10.17487/RFC3986`` — a URN, with ``urn`` as scheme and ``doi`` namespace
  * ``doi:10.17487/RFC3986`` — a URN, with ``doi`` as an IANA-sanctioned scheme
  * ``urn:ietf:rfc:3986`` — a URN, with ``urn`` as scheme and ``ietf``
    as an IANA-sanctioned namespace

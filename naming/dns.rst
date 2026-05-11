@@ -63,14 +63,13 @@ addresses; we will come back to this issue later in this section.
 
 Like the Unix file hierarchy, the DNS hierarchy can be visualized as a
 tree, where each node in the tree corresponds to a domain, and the
-leaves in the tree correspond to the hosts being named. :numref:`Figure
-%s <fig-domains>` gives an example of a domain hierarchy. Note that we
-should not assign any semantics to the term *domain* other than that it
-is simply a context in which additional names can be defined.\ [#]_
-
-.. [#] Confusingly, the word *domain* is also used in Internet
-       routing, where it means something different than it does in
-       DNS, being roughly equivalent to the term *autonomous system*.
+leaves in the tree correspond to the hosts being named.
+:numref:`Figure %s <fig-domains>` gives an example of a domain
+hierarchy. Note that we should not assign any semantics to the term
+*domain* other than that it is simply a context in which additional
+names can be defined. Confusingly, the word *domain* is also used in
+Internet routing, where it means something different than it does in
+DNS, being roughly equivalent to the term *autonomous system*.
 
 There was actually a substantial amount of discussion that took place
 when the domain name hierarchy was first being developed as to what

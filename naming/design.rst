@@ -103,7 +103,7 @@ name.
    *Carroll was a pen name for Oxford Mathematician Charles Dodgson,
    and so he surely understood the nuances of that statement. For our
    purposes, looking at protocols and layers of abstraction through the
-   "naming lens" is lesson in being precise about the language that
+   "naming lens" is a lesson in being precise about the language that
    we use use to talk about (and think about) networked systems.*
 
    *For example, this book has two chapters focused on routing, so it
@@ -150,7 +150,7 @@ this section is an example of such a name.
 Finally, we have been referring to name resolution as an abstract
 process, but it is implemented by a program. The resolver that maps IP
 addresses into Ethernet addresses is implemented by ARP, as we saw in
-Chapter |Fed|.2.5. The resolution process for domain names is
+Section |Fed|.2.5. The resolution process for domain names is
 described in the next section, where, as we'll see, the name resolver
 is a network application, just like those described in Chapter |Apps|.
 The domain name resolver is used by all other applications, and those
