@@ -49,7 +49,7 @@ addresses; we will come back to this issue later in this section.
 .. [#] While machines process domain names from right to left, humans
        read them as text strings, which means the direction of
        processing for humans depends on the language and character set. While
-       originally the DNS only allowed for latin characters, and would
+       originally the DNS only allowed for Latin characters, and would
        always be read left to right by humans, today it supports a
        wide range of character sets and languages that are read right
        to left.
