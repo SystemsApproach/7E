@@ -136,7 +136,7 @@ we can think of URLs as a kind of application address. Does this mean
 they are used to route messages to the appropriate destination? In a
 sense, yes. We're now talking about application messages, such as an
 HTTP request, and not individual packets, but it is by interpreting
-the naming authority part of a URL that a request messag is forwarded
+the naming authority part of a URL that a request message is forwarded
 to the appropriate server. DNS plays a role selecting this part of the
 route. Moreover, that server might "reroute" the request to another
 server by returning a 302 code. This sort of application-level routing,
@@ -214,12 +214,18 @@ If you try each of these in your browser, you will find that only the
 last two return something meaningful. This is because only the
 ``https`` scheme triggers a protocol capable of actually locating and
 retrieving content. Requesting the ``doi.org`` URL resolves the
-object's URN, returning the set of metadata associated with RFC 3986,
-including a link to the RFC itself. The ``www.rfc-editor.org`` URL is
-that web site, and so directly accessing that URL displays the RFC.
+object's URN, returning a 302 Redirect code pointing to the set of
+metadata associated with RFC 3986 (as opposed to the RFC itself).
+This metadata includes links to various representations of the RFC,
+including an HTML version. The last URL above is for that web page,
+and so accessing it displays the RFC.
 
-Note that third-party sites can also use URNs and the associated
-metadata. For example, the following URL returns metadata for the
+Note that the DOI site, which is based on the Handle System, returns a
+"representation" of the named object, specifically an information page
+containing the relevant metadata. Technically, a handle-based URN
+names an abstract resource, not necessarily an HTML web page.  Among
+other things, this means that third-party sites can also use DOI's
+URNs. For example, the following URL returns metadata for the
 DOI-managed handle corresponding to Kahn and Wilensky's paper
 describing the Handle System.
 
