@@ -48,14 +48,14 @@ arbitrary.
    :align: center
 
    URIs consist of a *scheme*, a *hierarchical-part*, and an
-   optionally *query*. The hierarchical-part is scheme-specific, with
+   optional *query*. The hierarchical-part is scheme-specific, with
    two examples shown.
 
 The ``https`` scheme is most familiar, so we start with it. The
 hierarchical part begins with a *naming authority* that is responsible
 for resolving names in the remainder of the URI. The naming authority
-is often identified by a domain name. HTTPs is used to connect to that
-authority, which in turn triggers DNS to resolve to the domain name.
+is often identified by a domain name. HTTPS is used to connect to that
+authority, which in turn triggers DNS to resolve the domain name.
 The authority component is preceded by a double slash ("//") and is
 terminated by the next slash ("/"), question mark ("?"), or number
 sign ("#") character, or by the end of the URI.
@@ -140,7 +140,7 @@ the naming authority part of a URL that a request message is forwarded
 to the appropriate server. DNS plays a role selecting this part of the
 route. Moreover, that server might "reroute" the request to another
 server by returning a 302 code. This sort of application-level routing,
-involving both DNS and HTTP, plays an important roll in distributed
+involving both DNS and HTTP, plays an important role in distributed
 services, such as CDNs. We return to this topic in Chapter |Overlay|.
 
 |Naming|.3.2 Persistent Names
@@ -279,7 +279,7 @@ gives an example invocation, where the first line gives three command
 options: ``-h`` says which server to contact, ``-x`` says to use
 simple authentication and ``-b`` gives the base *distinguished name*
 for the search (an important concept we explain below). The second
-line give the actual query; the ``&`` indicates that we want printers
+line gives the actual query; the ``&`` indicates that we want printers
 that match the intersection of the three attributes; note the ``*``
 (wildcard) operator for the location value. The final six lines
 specify the attributes we want returned for the matched devices.

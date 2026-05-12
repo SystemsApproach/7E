@@ -40,7 +40,7 @@ it is true that they are used to forward packets towards the intended
 host.
 
 The fact that we also have a readable representation for the two
-addresses (e.g, dot notation for IP) is a convenience. It does not
+addresses (e.g., dot notation for IP) is a convenience. It does not
 play a role in how switches process addresses.
 
 Dealing with scale is an important consideration for any Internet
@@ -49,7 +49,7 @@ can be introduced to improve scalability. Consider the specific
 problem of how names and addresses are assigned to objects. Domain
 names come from a *hierarchical* name space, where IANA, the Internet
 Assigned Numbers Authority, is responsible for the top-level domains
-(.e.g., ``.edu``, ``.com``, ``.uk``) and delegates management of those
+(e.g., ``.edu``, ``.com``, ``.uk``) and delegates management of those
 domains to registrars who allocate subdomains, and so on. At the
 lowest level of hierarchy, local administrators assign names to the
 hosts they manage. The IP address space is also hierarchical, with
@@ -72,8 +72,8 @@ unique 48-bit address to each of the devices it manufactures and ships
 using that prefix.
 
 One might conclude that hierarchical name and address assignment
-insures that all identifiers are *unique*, so that any entity that
-tries to resolves a given identifier will get back the same value.
+ensures that all identifiers are *unique*, so that any entity that
+tries to resolve a given identifier will get back the same value.
 This is true for domain names and Ethernet addresses—for which global
 uniqueness is a requirement—but not for IP addresses. This is because
 IP has long had a concept of "private" IP addresses that need not be
@@ -104,7 +104,7 @@ name.
    and so he surely understood the nuances of that statement. For our
    purposes, looking at protocols and layers of abstraction through the
    "naming lens" is a lesson in being precise about the language that
-   we use use to talk about (and think about) networked systems.*
+   we use to talk about (and think about) networked systems.*
 
    *For example, this book has two chapters focused on routing, so it
    may seem strange to suddenly start talking about routing as part of
