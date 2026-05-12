@@ -41,7 +41,7 @@ size, but rather, being aware of factors that might limit how large a
 network can grow.  The original Internet architects were aware that
 using 32-bit addresses for Internet-connected devices implied there
 could be no more than 2\ :sup:`32` (over 4 billion) devices.\ [#]_
-That number seemed more than adequate at at the time, but of course,
+That number seemed more than adequate at the time, but of course,
 we now know that it wasn't (and workarounds have been engineered).
 
 .. [#] The Internet refers to connected devices as *hosts* since they
@@ -55,7 +55,7 @@ There are other, less obvious factors that can limit network growth.
 Restricting the number of stakeholders responsible for different
 aspects of the network is an important one. For example, controlling
 who may deploy applications tends to limit the user communities that
-might benefit from the network; anyone should be able deploy a new
+might benefit from the network; anyone should be able to deploy a new
 application that serves some community, no matter how niche.  As
 another example, it would not be practical for a limited operations
 team to be responsible for fixing every outage reported anywhere on
@@ -90,7 +90,7 @@ This means networks are fundamentally a shared resource, making the
 mechanism that allocates resources to different users a key technical
 challenge. This mechanism should be fair (for some definition of
 fairness), but also efficient. The latter requirement means that we
-want to maximize the amount data the network delivers on behalf of its
+want to maximize the amount of data the network delivers on behalf of its
 users, for a given set of resource capacities.  We expand on this
 requirement in Section 1.4.
 

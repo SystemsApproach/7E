@@ -215,12 +215,12 @@ being two widely used open source examples.
 
    Sequence of MTAs store and forward email messages. Each MTA writes
    messages to disk (stable storage) so it can fulfill its promise to
-   deliver a message once it as accepted it from an upstream MTA.
+   deliver a message once it has accepted it from an upstream MTA.
 
 While it is possible that the MTA on a sender’s machine could
 establish an SMTP/TCP connection to the MTA on the recipient’s mail
 server, in many cases the mail traverses one or more intermediate MTA
-(also call a *mail gateway*) on its route from the sender’s host to
+(also called a *mail gateway*) on its route from the sender’s host to
 the receiver’s host. The gateway MTA buffers messages on disk, and is
 willing to try retransmitting them to the next machine for several
 days.  :numref:`Figure %s <fig-mail>` illustrates a two-hop path from
@@ -232,7 +232,7 @@ not want to include the specific host on which he or she reads email
 in his or her address. A second is scale: in large organizations, it’s
 often the case that a number of different machines hold the
 mailboxes for the organization. For example, mail delivered to
-``bob@princeton.edu`` might first sent to a University gateway (that
+``bob@princeton.edu`` might first be sent to a University gateway (that
 is, to the host named ``princeton.edu``), and then forwarded—involving
 a second connection—to the specific machine on which Bob has a mailbox
 (perhaps on a department server). The forwarding gateway maintains a

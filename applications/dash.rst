@@ -108,7 +108,7 @@ contains a set of *Adaptation Sets*; an Adaptation Set contains a set
 of *Representations*; and finally, each Representation specifies a
 set of *Segments* (each of which is an MPEG-compressed chunk of
 video). If this seems like more layers than our "N × M chunks"
-overview suggests, it is, but this corresponds a real-world
+overview suggests, it is, but this corresponds to a real-world
 application of that idea.  For example, Periods typically last many
 seconds (e.g., on the order of a minute), and define the boundary at
 which the player is allowed to shift from one bandwidth to another.
@@ -127,7 +127,7 @@ Finally, to allow for the possibility that the schema of the MPD file
 may change over time, a URN (``urn:mpeg:dash:schema:mpd:2011``)
 identifies the schema being used by this manifest. In other words,
 standards often require a surprising amount of detail, in many cases
-to accommodate the all the options different constituencies
+to accommodate all the options different constituencies
 require. That's the main lesson you should take away from this example, but
 for a more complete introduction to DASH, we recommend Iraj Sodagar's
 paper:
@@ -144,7 +144,7 @@ With this peek into the bookkeeping challenge of HTTP-based streaming,
 let's pop back up to the big picture. To view a video, a player first
 downloads its ``.mpd`` file, parses it, and then starts issuing HTTP
 GET requests for a sequence of ``.mp4`` files, decoding and displaying
-each at a smooth video frame rate But what is the right bandwidth to
+each at a smooth video frame rate. But what is the right bandwidth to
 select? For simplicity, let's first assume we have some way to measure
 the amount of free capacity along a
 path.  For example, a client can simply measure the rate at which data
@@ -249,7 +249,7 @@ examine this problem space in Chapter |Stream|.
 
 Finally, it is worth noting that video streaming involves a complex
 interplay between the application protocol and the underlying
-transport protocol. They are, in effect, trying to co-mange the rate
+transport protocol. They are, in effect, trying to co-manage the rate
 at which packets are delivered. As an application developer, you would
 undoubtedly prefer that the socket API for TCP told you everything you
 need to know about TCP's behavior, but that's just not the case. The

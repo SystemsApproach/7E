@@ -38,7 +38,7 @@ introducing two of the most widely referenced examples—the OSI
 architecture and the Internet architecture.  Because we're just
 getting started, the description is intentionally high level, and we
 do not attempt to justify either architecture as "the right answer."
-They are just two examples that illustrate how one might break the a
+They are just two examples that illustrate how one might break a
 problem of building a network into manageable subsystems, setting the
 stage for the rest of the book.
 
@@ -98,7 +98,7 @@ being combined in a teleconferencing application.
 The OSI model both defines how to modularize functionality into seven
 layers, and suggests how one might assemble a network from a set of
 *switches*—a special device that receives data on one communication
-port and send it out on another port. This means a distributed
+port and sends it out on another port. This means a distributed
 collection of switches can be interconnected to form a network, as
 shown in :numref:`Figure %s <fig-network>`. This switched network
 expands on the part of :numref:`Figure %s <fig-osi>` contained within
@@ -200,7 +200,7 @@ to another.
    :width: 500px
    :align: center
 
-   Interconnection of networks, which switches (typically called
+   Interconnection of networks, with switches (typically called
    routers) forwarding packets from one network to another.
 
 Because IP depends on other networks, it cannot assume anything about
@@ -296,7 +296,7 @@ This isn't to say that applications and network technologies are
 unimportant, but rather, that (1) it is best to not be overly
 prescriptive since we can't know what applications and technologies
 will emerge over time, and (2) it makes the job of architecting the
-the system easier if we keep our focus narrow. In general, the
+system easier if we keep our focus narrow. In general, the
 separation of concerns principle can be summarized as follows: When
 faced with the design of a complex system, carve out independent
 challenges and address them in isolation, without being overly

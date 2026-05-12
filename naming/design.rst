@@ -26,7 +26,7 @@ that may be established for a particular naming scheme.
   * IP address: ``128.112.155.72``
   * Ethernet address: ``40:4d:7f:b5:62:b0``
   * URL: ``http://www.cs.princeton.edu/index.html``
-  * URN: ``urn:doi:10.17487/RFC0791``
+  * URN: ``urn:doi:10.17487/RFC3986``
   * Email address: ``alice@systemsapproach.org``
 
 Starting with Shoch's definition, domain names, IP addresses, and
