@@ -8,7 +8,7 @@ way to build a switch: buy a general-purpose processor and equip it
 with multiple network interface cards. Such a device, running suitable
 software, can receive packets on one of its interfaces, decide the
 best way to forward each packet on towards its destination, and then
-transmit packets on another of its interfaces.  This so called
+transmit packets on another of its interfaces.  This so-called
 *software switch* is not too far removed from the architecture of many
 commercial mid- to low-end network devices.  Implementations that
 deliver high-end performance typically take advantage of additional
@@ -52,11 +52,11 @@ devices are sometimes called *L2/L3 switches*.
 
 There are many other possible configuration options, but to understand
 them, we need a more sophisticated model of a switch. For starters,
-switches make a distinction between a their *control plane* and their
+switches make a distinction between their *control plane* and their
 *data plane*.  The control plane determines how the network should
 behave (i.e., it puts address-to-port mappings in the lookup table),
 while the data plane is responsible for applying those mappings to
-individual packets (i.e., it forwards packets based on what is finds
+individual packets (i.e., it forwards packets based on what it finds
 in the lookup table).
 
 .. _fig-fib:
@@ -255,7 +255,7 @@ for “Content Addressable Memory,” which means that the key you want to
 look up in a table can effectively be used as the address into the
 memory that implements the table. The “T” stands for “Ternary” which
 is a fancy way to say the key you want to look up can have wildcards
-in it (e.g, key ``10*1`` matches both ``1001`` and ``1011``). Finally,
+in it (e.g., key ``10*1`` matches both ``1001`` and ``1011``). Finally,
 the processing involved to forward each packet is implemented by a
 forwarding pipeline.  This pipeline is implemented by an ASIC, but
 when well-designed, the pipeline’s forwarding behavior can be modified
@@ -312,7 +312,7 @@ port *i*. The original OpenFlow spec allowed the header fields shown
 in :numref:`Figure %s <fig-headers>` to be included in the Match half
 of the rule. So for example, a Match might specify a packet's ETH
 header ``Type`` field equals ``0x800`` (indicating the frame carries
-and IP packet) and its IP header ``DstAddr`` field be contained in
+an IP packet) and its IP header ``DstAddr`` field be contained in
 some subnet (e.g., ``192.12.69/24``). It is also possible to write
 flow rules that match specific UDP or TCP port numbers.
 
