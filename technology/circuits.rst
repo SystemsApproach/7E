@@ -22,7 +22,7 @@ resulting values are immediately passed to the output port and
 transmitted, without being queued. That's only possible if you are
 positive the output port is ready to transmit data the instant it is
 received, without the possibility of contention. That sort of strict
-guarantee implies circuits resources are first "reserved" before
+guarantee implies circuit resources are first "reserved" before
 used. Indeed, reservations are an essential aspect of circuit
 switching.
 
@@ -62,7 +62,7 @@ much as 100 Gbps of data.
    :align: center
 
    Packet switches connected by a logical point-to-point circuit, that
-   is in turn implemented by a path through sequence of ROADMs in an
+   is in turn implemented by a path through a sequence of ROADMs in an
    all-optical network.
 
 Connecting these fibers is an optical device called a ROADM

@@ -17,7 +17,7 @@ in :numref:`Figure %s <fig-spectrum>`.
    Electromagnetic spectrum, with frequencies measured in Hertz (Hz).
 
 The first challenge of communication is to convert a digital signal
-into the available analog signal, a process is known as *modulation*.
+into the available analog signal, a process known as *modulation*.
 In some cases this is very simple, as in *baseband modulation*, where
 a digital signal may be directly encoded as, say, high and low voltage
 levels on a cable. Many forms of modulation involve modifying the
@@ -47,7 +47,7 @@ That still leaves us with plenty of work to do, corresponding to what
 is usually referred to as the link layer, or sometimes *Layer 2 (L2)*\
 —terms originally coined by the OSI reference model presented in
 Chapter |Intro|.  Another term you will often see is *Medium Access Control
-(MAC)*, indicating that the focus is on controlling on how the sending
+(MAC)*, indicating that the focus is on controlling how the sending
 and receiving nodes access a physical medium. The MAC layer is usually
 implemented in a *network adaptor*, otherwise known as a *Network
 Interface Card (NIC)*, plugged into a computer.
@@ -193,7 +193,7 @@ it is common to vary a combination of a signal's phase and
 amplitude—for a fixed frequency band—making it possible to encode 16,
 64, or more different patterns (symbols) during each clock
 interval. If we have 64 different symbols, we can encode 6 bits per
-symbol. *QAM (Quadrature Amplitude Modulation)* is widely used example
+symbol. *QAM (Quadrature Amplitude Modulation)* is a widely used example
 of such a modulation scheme, which we will see again in
 Chapter |Shared|.
 
@@ -294,7 +294,7 @@ technologies. We briefly introduce two of them here, one of which is
 the strategy used by Ethernet.
 
 One of the oldest approaches to framing has its roots in connecting
-terminals to mainframes. The idea is view each frame as a collection
+terminals to mainframes. The idea is to view each frame as a collection
 of bytes (characters) rather than a collection of bits. Today, the
 widely used Point-to-Point Protocol (PPP) still uses this approach.
 
@@ -303,7 +303,7 @@ frames start and end. For example, a frame is everything contained
 between a special STX (start of text) and ETX (end of text) character.
 The problem with the sentinel approach, of course, is that one of the
 special characters might appear in the data portion of the frame. The
-standard way to overcome this problem by “escaping” the character by
+standard way to overcome this problem is by “escaping” the character by
 preceding it with a DLE (data-link-escape) character whenever it
 appears in the body of a frame; the DLE character is also escaped (by
 preceding it with an extra DLE) in the frame body. Note that it's also
@@ -311,7 +311,7 @@ possible for the special characters to become corrupted, which results
 in a *framing error*. When this happens, the receiver has to wait
 until the next sentinel character is sent to get back in sync.
 
-Ethernet uses an similar approach, but without assuming anything about
+Ethernet uses a similar approach, but without assuming anything about
 byte-boundaries—it simply views the frame as a collection of bits.
 These bits might come from some character set, such as ASCII; they
 might be pixel values in an image; or they could be instructions and
