@@ -40,7 +40,7 @@ on the link and the number of bits per second that we can deliver to
 the receiving process in practice. We tend to use the word
 *throughput* to refer to the *measured performance* of a system. Thus,
 because of various inefficiencies of implementation—most notably, how
-many times a message has to be copied from one memory location—a pair
+many times a message has to be copied from one memory location to another—a pair
 of nodes connected by a link with a bandwidth of 1 Gbps might achieve
 end-to-end throughput of only 100 Mbps. This would mean that an
 application on one host could send data to the other host at 100 Mbps.
@@ -128,7 +128,7 @@ In contrast, consider an application that is being asked to download a
 faster it will be able to return the file to the user. Here, network
 bandwidth dominates performance. To see this, suppose that the channel
 has a bandwidth of 100 Mbps. It takes 20 seconds to transmit the file
-(250 × 10\ :sup:`6` × 8-bits / 100 × 10\ :sup:`6` Mbps = 20 seconds),
+(250 × 10\ :sup:`6` × 8-bits / 100 × 10\ :sup:`6` bps = 20 seconds),
 making it relatively unimportant if the file is on the other side of a
 1-ms channel or a 100-ms channel; the difference between a
 20.001-second response time and a 20.1-second response time is

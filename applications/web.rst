@@ -280,9 +280,9 @@ In the common case, the response message will also carry the requested
 page. This page is an HTML document, but since it may carry nontextual
 data (e.g., a GIF image), it is encoded using MIME (see the section on
 email). Certain of the ``MESSAGE_HEADER`` lines give attributes of the
-page contents, including (number of bytes in the contents),
+page contents, including ``Content-Length`` (number of bytes in the contents),
 ``Expires`` (time at which the contents are considered stale), and
-(time at which the contents were last modified at the server).
+``Last-Modified`` (time at which the contents were last modified at the server).
 
 Connection Overhead
 ++++++++++++++++++++++
@@ -326,7 +326,7 @@ connections have many advantages. First, they eliminate the
 connection setup overhead, thereby reducing the load on the server,
 the load on the network caused by the additional TCP packets, and the
 delay perceived by the user. Second, because a client can send
-multiple request messages down a single TCP connection, TCP’s
+multiple request messages down a single TCP connection, TCP
 is able to operate more efficiently. (TCP includes a congestion
 control mechanism that paces traffic so as to not overload the
 network; that mechanism is described in Chapter |CC|.)
@@ -359,7 +359,7 @@ connections more than offset the drawbacks.
 
 While 1.1 is still widely supported, version 2.0 was formally
 approved by the IETF in 2015. Known as HTTP/2, the new version is
-backwards compatible with 1.1 (i.e,. it adopts the same syntax for
+backwards compatible with 1.1 (i.e., it adopts the same syntax for
 header fields, status codes, and URIs), but it adds several new features.
 
 The first is to make it easier for web servers to *minify* the
@@ -387,7 +387,7 @@ pairs on a single TCP connection. This goes beyond what version 1.1
 supports—allowing a *sequence* of requests to reuse a TCP
 connection—by permitting these requests to overlap with each
 other. The way HTTP/2 does this is to allow independent *streams*,
-each of which is labled in the HTTP header with a unique *stream
+each of which is labeled in the HTTP header with a unique *stream
 id*. A given stream is limited to one request/response exchange at a
 time, but multiple streams can be active on a given TCP connection.
 
@@ -399,7 +399,7 @@ effort has resulted in a new version of HTTP (known as HTTP/3) and a
 new transport protocol to be used in place of TCP (that protocol is
 called QUIC). Since understanding QUIC requires a deeper look at
 transport layer issues—including how we secure end-to-end
-communication—we postpone it until Chapter |Message|. For the purposes or
+communication—we postpone it until Chapter |Message|. For the purposes of
 this discussion, the big takeaway is that it is sometimes necessary to
 look across protocol layer boundaries, in this case, across the
 transport/application boundary.
@@ -518,7 +518,7 @@ whether or not a document can be cached, how long it can be cached, how
 fresh a document must be, and so on. We’ll return to the subject of
 CDNs in Chapter |Overlay|.
 
-2.2.3 RESTful API
+2.2.4 RESTful API
 ~~~~~~~~~~~~~~~~~~~~~
 
 So far we have focused on interactions between a human and a web
@@ -591,7 +591,7 @@ One of the selling features of REST is that it leverages the
 infrastructure that has been deployed to support the web. For example,
 web proxies can enforce security or cache information. Existing content
 distribution networks (CDNs) can be used to support RESTful
-applications
+applications.
 
 .. sidebar:: Alternative Design
 

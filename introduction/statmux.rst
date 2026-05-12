@@ -182,10 +182,10 @@ edge-of-network concerns.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our high-level description of statistical multiplexing is defined in
-term of links and switches, but we need to be more precise about
+terms of links and switches, but we need to be more precise about
 individual resources and their capacities. We also need to manage that
 capacity, which includes acquiring more resources when necessary.
-Adding (and removing) capacity is often often referred to as *resource
+Adding (and removing) capacity is often referred to as *resource
 provisioning*, and while it sometimes requires installing new hardware
 (or pulling new cables), it is increasingly accomplished by activating
 physical infrastructure that is already in place.
@@ -222,7 +222,7 @@ but for now, we identify three specific resources:
   is easily added to an existing switch (within limits), but too much memory for
   buffering results in potentially long buffering delays. This can be
   problematic, and so buffer capacity is often designed in proportion to
-  the number of bytes can be in transit across the network (a concept
+  the number of bytes that can be in transit across the network (a concept
   explained in the next section).
 
 Another way to look at capacity is to ask what the network is able to

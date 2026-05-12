@@ -17,7 +17,7 @@ building blocks into an effective communication service? Answering
 this question is the overriding goal of this book—to describe the
 available building materials and then to show how they can be used to
 construct a network from the ground up. Of course the Internet is just
-such a network, and so we use the it as our model.
+such a network, and so we use it as our model.
 
 Today's Internet connects over 22 billion devices. Those devices are
 widely distributed across the planet (and in low orbit around the
