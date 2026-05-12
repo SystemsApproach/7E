@@ -180,7 +180,7 @@ each zone.
 
 First, a root name server contains an ``NS`` record for each top-level
 domain (TLD) name server. This identifies a server that can resolve
-queries for this part of the DNS hierarchy (``.edu`` and ``.com``\ in
+queries for this part of the DNS hierarchy (``.edu`` and ``.com`` in
 this example). It also has ``A`` records that translates these names
 into the corresponding IP addresses. Taken together, these two records
 effectively implement a pointer from the root name server to one of the
@@ -206,7 +206,7 @@ for domains like this:
 In this case, we get an ``NS`` record and an ``A`` record for the name
 server that is responsible for the ``princeton.edu`` part of the
 hierarchy. That server might be able to directly resolve some queries
-(e.g., for\ ``email.princeton.edu``) while it would redirect others to a
+(e.g., for ``email.princeton.edu``) while it would redirect others to a
 server at yet another layer in the hierarchy (e.g., for a query about
 ``penguins.cs.princeton.edu``).
 
@@ -223,7 +223,7 @@ might also define a set of aliases (``CNAME`` records) for each of those
 hosts. Aliases are sometimes just convenient (e.g., shorter) names for
 machines, but they can also be used to provide a level of indirection.
 For example,\ ``www.cs.princeton.edu`` is an alias for the host named
-``coreweb.cs.princeton.edu``.This allows the site’s web server to move
+``coreweb.cs.princeton.edu``. This allows the site’s web server to move
 to another machine without affecting remote users; they simply continue
 to use the alias without regard for what machine currently runs the
 domain’s web server. The mail exchange (``MX``) records serve the same
