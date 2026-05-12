@@ -56,7 +56,7 @@ chapters. This is the first significant re-org of the book since the
 organizing principle revolves around the third bullet from above:
 *identify the available building blocks.* The networking landscape is
 much different than it was in 1995, and this needs to be reflected in
-where the story begins and how the how the narrative flows.
+where the story begins and how the narrative flows.
 
 The new organization is neither top-down nor bottom-up. Instead, we
 started with the essential set of “big ideas” at the heart of computer
@@ -67,7 +67,7 @@ topics that we can probably all agree represent the intellectual core
 of the discipline (e.g., how to achieve scalable connectivity, how to
 decentralize resource sharing, how to achieve high performance in the
 face of large delays). For this set, our goal was to address each
-topic in as self-contained way as possible, without leaning too
+topic in as self-contained a way as possible, without leaning too
 heavily into layering.
 
 Of those "big ideas", the narrow waist of the Internet architecture
@@ -87,15 +87,6 @@ Part III.
 Role of Artifacts
 -------------------------
 
-The new organization also changes how we balance “general concepts”
-and “concrete artifacts”. On the one hand, every topic is framed in
-terms of a general challenge any network must address. The concepts
-are the main theme and the chapters are titled accordingly. On the
-other hand, three key artifacts—IP, Ethernet, and HTTP—play an
-oversized role in how we organize the material. The new organization
-breaks the book into two parts, and introduces an anchor artifact for
-each part.
-
 Because networks are constantly evolving, it is important to be able
 to think beyond today’s protocol standards and commercial
 technologies; we refer to these as *artifacts*. At the same time,
@@ -108,7 +99,7 @@ examples is also essential to understanding the general concepts in
 depth, and satisfies the expectation that this book covers widely used
 protocols in detail. For readers that want to jump directly to
 descriptions of specific protocols, the introduction to each Part
-includes an "artifact index" its chapters.
+includes an "artifact index" for its chapters.
 
 One insight driving the refactoring of the book is that some artifacts
 are more important than others. They represent years of experience
@@ -119,26 +110,26 @@ evolves. Other problems are solved under the assumption that that
 particular protocol defines a fixed point. We identify three such
 protocols, and they have a prominent place in this book.
 
-We have already talked about one—IP—which has played that role
-throughout much of the Internet’s history. It didn’t pretend to be the
-only viable networking technology, but instead positioned itself as a
-logical network that can be overlaid on top of *any technology*\—those
-known today, or yet to be invented. That approach worked so well that
-for all practical purposes, “IP Internet” is now synonymous with
-“global internet”, with IP providing a universal, best-effort packet
-delivery service that makes it possible to communicate with every
-connected device in the world. This “narrow waist” defines the
-dividing line between Part II and Part III.
+The first is IP, which is at the center of the Internet architecture.
+It didn’t pretend to be the only viable networking technology, but
+instead positioned itself as a logical network that can be overlaid on
+top of *any technology*\—those known today, or yet to be
+invented. That approach worked so well that for all practical
+purposes, “IP Internet” is now synonymous with “global internet”, with
+IP providing a universal, best-effort packet delivery service that
+makes it possible to communicate with every connected device in the
+world. This “narrow waist” defines the dividing line between Part II
+and Part III.
 
 In our view, two other artifacts play a similar role today: the HTTP
 protocol (which we introduce in Chapter 2), and Ethernet switches
 (which we introduce in Chapter 3). We lead with these examples because
-they provide an anchor for the rest of the chapters that follow.
-Building a packet switched network is a tractable problem when you
-start with a hardened building block like an Ethernet switch. Similarly,
-how we build network applications—and the collection of sub-modules
-that enable them—owes a great deal to HTTP (and the World Wide Web) as
-the framework.
+they provide an anchor for the chapters that follow in Parts II
+and III.  Building a packet-switched network is a tractable problem
+when you start with a hardened building block like an Ethernet
+switch. Similarly, how we build network applications—and the
+collection of sub-modules that enable them—owes a great deal to HTTP
+(and the World Wide Web) as the framework.
 
 
 New Focus / New Topics
@@ -189,9 +180,9 @@ Layering Revisited
 --------------------------
 
 Earlier editions of this book emphasized our attitude towards
-layering, which is that it can be a helpful tool to managing
+layering, which is that it can be a helpful tool for managing
 complexity, but layers are not axiomatic. The new organization is even
-less "layerist" than earlier editions. While is true that Parts II and
+less "layerist" than earlier editions. While it is true that Parts II and
 III roughly divide the topics into two broad layers (which as noted
 above, can be read in either order), the topics within each Part are
 largely orthogonal; each covers a self-contained challenge.
@@ -259,7 +250,7 @@ informative:
 
  o `Fitting It All in Your Head <https://systemsapproach.org/2025/10/06/fitting-it-all-in-your-head/>`__. October 2025.
 
- o `No Skyhooks <https://systemsapproach.org/2026/01/26/no-skyhooks/>`__.  January 2026
+ o `No Skyhooks <https://systemsapproach.org/2026/01/26/no-skyhooks/>`__.  January 2026.
 
  o `Not Your Father's
  Internet <https://systemsapproach.org/2026/04/20/not-your-fathers-internet/>`__
