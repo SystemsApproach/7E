@@ -353,8 +353,8 @@ storage potentially required at each node) and the general problem
    the ARPANET routing metric is full of incidents where traffic swung
    heavily away from a congested link causing other links to be
    congested while the other link was left idle. On top of the problem
-   of dynamic behavior there is the question of how heavily should a
-   link be penalized for high latency versus low bandwidth. Should a
+   of dynamic behavior there is the question of how heavily a
+   link should be penalized for high latency versus low bandwidth. Should a
    satellite link that is six times higher in throughput than a
    terrestrial link but also adds hundreds of milliseconds of latency
    be more or less costly than the alternative?
@@ -382,7 +382,7 @@ storage potentially required at each node) and the general problem
 
 There are two widely used link-state routing protocols: OSPF and IS-IS.
 Both are open standards: OSPF was created under the auspices of the Internet
-Engineering Task Force (IETF), while  IS-IS is an ISO
+Engineering Task Force (IETF), while IS-IS is an ISO
 standard. At a high level, both protocols follow the approach
 described above. We provide some more details of OSPF to illustrate the
 amount of complexity that goes into bridging between theory and
@@ -424,7 +424,7 @@ basic link-state algorithm described above, including the following:
 
 There are several different types of OSPF messages, but all begin with
 the same header, as shown in :numref:`Figure %s <fig-ospf>`. Like most
-Internet protocols, OSPF uses packet formats that align on 32 bit
+Internet protocols, OSPF uses packet formats that align on 32-bit
 boundaries as in this figure.
 
 The
@@ -508,7 +508,7 @@ cost of the link. ``Link type`` tells us something about the link—for
 example, if it is a point-to-point link.
 
 The TOS information is mostly present for historical reasons. In
-theory it was possible for OSPF to choose different routes for IP
+theory, it was possible for OSPF to choose different routes for IP
 packets based on the value in their Type Of Service (TOS) field, e.g.,
 to send low-latency packets over a different path than bulk
 data. However, in the decades since OSPF was defined, the meaning of

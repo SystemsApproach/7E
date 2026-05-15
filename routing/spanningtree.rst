@@ -16,7 +16,7 @@ case they fail badly—frames potentially get forwarded forever. The
 problem with looping packets is that not only do they not get to their
 destination, they consume resources: switch
 capacity and link capacity. This is particularly bad in the case of
-Ethernet which has no way to tell when a packet is circulating in a
+Ethernet, which has no way to tell when a packet is circulating in a
 loop. (The Internet Protocol does have such a mechanism, although
 loops remain undesirable). Consider the example depicted in
 :numref:`Figure %s <fig-loops>`, where switches S1, S4, and S6 form
@@ -108,7 +108,7 @@ forwards frames out over all of its ports.
 Next, each switch computes the shortest path to the root and notes
 which of its ports is on this path. This port is also selected as the
 switch’s preferred path to the root. To account for the possibility
-there could be another switch connected to its ports, the switch
+that there could be another switch connected to its ports, the switch
 elects a single *designated* switch that will be responsible for
 forwarding frames toward the root.  Each designated switch is the one
 that is closest to the root. If two or more switches are equally close
@@ -224,7 +224,7 @@ unfold as follows:
 5. S5 accepts S1 as root and sends (S1, 1, S5) toward S3.
 
 6. S3 accepts S1 as root, and it notes that both S2 and S5 are closer to
-   the root than it is, but S2 has the smaller id, so it remains on S3’s
+   the root than it is, but S2 has the smaller ID, so it remains on S3’s
    path to the root.
 
 This leaves S3 with active ports as shown in :numref:`Figure %s <fig-tree>`.

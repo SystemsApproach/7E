@@ -10,7 +10,7 @@ in a direction determined by that table. Forwarding is considered part
 of the network's *data plane*, whereas routing is the process by which
 forwarding tables are built. Routing often depends on a complex
 distributed algorithm, and is considered part of the network's
-*control plane.*
+*control plane*.
 
 .. TODO -- Rethink next paragraph in terms of "switch as platform"
 
@@ -66,7 +66,7 @@ hosts could technically forward traffic on behalf of others (if
 configured to do so), but typically they are said to be *multi-homed*.
 Including networks as nodes in a network graph can be used to model
 multi-access networks; such a network behaves like a switch that
-connect a set of nodes. (In this case, a graph edge to such a vertex
+connects a set of nodes. (In this case, a graph edge to such a vertex
 represents the fact that a node is connected to that network.) Even
 switched networks are sometimes "abstracted away" for the purpose of
 routing, and hence, reduced to a single vertex in a routing graph. The

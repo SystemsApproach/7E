@@ -11,7 +11,7 @@ As we saw in Chapter 3, you can build a network from a set of links
 and switches, but once that network gets to any reasonable size, the
 problem that becomes apparent is: how to get packets efficiently to
 their correct destinations? When you try to open up a page on some
-distant web site, how does the first packet finds its way from your
+distant web site, how does the first packet find its way from your
 browser to the server that hosts that web site? This is the problem
 that routing sets out to solve.
 
@@ -35,7 +35,7 @@ If we limit ourselves to looking at the network of a single service
 provider or an enterprise, we normally see a routing protocol based on
 one of two approaches: *link-state routing* or *distance-vector
 routing*. We cover each of these in this chapter, along with a third
-approach, known a the *spanning tree protocol*.  While the spanning
+approach, known as the *spanning tree protocol*.  While the spanning
 tree protocol is not typically referred to as a routing algorithm (for
 historical reasons), it is a distributed algorithm for finding
 loop-free paths in a network of Ethernet switches. We conclude this
