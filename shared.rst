@@ -18,12 +18,12 @@ being transmitted in each direction is managed independently, without
 the risk of interference.)
 
 Another possibility is to connect multiple nodes directly to a shared
-communication medium, a so called *multi-access network*.  Wireless
-networks are an obvious example. where the "shared medium" is the
+communication medium, a so-called *multi-access network*.  Wireless
+networks are an obvious example, where the "shared medium" is the
 space carrying radio signals. There are also wired examples, with the
 original Ethernet being the most widely deployed. Just as with
 multiple people in a room trying to talk at the same time, multiple
-nodes simultaneously initiating a tranmission will interfere with each
+nodes simultaneously initiating a transmission will interfere with each
 other. Some strategy is needed to decide whose turn it is to transmit
 (or speak) next.
 
@@ -32,15 +32,15 @@ network technologies. Wi-Fi and the Mobile Cellular Network\ [#]_ are
 two wireless examples; *Passive Optical Networks (PON)*\ —colloquially
 known as Fiber-to-the-Home—is the third. In addition to illustrating
 three different approaches to mediating access to shared resources,
-all three technologies can be categoritzed as *access networks*,
+all three technologies can be categorized as *access networks*,
 indicating that they are the immediate network that edge hosts connect
-to, thereby being indirectly connecting to the rest of the Internet.
+to, thereby being indirectly connected to the rest of the Internet.
 It is common for access networks to implement some form of
 authentication to ensure that the connecting host has permission to
 access its resources in the first place. Establishing identity is
 often the first step before resource allocation takes place.
 
-.. [#] For simplity, we refer the the mobile cellular network as 5G,
+.. [#] For simplicity, we refer to the mobile cellular network as 5G,
        except when we are making a point about issues that span
        generations of the technology.
 

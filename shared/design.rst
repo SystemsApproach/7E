@@ -82,11 +82,11 @@ than Wi-Fi, but enough different to warrant its own subsection.
 
 There are three other design issues of note. The first is that
 multi-access networks allow all connected nodes to see (receive) every
-packet the other hosts send.\ [#]_ Being able too receive every message has
+packet the other hosts send.\ [#]_ Being able to receive every message has
 an upside—it means the network can easily support *broadcast*, which
 simplifies the design of some network applications—but it also has
 security implications since nodes can snoop on each other's
-traffic. This risk is compounded by the fact there there are often no
+traffic. This risk is compounded by the fact that there are often no
 physical barriers, like a secured room or building, to keep bad actors
 from gaining access to network traffic. Deciding what hosts are
 allowed to legitimately connect to such a network, for example using
@@ -96,7 +96,7 @@ solution.
 .. [#] This is not always the case on wireless networks, due to the
        hidden terminal problem discussed below.
 
-The second issue is unique to wireless multi-access network: wireless
+The second issue is unique to wireless multi-access networks: wireless
 nodes are inherently mobile, and this mobility has implications on
 resource allocation. This is because, even in a network that supports
 mobility, some nodes typically remain tethered to the wired network,
@@ -106,8 +106,8 @@ called. Moreover, these base stations are typically deployed in a way
 that provides overlapping coverage, with two or more potentially able
 to serve a given mobile node. The resource allocation challenge is
 deciding which, among potentially multiple base stations in some
-geographic area, serves a given mobile node, and how does this
-assignment change over time as nodes move around. The two main
+geographic area, serves a given mobile node, and how this
+assignment changes over time as nodes move around. The two main
 wireless technologies have developed different approaches to address
 this problem, each in keeping with their optimistic versus
 conservative assumptions.
