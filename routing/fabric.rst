@@ -15,7 +15,7 @@ previous sections, many datacenters adopt a centralized approach to
 routing based on the principles of *Software-Defined Networking
 (SDN)*. For another, the uniform structure of a leaf-spine fabric
 lends itself to other routing techniques, including an approach known as
-*segment routing*.  This sections gives an overview of SDN, and
+*segment routing*.  This section gives an overview of SDN, and
 explains the role it plays in implementing segment routing.
 
 
@@ -60,7 +60,7 @@ Centralized control opens up the possibility of rethinking how routing
 works in a network.  Rather than a fully distributed algorithm of the
 sort described in the preceding sections, we now have the option of
 using centralized algorithms. As a simple example, a controller could
-gather information from all the switches to which is is connected
+gather information from all the switches to which it is connected
 regarding the state of their links to other switches. With this
 information in hand, it has all the information needed to run a
 shortest path calculation from the perspective of any switch. Thus it
@@ -85,7 +85,7 @@ successes of SDN was to solve these *traffic engineering* problems in
 the large backbones interconnecting hyperscale datacenters.
 
 In this section we look at a related example—how to route *within* a
-single datacenter—and the specific method we describe is call *segment
+single datacenter—and the specific method we describe is called *segment
 routing*. In terms of :numref:`Figure %s <fig-sdn>`, you can think of
 segment routing as an example SDN control application. B4 and SWAN are
 examples of other possible control apps.
@@ -145,14 +145,14 @@ belonging to the same end-to-end flow on the same physical path. This
 is often done by taking the TCP or UDP port numbers into account when
 forwarding packets along equal-cost paths.
 
-There are two takeaways from this overview of link aggregation, First,
+There are two takeaways from this overview of link aggregation. First,
 with respect to routing, it is important to note that while routing
 algorithms are capable of determining which paths are best by some
 metric, they are not designed to balance load across equivalent
 paths. Such a fine-grain mechanism is left to the data plane after the
 routing decision has determined the equal-cost paths.
 
-Second, ECMP is a forwarding strategy that is applies uniformly across
+Second, ECMP is a forwarding strategy that is applied uniformly across
 all the switches in a fabric. The SDN control application knows the
 topology and pushes the port groups into each of the fabric switches
 accordingly.  Each switch then applies these port groups to its
@@ -178,7 +178,7 @@ simply "label" them; that is, assign a unique identifier to each.
 These identifiers (labels) are then used to uniquely identify each
 segment, packets carry the labels of the sequence of segments then
 need to traverse, and switches are programmed to use these labels to
-decided how to forward packets. We need a standard header format for
+decide how to forward packets. We need a standard header format for
 including labels in packets (which we'll get to in a moment), but
 assuming an agreed upon format, this approach is known as
 *label-switching*. A centralized fabric control program instructs the

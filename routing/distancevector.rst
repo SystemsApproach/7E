@@ -162,7 +162,7 @@ network.
    +---+---+---+---+---+---+---+---+
 
 There are a few details to fill in before our discussion of
-distance-vector routing is complete. First we note that nodes send
+distance-vector routing is complete. First, we note that nodes send
 updates to their neighbors periodically based on a timer (from seconds
 to minutes) but also send them immediately if they detect a change in
 the topology. That change may be the result of a local link failure or
@@ -289,11 +289,11 @@ by an update message from a neighboring node.
        if (i == numRoutes)
        {
            /* this is a completely new route; is there room for it? */
-           if (numRoutes < MAXROUTES)
+           if (numRoutes < MAX_ROUTES)
            {
                ++numRoutes;
            } else {
-               /* can`t fit this route in table so give up */
+               /* can't fit this route in table so give up */
                return;
            }
        }
