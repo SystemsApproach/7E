@@ -260,7 +260,7 @@ connected to the Mobile Core by a secure private network, over which
 it establishes the tunnels introduced in :numref:`Figure %s
 <fig-tunnels>`: a GTP/UDP/IP tunnel to the Core's User Plane (Core-UP)
 and a SCTP/IP tunnel to the Core's Control Plane (Core-CP). Second,
-each UE has an operator-provided SIM (Subscriber Identiy Module) card,
+each UE has an operator-provided SIM (Subscriber Identity Module) card,
 which contains information that uniquely identifies the subscriber and
 includes a secret key that the UE uses to authenticate itself.
 
@@ -280,7 +280,7 @@ represented as an up to 15-digit decimal number:
 * **SUB:** Subscriber (9-digit decimal number).
 
 The first two fields (*MCC*, *MNC*) are universally understood to
-uniquely identify the MNO, while that last field is one example of how
+uniquely identify the MNO, while the last field is one example of how
 an MNO might uniquely identify every device it serves; introducing
 other structure into the SUB is also an option.
 
@@ -444,7 +444,7 @@ and the quality-of-service class selected by the subscriber are the
 two key pieces of input to the scheduler. Rather than a single FIFO
 queue (as would be the case for Wi-Fi) the scheduler serves multiple
 queues. This makes it possible for the scheduler to preferentially
-send high-priorty traffic from one queue before lower priority traffic
+send high-priority traffic from one queue before lower priority traffic
 from another queue, so as to meet its QoS promises. The exact
 algorithm used in 5G is proprietary, but we describe a generic QoS
 scheduler in Chapter 8.

@@ -35,7 +35,7 @@ radio systems is motivated by the need to deal with these challenges.
 
 As we cover in the next two sections, Wi-Fi and 5G take different
 approaches to the allocation of radio spectrum, but despite these
-difference, they use basically the same multiplexing technology. This
+differences, they use basically the same multiplexing technology. This
 has not always been the case, but is now with the latest generations
 of Wi-Fi, known as Wi-Fi 6 and Wi-Fi 7 (also called 802.11ax and
 802.11be respectively). The rest of this section introduces the
@@ -67,7 +67,7 @@ spread*—the time between the first and last signals of one transmission
 arriving at the receiver—is 1–10μs in urban environments and 10–30μs
 in suburban environments. These multipath signals can interfere with
 each other constructively or destructively, and this will vary over
-time. Theoretical bounds for the time duration for which the channel
+time. The theoretical bound for the time duration for which the channel
 may be assumed to be invariant, known as the *coherence time* and
 denoted :math:`T_c`, is given by
 
@@ -108,7 +108,7 @@ the environment-imposed multipath propagation.
 The main takeaway from this brief introduction to the challenges of
 radio transmission is that the solution needs to be adaptive, so it
 can be configured to match the environment (indoor, urban, suburban)
-and dynamically reconfigured to match changing conditions. (noise,
+and dynamically reconfigured to match changing conditions (noise,
 mobility).
 
 |Shared|.2.2  Multiplexing Technique
@@ -145,7 +145,7 @@ interference. The efficiency of OFDM depends on the selection of
 subcarrier frequencies so as to avoid interference, that is, how it
 achieves orthogonality. That topic is beyond the scope of this book.
 
-.. [#] In radio communication, term "carrier" refers to the base
+.. [#] In radio communication, the term "carrier" refers to the base
        signal before it has been modulated to carry data.  Because we
        are now focused on dividing a larger frequency band into
        smaller subbands, each of those subbands has its own carrier
@@ -230,8 +230,8 @@ are made on a per-RU basis, with a sequence of "allocation plans"
 executed on a block-by-block basis over time.
 
 .. [#] This section gives a general overview of OFDMA, independent of
-       how it is used by Wi-Fi and 5G, but both of those use cases has
-       its own terminology for various concepts. For example, what we
+       how it is used by Wi-Fi and 5G, but both of those use cases have
+       their own terminology for various concepts. For example, what we
        refer to as a *Physical Block*, is called a *Physical Resource
        Block (PRB)* in 5G and a *Physical Packet Data Unit (PPDU)* in
        Wi-Fi. The term "Scheduling Horizon" is a similar generic term.
@@ -240,7 +240,7 @@ executed on a block-by-block basis over time.
 
 Second, we used 15-kHz as our example subcarrier spacing, with a
 Physical Block transmission time of 0.5ms. (This corresponds to a
-time-per-symbol 66.67 μs in the example, taking into account other
+time-per-symbol of 66.67 μs in the example, taking into account other
 overhead associated with transmitting a physical block.) These are
 sometimes referred to as the *numerology* of the radio's air
 interface, and our example is just that—an example.  Any given

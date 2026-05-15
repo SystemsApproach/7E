@@ -4,7 +4,7 @@
 Most users access the Internet using a wireless network based on the
 IEEE 802.11 standards, often referred to as *Wi-Fi*. Wi-Fi is
 technically a trademark, owned by a trade group called the Wi-Fi
-Alliance, which certifies product compliance with difference versions
+Alliance, which certifies product compliance with different versions
 of the 802.11 standard.
 
 Like Ethernet's 802.3 standard, 802.11 has evolved to accommodate new
@@ -16,7 +16,7 @@ delivered up to 54 Mbps using OFDM and the license-exempt 5-GHz
 band. Many other variants followed, using both the 2.4 and 5-GHz band
 and achieving per-device data rates of 150 Mbps to 450 Mbps.  As of
 this writing, 802.11ax (this is the variant that corresponds to Wi-Fi
-6) is becoming mainstream. It  provides yet another substantial improvement in
+6) is becoming mainstream. It provides yet another substantial improvement in
 throughput, in part by adopting the OFDMA framework described in
 Section |Shared|.2, and in part by adding spectrum in the 6-GHz band.
 802.11be (Wi-Fi 7) incrementally improves on 802.11ax and is also becoming
@@ -125,7 +125,7 @@ very much like that used on the Ethernet.
 After a successful RTS-CTS exchange, the sender sends its data packet
 and, if all goes well, receives an ACK for that packet. In the absence
 of a timely ACK, the sender will try again to request usage of the
-channel again, using the same process described above. By this time, of
+channel, using the same process described above. By this time, of
 course, other nodes may again be trying to get access to the channel as
 well.
 
@@ -387,12 +387,12 @@ as a whole, Wi-Fi is a best-effort solution. This means packets
 enqueued at the MAC layer are transmitted in FIFO order. Initiating a
 transmission first involves the CA mechanism described in Section
 |Shared|.3.1. The main difference from earlier versions is that in Wi-Fi 6,
-the APs take on additional responsibility coordinating with other
+the APs take on additional responsibility of coordinating with other
 devices as to when transmissions should happen. They do this by
 piggybacking RU assignments on RTS messages sent to devices, notifying
 them both when they should expect downlink traffic, and when they are
 cleared to send uplink traffic. Devices and APs also periodically
-exchange *Buffer Status Report Pool (BSRP)* message telling each other
+exchange *Buffer Status Report Pool (BSRP)* messages telling each other
 how much traffic they have buffered, awaiting transmission. This
 information helps the scheduler make RU allocations.
 
@@ -421,7 +421,7 @@ subcarriers for as long as it takes to send a complete packet. The AP
 does enforce an upper limit on how long a sender holds the
 subcarriers, ensuring an opportunity to preempt one sender so another
 can utilize the resource, but the limit is big enough that Wi-Fi
-connected hosts can send one or more packets from the front of its
+connected hosts can send one or more packets from the front of their
 queue.
 
 
