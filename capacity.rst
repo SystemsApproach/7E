@@ -34,7 +34,7 @@ deciding which packet to send next.
 Packet scheduling is an aspect of buffer management—the scheduler
 decides which packet to dequeue—but there are additional techniques
 for managing packet queues. They are collectively known as *Active Queue
-Mangement (AQM)*, and they generally decide which packet(s)
+Management (AQM)*, and they generally decide which packet(s)
 to drop as the buffer fills up. AQM plays an especially important role
 in the Internet because dropping a packet is an indirect way for a
 network node to "signal" an edge host—the entity responsible for
@@ -44,7 +44,7 @@ Ultimately, responsibility for managing congestion is shared between
 routers inside the network (they detect the onset of congestion) and
 edge hosts (they adjust their sending rates in response to
 congestion).  This chapter focuses on the router side of this
-interaction, and we cover the edge host side of the this interaction
+interaction, and we cover the edge host side of this interaction
 in Chapter |CC|. For the purpose of this chapter, all we need to know
 about edge hosts is that they react to whatever signal the routers
 send them by adapting the rate at which they inject packets into the
@@ -56,8 +56,8 @@ traffic onto links and nodes in the first place. This network-wide
 decision making process is known as *Traffic Engineering (TE)*, and it
 comes into play when per-node capacity is chronically underprovisioned
 due to long-term changes in the volume of traffic flowing between
-various nodes. TE was originally an off-line processes, requiring
-adminstrator intervention, but it is increasingly being done as an
+various nodes. TE was originally an off-line process, requiring
+administrator intervention, but it is increasingly being done as an
 automated (but coarse-grained) part of a network's overall approach to
 capacity management.
 

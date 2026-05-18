@@ -30,7 +30,7 @@ much traffic being offered to a bottleneck link. To see this, we need
 look no further than the simple network depicted in :numref:`Figure %s
 <fig-congestion>`, where all traffic has to flow through the same
 router to reach the destination. Although this is an extreme example,
-it is not uncommon to have bottleneck link that you can't route
+it is not uncommon to have a bottleneck link that you can't route
 around. The access link to an enterprise or residential network is a
 common example of such a bottleneck.
 
@@ -250,12 +250,12 @@ high-throughput.  The other two bits were saved for future use.
 
 The existence of the ``ToS`` field indicates a recognition that there
 are good reasons to treat packets differently, but the actual purpose
-of the field was to provide routers the information the might need to
+of the field was to provide routers the information they might need to
 properly set parameters on the underlying physical networks they
 forwarded packets over. It was assumed those physical networks offered
 different levels of service to different types of traffic; it was not
 intended that the router itself would change its own packet forwarding
-based on the setting, Routers remained purely best-effort, without
+based on the setting. Routers remained purely best-effort, without
 favoring one class of traffic over another. To further complicate
 things, different vendors ended up using the ``ToS`` bit for different
 purposes, and so there wasn't universal agreement on what the bits
@@ -267,7 +267,7 @@ referred to as *differentiated services*, indicating that not all
 packets are treated exactly the same. We are still squarely in the
 best-effort domain in that no promises are made, but short of
 guaranteeing a throughput rate or an upper bound on jitter, there are
-steps the network can to differentiate the level of service various
+steps the network can take to differentiate the level of service various
 classes of traffic receive.
 
 The following sections show how this is done by repurposing the

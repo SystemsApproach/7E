@@ -76,8 +76,8 @@ environment such as the Internet.
 Another approach is to enforce good behavior at a network-managed
 ingress node, such as the first router that connects an ISP to a set
 of its customers. End users can set the priority as desired, but the
-ingress node *polices* the flow of packet to ensure they stay below
-some target rate. Policing traffic is one aspect differentiated
+ingress node *polices* the flow of packets to ensure they stay below
+some target rate. Policing traffic is one aspect of differentiated services
 introduced in the previous section. We'll see an example of how
 policing is managed in a later section, but for now, the key is to
 recognize the potential value of priority queues, and the
@@ -220,7 +220,7 @@ There are two things to notice about fair queuing. First, the link is
 never left idle as long as there is at least one packet in the queue.
 Any queuing scheme with this characteristic is said to be *work
 conserving*. One effect of being work conserving is that if I am sharing
-a link with a lot of flows that are not sending any data then; I can use
+a link with a lot of flows that are not sending any data, then I can use
 the full link capacity for my flow. As soon as the other flows start
 sending, however, they will start to use their share and the capacity
 available to my flow will drop.
@@ -264,7 +264,7 @@ and the third will get one-half of the available bandwidth.
 
 While we have described WFQ in terms of flows, we noted above that a
 "flow" can be defined in many different ways. In particular we could
-replace flows with  *classes* of traffic, where classes are defined in some
+replace flows with *classes* of traffic, where classes are defined in some
 other way than the simple host-to-host or process-to-process flows.
 One practical example of this is to use some bits in the IP header to identify
 classes and allocate a queue and a weight to each class. This is
