@@ -2,8 +2,9 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: Apache-2.0
 
+.. include:: chapters.rst
 
-Chapter 6: Federating Networks
+Chapter |Fed|: Federating Networks
 ========================================
 
 Having looked at the operation of switches and the routing algorithms
