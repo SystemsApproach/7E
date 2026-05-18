@@ -1,4 +1,4 @@
-7.3 Securing Route Information
+|BGP|.3 Securing Route Information
 --------------------------------------
 
 The division of the Internet into autonomous systems allows individual
@@ -25,7 +25,7 @@ There are multiple levels to the problem of securing inter-domain
 routing.  When you make a secure, encrypted connection to your bank,
 you rely on Transport Layer Security (TLS) to keep your data private
 (using encryption) and to authenticate the connection to the bank. We
-cover the details of TLS in Chapter 14. And if are confident that you
+cover the details of TLS in Chapter |TLS|. And if you are confident that you
 are really connected to your bank, you probably trust them to show you
 accurate information about your account (mostly—banks do make mistakes
 on occasions). But a secure connection to a BGP speaker (a router
@@ -34,12 +34,12 @@ that speaker is reliable. In fact both honest mistakes and deliberate
 configuration decisions can and have resulted in false advertisements
 being made in BGP.
 
-7.3.1 Authentication and Integrity
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|BGP|.3.1 Authentication and Integrity
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Since BGP runs over a TCP connection, it was recommended for many
 years that the TCP connection be authenticated and integrity-protected
-using MD5, a cryptographic hash. That algorithm in now known to be
+using MD5, a cryptographic hash. That algorithm is now known to be
 vulnerable to attack and is deprecated in favor of a more general TCP
 authentication option using more modern cryptography, described in
 RFC 5925.
@@ -54,7 +54,7 @@ a peering point or Internet exchange points (IXPs) which allows for a
 simple TTL-based method to prevent spoofing. Privacy of BGP updates is
 considerably less important than authenticity. And as we shall see,
 there is a lot more to establishing the authenticity of a BGP
-advertisement that just authenticating the messages from a peer.
+advertisement than just authenticating the messages from a peer.
 
 When BGP was being developed in the 1980s and 1990s, TLS was still far
 in the future, and packet encryption and decryption operations were
@@ -83,8 +83,8 @@ advertisements.
    Security <https://www.rfc-editor.org/info/rfc7454>`__. RFC 7454,
    February 2015.
 
-7.3.2 Correctness of Routing Information
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|BGP|.3.2 Correctness of Routing Information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When a BGP speaker announces a path to a particular prefix, how do we
 know that they really have such a path? Do we know that they will use
@@ -164,7 +164,7 @@ provider with whom they have no relationship.
 
 A more sophisticated approach relies on the use of cryptographically
 signed statements authorizing a particular AS to advertise paths to a
-particular prefix. This technology behind this is referred to as RPKI:
+particular prefix. The technology behind this is referred to as RPKI:
 Resource Public Key Infrastructure.  RPKI builds on the concepts of
 cryptographic signatures and certificate hierarchies that also
 underpin TLS and security of the Web.
@@ -187,7 +187,7 @@ describe three different uses of the RPKI in the following sections.
    <https://faculty.cc.gatech.edu/~ctestart8/publications/RoutingSecTPRC.pdf>`__. TPRC
    48, February 2021.
 
-7.3.3 Route Origin Validation
+|BGP|.3.3 Route Origin Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The first use of RPKI is to allow an AS to prove that it is authorized
@@ -212,12 +212,12 @@ hierarchy of address allocation makes them a logical place to
 establish "roots of trust", known as trust anchors. There are five
 RIRs globally (ARIN, RIPE, APNIC, AFRINIC and LACNIC) and each has a
 root certificate in the RPKI. We will see how certificates work in
-more detail in Chapter 12. For our purposes in this chapter, it is
+more detail in Chapter |TLS|. For our purposes in this chapter, it is
 sufficient to understand that if I know the public key of some entity
 such as an ISP or an RIR, then I can check the validity of something
 signed by that entity. And a certificate is just a cryptographically
 signed statement providing some information. For example, an RIR can sign a
-certificate the asserts that a certain ISP has a particular public
+certificate that asserts that a certain ISP has a particular public
 key or a certain allocated set of addresses.
 
 The chain of trust for address allocation starts from an RIR, the root
@@ -227,7 +227,7 @@ may be additional layers in this hierarchy. A hierarchy of
 certificates is created to follow this hierarchy of address
 allocation. At each level in the hierarchy, a certificate is issued
 that says "this entity has been allocated the following block of
-address prefixes, and has the following public key. By repeating this
+address prefixes, and has the following public key." By repeating this
 process all the way down the hierarchy we can build "chains of trust"
 from the root to the leaves.
 
@@ -376,7 +376,7 @@ distributed using the same mechanisms as certificates.
 
 
 
-7.3.4 Path Validation
+|BGP|.3.4 Path Validation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -503,7 +503,7 @@ in the following section.
    in partial deployment: is the juice worth the squeeze? <https://dl.acm.org/doi/10.1145/2534169.2486010>`__ ACM
    SIGCOMM, August 2013.
 
-7.3.5 Provider Authorization
+|BGP|.3.5 Provider Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 At the time of writing, there is an effort underway at the IETF to
