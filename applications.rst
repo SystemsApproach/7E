@@ -4,7 +4,7 @@
 
 .. include:: chapters.rst
 
-Chapter 2: Network Applications
+Chapter |Apps|: Network Applications
 ==============================================
 
 The success of the Internet can largely be attributed to the broad
