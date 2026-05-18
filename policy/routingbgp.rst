@@ -1,5 +1,5 @@
-7.2 Sharing Routes and Routing Policy
----------------------------------------
+|BGP|.2 Sharing Routes and Routing Policy
+------------------------------------------
 
 Each AS has one or more *border routers* through which packets enter and
 leave the AS. In our simple example in :numref:`Figure %s <fig-autonomous>`,
@@ -111,8 +111,8 @@ or become disconnected from its peer, it would stop sending the
 keepalives, and the other routers that had learned routes from it would
 assume that those routes were no longer valid.
 
-7.2.1 AS Relationships and Policies
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|BGP|.2.1 AS Relationships and Policies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Having said that policies may be arbitrarily complex, there turn out
 to be a few common ones, reflecting common relationships between
@@ -202,8 +202,8 @@ Internet.
 
    CAIDA. `Center for Applied Internet Data Analysis <https://www.caida.org>`__.
 
-7.2.2 Integrating Interdomain and Intradomain Routing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|BGP|.2.2 Integrating Interdomain and Intradomain Routing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While the preceding discussion illustrates how a BGP speaker learns
 interdomain routing information, the question still remains as to how

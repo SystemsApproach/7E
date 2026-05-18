@@ -2,16 +2,18 @@
 .. SPDX-FileCopyrightText: 2025 Systems Approach LLC
 .. SPDX-License-Identifier: Apache-2.0
 
+.. include:: chapters.rst
+
 .. _artifact-bpg:
 
-Chapter 7: Interdomain Routing
+Chapter |BGP|: Interdomain Routing
 ========================================
 
 The previous chapter described the mechanisms that are used to
 assemble a set of independent networks into a logical internet. This
 makes end-to-end packet delivery possible, but doesn't say anything
 about how routes among the independent networks are calculated and
-distributed. Whereas our discussion of routing in Chapter 4 focused on
+distributed. Whereas our discussion of routing in Chapter |Routing| focused on
 finding paths with the lowest cost according to some metric, routing
 among independent networks is largely about satisfying the policies
 that govern how networks are used.  This chapter looks at this issue
@@ -31,10 +33,10 @@ information, by providing defenses against attempts to hijack and
 "black hole" traffic, is a critical aspect of the solution.  We
 explore these challenges in this chapter.
 
-The routing algorithms described in Chapter 4 are not up to
+The routing algorithms described in Chapter |Routing| are not up to
 the challenge, for two main reasons. The first is the issue of
 scale. There are tens of thousands of autonomous organizations in the
-Internet and they span the globe, so its not clear that the routing
+Internet and they span the globe, so it's not clear that the routing
 protocols we have seen to date could scale to that level even if we
 treated each organization as a simple point in a graph. But more
 importantly, the problem definition is not "find the shortest path to

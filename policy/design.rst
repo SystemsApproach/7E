@@ -1,9 +1,9 @@
-7.1 Design Issues
+|BGP|.1 Design Issues
 ------------------------------------
 
 Although we have been using the term "autonomous system" somewhat
 informally, the Internet defines it as a first-class abstraction. That
-is, the Internet is organized as collection of *autonomous systems
+is, the Internet is organized as a collection of *autonomous systems
 (ASes)*, each of which is assigned a unique AS number. An AS
 represents a single administrative entity that controls some set of
 networks. A corporation’s complex internal network might be a single
@@ -24,7 +24,7 @@ while providing a global service, and (b) to support aggregation of
 routing information in a large internet, thus improving
 scalability. We can divide the global routing problem into two parts:
 routing within a single autonomous system (which we covered in
-Chapter 4) and routing between autonomous systems. Autonomous systems
+Chapter |Routing|) and routing between autonomous systems. Autonomous systems
 are also known as routing *domains*, so we refer to the two parts of
 the routing problem as interdomain routing and intradomain
 routing. The AS model decouples the intradomain routing that takes
@@ -139,7 +139,7 @@ basically a statement that “you can reach this network through this AS.”
 This means that for interdomain routing to pick an optimal path is
 essentially impossible.
 
-The autonomous nature of interdomain raises issue of trust. Provider A
+The autonomous nature of interdomain routing raises the issue of trust. Provider A
 might be unwilling to believe certain advertisements from provider B for
 fear that provider B will advertise erroneous routing information. For
 example, trusting provider B when he advertises a great route to
