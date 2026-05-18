@@ -9,7 +9,7 @@ Chapter 6: Federating Networks
 Having looked at the operation of switches and the routing algorithms
 that allow us to determine best paths through large networks, we are
 well on our way to being able to build a network of global scale.
-However, there is an another aspect of the Internet that has enabled
+However, there is another aspect of the Internet that has enabled
 it to scale to connect the majority of the world's population: the
 ability to interconnect independently built and operated networks.
 
