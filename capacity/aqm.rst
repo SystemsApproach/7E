@@ -345,7 +345,7 @@ run empty. It should be noted that a great deal of experimentation and
 simulation has gone into these numerical choices, but more importantly, the
 algorithm does not seem to be overly sensitive to them.
 
-To summarize, CoDel largely ignore queues that last less than an RTT,
+To summarize, CoDel largely ignores queues that last less than an RTT,
 but starts taking action as soon as a queue persists for more than an
 RTT. By making reasonable assumptions about Internet RTTs, the
 algorithm requires no configuration parameters.
@@ -401,7 +401,7 @@ specified in RFC 3168.
    <https://datatracker.ietf.org/doc/html/rfc3168>`__.
    RFC 3168, September 2001.
 
-Specifically, this feedback is implemented by use the two "unused"
+Specifically, this feedback is implemented by using the two "unused"
 bits in the IP ``TOS`` field as ECN bits. One bit is set by the source
 to indicate that it is ECN-capable, that is, able to react to a
 congestion notification. This is called the ``ECT`` bit (ECN-Capable

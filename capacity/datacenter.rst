@@ -60,7 +60,7 @@ first three bits of the original ``ToS`` field, which continues to be
 used for high-value network control traffic, such as BGP and OSPF.
 All told, there are 2\ :sup:`6` = 64 possible DSCP settings, using the
 first six bits of the ``ToS`` field; the other two bits are used by
-ECN. The details of how a specific network might used these DSCP
+ECN. The details of how a specific network might use these DSCP
 settings are spelled out in multiple RFCs, each targeted at a
 different use case—e.g., multimedia conferencing, multimedia
 streaming, telephony, and so on—but it turns out that datacenter
@@ -80,9 +80,9 @@ have more than one class of service, we need a different way to decide
 what packets to mark. One option is to use ECN in conjunction with a
 variant of RED, known as *Weighted RED (WRED)*. WRED augments RED by
 applying different thresholds (``MinThreshold``, ``MaxThreshold``) and
-probability (``MaxP``) to each DSCP class. This means the router is
-more or less aggressively select certain traffic for ECN marking, but
-all within the same queue. An second option is to segregate different
+probability (``MaxP``) to each DSCP class. This means the router
+more or less aggressively selects certain traffic for ECN marking, but
+all within the same queue. A second option is to segregate different
 DSCP classes into different queues, each of which is serviced in a
 weighted round-robin fashion, that is, using the FQ scheduler
 described in Section |Capacity|.2.3. Each of these queues then applies
