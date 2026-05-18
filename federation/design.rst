@@ -1,5 +1,5 @@
-6.1 Design Issues
-------------------
+|Fed|.1 Design Issues
+---------------------
 
 While it is easy enough to read the specifications for any Internet
 protocol, since they are all documented in *Requests For Comments*
@@ -76,7 +76,7 @@ networks are called *routers*.  They historically were also sometimes
 called *gateways*, but since this term has several other connotations,
 we restrict our usage to router.\ [#]_
 
-.. [#] As we saw in Chapter 2, whether a switch forwards L2 frames or
+.. [#] As we saw in Chapter |Tech|, whether a switch forwards L2 frames or
        L3 packets is often a matter of configuration. This means our
        other option is to call them L3 switches, but we reserve that
        name for when we use IP *within* a packet-switched network—as
@@ -132,7 +132,7 @@ overview of the issues that need to be tackled in an internetwork:
 .. [#] In the original paper the word "gateways" is used here.
 
 Some of these will look familiar from our discussion of requirements
-in Chapter 1. The idea that the Internet keeps working in the face of
+in Chapter |Intro|. The idea that the Internet keeps working in the face of
 failure of any network or router is widely understood—although the
 claim that it was meant to survive nuclear war seems to be a
 conflation of ideas from other research, according to the authoritative
@@ -146,7 +146,7 @@ history by Leiner *et al*.
    SIGCOMM CCR, October 2009.
 
 The second and third requirements are captured by the hourglass shape
-we saw in Chapter 1. Many types of communications
+we saw in Chapter |Intro|. Many types of communications
 service (or applications) can run over the Internet, and many
 different types of networks (including those not yet invented at the
 time) can be accommodated within the Internet's architecture. We refer
@@ -160,7 +160,7 @@ operators of the autonomous networks to set policies about how the
 resources that they control are used by other networks to which they
 connect.
 
-We discussed cost-effective resource usage in Chapter 1, and this is
+We discussed cost-effective resource usage in Chapter |Intro|, and this is
 one of the main reasons that packet switching emerged as the
 technology used in Internet routers. Being general
 purpose and being cost-effective were somewhat in tension, with

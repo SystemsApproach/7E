@@ -1,7 +1,7 @@
 .. _artifact-ipv4:
 
-6.2 Heterogeneity
--------------------
+|Fed|.2 Heterogeneity
+---------------------
 
 The Internet aims to support heterogeneity in terms of both the
 underlying networks that it can accommodate and the applications it
@@ -12,8 +12,8 @@ accommodate the diverse needs of applications. Once we have decided on
 the service, we can then define a set of protocols that enable that
 service to be delivered over heterogeneous networks.
 
-6.2.1 Service Model
-~~~~~~~~~~~~~~~~~~~~
+|Fed|.2.1 Service Model
+~~~~~~~~~~~~~~~~~~~~~~~
 
 The main concern in defining a service model for an internetwork is that
 we can only offer a host-to-host service that can somehow
@@ -98,7 +98,7 @@ Clearly, a key part of the IP service model is the type of packets
 that can be carried. The IP packet consists of a
 header followed by a number of bytes of data. The format of the header
 (for IP version 4)
-is shown in :numref:`Figure %s <fig-iphead>`. As we saw in Chapter 4,
+is shown in :numref:`Figure %s <fig-iphead>`. As we saw in Chapter |Routing|,
 packet headers at the
 internetworking layer and above are almost always designed to
 align on 32-bit boundaries to simplify the task of processing them in
@@ -242,8 +242,8 @@ efficiently than normal "fast path" processing.
    the path but eventually the host discovers an MTU that works.
 
 
-6.2.2 Global Addresses
-~~~~~~~~~~~~~~~~~~~~~~~
+|Fed|.2.2 Global Addresses
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In the above discussion of the IP service model, we mentioned that one
 of the things that it provides is an addressing scheme. After all, if
@@ -334,16 +334,16 @@ packets, and it is those addresses that are used in IP routers to make
 forwarding decisions.
 
 
-6.2.3 Packet Forwarding
+|Fed|.2.3 Packet Forwarding
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We are now ready to look at the basic mechanism by which IP routers
 forward packets in an internetwork. Recall that *forwarding* is the
 process of taking a packet from an input and sending it out on the
-appropriate output (we looked at this in depth in Chapter 2), while
+appropriate output (we looked at this in depth in Chapter |Tech|), while
 *routing* is the process of building up the tables that allow the
 correct output for a packet to be determined (we saw several examples
-of this in Chapter 4). The discussion here focuses on forwarding; we
+of this in Chapter |Routing|). The discussion here focuses on forwarding; we
 return to routing at the end of this chapter.
 
 The main points to bear in mind as we discuss the forwarding of IP
@@ -482,7 +482,7 @@ over a network to which it is connected.
 The forwarding table used by R2 is simple enough that it could be
 manually configured. Usually, however, these tables are more complex and
 would be built up by running a routing protocol such as one of those
-described in Chapter 4. Also note that, in practice, the network
+described in Chapter |Routing|. Also note that, in practice, the network
 numbers are usually longer (e.g., 128.96).
 
 We can now see how hierarchical addressing—splitting the address into
@@ -512,7 +512,7 @@ by no means the last) in achieving scalability.
 
 .. _artifact-arp:
 
-6.2.4 Address Translation
+|Fed|.2.4 Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have talked about how to get IP packets to the

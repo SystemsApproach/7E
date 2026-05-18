@@ -1,5 +1,5 @@
-6.3 Scale
------------
+|Fed|.3 Scale
+-------------
 
 As the Internet has grown in its geographic reach, the number of
 networks, and the number of hosts it connects, various aspects of its
@@ -10,8 +10,8 @@ we examine the range of techniques that have been applied to enable
 the Internet to keep on scaling up.
 
 
-6.3.1 Subnetting and Classless Addressing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Fed|.3.1 Subnetting and Classless Addressing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The original "classful" design for IP addresses uses the network part
 of the address to identify exactly one physical network. It turns out that this
@@ -311,7 +311,7 @@ address and the variable-length prefixes in a forwarding table has
 been a fruitful field of research for many years. The most well-known
 algorithm uses an approach known as a *PATRICIA tree*, which was
 actually developed well in advance of CIDR. High-end switches, as
-described in Chapter 3, offer a hardware-based alternative, often by
+described in Chapter |Tech|, offer a hardware-based alternative, often by
 performing address lookups in Ternary Content Addressable Memory
 (TCAM). This supports constant-time lookups, but TCAM is often limited
 in size. This means it is often treated as a cache of the most
@@ -319,8 +319,8 @@ frequently used forwarding entries; a fallback lookup algorithm is
 still needed.
 
 
-6.3.2 Network Address Translation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Fed|.3.2 Network Address Translation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Network Address Translation (NAT) has a long and somewhat
 controversial history. It seems the idea was independently invented by
@@ -367,7 +367,7 @@ addresses per campus to a single global address, and this is how much
 of the Internet is constructed today.  The vast majority of
 traffic running over IP is either TCP or UDP, both of which have a
 16-bit source port and 16-bit destination port (for reasons we will
-discuss in Chapter 11). So it is possible for many different hosts in
+discuss in Chapter |TCP|). So it is possible for many different hosts in
 the private network to *simultaneously* use the same global address
 for external communication by using the TCP or UDP port field as a key
 to distinguish one host from another. This is probably best explained
@@ -442,8 +442,8 @@ adopted in 2015.
 
 .. _artifact-ipv6:
 
-6.3.3 IP Version 6
-~~~~~~~~~~~~~~~~~~~~~
+|Fed|.3.3 IP Version 6
+~~~~~~~~~~~~~~~~~~~~~~
 
 The motivation for defining a new version of IP is simple: to deal
 with exhaustion of the IP address space. CIDR helped considerably to
