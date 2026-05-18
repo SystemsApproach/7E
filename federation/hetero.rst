@@ -6,7 +6,7 @@
 The Internet aims to support heterogeneity in terms of both the
 underlying networks that it can accommodate and the applications it
 will support. To meet this goal, we need to come up with a *service
-model*. This is, what is the host-to-host service that our
+model*. That is, what is the host-to-host service that our
 internetwork will provide? It needs to be general enough to
 accommodate the diverse needs of applications. Once we have decided on
 the service, we can then define a set of protocols that enable that
@@ -49,7 +49,7 @@ providing a "connectionless datagram" service model, so as to
 distinguish it from the alternatives. We usually refer
 to IP packets (rather than IP datagrams) in this book, since
 they are the current best practice, but "connectionless datagram"
-should interpreted as a roughly equivalent way of talking about the
+should be interpreted as a roughly equivalent way of talking about the
 same idea.
 
 Packet Delivery
@@ -195,7 +195,7 @@ presence or absence of options may be determined by examining the header
 length (``HLen``) field. While options are used fairly rarely, a
 complete IP implementation must handle them all. It is commonly the
 case that routers process options as an exception less
-efficiently that normal "fast path" processing.
+efficiently than normal "fast path" processing.
 
 .. sidebar:: Fragmentation Considered Harmful
 
@@ -282,7 +282,7 @@ Note that the routers in :numref:`Figure %s <fig-inet>` are attached
 to two networks. They need to have an address on each network, one for
 each interface. For example, router R3, which sits between two
 Ethernets, has an IP address on the interface to each of them; the
-network part of each address the same as all the hosts on that
+network part of each address is the same as that of all the hosts on that
 network. Thus, bearing in mind that a router might be implemented as a
 host with two network interfaces, it is more precise to think of IP
 addresses as belonging to interfaces than to hosts.
@@ -512,13 +512,13 @@ by no means the last) in achieving scalability.
 
 .. _artifact-arp:
 
-6.2.5 Address Translation
+6.2.4 Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have talked about how to get IP packets to the
 right physical network but glossed over the issue of how to get a
 packet to a particular host or router on that network. The main issue
-is that IP packet contain IP addresses, but the physical interface
+is that IP packets contain IP addresses, but the physical interface
 hardware on the host or router to which you want to send the packet
 only understands the addressing scheme of that particular network. Thus,
 we need to translate the IP address to a link-level address that makes

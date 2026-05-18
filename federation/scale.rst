@@ -326,7 +326,7 @@ Network Address Translation (NAT) has a long and somewhat
 controversial history. It seems the idea was independently invented by
 a few people, but the first publication describing it was by Paul
 Tsuchiya and Tony Eng in 1993. It was conceived at around the same
-time that work was getting start on IP version 6, and to tackle the
+time that work was getting started on IP version 6, and to tackle the
 same basic issues: address space depletion and scalability of
 routing.
 
@@ -505,7 +505,7 @@ which everyone shut down their hosts and routers and installed a new
 version of IP. The architects expected a long transition period in
 which some hosts and routers would run IPv4 only, some will run IPv4
 and IPv6, and some will run IPv6 only. It is unclear if they
-anticipated that transition period would extend beyond 30 years.
+anticipated that the transition period would extend beyond 30 years.
 
 IPv6 Addresses and Routing
 ++++++++++++++++++++++++++++++

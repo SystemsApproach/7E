@@ -148,7 +148,7 @@ history by Leiner *et al*.
 The second and third requirements are captured by the hourglass shape
 we saw in Chapter 1. Many types of communications
 service (or applications) can run over the Internet, and many
-different types of networks (included those not yet invented at the
+different types of networks (including those not yet invented at the
 time) can be accommodated within the Internet's architecture. We refer
 to this property as heterogeneity.
 
