@@ -7,7 +7,7 @@
 Chapter |Shared|:  Mediating Shared Access
 ==============================================
 
-Chapter 1 highlights the challenge of multiplexing multiple users on a
+Chapter |Intro| highlights the challenge of multiplexing multiple users on a
 shared network, but focuses on how that problem manifests on switches.
 They buffer packets that need to be sent on a given output port, and
 decide which of those packets to send next (typically the one at the
