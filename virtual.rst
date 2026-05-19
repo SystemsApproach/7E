@@ -4,24 +4,24 @@
 
 .. include:: chapters.rst
 
-Chapter |Virt|: Virtual Networks
-====================================
+Chapter |Virt|: Virtualizing Networks
+=======================================
 
-Virtualization of computing resources is so deeply entrenched in the
-design of modern computer systems that we often take it for
+The virtualization of computing resources is so deeply entrenched in
+the design of modern computer systems that we often take it for
 granted. The term "virtual" gets thrown around in many contexts, but
 when it comes to computing, the definition is reasonably precise: a
 virtualized resource provides the same interface to consumers of that
-resource as a physical resource would do, but it is done in a way that
+resource as a physical resource would, but it is done in a way that
 decouples it from specific physical resources.
 
 One of the easiest examples to understand is virtual memory. An
 application has access to a potentially vast amount of virtual memory,
 and can freely read and write to any address in that memory, without
 worrying about the details of the underlying physical memory. The
-physical memory is usually shared among many processes and users and
-is limited to a smaller number of bytes than the virtual memory, but
-all of these details are hidden from the application or
+physical memory is usually shared among many processes and users, and
+is limited to orders of magnitude fewer bytes than the virtual memory.
+But all of these details are hidden from the application or
 programmer. With a mixture of operating system techniques and hardware
 assistance to map from virtual addresses to physical addresses, the
 illusion of a large, private memory space is presented seamlessly to
@@ -37,22 +37,23 @@ most common approaches to virtualizing networks.
 
 One early and widely used approach to virtualization is the virtual LAN
 (VLAN). Each VLAN is a separate broadcast domain from any other VLAN,
-even if it runs on the same physical Ethernet segment as other
+even if it runs on the same physical Ethernet as other
 VLANs. By providing isolation among different tenants on shared
 infrastructure, VLANs are analogous to virtual memory systems.
 
 Virtual Private Networks (VPNs) provide something similar to VLANs but
-with wide-area network capabilities. There are quite a few different
-ways to deliver a VPN service but they are commonly offered as a
+with wide-area network capabilities. There are different
+ways to deliver a VPN service, but they are commonly offered as a
 private IP network to interconnect the sites of a large business with
-multiple offices, as well allowing connections to the devices of remote workers.
+multiple offices. In another use case, VPNs allow the devices of
+remote workers to connect to the home office.
 
 Network virtualization for datacenters is most closely analogous to
-virtual machines on the computing side. The idea is to create in
-software an abstraction of a complete network with features that
-include switching, routing, firewalling, NAT, among others. These
-virtual networks resemble virtual machines in the completeness of
-their capabilities: they allow applications that depend on a rich set
+virtual machines on the computing side. The idea is to create
+an abstraction of a complete network with features that
+include switching, routing, firewalling, and NAT, among others. These
+virtual networks resemble virtual machines in their completeness:
+they allow applications that depend on a rich set
 of capabilities to be deployed onto virtual networks without
 modification, just as an unmodified operating system can be deployed
 into a virtual machine as if it was running on a physical
