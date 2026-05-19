@@ -1,4 +1,4 @@
-|Virt|.4 Network Virtualization for Datacenters
+|Virt|.4 Virtual Networks for Datacenters
 -----------------------------------------------
 
 Network virtualization as we understand it today is closely linked to
@@ -39,12 +39,12 @@ must be specific to a subnet that connects to the server hosting the
 VM.\ [#]_ So if a VM is to migrate to another server, either it needs
 to move to a server where that subnet is also present, or it needs a
 new IP address. The first choice limits where it can move within the
-datacenter, which affects the efficiency of resource usage. The
-second option is quite a disruptive thing: TCP connections are
-dropped, and applications may need to be restarted. Furthermore, some
-applications depend on layer-2 adjacency between communicating peers,
-and thus depend on some set of VMs staying in a given subnet even as
-they move around within the datacenter.
+datacenter, which affects the efficiency of resource usage. The second
+option is quite a disruptive thing: TCP connections are dropped, and
+applications may need to be restarted. Furthermore, some applications
+depend on layer-2 adjacency between communicating peers, and thus
+depend on some set of VMs staying in a given subnet even as they move
+around within the datacenter.
 
 .. [#] Technically more than one subnet can connect to a given server
        in which case an IP address for a VM needs to be
@@ -73,16 +73,16 @@ complexity of these tasks that made network configuration the barrier
 to agility in datacenter configuration.
 
 The solution that emerged to tackle these issues of configuration and
-provisioning was based on software-defined networking (SDN). The key
-insight is that a central API to an SDN controller provides the ideal
-way to specify the desired behavior of the virtual network, with the
-logically centralized controller then taking responsibility for
-figuring out how to implement the network with the available
-resources, such as virtual switches in the hypervisors of the
-datacenter's servers. The core principles of SDN—separation of data
-plane from control plane, and centralization of the controller to
-manage a multitude of switching elements—provide the basis for this
-approach. The coming sections dig deeper into how this works.
+provisioning was based on SDN. The key insight is that a central API
+to an SDN controller provides the ideal way to specify the desired
+behavior of the virtual network, with the logically centralized
+controller then taking responsibility for figuring out how to
+implement the network with the available resources, such as virtual
+switches in the hypervisors of the datacenter's servers. The core
+principles of SDN—separation of data plane from control plane, and
+centralization of the controller to manage a multitude of switching
+elements—provide the basis for this approach. The rest of this section
+digs deeper into how this works.
 
 
 .. _reading-VL2:
@@ -121,16 +121,16 @@ that is required. Let’s look more closely at that abstraction.
 Since the VMs should be free to move around the datacenter, their IP
 addresses need to be independent of the physical network topology
 (indicated by the underlay network in the figure). In particular, we
-don’t want a particular VM to be restricted in its location by the
-subnet addressing of the underlying physical network. For this reason,
+don’t want any given VM to be restricted in its location by the subnet
+addressing of the underlying physical network. For this reason,
 network virtualization systems invariably make use of an overlay
 encapsulation such as VXLAN, NVGRE, or GENEVE. Encapsulation is a
 low-level mechanism that solves an important problem: decoupling the
 address space of the virtual network from that of the physical
 network. However, it is worth noting that they are just a building
-block, and not a complete network virtualization solution. We will look
-more closely at network virtualization overlay
-encapsulations in Section |Virt|.4.3.
+block, and not a complete network virtualization solution. We look
+more closely at network virtualization overlay encapsulations in
+Section |Virt|.4.2.
 
 .. _fig-encaps-nv:
 .. figure:: virtual/figures/Slide45.png
@@ -145,7 +145,15 @@ set of *outer* headers that are used by the physical network to
 deliver the packet to the appropriate end host, and there are a set of
 *inner* headers that are meaningful only in the context of a
 particular virtual network. This is how encapsulation decouples the
-virtual network addressing from that of the physical.
+virtual network addressing from that of the physical. A second thing
+to notice is that this particular flavor of encapsulation, known as
+VXLAN and specified in RFC 7348, is overlaid on top of UDP.
+
+.. admonition:: Further Reading
+
+   `Virtual eXtensible Local Area Network (VXLAN)
+   <https://www.rfc-editor.org/info/rfc7348>`__. RFC 7348,
+   August 2014.
 
 This simple example also shows one of the tasks that must be
 implemented by the network virtualization controller. When a VM wants
@@ -217,7 +225,7 @@ plane. Commonly, this is a set of *Virtual Switches (vSwitches)* that
 run inside hypervisors or container hosts. The data plane is where
 virtual networks are implemented. As we saw in the example, a
 virtual switch forwards packets between VMs and the physical network,
-and to do it needs to apply appropriate headers to the packets. The
+and to do so it needs to apply appropriate headers to the packets. The
 data plane also has information about the current state of the system,
 such as the locations of VMs, that needs to be taken into account by
 the higher layers of the network virtualization system. This is
@@ -258,7 +266,7 @@ are located, and the IP addresses of the relevant hypervisors. With
 this information, it determines what the encapsulation of packets
 should be if A and B are to communicate with each other. From this, it
 computes a set of control directives that need to be installed into
-the appropriate vSwitches. These directive are pushed to the vSwitches,
+the appropriate vSwitches. These directives are pushed to the vSwitches,
 expressed, for example, as a set of OpenFlow rules.
 
 If, at some later time, one of the VMs moves to a different
@@ -343,7 +351,7 @@ implement them in a distributed manner with the efficiency and
 performance benefits outlined here.
 
 
-|Virt|.4.3 Building Blocks
+|Virt|.4.2 Building Blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Now that we understand the architecture of network virtualization
@@ -478,7 +486,7 @@ of the same components as one for VMs, and mixed environments (where
 containers and VMs communicate in a single virtual network) are also
 possible.
 
-|Virt|.4.4 Example System
+|Virt|.4.3 Example System
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There have been several successful implementations of network
@@ -500,9 +508,9 @@ management planes. The high level architecture of OVN is shown in
 
 
 An important aspect of OVN is its use of two databases (referred to as
-Northbound and Southbound) to store state. Theses databases are
+Northbound and Southbound) to store state. These databases are
 implemented using OVSDB, which was originally created to store
-configuration state for OVS, as discussed in Section 8.3.2. In OVN,
+configuration state for OVS, as discussed in Section |Virt|.4.2. In OVN,
 OVSDB has a larger role, being used for both configuration state and
 control state.
 
@@ -520,7 +528,7 @@ compared to the generic architecture of :numref:`Figure %s
 <fig-three-planes>`. Importantly, it is divided into a centralized
 component, known as *ovn-northd*, and a distributed component that
 runs on every hypervisor, called the *OVN controller*. Recall that in
-Section 1.2.2 we discussed the trade-off between centralized and
+Section |Routing|.5.1 we discussed the trade-off between centralized and
 distributed control for SDN; in OVN, a hybrid model is used. The
 decision to make this split followed the experience of the OVN team in
 working on earlier systems where the centralized controller had a full
@@ -611,8 +619,12 @@ build virtual networks for the containers they are hosting. In this
 case, the "cloud management system" that OVN integrates with is likely
 to be a container management system, such as Kubernetes.
 
+.. TODO -- It might make sense to end the datacenter section here
+   (with the capstone example) and then elevate Microsegmentation to
+   top-level section 9.5. The lead paragraph would need to be modified
+   a bit, but this seems like a "stand-alone" nugget worth highlighting.
 
-|Virt|.4.5 Microsegmentation
+|Virt|.4.4 Microsegmentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Network virtualization has certainly had an impact on networking,
@@ -685,16 +697,15 @@ virtualization.
 
 .. sidebar:: Is Network Virtualization SDN?
 
-
-  There is a case to be made that Network Virtualization didn't change
+  *There is a case to be made that Network Virtualization didn't change
   the way physical networks are built and thus can't be called
   "SDN". It simply runs as an overlay on top of a standard L2/L3
   network, which might run traditional routing protocols and be
   configured one box at a time. This argument seems to be a less
   prevalent view now that network virtualization has become so
-  widespread, but it misses the point.
+  widespread, but it misses the point.*
 
-  Simply stated, Network Virtualization adheres to the core
+  *Simply stated, Network Virtualization adheres to the core
   architectural principles laid out by SDN's inventors (and summarized
   in Section |Routing|.5). There is a clear separation between control and
   data planes, with a centralized controller responsible for a
@@ -703,18 +714,17 @@ virtualization.
   implementation detail and not fundamental to SDN. Finally, the fact
   that network virtualization uses a completely programmable
   forwarding plane, as exemplified by OVS, also places it squarely in
-  the SDN universe.
+  the SDN universe.*
 
-   SDN has always been an approach to building and operating networks,
-   applied to isolated domains where it provides value. There is no
-   requirement of universality. Datacenter underlays, as exemplified
-   by leaf-spine switching fabrics, are one such domain. Virtual
-   networking overlays are another such domain. Both are even deployed
-   simultaneously in the same datacenters, without either being aware
-   that the other exists. Going forward, it is possible these two
-   domains might share some technologies (e.g., a common Network OS, a
-   common language for writing forwarding functions, a common
-   toolchain to generate the control interface). We may see the line
-   separating the two domains begin to blur, if an overlay-aware
-   underlay or underlay-aware overlay is shown to provide value.
-
+  *SDN has always been an approach to building and operating networks,
+  applied to isolated domains where it provides value. There is no
+  requirement of universality. Datacenter underlays, as exemplified
+  by leaf-spine switching fabrics, are one such domain. Virtual
+  networking overlays are another such domain. Both are even deployed
+  simultaneously in the same datacenters, without either being aware
+  that the other exists. Going forward, it is possible these two
+  domains might share some technologies (e.g., a common Network OS, a
+  common language for writing forwarding functions, a common
+  toolchain to generate the control interface). We may see the line
+  separating the two domains begin to blur, if an overlay-aware
+  underlay or underlay-aware overlay is shown to provide value.*

@@ -34,7 +34,7 @@ switches S1 and S2. The link between S1 and S2 is considered to be in
 both VLANs. It is sometimes referred to as a *trunk* interface, while
 the links facing towards the hosts are *access*
 interfaces. Configuration settings determine whether an interface is
-in trunk or access mode. 
+in trunk or access mode.
 
 When a packet sent by host X arrives at switch S2, the switch observes
 that it came in via an access port that was configured as being in
@@ -56,7 +56,7 @@ of VLAN 100 and thus enable X, W, and Z to be on the same virtual LAN,
 then we would just need to change one piece of configuration on switch
 S2.
 
-And important benefit of VLANs is the reduction in size of broadcast
+An important benefit of VLANs is the reduction in size of broadcast
 domains compared to the equivalent physical network if VLANs were not
 used. Broadcast storms, caused by misbehaving or malfunctioning hosts,
 can be a serious issue in networks that support broadcast such as
