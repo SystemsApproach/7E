@@ -4,39 +4,40 @@
 VPNs come in many different flavors, but the common theme is that they
 create the illusion of a *private* network using shared
 infrastructure. In many, but not all, cases, that shared
-infrastructure is the public Internet. So whereas VLANs provide some
-sort of isolation among tenants on a single physical LAN, VPNs often
+infrastructure is the public Internet. So whereas VLANs provide
+minimal isolation among tenants on a single physical LAN, VPNs often
 provide stronger protection for the traffic traversing the public
-Internet using encryption.
+Internet. They do this using encryption.
 
-Any VPN requires that we establish
-connectivity among a set of endpoints. The connections must
-offer some level of privacy to the entities communicating between
-those endpoints. Furthermore, to qualify as a *virtual* private
-network, a VPN creates the illusion of being dedicated to a group of
-users, even though the underlying infrastructure is shared more
-widely. In practice, this means that a VPN is almost always built as
-some sort of *overlay* on shared infrastructure. This was not always
-the case; dedicated networks using technologies such as frame relay
-and MPLS have also been used to deliver VPN services. We return to
-MPLS below, but using some sort of tunnel over IP is most common
-today, so we start our discussion there.
+Any VPN requires that we establish connectivity among a set of
+endpoints. The connections must offer some level of privacy to the
+entities communicating between those endpoints. Furthermore, to
+qualify as a *virtual* private network, a VPN creates the illusion of
+being dedicated to a group of users, even though the underlying
+infrastructure is shared more widely. In practice, this means that a
+VPN is almost always built as some sort of *overlay* on shared
+infrastructure. This was not always the case; dedicated networks using
+technologies such as frame relay and MPLS have also been used to
+deliver VPN services. We return to MPLS later in this section, but
+using some sort of tunnel over IP is most common today, so we start
+our discussion there.
 
 
 |Virt|.3.1 Tunnels
 ~~~~~~~~~~~~~~~~~~~~~~
 
-We can think of an IP tunnel as a virtual point-to-point link between a
-pair of nodes that are actually separated by an arbitrary number of
-networks. The virtual link is created within the router at the entrance
-to the tunnel, either by configuration or using some control
-protocol. The information required to create this virtual link includes the IP address of the router at the
-far end of the tunnel. Whenever the router at the entrance of the tunnel
-wants to send a packet over this virtual link, it encapsulates the
-packet, including its headers, as the payload of another IP
-packet. The destination address of the "outer" IP header
-is the address of the router at the far end of the tunnel, while the
-source address is that of the encapsulating router.
+We can think of an IP tunnel as a virtual point-to-point link between
+a pair of nodes that are actually separated by an arbitrary number of
+networks. The virtual link is created within the router at the
+entrance to the tunnel, either by manual configuration or using some
+control protocol. The information required to create this virtual link
+includes the IP address of the router at the far end of the
+tunnel. Whenever the router at the entrance of the tunnel wants to
+send a packet over this virtual link, it encapsulates the packet,
+including its headers, as the payload of another IP packet. The
+destination address of the "outer" IP header is the address of the
+router at the far end of the tunnel, while the source address is that
+of the encapsulating router.
 
 .. _fig-tunnel:
 .. figure:: virtual/figures/f03-27-9780123850591.png
@@ -126,7 +127,7 @@ corporate office.
 *Site-to-Site VPNs* are generally used to interconnect the sites of an
 enterprise, which could include datacenters, main corporate offices,
 and branch offices. :numref:`Figure %s <fig-sitevpn>` shows a simple
-example for three sites of difference sizes.
+example for three sites of different sizes.
 
 .. _fig-sitevpn:
 .. figure:: virtual/figures/sitevpn.png
@@ -136,10 +137,10 @@ example for three sites of difference sizes.
    A corporate VPN connects a main office, a branch office, and a datacenter.
 
 Viewed at this level of abstraction, there are obvious similarities
-between these VPN classes. They are not entirely non-overlapping but they
-help us identify the requirements. The differences become apparent
-when we look at the types of devices that terminate tunnels and the
-methods used to establish them.
+between these two VPN classes. They are not entirely non-overlapping
+but they help us identify the requirements. The differences become
+apparent when we look at the types of devices that terminate tunnels
+and the methods used to establish them.
 
 Remote access VPNs usually establish tunnels directly from a client
 device, such as a phone or a laptop, to a device at the edge of the
@@ -148,14 +149,21 @@ client software performs this task, with WireGuard and OpenVPN being
 two examples of open source, multi-platform clients. There are plenty
 of proprietary options as well.
 
+.. admonition:: Further Reading
+
+   `Wireguard: Fast, Modern, Secure VPN Tunnel <https://www.wireguard.com/>`__.
+
+   `OpenVPN: Secure VPN Solutions <https://openvpn.net>`__.
+
 An encrypted tunnel is just like the tunnels described above, with the
 additional twist that everything that is sent as a payload in the
 outer header is encrypted using some cryptographic algorithm. We
-discuss encryption in more detail in Chapter |TLS|. In order for the
-traffic to be *decrypted* at the far end of the tunnel, the two ends
-of the tunnel have to share some secret, and distributing those
-secrets is part of the process of establishing a VPN. The details are
-closely tied up with the choice of encryption technique.
+discuss encryption in more detail in Chapter |TLS|, but for now, it's
+sufficient to know that for traffic to be *decrypted* at the far end
+of the tunnel, the two ends of the tunnel have to share some secret.
+Distributing those secrets is part of the process of establishing a
+VPN, and the details are closely related to the choice of encryption
+technique.
 
 OpenVPN leverages TLS (described in Chapter |TLS|) to build the
 encrypted tunnels from client to server. While this mostly follows the
@@ -170,9 +178,9 @@ password and optionally multi-factor authentication.
 
 WireGuard is a more recent implementation of encrypted tunnels that
 aims to address some shortcomings that have emerged over years of
-using OpenVPN tunnels and similar approaches. The paper below from
-NDSS 2017 lays out the design philosophy of WireGuard. Compared to
-OpenVPN, it is less complex by virtue of reducing the set of
+using OpenVPN tunnels and similar approaches. A 2017 NDSS paper by
+Jason Donenfeld lays out the design philosophy of WireGuard. Compared
+to OpenVPN, it is less complex by virtue of reducing the set of
 cryptographic algorithms that it supports. It establishes "stateless"
 tunnels—that is, there is no TLS connection to establish. Finally, it
 is implemented in the operating system kernel, another contrast to
@@ -188,8 +196,8 @@ you to the paper.
 Encrypted tunnels, client authentication, and a gateway or
 concentrator to terminate the tunnels is pretty much all that is
 needed to deliver a remote access VPN. A concentrator is just an
-appliance that can handle a large number of VPN tunnels at once,
-provides the necessary administrative controls for managing user
+appliance that can handle a large number of VPN tunnels at once.
+It provides the necessary administrative controls for managing user
 accounts and authentication, and forwards the VPN traffic between
 tunnels and the corporate network. Note that a remote access VPN will
 almost always have to solve the problem of how to get traffic through
@@ -213,7 +221,7 @@ for a small VPN, but as the number of sites increases, the
 configuration overhead becomes considerable. Furthermore, there is not
 likely to be an on-site routing and security expert at every branch
 office, so the configuration would have to be set once before the
-router was shipped out to the branch and after that point, changes
+router was shipped out to the branch, and after that point, changes
 become difficult, especially if the router becomes unreachable for
 some reason. On top of this, if the connectivity among sites is
 anything other than a hub and spoke, then the issue of correctly
@@ -259,37 +267,37 @@ there may be firewalls to traverse as well. An IETF standard called
 STUN (Session Traversal Utilities for NAT) plays an important part,
 and the centralized control plane helps to resolve some of the more
 difficult corner cases. You can read more about the issues to be
-solved in the blog post listed below.
-
+solved in the Tailscale blog post.
 
 Because mesh VPNs build tunnels all the way from client to client,
 they also avoid one of the drawbacks of traditional VPNs, which is the
 existence of trusted network zones, such as the network behind the
 firewall to which a remote access or site-to-site VPN would give
-access. In this respect they embrace the idea of *zero trust
-networking*, in the sense that there is no "trusted" zone; only
-explicitly allowed connections among specific devices are possible.
-
+access. In this respect, they embrace the idea of *zero trust
+networking*, in that there is no "trusted" zone; only explicitly
+allowed connections among specific devices are possible.
 
 .. admonition:: Further Reading
 
-   A. Pennarun. `How Tailscale Works <https://tailscale.com/blog/how-tailscale-works>`__.
-   Tailscale blog, 2020.
+   A. Pennarun. `How Tailscale Works
+   <https://tailscale.com/blog/how-tailscale-works>`__.  Tailscale
+   blog, 2020.
 
 |Virt|.3.4 MPLS/BGP VPNs
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The complexity of configuring and managing a VPN comprised of
-encrypted tunnels is one reason why MPLS/BGP VPNs, which outsource most of
-the complexity of VPN management to a service provider, became such a
-successful service offering in the early 2000s. MPLS does not protect
-privacy using encryption, but it does solve the issues of routing
-traffic among large numbers of sites, and with respect to security,
-ensures that the traffic belonging to one customer does not leak to
-the network of another. Said another way, MPLS isolates users (private
-networks) from each other, but users trust that the service provider
-does not snoop on the traffic they carry. This is a trust assumption
-that typically does not hold for a VPN that traverses the public
-Internet.
+encrypted tunnels is one reason why MPLS/BGP VPNs—which outsource most
+of the complexity of VPN management to a service provider—became such
+a successful service offering in the early 2000s. MPLS does not
+protect privacy using encryption, but it does solve the issues of
+routing traffic among large numbers of sites, and with respect to
+security, ensures that the traffic belonging to one customer does not
+leak to the network of another. Said another way, MPLS isolates users
+(private networks) from each other, but users must trust that the
+service provider does not snoop on the traffic they carry. This is a
+trust assumption that typically does not hold for a VPN that traverses
+the public Internet.
 
 
 .. _fig-mpls-vpn:
@@ -302,14 +310,15 @@ Internet.
 
 
 MPLS/BGP VPNs are reasonably complex, but the abstraction that they
-offer in the common case
-is easy to describe. Each customer is presented with a private IP
-network that interconnects the sites of that customer. In a simple
-configuration, the edge router at each customer site has a default
-route pointing to the provider network. All the sites of the customer VPN in
-:numref:`Figure %s <fig-mpls-vpn>` can send traffic to each other, and
-the sites of other customers connected to the same provider can similarly send traffic to each other, but no
-traffic can flow from sites of one customer to the other.
+offer in the common case is easy to describe. Each customer is
+presented with a private IP network that interconnects the sites of
+that customer. In a simple configuration, the edge router at each
+customer site has a default route pointing to the provider
+network. All the sites of the customer VPN in :numref:`Figure %s
+<fig-mpls-vpn>` can send traffic to each other, and the sites of other
+customers connected to the same provider can similarly send traffic to
+each other, but no traffic can flow from sites of one customer to the
+other.
 
 The enforcement of isolation between different customers starts by
 configuring the interfaces on the routers at the provider edge that
@@ -320,27 +329,26 @@ there are at least two VRFs on that edge router.
 
 All the provider edge routers exchange routing information using a
 version of BGP that supports VPN routes. These BGP routes look much
-like the ones we discussed in Chapter |BGP| but they contain
+like the ones we discussed in Chapter |BGP|, but they contain
 additional information to disambiguate between the routing information
 of different customers. This means that even if two customers happened
 to use the same internal IP addresses (which happens often enough when
 using the IP address ranges designated for private use) the provider's
 instance of BGP can tell the difference between the routing
-information from customer A and that from customer B. There is further
-information in the BGP messages (known as *route targets*) to ensure that the routes from
-customer A are placed into the correct VRF for customer A and likewise
+information for customer A and that for customer B. There is further
+information in the BGP messages (known as *route targets*) to ensure
+that customer A's routes are placed into the correct VRF, and likewise
 for customer B.
 
-When it comes time to send a packet from one site to another
-site in the same organization, the provider edge router looks up the destination
-address in the appropriate VRF. The appropriate VRF is determined by
-the interface on which the packet arrived. This contrasts with the
-forwarding model described previously for typical IP routers, which is
-the same no matter which interface the packet arrives on. The
-forwarding table not only tells the router where to send the packet
-next, but also contains the information required to correctly
-encapsulate it for its trip across the backbone.
-
+When it comes time to send a packet from one site to another site in
+the same organization, the provider edge router looks up the
+destination address in the appropriate VRF. The appropriate VRF is
+determined by the interface on which the packet arrived. This
+contrasts with the forwarding model described previously for typical
+IP routers, which is the same no matter which interface the packet
+arrives on. The forwarding table not only tells the router where to
+send the packet next, but also contains the information required to
+correctly encapsulate it for its trip across the backbone.
 
 .. _fig-mpls-hdr:
 .. figure:: virtual/figures/mpls-hdr.png
@@ -365,17 +373,18 @@ site upon egress. Both labels are removed before the packet is passed
 off to the customer, so they only see IP packets passing between
 sites.
 
-We have glossed over a lot of detail here, but you can think of MPLS/BGP
-VPNs as having both a control plane and a data plane that support the
-abstraction of private networks for multiple customers.  The control
-plane is based on BGP, enhanced to support the
-need to isolate one customer from another and to allow for the
-possibility of non-unique customer addresses. The data plane is based
-on MPLS and is just another form of tunneling that decouples the
-virtual networks offered to the customers from the shared infrastructure of
-the provider.
+We have glossed over a lot of detail here, but you can think of
+MPLS/BGP VPNs as having both a control plane and a data plane that
+support the abstraction of private networks for multiple customers.
+The control plane is based on BGP, enhanced to support the need to
+isolate one customer from another and to allow for the possibility of
+non-unique customer addresses. The data plane is based on MPLS and is
+just another form of tunneling that decouples the virtual networks
+offered to the customers from the shared infrastructure of the
+provider.
 
-To learn more about MPLS/BGP VPNs you can refer to the main RFC or the book on MPLS listed below.
+To learn more about MPLS/BGP VPNs you can refer to the main RFC or the
+book on MPLS listed below.
 
 .. admonition:: Further Reading
 
@@ -398,17 +407,17 @@ addition, it would typically require the provisioning of a circuit
 from the customer site to the nearest point of presence for the
 appropriate Telco.
 
-With SD-WAN, the assumption is that every branch and head
-office has connectivity to the Internet. An edge router is deployed at
-each site, and a centralized control plane is used to simplify
-configuration. An enterprise wants its sites—and only its authorized
-sites—to be interconnected by the VPN, and it typically wants to apply
-a set of policies regarding security, traffic prioritization, access
-to shared services, and so on. The abstraction is very similar to that
-provided by MPLS VPNs: a private IP network connecting the sites of a
-company, provided over shared infrastructure. The shared
-infrastructure just happens to be the public Internet, which implies
-encrypted tunnels are required.
+With SD-WAN, the assumption is that every branch and head office has
+connectivity to the Internet. An edge router is deployed at each site,
+and a centralized control plane is used to automate the configuration
+of those routers. An enterprise wants its sites—and only its
+authorized sites—to be interconnected by the VPN, and it typically
+wants to apply a set of policies regarding security, traffic
+prioritization, access to shared services, and so on. The abstraction
+is very similar to that provided by MPLS VPNs: a private IP network
+connecting the sites of a company, provided over shared
+infrastructure. The shared infrastructure just happens to be the
+public Internet, which implies encrypted tunnels are required.
 
 The policies regarding connectivity among the sites of a single VPN
 are input to a central controller, which can then push out all the
@@ -447,12 +456,13 @@ building and managing encrypted tunnels to drive adoption of this
 approach, often replacing MPLS-based VPNs.
 
 An important benefit offered by SD-WAN over many earlier VPN
-approaches was to simplify the task of managing access from a branch
-office to a cloud service offered by a third party. It
-seems natural that you would choose to access those services directly
-from an Internet-connected branch, but traditional VPNs would
-*backhaul* traffic to a central site before sending it out to the
-Internet, precisely so that security policies could be controlled
-centrally. With SD-WAN, the central control over security policy is achieved, while the data
-plane remains fully distributed–meaning that remote sites can directly
-connect to the cloud services without backhaul.
+approaches is to simplify the task of managing access from a branch
+office to a cloud service offered by a third party. It seems natural
+that you would choose to access those services directly from an
+Internet-connected branch, but traditional VPNs would *backhaul*
+traffic to a central site before sending it out to the Internet,
+precisely so that security policies could be controlled
+centrally. With SD-WAN, the central control over security policy is
+achieved, while the data plane remains fully distributed—meaning that
+remote sites can directly connect to the cloud services without
+backhaul.
