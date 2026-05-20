@@ -13,9 +13,9 @@ architect of the Internet".
 .. _reading_darpa:
 .. admonition:: Further Reading
 
-   David D. Clark. `The design philosophy of the DARPA Internet
+   D. Clark. `The Design Philosophy of the DARPA Internet
    Protocols <https://dl.acm.org/doi/10.1145/205447.205458>`__.
-   Proc. ACM SIGCOMM, 1988.
+   ACM SIGCOMM '88 Symposium, August 1988.
 
 The fundamental design goal of the Internet was to interconnect the
 small handful of networks that existed at the time of its conception
@@ -143,7 +143,7 @@ history by Leiner *et al*.
 
    B. Leiner, et al. `A Brief History of the Internet
    <https://dl.acm.org/doi/10.1145/1629607.1629613>`__.
-   SIGCOMM CCR, October 2009.
+   ACM SIGCOMM CCR, October 2009.
 
 The second and third requirements are captured by the hourglass shape
 we saw in Chapter |Intro|. Many types of communications

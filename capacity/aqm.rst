@@ -26,14 +26,14 @@ Architecture (an early peer of the TCP/IP Internet).
 .. _reading_red:
 .. admonition:: Further Reading
 
-      K.K. Ramakrishnan and R. Jain.
+      K. Ramakrishnan and R. Jain.
       `A Binary Feedback Scheme for
       Congestion Avoidance in Computer Networks with a Connectionless
-      Network Layer <https://dl.acm.org/doi/pdf/10.1145/52324.52355>`__.
-      ACM SIGCOMM, August 1988.
+      Network Layer <https://dl.acm.org/doi/10.1145/52324.52355>`__.
+      ACM SIGCOMM '88 Symposium, August 1988.
 
-      S. Floyd and V.  Jacobson `Random Early Detection (RED)
-      Gateways for Congestion Avoidance <http://www.icir.org/floyd/papers/early.twocolumn.pdf>`__.
+      S. Floyd and V. Jacobson. `Random Early Detection (RED)
+      Gateways for Congestion Avoidance <https://dl.acm.org/doi/10.1109/90.251892>`__.
       IEEE/ACM Transactions on Networking. August 1993.
 
 As originally designed, RED did not explicitly send a congestion
@@ -273,10 +273,10 @@ in datacenters.
 .. _reading_rfc:
 .. admonition:: Further Reading
 
-      R. Braden, *et al*.
-      `Recommendations on Queue Management and Congestion Avoidance in the Internet
-      <https://tools.ietf.org/html/rfc2309>`__.
-      RFC 2309, April 1998.
+   R. Braden et al. `Recommendations on Queue Management and
+   Congestion Avoidance in the Internet
+   <https://www.rfc-editor.org/info/rfc2309>`__.
+   RFC 2309, April 1998.
 
 .. TODO: this has been replaced by RFC 7567 which still asks for AQM
    but admits that RED might not be the best choice
@@ -303,10 +303,10 @@ AQM.
 .. _reading_codel:
 .. admonition:: Further Reading
 
-      K. Nichols and V. Jacobson.
-      `Controlling Queue Delay
-      <https://queue.acm.org/detail.cfm?id=2209336>`__.
-      ACM Queue, 10(5), May 2012.
+   K. Nichols and V. Jacobson.
+   `Controlling Queue Delay
+   <https://dl.acm.org/doi/10.1145/2209249.2209264>`__.
+   Communications of the ACM, July 2012.
 
 First, the CoDel authors were the ones that articulated the difference
 between \"good queues\" and \"bad queues\" as illustrated in
@@ -376,6 +376,13 @@ CoDel provides value in home routers (which are often Linux-based), a
 point along the end-to-end path (see :numref:`Figure %s <fig-codel>`)
 that commonly experiences bufferbloat.
 
+.. admonition:: Further Reading
+
+   K. Nichols, V. Jacobson, A. McGregor, and J. Iyengar (Eds.).
+   `Controlled Delay Active Queue Management
+   <https://www.rfc-editor.org/info/rfc8289>`__. RFC 8289,
+   January 2018.
+
 .. TODO: I would update this to cover fq_codel and RFC 8290
    https://blog.cerowrt.org/post/state_of_fq_codel/
 
@@ -398,7 +405,7 @@ specified in RFC 3168.
 
    K. Ramakrishnan, S. Floyd, and D. Black.
    `The Addition of Explicit Congestion Notification (ECN) to IP
-   <https://datatracker.ietf.org/doc/html/rfc3168>`__.
+   <https://www.rfc-editor.org/info/rfc3168>`__.
    RFC 3168, September 2001.
 
 Specifically, this feedback is implemented by using the two "unused"

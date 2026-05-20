@@ -20,6 +20,13 @@ resolving those identifiers. The process is extensible in the sense
 that it takes advantage of resolution mechanisms defined by other name
 spaces, including DNS.
 
+.. admonition:: Further Reading
+
+   T. Berners-Lee, R. Fielding, and L. Masinter. `Uniform Resource
+   Identifier (URI): Generic Syntax
+   <https://www.rfc-editor.org/info/rfc3986>`__. RFC 3986,
+   January 2005.
+
 Each URI begins with a *scheme* that prescribes how the rest of the
 URI is to be interpreted. Each scheme then specifies its own syntax
 for the rest of the URI, with the requirement that all URIs must be of
@@ -362,5 +369,6 @@ recommend RFC 4510 as the starting point.
 
 .. admonition:: Further Reading
 
-   `Lightweight Directory Access Protocol (LDAP):  Technical Specification Road
-   Map. <https://www.rfc-editor.org/info/rfc4510>`__ RFC 4510, June 2006.
+   K. Zeilenga (Ed.). `Lightweight Directory Access Protocol (LDAP): Technical
+   Specification Road Map <https://www.rfc-editor.org/info/rfc4510>`__. RFC 4510,
+   June 2006.

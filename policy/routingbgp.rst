@@ -198,7 +198,7 @@ Internet.
 
    X. Dimitropoulos et al. `AS Relationships: Inference and Validation
    <https://dl.acm.org/doi/10.1145/1198255.1198259>`__.
-   SIGCOMM CCR, January 2007.
+   ACM SIGCOMM CCR, January 2007.
 
    CAIDA. `Center for Applied Internet Data Analysis <https://www.caida.org>`__.
 

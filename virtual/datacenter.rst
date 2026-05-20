@@ -89,9 +89,9 @@ digs deeper into how this works.
 
 .. admonition:: Further Reading
 
-   Greenberg et al. `VL2: a scalable and flexible data center network
+   A. Greenberg et al. `VL2: a scalable and flexible data center network
    <https://dl.acm.org/doi/10.1145/1594977.1592576>`__.
-   SIGCOMM, August, 2009.
+   ACM SIGCOMM '09 Symposium, August 2009.
 
 
 
@@ -151,7 +151,7 @@ VXLAN and specified in RFC 7348, is overlaid on top of UDP.
 
 .. admonition:: Further Reading
 
-   `Virtual eXtensible Local Area Network (VXLAN)
+   M. Mahalingam et al. `Virtual eXtensible Local Area Network (VXLAN)
    <https://www.rfc-editor.org/info/rfc7348>`__. RFC 7348,
    August 2014.
 
@@ -382,9 +382,9 @@ GENEVE and the set of requirements that it was developed to meet.
 .. _reading_Geneve:
 .. admonition:: Further Reading
 
-   J. Gross, I. Ganga and T. Sridhar (Eds.), `Geneve: Generic Network
-   Virtualization Encapsulation (RFC 8926)
-   <https://datatracker.ietf.org/doc/html/rfc8926>`__.
+   J. Gross, I. Ganga, and T. Sridhar (Eds.). `Geneve: Generic Network
+   Virtualization Encapsulation <https://www.rfc-editor.org/info/rfc8926>`__.
+   RFC 8926, November 2020.
 
 A notable feature of GENEVE is its extensibility. This represented
 something of a compromise between those building software-based
@@ -433,10 +433,9 @@ vSwitch (OVS).*
 .. _reading_OVS:
 .. admonition:: Further Reading
 
-   B. Pfaff, et al, `The Design and Implementation of Open
-   vSwitch
-   <https://www.openvswitch.org/support/papers/nsdi2015.pdf>`__,
-   USENIX NSDI 2015.
+   B. Pfaff et al. `The Design and Implementation of Open vSwitch
+   <https://www.usenix.org/system/files/conference/nsdi15/nsdi15-paper-pfaff.pdf>`__.
+   Usenix NSDI '15 Symposium, May 2015.
 
 Open vSwitch has been used in both proprietary systems and open source
 systems such as *Open Virtual Network (OVN)* described below.

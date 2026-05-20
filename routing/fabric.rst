@@ -245,7 +245,8 @@ architecture.
 
 .. admonition:: Further Reading
 
-   L. Poutievski et al. `Jupiter evolving: transforming Google's
-      datacenter network via optical circuit switches and
-      software-defined networking
-      <https://doi.org/10.1145/3544216.3544265>`__. Proc. SIGCOMM 2022.
+   L. Poutievski et al. `Jupiter Evolving: Transforming Google's
+   Datacenter Network via Optical Circuit Switches and
+   Software-Defined Networking
+   <https://doi.org/10.1145/3544216.3544265>`__. ACM SIGCOMM '22 Symposium,
+   August 2022.

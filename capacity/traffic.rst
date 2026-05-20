@@ -86,5 +86,5 @@ insightful about the thought process in adopting SDN.
 
    A. Vahdat, D. Clark, and J. Rexford. `A Purpose-built Global Network:
    Google's Move to SDN
-   <https://queue.acm.org/detail.cfm?id=2856460>`__.
-   ACM Queue, December 2015.
+   <https://dl.acm.org/doi/10.1145/2814326>`__.
+   Communications of the ACM, February 2016.

@@ -432,12 +432,12 @@ adopted in 2015.
 .. _reading_nat:
 .. admonition:: Further Reading
 
-   P. Tsuchiya and T. Eng.  `Extending the IP internet through address
-   reuse. <https://dl.acm.org/doi/10.1145/173942.173944>`__. SIGCOMM
+   P. Tsuchiya and T. Eng.  `Extending the IP Internet Through Address
+   Reuse. <https://dl.acm.org/doi/10.1145/173942.173944>`__. ACM SIGCOMM
    CCR, January 1993.
 
    P. Francis. `Network Address Translation
-   <https://dl.acm.org/doi/epdf/10.1145/2766330.2766340>`__. SIGCOMM
+   <https://dl.acm.org/doi/10.1145/2766330.2766340>`__. ACM SIGCOMM
    CCR, April 2015.
 
 .. _artifact-ipv6:

@@ -211,5 +211,6 @@ refer the reader to the authoritative RFC.
 .. _reading_timeout:
 .. admonition::  Further Reading
 
-   `RFC 6298: Computing TCP's Retransmission Timer
-   <https://tools.ietf.org/html/rfc6298>`__. June 2011.
+   V. Paxson, M. Allman, J. Chu, and M. Sargent. `Computing TCP's
+   Retransmission Timer <https://www.rfc-editor.org/info/rfc6298>`__.
+   RFC 6298, June 2011.

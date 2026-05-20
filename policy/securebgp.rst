@@ -44,6 +44,12 @@ vulnerable to attack and is deprecated in favor of a more general TCP
 authentication option using more modern cryptography, described in
 RFC 5925.
 
+.. admonition:: Further Reading
+
+   J. Touch, A. Mankin, and R. Bonica. `The TCP Authentication Option
+   <https://www.rfc-editor.org/info/rfc5925>`__. RFC 5925,
+   June 2010.
+
 Given that TLS is now quite ubiquitous on the World Wide Web, it may
 seem surprising that BGP does not use it for authentication.
 This comes down to a combination
@@ -499,9 +505,10 @@ in the following section.
 .. _reading_bgpsec:
 .. admonition::  Further Reading
 
-   R. Lychev, S. Goldberg and M. Schapira. `BGP security
-   in partial deployment: is the juice worth the squeeze? <https://dl.acm.org/doi/10.1145/2534169.2486010>`__ ACM
-   SIGCOMM, August 2013.
+   R. Lychev, S. Goldberg and M. Schapira. `BGP Security
+   in Partial Deployment: Is the Juice Worth the Squeeze?
+   <https://dl.acm.org/doi/10.1145/2534169.2486010>`__.
+   ACM SIGCOMM '13 Symposium, August 2013.
 
 |BGP|.3.5 Provider Authorization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -584,7 +591,8 @@ deployment.
 .. admonition::  Further Reading
 
    A, Azimov et al. `BGP AS_PATH Verification Based on
-   Autonomous System Provider Authorization (ASPA) Objects <https://datatracker.ietf.org/doc/draft-ietf-sidrops-aspa-verification/>`__. Internet
-   draft, work in progress.
+   Autonomous System Provider Authorization (ASPA) Objects
+   <https://www.ietf.org/archive/id/draft-ietf-sidrops-aspa-verification-18.html>`__.
+   Internet Draft, July 2024.
 
 

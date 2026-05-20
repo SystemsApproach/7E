@@ -70,11 +70,11 @@ standard Internet protocol under the name ONC RPC.
 .. admonition:: Further Reading
 
     A. Birrell and B. Nelson. `Implementing Remote Procedure Calls
-    <http://birrell.org/andrew/papers/ImplementingRPC.pdf>`__. ACM
+    <https://dl.acm.org/doi/10.1145/2080.357392>`__. ACM
     Transactions on Computer Systems, February 1984.
 
     R. Thurlow. `RPC: Remote Procedure Call Protocol Specification
-    Version 2 <https://www.rfc-editor.org/rfc/rfc5531>`__. RFC 5531,
+    Version 2 <https://www.rfc-editor.org/info/rfc5531>`__. RFC 5531,
     May 2009.
 
 The emergence of the cloud led to another seismic shift in RPC design,

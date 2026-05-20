@@ -311,7 +311,7 @@ mechanisms described in this chapter.
 
    R. Jain, D. Chiu, and W. Hawe. `A Quantitative Measure of Fairness
    and Discrimination for Resource Allocation in Shared Computer Systems
-   <https://www.cse.wustl.edu/~jain/papers/ftp/fairness.pdf>`__.
+   <https://arxiv.org/abs/cs/9809099>`__.
    DEC Research Report TR-301, 1984.
 
    F. Kelly. `Charging and Rate Control for Elastic Traffic
@@ -320,13 +320,13 @@ mechanisms described in this chapter.
 
    S. Athuraliya and S. Low, `An Empirical Validation of a Duality
    Model of TCP and Active Queue Management Algorithms
-   <https://ieeexplore.ieee.org/document/977445>`__.  Proceedings of the
+   <https://ieeexplore.ieee.org/document/977445>`__.
    Winter Simulation Conference, 2001.
 
-   R. Ware, *et al*. `Beyond Jain's Fairness Index: Setting the Bar for
+   R. Ware et al. `Beyond Jain's Fairness Index: Setting the Bar for
    the Deployment of Congestion Control Algorithms
-   <https://www.cs.cmu.edu/~rware/assets/pdf/ware-hotnets19.pdf>`__.
-   ACM SIGCOMM HotNets. November 2019.
+   <https://dl.acm.org/doi/10.1145/3365609.3365855>`__.
+   ACM SIGCOMM HotNets, November 2019.
 
 
 .. TODO -- Possibly include a sidebar on BSD/Linux as the reference
