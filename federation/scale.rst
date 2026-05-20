@@ -436,7 +436,7 @@ adopted in 2015.
    Reuse. <https://dl.acm.org/doi/10.1145/173942.173944>`__. ACM SIGCOMM
    CCR, January 1993.
 
-   P. Francis. `Network Address Translation
+   P. Francis. `Network Address Translation (NAT)
    <https://dl.acm.org/doi/10.1145/2766330.2766340>`__. ACM SIGCOMM
    CCR, April 2015.
 
