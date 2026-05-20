@@ -137,8 +137,8 @@ paper:
 
    I. Sodagar. `The MPEG-DASH Standard for Multimedia Streaming Over
    the Internet
-   <https://ieeexplore.ieee.org/document/6077864>`__. *IEEE
-   MultiMedia, vol. 18, no. 4*, April 2011.
+   <https://ieeexplore.ieee.org/document/6077864>`__. IEEE
+   MultiMedia, April 2011.
 
 With this peek into the bookkeeping challenge of HTTP-based streaming,
 let's pop back up to the big picture. To view a video, a player first

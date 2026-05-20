@@ -4,16 +4,17 @@
 .. A helpful RDMA Tutorial Slide Deck
    https://www.doc.ic.ac.uk/~jgiceva/teaching/ssc18-rdma.pdf
 
-RDMA is a remote variant of DMA (direct memory access), an architectural feature commonly
-used for device/host communication over a computer's I/O bus. A
-network adaptor (i.e., NIC) is an example device that uses DMA to pass
-frames between the NIC and the host. For example, a host passes an
-address for an empty memory buffer to the NIC, and the NIC is able to
-directly write incoming frames (arriving from the network) into that
-buffer without the host CPU being involved. In the other direction,
-the host passes an address for a full memory buffer to the NIC, and
-the NIC is able to transmit a frame onto the network by directly
-reading from that buffer, again without the host CPU being involved.
+RDMA is a remote variant of DMA (direct memory access), an
+architectural feature commonly used for device/host communication over
+a computer's I/O bus. A network adaptor (i.e., NIC) is an example
+device that uses DMA to pass frames between the NIC and the host. For
+example, a host passes an address for an empty memory buffer to the
+NIC, and the NIC is able to directly write incoming frames (arriving
+from the network) into that buffer without the host CPU being
+involved. In the other direction, the host passes an address for a
+full memory buffer to the NIC, and the NIC is able to transmit a frame
+onto the network by directly reading from that buffer, again without
+the host CPU being involved.
 
 As a communication abstraction, RDMA extends that model to
 network-connected machines, as shown in :numref:`Figure %s
@@ -259,12 +260,12 @@ AI workloads. We're now ready to look at the NIC in more detail.
 
 .. admonition:: Further Reading
 
-   RDMA Core Userspace Libraries and Daemons
-   https://github.com/linux-rdma/rdma-core/blob/master/README.md
+   `RDMA Core Userspace Libraries and Daemons
+   <https://github.com/linux-rdma/rdma-core/blob/master/README.md>`__.
 
-   H. Lauer and R. Needham. On the Duality of Operating System
-   Structures. *Proceedings of the 7th ACM Symposium on Operating
-   Systems Principles (SOSP).* December 1979.
+   H. Lauer and R. Needham. `On the Duality of Operating System
+   Structures <https://dl.acm.org/doi/10.1145/850657.850658>`__.  7th
+   ACM Symposium on Operating Systems Principles (SOSP), December 1979.
 
 
 |Message|.4.3 Protocol Details

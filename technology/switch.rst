@@ -385,9 +385,9 @@ that competes with the largest vendors in the networking industry.
 .. _reading_openflow:
 .. admonition:: Further Reading
 
-   N. McKeown, et. al. `OpenFlow: Enabling Innovation in Campus Networks
-   <http://ccr.sigcomm.org/online/files/p69-v38n2n-mckeown.pdf>`__.
-   SIGCOMM CCR, March 2008.
+   N. McKeown et al. `OpenFlow: Enabling Innovation in Campus Networks
+   <https://dl.acm.org/doi/10.1145/1355734.1355746>`__.
+   ACM SIGCOMM CCR, March 2008.
 
    L. Peterson, C. Cascone, B. O'Connor, T. Vachuska, and B. Davie.
    `Software-Defined Networks: A Systems Approach

@@ -85,6 +85,12 @@ proven too bizarre for IP. In principle, IP can run over a network that
 transports messages using carrier pigeons (as satirically
 described in RFC 1149!).
 
+.. admonition:: Further Reading
+
+   D. Waitzman. `Standard for the Transmission of IP Datagrams on
+   Avian Carriers <https://www.rfc-editor.org/info/rfc1149>`__.
+   RFC 1149, April 1990.
+
 Best-effort delivery does not just mean that packets can get lost or delayed.
 Sometimes they can get delivered out of order, and sometimes the same
 packet can get delivered more than once. The higher-level protocols or

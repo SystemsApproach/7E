@@ -23,11 +23,10 @@ championed by Google today.
 .. _reading_vegas:
 .. admonition:: Further Reading
 
-      L. Brakmo, S. O'Malley and L. Peterson
+      L. Brakmo, S. O'Malley, and L. Peterson.
       `TCP Vegas: New Technique for Congestion Detection and Avoidance
-      <https://sites.cs.ucsb.edu/~almeroth/classes/F05.276/papers/vegas.pdf>`__.
-      ACM SIGCOMM '94 Symposium. August 1994. (Reprinted in IEEE/ACM Transactions
-      on Networking, October 1995).
+      <https://dl.acm.org/doi/10.1145/190314.190317>`__.
+      ACM SIGCOMM '94 Symposium, August 1994.
 
 |CC|.4.1 TCP Vegas
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -390,8 +389,8 @@ hosting discussions on the ongoing design and experimentation.
 .. _reading_bbr:
 .. admonition:: Further Reading
 
-     N. Cardwell, Y. Cheng, C. S. Gunn, S. Yeganeh, V. Jacobson. `BBR: Congestion-based
-     Congestion Control
-     <https://cacm.acm.org/magazines/2017/2/212428-bbr-congestion-based-congestion-control/fulltext>`__.
-     Communications of the ACM, Volume 60, Issue 2, February 2017.
+   N. Cardwell, Y. Cheng, C. S. Gunn, S. Yeganeh, V. Jacobson. `BBR:
+   Congestion-based Congestion Control
+   <https://cacm.acm.org/magazines/2017/2/212428-bbr-congestion-based-congestion-control/fulltext>`__.
+   Communications of the ACM, February 2017.
 

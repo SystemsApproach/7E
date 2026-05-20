@@ -27,6 +27,16 @@ protocols warrants a quick look.
        several times, the
        most current version at the time of writing being RFC 5322.
 
+.. admonition:: Further Reading
+
+   D. Crocker. `Standard for the Format of ARPA Internet Text Messages
+   <https://www.rfc-editor.org/info/rfc822>`__. RFC 822,
+   August 1982.
+
+   P. Resnick (Ed.). `Internet Message Format
+   <https://www.rfc-editor.org/info/rfc5322>`__. RFC 5322,
+   October 2008.
+
 The key abstraction in email is a *mailbox*, which provides a
 rendezvous point for an email exchange: SMTP is used to send email to
 a mailbox, and IMAP (and its predecessor, POP, the Post Office

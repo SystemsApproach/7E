@@ -68,6 +68,13 @@ networks have largely converged on a minimal subset that includes just
 one or two AF classes, in addition to the high-priority network
 control class and default best-effort class.
 
+.. admonition:: Further Reading
+
+   K. Nichols, S. Blake, F. Baker, and D. Black. `Definition of the
+   Differentiated Services Field (DS Field) in the IPv4 and IPv6
+   Headers <https://www.rfc-editor.org/info/rfc2474>`__. RFC 2474,
+   December 1998.
+
 .. TODO -- Verify that the above paragraph is correct. It suggests a
    thread that is of minimal value (except perhaps as a negative
    example).

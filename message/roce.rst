@@ -98,10 +98,23 @@ Notification (ECN) mechanism described in Chapter |Capacity|. This is appealing
 for cloud providers because their datacenters already leverage ECN in
 support of TCP congestion control.  The two mechanisms work in
 concert, with ECN pacing the source host as a first response to
-congestion, and PFC serving as a fall-back.
+congestion, and PFC serving as a fall-back. Note that this is all
+still an active area of research, with the following papers giving
+some insight into the issues being studied.
 
-.. TODO could say more about how modern ROCE congestion control is shaping
-   up without PFC. Maybe a side bar on the open state of research here
+.. admonition:: Further Reading
+
+   C. Gao et al. `RDMA over Ethernet at Scale
+   <https://dl.acm.org/doi/10.1145/2934872.2934908>`__.
+   ACM SIGCOMM '16 Symposium, August 2016.
+
+   Q. Li et al. `RDMA over Heterogeneous NICS
+   <https://www.usenix.org/system/files/osdi23-li-qiang.pdf>`__.
+   Usenix OSDI '23 Symposium, July 2023.
+
+   A. Singhvi et al. `Falcon: A Reliable, Low Latency Hardware
+   Transport <https://dl.acm.org/doi/10.1145/3718958.3754353>`__.
+   ACM SIGCOMM '25 Symposium, August 2025.
 
 .. _fig-soft-roce:
 .. figure:: message/figures/soft-roce.png
@@ -126,12 +139,6 @@ translate to worse message latency. This configuration is shown in
     https://network.nvidia.com/pdf/whitepapers/IB_Intro_WP_190.pdf
         https://cloudswit.ch/blogs/roce-or-infiniband-technical-comparison/#1-6-transport-layer
 
-    Converged Ethernet
-    https://dl.acm.org/doi/pdf/10.1145/3718958.3754353
-
-    RDMA over Ethernet at Scale (SIGCOMM 2016)
-    https://dl.acm.org/doi/10.1145/2934872.2934908
-
     RDMA over Heterogeneous NICS
     https://www.usenix.org/system/files/osdi23-li-qiang.pdf
 
@@ -142,9 +149,6 @@ translate to worse message latency. This configuration is shown in
 
     For a good overview of RoCE, see
     https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
-
-    maybe also the Falcon paper
-    https://dl.acm.org/doi/10.1145/3718958.3754353
 
 .. sidebar:: Information Processing Units
 

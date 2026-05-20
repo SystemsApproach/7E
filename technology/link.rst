@@ -615,12 +615,12 @@ while retaining the simplicity of network administration.
 
 .. admonition:: Further Reading
 
-   R. M. Metcalfe and D. R. Boggs. Ethernet: Distributed Packet
-   Switching for Local Computer Networks. *Communications of the ACM,*
-   Volume 19, Issue 7. July 1976.
-   (https://dl.acm.org/doi/abs/10.1145/360248.360253)
+   R. Metcalfe and D. Boggs. `Ethernet: Distributed Packet
+   Switching for Local Computer Networks
+   <https://dl.acm.org/doi/10.1145/360248.360253>`__.
+   Communications of the ACM,  July 1976.
 
-   N. Abramson. The ALOHA System—Another Alternative for Computer
-   Communications. *Proceedings of the 1970 Fall Joint Computer
-   Conference*. AFIPS Press. 1971.
-   (https://www.clear.rice.edu/comp551/papers/Abramson-Aloha.pdf)
+   N. Abramson. `The ALOHA System—Another Alternative for Computer
+   Communications
+   <https://dl.acm.org/doi/10.1145/1478462.1478502>`__. 
+   AFIPS 1970 Fall Joint Computer Conference, November 1970.

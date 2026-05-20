@@ -556,10 +556,9 @@ permitted). We return to QUIC in Chapter |Message|.
 .. _reading_newreno:
 .. admonition::  Further Reading
 
-   J. Hoe. `Improving the start-up behavior of a congestion control
-   scheme for TCP
-   <https://dl.acm.org/doi/10.1145/248156.248180>`__.
-   SIGCOMM '96. August 1996.
+   J. Hoe. `Improving the Start-up Behavior of a Congestion Control
+   Scheme for TCP <https://dl.acm.org/doi/10.1145/248156.248180>`__.
+   ACM SIGCOMM '96 Symposium, August 1996.
 
 The key insight behind NewReno is that even without SACK, duplicate
 ACKs can convey information to the sender about how many packets have
@@ -704,6 +703,6 @@ been widely deployed.
 .. admonition::  Further Reading
 
    S. Ha, I. Rhee, and L. Xu. `CUBIC: a New TCP-friendly High-speed TCP Variant
-   <https://www.cs.princeton.edu/courses/archive/fall16/cos561/papers/Cubic08.pdf>`__.
+   <https://dl.acm.org/doi/10.1145/1400097.1400105>`__.
    ACM SIGOPS Operating Systems Review, July 2008.
 

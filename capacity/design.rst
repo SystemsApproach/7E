@@ -65,7 +65,7 @@ this default decision is important for two reasons.
 
        D. Clark, `The Design Philosophy of the DARPA Internet
        Protocols <https://dl.acm.org/doi/10.1145/52324.52336>`__.
-       ACM SIGCOMM, 1988.
+       ACM SIGCOMM '88 Symposium, August 1988.
 
 First, while the Internet's approach to congestion control is
 distributed across its millions of hosts and routers, it is fair to
