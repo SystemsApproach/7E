@@ -115,6 +115,11 @@ illustrated by :numref:`Figure %s <fig-quic-tls>`. As RFC 9001 puts it:
 uses the TLS handshake; TLS uses the reliability, ordered delivery,
 and record layer provided by QUIC.*
 
+.. admonition:: Further Reading
+
+   M. Thomson and S. Turner (Eds.). `Using TLS to Secure QUIC
+   <https://www.rfc-editor.org/info/rfc9001>`__. RFC 9001,
+   May 2021.
 
 .. _fig-quic-tls:
 .. figure:: message/figures/QUIC-TLS.png
@@ -430,11 +435,11 @@ as the interactions with TLS and congestion control.
 .. _reading_quic:
 .. admonition::  Further Reading
 
-   A. Langley *et al.*
+   A. Langley et al.
    `The QUIC Transport Protocol: Design and Internet-Scale Deployment
    <https://doi.org/10.1145/3098822.3098842>`__.
-   Proc. ACM SIGCOMM, August 2017.
+   ACM SIGCOMM '17 Symposium, August 2017.
 
-   J. Iyengar and M. Thomson, Eds. `QUIC: A UDP-Based Multiplexed and
+   J. Iyengar and M. Thomson (Eds.). `QUIC: A UDP-Based Multiplexed and
       Secure Transport
-      <https://www.rfc-editor.org/rfc/rfc9000>`__. RFC 9000, May 2021.
+      <https://www.rfc-editor.org/info/rfc9000>`__. RFC 9000, May 2021.

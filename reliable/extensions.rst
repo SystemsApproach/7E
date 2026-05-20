@@ -100,5 +100,6 @@ experimentation and extensions, was fully updated in 2022.
 .. _reading_TCPSTD:
 .. admonition::  Further Reading
 
-   `RFC 9293: Transmission Control Protocol
-   <https://www.rfc-editor.org/info/rfc9293>`__. September 2022.
+   W. Eddy (Ed.). `Transmission Control Protocol (TCP)
+   <https://www.rfc-editor.org/info/rfc9293>`__. RFC 9293,
+   August 2022.

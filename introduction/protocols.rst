@@ -269,6 +269,30 @@ entire body of the message, including both the original application’s
 data and all the headers attached to that data by higher-level
 protocols.
 
+As Internet protocols, the specifications for IP, TCP, and
+UDP—including their header formats—are given in official documents
+known as *Request for Comments*, or *RFCs* for short. For example, RFC
+791 is the original specification for IP, RFC 793 is the original
+specification for TCP, and RFC 768 is the original specification for
+UDP.  All three protocols have been updated over time (and new RFCs
+issued), but as an introduction to RFCs, these three are the right
+place to start. And for the purpose of this section, focusing on the
+header format each RFC defines is sufficient.
+
+.. admonition:: Further Reading
+
+   J. Postel. `Internet Protocol
+   <https://www.rfc-editor.org/info/rfc791>`__. RFC 791,
+   September 1981.
+
+   J. Postel. `Transmission Control Protocol
+   <https://www.rfc-editor.org/info/rfc793>`__. RFC 793,
+   September 1981.
+
+   J. Postel. `User Datagram Protocol
+   <https://www.rfc-editor.org/info/rfc768>`__. RFC 768,
+   August 1980.
+
 1.3.4 Multiplexing and Demultiplexing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

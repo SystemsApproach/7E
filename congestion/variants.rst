@@ -131,14 +131,14 @@ datacenters.
 .. _reading_dctcp:
 .. admonition::  Further Reading
 
-   M. Alizadeh, *et al*. `Data
+   M. Alizadeh et al. `Data
    Center TCP (DCTCP)
-   <http://dl.acm.org/citation.cfm?doid=1851182.1851192>`__.
-   ACM SIGCOMM, August 2010.
+   <https://dl.acm.org/doi/10.1145/1851182.1851192>`__.
+   ACM SIGCOMM '10 Symposium, August 2010.
 
-   A. Dhamija  *et al*. `A Large-Scale Deployment of DCTCP
+   A. Dhamija et al. `A Large-Scale Deployment of DCTCP
    <https://www.usenix.org/system/files/nsdi24-dhamija.pdf>`__.
-   Usenix NSDI, April 2024.
+   Usenix NSDI '24 Symposium, April 2024.
 
 There has been considerable research since DCTCP to optimize TCP for
 datacenters, with the general approach being to introduce ever-more
@@ -202,15 +202,15 @@ hardware, making On-Ramp easy to deploy.
 .. _reading_onramp:
 .. admonition::  Further Reading
 
-   S. Liu, *et al*. `Breaking the Transience-Equilibrium Nexus: A New
+   S. Liu et al. `Breaking the Transience-Equilibrium Nexus: A New
    Approach to Datacenter Packet Transport
    <https://www.usenix.org/system/files/nsdi21-liu.pdf>`__.
-   Usenix NSDI '21. April 2021.
+   Usenix NSDI '21 Symposium, April 2021.
 
-   Y. Geng, *et al*. `Exploiting a Natural Network Effect for Scalable,
+   Y. Geng et al. `Exploiting a Natural Network Effect for Scalable,
    Fine-grained Clock Synchronization
    <https://www.usenix.org/system/files/conference/nsdi18/nsdi18-geng.pdf>`__.
-   Usenix NSDI '18, April 2018.
+   Usenix NSDI '18 Symposium, April 2018.
 
 |CC|.5.2 Mobile Cellular Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -290,18 +290,19 @@ other point along the Internet segment is the actual bottleneck.
 .. _reading_ran:
 .. admonition::  Further Reading
 
-   S. Mascolo, C. Casetti, M. Gerla, M. Sanadidi, and R. Wang.
+   S. Mascolo et al..
    `TCP Westwood: Bandwidth Estimation for Enhanced Transport over Wireless
-   Links <https://dl.acm.org/doi/abs/10.1023/A%3A1016590112381>`__,
-   Proc. of the ACM Mobicom 2001, Rome, Italy, July 16-21 2001
+   Links <https://dl.acm.org/doi/10.1145/381677.381704>`__,
+   ACM Mobicom '01 Symposium, July 2001.
 
    H. Jiang, Z. Liu, Y. Wang, K. Lee and I. Rhee.
    `Understanding Bufferbloat in Cellular Networks
-   <https://conferences.sigcomm.org/sigcomm/2012/paper/cellnet/p1.pdf>`__
+   <https://dl.acm.org/doi/10.1145/2342468.2342470>`__
    ACM SIGCOMM Workshop on Cellular Networks, August 2012.
 
    Y. Xie, F. Yi, and K. Jamieson. `PBE-CC: Congestion Control via
    Endpoint-Centric, Physical-Layer Bandwidth Measurements
-   <https://arxiv.org/abs/2002.03475>`__. SIGCOMM 2020.
+   <https://dl.acm.org/doi/10.1145/3387514.3405880>`__. ACM SIGCOMM
+   '20 Symposium, August 2020.
 
 

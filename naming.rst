@@ -56,8 +56,8 @@ the software ecosystem running on hosts at the edge of the network.
    <https://www.rfc-editor.org/ien/ien19.txt>`__ Internet Experiment
    Note #19. January 1978.
 
-   J. Saltzer. `On the Naming and Binding of Network Destinations.
-   <https://datatracker.ietf.org/doc/html/rfc1498>`__  RFC 1498.
+   J. Saltzer. `On the Naming and Binding of Network Destinations
+   <https://www.rfc-editor.org/info/rfc1498>`__. RFC 1498,
    August 1993.
 
 .. include:: naming/design.rst
