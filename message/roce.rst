@@ -104,7 +104,7 @@ some insight into the issues being studied.
 
 .. admonition:: Further Reading
 
-   C. Gao et al. `RDMA over Ethernet at Scale
+   C. Gao et al. `RDMA over Commodity Ethernet at Scale
    <https://dl.acm.org/doi/10.1145/2934872.2934908>`__.
    ACM SIGCOMM '16 Symposium, August 2016.
 
