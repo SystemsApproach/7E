@@ -23,7 +23,7 @@ experience a phenomenon known as *congestion collapse*. A
 solution—congestion control—was developed and deployed in the late
 1980s and the immediate crisis was addressed. The Internet community
 has been studying and refining its approach to congestion control ever
-since. This chapter is about that journey.
+since. This chapter is about that journey. 
 
 The most famous early efforts to manage congestion were undertaken by
 two researchers, Van Jacobson and Mike Karels. The resulting paper,

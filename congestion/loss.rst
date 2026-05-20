@@ -23,7 +23,26 @@ be read as a case study of the experience of identifying and solving a
 sequence of problems. We will trace the historical context as we visit
 each of the techniques in the subsections that follow.
 
-|CC|.3.1 Additive Increase/Multiplicative Decrease
+Note that the IETF has published multiple "checkpoints" over the
+years, reporting best-practices at that point in time. RFCs 5681 and
+9438 are two noteworthy examples. But the process is inherently
+incremental, with each improvement rooted in some key insight.  The
+incremental nature of the process, and those key insights, is a
+central theme of the subsections that follow.
+
+.. admonition:: Further Reading
+
+   M. Allman and V. Paxson. `TCP Congestion Control 
+   <https://www.rfc-editor.org/info/rfc5681>`__. RFC 5681,
+   September 2009.
+
+   L. Xu, S. Ha, I. Rhee, V. Goel, and L. Eggert (Eds.). `CUBIC for
+   FAST and Long-Distance Networks
+   <https://www.rfc-editor.org/info/rfc9438>`__. RFC 9438,
+   August 2023.
+
+
+|CC|.2.1 Additive Increase/Multiplicative Decrease
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The central challenge is computing an estimate of how much traffic
@@ -151,10 +170,10 @@ detected by a timeout.
 Finally, since a timeout is an indication of congestion that triggers
 multiplicative decrease, TCP needs the most accurate timeout mechanism
 it can afford. We already covered TCP’s timeout mechanism in Section
-|CC|.2, but recall that timeouts are set as a function of both the
+|TCP|.6, but recall that timeouts are set as a function of both the
 average RTT and the deviation in that average.
 
-|CC|.3.2 Slow Start
+|CC|.2.2 Slow Start
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The additive increase mechanism just described is a reasonable approach to
@@ -367,7 +386,7 @@ could be a long time before these types of enhancements could make it
 into the Internet; for now, they are more likely to be used in
 controlled network environments (e.g., research networks).
 
-|CC|.3.3 Fast Retransmit and Fast Recovery
+|CC|.2.3 Fast Retransmit and Fast Recovery
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The mechanisms described so far were part of the original proposal to
@@ -475,7 +494,7 @@ a connection and whenever a coarse-grained timeout occurs. At all
 other times, the congestion window is following a pure additive
 increase/multiplicative decrease pattern.
 
-|CC|.3.4 Incremental Enhancements
+|CC|.2.4 Incremental Enhancements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If a study of TCP congestion control teaches us one thing, it's how
@@ -589,7 +608,7 @@ with respect to the subtleties of TCP's retransmission mechanism),
 adding to the challenge of getting new algorithms into deployment.
 
 
-|CC|.3.5 TCP CUBIC
+|CC|.2.5 TCP CUBIC
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It should be clear by now that trying to find the appropriate rate at
