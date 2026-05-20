@@ -19,7 +19,7 @@ described in a companion book.
    Systems Approach <https://tcpcc.systemsapproach.org>`__.
    May 2022.
 
-|CC|.5.1 Datacenter Networks
+|CC|.4.1 Datacenter Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. TODO -- I believe the DCTCP description is up-to-date.
@@ -212,7 +212,7 @@ hardware, making On-Ramp easy to deploy.
    <https://www.usenix.org/system/files/conference/nsdi18/nsdi18-geng.pdf>`__.
    Usenix NSDI '18 Symposium, April 2018.
 
-|CC|.5.2 Mobile Cellular Networks
+|CC|.4.2 Mobile Cellular Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A second use case that continues to attract attention from the

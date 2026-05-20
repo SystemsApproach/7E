@@ -28,7 +28,7 @@ championed by Google today.
       <https://dl.acm.org/doi/10.1145/190314.190317>`__.
       ACM SIGCOMM '94 Symposium, August 1994.
 
-|CC|.4.1 TCP Vegas
+|CC|.3.1 TCP Vegas
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The essential idea behind TCP Vegas is to adapt the sending rate based
@@ -178,7 +178,7 @@ decrease just described is an *early* decrease in the congestion window
 that should happen before congestion occurs and packets start being
 dropped.
 
-|CC|.4.2 Varied Assumptions
+|CC|.3.2 Varied Assumptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TCP Vegas—and other delay-based approaches to avoiding congestion—have
@@ -189,7 +189,7 @@ real-world experience, but they have collectively refined and
 contributed to our understanding of avoidance-based algorithms. We
 summarize some of those insights here, but return to the general topic
 of customizing the congestion control algorithm for specific use cases
-in Section |CC|.5.
+in Section |CC|.4.
 
 FAST TCP
 +++++++++++++++
@@ -268,7 +268,7 @@ than instantaneously, in case the new measurement is noisy. To filter
 out bad measurements, NV collects many measurements and then use the
 best one before making a congestion determination.
 
-|CC|.4.3 TCP BBR
+|CC|.3.3 TCP BBR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BBR (Bottleneck Bandwidth and Round-trip propagation time) is a TCP
