@@ -1,4 +1,4 @@
-1.4 Resource Sharing
+|Intro|.4 Resource Sharing
 ----------------------------------------------
 
 Networks are a shared resource, carrying traffic between different
@@ -161,7 +161,7 @@ coordination is required. This might not always result in a fair
 decision since packets that have already been forwarded around the
 globe intuitively have more "at risk" should they encounter
 congestion, but that's a problem for another day (as we'll see in
-Chapter 14). It turns out this issue is a consequence of our
+Chapter |CC|). It turns out this issue is a consequence of our
 architectural decision to separate in-the-network versus
 edge-of-network concerns.
 
@@ -213,7 +213,7 @@ but for now, we identify three specific resources:
   an input port to an output port. This requires an internal forwarding
   mechanism. This capacity is usually measured in packets-per-second
   (pps), with a given switch engineered to support some maximum
-  forwarding rate. (See Chapter 3 for more details.) A new switch has
+  forwarding rate. (See Chapter |Tech| for more details.) A new switch has
   to be deployed when additional forwarding capacity is needed.
 
 * **Buffer Capacity:** Switches store packets in a buffer, where they
@@ -237,12 +237,12 @@ exchange messages).
 
 Such theoretical analysis is beyond the scope of this book, but there
 are a few common topologies of note. One is a mesh topology, of which
-:numref:`Figure %s <fig-network>` in Section 1.2 is an example.  Mesh
+:numref:`Figure %s <fig-network>` in Section |Intro|.2 is an example.  Mesh
 topologies have no obvious structure, although in practice they often
 mirror geographical maps (as would be the case for a nation-wide backbone
 network with switches in major cities). Another common example is a
 *leaf-spine* topology, similar to the one shown in
-:ref:`Section 2.1 <fig-leaf-spine>`.
+:ref:`Section |Apps|.1 <fig-leaf-spine>`.
 This particular structure is designed to support low-latency
 communication between servers in a cloud datacenter.
 

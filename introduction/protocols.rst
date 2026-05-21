@@ -1,4 +1,4 @@
-1.3  Network Protocols
+|Intro|.3  Network Protocols
 ------------------------------------------
 
 Network architectures prescribe and describe a particular modularization
@@ -10,7 +10,7 @@ previous section try to do, but before we get into the merits and
 limitations of any particular architecture, let's first consider what
 these "network modules" actually look like.
 
-1.3.1 Layering
+|Intro|.3.1 Layering
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Abstractions naturally lead to layering, especially in network
@@ -60,7 +60,7 @@ establishing a reliable byte-stream between two processes (TCP) and
 the other delivering unreliable datagrams between two processes (UDP).
 
 
-1.3.2 Interfaces
+|Intro|.3.2 Interfaces
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 With a set of layers as a foundation, we are now ready to discuss the
@@ -154,8 +154,8 @@ exchange messages. Two or more protocol modules that do accurately
 implement a protocol specification are said to *interoperate* with
 each other.
 
-1.3.3 Encapsulation
-~~~~~~~~~~~~~~~~~~~~
+|Intro|.3.3 Encapsulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Consider what happens in :numref:`Figure %s <fig-protograph>` when one
 of the application programs sends a message to its peer by passing the
@@ -272,12 +272,11 @@ protocols.
 As Internet protocols, the specifications for IP, TCP, and
 UDP—including their header formats—are given in official documents
 known as *Request for Comments*, or *RFCs* for short. For example, RFC
-791 is the original specification for IP, RFC 793 is the original
-specification for TCP, and RFC 768 is the original specification for
-UDP.  All three protocols have been updated over time (and new RFCs
-issued), but as an introduction to RFCs, these three are the right
-place to start. And for the purpose of this section, focusing on the
-header format each RFC defines is sufficient.
+791 is the original spec for IP, RFC 793 is the original spec for TCP,
+and RFC 768 is the original spec for UDP.  All three protocols have
+been updated over time (and new RFCs issued), but as a general
+introduction to what a protocol definition looks like, these three
+RFCs are a good place to start.
 
 .. admonition:: Further Reading
 
@@ -293,8 +292,8 @@ header format each RFC defines is sufficient.
    <https://www.rfc-editor.org/info/rfc768>`__. RFC 768,
    August 1980.
 
-1.3.4 Multiplexing and Demultiplexing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Intro|.3.4 Multiplexing and Demultiplexing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each of the protocols in :numref:`Figure %s <fig-protograph>` is
 potentially asked to send and receive messages on behalf of multiple
@@ -366,6 +365,12 @@ we only care about some prefix of an IP address, say the first 16 or
 network that a host is connected to, and that's the bit of
 information we want to know.
 
+Finally, you may have noticed that the definition of UDP in RFC 768 is
+only three pages long. This is because UDP's sole purpose is to layer
+a user-level demultiplexing capability—in the form of a
+source/destination port pair—on top of IP's best-effort packet
+delivery service. In doing to, UDP turns IP's host-to-host service
+into a process-to-process service.
 
 
 

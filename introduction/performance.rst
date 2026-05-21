@@ -1,4 +1,4 @@
-1.5 Performance
+|Intro|.5 Performance
 --------------------------------
 
 Like any computer system, computer networks are also expected to
@@ -10,8 +10,8 @@ true, in networking it is often necessary to “design for performance.”
 It is therefore important to understand the various factors that
 impact network performance.
 
-1.5.1 Bandwidth and Latency
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Intro|.5.1 Bandwidth and Latency
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Network performance is measured in two fundamental ways: *bandwidth*
 (also called *throughput*) and *latency* (also called *delay*). The
@@ -143,7 +143,7 @@ we use the term *propagation delay*.  Also, we make it clear in the
 context of the discussion whether we are referring to the one-way
 latency or the round-trip time.
 
-1.5.2 Delay × Bandwidth Product
+|Intro|.5.2 Delay × Bandwidth Product
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It is also useful to talk about the product of these two metrics, often
@@ -212,7 +212,7 @@ some typical network links.
    | Cross-country fiber | 10 Gbps   | 4,000 km         | 40 ms   | 400 Mb          |
    +---------------------+-----------+------------------+---------+-----------------+
 
-1.5.3 Infinite Bandwidth
+|Intro|.5.3 Infinite Bandwidth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The seeming continual increase in bandwidth causes network designers
@@ -290,7 +290,7 @@ security properties for the connection at the start of the
 transfer—will hurt the effective throughput for any transfer of finite
 size and will be most noticeable for small transfers.
 
-1.5.4 Application Requirements
+|Intro|.5.4 Application Requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The discussion up to this point takes a network-centric view of

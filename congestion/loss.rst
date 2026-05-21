@@ -26,13 +26,14 @@ each of the techniques in the subsections that follow.
 Note that the IETF has published multiple "checkpoints" over the
 years, reporting best-practices at that point in time. RFCs 5681 and
 9438 are two noteworthy examples. But the process is inherently
-incremental, with each improvement rooted in some key insight.  The
-incremental nature of the process, and those key insights, is a
-central theme of the subsections that follow.
+incremental, with each improvement rooted in some insight gained
+through operational experience.  The incremental nature of the
+process, and those key insights, is a central theme of the subsections
+that follow.
 
 .. admonition:: Further Reading
 
-   M. Allman and V. Paxson. `TCP Congestion Control 
+   M. Allman and V. Paxson. `TCP Congestion Control
    <https://www.rfc-editor.org/info/rfc5681>`__. RFC 5681,
    September 2009.
 

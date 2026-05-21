@@ -1,5 +1,5 @@
-1.1  Requirements
----------------------------
+|Intro|.1  Requirements
+-------------------------------
 
 This chapter establishes the ambitious goal of building a network that
 scales to a global footprint and supports a wide range of
@@ -92,7 +92,7 @@ challenge. This mechanism should be fair (for some definition of
 fairness), but also efficient. The latter requirement means that we
 want to maximize the amount of data the network delivers on behalf of its
 users, for a given set of resource capacities.  We expand on this
-requirement in Section 1.4.
+requirement in Section |Intro|.4.
 
 The fourth requirement is that the network be *high performance.*
 Everyone wants the network to be fast, but performance is
@@ -103,7 +103,7 @@ packet delivery is predictable, so that a video stream plays without
 jarring pauses. All of these metrics depend on physical limitations,
 such as the speed of light, but there is also significant work that a
 network has to do in order to deliver on this potential. We expand
-on this requirement in Section 1.5.
+on this requirement in Section |Intro|.5.
 
 We highlight these four requirements because they dominate the design
 challenges discussed throughout the book. There are other
