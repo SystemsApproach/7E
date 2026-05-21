@@ -622,5 +622,5 @@ while retaining the simplicity of network administration.
 
    N. Abramson. `The ALOHA System—Another Alternative for Computer
    Communications
-   <https://dl.acm.org/doi/10.1145/1478462.1478502>`__. 
+   <https://dl.acm.org/doi/10.1145/1478462.1478502>`__.
    AFIPS 1970 Fall Joint Computer Conference, November 1970.

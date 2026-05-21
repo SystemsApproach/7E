@@ -1,5 +1,5 @@
-1.2  Network Architecture
----------------------------
+|Intro|.2  Network Architecture
+-------------------------------
 
 The previous section established a substantial set of requirements for
 network design—a computer network must provide general,
@@ -43,7 +43,7 @@ problem of building a network into manageable subsystems, setting the
 stage for the rest of the book.
 
 
-1.2.1 OSI Model
+|Intro|.2.1 OSI Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The International Standards Organization (ISO) was one of the first
@@ -119,8 +119,8 @@ internal structure or what technology it uses. In the simplest case,
 the network can be implemented by a single point-to-point link.
 
 
-1.2.2 Internet Architecture
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Intro|.2.2 Internet Architecture
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Internet architecture is more concrete than the OSI architecture
 because it is organized around specific components, namely, the TCP
@@ -217,7 +217,7 @@ forward complete packets on an output port. Such networks are
 sometimes called *store-and-forward* networks to distinguish them from
 circuit-based networks that pass signals (either electrical or
 optical) directly from input to output without buffering or delay. We
-discuss the importance of this design in Section 1.4.
+discuss the importance of this design in Section |Intro|.4.
 
 The Internet is a *logical* network running on top of a
 collection of *physical* networks, and this is a powerful idea, with non-obvious
@@ -231,8 +231,8 @@ an internet can be built from a set of internets.  Thus, we can
 recursively build arbitrarily large networks by interconnecting clouds
 to form larger clouds.
 
-We take a closer look at how IP achieves this goal in Chapter 6, but
-for now the main take away is that we can define a *network*
+We take a closer look at how IP achieves this goal in Chapter |Fed|,
+but for now the main take away is that we can define a *network*
 recursively as consisting of two or more nodes connected by a physical
 link, or as two or more networks connected by a node. In other words,
 a network can be constructed from a nesting of networks, where at the
@@ -277,7 +277,7 @@ T-shirts commonly worn at IETF meetings:
    *We reject kings, presidents, and voting. We believe in rough
    consensus and running code.* **(David Clark)**
 
-1.2.3 Separation of Concerns
+|Intro|.2.3 Separation of Concerns
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 System design principles—the collective wisdom that comes from years
@@ -311,10 +311,10 @@ leverage it as an organizing principle for the rest of this book,
 which we break into three parts:
 
 * **Foundation:** Part I introduces the base concepts and terminology,
-  and scopes the other two parts. Chapter 2 introduces a
+  and scopes the other two parts. Chapter |Apps| introduces a
   representative set of applications and identifies how they differ
   and what they have in common. This sets the stage for understanding
-  the edge software stack described in Part III.  Chapter 3 looks at
+  the edge software stack described in Part III.  Chapter |Tech| looks at
   the possible design space for switches and links, and then settles
   on a particular technology—Ethernet—that serves as an exemplar
   building block for discussing the challenges raised in Part II.
