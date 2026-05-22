@@ -14,7 +14,7 @@ amount of time. In addition to these failure modes, packets are
 limited to some finite size, typically on the order of a few thousand
 bytes.
 
-At the same time, applications like the ones we looked at in Chapter 2
+At the same time, applications like the ones we looked at in Chapter |Apps|
 expect a higher level of service from the network. This often includes
 requirements like the following: at most one copy of each message is
 delivered; a sequence of messages should be delivered in the same

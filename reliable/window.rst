@@ -289,7 +289,7 @@ extension to TCP that effectively extends the sequence number space to
 protect against the sequence number wrapping around. This and related
 extensions are described in a later section.
 
-|TCP|.4.5 Keeping the Pipe Full
+|TCP|.4.4 Keeping the Pipe Full
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The relevance of the 16-bit ``AdvertisedWindow`` field is that it must
