@@ -34,6 +34,7 @@ Larry Peterson and Bruce Davie
    policy.rst
    capacity.rst
    virtual.rst
+   operations.rst
    part_three.rst
    naming.rst
    reliable.rst
