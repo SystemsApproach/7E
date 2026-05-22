@@ -120,12 +120,14 @@ the number of packets we hope to have in flight at any given time
 (i.e., a 4-bit field supporting 16 sequence numbers in this example).
 We leave it as an exercise for the reader to figure out why this is
 the case, and do a deeper dive into the specific approach TCP uses in
-Section |TCP|.4. If you are interested in a protocol-agnostic description
-of the sliding window algorithm, we suggest:
+Section |TCP|.4.
 
-.. We might package as a standalone supplement.
+.. Not sure how to deal with additional detail from 6E. (Are there
+   other examples?)
 
-https://book.systemsapproach.org/direct/reliable.html#sliding-window
+   If you are interested in a protocol-agnostic description 
+   of the sliding window algorithm, we suggest:
+   https://book.systemsapproach.org/direct/reliable.html#sliding-window
 
 Unlike this simplified example, one of the more severe complications
 TCP has to address is that it doesn't have a perfect knowledge of the
