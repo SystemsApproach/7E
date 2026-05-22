@@ -1,7 +1,7 @@
 .. _artifact-rip:
 
-4.4 Distance Vector Routing
----------------------------------
+|Routing|.4 Distance Vector Routing
+---------------------------------------------
 
 The idea behind the distance-vector algorithm is suggested by its
 name.  (The other common name for this class of algorithm is
@@ -223,8 +223,8 @@ really had a route to E. Unfortunately, this approach delays the
 convergence of the protocol; speed of convergence is one of the key
 advantages of link-state routing.
 
-4.4.1 Implementation
-~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.4.1 Implementation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The code that implements this algorithm is very straightforward; we give
 only some of the basics here. Structure ``Route`` defines each entry in
@@ -237,7 +237,7 @@ is kept in the table before it is discarded.\ [#]_
        structured to support discovering routes, and not for doing
        fast lookup operations. Once we have decided on a route,
        information from the routing table is installed in the
-       forwarding table, as outlined in Chapter 3.
+       forwarding table, as outlined in Chapter |Tech|.
 
 .. code-block:: c
 
@@ -321,8 +321,8 @@ routing update that is received from a neighboring node.
        }
    }
 
-4.4.2 Routing Information Protocol (RIP)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.4.2 Routing Information Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One of the more widely used routing protocols in early IP networks was
 the Routing Information Protocol (RIP). Its widespread use was due in

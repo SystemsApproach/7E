@@ -1,5 +1,7 @@
-4.5 Routing in Datacenters
--------------------------------
+.. _artifact_ecmp:
+
+|Routing|.5 Routing in Datacenters
+------------------------------------
 
 We conclude our discussion of routing by looking at a different
 scenario: how routes are managed in datacenter networks. Recall from
@@ -19,8 +21,8 @@ lends itself to other routing techniques, including an approach known as
 explains the role it plays in implementing segment routing.
 
 
-4.5.1 Software-Defined Networking
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.5.1 Software-Defined Networking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As discussed in Chapter |Tech|, switches and routers have a control plane
 and a data plane, with some interface between them to allow forwarding
@@ -90,7 +92,7 @@ routing*. In terms of :numref:`Figure %s <fig-sdn>`, you can think of
 segment routing as an example SDN control application. B4 and SWAN are
 examples of other possible control apps.
 
-4.5.2 Link Aggregation
+|Routing|.5.2 Link Aggregation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We start with a more detailed look at how switches and servers are
@@ -159,7 +161,7 @@ accordingly.  Each switch then applies these port groups to its
 forwarding pipeline, which then forwards packets across the set of
 ports in each group without additional control plane involvement.
 
-4.5.3 Segment Routing
+|Routing|.5.3 Segment Routing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. TODO -- We need to at least mention other possibilities, including

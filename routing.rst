@@ -7,7 +7,7 @@
 Chapter |Routing|: Routing
 ========================================
 
-As we saw in Chapter 3, you can build a network from a set of links
+As we saw in Chapter |Tech|, you can build a network from a set of links
 and switches, but once that network gets to any reasonable size, the
 problem that becomes apparent is: how to get packets efficiently to
 their correct destinations? When you try to open up a page on some
@@ -29,7 +29,7 @@ service providers is largely handled by BGP (the Border Gateway
 Protocol), which deals with the commercial relationships among
 providers while also trying to find paths that are reasonably direct
 and free of loops. We describe BGP, probably the most complex routing
-system, in Chapter 7.
+system, in Chapter |BGP|.
 
 If we limit ourselves to looking at the network of a single service
 provider or an enterprise, we normally see a routing protocol based on

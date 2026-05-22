@@ -1,7 +1,7 @@
 .. _artifact-ospf:
 
-4.3 Link-State Routing
------------------------------
+|Routing|.3 Link-State Routing
+-------------------------------------
 
 Link-state routing is the most widely used class of intradomain
 routing protocol, at least in the service provider networks that make
@@ -37,8 +37,8 @@ of routes from the sum of all the accumulated link-state knowledge.
 When all the nodes have reached a common view of the network, routing
 is said to have *converged*.
 
-4.3.1 Reliable Flooding
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.3.1 Reliable Flooding
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *Reliable flooding* is the process of making sure that all the nodes
 participating in the routing protocol get a copy of the link-state
@@ -160,8 +160,8 @@ When the TTL reaches 0, the node refloods the LSP (with the TTL of 0), which
 is interpreted by all the nodes in the network as a signal to delete
 that LSP.
 
-4.3.2 Route Calculation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.3.2 Route Calculation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once a given node has a copy of the LSP from every other node, it is
 able to compute a complete map for the topology of the network, and from
@@ -377,8 +377,8 @@ storage potentially required at each node) and the general problem
    simple as possible is usually the best approach.
 
 
-4.3.3 The Open Shortest Path First Protocol (OSPF)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.3.3 Open Shortest Path First Protocol
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are two widely used link-state routing protocols: OSPF and IS-IS.
 Both are open standards: OSPF was created under the auspices of the Internet
