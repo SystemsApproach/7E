@@ -125,7 +125,7 @@ Section |TCP|.4.
 .. Not sure how to deal with additional detail from 6E. (Are there
    other examples?)
 
-   If you are interested in a protocol-agnostic description 
+   If you are interested in a protocol-agnostic description
    of the sliding window algorithm, we suggest:
    https://book.systemsapproach.org/direct/reliable.html#sliding-window
 
