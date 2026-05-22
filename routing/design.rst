@@ -1,8 +1,8 @@
-4.1 Design Issues
-------------------
+|Routing|.1 Design Issues
+----------------------------
 
 Since this chapter is about routing, we need to be clear about what we
-mean by that term. As pointed out in Chapter 3, *routing* refers to
+mean by that term. As pointed out in Chapter |Tech|, *routing* refers to
 the process of finding a suitable path through a network. Routing is
 distinct from *forwarding*, which consists of receiving a packet,
 looking up its destination address in a table, and sending the packet
@@ -47,8 +47,8 @@ that we are considering the problem of routing in the context of small
 to mid-sized networks, not for a network the size of the entire
 Internet.
 
-4.1.1 Network as a Graph
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Routing|.1.1 Network as a Graph
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Routing is, in essence, a problem of graph theory. :numref:`Figure %s
 <fig-graph-route>` shows a graph representing a network. The nodes of

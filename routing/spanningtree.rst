@@ -1,5 +1,5 @@
-4.2 Spanning Tree Protocol
----------------------------
+|Routing|.2 Spanning Tree Protocol
+---------------------------------------
 
 The history of Ethernet switching goes back a long way, with the
 earliest switches being referred to as "bridges" because they
