@@ -1,0 +1,12 @@
+message RebootRequest {
+     // COLD, POWERDOWN, HALT, WARM, NSF, ... 
+    RebootMethod method = 1;
+    // Delay in nanoseconds before issuing reboot.
+    uint64 delay = 2; 
+    // Informational reason for the reboot.
+    string message = 3;
+    // Optional sub-components to reboot.
+    repeated types.Path subcomponents = 4;
+    // Force reboot if sanity checks fail.
+    bool force = 5; 
+}
