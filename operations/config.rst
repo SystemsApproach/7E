@@ -1,46 +1,27 @@
 |Ops|.2 Configuration Management 
 --------------------------------------
 
+We first look at the configuration side of the operations problem,
+which includes a bootstrapping step that anyone that's openned their
+laptop in the hopes of getting a Wi-Fi connection has triggered:
+aquiring an IP address from the network.
+
 |Ops|.2.1 Host Configuration 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**[Start with problem of configuring edge hosts (DHCP). Following is
-taken from IP chapter of 6E.]**
-
-Ethernet addresses are configured into the network adaptor by the
-manufacturer, and this process is managed in such a way to ensure that
-these addresses are globally unique. This is clearly a sufficient
-condition to ensure that any collection of hosts connected to a single
-Ethernet (including an extended LAN) will have unique addresses.
-Furthermore, uniqueness is all we ask of Ethernet addresses.
-
-IP addresses, by contrast, not only must be unique on a given
-internetwork but also must reflect the structure of the internetwork. As
-noted above, they contain a network part and a host part, and the
-network part must be the same for all hosts on the same network. Thus,
-it is not possible for the IP address to be configured once into a host
-when it is manufactured, since that would imply that the manufacturer
-knew which hosts were going to end up on which networks, and it would
-mean that a host, once connected to one network, could never move to
-another. For this reason, IP addresses need to be reconfigurable.
-
-In addition to an IP address, there are some other pieces of information
-a host needs to have before it can start sending packets. The most
-notable of these is the address of a default router—the place to which
-it can send packets whose destination address is not on the same network
-as the sending host.
-
-Most host operating systems provide a way for a system administrator, or
-even a user, to manually configure the IP information needed by a host;
-however, there are some obvious drawbacks to such manual configuration.
-One is that it is simply a lot of work to configure all the hosts in a
-large network directly, especially when you consider that such hosts are
-not reachable over a network until they are configured. Even more
-importantly, the configuration process is very error prone, since it is
-necessary to ensure that every host gets the correct network number and
-that no two hosts receive the same IP address. For these reasons,
-automated configuration methods are required. The primary method uses a
-protocol known as the *Dynamic Host Configuration Protocol* (DHCP).
+We have been treating hosts as connected to the edge of the packet
+delivery network, but in addition to sending and receiving packets,
+edge hosts interact with the underlying network in one other critical
+way: they ask the network to assign them an IP address. They also
+learn other configuration parameters that they will need to
+successfully send and receive packets, including their subnet mask,
+default router, and DNS server. As we saw in Section |Shared|.4.3, the
+Mobile Cellular network includes a mechanism for authenticating
+devices and assigning IP addresses to them, but for most of the rest
+of the Internet, the Dynamic Host Configuration Protocol (DHCP), is
+the mechanism that implements this functionality.  (Remember that a
+machine's Ethernet address is typically burned into the NIC, but its
+IP address depends on what network it tries to connect to.)
 
 DHCP relies on the existence of a DHCP server that is responsible for
 providing configuration information to hosts. There is at least one DHCP
@@ -134,24 +115,7 @@ pool. A host with a leased address clearly needs to renew the lease
 periodically if in fact it is still connected to the network and
 functioning correctly.
 
-.. _key-dhcp:
-.. admonition:: Key Takeaway
-
-   DHCP illustrates an important aspect of scaling: the scaling of
-   network management. While discussions of scaling often focus on
-   keeping the state in network devices from growing too fast, it is
-   important to pay attention to the growth of network management
-   complexity. By allowing network managers to configure a range of IP
-   addresses per network rather than one IP address per host, DHCP
-   improves the manageability of a network.
-
-Note that DHCP may also introduce some more complexity into network
-management, since it makes the binding between physical hosts and IP
-addresses much more dynamic. This may make the network manager’s job
-more difficult if, for example, it becomes necessary to locate a
-malfunctioning host.
-
-|Ops|.2.2 Configuration API 
+|Ops|.2.2 Configuration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **[Introduce SNMP and MIB, but then pivot to a modern take. Following
