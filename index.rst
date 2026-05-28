@@ -39,6 +39,7 @@ Larry Peterson and Bruce Davie
    congestion.rst
    secure.rst
    message.rst
+   stream.rst
    README.rst
    authors.rst
    latest.rst
