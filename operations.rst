@@ -14,18 +14,15 @@ and running, you will discover that someone then needs to operate it.
 And if you've done a good job in the design phase, that ops team will
 be rewarded by getting to operate it for a long time, possibly spanning
 generations of hardware and software technologies.  For their sake,
-your design should should take the network's operational requirements
-into account. This chapter looks at those requirements, and describes
+your design should take the network's operational requirements into
+account. This chapter looks at those requirements, and describes
 mechanisms commonly built into networks to address them.
-
-.. TODO -- Might try to work the "Day 0", "Day 1".... terminology into
-   this intro; it could serve as a transition to the next paragraph.
 
 One of the biggest challenges in understanding network operations is
 wading through the plethora of terminology that has been invented to
 talk about it. Telcos—one of the earliest, and still quite common
 organizations to operate data networks—have nearly a century of
-know-how (and associated terminology) in operating networks. Much of
+know-how (and associated terminology) in operating networks. Many of
 those practices have been adapted from earlier voice networks.
 Today's cloud providers operate both massive datacenter networks that
 connect tens of thousands of servers, and global backbone networks
@@ -43,12 +40,12 @@ like most people, and outsourcing that responsibility to their ISP.
 In this chapter, we will try to avoid the use of arcane terminology,
 and focus instead on the fundamental issues all of these operators
 face. They all have the same goals: to ensure the network has enough
-capacity to handle its current workload, and then deploy additional
-resources when and where they are needed; to decide how all the
-components (both software and hardware) they deploy should be
-configured, and then set their parameters accordingly; and to detect
-when something goes wrong, troubleshoot the cause of that failure, and
-then take corrective action.
+features and capacity to handle the demands of its current workload,
+and then deploy additional resources when and where they are needed;
+to decide how all the hardware and software components they deploy
+should be configured, and then set their parameters accordingly; and
+to detect when something goes wrong, troubleshoot the cause of that
+failure, and then take corrective action.
 
 .. include:: operations/design.rst
 .. include:: operations/config.rst

@@ -10,6 +10,6 @@ discussion. Also a chance to revisit the role of SDN.]**
 
 .. admonition:: Further Reading
 
-	L. Peterson, A. Bavier, S. Baker, Z. Williams, and B. Davie.
-	`Edge Cloud Operations: A Systems Approach
-	<https:ops.systemsapproach.org>`__.  June 2025.
+   L. Peterson, A. Bavier, S. Baker, Z. Williams, and B. Davie.
+   `Edge Cloud Operations: A Systems Approach
+   <https:ops.systemsapproach.org>`__.  June 2025.
