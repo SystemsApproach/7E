@@ -1,44 +1,47 @@
-|Ops|.2 Configuration Management 
+|Ops|.2 Configuration Management
 --------------------------------------
 
-We first look at the configuration side of the operations problem,
-which includes a bootstrapping step that anyone that's openned their
-laptop in the hopes of getting a Wi-Fi connection has triggered:
-aquiring an IP address from the network.
+This section looks at the configuration side of the operations
+problem, with a focus on the protocols, interfaces, data models, and
+open source tool commonly used to build a network management system.
+Every network adopts its own operational practices, so there is no
+single "solution" that we can point to.
 
-|Ops|.2.1 Host Configuration 
+|Ops|.2.1 Host Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We have been treating hosts as connected to the edge of the packet
-delivery network, but in addition to sending and receiving packets,
-edge hosts interact with the underlying network in one other critical
-way: they ask the network to assign them an IP address. They also
-learn other configuration parameters that they will need to
-successfully send and receive packets, including their subnet mask,
-default router, and DNS server. As we saw in Section |Shared|.4.3, the
-Mobile Cellular network includes a mechanism for authenticating
-devices and assigning IP addresses to them, but for most of the rest
+We start with a bootstrapping step that anyone that's opened their
+laptop in the hopes of getting a Wi-Fi connection has triggered:
+aquiring an IP address. While this might seem like a problem to be
+addressed in Part III, where we take up issues at the edge of the
+network, assigning IP addresses is the responsibility of the network.
+It is also an operational problem in that sense that IP addresses are
+a kind of resource that needs to be managed. Either we find a way to
+automate the solution, or an operator (system admin) has to do it
+manually, on a case-by-case basis.
+
+We have already seen one example of the network assigning IP address
+to connected devices, and that was in Section |Shared|.4.3, where we
+described how Mobile Cellular network authenticates UEs. For the rest
 of the Internet, the Dynamic Host Configuration Protocol (DHCP), is
-the mechanism that implements this functionality.  (Remember that a
+the mechanism that implements address assignment. DHCP is actually
+more general, in that it is used to configure other parameters hosts
+need to successfully send and receive packets; for example, their
+subnet mask, default router, and DNS server. (Remember that a
 machine's Ethernet address is typically burned into the NIC, but its
 IP address depends on what network it tries to connect to.)
 
 DHCP relies on the existence of a DHCP server that is responsible for
-providing configuration information to hosts. There is at least one DHCP
-server for an administrative domain. At the simplest level, the DHCP
-server can function just as a centralized repository for host
-configuration information. Consider, for example, the problem of
-administering addresses in the internetwork of a large company. DHCP
-saves the network administrators from having to walk around to every
-host in the company with a list of addresses and network map in hand and
-configuring each host manually. Instead, the configuration information
-for each host could be stored in the DHCP server and automatically
-retrieved by each host when it is booted or connected to the network.
-However, the administrator would still pick the address that each host
-is to receive; he would just store that in the server. In this model,
-the configuration information for each host is stored in a table that is
-indexed by some form of unique client identifier, typically the hardware
-address (e.g., the Ethernet address of its network adaptor).
+providing configuration information to hosts. There is at least one
+DHCP server for an administrative domain. At the simplest level, this
+server implements a centralized repository for host configuration
+information, so in principle, a network administrator could maintain a
+static list of address assignments on this server. Each host could
+then contact the server when it boots up, and retrieve its
+configuration.  In this model, the configuration information for each
+host is stored in a table that is indexed by some form of unique
+client identifier, typically the hardware address (e.g., the Ethernet
+address of its network adaptor).
 
 A more sophisticated use of DHCP saves the network administrator from
 even having to assign addresses to individual hosts. In this model, the
@@ -48,29 +51,30 @@ an administrator must do, since now it is only necessary to allocate a
 range of IP addresses (all with the same network number) to each
 network.
 
-Since the goal of DHCP is to minimize the amount of manual configuration
-required for a host to function, it would rather defeat the purpose if
-each host had to be configured with the address of a DHCP server. Thus,
-the first problem faced by DHCP is that of server discovery.
+Since the goal of DHCP is to minimize the amount of manual
+configuration required for a host to function, it would rather defeat
+the purpose if each host had to be configured with the address of a
+DHCP server. Thus, the first problem faced by DHCP is that of server
+discovery.
 
 To contact a DHCP server, a newly booted or attached host sends a
-``DHCPDISCOVER`` message to a special IP address (255.255.255.255) that
-is an IP broadcast address. This means it will be received by all hosts
-and routers on that network. (Routers do not forward such packets onto
-other networks, preventing broadcast to the entire Internet.) In the
-simplest case, one of these nodes is the DHCP server for the network.
-The server would then reply to the host that generated the discovery
-message (all the other nodes would ignore it). However, it is not really
-desirable to require one DHCP server on every network, because this
-still creates a potentially large number of servers that need to be
-correctly and consistently configured. Thus, DHCP uses the concept of a
-*relay agent*. There is at least one relay agent on each network, and it
-is configured with just one piece of information: the IP address of the
-DHCP server. When a relay agent receives a ``DHCPDISCOVER`` message, it
-unicasts it to the DHCP server and awaits the response, which it will
-then send back to the requesting client. The process of relaying a
-message from a host to a remote DHCP server is shown in :numref:`Figure
-%s <fig-dhcp-relay>`.
+``DHCPDISCOVER`` message to a special IP address (255.255.255.255)
+that is an IP broadcast address. This means it will be received by all
+hosts and routers on that network. (Routers do not forward such
+packets onto other networks, preventing broadcast to the entire
+Internet.) In the simplest case, one of these nodes is the DHCP server
+for the network.  The server would then reply to the host that
+generated the discovery message (all the other nodes would ignore
+it). However, it is not really desirable to require one DHCP server on
+every network, because this still creates a potentially large number
+of servers that need to be correctly and consistently configured.
+Thus, DHCP uses the concept of a *relay agent*. There is at least one
+relay agent on each network, and it is configured with just one piece
+of information: the IP address of the DHCP server. When a relay agent
+receives a ``DHCPDISCOVER`` message, it unicasts it to the DHCP server
+and awaits the response, which it will then send back to the
+requesting client. The process of relaying a message from a host to a
+remote DHCP server is shown in :numref:`Figure %s <fig-dhcp-relay>`.
 
 .. _fig-dhcp-relay:
 .. figure:: operations/figures/f03-24-9780123850591.png
@@ -82,11 +86,14 @@ message from a host to a remote DHCP server is shown in :numref:`Figure
    server.
 
 :numref:`Figure %s <fig-dhcp>` below shows the format of a DHCP
-message. The message is actually sent using a protocol called the
-*User Datagram Protocol* (UDP) that runs over IP. UDP is discussed in
-detail in the next chapter, but the only interesting thing it does in
-this context is to provide a demultiplexing key that says, “This is a
-DHCP packet.”
+message, which is sent using UDP. Note that DHCP was derived from an
+earlier protocol called BOOTP, and some of the packet fields are thus
+not strictly relevant to host configuration. When trying to obtain
+configuration information, the client puts its hardware address (e.g.,
+its Ethernet address) in the ``chaddr`` field. The DHCP server replies
+by filling in the ``yiaddr`` (“your” IP address) field and sending it
+to the client. Other information such as the default router to be used
+by this client can be included in the ``options`` field.
 
 .. _fig-dhcp:
 .. figure:: operations/figures/f03-25-9780123850591.png
@@ -94,15 +101,6 @@ DHCP packet.”
    :align: center
 
    DHCP packet format.
-
-DHCP is derived from an earlier protocol called BOOTP, and some of the
-packet fields are thus not strictly relevant to host configuration. When
-trying to obtain configuration information, the client puts its hardware
-address (e.g., its Ethernet address) in the ``chaddr`` field. The DHCP
-server replies by filling in the ``yiaddr`` (“your” IP address) field
-and sending it to the client. Other information such as the default
-router to be used by this client can be included in the ``options``
-field.
 
 In the case where DHCP dynamically assigns IP addresses to hosts, it is
 clear that hosts cannot keep addresses indefinitely, as this would
@@ -118,37 +116,56 @@ functioning correctly.
 |Ops|.2.2 Configuration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**[Introduce SNMP and MIB, but then pivot to a modern take. Following
-is taken from Switch OS section of the SDN book.]**
+DHCP targets the configuration problem at the boundry between the
+network and the hosts that connect to the network. We now turn our
+attention to the more general problem of configuring all the switches
+and routers—plus the software they run—inside the network. As outlined
+in the previous section, the core problem is to define the set of
+variables available for operators to ``GET`` and ``SET`` on these
+devices, with the additional requirement that this dictionary of
+variables should be uniform across devices (i.e., be vendor-agnostic).
+We also need an over-the-wire protocol to remotely invoke these
+operations, but that's the easy part, as we'll explain below.
 
-A core challenge of configuring and operating any network device is to
-define the set of variables available for operators to ``GET`` and
-``SET`` on the device, with the additional requirement that this
-dictionary of variables should be uniform across devices (i.e., be
-vendor-agnostic). The Internet has gone through a decades-long
-exercise defining such a dictionary, resulting in the *Management
-Information Base (MIB)* used in conjunction with SNMP. But the MIB was
-more focused on *reading* device status variables than *writing*
-device configuration variables, where the latter has historically been
-done using the device’s *Command Line Interface (CLI)*. One
-consequence of the SDN transformation is to nudge the industry towards
-support for programmatic configuration APIs. This means revisiting the
-information model for network devices.
+The Internet has gone through a decades-long exercise defining such a
+dictionary, resulting in the *Management Information Base (MIB)*,
+which is used in conjunction with the *Simple Network Management
+Protocol (SNMP)*; the latter is the protocol used to issue ``GET`` and
+``SET`` commands on MIB-defined variables. SNMP has slightly different
+names for these operations, specifically ``GetRequest`` and
+``SetRequest``, plus other operations designed to simplify the process
+of walking through a collection of variables, but the idea is
+straightforward. In any case, our focus is on the variable dictionary.
 
-The main technical advance that was not prevalent in the early days of
-SNMP and MIB is the availability of pragmatic modeling languages,
-where YANG is the leading choice to have emerged over the last few
-years. YANG—which stands for *Yet Another Next Generation*, a name
-chosen to poke fun at how often a do-over proves necessary—can be
-viewed as a restricted version of XSD, which is a language for
-defining a schema for XML. YANG defines the structure of the data, but
-unlike XSD, it is not XML-specific. Instead, YANG can be used in
-conjunction with different over-the-wire message formats, including
-XML, but also protobufs and JSON. If these acronyms are unfamiliar, or
-the distinction between a markup language and a schema for a markup
-language is fuzzy, a gentle introduction is available online.
+.. admonition:: Further Reading
 
-.. _reading_xml:
+   J. Case, M. Fedor, M. Schoffstall, and J. Davin.  `Simple Network 
+   Management Protocol (SNMP) 
+   <https://www.rfc-editor.org/info/rfc1157>`__. RFC 1157, May 1990. 
+
+   K. McCloghrie and M. Rose. `Management Information Base for Network
+   Management of TCP/IP-based Internets: MIB-II
+   <https://www.rfc-editor.org/info/rfc1213>`__. RFC 1213, March 1991.
+
+You can learn more about SNMP and the MIB from RFCs 1157 and 1213,
+respectively, and if you want to follow the history of incremental
+refinements, there is a long list of follow-on RFCs. But all of this
+work is based on an approach that pre-dates the availability of modern
+pragmatic modeling languages, of which YANG is the leading choice to
+have emerged over the last few years. YANG—which stands for *Yet
+Another Next Generation*, a name chosen to poke fun at how often a
+do-over proves necessary—can be viewed as a restricted version of XSD,
+which is a language for defining a schema for XML. YANG defines the
+structure of the data, but unlike XSD, it is not XML-specific. Instead,
+YANG can be used in conjunction with different over-the-wire message
+formats, including XML, but also protobufs and JSON. If these acronyms
+are unfamiliar, or the distinction between a markup language and a
+schema for a markup language is fuzzy, a gentle introduction is
+available online.
+
+.. TODO -- Another example of where a stand-alone "piece" of 6E might
+   be useful.
+
 .. admonition:: Further Reading
 
    `Markup Languages (XML)
@@ -167,24 +184,6 @@ and vendors have an equally strong incentive to adhere to those
 models. YANG makes the process of creating, using, and modifying
 models programmable and hence, adaptable to this iterative process.
 
-.. sidebar:: Cloud Best Practices
-
-     *Our commentary on OpenConfig vs. NETCONF is grounded in a
-     fundamental tenet of SDN, which is about bringing best
-     practices in cloud computing to the network. It involves big
-     ideas like implementing the network control plane as a
-     scalable cloud service, but it also includes more narrow
-     benefits, such as using modern messaging frameworks like
-     gRPC and protobufs.*
-
-     *The advantages in this particular case are tangible: (1)
-     improved and optimized transport using HTTP/2 and
-     protobuf-based marshalling instead of SSH plus hand-coded
-     marshalling; (2) binary data encodings instead of text-based
-     encoding; (3) diff-oriented data exchange instead of
-     snapshot-based responses; and (4) native support for server
-     push and client streaming.*
-
 This is where an industry-wide standardization effort, called
 *OpenConfig*, comes into play. OpenConfig is a group of network
 operators trying to drive the industry towards a common set of
@@ -196,18 +195,20 @@ you might guess from its name, gNMI uses gRPC (which in turn runs on
 top of HTTP/2). This means gNMI also adopts protobufs as the way it
 specifies the data actually communicated over the HTTP
 connection. Thus, gNMI is intended as a standard management interface
-for network devices.
+for network devices. (See Chapter |Message| for more information on
+gRPC and protobufs.)
 
 For completeness, note that NETCONF is another of the post-SNMP
 protocols for communicating configuration information to network
 devices. OpenConfig also works with NETCONF, but our current
 assessment is that gNMI has the weight of industry behind it as the
-future management protocol. For this reason, it
-is the one we highlight in our description of the full SDN software
-stack.
+future management protocol.
 
-OpenConfig defines a hierarchy of object types. For example, the YANG
-model for network interfaces looks like this:
+.. TODO -- Make sure this "assessement" still holds.
+
+Returning the data model, OpenConfig defines a hierarchy of object
+types. For example, the YANG model for network interfaces looks like
+this:
 
 .. literalinclude:: operations/code/iface.yang
 
@@ -231,17 +232,19 @@ the operator needs to track.
 Having a meaningful set of models is necessary, but a full
 configuration system includes other elements as well. In our case,
 there are three important points to make about the relationship
-between Stratum and the OpenConfig models.
+between the OpenConfig models and the devices that need to respond to
+requests for OpenConfig-defined variables. Think of this toolset as
+being part of the operating system running on every switch or router.
 
-The first is that Stratum depends on a YANG toolchain. :numref:`Figure
-%s <fig-yang>` shows the steps involved in translating a set of
-YANG-based OpenConfig models into the client-side and server-side gRPC
-stubs used by gNMI. The toolchain supports multiple target programming
-languages (Stratum happens to use C++), where the client and server
-sides of the gRPC need not be written in the same language.
+The first is a YANG toolchain. :numref:`Figure %s <fig-yang>` shows
+the steps involved in translating a set of YANG-based OpenConfig
+models into the client-side and server-side gRPC stubs used by
+gNMI. The toolchain supports multiple target programming languages,
+where the client and server sides of the gRPC need not be written in
+the same language.
 
 .. _fig-yang:
-.. figure:: operations/figures/Slide25.png
+.. figure:: operations/figures/yang-tooling.png
     :width: 550px
     :align: center
 
@@ -270,29 +273,24 @@ by a protobuf ``Message`` and include various fields from the YANG
 models. A given field is specified by giving its fully qualified
 path name in the data model tree.
 
-The third point is that Stratum does not necessarily care about the
-full range of OpenConfig models. This is because—as a Switch OS
-designed to support a centralized Controller—Stratum cares about
-configuring various aspects of the data plane but is not typically
-involved in configuring control plane protocols like BGP. Such control
-plane protocols are no longer implemented on the switch in an
-SDN-based solution (although they remain in scope for the Network OS,
-which implements their centralized counterpart). To be specific,
-Stratum tracks the following OpenConfig models: Interfaces, VLANs,
-QoS, and LACP (link aggregation), in addition to a set of system and
-platform variables (of which the switch’s fan speed is everyone’s
-favorite example).
+The third point is that a given switch does not necessarily care about
+the full range of OpenConfig models. This is because a given device
+might support control plane protocols like BGP, or it might support an
+SDN control plane like the one described in Section |Routing|.5.  For
+example, the Swith OS on a datacenter switch might tracks the
+following OpenConfig models: Interfaces, VLANs, QoS, and LACP (link
+aggregation), in addition to a set of system and platform variables
+(of which the switch’s fan speed is a favorite example).
 
-We conclude this section by briefly turning our attention to gNOI, but
-there isn't a lot to say. This is because the underlying mechanism
-used by gNOI is exactly the same as for gNMI, and in the larger scheme
-of things, there is little difference between a switch’s configuration
-interface and its operations interface. Generally speaking, persistent
-state is handled by gNMI (and a corresponding YANG model is defined),
-whereas clearing or setting ephemeral state is handled by gNOI. It is
-also the case that non-idempotent actions like reboot and ping tend to
-fall under gNOI's domain. In any case, the two are closely enough
-aligned to collectively be referred to as gNXI.
+We conclude this section by briefly turning our attention to a related
+interface, called gNOI (Network Operations Interface).  The underlying
+mechanism used by gNOI is exactly the same as for gNMI, and in the
+larger scheme of things, there is little difference between a switch’s
+configuration interface and its operations interface. Generally
+speaking, persistent state is handled by gNMI (and a corresponding
+YANG model is defined), whereas clearing or setting ephemeral state is
+handled by gNOI. It is also the case that non-idempotent actions like
+reboot and ping tend to fall under gNOI's domain.
 
 As an illustrative example of what gNOI is used for, the following is
 the protobuf specification for the ``System`` service:
@@ -303,15 +301,6 @@ where, for example, the following protobuf message defines the
 ``RebootRequest`` parameter:
 
 .. literalinclude:: operations/code/reboot.proto
-
-As a reminder, if you are unfamiliar with protobufs, a brief overview is available online.
-
-.. _reading_protobuf:
-.. admonition:: Further Reading
-
-   `Protocol Buffers
-   <https://book.systemsapproach.org/data/presentation.html#protobufs>`__.
-   *Computer Networks: A Systems Approach*, 2020.
 
 
 |Ops|.2.3 Configuration-as-Code
