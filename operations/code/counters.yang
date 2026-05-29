@@ -1,0 +1,12 @@
+	       ...
+	+--ro counters
+		+--ro in-octets
+		+--ro out-octets
+		+--ro in-unicast-pkts
+		+--ro out-unicast-pkts
+		+--ro in-errors
+		+--ro out-erros
+		+--ro in-discards
+		+--ro out-discards
+		+--ro last-clear
+		       ...

@@ -1,0 +1,27 @@
+interfaces:
+  interface:
+    - name: Ethernet1/1
+      config:
+        name: Ethernet1/1
+        type: ethernetCsmacd
+        mtu: 9214
+        enabled: true
+        description: "uplink to core-router-01"
+
+      ethernet:
+        config:
+          mac-address: "aa:bb:cc:dd:ee:ff"   # desired/configured MAC
+          auto-negotiate: false
+          duplex-mode: FULL
+          port-speed: SPEED_100GB
+          enable-flow-control: false
+
+        state:
+          mac-address: "aa:bb:cc:dd:ee:ff"   # configured MAC
+          auto-negotiate: false
+          duplex-mode: FULL
+          port-speed: SPEED_100GB
+          enable-flow-control: false
+          hw-mac-address: "aa:bb:cc:dd:ee:ff" # burned-in MAC from hardware
+          counters:
+		...
