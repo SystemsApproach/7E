@@ -3,7 +3,7 @@
 
 This section looks at the configuration side of the operations
 problem, with a focus on the protocols, interfaces, data models, and
-open source tool commonly used to build a network management system.
+open source tools commonly used to build a network management system.
 Every network adopts its own operational practices, so there is no
 single "solution" that we can point to.
 
@@ -31,17 +31,17 @@ subnet mask, default router, and DNS server. (Remember that a
 machine's Ethernet address is typically burned into the NIC, but its
 IP address depends on what network it tries to connect to.)
 
-DHCP relies on the existence of a DHCP server that is responsible for
-providing configuration information to hosts. There is at least one
-DHCP server for an administrative domain. At the simplest level, this
-server implements a centralized repository for host configuration
-information, so in principle, a network administrator could maintain a
-static list of address assignments on this server. Each host could
-then contact the server when it boots up, and retrieve its
-configuration.  In this model, the configuration information for each
-host is stored in a table that is indexed by some form of unique
-client identifier, typically the hardware address (e.g., the Ethernet
-address of its network adaptor).
+DHCP relies on the existence of a DHCP server to provide configuration
+information to hosts. There is at least one DHCP server for an
+administrative domain. At the simplest level, this server implements a
+centralized repository for host configuration information, so in
+principle, a network administrator could maintain a static list of
+address assignments on this server. Each host could then contact the
+server when it boots up, and retrieve its configuration.  In this
+model, the configuration information for each host is stored in a
+table that is indexed by some form of unique client identifier,
+typically the hardware address (e.g., the Ethernet address of its
+network adaptor).
 
 A more sophisticated use of DHCP saves the network administrator from
 even having to assign addresses to individual hosts. In this model, the
@@ -102,15 +102,15 @@ by this client can be included in the ``options`` field.
 
    DHCP packet format.
 
-In the case where DHCP dynamically assigns IP addresses to hosts, it is
-clear that hosts cannot keep addresses indefinitely, as this would
+In the case where DHCP dynamically assigns IP addresses to hosts, it
+is clear that hosts cannot keep addresses indefinitely, as this would
 eventually cause the server to exhaust its address pool. At the same
-time, a host cannot be depended upon to give back its address, since it
-might have crashed, been unplugged from the network, or been turned off.
-Thus, DHCP allows addresses to be leased for some period of time. Once
-the lease expires, the server is free to return that address to its
-pool. A host with a leased address clearly needs to renew the lease
-periodically if in fact it is still connected to the network and
+time, a host cannot be depended upon to give back its address, since
+it might have crashed, been unplugged from the network, or been turned
+off.  Thus, DHCP allows addresses to be leased for some period of
+time. Once the lease expires, the server is free to return that
+address to its pool. A host with a leased address needs to renew the
+lease periodically if in fact it is still connected to the network and
 functioning correctly.
 
 |Ops|.2.2 Configuration Interface
@@ -131,10 +131,10 @@ The Internet has gone through a decades-long exercise defining such a
 dictionary, resulting in the *Management Information Base (MIB)*,
 which is used in conjunction with the *Simple Network Management
 Protocol (SNMP)*; the latter is the protocol used to issue ``GET`` and
-``SET`` commands on MIB-defined variables. SNMP has slightly different
-names for these operations, specifically ``GetRequest`` and
+``SET`` commands for MIB-defined variables. SNMP has slightly
+different names for these operations, specifically ``GetRequest`` and
 ``SetRequest``, plus other operations designed to simplify the process
-of walking through a collection of variables, but the idea is
+of walking through an array of related variables, but the idea is
 straightforward. In any case, our focus is on the variable dictionary.
 
 .. admonition:: Further Reading
@@ -147,29 +147,28 @@ straightforward. In any case, our focus is on the variable dictionary.
    Management of TCP/IP-based Internets: MIB-II
    <https://www.rfc-editor.org/info/rfc1213>`__. RFC 1213, March 1991.
 
-You can learn more about SNMP and the MIB from RFCs 1157 and 1213,
-respectively, and if you want to follow the history of incremental
-refinements, there is a long list of follow-on RFCs. But all of this
-work is based on an approach that pre-dates the availability of modern
-pragmatic modeling languages, of which YANG is the leading choice to
-have emerged over the last few years. YANG—which stands for *Yet
-Another Next Generation*, a name chosen to poke fun at how often a
-do-over proves necessary—can be viewed as a restricted version of XSD,
-which is a language for defining a schema for XML. YANG defines the
-structure of the data, but unlike XSD, it is not XML-specific. Instead,
-YANG can be used in conjunction with different over-the-wire message
-formats, including XML, but also protobufs and JSON. If these acronyms
-are unfamiliar, or the distinction between a markup language and a
-schema for a markup language is fuzzy, a gentle introduction is
-available online.
+You can learn more about the basics of SNMP and the MIB from RFCs 1157
+and 1213, respectively, and if you want to follow the history of
+incremental refinements, there is a long list of follow-on RFCs. But
+all of this work is based on an approach that pre-dates the
+availability of modern pragmatic modeling languages, of which YANG is
+the leading choice to have emerged over the last few years. YANG—which
+stands for *Yet Another Next Generation*, a name chosen to poke fun at
+how often a do-over proves necessary—can be viewed as a restricted
+version of XSD, which is a language for defining a schema
+for XML. YANG defines the structure of the data, but unlike XSD, it is
+not XML-specific. Instead, YANG can be used in conjunction with
+different over-the-wire message formats, including XML, but also
+protobufs and JSON. If these acronyms are unfamiliar, or the
+distinction between a markup language and a schema for a markup
+language is fuzzy, a gentle introduction is available online.
 
 .. TODO -- Another example of where a stand-alone "piece" of 6E might
    be useful.
 
 .. admonition:: Further Reading
 
-   `Markup Languages (XML)
-   <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
+   `Markup Languages (XML) <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
 What’s important about going in this direction is that the data model
@@ -227,7 +226,7 @@ read-only from the client-side). This distinction between declarative
 configuration state and runtime feedback state is a fundamental aspect
 of any network device interface, where OpenConfig is explicitly
 focused on generalizing the latter to include network telemetry data
-the operator needs to track.
+the operator needs to track. (More on telemetry data in the next section.)
 
 Having a meaningful set of models is necessary, but a full
 configuration system includes other elements as well. In our case,
@@ -236,12 +235,18 @@ between the OpenConfig models and the devices that need to respond to
 requests for OpenConfig-defined variables. Think of this toolset as
 being part of the operating system running on every switch or router.
 
-The first is a YANG toolchain. :numref:`Figure %s <fig-yang>` shows
-the steps involved in translating a set of YANG-based OpenConfig
-models into the client-side and server-side gRPC stubs used by
-gNMI. The toolchain supports multiple target programming languages,
-where the client and server sides of the gRPC need not be written in
-the same language.
+The first is the availability of a YANG toolchain. :numref:`Figure %s
+<fig-yang>` shows the steps involved in translating a set of
+YANG-based OpenConfig models into the client-side and server-side gRPC
+stubs used by gNMI. The toolchain supports multiple target programming
+languages, where the client and server sides of the gRPC need not be
+written in the same language. With respect to the overview of network
+management shown in :numref:`Figure %s <fig-mgmt-system>`, the ``gNMI
+Client`` stub runs as part of the Network Management System and an
+instance of the the ``gNMI Server`` stub runs on each individual
+switch, specifically as part of the operating system running on the
+switch's control processor (see, for example, :ref:`Figure 37
+<fig-baremetal>` in Chapter |Tech|).
 
 .. _fig-yang:
 .. figure:: operations/figures/yang-tooling.png
@@ -252,10 +257,10 @@ the same language.
 
 Keep in mind that YANG is not tied to either gRPC or gNMI. The
 toolchain is able to start with the very same OpenConfig models but
-instead produce XML or JSON representations for the data being
-read from or written to network devices using, for example, NETCONF or
-RESTCONF, respectively. But in our context, the target is protobufs,
-which Stratum uses to support gNMI running over gRPC.
+instead produce XML or JSON representations for the data being read
+from or written to network devices using, for example, NETCONF. But in
+our context, the target is protobufs, which can be used to run gNMI
+over gRPC.
 
 The second point is that gNMI defines a specific set of gRPC methods to
 operate on these models. The set is defined collectively as a Service
@@ -277,7 +282,7 @@ The third point is that a given switch does not necessarily care about
 the full range of OpenConfig models. This is because a given device
 might support control plane protocols like BGP, or it might support an
 SDN control plane like the one described in Section |Routing|.5.  For
-example, the Swith OS on a datacenter switch might tracks the
+example, the Switch OS on a datacenter switch might tracks the
 following OpenConfig models: Interfaces, VLANs, QoS, and LACP (link
 aggregation), in addition to a set of system and platform variables
 (of which the switch’s fan speed is a favorite example).
@@ -292,8 +297,8 @@ YANG model is defined), whereas clearing or setting ephemeral state is
 handled by gNOI. It is also the case that non-idempotent actions like
 reboot and ping tend to fall under gNOI's domain.
 
-As an illustrative example of what gNOI is used for, the following is
-the protobuf specification for the ``System`` service:
+As an illustrative example of how gNOI is used, the following is the
+protobuf specification for the ``System`` service:
 
 .. literalinclude:: operations/code/system.proto
 
@@ -306,8 +311,73 @@ where, for example, the following protobuf message defines the
 |Ops|.2.3 Configuration-as-Code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**[Diagram a simple pipeline, including a Config repo; maybe also an
-Inventory repo. Talk about Lifecyle Mgmt in general, and why treating
-configuration as code is a good idea. Also point to verification
-tools.  The Velocity section (10.4) builds on this pipeline to also
-include code, which motivates GitOps and similar topics.]**
+SNMP is still in wide use, but primarily for modest-sized networks,
+such ones you might find in an enterprise. As soon as you scale the
+network—for example, to the size of a hyperscaler datacenter—you also
+need to scale operations. Being able to generate the configuration
+interface from a set of YANG models is an importantpart part of that,
+but the configuration settings, themselves, still have to be entered.
+If an operator has to do that by typing individual values into a web
+form, then you still have a problem. Moreover, it's not just a data
+entry problem. Every time a change needs to be made is an opportunity
+to make a mistake.
+
+The solution, which has its origins in cloud operations, is to treat
+parameter settings as though it were code; the practice is known as
+*Configuration-as-Code*. Typically, this means parameters are
+specified in YAML (Yet Another Markup Language), and the set of YAML
+files corresponding to a network's aggregate configuration is managed
+in a code repository just like any other collection of C, Java, or
+GoLang programs. The following snippet of YAML code shows how
+one might configure an Ethernet interface; this file corresponds to
+the YANG shown in the previous section.
+
+.. literalinclude:: operations/code/ethernet.yaml
+
+The advantage of managing configuration state as code is that it can
+be versioned just like software. There could be a stable version that
+represents the currently deployed parameters. Edits can be made,
+reviewed, and thoroughly tested. And when there is confidence in its
+correctness, the changes rolled out to the operational. And most
+importantly, if there is a problem, it's possible to roll back to an
+earlier, known-working version of the configuration state. Testing
+that a configuration is correct is clearly an important part of this
+process, and there are a variety of tools available to help. Batfish
+is a popular open source example.
+
+.. TODO -- This is a good opportunity to cite some of the most
+   notorious configuration failures. Maybe in a sidebar.
+
+.. admonition:: Further Reading
+
+    `Batfish: An open source network configuration analysis tool
+    <https://batfish.org/>`__.
+
+Another aspect of treating configuration variables as code is that it
+naturally plugs into a management pipeline, similar to the one
+depicted in :numref:`Figure %s <fig-config-pipeline>`. The pipline
+takes input from three sources: an inventory repo, a config repo, and
+a code repo. We briefly mentioned inventory in the previous section,
+but you can imagine it being implemented by a collection of YAML files
+representing all the deployed devices. The config repo is similar to
+what we've just described, with the exception that instead of
+hardcoding some of the parameters, the YAML includes templates that
+get filled in with device-specific information. Operators are
+responsible for updating these first two repos. Finally, the image
+repo holds the latest executable images for the software stack running
+on each device (e.g., the latest release of OSPF or BGP). For now, we
+assume an upstream provider, for example a vendor, popultes the image
+repo.  We'll look at how the pipeline extends to the left to account
+for networks that also build their own software in Section |Ops|.4.
+
+.. _fig-config-pipeline:
+.. figure:: operations/figures/config-pipeline.png
+   :width: 500px
+   :align: center
+
+   Simple configuration pipeline, with operator-supplied configuration
+   and inventory specifications stored in their respective repositories,
+   and executable images supplied by an upstream vendor.
+
+.. TODO -- Grow this pipeline to the left in 10.4.
+

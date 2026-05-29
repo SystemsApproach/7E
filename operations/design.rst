@@ -33,10 +33,10 @@ sophistication of its internal mechanisms. On the configuration side,
 operator intents could be expressed as "natural text", with a Large
 Language Model (LLM) translating the intent into a discrete set of
 configuration settings. On the monitoring side, Machine Learning (ML)
-algorithms could analyze the reported data, and raise an alert when a
-statistical anomaly is detected. And in the limit, we could build a
-*closed control loop*, where an analytics alert triggers a new intent,
-bypassing the human operator entirely.
+algorithms could analyze the reported data, and raise an alert anytime
+a statistical anomaly is detected. And in the limit, we could build a
+*closed control loop*, where an alert triggers a new intent, bypassing
+the human operator entirely.
 
 .. _fig-mgmt-system:
 .. figure:: operations/figures/mgmt-system.png
@@ -139,19 +139,20 @@ practice is sometimes described in exactly those terms:
    device. Additionally, these may integrate with monitoring and other
    device health telemetry systems.
 
-We now turn our attention to the building blocks we need in order to
-monitor an operational network, a process often referred to as
-*telemetry* since is involves "reading meters at a distance." Breaking
-the problem down further, the first requirement is that devices
-themselves need to be *instrumented*, which is to say, they need to
-record their activity (such as number of packets sent or received) in
-local counters.  Layered on top those raw meters and counters is a
-data collection mechanism that periodically reads the meters and
-records their values in a time-series database. The collection
-mechanism can be built around a combination of ``PUSH`` and ``PULL``
-operations; the former requiring devices to periodically send their
-data to the collector, and the latter involving the collector
-periodically pulling (also described as "polling") the device.
+We now turn our attention to the building blocks we need to monitor an
+operational network, a process often referred to as *telemetry* since
+is involves "reading meters at a distance." Breaking the problem down
+further, the first requirement is that devices themselves need to be
+*instrumented*, which is to say, they need to record their activity
+(such as number of packets sent or received) in local counters.
+Layered on top those raw meters and counters is a data collection
+mechanism that periodically reads the per-device variables and records
+their values in a time-series database. The collection mechanism can
+be built around a combination of ``PUSH`` and ``PULL`` operations; the
+former requiring devices to periodically send their data to the
+collector (also referred to as "streaming"), and the latter involving
+the collector periodically pulling (also referred to as "polling") the
+device.
 
 We also need a query mechanism that allows operators to look at the
 data. This includes both feeding data to dashboards that display it
@@ -166,14 +167,14 @@ configuration.
 As straightforward as this sounds, the challenge is knowing what data
 to collect, and then being diligent about collecting it. In the same
 way individual systems need to think about security, reliability,
-scalability, availability, and so on (they are collectively known as
+scalability, availability, and so on (these are collectively known as
 the *-ities*), system designers need to worry about *observability*\
 —the property of a system that makes visible the facts about its
 internal operation needed to make informed management and control
-decisions. If you don't think to record certain facts, then the data
-will not be there when you need it. As a general rule, the answer is
-that there are three kinds of telemetry data: metrics, logs, and
-traces.
+decisions. If you don't think to record certain facts as they happen,
+then the data will not be there when you need it. As a general rule,
+the answer is that there are three kinds of telemetry data: metrics,
+logs, and traces.
 
 Metrics are quantitative data about a system. These include common
 performance metrics such as link bandwidth, CPU utilization, and
@@ -182,7 +183,7 @@ memory usage, but also binary results corresponding to "up" and
 every few seconds), either by reading a counter, or by executing a
 runtime test that returns a value. These metrics can be associated
 with physical resources such as servers and switches, virtual
-resources such as VMs or IP subnets, or even end-to-end protocols or
+resources such as VMs or IP subnets, or even end-to-end protocols
 services.
 
 Logs are the qualitative data that is generated whenever a noteworthy
@@ -214,7 +215,6 @@ data model (schema) is similar to one we need for configuration
 management, except it is designed for *observed* behavior as opposed
 to *configured* behavior. Note that we can treat some of the variables
 read by the configuration system as telemetry data—that is, there are
-some variables that serve both sides of the management system—but in
-general, it is considered good practice to keep the two schemas
-distinct.
+some variables that serve both sides of the management system.
+
 
