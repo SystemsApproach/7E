@@ -30,18 +30,18 @@ that interconnect hundreds of datacenters. Their focus on feature
 velocity—which takes advantage of agile software practices and
 commodity hardware—has led to an entirely different approach (and
 associated terminology) for operations. Yet another class of operator
-is the system administrator, who is responsible for buying,
-configuring, and operating hardware that serves an enterprise or
-department. Their approach to operations is heavily influenced by the
-vendors that sell them servers, routers, and other network appliances.
-And finally there is you, either managing your home network, or doing
-like most people, and outsourcing that responsibility to their ISP.
+is the system administrator responsible for buying, configuring, and
+maintaining hardware that serves an enterprise or department. Their
+approach to operations is heavily influenced by the vendors that sell
+them servers, routers, and other network appliances. And finally there
+is you, either managing your home network, or doing like most people,
+and outsourcing that responsibility to their ISP.
 
 In this chapter, we will try to avoid the use of arcane terminology,
 and focus instead on the fundamental issues all of these operators
 face. They all have the same goals: to ensure the network has enough
 features and capacity to handle the demands of its current workload,
-and then deploy additional resources when and where they are needed;
+and then deploy additional resources and functionalilty when needed;
 to decide how all the hardware and software components they deploy
 should be configured, and then set their parameters accordingly; and
 to detect when something goes wrong, troubleshoot the cause of that

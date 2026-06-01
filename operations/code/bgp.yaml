@@ -1,0 +1,20 @@
+bgp:
+  neighbors:
+    neighbor:
+      - neighbor-address: 192.0.2.1
+        state:
+          neighbor-address: 192.0.2.1
+          peer-as: 65002
+          session-state: ACTIVE
+          last-established: "2026-05-28T08:00:00Z"
+          established-transitions: 4
+          messages:
+            received:
+              UPDATE: 1842
+              NOTIFICATION: 1
+            sent:
+              UPDATE: 953
+              NOTIFICATION: 0
+          prefixes:
+            received: 489
+            installed: 487
