@@ -139,9 +139,9 @@ straightforward. In any case, our focus is on the variable dictionary.
 
 .. admonition:: Further Reading
 
-   J. Case, M. Fedor, M. Schoffstall, and J. Davin.  `Simple Network 
-   Management Protocol (SNMP) 
-   <https://www.rfc-editor.org/info/rfc1157>`__. RFC 1157, May 1990. 
+   J. Case, M. Fedor, M. Schoffstall, and J. Davin.  `Simple Network
+   Management Protocol (SNMP)
+   <https://www.rfc-editor.org/info/rfc1157>`__. RFC 1157, May 1990.
 
    K. McCloghrie and M. Rose. `Management Information Base for Network
    Management of TCP/IP-based Internets: MIB-II
