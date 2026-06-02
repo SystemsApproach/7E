@@ -56,6 +56,33 @@ think of the management system as having two parts: one responsible for
 configuring network devices and the other responsible for monitoring
 network devices. We consider each, in turn.
 
+.. sidebar:: Is it SDN?
+
+   The schematic for a Network Managment System shown in
+   :numref:`Figure %s <fig-mgmt-system>` looks a lot like the
+   schematic for an SDN Controller presented in Section |Routing|.5.1.
+   This is no accident. At a high level, both involve a centralized
+   program being used to "oversee" a distributed set of devices.  The
+   only difference is whether the centralize component is *controling*
+   the device (i.e., installing forwarding rules into the device's
+   data plane) or *configuring* the device (i.e., giving the on-device
+   control plane the list of BGP neighbors it should peer with).
+
+   SDN started with the premise that it was possible to build a
+   centralized control plane, and use it to install flow rules in a
+   distributed data plane. That proved to be too disruptive, in part
+   because it implied making real-time decisions about how to respond
+   to link and switch failures. If the data plane reports a failure,
+   the control plane needs to learn about this failure and provide a
+   remedy (e.g., a new Match/Action flow rule) generally within
+   milliseconds. In response, many switch and router vendors offered
+   an "SDN Lite" solution, which involved support for a centralized
+   *Management Plane*. Management has historically been done using a
+   Command Line Interface (CLI), so it was a major improvement to add
+   a programmatic alternative. This capability is what we focus on in
+   this chapter, where centralizing the use of that interface is a
+   clear win for SDN.
+
 On the configuration side, automation require a programmatic approach;
 expecting a human to manually enter configuration parameters into a
 web form simply does not scale. Manually entering configuration

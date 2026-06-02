@@ -294,19 +294,27 @@ larger scheme of things, there is little difference between a switch’s
 configuration interface and its operations interface. Generally
 speaking, persistent state is handled by gNMI (and a corresponding
 YANG model is defined), whereas clearing or setting ephemeral state is
-handled by gNOI. It is also the case that non-idempotent actions like
-reboot and ping tend to fall under gNOI's domain.
+handled by gNOI. (By empheral state, we mean settings known on the
+device, but without a requirement that any other entity remember the
+values.) It is also the case that non-idempotent actions like reboot
+and ping tend to fall under gNOI's domain.
 
 As an illustrative example of how gNOI is used, the following is the
-protobuf specification for the ``System`` service:
+protobuf specification for the ``System`` service. In this example,
+``Ping``, ``Traceroute``, ``Time``, and so on, are gNOI methods the
+operator can invoke on a device.
 
 .. literalinclude:: operations/code/system.proto
 
-where, for example, the following protobuf message defines the
-``RebootRequest`` parameter:
+The ``Reboot`` method, for example, takes ``RebootRequest`` as an
+argument, where that parameter is defined by the following protobuf
+message:
 
 .. literalinclude:: operations/code/reboot.proto
 
+We explain protobuf syntax in Section |Message|.6, but for the purpose
+of this discussion, the idea of ``Reboot`` taking ``method`` and
+``delay`` arguments (among others) is straightforward.
 
 |Ops|.2.3 Configuration-as-Code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,25 +331,28 @@ entry problem. Every time a change needs to be made is an opportunity
 to make a mistake.
 
 The solution, which has its origins in cloud operations, is to treat
-parameter settings as though it were code; the practice is known as
+parameter settings as code; the practice is known as
 *Configuration-as-Code*. Typically, this means parameters are
 specified in YAML (Yet Another Markup Language), and the set of YAML
 files corresponding to a network's aggregate configuration is managed
 in a code repository just like any other collection of C, Java, or
-GoLang programs. The following snippet of YAML code shows how
-one might configure an Ethernet interface; this file corresponds to
-the YANG shown in the previous section.
+GoLang programs. This is not as big of stretch as it might sound: you
+can think of YAML as a declarative programming language.
+
+The following snippet of YAML code shows how one might configure an
+Ethernet interface. This file corresponds to the YANG shown in the
+previous section.
 
 .. literalinclude:: operations/code/ethernet.yaml
 
 The advantage of managing configuration state as code is that it can
-be versioned just like software. There could be a stable version that
-represents the currently deployed parameters. Edits can be made,
-reviewed, and thoroughly tested. And when there is confidence in its
-correctness, the changes rolled out to the operational. And most
+be versioned just like other software modules. There could be a stable
+version that represents the currently deployed parameters. Edits can
+be made, reviewed, and thoroughly tested, and when there is confidence
+in its correctness, the changes rolled out to the operational. Most
 importantly, if there is a problem, it's possible to roll back to an
 earlier, known-working version of the configuration state. Testing
-that a configuration is correct is clearly an important part of this
+that a configuration is correct is clearly an important step in this
 process, and there are a variety of tools available to help. Batfish
 is a popular open source example.
 
@@ -357,11 +368,11 @@ Another aspect of treating configuration variables as code is that it
 naturally plugs into a management pipeline, similar to the one
 depicted in :numref:`Figure %s <fig-config-pipeline>`. The pipline
 takes input from three sources: an inventory repo, a config repo, and
-a code repo. We briefly mentioned inventory in the previous section,
-but you can imagine it being implemented by a collection of YAML files
-representing all the deployed devices. The config repo is similar to
-what we've just described, with the exception that instead of
-hardcoding some of the parameters, the YAML includes templates that
+an image repo. We briefly mentioned inventory in the previous section,
+but you can think of it being implemented by a collection of YAML
+files representing all the deployed devices. The config repo is
+similar to what we've just described, with the exception that instead
+of hardcoding some of the parameters, the YAML includes templates that
 get filled in with device-specific information. Operators are
 responsible for updating these first two repos. Finally, the image
 repo holds the latest executable images for the software stack running
