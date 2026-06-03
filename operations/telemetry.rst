@@ -5,14 +5,15 @@ There are many potential sources of telemetry data. This section looks
 at some representative examples, with the caveat that we focus on
 metrics and traces, but not logs (the second of the three pillars of
 observability cited in Section |Ops|.1). This is because we are
-primarily focused on operating a network that, functionally, is
-relatively static: it forwards packets with changes to the in-network
-protocols stack being infrequent. Router and switch vendors often make
-use of logs to ensure that their implementations of OSPF, BGP, and so
-on, are correct, but once in the hands of a network operator, metrics
-and traces are the most common way to monitor whether or not the
-network is operating properly.  We revisit this topic in Section
-|Ops|.4, when we look at more rapidly evolving network functionality.
+primarily focused on operating a network that is relatively static
+with respect to functionality: it forwards packets, with infrequent
+changes to the protocols stack. Router and switch vendors make use of
+logs to ensure that their implementations of OSPF, BGP, and so on, are
+correct, but once in the hands of a network operator, metrics and
+traces are the most common way to monitor whether or not the network
+is operating properly and to diagnose problems. We revisit this
+assumption in Section |Ops|.4, when we look at more rapidly evolving
+network functionality.
 
 |Ops|.3.1 OpenConfig Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -48,7 +49,7 @@ there are several things an operator needs to keep an eye on. Variable
 which is good, but seeing ``established-transitions`` increasing over
 time might be a sign that the neighbor is repeatedly failing and
 attempting to reconnect. Tracking changes in ``last-established`` is
-another way to watch for potential problems.  Moreover, variable
+another way to watch for potential problems. Variable
 ``messages.NOTIFCATIONS`` tells us how many clean session restarts
 there have been; this value being less than
 ``established-transitions`` is an indication that the network path
@@ -101,6 +102,10 @@ parse the packet headers and display their fields.
 .. admonition:: Further Reading
 
     `Wireshark <https://www.wireshark.org/>`__.
+
+.. TODO -- Seems like we should say more about Wireshark and/or
+   pcap. Maybe include an example or two. An alternative is to include
+   examples in the "resources" repo, and just reference them here.
 
 Beyond troubleshooting, packet capture is not a practical approach to
 analyzing traffic. Simply deciding what flows are currently active,
