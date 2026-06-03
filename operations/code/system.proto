@@ -1,4 +1,4 @@
-service System {
+Service System {
     rpc Ping(PingRequest)
 	returns (stream PingResponse) {}
     rpc Traceroute(TracerouteRequest)

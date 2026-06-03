@@ -12,7 +12,7 @@ single "solution" that we can point to.
 
 We start with a bootstrapping step that anyone that's opened their
 laptop in the hopes of getting a Wi-Fi connection has triggered:
-aquiring an IP address. While this might seem like a problem to be
+acquiring an IP address. While this might seem like a problem to be
 addressed in Part III, where we take up issues at the edge of the
 network, assigning IP addresses is the responsibility of the network.
 It is also an operational problem in that sense that IP addresses are
@@ -116,7 +116,7 @@ functioning correctly.
 |Ops|.2.2 Configuration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-DHCP targets the configuration problem at the boundry between the
+DHCP targets the configuration problem at the boundary between the
 network and the hosts that connect to the network. We now turn our
 attention to the more general problem of configuring all the switches
 and routers—plus the software they run—inside the network. As outlined
@@ -282,7 +282,7 @@ The third point is that a given switch does not necessarily care about
 the full range of OpenConfig models. This is because a given device
 might support control plane protocols like BGP, or it might support an
 SDN control plane like the one described in Section |Routing|.5.  For
-example, the Switch OS on a datacenter switch might tracks the
+example, the Switch OS on a datacenter switch might track the
 following OpenConfig models: Interfaces, VLANs, QoS, and LACP (link
 aggregation), in addition to a set of system and platform variables
 (of which the switch’s fan speed is a favorite example).
@@ -294,27 +294,22 @@ larger scheme of things, there is little difference between a switch’s
 configuration interface and its operations interface. Generally
 speaking, persistent state is handled by gNMI (and a corresponding
 YANG model is defined), whereas clearing or setting ephemeral state is
-handled by gNOI. (By empheral state, we mean settings known on the
+handled by gNOI. (By ephemeral state, we mean settings known on the
 device, but without a requirement that any other entity remember the
-values.) It is also the case that non-idempotent actions like reboot
-and ping tend to fall under gNOI's domain.
+values so they can be recovered upon restart.) It is also the case
+that non-idempotent actions like reboot and ping tend to fall under
+gNOI's domain.
 
 As an illustrative example of how gNOI is used, the following is the
 protobuf specification for the ``System`` service. In this example,
-``Ping``, ``Traceroute``, ``Time``, and so on, are gNOI methods the
-operator can invoke on a device.
+``Ping``, ``Traceroute``, ``Time``, ``SetPackage``, and ``Reboot`` are
+gNOI methods the operator can invoke on a device. Of particular note,
+``SetPackage`` is used to instruct the device to download and install
+a specified software module. This method would typically be invoked to
+upgrade the device, for example, by installing the latest version of BGP.
 
 .. literalinclude:: operations/code/system.proto
 
-The ``Reboot`` method, for example, takes ``RebootRequest`` as an
-argument, where that parameter is defined by the following protobuf
-message:
-
-.. literalinclude:: operations/code/reboot.proto
-
-We explain protobuf syntax in Section |Message|.6, but for the purpose
-of this discussion, the idea of ``Reboot`` taking ``method`` and
-``delay`` arguments (among others) is straightforward.
 
 |Ops|.2.3 Configuration-as-Code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,12 +318,12 @@ SNMP is still in wide use, but primarily for modest-sized networks,
 such ones you might find in an enterprise. As soon as you scale the
 network—for example, to the size of a hyperscaler datacenter—you also
 need to scale operations. Being able to generate the configuration
-interface from a set of YANG models is an importantpart part of that,
+interface from a set of YANG models is an important part of that,
 but the configuration settings, themselves, still have to be entered.
 If an operator has to do that by typing individual values into a web
-form, then you still have a problem. Moreover, it's not just a data
-entry problem. Every time a change needs to be made is an opportunity
-to make a mistake.
+form, then you still have a problem. Moreover, it's not just that data
+entry is time consuming. Every time a change needs to be made, there
+is an opportunity to make a mistake.
 
 The solution, which has its origins in cloud operations, is to treat
 parameter settings as code; the practice is known as
@@ -366,7 +361,7 @@ is a popular open source example.
 
 Another aspect of treating configuration variables as code is that it
 naturally plugs into a management pipeline, similar to the one
-depicted in :numref:`Figure %s <fig-config-pipeline>`. The pipline
+depicted in :numref:`Figure %s <fig-config-pipeline>`. The pipeline
 takes input from three sources: an inventory repo, a config repo, and
 an image repo. We briefly mentioned inventory in the previous section,
 but you can think of it being implemented by a collection of YAML
@@ -377,13 +372,13 @@ get filled in with device-specific information. Operators are
 responsible for updating these first two repos. Finally, the image
 repo holds the latest executable images for the software stack running
 on each device (e.g., the latest release of OSPF or BGP). For now, we
-assume an upstream provider, for example a vendor, popultes the image
+assume an upstream provider, for example a vendor, populates the image
 repo.  We'll look at how the pipeline extends to the left to account
 for networks that also build their own software in Section |Ops|.4.
 
 .. _fig-config-pipeline:
 .. figure:: operations/figures/config-pipeline.png
-   :width: 500px
+   :width: 550px
    :align: center
 
    Simple configuration pipeline, with operator-supplied configuration

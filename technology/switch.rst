@@ -395,3 +395,8 @@ that competes with the largest vendors in the networking industry.
 
    `P4 Tutorials
    <https://github.com/p4lang/tutorials>`__. P4 Consortium, May 2019.
+
+.. TODO -- Somewhere in this section we need to introduce the idea of
+   the Management Plane, and a Switch OS (with SONIC as an example).
+   Hint at what's coming in the Ops chapter, including the idea of a
+   programmatic interface instead of a CLI.

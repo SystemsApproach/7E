@@ -58,7 +58,7 @@ network devices. We consider each, in turn.
 
 .. sidebar:: Is it SDN?
 
-   The schematic for a Network Managment System shown in
+   The schematic for a Network Management System shown in
    :numref:`Figure %s <fig-mgmt-system>` looks a lot like the
    schematic for an SDN Controller presented in Section |Routing|.5.1.
    This is no accident. At a high level, both involve a centralized
@@ -93,7 +93,7 @@ device supports.  Defining a schema for the set of configurable
 variables supported by network elements is the central problem of
 configuration management. To complicate matters, the schema should be
 vendor-agnostic (i.e., work across similar devices from multiple
-vendors), and support everything from low-evel hardware settings
+vendors), and support everything from low-level hardware settings
 (e.g., setting the port speed on an interface card) to high-level
 protocol settings (e.g., setting the AS number for BGP).
 

@@ -41,7 +41,7 @@ In this chapter, we will try to avoid the use of arcane terminology,
 and focus instead on the fundamental issues all of these operators
 face. They all have the same goals: to ensure the network has enough
 features and capacity to handle the demands of its current workload,
-and then deploy additional resources and functionalilty when needed;
+and then deploy additional resources and functionality when needed;
 to decide how all the hardware and software components they deploy
 should be configured, and then set their parameters accordingly; and
 to detect when something goes wrong, troubleshoot the cause of that
