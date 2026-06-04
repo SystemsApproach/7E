@@ -10,8 +10,8 @@ single "solution" that we can point to.
 |Ops|.2.1 Host Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We start with a bootstrapping step that anyone that's opened their
-laptop in the hopes of getting a Wi-Fi connection has triggered:
+We start with a bootstrapping step that happens any time you open your
+laptop and hope to connect to Wi-Fi:
 acquiring an IP address. While this might seem like a problem to be
 addressed in Part III, where we take up issues at the edge of the
 network, assigning IP addresses is the responsibility of the network.
@@ -30,6 +30,13 @@ need to successfully send and receive packets; for example, their
 subnet mask, default router, and DNS server. (Remember that a
 machine's Ethernet address is typically burned into the NIC, but its
 IP address depends on what network it tries to connect to.)
+
+It's worth noting that DHCP wasn't part of the original Internet's
+design. IP address configuration was a manual step in the early years,
+and it was only as the Internet started to spread to home networks and
+small offices without IT staff
+that the need for autoconfiguration became sufficiently pressing to
+lead to the development of DHCP. 
 
 DHCP relies on the existence of a DHCP server to provide configuration
 information to hosts. There is at least one DHCP server for an
@@ -151,7 +158,7 @@ You can learn more about the basics of SNMP and the MIB from RFCs 1157
 and 1213, respectively, and if you want to follow the history of
 incremental refinements, there is a long list of follow-on RFCs. But
 all of this work is based on an approach that pre-dates the
-availability of modern pragmatic modeling languages, of which YANG is
+availability of modern modeling languages, of which YANG is
 the leading choice to have emerged over the last few years. YANG—which
 stands for *Yet Another Next Generation*, a name chosen to poke fun at
 how often a do-over proves necessary—can be viewed as a restricted
@@ -171,9 +178,9 @@ language is fuzzy, a gentle introduction is available online.
    `Markup Languages (XML) <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
-What’s important about going in this direction is that the data model
-that defines the semantics of the variables available to be read and
-written is available in a programmatic form; it’s not just text in a
+What’s important about going in this direction is that the data model,
+which defines the semantics of the variables available to be read and
+written, is available in a programmatic form; it’s not just text in a
 standards document. Moreover, while it is true that all hardware
 vendors promote the unique capabilities of their products, it is not a
 free-for-all, with each vendor defining a unique model. This is because
@@ -190,22 +197,25 @@ configuration models using YANG as its modeling language. OpenConfig
 is officially agnostic as to the over-the-wire protocol used to access
 on-device configuration and status variables, but gNMI (gRPC Network
 Management Interface) is one approach it is actively pursuing. And as
-you might guess from its name, gNMI uses gRPC (which in turn runs on
-top of HTTP/2). This means gNMI also adopts protobufs as the way it
-specifies the data actually communicated over the HTTP
-connection. Thus, gNMI is intended as a standard management interface
-for network devices. (See Chapter |Message| for more information on
-gRPC and protobufs.)
+you might guess from its name, gNMI uses gRPC (a request/response
+protocol which runs on top of HTTP—see Chapter |Message|). Thus, gNMI
+is intended as a standard management interface for network devices.\
+[#]_
 
-For completeness, note that NETCONF is another of the post-SNMP
-protocols for communicating configuration information to network
-devices. OpenConfig also works with NETCONF, but our current
-assessment is that gNMI has the weight of industry behind it as the
-future management protocol.
+.. Tried to limit the forward references above
 
-.. TODO -- Make sure this "assessement" still holds.
+.. [#] For completeness, note that NETCONF is another of the post-SNMP
+       protocols for communicating configuration information to network
+       devices. OpenConfig also works with NETCONF, but our current
+       assessment is that gNMI has the weight of industry behind it as the
+       future management protocol.
 
-Returning the data model, OpenConfig defines a hierarchy of object
+.. TODO -- Make sure this "assessment" still holds. (Bruce: I see
+   some evidence that NETCONF lives on among IETF types while gNMI is
+   popular with cloud types - but that's a guess only)
+
+
+Returning to the data model, OpenConfig defines a hierarchy of object
 types. For example, the YANG model for network interfaces looks like
 this:
 
@@ -259,14 +269,17 @@ Keep in mind that YANG is not tied to either gRPC or gNMI. The
 toolchain is able to start with the very same OpenConfig models but
 instead produce XML or JSON representations for the data being read
 from or written to network devices using, for example, NETCONF. But in
-our context, the target is protobufs, which can be used to run gNMI
-over gRPC.
+our context, the target is gNMI. 
 
 The second point is that gNMI defines a specific set of gRPC methods to
 operate on these models. The set is defined collectively as a Service
-in the protobuf specification:
+in the following specification:
 
 .. literalinclude:: operations/code/service.proto
+
+This specification uses the Protocol Buffers (usually referred to as
+protobufs) specification language. We take a closer look at protobufs
+in Section |Message|.6.
 
 The ``Capabilities`` method is used to retrieve the set of model
 definitions supported by the device. The ``Get`` and ``Set`` methods
@@ -315,7 +328,7 @@ upgrade the device, for example, by installing the latest version of BGP.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 SNMP is still in wide use, but primarily for modest-sized networks,
-such ones you might find in an enterprise. As soon as you scale the
+such as ones you might find in an enterprise. As soon as you scale the
 network—for example, to the size of a hyperscaler datacenter—you also
 need to scale operations. Being able to generate the configuration
 interface from a set of YANG models is an important part of that,
@@ -328,12 +341,16 @@ is an opportunity to make a mistake.
 The solution, which has its origins in cloud operations, is to treat
 parameter settings as code; the practice is known as
 *Configuration-as-Code*. Typically, this means parameters are
-specified in YAML (Yet Another Markup Language), and the set of YAML
+specified in YAML\ [#]_, and the set of YAML
 files corresponding to a network's aggregate configuration is managed
 in a code repository just like any other collection of C, Java, or
 GoLang programs. This is not as big of stretch as it might sound: you
 can think of YAML as a declarative programming language.
 
+.. [#] YAML at one time stood for "Yet Another Markup Language" but
+       now expands to "YAML Ain't Markup Language" to indicate its use
+       in configuration specification rather than document markup.
+   
 The following snippet of YAML code shows how one might configure an
 Ethernet interface. This file corresponds to the YANG shown in the
 previous section.
@@ -341,10 +358,11 @@ previous section.
 .. literalinclude:: operations/code/ethernet.yaml
 
 The advantage of managing configuration state as code is that it can
-be versioned just like other software modules. There could be a stable
+be versioned just like other software modules, with a corresponding
+set of version control and release management tools. There could be a stable
 version that represents the currently deployed parameters. Edits can
 be made, reviewed, and thoroughly tested, and when there is confidence
-in its correctness, the changes rolled out to the operational. Most
+in its correctness, the changes rolled out to the operational system. Most
 importantly, if there is a problem, it's possible to roll back to an
 earlier, known-working version of the configuration state. Testing
 that a configuration is correct is clearly an important step in this
@@ -367,7 +385,7 @@ an image repo. We briefly mentioned inventory in the previous section,
 but you can think of it being implemented by a collection of YAML
 files representing all the deployed devices. The config repo is
 similar to what we've just described, with the exception that instead
-of hardcoding some of the parameters, the YAML includes templates that
+of hard-coding some of the parameters, the YAML includes templates that
 get filled in with device-specific information. Operators are
 responsible for updating these first two repos. Finally, the image
 repo holds the latest executable images for the software stack running
