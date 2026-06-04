@@ -179,11 +179,9 @@ further, the first requirement is that devices themselves need to be
 Layered on top of those raw meters and counters is a data collection
 mechanism that periodically reads the per-device variables and records
 their values in a time-series database. The collection mechanism can
-be built around a combination of ``PUSH`` and ``PULL`` operations; the
-former requiring devices to periodically send their data to the
-collector (also referred to as "streaming"), and the latter involving
-the collector periodically pulling (also referred to as "polling") the
-device.
+be built around a combination of configuring devices to ``Stream``
+their data to the collector, and configuring the collector to
+periodically ``Poll`` the device.
 
 We also need a query mechanism that allows operators to look at the
 data. This includes both feeding data to dashboards that display it
