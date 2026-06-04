@@ -400,3 +400,50 @@ that competes with the largest vendors in the networking industry.
    the Management Plane, and a Switch OS (with SONIC as an example).
    Hint at what's coming in the Ops chapter, including the idea of a
    programmatic interface instead of a CLI.
+
+|Tech|.2.5 Switch OS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Our overview of packet switches has focused on their internal design,
+with the control/data plane split being the most important take away.
+But there is one more switch component to highlight: the *Northbound
+Interface (NBI)* used by a network operations team to manage a switch
+once it has been deployed in a network. We address this operational
+challenge in Chapter |Ops|, but with respect to switch design,
+:numref:`Figure %s <fig-nbi>` adds two important details.
+
+.. _fig-nbi:
+.. figure:: technology/figures/nbi.png
+    :width: 450px
+    :align: center
+
+    A Switch OS running on the switch implements a NBI used by network
+    operators—with the aid of of their management tools—configure and
+    monitor operational switches.
+
+First, the switch control processor runs an operating system, just
+like any computer. This *Switch OS* runs all the control plane
+programs, as well as the NBI through which external agents, including
+human operators, manage the switch.  Historically, vendors have
+supported proprietary Switch OSes, with Cisco's IOS (Internetworking
+Operating System) being the most well known. Today, there is momentum
+towards an open Switch OS, one called SONiC being a leading
+candidate. Initially developed at Microsoft, SONiC is Linux-based, and
+in addition to being bundled with common protocols like BGP, includes
+a standardized API for the switch forwarding hardware. You can think
+of this API as providing a broad *Hardware Abstraction Layer (HAL)*,
+of which installing flow rules is just one narrow aspect.
+
+The second detail concerns the NBI. Historically, the NBI took the
+form of a *Command Line Interface (CLI)*. Operators would typically
+"log into" the switch via a console port, and issue whatever commands
+were needed to get the switch up and running, or to change some
+configuration parameter. SONiC does not mandate a particular NBI (we
+describe an example in Chapter |Ops|), but for now, the important take
+away is that this NBI is programmatic. This enables a far richer
+collection of management tools, so much so, that there as been a
+fundamental shift in how we think about the overall problem space.  In
+addition to the control and data planes, which are typically
+implemented within the switch chassis, we also now also include a
+*management plane* running at a higher level. This management plane is
+the focus of Chapter |Ops|.
