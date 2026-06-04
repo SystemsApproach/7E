@@ -1,12 +1,13 @@
 |Ops|.1 Design Issues
 ------------------------------
 
-Users that manage their home network (or a small enterprise network)
-have experience with many of the same issues any operator faces:
+Users who manage their home network (or a small enterprise network)
+experience many of the same issues any operator faces:
 deciding what devices to buy, making sure they are correctly
 configured, and figuring out what went wrong when something doesn't
 work. The main difference between a home network and an ISP or cloud
-network is one of scale. Imagine that instead of managing a single
+network is one of scale and the corresponding impact of
+outages. Imagine that instead of managing a single 
 home router, your job is to make sure hundreds or possibly thousands
 of network devices are properly configured. A manual approach,
 requiring operators to log into each device and set parameters, would
@@ -22,19 +23,19 @@ per-device configuration parameters, and (b) remotely install those
 parameters in each device. The devices would then periodically report
 information about their status—such as how many packets they had
 forwarded, the average queue length each output port, the number of
-routes updates they had processed, and so on—back to the management
+route updates they had processed, and so on—back to the management
 system, with with the goal of detecting problematic behavior and
 sending an *alert* to the operator whenever something requires their
 attention.
 
 Such an idealized management system is shown in :numref:`Figure %s
-<fig-mgmt-system>`, where we can fantasize a bit more about the
-sophistication of its internal mechanisms. On the configuration side,
-operator intents could be expressed as "natural text", with a Large
-Language Model (LLM) translating the intent into a discrete set of
-configuration settings. On the monitoring side, Machine Learning (ML)
-algorithms could analyze the reported data, and raise an alert anytime
-a statistical anomaly is detected. And in the limit, we could build a
+<fig-mgmt-system>`; we can imagine sophisticated possibilities for its
+internal mechanisms. On the configuration side, operator intents could
+be expressed as "natural text", with a Large Language Model (LLM)
+translating the intent into a discrete set of configuration
+settings. On the monitoring side, Machine Learning (ML) algorithms
+could analyze the reported data, and raise an alert anytime a
+statistical anomaly is detected. And in the limit, we could build a
 *closed control loop*, where an alert triggers a new intent, bypassing
 the human operator entirely.
 
@@ -63,39 +64,41 @@ network devices. We consider each, in turn.
    schematic for an SDN Controller presented in Section |Routing|.5.1.
    This is no accident. At a high level, both involve a centralized
    program being used to "oversee" a distributed set of devices.  The
-   only difference is whether the centralize component is *controling*
+   only difference is whether the centralized component is *controling*
    the device (i.e., installing forwarding rules into the device's
    data plane) or *configuring* the device (i.e., giving the on-device
    control plane the list of BGP neighbors it should peer with).
 
-   SDN started with the premise that it was possible to build a
-   centralized control plane, and use it to install flow rules in a
-   distributed data plane. That proved to be too disruptive, in part
-   because it implied making real-time decisions about how to respond
-   to link and switch failures. If the data plane reports a failure,
-   the control plane needs to learn about this failure and provide a
-   remedy (e.g., a new Match/Action flow rule) generally within
-   milliseconds. In response, many switch and router vendors offered
-   an "SDN Lite" solution, which involved support for a centralized
-   *Management Plane*. Management has historically been done using a
-   Command Line Interface (CLI), so it was a major improvement to add
-   a programmatic alternative. This capability is what we focus on in
-   this chapter, where centralizing the use of that interface is a
-   clear win for SDN.
+   One of the papers that inspired the SDN movement, the 4D paper
+   (see Further Reading below), speficially called out manageability
+   in its top-level goals. SDN adopted the premise that it was
+   possible to build a centralized control plane, and used it to
+   install flow rules in a distributed data plane. That proved to be
+   too disruptive, in part because it implied making real-time
+   decisions about how to respond to link and switch failures. If the
+   data plane reports a failure, the control plane needs to learn
+   about this failure and provide a remedy (e.g., a new Match/Action
+   flow rule) generally within milliseconds. In response, many switch
+   and router vendors offered an "SDN Lite" solution, which involved
+   support for a centralized *Management Plane*. Management has
+   historically been done using a Command Line Interface (CLI), so it
+   was a major improvement to add a programmatic alternative. This
+   capability is what we focus on in this chapter, where centralizing
+   the use of that interface is a clear win for SDN.
 
 On the configuration side, automation require a programmatic approach;
 expecting a human to manually enter configuration parameters into a
-web form simply does not scale. Manually entering configuration
-settings is also notoriously error-prone. What we need is a
-programmatic interface that supports ``GET`` and ``SET`` operations,
-but that implies knowing what set of parameters (variables) each
-device supports.  Defining a schema for the set of configurable
-variables supported by network elements is the central problem of
-configuration management. To complicate matters, the schema should be
-vendor-agnostic (i.e., work across similar devices from multiple
-vendors), and support everything from low-level hardware settings
-(e.g., setting the port speed on an interface card) to high-level
-protocol settings (e.g., setting the AS number for BGP).
+web form or command line interface simply does not scale. Manually
+entering configuration settings is also notoriously error-prone. What
+we need is a programmatic interface that supports ``GET`` and ``SET``
+operations, but that implies knowing what set of parameters
+(variables) each device supports.  Defining a schema for the set of
+configurable variables supported by network elements is the central
+problem of configuration management. To complicate matters, the schema
+should be vendor-agnostic (i.e., work across similar devices from
+multiple vendors), and support everything from low-level hardware
+settings (e.g., setting the port speed on an interface card) to
+high-level protocol settings (e.g., setting the AS number for BGP).
 
 A programmatic interface implies that a program is already running on
 the devices (that program responds to ``GET`` and ``SET`` requests),
@@ -109,7 +112,8 @@ ongoing maintenance, we'd like this initial setup process to be
 automated, requiring as few manual steps as possible. (Another way of
 saying this, is that the goal is for the person physically installing
 the hardware to require as little technical training as possible.)
-This goal is sometimes called *zero-touch provisioning*.
+This goal is sometimes called *zero-touch provisioning* (a topic we
+discussed in the VPN context in Chapter |Virtual|).
 
 .. [#] This discussion of provisioning implicitly assumes that
        hardware is being purchased and installed, but in general, an
@@ -172,7 +176,7 @@ is involves "reading meters at a distance." Breaking the problem down
 further, the first requirement is that devices themselves need to be
 *instrumented*, which is to say, they need to record their activity
 (such as number of packets sent or received) in local counters.
-Layered on top those raw meters and counters is a data collection
+Layered on top of those raw meters and counters is a data collection
 mechanism that periodically reads the per-device variables and records
 their values in a time-series database. The collection mechanism can
 be built around a combination of ``PUSH`` and ``PULL`` operations; the
@@ -184,7 +188,7 @@ device.
 We also need a query mechanism that allows operators to look at the
 data. This includes both feeding data to dashboards that display it
 graphically, and feeding analysis tools that help operators diagnose
-faults, tune performance, do root cause analysis, conduct security
+faults, tune performance, do root-cause analysis, conduct security
 audits, and provision additional capacity. As mentioned earlier in
 this section, as these tools grow more and more sophisticated, there
 is the potential that they auto-configure the system based on these
@@ -210,7 +214,7 @@ memory usage, but also binary results corresponding to "up" and
 every few seconds), either by reading a counter, or by executing a
 runtime test that returns a value. These metrics can be associated
 with physical resources such as servers and switches, virtual
-resources such as VMs or IP subnets, or even end-to-end protocols
+resources such as VMs or IP subnets, or even end-to-end protocols and
 services.
 
 Logs are the qualitative data that is generated whenever a noteworthy
@@ -244,4 +248,13 @@ to *configured* behavior. Note that we can treat some of the variables
 read by the configuration system as telemetry data—that is, there are
 some variables that serve both sides of the management system.
 
+
+
+.. _reading-4D:
+
+.. admonition:: Further Reading
+
+   A. Greenberg et al. `A clean slate 4D approach to network control and management
+   <https://dl.acm.org/doi/10.1145/1096536.1096541>`__.
+     ACM SIGCOMM Computer Communication Review, October 2005.
 
