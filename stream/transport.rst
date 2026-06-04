@@ -524,7 +524,4 @@ applications without making the protocol itself impossible to implement.
 RTP has proven very successful in this regard, forming the basis for
 many real-time multimedia applications run over the Internet today.
 
-|Stream|.3.4 Media Over QUIC
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. Todo
+.. todo sidebar on SRTP
