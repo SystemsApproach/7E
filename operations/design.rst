@@ -7,7 +7,7 @@ deciding what devices to buy, making sure they are correctly
 configured, and figuring out what went wrong when something doesn't
 work. The main difference between a home network and an ISP or cloud
 network is one of scale and the corresponding impact of
-outages. Imagine that instead of managing a single 
+outages. Imagine that instead of managing a single
 home router, your job is to make sure hundreds or possibly thousands
 of network devices are properly configured. A manual approach,
 requiring operators to log into each device and set parameters, would
@@ -113,7 +113,7 @@ automated, requiring as few manual steps as possible. (Another way of
 saying this, is that the goal is for the person physically installing
 the hardware to require as little technical training as possible.)
 This goal is sometimes called *zero-touch provisioning* (a topic we
-discussed in the VPN context in Chapter |Virtual|).
+discussed in the VPN context in Chapter |Virt|).
 
 .. [#] This discussion of provisioning implicitly assumes that
        hardware is being purchased and installed, but in general, an
@@ -254,5 +254,5 @@ some variables that serve both sides of the management system.
 
    A. Greenberg et al. `A clean slate 4D approach to network control and management
    <https://dl.acm.org/doi/10.1145/1096536.1096541>`__.
-     ACM SIGCOMM Computer Communication Review, October 2005.
+   ACM SIGCOMM Computer Communication Review, October 2005.
 
