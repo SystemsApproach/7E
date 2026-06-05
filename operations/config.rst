@@ -42,7 +42,7 @@ design. IP address configuration was a manual step in the early years,
 and it was only as the Internet started to spread to home networks and
 small offices without IT staff
 that the need for autoconfiguration became sufficiently pressing to
-lead to the development of DHCP. 
+lead to the development of DHCP.
 
 DHCP relies on the existence of a DHCP server to provide configuration
 information to hosts. There is at least one DHCP server for an
@@ -260,9 +260,10 @@ written in the same language. With respect to the overview of network
 management shown in :numref:`Figure %s <fig-mgmt-system>`, the ``gNMI
 Client`` stub runs as part of the Network Management System and an
 instance of the the ``gNMI Server`` stub runs on each individual
-switch, specifically as part of the operating system running on the
-switch's control processor (see, for example, :ref:`Figure 37
-<fig-baremetal>` in Chapter |Tech|).
+switch, specifically as part of the Switch OS system running on the
+switch's control processor. (See, for example, :ref:`Figure 40
+<fig-nbi>` in Chapter |Tech|, where the server stub in :numref:`Figure
+%s <fig-yang>`  implements the switch's NBI.)
 
 .. _fig-yang:
 .. figure:: operations/figures/yang-tooling.png
@@ -275,7 +276,7 @@ Keep in mind that YANG is not tied to either gRPC or gNMI. The
 toolchain is able to start with the very same OpenConfig models but
 instead produce XML or JSON representations for the data being read
 from or written to network devices using, for example, NETCONF. But in
-our context, the target is gNMI. 
+our context, the target is gNMI.
 
 The second point is that gNMI defines a specific set of gRPC methods to
 operate on these models. The set is defined collectively as a Service
@@ -285,17 +286,18 @@ in the following specification:
 
 This specification uses the Protocol Buffers (usually referred to as
 protobufs) specification language. We take a closer look at protobufs
-in Section |Message|.6.
+in Section |Message|.6, but understanding the essence of the spec is
+straightforward.
 
 The ``Capabilities`` method is used to retrieve the set of model
 definitions supported by the device. The ``Get`` and ``Set`` methods
-are used to read and write the corresponding variable defined in some
-models. The ``Subscribe`` method is used to set up a stream of
-telemetry updates from the device. The corresponding arguments and
-return values (e.g., ``GetRequest``, ``GetResponse``) are defined
-by a protobuf ``Message`` and include various fields from the YANG
-models. A given field is specified by giving its fully qualified
-path name in the data model tree.
+are used to read and write the corresponding variable defined in one
+of those models. The ``Subscribe`` method is used to set up a stream
+of telemetry updates from the device. The corresponding arguments and
+return values (e.g., ``GetRequest``, ``GetResponse``) are defined by a
+protobuf ``Message`` and include various fields from the YANG
+models. A given field is identified with its fully qualified path name
+in the data model tree.
 
 The third point is that a given switch does not necessarily care about
 the full range of OpenConfig models. This is because a given device
@@ -356,7 +358,7 @@ can think of YAML as a declarative programming language.
 .. [#] YAML at one time stood for "Yet Another Markup Language" but
        now expands to "YAML Ain't Markup Language" to indicate its use
        in configuration specification rather than document markup.
-   
+
 The following snippet of YAML code shows how one might configure an
 Ethernet interface. This file corresponds to the YANG shown in the
 previous section.
