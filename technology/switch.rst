@@ -396,10 +396,6 @@ that competes with the largest vendors in the networking industry.
    `P4 Tutorials
    <https://github.com/p4lang/tutorials>`__. P4 Consortium, May 2019.
 
-.. TODO -- Somewhere in this section we need to introduce the idea of
-   the Management Plane, and a Switch OS (with SONIC as an example).
-   Hint at what's coming in the Ops chapter, including the idea of a
-   programmatic interface instead of a CLI.
 
 |Tech|.2.5 Switch OS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -427,20 +423,20 @@ programs, as well as the NBI through which external agents, including
 human operators, manage the switch.  Historically, vendors have
 supported proprietary Switch OSes, with Cisco's IOS (Internetworking
 Operating System) being the most well known. Today, there is momentum
-towards an open Switch OS, one called SONiC being a leading
+towards an open Switch OS, with one called SONiC being a leading
 candidate. Initially developed at Microsoft, SONiC is Linux-based, and
 in addition to being bundled with common protocols like BGP, includes
 a standardized API for the switch forwarding hardware. You can think
 of this API as providing a broad *Hardware Abstraction Layer (HAL)*,
 of which installing flow rules is just one narrow aspect.
 
-The second detail concerns the NBI. Historically, the NBI took the
-form of a *Command Line Interface (CLI)*. Operators would typically
-"log into" the switch via a console port, and issue whatever commands
-were needed to get the switch up and running, or to change some
-configuration parameter. SONiC does not mandate a particular NBI (we
-describe an example in Chapter |Ops|), but for now, the important take
-away is that this NBI is programmatic. This enables a far richer
+The second detail concerns the NBI. Historically, this interfce took
+the form of a *CLI (Command Line Interface)*. Operators would
+typically "log into" the switch via a console port, and issue whatever
+commands were needed to get the switch up and running, or to change
+some configuration parameter. SONiC does not mandate a particular NBI
+(we describe an example in Chapter |Ops|), but for now, the important
+take away is that this NBI is programmatic. This enables a far richer
 collection of management tools, so much so, that there as been a
 fundamental shift in how we think about the overall problem space.  In
 addition to the control and data planes, which are typically

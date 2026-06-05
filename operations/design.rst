@@ -69,22 +69,21 @@ network devices. We consider each, in turn.
    data plane) or *configuring* the device (i.e., giving the on-device
    control plane the list of BGP neighbors it should peer with).
 
-   One of the papers that inspired the SDN movement, the 4D paper
-   (see Further Reading below), specifically called out manageability
-   in its top-level goals. SDN adopted the premise that it was
-   possible to build a centralized control plane, and used it to
-   install flow rules in a distributed data plane. That proved to be
-   too disruptive, in part because it implied making real-time
-   decisions about how to respond to link and switch failures. If the
-   data plane reports a failure, the control plane needs to learn
-   about this failure and provide a remedy (e.g., a new Match/Action
-   flow rule) generally within milliseconds. In response, many switch
-   and router vendors offered an "SDN Lite" solution, which involved
-   support for a centralized *Management Plane*. Management has
-   historically been done using a Command Line Interface (CLI), so it
-   was a major improvement to add a programmatic alternative. This
-   capability is what we focus on in this chapter, where centralizing
-   the use of that interface is a clear win for SDN.
+   One of the papers that inspired the SDN movement, the 4D paper (see
+   Further Reading below), specifically called out manageability in
+   its top-level goals. SDN adopted the premise that it was possible
+   to build a centralized control plane, and used it to install flow
+   rules in a distributed data plane. That proved to be too
+   disruptive, in part because it implied making real-time decisions
+   about how to respond to link and switch failures. If the data plane
+   reports a failure, the control plane needs to learn about this
+   failure and provide a remedy (e.g., a new Match/Action flow rule)
+   generally within milliseconds. In response, many switch and router
+   vendors offered an "SDN Lite" solution, which involved support for
+   a centralized *Management Plane*. As described in Section
+   |Tech|.2.5, replacing a CLI with a programmatic interface was a key
+   advancement. The centralized use of that interface has led to a
+   clear win for SDN.
 
 On the configuration side, automation require a programmatic approach;
 expecting a human to manually enter configuration parameters into a
@@ -132,7 +131,7 @@ datacenter networks, it doesn't get around the fact that there are
 still large networks of physical devices to be managed. Furthermore,
 the wide variety of features and disparities among devices, even those
 from the same vendor, have made it hard to come up with unifying
-abstractions to manage the complexity of network operations. 
+abstractions to manage the complexity of network operations.
 
 Another aspect of the problem is *inventory management*, that is,
 tracking both the physical resources (racks, servers, switches,
