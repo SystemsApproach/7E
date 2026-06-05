@@ -205,14 +205,14 @@ is intended as a standard management interface for network devices.\
 .. Tried to limit the forward references above
 
 .. [#] For completeness, note that NETCONF is another of the post-SNMP
-       protocols for communicating configuration information to network
-       devices. OpenConfig also works with NETCONF, but our current
-       assessment is that gNMI has the weight of industry behind it as the
-       future management protocol.
+       protocols for communicating configuration information to
+       network devices. OpenConfig also works with NETCONF, but our
+       current assessment is that gNMI has the weight of the large
+       cloud operators behind it as the future management protocol.
 
 .. TODO -- Make sure this "assessment" still holds. (Bruce: I see
    some evidence that NETCONF lives on among IETF types while gNMI is
-   popular with cloud types - but that's a guess only)
+   popular with cloud types - tweaked the above to make the cloud our focus)
 
 
 Returning to the data model, OpenConfig defines a hierarchy of object
@@ -359,23 +359,29 @@ previous section.
 
 The advantage of managing configuration state as code is that it can
 be versioned just like other software modules, with a corresponding
-set of version control and release management tools. There could be a stable
-version that represents the currently deployed parameters. Edits can
-be made, reviewed, and thoroughly tested, and when there is confidence
-in its correctness, the changes rolled out to the operational system. Most
-importantly, if there is a problem, it's possible to roll back to an
-earlier, known-working version of the configuration state. Testing
-that a configuration is correct is clearly an important step in this
-process, and there are a variety of tools available to help. Batfish
-is a popular open source example.
+set of version control and release management tools. There could be a
+stable version that represents the currently deployed
+parameters. Edits can be made, reviewed, and thoroughly tested, and
+when there is confidence in its correctness, the changes rolled out to
+the operational system. Most importantly, if there is a problem, it's
+possible to roll back to an earlier, known-working version of the
+configuration state. Testing that a configuration is correct is
+clearly an important step in this process, and there are a variety of
+tools available to help. Batfish, described in the following paper, is
+a popular open source example.
 
 .. TODO -- This is a good opportunity to cite some of the most
    notorious configuration failures. Maybe in a sidebar.
 
 .. admonition:: Further Reading
 
-    `Batfish: An open source network configuration analysis tool
-    <https://batfish.org/>`__.
+   R. Beckett, A. Gupta, R. Mahajan and D. Walker. `A General
+   Approach to Network Configuration Verification
+   <https://dl.acm.org/doi/10.1145/3098822.3098834/>`__.  ACM
+   SIGCOMM '17 Symposium, August 2017.
+
+   `Batfish: An open source network configuration analysis tool
+   <https://batfish.org/>`__.
 
 Another aspect of treating configuration variables as code is that it
 naturally plugs into a management pipeline, similar to the one
