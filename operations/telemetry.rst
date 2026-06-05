@@ -50,7 +50,7 @@ which is good, but seeing ``established-transitions`` increasing over
 time might be a sign that the neighbor is repeatedly failing and
 attempting to reconnect. Tracking changes in ``last-established`` is
 another way to watch for potential problems. Variable
-``messages.NOTIFCATIONS`` tells us how many clean session restarts
+``messages.NOTIFICATIONS`` tells us how many clean session restarts
 there have been; this value being less than
 ``established-transitions`` is an indication that the network path
 between this router and its neighbor is flaky (i.e., the underlying
@@ -125,9 +125,9 @@ standard, called *sFlow*, has been developed around the idea of
 sampling. A switch needs to be instrumented to support sampling, and
 an interface is needed to say what level of sampling to perform (e.g.,
 1-in-10000 on a 100-Gbps link) and where to send the collected
-headers. For the latter problem, OpenConfig defines an ``sflow``
+headers. For the latter problem, OpenConfig defines an ``sFlow``
 model, although it is still more common for vendors to provide CLI
-command to activate and configure sflow.
+command to activate and configure sFlow.
 
 The other big issue is how to analyze the collected samples. One
 option is to send the samples to a network port where a process like
@@ -192,7 +192,7 @@ collaborative efforts to deploy servers that are explicitly programmed
 to respond to active measurement probes. One of these is
 MeasurementLab (M-Lab), which in cooperation with ISPs around the
 world, has installed servers at important Internet exchange points.
-M-Lab deploys its own active measurement tools (a opposed to expecting
+M-Lab deploys its own active measurement tools (as opposed to expecting
 users to know about ``iperf``), and it goes a step further by
 archiving the results of any active probe requested by any user. The
 resulting dataset is then available to be queried by anyone. This is
@@ -209,8 +209,8 @@ worldwide (in addition to testing the quality of your own connection).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We conclude this discussion of telemetry by returning to the weakest
-link—that someone had the foresight to collect the data we want when
-we get the point that we need it. This concern is especially important
+link—that someone had the foresight to collect the data we want prior
+to the realization that we need it. This concern is especially important
 on hardware switches, which are not easily modified in the field.
 Should we need to add a new counter to the data plane, we are likely
 to need to wait until the next release of the switching chip. The
@@ -251,7 +251,7 @@ packet, and records the corresponding data for each switch.
     Illustration of Inband Network Telemetry (INT), with each packet
     collecting measurement data as it traverses the network.
 
-INT is still early-stage, but it has the potential to provide
+INT is still in an early stage, but it has the potential to provide
 qualitatively deeper insights into traffic patterns and the root
 causes of network failures. For example, INT can be used to measure
 and record queuing delay individual packets experience while
