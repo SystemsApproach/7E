@@ -64,13 +64,13 @@ network devices. We consider each, in turn.
    schematic for an SDN Controller presented in Section |Routing|.5.1.
    This is no accident. At a high level, both involve a centralized
    program being used to "oversee" a distributed set of devices.  The
-   only difference is whether the centralized component is *controling*
+   only difference is whether the centralized component is *controlling*
    the device (i.e., installing forwarding rules into the device's
    data plane) or *configuring* the device (i.e., giving the on-device
    control plane the list of BGP neighbors it should peer with).
 
    One of the papers that inspired the SDN movement, the 4D paper
-   (see Further Reading below), speficially called out manageability
+   (see Further Reading below), specifically called out manageability
    in its top-level goals. SDN adopted the premise that it was
    possible to build a centralized control plane, and used it to
    install flow rules in a distributed data plane. That proved to be
@@ -122,6 +122,17 @@ discussed in the VPN context in Chapter |Virt|).
        operation on a cloud provider, or a "Create Circuit" operation
        on a broadband provider. We take up this broader perspective
        in Section |Ops|.4.
+
+Managing networks via programmatic interfaces has proven to be one of
+the famously hard problems in networking. One effort to address that
+problem was covered in Section |Virt|.4: virtualize the network in
+order to abstract away the large set of individual features across
+thousands of devices. While that solution has been popular in
+datacenter networks, it doesn't get around the fact that there are
+still large networks of physical devices to be managed. Furthermore,
+the wide variety of features and disparities among devices, even those
+from the same vendor, have made it hard to come up with unifying
+abstractions to manage the complexity of network operations. 
 
 Another aspect of the problem is *inventory management*, that is,
 tracking both the physical resources (racks, servers, switches,

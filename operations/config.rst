@@ -5,7 +5,13 @@ This section looks at the configuration side of the operations
 problem, with a focus on the protocols, interfaces, data models, and
 open source tools commonly used to build a network management system.
 Every network adopts its own operational practices, so there is no
-single "solution" that we can point to.
+single "solution" that we can point to. There are some broad trends
+among the large cloud operators that we use to illustrate the
+approaches to configuration management, while more traditional network
+operators might choose a different set of tools. We aim here to
+illustrate the set of problems that need to be tackled and show some
+of the tools in widespread use, but this is necessarily a partial view
+of a broad landscape of operational tooling.
 
 |Ops|.2.1 Host Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
