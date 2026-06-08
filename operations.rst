@@ -37,15 +37,15 @@ them servers, routers, and other network appliances. And finally there
 is you, either managing your home network, or, like many people,
 outsourcing that responsibility to their ISP.
 
-In this chapter, we will try to avoid the use of arcane terminology,
-and focus instead on the fundamental issues all of these operators
-face. They all have the same goals: to ensure the network has enough
-features and capacity to handle the demands of its current workload,
-and then deploy additional resources and functionality when needed;
-to decide how all the hardware and software components they deploy
-should be configured, and then set their parameters accordingly; and
-to detect when something goes wrong, troubleshoot the cause of that
-failure, and then take corrective action.
+In this chapter, we avoid the use of arcane terminology, and focus
+instead on the fundamental issues all of these operators face. They
+all have the same goals: to ensure the network has enough features and
+capacity to handle the demands of its current workload, and then
+deploy additional resources and functionality when needed; to decide
+how all the hardware and software components they deploy should be
+configured, and then set their parameters accordingly; and to detect
+when something goes wrong, troubleshoot the cause of that failure, and
+then take corrective action.
 
 .. include:: operations/design.rst
 .. include:: operations/config.rst

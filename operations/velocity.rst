@@ -10,11 +10,11 @@ the network edge, evolve at a much faster pace than any of the
 protocols we've see so far in Part II. We are getting a little bit
 ahead of ourselves—we discuss the software that runs on edge hosts in
 Part III—but seeing the two operational challenges side-by-side helps
-us to appreciate that there is spectrum of options every operator has to
-take into account. That spectrum is how much they are willing to trade
-*network stability* for *feature velocity.* Every feature you add to a
-network (supposedly) provides value, but it comes at the risk of
-stability.
+us to appreciate that there is spectrum of options every operator has
+to take into account. That spectrum is how much they are willing to
+trade *network stability* for *feature velocity.* Every feature you
+add to a network (supposedly) provides value, but it comes at the risk
+of negatively impacting stability.
 
 One reason we have split the topics covered in this book into "inside
 the network" and "at the network edge" is that is has proven to be a
@@ -30,8 +30,8 @@ chapter by briefly outlining what those practices involve.
        they offer their customers. For example, one of the biggest
        arguments for 5G was that MNOs would be able develop and sell
        additional services beyond broadband connectivity. But that's
-       easier said than done, the challenge of operating the resulting set
-       of services is a big reason why.
+       easier said than done, and the challenge of operating the
+       resulting set of services is a big reason why.
 
 The biggest factor limiting the deployment of software into the cloud
 (or network) is its inclusion in the management process. Hence there
