@@ -164,15 +164,15 @@ You can learn more about the basics of SNMP and the MIB from RFCs 1157
 and 1213, respectively, and if you want to follow the history of
 incremental refinements, there is a long list of follow-on RFCs. But
 all of this work is based on an approach that pre-dates the
-availability of modern modeling languages, of which YANG is
-the leading choice to have emerged over the last few years. YANG—which
+availability of modern modeling languages, of which YANG is the
+solution to have emerged over the last several years. YANG—which
 stands for *Yet Another Next Generation*, a name chosen to poke fun at
 how often a do-over proves necessary—can be viewed as a restricted
-version of XSD, which is a language for defining a schema
-for XML. YANG defines the structure of the data, but unlike XSD, it is
-not XML-specific. Instead, YANG can be used in conjunction with
-different over-the-wire message formats, including XML, but also
-protobufs and JSON. If these acronyms are unfamiliar, or the
+version of XSD, which is a language for defining a schema for XML.
+YANG defines the structure of the data, but unlike XSD, it is not
+XML-specific. Instead, YANG can be used in conjunction with different
+over-the-wire message formats, including XML, but also YAML,
+protobufs, and JSON. If these acronyms are unfamiliar, or the
 distinction between a markup language and a schema for a markup
 language is fuzzy, a gentle introduction is available online.
 
@@ -181,6 +181,11 @@ language is fuzzy, a gentle introduction is available online.
 
 .. admonition:: Further Reading
 
+   M. Bjorklund (Ed.). `YANG: A Data Modeling Language for the Network
+   Configuration Protocol (NETCONF)
+   <https://www.rfc-editor.org/info/rfc6020>`__. RFC 6020,
+   October 2010.
+
    `Markup Languages (XML) <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
@@ -188,13 +193,15 @@ What’s important about going in this direction is that the data model,
 which defines the semantics of the variables available to be read and
 written, is available in a programmatic form; it’s not just text in a
 standards document. Moreover, while it is true that all hardware
-vendors promote the unique capabilities of their products, it is not a
-free-for-all, with each vendor defining a unique model. This is because
-the network operators that buy network hardware have a strong
-incentive to drive the models for similar devices towards convergence,
-and vendors have an equally strong incentive to adhere to those
-models. YANG makes the process of creating, using, and modifying
-models programmable and hence, adaptable to this iterative process.
+vendors promote the unique capabilities of their products, the goal is
+to avoid it becoming a free-for-all, with each vendor defining a
+unique model. Network operators that buy network hardware have a
+strong incentive to drive the models for similar devices towards
+convergence; unfortunately, vendors have an equally strong incentive
+to emphasize the uniqueness of their products. YANG makes the process
+of creating, using, and modifying models programmable and hence,
+adaptable to an iterative process. The only question is whether the
+industry can successfully iterate towards convergence.
 
 This is where an industry-wide standardization effort, called
 *OpenConfig*, comes into play. OpenConfig is a group of network
@@ -208,18 +215,13 @@ protocol which runs on top of HTTP—see Chapter |Message|). Thus, gNMI
 is intended as a standard management interface for network devices.\
 [#]_
 
-.. Tried to limit the forward references above
-
-.. [#] For completeness, note that NETCONF is another of the post-SNMP
-       protocols for communicating configuration information to
-       network devices. OpenConfig also works with NETCONF, but our
-       current assessment is that gNMI has the weight of the large
-       cloud operators behind it as the future management protocol.
-
-.. TODO -- Make sure this "assessment" still holds. (Bruce: I see
-   some evidence that NETCONF lives on among IETF types while gNMI is
-   popular with cloud types - tweaked the above to make the cloud our focus)
-
+.. [#] For completeness, note that NETCONF is the transport protocol
+       originally developed in conjuntion with YANG, and it still
+       enjoys wide adoption in certain domains.  OpenConfig also works
+       with NETCONF, but our current assessment is that gNMI has the
+       weight of the large cloud operators behind it as the future
+       management protocol, and so we elect to focus on it throughout
+       the rest of this chapter.
 
 Returning to the data model, OpenConfig defines a hierarchy of object
 types. For example, the YANG model for network interfaces looks like
@@ -227,7 +229,8 @@ this:
 
 .. literalinclude:: operations/code/iface.yang
 
-This is a base model that can be augmented, for example, to model an Ethernet interface:
+This is a base model that can be augmented, for example, to model an
+Ethernet interface:
 
 .. literalinclude:: operations/code/eth.yang
 
@@ -335,16 +338,15 @@ upgrade the device, for example, by installing the latest version of BGP.
 |Ops|.2.3 Configuration-as-Code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SNMP is still in wide use, but primarily for modest-sized networks,
-such as ones you might find in an enterprise. As soon as you scale the
-network—for example, to the size of a hyperscaler datacenter—you also
-need to scale operations. Being able to generate the configuration
-interface from a set of YANG models is an important part of that,
-but the configuration settings, themselves, still have to be entered.
-If an operator has to do that by typing individual values into a web
-form, then you still have a problem. Moreover, it's not just that data
-entry is time consuming. Every time a change needs to be made, there
-is an opportunity to make a mistake.
+As soon as you scale the network—for example, to the size of a
+datacenter or a global backbone—you also need to scale
+operations. Being able to generate the configuration interface from a
+set of YANG models is an important part of that, but the configuration
+settings, themselves, still have to be entered.  If an operator has to
+do that by typing individual values into a web form, then you still
+have a problem. Moreover, it's not just that data entry is time
+consuming. Every time a change needs to be made, there is an
+opportunity to make a mistake.
 
 The solution, which has its origins in cloud operations, is to treat
 parameter settings as code; the practice is known as
@@ -375,21 +377,21 @@ the operational system. Most importantly, if there is a problem, it's
 possible to roll back to an earlier, known-working version of the
 configuration state. Testing that a configuration is correct is
 clearly an important step in this process, and there are a variety of
-tools available to help. Batfish, described in the following paper, is
-a popular open source example.
+tools available to help. Batfish and Minesweeper (described in a
+2017 SIGCOMM paper) are popular examples.
 
 .. TODO -- This is a good opportunity to cite some of the most
    notorious configuration failures. Maybe in a sidebar.
 
 .. admonition:: Further Reading
 
-   R. Beckett, A. Gupta, R. Mahajan and D. Walker. `A General
-   Approach to Network Configuration Verification
-   <https://dl.acm.org/doi/10.1145/3098822.3098834/>`__.  ACM
-   SIGCOMM '17 Symposium, August 2017.
-
    `Batfish: An open source network configuration analysis tool
    <https://batfish.org/>`__.
+
+   R. Beckett, A. Gupta, R. Mahajan and D. Walker. `A General
+   Approach to Network Configuration Verification
+   <https://dl.acm.org/doi/abs/10.1145/3098822.3098834>`__.  ACM
+   SIGCOMM '17 Symposium, August 2017.
 
 Another aspect of treating configuration variables as code is that it
 naturally plugs into a management pipeline, similar to the one
