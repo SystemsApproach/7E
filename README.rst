@@ -9,7 +9,7 @@ About This Book
 .. image:: https://github.com/SystemsApproach/book/actions/workflows/publish-docs.yml/badge.svg
   :align: left
   :alt: deployment status button
-  :target: https://github.com/SystemsApproach/book/actions/
+  :target: https://github.com/SystemsApproach/7E/actions/
 
 |
 
@@ -25,6 +25,7 @@ following information:
 
 |  Title: *Computer Networks: A Systems Approach*
 |  Authors: Larry Peterson and Bruce Davie
+|  Copyright: Larry Peterson and Bruce Davie, 2026
 |  Source: https://github.com/SystemsApproach/7E
 |  License: `CC BY  4.0 <https://creativecommons.org/licenses/by/4.0>`__
 
@@ -64,12 +65,12 @@ textbook based on a fork of v7.0, but going forward, open source
 releases found here will not necessarily stay in sync with any future
 published editions.
 
-In general, ``master`` contains a coherent and internally consistent
+In general, ``main`` contains a coherent and internally consistent
 version of the material. (If it were code, the book would build and
 run.) New content under development is checked into branches until it
-can be merged into ``master`` without breaking self-consistency. The web
+can be merged into ``main`` without breaking self-consistency. The web
 version of the book available at https://book.systemsapproach.org is then
-continuously generated from ``master``, corresponding to a typical
+continuously generated from ``main``, corresponding to a typical
 maintenance release (although we do not bother to tag it as such).
 
 Minor releases (e.g., v7.1) are tagged whenever there is sufficient
@@ -88,7 +89,7 @@ source:
    $ mkdir ~/systemsapproach
    $ cd ~/systemsapproach
    $ git clone https://github.com/systemsapproach/7e.git
-   $ cd book
+   $ cd 7e
 
 The build process is stored in the ``Makefile`` and requires Python be
 installed. The ``Makefile`` will create a virtualenv (``venv-docs``) which
@@ -118,39 +119,29 @@ addressed, and issuing *Pull Requests* to merge your improvements back
 into GitHub.
 
 If you do want to contribute either patches or new material, you will
-need to sign a `Contributor Licensing Agreement
-(CLA) <https://github.com/SystemsApproach/book/blob/master/CLA.rst>`__.
-You’ll be prompted to sign the CLA the first time you make a pull
-request.
+need to include a `Developer Certificate of Origin
+<https://wiki.linuxfoundation.org/dco>`__ stating that you agree to
+the terms published at https://developercertificate.org/.
 
-The CLA is pretty straightforward: it establishes that (a) you have the
-right to contribute what you’re contributing, and (b) what you
-contribute is available to everyone else under the same `CC
-BY <https://creativecommons.org/licenses/by/4.0>`__ terms as the
-existing content. The CLA is a little unusual in that it explicitly
-calls out Elsevier’s rights (which are the same as everyone’s), but this
-does signal their intent to continue publishing textbooks based on the
-material.
 
-You should also familiarize yourself with the `guidelines for
-contributing <https://github.com/SystemsApproach/book/blob/master/CONTRIBUTING.rst>`__.
+You should also familiarize yourself with the `guidelines for contributing
+<https://github.com/SystemsApproach/7E/blob/main/CONTRIBUTING.rst>`__.
 
 If you’d like to contribute and are looking for something that needs
-attention, see the current `Project
-Board <https://github.com/orgs/SystemsApproach/projects/>`__. We’d also
-like to expand the set of topics/chapters beyond the initial set
-inherited from the 5th edition, so if you have ideas, we’d love to hear
-from you. Send email to ``discuss@systemsapproach.org``, or better yet,
-`join the
-forum <https://groups.google.com/a/systemsapproach.org/forum/#!forum/discuss>`__.
+attention, see the current `Project Board
+<https://github.com/orgs/SystemsApproach/projects/>`__. We’d also like
+to expand the set of topics/chapters beyond the initial set inherited
+from the 5th edition, so if you have ideas, we’d love to hear from
+you. Send email to ``discuss@systemsapproach.org``, or better yet,
+`join the forum
+<https://groups.google.com/a/systemsapproach.org/forum/#!forum/discuss>`__.
 
-Finally, in as much as this is an on-going effort, we will try to record
-and track our
-`progress
-<https://github.com/SystemsApproach/book/blob/master/status.rst>`__.
-For now, think of this as a poor-man’s release notes. Additional
-information about work-in-progress can be found in the
-`wiki <https://github.com/SystemsApproach/book/wiki>`__.
+Finally, in as much as this is an on-going effort, we will try to
+record and track our `progress
+<https://github.com/SystemsApproach/7E/blob/main/status.rst>`__.  For
+now, think of this as a poor-man’s release notes. Additional
+information about work-in-progress can be found in the `wiki
+<https://github.com/SystemsApproach/7E/wiki>`__.
 
 Join Us
 -------
@@ -160,4 +151,4 @@ Approach* over the years, and we’re eager to have you join us in this
 new venture.
 
 | Larry Peterson & Bruce Davie
-| November 2019
+| June 2026
