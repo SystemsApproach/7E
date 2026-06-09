@@ -12,20 +12,15 @@ If you have new material that doesn’t fit into the current book
 organization in an obvious way, you may want to look at one of the following
 repositories:
 
-- `sdn <https://github.com/SystemsApproach/sdn>`__: Our book on
-   Software-Defined Networking.
+- `sdn <https://github.com/SystemsApproach/sdn>`__: Our book on Software-Defined Networking.
 
-- `ops <https://github.com/SystemsApproach/ops>`__: Our book on Edge
-   Cloud Operations.
+- `ops <https://github.com/SystemsApproach/ops>`__: Our book on Edge Cloud Operations.
 
-- `tcpcc <https://github.com/SystemsApproach/tcpcc>`__: Our book on
-   TCP Congestion Control.
+- `tcpcc <https://github.com/SystemsApproach/tcpcc>`__: Our book on TCP Congestion Control.
 
-- `security <https://github.com/SystemsApproach/security>`__: Our book
-   on Network Security.
+- `security <https://github.com/SystemsApproach/security>`__: Our book on Network Security.
 
-- `private5g <https://github.com/SystemsApproach/private5g>`__: Our
-   book on Private 5G.
+- `private5g <https://github.com/SystemsApproach/private5g>`__: Our  book on Private 5G.
    
 As for stylistic guidelines, there are only a few things to keep in
 mind.
