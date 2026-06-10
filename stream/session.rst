@@ -204,7 +204,9 @@ voicemail server. It is widely used for video conferencing, and can
 also be used for instant messaging.
 
 
-|Stream|.4.2 Media Over QUIC
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
 
 .. Todo

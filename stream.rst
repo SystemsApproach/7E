@@ -13,3 +13,4 @@ Chapter |Stream|: Real-Time Streaming
 .. include:: stream/coding.rst
 .. include:: stream/transport.rst
 .. include:: stream/session.rst
+.. include:: stream/scale.rst
