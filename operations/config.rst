@@ -164,17 +164,17 @@ You can learn more about the basics of SNMP and the MIB from RFCs 1157
 and 1213, respectively, and if you want to follow the history of
 incremental refinements, there is a long list of follow-on RFCs. But
 all of this work is based on an approach that pre-dates the
-availability of modern modeling languages, of which YANG is the
-solution to have emerged over the last several years. YANG—which
-stands for *Yet Another Next Generation*, a name chosen to poke fun at
-how often a do-over proves necessary—can be viewed as a restricted
-version of XSD, which is a language for defining a schema for XML.
-YANG defines the structure of the data, but unlike XSD, it is not
-XML-specific. Instead, YANG can be used in conjunction with different
-over-the-wire message formats, including XML, but also YAML,
-protobufs, and JSON. If these acronyms are unfamiliar, or the
-distinction between a markup language and a schema for a markup
-language is fuzzy, a gentle introduction is available online.
+availability of modern modeling languages, of which YANG has become
+the widely-accepted solution. YANG—which stands for *Yet Another Next
+Generation*, a name chosen to poke fun at how often a do-over proves
+necessary—can be viewed as a restricted version of XSD, which is a
+language for defining a schema for XML.  YANG defines the structure of
+the data, but unlike XSD, it is not XML-specific. Instead, YANG can be
+used in conjunction with different over-the-wire message formats,
+including XML, but also YAML, protobufs, and JSON. If these acronyms
+are unfamiliar, or the distinction between a markup language and a
+schema for a markup language is fuzzy, a gentle introduction is
+available online.
 
 .. TODO -- Another example of where a stand-alone "piece" of 6E might
    be useful.
@@ -189,19 +189,20 @@ language is fuzzy, a gentle introduction is available online.
    `Markup Languages (XML) <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
    *Computer Networks: A Systems Approach*, 2020.
 
-What’s important about going in this direction is that the data model,
-which defines the semantics of the variables available to be read and
+What’s important about this direction is that the data model, which
+defines the semantics of the variables available to be read and
 written, is available in a programmatic form; it’s not just text in a
-standards document. Moreover, while it is true that all hardware
-vendors promote the unique capabilities of their products, the goal is
-to avoid it becoming a free-for-all, with each vendor defining a
-unique model. Network operators that buy network hardware have a
-strong incentive to drive the models for similar devices towards
-convergence; unfortunately, vendors have an equally strong incentive
-to emphasize the uniqueness of their products. YANG makes the process
-of creating, using, and modifying models programmable and hence,
-adaptable to an iterative process. The only question is whether the
-industry can successfully iterate towards convergence.
+standards document. But a modeling language is no better than the
+models it defines, and this has proven problematic due to conflicting
+incentives. Network operators that buy network hardware have a strong
+incentive to drive the models for similar devices towards convergence,
+so they are not locked into products from a single vendor.  Vendors,
+on the other hand, have an equally strong incentive to emphasize the
+uniqueness of their products. This results in a fragmented set of
+models.  YANG makes the process of creating, using, and modifying
+models programmable and hence, adaptable to an iterative process. The
+only question is whether the industry can successfully iterate towards
+convergence.
 
 This is where an industry-wide standardization effort, called
 *OpenConfig*, comes into play. OpenConfig is a group of network
@@ -216,10 +217,10 @@ is intended as a standard management interface for network devices.\
 [#]_
 
 .. [#] For completeness, note that NETCONF is the transport protocol
-       originally developed in conjuntion with YANG, and it still
-       enjoys wide adoption in certain domains.  OpenConfig also works
-       with NETCONF, but our current assessment is that gNMI has the
-       weight of the large cloud operators behind it as the future
+       originally developed in conjunction with YANG, and it still
+       enjoys wide adoption, particularly among ISPs.  OpenConfig also
+       works with NETCONF, but our current assessment is that gNMI has
+       the weight of the large cloud operators behind it as the future
        management protocol, and so we elect to focus on it throughout
        the rest of this chapter.
 
@@ -265,8 +266,8 @@ Client`` stub runs as part of the Network Management System and an
 instance of the the ``gNMI Server`` stub runs on each individual
 switch, specifically as part of the Switch OS system running on the
 switch's control processor. (See, for example, :ref:`Figure 40
-<fig-nbi>` in Chapter |Tech|, where the server stub in :numref:`Figure
-%s <fig-yang>`  implements the switch's NBI.)
+<fig-nbi>` in Section |Tech|.2.5, where the server stub in
+:numref:`Figure %s <fig-yang>` implements the switch's NBI.)
 
 .. _fig-yang:
 .. figure:: operations/figures/yang-tooling.png
@@ -282,7 +283,7 @@ from or written to network devices using, for example, NETCONF. But in
 our context, the target is gNMI.
 
 The second point is that gNMI defines a specific set of gRPC methods to
-operate on these models. The set is defined collectively as a Service
+operate on these models. The set is defined collectively as a ``Service``
 in the following specification:
 
 .. literalinclude:: operations/code/service.proto
@@ -339,12 +340,13 @@ upgrade the device, for example, by installing the latest version of BGP.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As soon as you scale the network—for example, to the size of a
-datacenter or a global backbone—you also need to scale
-operations. Being able to generate the configuration interface from a
-set of YANG models is an important part of that, but the configuration
-settings, themselves, still have to be entered.  If an operator has to
-do that by typing individual values into a web form, then you still
-have a problem. Moreover, it's not just that data entry is time
+datacenter or a global backbone—you also need to scale operations; it
+is not viable to heavily depend on manual intervention. Being able to
+generate the configuration interface from a set of YANG models is an
+important part of that, but the configuration settings, themselves,
+still have to be entered.  If an operator has to do that by typing
+individual values into a web form, then you still have a
+problem. Moreover, it's not just that data entry is time
 consuming. Every time a change needs to be made, there is an
 opportunity to make a mistake.
 
@@ -418,6 +420,4 @@ for networks that also build their own software in Section |Ops|.4.
    Simple configuration pipeline, with operator-supplied configuration
    and inventory specifications stored in their respective repositories,
    and executable images supplied by an upstream vendor.
-
-.. TODO -- Grow this pipeline to the left in 10.4.
 

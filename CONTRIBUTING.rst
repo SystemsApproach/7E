@@ -21,7 +21,7 @@ repositories:
 - `security <https://github.com/SystemsApproach/security>`__: Our book on Network Security.
 
 - `private5g <https://github.com/SystemsApproach/private5g>`__: Our  book on Private 5G.
-   
+
 As for stylistic guidelines, there are only a few things to keep in
 mind.
 
