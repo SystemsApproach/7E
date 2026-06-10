@@ -224,6 +224,8 @@ that the reduced bandwidth can now be met by the network, and the
 queue will start to fill again. If the queue is getting more full over
 time, that can be a sign that a higher quality can be requested.
 
+.. TODO: say more about adaptive algorithms using buffer depth, refer to the 2 Test of Time papers
+
 There is a lot of work that goes into tuning these algorithms to make
 the appropriate tradeoff between perceived quality and bandwidth. For
 example, constantly switching between two quality levels is likely to
