@@ -1,3 +1,5 @@
+.. _artifact-pon:
+
 |Shared|.5 Passive Optical Network
 -----------------------------------------
 

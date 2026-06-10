@@ -1,3 +1,5 @@
+.. _artifact-rdma:
+
 |Message|.4 Remote DMA
 ----------------------------
 

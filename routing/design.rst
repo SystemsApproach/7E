@@ -12,7 +12,8 @@ forwarding tables are built. Routing often depends on a complex
 distributed algorithm, and is considered part of the network's
 *control plane*.
 
-.. TODO -- Rethink next paragraph in terms of "switch as platform"
+.. TODO -- Consider whether any of this discussion needs to be
+   tweaked in light of the Switch vs Router blog post. (Probably not.)
 
 Recall also that there isn't a lot of difference between switches and
 routers (no matter how much the vendors of these devices might argue
@@ -126,8 +127,6 @@ the destination and decide to send packets to the other one. Clearly,
 such packets will be stuck in a loop until the discrepancy is resolved,
 and it would be good to resolve it as soon as possible. This is just
 one example of the type of problem routing protocols must address.
-
-.. TODO -- DO we come back to this? - yes, now noted in both linkstate and DV
 
 To begin our analysis, we assume that the edge costs in the network
 are known; they are often set statically when switches are

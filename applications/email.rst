@@ -193,6 +193,8 @@ contains various pieces, each denoted by a character string that does
 not appear in the data itself. Each piece then has its own
 ``Content-Type`` and ``Content-Transfer-Encoding`` lines.
 
+.. _artifact-smtp:
+
 2.3.2 Message Transfer
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -329,6 +331,8 @@ email addresses look pretty tame (e.g., ``bob@princeton.edu``), this
 was not always the case. In the days before everyone was connected to
 the Internet, it was not uncommon to see email addresses of the form
 ``user%host@site!neighbor``.
+
+.. _artifact-pop3:
 
 2.3.3 Mail Reader
 ~~~~~~~~~~~~~~~~~

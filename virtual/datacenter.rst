@@ -627,15 +627,15 @@ to be a container management system, such as Kubernetes.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Network virtualization has certainly had an impact on networking,
-particularly in the datacenter, in the years since VL2. The technology is now widespread
-in Telcos and large enterprise datacenters. It is also ubiquitous in
-the datacenters of large cloud companies, as an essential component of
-delivering infrastructure as a service.
+particularly in the datacenter, in the years since VL2. The technology
+is now widespread in Telcos and large enterprise datacenters. It is
+also ubiquitous in the datacenters of large cloud companies, as an
+essential component of delivering infrastructure as a service.
 
-..
-  TODO We are talking about firewalls for the first time in this chapter -
-  do they need to appear elsewhere in the book? Is it sufficient to add
-  a bit more on firewalls at their first appearance here
+.. TODO -- We are talking about firewalls for the first time in this
+   chapter. Do they need to appear elsewhere in the book? Is it
+   sufficient to add a bit more on firewalls at their first appearance
+   here?
 
 One of the interesting side-effects of network virtualization is that
 it enabled a change in the way security is implemented in the

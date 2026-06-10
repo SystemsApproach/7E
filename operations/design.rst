@@ -170,15 +170,16 @@ practice is sometimes described in exactly those terms:
   service. This is often referred to simply as “Day 2 Operations”.
 
 
-.. TODO -- Work Remote Device Management in somewhere, either
-   here or in the Config Section. Includes the following...
-
-   A standard (e.g., IPMI, Redfish) that defines a way to remotely
-   manage hardware devices in support of zero-touch provisioning. The
-   idea is to send and receive out-of-band messages over the LAN in
-   place of having video or serial console access to the
-   device. Additionally, these may integrate with monitoring and other
-   device health telemetry systems.
+.. TODO -- Work Remote Device Management in somewhere, either here or
+   in the Config Section. Maybe a footnote or sidebar is enough. Key
+   is to point out that many servers have a "management port" and you
+   can use IPMI or Redfish to remotely manage hardware devices in
+   support of zero-touch provisioning. The idea is to send and receive
+   out-of-band messages over the LAN in place of having video or
+   serial console access to the device. Additionally, these may
+   integrate with monitoring and other device health telemetry
+   systems. (At the level of this chapter, this is a nit, but an
+   interesting one highlighting how tricky mgmt can be.)
 
 We now turn our attention to the building blocks we need to monitor an
 operational network, a process often referred to as *telemetry* since

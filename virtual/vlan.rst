@@ -1,3 +1,5 @@
+.. _artifact-vlan:
+
 |Virt|.2 Virtual LANs (VLANs)
 -----------------------------------------------
 

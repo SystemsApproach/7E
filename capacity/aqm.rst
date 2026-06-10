@@ -266,7 +266,8 @@ different RTTs and bottleneck bandwidths.
 
 As a footnote, 15 prominent network researchers urged for the
 widespread adoption of RED-inspired AQM in 1998. The recommendation
-was largely ignored, for reasons that we touch on below. AQM
+was largely ignored, primarily having to do with how difficult it is
+to correctly set the parameters (as documented in RFC 7567). AQM
 approaches based on RED have, however, been applied with some success
 in datacenters.
 
@@ -278,8 +279,9 @@ in datacenters.
    <https://www.rfc-editor.org/info/rfc2309>`__.
    RFC 2309, April 1998.
 
-.. TODO: this has been replaced by RFC 7567 which still asks for AQM
-   but admits that RED might not be the best choice
+   F. Baker and G. Fairhurst. `IETF Recommendations Regarding Active
+   Queue Management <https://www.rfc-editor.org/info/rfc7567>`__.
+   RFC 7567, July 2015.
 
 |Capacity|.3.2 Controlled Delay
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -383,7 +385,7 @@ that commonly experiences bufferbloat.
    <https://www.rfc-editor.org/info/rfc8289>`__. RFC 8289,
    January 2018.
 
-.. TODO: I would update this to cover fq_codel and RFC 8290
+.. TODO: Need to update this to cover fq_codel and RFC 8290
    https://blog.cerowrt.org/post/state_of_fq_codel/
 
 |Capacity|.3.3 Explicit Congestion Notification

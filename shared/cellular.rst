@@ -1,3 +1,5 @@
+.. _artifact-5g:
+
 |Shared|.4 Mobile Cellular Network
 --------------------------------------------
 

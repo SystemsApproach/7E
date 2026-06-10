@@ -1,3 +1,5 @@
+.. _artifact-stp:
+
 |Routing|.2 Spanning Tree Protocol
 ---------------------------------------
 

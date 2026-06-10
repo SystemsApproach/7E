@@ -48,9 +48,6 @@ this section explores that part of the design space.
 |Capacity|.1.1 Centralized vs Distributed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. TODO -- This subsection may be a little too broad for the purposes
-   of this chapter, but it does set up TE as a topic.
-
 In principle, the first design decision is whether a network's
 approach to resource allocation is centralized (based on global
 information) or distributed (based on local information). In practice,
@@ -202,8 +199,6 @@ consistent set of routers. This idea of a *flow*—a sequence of packets
 sent between a source/destination pair and following the same route
 through the network—is an important abstraction that we take advantage
 of.
-
-.. TODO deal with the forward reference to TCP port numbers?
 
 One of the powers of the flow abstraction is that flows can be defined
 at different granularities. For example, a flow can be host-to-host

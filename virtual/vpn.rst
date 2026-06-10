@@ -207,8 +207,10 @@ what the VPN user can access. So the VPN represents a weak point that
 is often exploited by attackers. Some ways to address this issue are
 discussed below.
 
-.. TODO don't really have firewall coverage anywhere yet. Can we use a sidebar?
-
+.. TODO -- Don't really have firewall coverage anywhere yet. This also
+   comes up in the datacenter section. Maybe a Firewall sidebar in the
+   design section makes sense. The relationship between virtual nets
+   and firewalls is interesting in its own right.
 
 Site-to-site VPNs differ from remote access VPNs in that they aim to connect
 entire networks together, not just the devices of single remote
@@ -282,6 +284,8 @@ allowed connections among specific devices are possible.
    A. Pennarun. `How Tailscale Works
    <https://tailscale.com/blog/how-tailscale-works>`__.  Tailscale
    blog, 2020.
+
+.. _artifact-mpls:
 
 |Virt|.3.4 MPLS/BGP VPNs
 ~~~~~~~~~~~~~~~~~~~~~~~~~

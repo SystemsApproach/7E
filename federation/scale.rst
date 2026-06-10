@@ -319,6 +319,8 @@ frequently used forwarding entries; a fallback lookup algorithm is
 still needed.
 
 
+.. _artifact-nat:
+
 |Fed|.3.2 Network Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
