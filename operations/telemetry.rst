@@ -203,7 +203,8 @@ worldwide (in addition to testing the quality of your own connection).
 
     `Measurement Lab <https://www.measurementlab.net/>`__.
 
-.. TODO -- Seems thin, but I'm not sure what else to talk about.
+.. TODO -- A bit thin. Probably should give a quick overview of NDT.
+   Anything else?
 
 |Ops|.3.4 In-Band Network Telemetry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

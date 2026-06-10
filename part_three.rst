@@ -29,9 +29,12 @@ challenges, we incude descriptions of the following artifacts:
    ===========   ===========
    Protocol                  Coverage
    ===========   ===========
-   TCP                         Chapter 11
-   TLS                         Chapter 12
-   gRPC                       :ref:`Section 13.2 <artifact-grpc>`
-   QUIC                       :ref:`Section 13.3 <artifact-quic>`
-   RoCE                       :ref:`Section 13.5 <artifact-roce>`
+   DCTCP                       :ref:`Section 13.4.1 <artifact-dctcp>`
+   DNS                         :ref:`Section 11.2 <artifact-dns>`
+   gRPC                        :ref:`Section 15.2 <artifact-grpc>`
+   QUIC                        :ref:`Section 15.3 <artifact-quic>`
+   RDMA                        :ref:`Section 15.4 <artifact-rdma>`
+   RoCE                        :ref:`Section 15.5 <artifact-roce>`
+   TCP                         :ref:`Chapter 12 <artifact-tcp>`
+   TLS                         :ref:`Chapter 14 <artifact-tls>`
    ===========   ===========

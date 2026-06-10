@@ -4,6 +4,8 @@
 
 .. include:: chapters.rst
 
+.. _artifact-tcp:
+
 Chapter |TCP|:  Reliable Byte Stream
 ====================================
 

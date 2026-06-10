@@ -1,3 +1,5 @@
+.. _artifact-dash:
+
 2.4 Adaptive Streaming
 -------------------------------
 

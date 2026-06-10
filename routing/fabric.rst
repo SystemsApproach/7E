@@ -54,7 +54,7 @@ conceptual picture of an SDN system is shown in :numref:`Figure %s
     applications and providing a logically centralized point of
     control for an underlying network data plane.
 
-.. TODO -- We may want to drop the NOC angle, and just focus
+.. TODO -- We may want to drop the NOS angle, and just focus
    on a single "Control Program". Or at least equate NOS with
    "library"  and note that it's not multi-tenant.
 
@@ -134,9 +134,6 @@ four links as equivalent.
     High availability through a combination of link bonding on servers
     and ECMP groups on switches.
 
-.. TODO -- Links from Leaf 1 switch to two servers are misdrawn.
-   It's a snap issue.
-
 The one complication for both link bonding and ECMP groups is the
 algorithm used to distribute traffic over the available links/paths.
 Some end-to-end protocols, most notably TCP, work best when all the
@@ -164,9 +161,9 @@ ports in each group without additional control plane involvement.
 |Routing|.5.3 Segment Routing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. TODO -- We need to at least mention other possibilities, including
-   BGP. This would require a forward reference to the interdomain
-   routing chapter. (A sidebar in that chapter makes sense.)
+.. TODO -- We need to mention other possibilities, including BGP.
+   This would require a forward reference to the interdomain
+   routing chapter. (A sidebar in that chapter might make sense.)
 
 Independent of link aggregation, we still need to discover routes
 between all the servers. One approach is a routing algorithm called
@@ -238,8 +235,7 @@ is popped off the list (by one of the spine switches), Leaf 2 is left
 to match the original destination address in the IPv6 header to
 implement its forwarding decision.
 
-.. TODO -- Probably ought to give an example layout diagram
-
+.. TODO -- Probably ought to include a packet format diagram.
 
 For a useful overview of one hyperscale data center design that
 leverages SDN, we recommend the paper on Google's Jupiter
@@ -252,3 +248,7 @@ architecture.
    Software-Defined Networking
    <https://doi.org/10.1145/3544216.3544265>`__. ACM SIGCOMM '22 Symposium,
    August 2022.
+
+.. TODO -- Could use Jupiter citation as an excuse to mention some
+   of the more advanced ideas in datacenter backbones; e.g., the use of
+   passive optical switches.

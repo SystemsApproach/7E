@@ -132,8 +132,8 @@ servicing of packets from each flow’s queue will give the first flow
 two-thirds of the link’s bandwidth and the second flow only one-third
 of its bandwidth.
 
-.. TODO -- Probably should update the algorithm to DWRR rather
-   FQ/WFQ. Keep the bit-by-bit story as motivation, mention that there
+.. TODO -- Need toupdate the algorithm to DWRR rather FQ/WFQ.
+   Keep the bit-by-bit story as motivation, mention that there
    are multiple algorithms, but then present DWRR's approximation.
 
 What we really want is bit-by-bit round-robin, where the router
@@ -269,9 +269,7 @@ other way than the simple host-to-host or process-to-process flows.
 One practical example of this is to use some bits in the IP header to identify
 classes and allocate a queue and a weight to each class. This is
 exactly what is defined as part of the Differentiated Services
-mechanism described in Chapter |Stream|.
-
-.. TODO not sure where we are covering Diff Serv yet, so check that reference.
+mechanism described later in this Chapter.
 
 Finally, we observe that this whole discussion of queue management
 illustrates an important system design principle known as *separating

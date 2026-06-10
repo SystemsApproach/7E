@@ -1,3 +1,5 @@
+.. _artifact-dns:
+
 |Naming|.2 Domain Naming System
 -------------------------------------------
 

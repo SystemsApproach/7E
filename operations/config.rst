@@ -13,6 +13,8 @@ illustrate the set of problems that need to be tackled and show some
 of the tools in widespread use, but this is necessarily a partial view
 of a broad landscape of operational tooling.
 
+.. _artifact-dhcp:
+
 |Ops|.2.1 Host Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -126,6 +128,8 @@ address to its pool. A host with a leased address needs to renew the
 lease periodically if in fact it is still connected to the network and
 functioning correctly.
 
+.. _artifact-yang:
+
 |Ops|.2.2 Configuration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -177,7 +181,8 @@ schema for a markup language is fuzzy, a gentle introduction is
 available online.
 
 .. TODO -- Another example of where a stand-alone "piece" of 6E might
-   be useful.
+   be useful. Maybe a "Markup Language" sidebar is a better approach;
+   just survey all the related acronyms with a dose of taxonomy.
 
 .. admonition:: Further Reading
 

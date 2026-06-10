@@ -8,8 +8,8 @@ sections have proven useful in narrow settings. Datacenter networks
 are a noteworthy example, and so we use them to illustrate how these
 mechanisms are used in practice.
 
-.. TODO Suggest reworking this to make Datacenter one example out of 2
-   or 3, including VOIP and perhaps access networks
+.. TODO Suggest reworking this section to make Datacenter one example
+   out of 2 or 3, including VOIP and perhaps access networks.
 
 Datacenter networks have two properties that make them an ideal
 candidate for enhanced resource management. One is that they are
@@ -77,8 +77,7 @@ control class and default best-effort class.
 
 .. TODO -- Verify that the above paragraph is correct. It suggests a
    thread that is of minimal value (except perhaps as a negative
-   example).
-   The Google Cloud docs suggest a larger number of AF classes
+   example). The Google Cloud docs suggest a larger number of AF classes.
 
 Second, instead of probabilistically dropping packets, datacenters use
 ECN to provide direct feedback. Given the low round-trip times, ECN

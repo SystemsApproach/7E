@@ -11,6 +11,8 @@ protocol—HTTP—underpinning it. In this section we dig into the details
 of that protocol, and in doing so, tease out the reasons the web has
 become such a ubiquitous framework for building new applications.
 
+.. _artifact-http:
+
 2.2.1 Application Protocols
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
