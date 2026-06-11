@@ -134,9 +134,11 @@ The preceding discussion captures MoQ at a particular point in time,
 since the specifications are still evolving and implementations are
 trying to track the specifications. Nevertheless, this approach draws
 on the success of existing technologies such as QUIC and DASH and has
-the weight of major industry players behind it. The CDN provider
-Cloudflare has implemented the relay function in a large scale
-deployment and you can read more in their blog on the subject.
+the weight of major industry players behind it, so there is reason to
+be optimistic for its future. The implemention of the relay function
+in a large-scale deployment at Cloudflare is one example of the
+industry investment in MoQ; you can read more about MoQ and its
+implementation in their blog on the subject.
 
 .. admonition:: Further Reading
 
