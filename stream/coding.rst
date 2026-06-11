@@ -15,7 +15,7 @@ some of the major efforts in representing and compressing multimedia
 data.
 
 The uses of compression are not limited to multimedia data of course—for
-example, you may well have used a utility like ``zip`` 
+example, you may well have used a utility like ``zip``
 to compress files before sending them over a network, or to uncompress a
 data file after downloading. It turns out that the techniques used for
 compressing data—which are typically *lossless*, because most people
@@ -155,7 +155,7 @@ it, it would take 15 bits to encode the index, meaning that the string
 “compression” could be represented in 15 bits rather than the 77 bits
 required by 7-bit ASCII. This is a compression ratio of 5-to-1! As an
 example, we ran the first chapter of this book through ``gzip`` and it
-shrank from 78kB to 27kB, about 35% of its original size. 
+shrank from 78kB to 27kB, about 35% of its original size.
 
 Of course, this leaves the question of where the dictionary comes from.
 One option is to define a static dictionary, preferably one that is
@@ -680,11 +680,12 @@ rates for the I frame. Without first reducing the 24 bits of color to
 and 50:1.
 
 MPEG involves a set of relatively expensive computations. Compression
-can be done in an offline manner when preparing movies for
-a video-on-demand service.  As video has become mainstream for real-time communication,
-hardware that is well suited to video compression, such as GPUs, has become
-standard on end systems. On the decompression side, MPEG decoding
-is often done in software, with GPUs again playing a role in many cases. 
+can be done in an offline manner when preparing movies for a
+video-on-demand service.  As video has become mainstream for real-time
+communication, hardware that is well suited to video compression, such
+as GPUs, has become standard on end systems. On the decompression
+side, MPEG decoding is often done in software, with GPUs again playing
+a role in many cases.
 
 Video Encoding Standards
 ++++++++++++++++++++++++++++++

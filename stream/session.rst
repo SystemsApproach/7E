@@ -1,5 +1,5 @@
-|Stream|.4 Session Control 
-----------------------------------
+|Stream|.4 Session Control
+--------------------------
 
 Many applications, including most uses of the World Wide Web and
 video-on-demand applications, fit well into the client-server model
@@ -123,7 +123,7 @@ case, the content is an SDP (Session Description Protocol)
 message. That message would describe such things as the type of media
 (audio, video, etc.) that Bruce would like to exchange with Larry and
 other properties of the session such as codec types that he
-supports. 
+supports.
 
 Returning to the example, when the ``invite`` message arrives at the
 proxy, not only does the proxy forward the message on toward

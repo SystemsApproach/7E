@@ -45,7 +45,7 @@ overlay networks such as CDNs. And there is an ongoing effort to
 standardize a type of overlay specifically for real-time streams. That
 effort is known as "Media Over QUIC" (MEOW) but the name doesn't really
 tell you much about all the moving parts. Let's take a look at the
-main features of MoQ. 
+main features of MoQ.
 
 There is a well-established concept in distributed systems known as
 the *publish/subscribe* pattern. Publish/subscribe is a generic
@@ -103,7 +103,7 @@ to know about publishers and *vice versa*.
    :width: 500px
    :align: center
 
-   Relays form an overlay for media distribution   
+   Relays form an overlay for media distribution
 
 Relays form an overlay of nodes that can store, forward, and replicate
 objects, as shown in :numref:`Figure %s <fig-relays>`. They don't need

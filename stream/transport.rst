@@ -1,5 +1,5 @@
-|Stream|.3 Transport Issues 
-----------------------------------
+|Stream|.3 Transport Issues
+---------------------------
 
 In Chapter |Apps| we saw how streaming video could be delivered over
 HTTP, thus leveraging widely deployed protocols and much of the
@@ -195,7 +195,7 @@ of structure to represent all the different types of information.
    datagrams, so that a lost packet only corrupts a single frame, not
    two. It is for this reason that RTP leaves so many of the protocol
    details to the profile and format documents that are specific to an
-   application. 
+   application.
 
 Header Format
 +++++++++++++++
