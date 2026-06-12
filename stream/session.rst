@@ -1,3 +1,5 @@
+.. _artifact-sip:
+
 |Stream|.4 Session Control
 --------------------------
 
@@ -9,8 +11,9 @@ conferencing, don't conform so well to that model. There is no
 well-defined server for a client to connect to. Instead, we want to
 establish a communication *session* among the participants. These
 sorts of applications typically use something called *session
-control*. We begin our discussion with the widely used SIP, the
-session initiation protocol.
+control*. This section explores the challenge of session control,
+using SIP (Session Initiation Protocol) as an example. SIP is typically
+paired with RTP to implement VOIP.
 
 |Stream|.4.1 Session Initiation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -21,45 +24,45 @@ designed with these different applications in mind and thus
 provides different capabilities than HTTP. The capabilities
 provided by SIP can be grouped into five categories:
 
--  User location—Determining the correct device with which to
+-  User location: Determining the correct device with which to
    communicate to reach a particular user
 
--  User availability—Determining if the user is willing or able to take
+-  User availability: Determining if the user is willing or able to take
    part in a particular communication session
 
--  User capabilities—Determining such items as the choice of media and
+-  User capabilities: Determining such items as the choice of media and
    coding scheme to use
 
--  Session setup—Establishing session parameters such as port numbers to
+-  Session setup: Establishing session parameters such as port numbers to
    be used by the communicating parties
 
--  Session management—A range of functions including transferring
+-  Session management: A range of functions including transferring
    sessions (e.g., to implement “call forwarding”) and modifying session
    parameters
 
-Most of these functions are easy enough to understand, but the issue
-of location bears some further discussion. Unlike HTTP, SIP is
-primarily used for human-to-human communication. Thus, it is important
-to be able to locate individual *users*, not just machines. And,
-unlike email, it’s not good enough just to locate a server that the
-user will be checking on at some later date and dump the message
-there—we need to know where the user is right now if we want to be
-able to communicate with him in real time. This is further complicated
-by the fact that a user might choose to communicate using a range of
-different devices, such as using his desktop PC when he’s in the
-office and using a handheld device when traveling. Multiple devices
-might be active at the same time and might have widely different
-capabilities (e.g., an alphanumeric pager and a PC-based video
-“phone”).  Ideally, it should be possible for other users to be able
-to locate and communicate with the appropriate device at any
-time. Furthermore, the user must be able to have control over when,
-where, and from whom he receives calls.
+Most of these functions are straightforward, but the issue of location
+bears further discussion. Since SIP is primarily used for
+human-to-human communication, it is important to be able to locate
+individual *users*, not just machines. And, unlike email, it’s not
+good enough just to locate a server that the user will be checking on
+at some later date and dump the message there—we need to know where
+the user is right now if we want to be able to communicate with them
+in real time. This is further complicated by the fact that a user
+might choose to communicate using a range of different devices, such
+as a desktop when in the office and a handheld device when
+traveling. Multiple devices might be active at the same time and might
+have widely different capabilities (e.g., an alphanumeric pager and a
+PC-based video “phone”).  Ideally, it should be possible for other
+users to be able to locate and communicate with the appropriate device
+at any time. Furthermore, the user must be able to have control over
+when, where, and from whom they receives calls.
 
-To enable a user to exercise the appropriate level of control over his
-calls, SIP introduces the notion of a proxy. A SIP proxy can be thought
-of as a point of contact for a user to which initial requests for
-communication with him are sent. Proxies also perform functions on
-behalf of callers. We can see how proxies work best through an example.
+To enable a user to exercise the appropriate level of control over
+their calls, SIP introduces the notion of a proxy. A SIP proxy can be
+thought of as a point of contact for a user to which initial requests
+for communication with a given person are sent. Proxies also perform
+functions on behalf of callers. We can see how proxies work best
+through an example.
 
 .. _fig-sipproxy:
 .. figure:: stream/figures/f09-08-9780123850591.png
@@ -72,9 +75,9 @@ Consider the two users in :numref:`Figure %s <fig-sipproxy>`. The
 first thing to notice is that each user has a name in the format
 ``user@domain``, very much like an email address. When user Bruce
 wants to initiate a session with Larry, he sends his initial SIP
-message to the local proxy for his domain, ``systemsapproach.org``. Among other
-things, this initial message contains a *SIP URI*—these are a form of
-uniform resource identifier which look like this:
+message to the local proxy for his domain, ``systemsapproach.org``.
+Among other things, this initial message contains a *SIP URI*—these
+are a form of uniform resource identifier which look like this:
 
 ::
 
@@ -167,18 +170,19 @@ acceptable to Larry and the device, considering the options that were
 proposed in Bruce’s ``invite``. In this way, mutually acceptable session
 parameters are agreed to before the media flow starts.
 
-The other big issue we have glossed over is that of locating the correct
-device for Larry. First, Bruce’s computer had to send its ``invite`` to
-the ``systemsapproach.org`` proxy. This could have been a configured piece of
-information in the computer, or it could have been learned by DHCP. Then
-the ``systemsapproach.org`` proxy had to find the ``princeton.edu`` proxy. This
-could be done using a special sort of DNS lookup that would return the
-IP address of the SIP proxy for the domain. (This is similar to how
-email servers can be found as discussed in Chapter |Naming|.) Finally, the ``princeton.edu`` proxy had to
-find a device on which Larry could be contacted. Typically, a proxy
-server has access to a location database that can be populated in
-several ways. Manual configuration is one option, but a more flexible
-option is to use the *registration* capabilities of SIP.
+The other big issue we have glossed over is that of locating the
+correct device for Larry. First, Bruce’s computer had to send its
+``invite`` to the ``systemsapproach.org`` proxy. This could have been
+a configured piece of information in the computer, or it could have
+been learned by DHCP. Then the ``systemsapproach.org`` proxy had to
+find the ``princeton.edu`` proxy. This could be done using a special
+sort of DNS lookup that would return the IP address of the SIP proxy
+for the domain. (This is similar to how email servers can be found as
+discussed in Chapter |Naming|.) Finally, the ``princeton.edu`` proxy
+had to find a device on which Larry could be contacted. Typically, a
+proxy server has access to a location database that can be populated
+in several ways. Manual configuration is one option, but a more
+flexible option is to use the *registration* capabilities of SIP.
 
 A user can register with a location service by sending a SIP
 ``register`` message to the “registrar” for his domain. This message
@@ -202,11 +206,3 @@ to do with telephony. For example, SIP supports operations
 that enable a call to be routed to a “music-on-hold” server or a
 voicemail server. It is widely used for video conferencing, and can
 also be used for instant messaging.
-
-
-
-
-
-
-
-.. Todo

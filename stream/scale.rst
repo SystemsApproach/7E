@@ -1,8 +1,8 @@
 
 |Stream|.5 Scaling Real-time Applications
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
-Back in Chapter |Apps| we observed that the success of DASH to deliver
+In Chapter |Apps| we observed that the success of DASH to deliver
 steaming media at scale had a lot to do with its effective use of HTTP
 as the delivery mechanism. The web has developed over the decades to
 make HTTP delivery very efficient, particularly through the use of
@@ -20,8 +20,8 @@ interactive session.
 
 The traditional approach to real-time applications is to run them over
 UDP rather than TCP and deal with packet losses in the application
-rather than by retransmission. This is how RTP, described in Section
-|Stream|.2, typically operates. However, this doesn't tackle the
+rather than by retransmission. As we say in Section |Stream|.3, this
+is how RTP typically operates. However, this doesn't tackle the
 question of scale. How can a video stream be distributed out to
 hundreds of thousands of viewers, as might be required for a live
 sporting event, for example?
@@ -31,25 +31,26 @@ For a lot of video conference solutions, the answer has been to use a
 video and audio to the mixer, and a mixed video and audio stream is
 sent back out to every recipient. That works reasonably well up to a
 point, but it does mean that the same media stream is being sent out
-many times from the cloud. For large scale events, a more efficient
-replication method would be ideal.
+many times from the cloud. Any single cloud site has significant
+capacity, but for truly large scale events, a more efficient
+replication method is required.
 
-For a while, the standard answer to this problem was multicast at the
-IP layer. Replication of packets was handled directly by the routers,
-with receivers joining a multicast group to receive the content, and
-senders directing their traffic to a multicast IP address. This
-technology is probably still running in some enterprise networks today
-but largely failed to launch in the broader Internet. The core idea,
-however, of efficient replication at intermediate nodes, lives on in
-overlay networks such as CDNs. And there is an ongoing effort to
-standardize a type of overlay specifically for real-time streams. That
-effort is known as "Media Over QUIC" (MEOW) but the name doesn't really
-tell you much about all the moving parts. Let's take a look at the
-main features of MoQ.
+For several years, the standard answer to this problem was multicast
+at the IP layer. Replication of packets was handled directly by the
+routers, with receivers joining a multicast group to receive the
+content, and senders directing their traffic to a multicast IP
+address. This technology is probably still running in some enterprise
+networks today, but multicast IP largely failed to launch in the
+broader Internet. The core idea, however, of efficient replication at
+intermediate nodes, lives on in overlay networks such as CDNs. And
+there is an now an effort to standardize an analogous type of overlay
+specifically for real-time streams. That effort is known as "Media
+Over QUIC" (MoQ) but the name doesn't really tell you much about all
+the moving parts. Let's take a look at the main features of MoQ.
 
 There is a well-established concept in distributed systems known as
 the *publish/subscribe* pattern. Publish/subscribe is a generic
-approach to data distribution: data is published to some sort of
+approach to data distribution: data is published onto an abstract
 channel, and subscribers to the channel receive the data. Notably, the
 publishers and subscribers don't need to know about each other; they
 only need to know about the channel. This turns out to be a good fit
@@ -64,31 +65,29 @@ receive it.
 Tracks are made up of *groups*, which in turn are made up of
 *objects*. A group is independently decodable, that is, a receiver of
 a group can decode it without having received any prior groups from
-the track. A group would likely correspond to a group of
-pictures (GOP) in a video stream, which includes an I frame and some
-number of B and P frames as described in Section |Stream|.1. The fact
-that the group can be decoded independently means a subscriber can
-join a channel and immediately decode the
-media once a group is received.
+the track. A group would likely correspond to a group of pictures
+(GOP) in a video stream, which includes an I frame and some number of
+B and P frames as described in Section |Stream|.2. The fact that the
+group can be decoded independently means a subscriber can join a
+channel and immediately decode the media once a group is received.
 Objects are the individual units of data transmitted by MoQ.
 
-As you probably guessed from the name, MoQ uses QUIC as the underlying
-transport. This might seem at odds with the desire to minimize
-latency, since QUIC, as we discussed in Section |Message|.3, uses
-retransmission of lost packets to ensure reliable delivery. MoQ takes
-advantage of some of the features of QUIC to get around this. In
-particular, recall that the lightweight streams of QUIC allow for
-independent components of a QUIC connection to proceed without being
-blocked by each other. So MoQ uses streams to ensure that different
-parts of a media stream can be sent independently of each other. One
-use of this is to discard the higher resolution parts of a video if
-necessary to deal with congestion. It is also possible to just
-terminate a stream if, for example, the observed level of congestion
-suggests that sending this part of the media would only exacerbate
-congestion, or the information in the stream would arrive too late to
-be useful.  MoQ objects have an associated *priority* that can be used
-to make decisions about which streams to transmit and which to
-terminate.
+As its name implies, MoQ uses QUIC as the underlying transport. This
+might seem at odds with the desire to minimize latency, since QUIC, as
+we discussed in Section |Message|.3, uses retransmission of lost
+packets to ensure reliable delivery. MoQ takes advantage of some of
+the features of QUIC to get around this. In particular, recall that
+the lightweight streams of QUIC allow for independent components of a
+QUIC connection to proceed without being blocked by each other. So MoQ
+uses streams to ensure that different parts of a media stream can be
+sent independently of each other. One use of this is to discard the
+higher resolution parts of a video if necessary to deal with
+congestion. It is also possible to just terminate a stream if, for
+example, the observed level of congestion suggests that sending this
+part of the media would only exacerbate congestion, or the information
+in the stream would arrive too late to be useful.  MoQ objects have an
+associated *priority* that can be used to make decisions about which
+streams to transmit and which to terminate.
 
 The key to scalability in MoQ is the use of *relays*, a form of
 overlay that handles replication of media. Just as we saw in Chapter
@@ -103,7 +102,7 @@ to know about publishers and *vice versa*.
    :width: 500px
    :align: center
 
-   Relays form an overlay for media distribution
+   Relays form an overlay for media distribution.
 
 Relays form an overlay of nodes that can store, forward, and replicate
 objects, as shown in :numref:`Figure %s <fig-relays>`. They don't need
@@ -135,7 +134,7 @@ since the specifications are still evolving and implementations are
 trying to track the specifications. Nevertheless, this approach draws
 on the success of existing technologies such as QUIC and DASH and has
 the weight of major industry players behind it, so there is reason to
-be optimistic for its future. The implemention of the relay function
+be optimistic for its future. The implementation of the relay function
 in a large-scale deployment at Cloudflare is one example of the
 industry investment in MoQ; you can read more about MoQ and its
 implementation in their blog on the subject.
