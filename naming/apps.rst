@@ -183,8 +183,6 @@ manage these persistent names. The Handle System calls such
 identifiers *handles* since they represent the "handle" by which a
 given object can be accessed.
 
-.. TODO -- Could add a sidebar about the Kahn/Berners-Lee
-
 .. admonition:: Further Reading
 
    R. Kahn and R. Wilensky. `A Framework for Distributed Digital Object
