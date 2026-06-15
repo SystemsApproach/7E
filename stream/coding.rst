@@ -1,3 +1,6 @@
+.. _artifact-mpeg:
+.. _artifact-jpeg:
+
 |Stream|.2 Coding and Compression
 ----------------------------------
 
@@ -38,171 +41,56 @@ bits of color information, so each frame is
 
 .. centered:: 1080 × 1920 × 24 = 50 *Mb*
 
-so if you want to send 24 frames per second, that would be over
+If you want to send 24 frames per second, that would be over
 1 Gbps.  That’s more than most Internet users have access to even
-today, and by orders
+today, and more by orders
 of magnitude for most of the history of the Internet.  By
 contrast, modern compression techniques can get a reasonably
-high-quality HDTV signal down to the range of 10 Mbps, a two order of
+high-quality HDTV signal down to the range of 10 Mbps, a two orders of
 magnitude reduction and well within the reach of most broadband users.
 Similar compression gains apply to lower quality video such as YouTube
 clips—Web video could never have reached its current popularity
 without compression to make all those videos fit within
 the bandwidth of contemporary networks.
 
-Compression techniques as applied to multimedia have been an area of
-great innovation, particularly lossy compression.  Lossless techniques
-also have an important role to play, however.  Indeed, most of the
-lossy techniques include some steps that are lossless, so we begin our
-discussion with an overview of lossless compression.
+This section works through the problem in three steps: (1) how media
+is represented in the first place (independent of compression); (2)
+how still images are compressed, and (3) how video, which is
+conceptually a sequence of still images, is compressed. We use the
+familiar JPEG and MPEG standards to illustrate the ideas.
 
-|Stream|.2.1 Lossless Compression Techniques
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Stream|.2.1 Image Representation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In many ways, compression is inseparable from data encoding. When
-thinking about how to encode a piece of data in a set of bits, we might
-just as well think about how to encode the data in the smallest set of
-bits possible. For example, if you have a block of data that is made up
-of the 26 symbols A through Z, and if all of these symbols have an equal
-chance of occurring in the data block you are encoding, then encoding
-each symbol in 5 bits is the best you can do (since 2\ :sup:`5` = 32
-is the lowest power of 2 above 26). If, however, the symbol R occurs
-50% of the time, then it would be a good idea to use fewer bits to
-encode the R than any of the other symbols. In general, if you know the
-relative probability that each symbol will occur in the data, then you
-can assign a different number of bits to each possible symbol in a way
-that minimizes the number of bits it takes to encode a given block of
-data. This is the essential idea of *Huffman codes*, one of the
-important early developments in data compression.
+Given the ubiquitous use of digital imagery—this use was spawned by
+the invention of graphical displays, not high-speed networks—the need
+for standard representation formats and compression algorithms for
+digital imagery data has become essential. In response to this need,
+the ISO defined a digital image format known as *JPEG*, named after
+the Joint Photographic Experts Group that designed it. (The “Joint” in
+JPEG stands for a joint ISO/ITU effort.) JPEG is the most widely used
+format for still images in use today. At the heart of the definition
+of the format is a compression algorithm, which we describe in the
+next subsection.  But we start with the simpler question of exactly
+what makes up a digital image.
 
-Run Length Encoding
-++++++++++++++++++++++++++++++
-
-Run length encoding (RLE) is a compression technique with a brute-force
-simplicity. The idea is to replace consecutive occurrences of a given
-symbol with only one copy of the symbol, plus a count of how many times
-that symbol occurs—hence, the name *run length*. For example, the string
-``AAABBCDDDD`` would be encoded as ``3A2B1C4D``.
-
-RLE turns out to be useful for compressing some classes of images. It
-can be used in this context by comparing adjacent pixel values and then
-encoding only the changes. For images that have large homogeneous
-regions, this technique is quite effective. For example, it is not
-uncommon that RLE can achieve compression ratios on the order of 8-to-1
-for scanned text images. RLE works well on such files because they often
-contain a large amount of white space that can be removed. For those old
-enough to remember the technology, RLE was the key compression algorithm
-used to transmit faxes. However, for images with even a small degree of
-local variation, it is not uncommon for compression to actually increase
-the image byte size, since it takes 2 bytes to represent a single symbol
-when that symbol is not repeated.
-
-Differential Pulse Code Modulation
-++++++++++++++++++++++++++++++++++++++++
-
-Another simple lossless compression algorithm is Differential Pulse Code
-Modulation (DPCM). The idea here is to first output a reference symbol
-and then, for each symbol in the data, to output the difference between
-that symbol and the reference symbol. For example, using symbol A as the
-reference symbol, the string ``AAABBCDDDD`` would be encoded as
-``A0001123333`` because A is the same as the reference symbol, B has a
-difference of 1 from the reference symbol, and so on. Note that this
-simple example does not illustrate the real benefit of DPCM, which is
-that when the differences are small they can be encoded with fewer bits
-than the symbol itself. In this example, the range of differences, 0-3,
-can be represented with 2 bits each, rather than the 7 or 8 bits
-required by the full character. As soon as the difference becomes too
-large, a new reference symbol is selected.
-
-DPCM works better than RLE for most digital imagery, since it takes
-advantage of the fact that adjacent pixels are usually similar. Due to
-this correlation, the dynamic range of the differences between the
-adjacent pixel values can be significantly less than the dynamic range
-of the original image, and this range can therefore be represented using
-fewer bits. Using DPCM, we have measured compression ratios of 1.5-to-1
-on digital images. DPCM also works on audio, because adjacent samples of
-an audio waveform are likely to be close in value.
-
-A slightly different approach, called *delta encoding*, simply encodes a
-symbol as the difference from the previous one. Thus, for example,
-``AAABBCDDDD`` would be represented as ``A001011000``. Note that delta
-encoding is likely to work well for encoding images where adjacent
-pixels are similar. It is also possible to perform RLE after delta
-encoding, since we might find long strings of 0s if there are many
-similar symbols next to each other.
-
-Dictionary-Based Methods
-++++++++++++++++++++++++
-
-The final lossless compression method we consider is the
-dictionary-based approach, of which the Lempel-Ziv (LZ) compression
-algorithm is the best known. The Unix ``compress`` and ``gzip``
-commands use variants of the LZ algorithm.
-
-The idea of a dictionary-based compression algorithm is to build a
-dictionary (table) of variable-length strings (think of them as common
-phrases) that you expect to find in the data and then to replace each of
-these strings when it appears in the data with the corresponding index
-to the dictionary. For example, instead of working with individual
-characters in text data, you could treat each word as a string and
-output the index in the dictionary for that word. To further elaborate
-on this example, the word *compression* has the index 4978 in one
-particular dictionary; it is the 4978th word in
-``/usr/share/dict/words``. To compress a body of
-text, each time the string “compression” appears, it would be replaced
-by 4978. Since this particular dictionary has just over 25,000 words in
-it, it would take 15 bits to encode the index, meaning that the string
-“compression” could be represented in 15 bits rather than the 77 bits
-required by 7-bit ASCII. This is a compression ratio of 5-to-1! As an
-example, we ran the first chapter of this book through ``gzip`` and it
-shrank from 78kB to 27kB, about 35% of its original size.
-
-Of course, this leaves the question of where the dictionary comes from.
-One option is to define a static dictionary, preferably one that is
-tailored for the data being compressed. A more general solution, and the
-one used by LZ compression, is to adaptively define the dictionary based
-on the contents of the data being compressed. In this case, however, the
-dictionary constructed during compression has to be sent along with the
-data so that the decompression half of the algorithm can do its job.
-Exactly how you build an adaptive dictionary has been a subject of
-extensive research.
-
-|Stream|.2.2 Image Representation and Compression (GIF, JPEG)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Given the ubiquitous use of digital imagery—this use was spawned by the
-invention of graphical displays, not high-speed networks—the need for
-standard representation formats and compression algorithms for digital
-imagery data has become essential. In response to this need, the ISO
-defined a digital image format known as *JPEG*, named after the Joint
-Photographic Experts Group that designed it. (The “Joint” in JPEG stands
-for a joint ISO/ITU effort.) JPEG is the most widely used format for
-still images in use today. At the heart of the definition of the format
-is a compression algorithm, which we describe below. Many techniques
-used in JPEG also appear in MPEG, the set of standards for video
-compression and transmission created by the Moving Picture Experts
-Group.
-
-Before delving into the details of JPEG, we observe that there are quite
-a few steps to get from a digital image to a compressed representation
-of that image that can be transmitted, decompressed, and displayed
-correctly by a receiver. You probably know that digital images are made
-up of pixels (hence, the megapixels quoted in smartphone camera
+For starters, it's probably obvious that digital images are made up of
+pixels (hence, the megapixels quoted in smartphone camera
 advertisements). Each pixel represents one location in the
-two-dimensional grid that makes up the image, and for color images each
-pixel has some numerical value representing a color. There are lots of
-ways to represent colors, referred to as *color spaces*; the one most
-people are familiar with is RGB (red, green, blue). You can think of
-color as being a three dimensional quantity—you can make any color out
-of red, green, and blue light in different amounts. In a
+two-dimensional grid that makes up the image, and for color images
+each pixel has some numerical value representing a color. There are
+lots of ways to represent colors, referred to as *color spaces*; the
+one most people are familiar with is RGB (red, green, blue). You can
+think of color as being a three dimensional quantity—you can make any
+color out of red, green, and blue light in different amounts. In a
 three-dimensional space, there are lots of different, valid ways to
 describe a given point (consider Cartesian and polar coordinates, for
 example). Similarly, there are various ways to describe a color using
 three quantities, and the most common alternative to RGB is YUV. The Y
 is luminance, roughly the overall brightness of the pixel, and U and V
 contain chrominance, or color information. Confoundingly, there are a
-few different variants of the YUV color space as well. More on this in a
-moment.
+few different variants of the YUV color space as well. More on this in
+a moment.
 
 The significance of this discussion is that the encoding and
 transmission of color images (either still or moving) requires agreement
@@ -212,43 +100,16 @@ captured by the sender. Hence, agreeing on a color space definition (and
 perhaps a way to communicate which particular space is in use) is part
 of the definition of any image or video format.
 
-Let’s look at the example of the Graphical Interchange Format (GIF). GIF
-uses the RGB color space and starts out with 8 bits to represent each of
-the three dimensions of color for a total of 24 bits. Rather than
-sending those 24 bits per pixel, however, GIF first reduces 24-bit color
-images to 8-bit color images. This is done by identifying the colors
-used in the picture, of which there will typically be considerably fewer
-than 2\ :sup:`24`, and then picking the 256 colors that most closely
-approximate the colors used in the picture. There might be more than 256
-colors, however, so the trick is to try not to distort the color too much
-by picking 256 colors such that no pixel has its color changed too much.
-
-The 256 colors are stored in a table, which can be indexed with an 8-bit
-number, and the value for each pixel is replaced by the appropriate
-index. Note that this is an example of lossy compression for any picture
-with more than 256 colors. GIF then runs an LZ variant over the result,
-treating common sequences of pixels as the strings that make up the
-dictionary—a lossless operation. Using this approach, GIF is sometimes
-able to achieve compression ratios on the order of 10:1, but only when
-the image consists of a relatively small number of discrete colors.
-Graphical logos, for example, are handled well by GIF. Images of natural
-scenes, which often include a more continuous spectrum of colors, cannot
-be compressed at this ratio using GIF. It is also not too hard for a
-human eye to detect the distortion caused by the lossy color reduction
-of GIF in some cases.
-
-The JPEG format is considerably more well suited to photographic images,
-as you would hope given the name of the group that created it. JPEG does
-not reduce the number of colors like GIF. Instead, JPEG starts off by
+The JPEG format is tailored for photographic images. It starts by
 transforming the RGB colors (which are what you usually get out of a
-digital camera) to the YUV space. The reason for this has to do with the
-way the eye perceives images. There are receptors in the eye for
-brightness, and separate receptors for color. Because we’re very good at
-perceiving variations in brightness, it makes sense to spend more bits
-on transmitting brightness information. Since the Y component of YUV is,
-roughly, the brightness of the pixel, we can compress that component
-separately, and less aggressively, from the other two (chrominance)
-components.
+digital camera) to the YUV space. The reason for this has to do with
+the way the eye perceives images. There are receptors in the eye for
+brightness, and separate receptors for color. Because we’re very good
+at perceiving variations in brightness, it makes sense to spend more
+bits on transmitting brightness information. Since the Y component of
+YUV is, roughly, the brightness of the pixel, we can compress that
+component separately, and less aggressively, from the other two
+(chrominance) components.
 
 As noted above, YUV and RGB are alternative ways to describe a point in
 a 3-dimensional space, and it’s possible to convert from one color space
@@ -281,30 +142,33 @@ in this case would be zero. That is, a fully white pixel is
 
    Subsampling the U and V components of an image.
 
-Once the image has been transformed into YUV space, we can now think
-about compressing each of the three components separately. We want to
-be more aggressive in compressing the U and V components, to which
-human eyes are less sensitive. One way to compress the U and V
-components is to *subsample* them. The basic idea of subsampling is to
-take a number of adjacent pixels, calculate the average U or V value
-for that group of pixels, and transmit that, rather than sending the
-value for every pixel. :numref:`Figure %s <fig-yuvsub>` illustrates
-the point. The luminance (Y) component is not subsampled, so the Y
-value of all the pixels will be transmitted, as indicated by the 16 ×
-16 grid of pixels on the left. In the case of U and V, we treat each
-group of four adjacent pixels as a group, calculate the average of the
-U or V value for that group, and transmit that. Hence, we end up with
-an 8 × 8 grid of U and V values to transmit. Thus, in this example,
-for every four pixels, we transmit six values (four Y and one each of
-U and V) rather than the original 12 values (four each for all three
-components), for a 50% reduction in information.
+|Stream|.2.2 Image Compression
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once the image has been transformed into YUV space, we are ready to
+compress each of the three components separately. We want to be more
+aggressive in compressing the U and V components, to which human eyes
+are less sensitive. One way to compress the U and V components is to
+*subsample* them. The basic idea of subsampling is to take a number of
+adjacent pixels, calculate the average U or V value for that group of
+pixels, and transmit that, rather than sending the value for every
+pixel. :numref:`Figure %s <fig-yuvsub>` illustrates the point. The
+luminance (Y) component is not subsampled, so the Y value of all the
+pixels will be transmitted, as indicated by the 16 × 16 grid of pixels
+on the left. In the case of U and V, we treat each group of four
+adjacent pixels as a group, calculate the average of the U or V value
+for that group, and transmit that. Hence, we end up with an 8 × 8 grid
+of U and V values to transmit. Thus, in this example, for every four
+pixels, we transmit six values (four Y and one each of U and V) rather
+than the original 12 values (four each for all three components), for
+a 50% reduction in information.
 
 It’s worth noting that you could be either more or less aggressive in
 the subsampling, with corresponding increases in compression and
 decreases in quality. The subsampling approach shown here, in which
 chrominance is subsampled by a factor of two in both horizontal and
 vertical directions (and which goes by the identification 4:2:0),
-happens to match the most common approach used for both JPEG and MPEG.
+happens to match the most commonly used approach.
 
 .. _fig-jpeg:
 .. figure:: stream/figures/f07-12-9780123850591.png
@@ -479,12 +343,12 @@ The final phase of JPEG encodes the quantized frequency coefficients
 in a compact form. This results in additional compression, but this
 compression is lossless. Starting with the DC coefficient in position
 (0,0), the coefficients are processed in the zigzag sequence shown in
-:numref:`Figure %s <fig-zigzag>`. Along this zigzag, a form of run
-length encoding is used—RLE is applied to only the 0 coefficients,
-which is significant because many of the later coefficients are 0. The
-individual coefficient values are then encoded using a Huffman
-code. (The JPEG standard allows the implementer to use an arithmetic
-coding instead of the Huffman code.)
+:numref:`Figure %s <fig-zigzag>`. Along this zigzag, a form of Run
+Length Encoding (RLE) is used—RLE is applied to only the 0
+coefficients, which is significant because many of the later
+coefficients are 0. The individual coefficient values are then encoded
+using a Huffman code. (RLE and Huffman codes are two examples of
+*lossless* compression algorithms; see the sidebar for a summary.)
 
 .. _fig-zigzag:
 .. figure:: stream/figures/f07-13-9780123850591.png
@@ -493,11 +357,42 @@ coding instead of the Huffman code.)
 
    Zigzag traversal of quantized frequency coefficients.
 
+.. sidebar:: Other Compression Algorithms
+
+   *When thinking about how to encode a piece of data in a set of
+   bits, we might just as well think about how to encode the data in
+   the smallest set of bits possible. For example, if a block of data
+   is made up of the 26 symbols A through Z, and if all of these
+   symbols have an equal chance of occurring in the data block you are
+   encoding, then encoding each symbol in 5 bits is the best you can
+   do (since 25 = 32 is the lowest power of 2 above 26). If, however,
+   the symbol R occurs 50% of the time, then it would be a good idea
+   to use fewer bits to encode the R than any of the other symbols. In
+   general, if you know the relative probability that each symbol will
+   occur in the data, then you can assign a different number of bits
+   to each possible symbol in a way that minimizes the number of bits
+   it takes to encode a given block of data. This is the essential
+   idea of Huffman codes, one of the important early developments in
+   data compression.*
+
+   *Run length encoding (RLE) is a another compression technique.  The
+   idea is to replace consecutive occurrences of a given symbol with
+   only one copy of the symbol, plus a count of how many times that
+   symbol occurs—hence, the name run length. For example, the string
+   AAABBCDDDD would be encoded as 3A2B1C4D.*
+
+   *Another straightforward idea is the dictionary-based approach, of
+   which the Lempel-Ziv (LZ) compression algorithm is the best
+   known. The idea is to build a dictionary (table) of variable-length
+   strings (think of them as common phrases) that you expect to find
+   in the data and then to replace each of these strings when it
+   appears in the data with the corresponding index to the dictionary.*
+
 In addition, because the DC coefficient contains a large percentage of
 the information about the 8 × 8 block from the source image, and images
 typically change slowly from block to block, each DC coefficient is
 encoded as the difference from the previous DC coefficient. This is the
-delta encoding approach described in a later section.
+delta encoding approach described in the next section.
 
 JPEG includes a number of variations that control how much compression
 you achieve versus the fidelity of the image. This can be done, for
@@ -508,7 +403,7 @@ achieved with JPEG. Ratios of 30:1 are common, and higher ratios are
 certainly possible, but *artifacts* (noticeable distortion due to
 compression) become more severe at higher ratios.
 
-|Stream|.2.3 Video Compression (MPEG)
+|Stream|.2.3 Video Compression
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We now turn our attention to the MPEG format, named after the Moving
@@ -696,20 +591,23 @@ algorithm every possible degree of freedom in how it encodes a given
 video stream, resulting in different video transmission rates. It also
 comes from the evolution of the standard over time, with the Moving
 Picture Experts Group working hard to retain backwards compatibility
-(e.g., MPEG-1, MPEG-2, MPEG-4). What we describe in this book is the
-essential ideas underlying MPEG-based compression, but certainly not all
-the intricacies involved in an international standard.
+(e.g., MPEG-1, MPEG-2, MPEG-4, MPEG-H). What we describe in this book
+is the essential ideas underlying MPEG-based compression, but
+certainly not all the intricacies involved in an international standard.
 
-What’s more, MPEG is not the only standard available for encoding video.
-For example, the ITU-T has also defined the *H series* for encoding
-real-time multimedia data. Generally, the H series includes standards
-for video, audio, control, and multiplexing (e.g., mixing audio, video,
-and data onto a single bit stream). Within the series, H.261 and H.263
-were the first- and second-generation video encoding standards. In
-principle, both H.261 and H.263 look a lot like MPEG: They use DCT,
-quantization, and interframe compression. The differences between
-H.261/H.263 and MPEG are in the details.
+What’s more, MPEG is not the only standard available for encoding
+video.  For example, the ITU-T has also defined the *H series* for
+encoding real-time multimedia data. Generally, the H series includes
+standards for video, audio, control, and multiplexing (e.g., mixing
+audio, video, and data onto a single bit stream). Within the series,
+H.261 and H.263 were the first- and second-generation video encoding
+standards. In principle, both H.261 and H.263 look a lot like MPEG:
+They use DCT, quantization, and interframe compression. The
+differences between H.261/H.263 and MPEG are in the details.
 
-Today, a partnership between the ITU-T and the MPEG group has lead to
-the joint H.264/MPEG-4 standard, which is used for both Blu-ray Discs
-and by many popular streaming sources (e.g., YouTube, Vimeo).
+A partnership between the ITU-T and the MPEG group lead to the joint
+H.264/MPEG-4 standard, which is used for both Blu-ray Discs and by
+many popular streaming sources, such as YouTube. The recent upgrade of
+graphical displays to 4k comes with yet another round of
+standardization, published as H.265/MPEG-H.
+
