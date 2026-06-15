@@ -19,7 +19,7 @@ slightly different requirements. For example, early success stories
 had very loose latency requirements. If you wanted to watch a movie or
 listen to a song, it was acceptable to wait a few seconds before the
 stream started. This meant that video streaming services like Netflix
-and YouTube, as well as music streaming service like Pandora and
+and YouTube, as well as music streaming services like Pandora and
 Spotify, could use substantial buffering at the client to hide any
 delays in packet delivery. This led to the development of adaptive
 mechanisms, with the DASH protocol described in Chapter |Apps|
@@ -29,9 +29,10 @@ But DASH doesn't work for every scenario. For use cases with tighter
 latency constraints, such as video conferencing and live events, we
 need additional tools to manage the delivery of latency-sensitive
 media. This is why we include the "real-time" qualifier, although even
-then, there is a spectrum of delay tolerances: a one-second pause
-after each speaker in a video conference call is much more disruptive
-than a seeing a live sporting event with a few seconds of delay.
+then, there is a spectrum of delay tolerances: a one-second delay when
+trying to reply to a speaker in a video conference call is much more
+disruptive than a few seconds of delay when watching a live sporting
+event.
 
 This chapter examines the additional challenges in delivering
 real-time media and some of the technologies and protocols that have

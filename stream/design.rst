@@ -52,7 +52,7 @@ another so that audio and video tracks can be synchronized. It could
 be done by the application, but it is a common enough problem that
 it's helpful to have a transport protocol that takes care of this
 task. Identifying those useful common tasks and building them into a
-real-time transport led to the development of RTP (Real-Time
+real-time transport led to the development of RTP (Real-time Transport
 Protocol).
 
 Third, since many real-time applications involve two or more humans

@@ -43,10 +43,10 @@ bits of color information, so each frame is
 
 If you want to send 24 frames per second, that would be over
 1 Gbps.  That’s more than most Internet users have access to even
-today, and by orders
+today, and more by orders
 of magnitude for most of the history of the Internet.  By
 contrast, modern compression techniques can get a reasonably
-high-quality HDTV signal down to the range of 10 Mbps, a two order of
+high-quality HDTV signal down to the range of 10 Mbps, a two orders of
 magnitude reduction and well within the reach of most broadband users.
 Similar compression gains apply to lower quality video such as YouTube
 clips—Web video could never have reached its current popularity

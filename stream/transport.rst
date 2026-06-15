@@ -3,11 +3,11 @@
 |Stream|.3 Transport Protocol
 ------------------------------
 
-We now turn our attention to the transport protocol used deliver
-real-time media, which as we noted in Section |Stream|.2, needs to
+We now turn our attention to the transport protocol used to deliver
+real-time media, which as we noted in Section |Stream|.1, needs to
 avoid the possibility of unbounded delay by retransmitting dropped
-packets. The protocol also needs to account other application
-requirements, which sometimes include synchronizing separate audio
+packets. The protocol also needs to account for other application
+requirements, such as synchronizing separate audio
 and video streams.
 
 Settling on the functionality to be bundled in a *Real-time Transport
