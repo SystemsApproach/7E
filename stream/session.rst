@@ -9,17 +9,19 @@ that we discussed in Chapter |Apps|. However, applications for
 human-to-human communication, such as VOIP or multi-party
 conferencing, don't conform so well to that model. There is no
 well-defined server for a client to connect to. Instead, we want to
-establish a communication *session* among the participants. These
-sorts of applications typically use something called *session
-control*. This section explores the challenge of session control,
-using SIP (Session Initiation Protocol) as an example. SIP is typically
-paired with RTP to implement VOIP.
+establish a communication *session* among the
+participants. Participants might also wish to be reached on different
+devices at different points in time. These sorts of applications
+typically use something called *session control*. This section
+explores the challenge of session control, using SIP (Session
+Initiation Protocol) as an example. SIP is typically paired with RTP
+to implement VOIP.
 
 |Stream|.4.1 Session Initiation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 SIP bears a certain resemblance to
-HTTP, being based on a similar request/response model. However, it is
+HTTP, and is based on a similar request/response model. However, it is
 designed with these different applications in mind and thus
 provides different capabilities than HTTP. The capabilities
 provided by SIP can be grouped into five categories:
