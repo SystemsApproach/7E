@@ -111,6 +111,9 @@ Passing Interface (MPI)* , *Global Address Space Programming Interface
    complete in a collective gates when execution continues with the
    next step 100th %ile FCT determines performance.
 
+.. TODO -- Also mention GPU-specific libraries (CUDA and NCCL) and why
+   they are important (related to previous note about AI workloads).
+   
 Second, Ethernet continues to evolve, and in this particular
 circumstance, offers an alternative to InfiniBand's "native" switches.
 This effort is known as *Converged Ethernet (CE)*, and it makes it
@@ -225,6 +228,9 @@ immediate value might indicate something about the state of the
 calling process or what the caller expects the callee to do with the
 message. If nothing else, it is a signal to the local application that
 a remote write has completed.
+
+.. TODO -- Change these examples to use snippets from NCCL
+
 
 .. code-block:: c
 

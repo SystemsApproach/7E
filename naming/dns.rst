@@ -329,6 +329,8 @@ names before sending out a query.
    of steps in the process.
 
 
-.. TODO -- Somewhere in this section we might mention where the root
-   servers are. We might also want to cover DNS over HTTP, plus other
-   security-related topics.
+.. TODO -- Somewhere in this section we should mention where the root
+   servers are, and how they are governed.
+
+.. TODO -- We might want to mention DNS over HTTP, plus other
+   security-related challenges.
