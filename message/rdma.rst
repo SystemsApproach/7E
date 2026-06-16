@@ -97,23 +97,47 @@ assumptions, but for now, we focus on the key design decisions
 underpinning RDMA.
 
 First, the RDMA programming interface, known as the *Verbs API*, has
-become a *de facto* standard for HPC programs, and most recently,
-for AI workloads that run in cloud datacenters. The Verbs API is
+become a *de facto* standard for HPC programs, and most recently, for
+AI workloads that run in cloud datacenters. The Verbs API is
 low-level, and so is typically not directly used by application
 programs. Such applications are generally written to a higher level
 interface, of which there are several options. They include *Message
 Passing Interface (MPI)* , *Global Address Space Programming Interface
-(GPI)*, and *Open Fabrics Interface (OFI)*.
+(GPI)*, and *Open Fabrics Interface (OFI)*, all of which pre-date the
+the last decade's pivot towards AI workloads. More recently, *NCCL*
+(pronounced "nickel") has become the dominant API for AI software
+running on GPUs. NCCL was created by NVIDIA (it is an acronym for
+"NVIDIA Collective Communications Library"), but its implementation as
+software package running on top of the Verbs API is available as open
+source.
 
-.. TODO possible sidebar on Networking for AI workloads. AI workloads
-   are brutal for the network because training goes in steps, where
-   there is collective communication per step, and the last flow to
-   complete in a collective gates when execution continues with the
-   next step 100th %ile FCT determines performance.
+.. sidebar:: Understanding AI Workloads
 
-.. TODO -- Also mention GPU-specific libraries (CUDA and NCCL) and why
-   they are important (related to previous note about AI workloads).
-   
+   *Our focus is on the network's role supporting AI workloads, and
+   not on the broader programming models, nor the role of GPUs in
+   executing those programs. In this context, the high-level
+   communication pattern for AI training models is to proceed in a
+   sequence of iterations. For each iteration, data is first
+   "scattered" across multiple nodes, the nodes then compute on the
+   subset of data sent to each of them, and finally the results are
+   "gathered" back in a central node. To support this (and similar
+   patterns), the NCCL API supports* **Scatter** and **Gather**
+   *operations among a collective of nodes, the first implies a
+   one-to-many communication, and the second implies a many-to-one
+   communication.*
+
+   *Importantly, there is often a synchronization barrier between each
+   iteration, such that one iteration has to complete before the next
+   iteration can begin. This means that the last flow to complete
+   during each transfer limits how fast the overall computation
+   runs. In other words, it's not how fast the fastest communication
+   can be implemented; it's how fast the slowest communication
+   completes. Being able to achieve low latency in the face of traffic
+   bursts—a natural consequence of one-to-many and many-to-one
+   exhanges—is the central performance challenge for the network. We
+   return to this topic in the next section when we look at possible
+   optimizations.*
+
 Second, Ethernet continues to evolve, and in this particular
 circumstance, offers an alternative to InfiniBand's "native" switches.
 This effort is known as *Converged Ethernet (CE)*, and it makes it
@@ -128,7 +152,7 @@ workloads).
 
 .. _fig-verbs:
 .. figure:: message/figures/verbs.png
-   :width: 400px
+   :width: 350px
    :align: center
 
    RDMA is invoked using the Verbs API. This API sits under multiple
@@ -219,52 +243,69 @@ The two atomic operations are familiar to anyone who has written
 programs that must synchronize concurrent processes. This is a common
 activity in the kinds of parallel programs RDMA is designed to
 support, but outside the scope of this book. Here, we focus on the
-write operations, and in particular, *Write-with-Immediate*. The
-following code snippet shows the client side writing a "Hello, World"
-message to a remote address, along with the "immediate" value
-``42``. There's nothing magical about the number 42; it's just an
-example of a value that gets passed to the server). In practice, the
-immediate value might indicate something about the state of the
-calling process or what the caller expects the callee to do with the
-message. If nothing else, it is a signal to the local application that
-a remote write has completed.
-
-.. TODO -- Change these examples to use snippets from NCCL
-
+write operation. The following code snippet shows the client side
+writing a "Hello, World" message to a remote memory address.
 
 .. code-block:: c
 
-   const char *msg = "Hello, World!";
-   memset(ctx.buf, 0, BUFFER_SIZE);
-   memcpy(ctx.buf, msg, strlen(msg) + 1);
+   /* Register a memory region with the NIC */
+   char buf[] = "Hello World";
+   struct ibv_mr *mr = ibv_reg_mr(pd, buf, sizeof(buf), 0);
 
-   post_rdma_write(&ctx, ctx.buf, (uint32_t)(strlen(msg) + 1),
-          remote_addr, remote_rkey, /*imm=*/42);
-   poll_cq(ctx.cq, 1, NULL);
+   /*  Post the RDMA write */
+   ibv_wr_start(qpx);
+   ibv_wr_rdma_write(qpx, remote_rkey, remote_addr);
+   ibv_wr_set_sge(qpx, mr->lkey, (uintptr_t)buf, sizeof(buf));
+   ibv_wr_complete(qpx);
 
-And correspondingly on the server side:
+The code snippet is surprisingly complicated, unless you are familiar
+with device drivers, which a reasonable comparison. Let's briefly walk
+through the steps. We start with a call to ``ib _reg_mr``, which
+registers a region of application memory with the NIC; the buffer
+holding the string ``"Hello World"`` in our case. In general, this
+buffer can be reused for multiple sends once it's registered. The
+actual write then spans four operations. The ``ibv_wr_start``
+operation sets the context; ``qpx`` denotes the local "Queue Pair",
+which is the rough equivalent of a socket. (See the next subsection
+for more information.)  The ``ibv_wr_rdma_write`` operation specifies
+the target of the write, which includes both the ``remote_addr`` and
+the ``remote_key`` needed to write to that address. (Both parameters
+are established during the Communication Management phase.) The third
+operation, ``ibv_wr_set_sge``, provides the local buffer that is the
+source of data for the write.\ [#]_ Finally, the ``ibv_wr_complete``
+operation signals to the NIC that the message is ready to be sent.
 
-.. code-block:: c
+.. [#] The "sge" in ``ibv_wr_set_sge`` operation denotes the concept
+   of "Scatter-Gather", indicating that the message to be written
+   might be scattered across multiple non-continuous memory
+   buffers. (Our particular "Hello World" message is located in a
+   single continuous buffer.) This is similar to the scatter/gather
+   operations mentioned in the earlier sidebar about AI workloads, but
+   in that case work is "scattered" across multiple nodes, and an this
+   case a message is "scattered" across multiple buffers.
 
-    uint32_t imm;
-    poll_cq(ctx.cq, 1, &imm);
-    printf("[server] Message (via RDMA Write-with-Immediate, imm=%u): \"%s\"\n",
-           imm, ctx.buf);
+What might be equally surprising about this example is what little we
+know when the ``ibv_wr_complete`` returns, which is only that the
+local NIC has accepted the message for transfer. We don't know that
+the message has arrived at the remote server, or that it's been
+successfully written into the remote buffer. Moreover, since this is a
+one-way operation, the application on the remote server is not
+explicitly notified when the write does in fact complete. The
+application would need to either iteratively poll the target memory
+location to see if it changes, or fall back to some other out-of-band
+signal (of which RDMA provides several alternatives). The point is
+that "message transfer" and "process synchronization" are separable
+concerns. We often find it convenient to couple them—so, for example,
+a "receive" blocks until a request arrives, or a "send" blocks until a
+reply arrives—but this not an absolute requirement.
 
-For both sides, ``ctx`` is the context set up beforehand. It includes
-a local buffer (``buf``) that holds the message being sent or
-received, and a local completion queue (``cq``) where notifications
-are delivered. In this example, both sides block on this queue: the
-client waiting for notification that its message has been successfully
-written to the remote buffer, and the server waiting for notification
-that a message has arrived in its local buffer.
-
-Clearly, these are both low-level primitives, upon which MPI and the
-other libraries implement more powerful read/write and send/receive
-operations. One could even implement RPC on top of such a
-primitive. The point is that just such a primitive mechanism—assuming
-the underlying NICs do their job—is the foundation for much of today's
-AI workloads. We're now ready to look at the NIC in more detail.
+Clearly, the Verbs API provides a collection of low-level primitives,
+upon which MPI, NCCL, and the other libraries implement more powerful
+read/write and send/receive operations. One could even implement RPC
+on top of such a primitive. The point is that just such a primitive
+mechanism—assuming the underlying NICs do their job—is the foundation
+for much of today's AI workloads. We're now ready to look at the NIC
+in more detail.
 
 .. admonition:: Further Reading
 

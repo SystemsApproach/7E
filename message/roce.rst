@@ -94,13 +94,21 @@ has two main parts. The first is to replicate InfiniBand's flow
 control mechanism by adding support for Priority Flow Control to
 Ethernet switches. This has been standardized as IEEE 802.1Qbb.  The
 second is to take advantage of the existing Explicit Congestion
-Notification (ECN) mechanism described in Chapter |Capacity|. This is appealing
-for cloud providers because their datacenters already leverage ECN in
-support of TCP congestion control.  The two mechanisms work in
-concert, with ECN pacing the source host as a first response to
-congestion, and PFC serving as a fall-back. Note that this is all
+Notification (ECN) mechanism described in Chapter |Capacity|. This is
+appealing for cloud providers because their datacenters already
+leverage ECN in support of TCP congestion control.  The two mechanisms
+work in concert, with ECN pacing the source host as a first response
+to congestion, and PFC serving as a fall-back. Note that this is all
 still an active area of research, with the following papers giving
-some insight into the issues being studied.
+some insight into the issues being studied. One complicating factor
+worth highlighting is that ECN was originally designed under the
+assumption that the end points were running independent TCP flows. For
+AI workloads running in datacenters, the one-to-many and many-to-one
+communication pattern means that multiple "flows" are now part of a
+larger collective of communicating nodes.
+
+.. TODO -- Is the added "complication" helpful? Should we say more,
+   or maybe less?
 
 .. admonition:: Further Reading
 

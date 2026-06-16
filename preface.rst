@@ -17,4 +17,4 @@ informative:
  o `Not Your Father's
  Internet <https://systemsapproach.org/2026/04/20/not-your-fathers-internet/>`__
  April 2026.
- 
+
