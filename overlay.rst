@@ -22,15 +22,12 @@ application-specific way. The links that connect the overlay nodes are
 implemented as logical links (e.g., tunnels) through the underlying
 network.
 
-
 .. _fig-overlay-net:
 .. figure:: overlay/figures/f09-19-9780123850591.png
    :width: 300px
    :align: center
 
    Overlay network layered on top of a physical network.
-
-   
 
 We explored one common use of overlay networks in Chapter |Virt|,
 using tunnels to build virtual networks. In this chapter we move our
@@ -41,7 +38,7 @@ an indispensible part of the Internet's infrastructure, even though
 they are technically implemented as overlays. Similarly, the ubiquity
 of video conferencing applications such as Zoom has been possible only
 because of the investments in overlays made by the developers of
-conferencing systems. 
+conferencing systems.
 
 .. include:: overlay/design.rst
 .. include:: overlay/CDN.rst
