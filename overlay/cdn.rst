@@ -41,7 +41,7 @@ do about the first-mile problem, but it is possible to use content
 replication to address the remaining problems.  Content distribution
 networks are the systems that manage the process of replicating
 content and delivering it to clients, which has a few more moving
-parts than first meet the eye . Akamai was one of the first operators
+parts than first meet the eye. Akamai was one of the first operators
 of a CDN and today there are a number of large CDN operators with
 global footprints.
 
