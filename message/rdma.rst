@@ -259,21 +259,22 @@ writing a "Hello, World" message to a remote memory address.
    ibv_wr_complete(qpx);
 
 The code snippet is surprisingly complicated, unless you are familiar
-with device drivers, which a reasonable comparison. Let's briefly walk
-through the steps. We start with a call to ``ib _reg_mr``, which
-registers a region of application memory with the NIC; the buffer
+with device drivers, which is a reasonable comparison. Let's briefly
+walk through the steps. We start with a call to ``ib _reg_mr`` to
+register a region of application memory with the NIC; the buffer
 holding the string ``"Hello World"`` in our case. In general, this
 buffer can be reused for multiple sends once it's registered. The
 actual write then spans four operations. The ``ibv_wr_start``
 operation sets the context; ``qpx`` denotes the local "Queue Pair",
-which is the rough equivalent of a socket. (See the next subsection
-for more information.)  The ``ibv_wr_rdma_write`` operation specifies
-the target of the write, which includes both the ``remote_addr`` and
-the ``remote_key`` needed to write to that address. (Both parameters
-are established during the Communication Management phase.) The third
-operation, ``ibv_wr_set_sge``, provides the local buffer that is the
-source of data for the write.\ [#]_ Finally, the ``ibv_wr_complete``
-operation signals to the NIC that the message is ready to be sent.
+which is a handle, roughly analogous to a socket. (See the next
+subsection for more information.)  The ``ibv_wr_rdma_write`` operation
+specifies the target of the write, which includes both the
+``remote_addr`` and the ``remote_key`` needed to write to that
+address. (Both parameters are established during the Communication
+Management phase.) The third operation, ``ibv_wr_set_sge``, provides
+the local buffer that is the source of data for the write.\ [#]_
+Finally, the ``ibv_wr_complete`` operation signals to the NIC that the
+message is ready to be sent.
 
 .. [#] The "sge" in ``ibv_wr_set_sge`` operation denotes the concept
    of "Scatter-Gather", indicating that the message to be written
@@ -281,7 +282,7 @@ operation signals to the NIC that the message is ready to be sent.
    buffers. (Our particular "Hello World" message is located in a
    single continuous buffer.) This is similar to the scatter/gather
    operations mentioned in the earlier sidebar about AI workloads, but
-   in that case work is "scattered" across multiple nodes, and an this
+   in that case work is "scattered" across multiple nodes, and in this
    case a message is "scattered" across multiple buffers.
 
 What might be equally surprising about this example is what little we
