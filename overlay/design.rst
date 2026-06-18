@@ -2,28 +2,31 @@
 -----------------------------------------------
 
 If an overlay is a new network implemented on top of an existing
-network—presumably one that provides some new functionality or
+network—presumably to provide some new functionality or
 capability—then an obvious question to ask is why didn't we just add
 the new feature to the existing network? There are as many answers as
 there are overlays, but they all boil down to one pragmatic
 consideration: it is difficult to add new functionality to an
 operational network. The challenge of getting everyone to agree to
 such an upgrade, let alone dealing with the logistics of deploying the
-upgrade, eventually leads to the ossification of the established
-network.  Demonstrating the value of a new feature is easier if you
-can run the new network *over the top*, without having to modify any
-of the network's existing infrastructure.
+upgrade across thousand of switches, is an extremely high barrier.
+Demonstrating the value of a new feature is easier if you can run the
+new network *over the top*, without having to modify any of the
+existing network infrastructure.
 
 Overlays are how networks evolve, as the Internet itself perfectly
-illustrates.  Decades ago, trying to augment the existing
+illustrates. Decades ago, trying to augment the existing
 circuit-switched network with a packet-switching capability would have
-been an untenable technical problem, not to mention how disruptive
-such a change would have been to the business models of the incumbent
-Telcos. The same is true today, except now, Internet ISPs are the
-incumbents. Incumbents are cautious and change is slow, but overlays
-are widely accepted as a way to introduce disruptive technology. This
-observation was noted by a National Academies report about the state
-of networking over two decades ago:
+been an untenable technical problem, not to mention a significant
+disruption of the business models of the incumbent Telcos. The same is
+true today, except now, Internet ISPs are the incumbents. History
+teaches us that incumbents are cautious and change is slow, so much
+so, that entrenched technology tends to ossify over time. This results
+in a phenomenon that Clayton Christensen famously called the
+*Innovator's Dilemma*. Fortunately, networking gives us a workaround,
+with overlays being the widely accepted as a way to introduce
+disruptive technology. A National Academies report made this
+observation about the state of the Internet over two decades ago:
 
   *The existing core IP network could be used simply as a data
   transport service, and disruptive technology could be implemented as
@@ -37,59 +40,92 @@ of networking over two decades ago:
 
 .. admonition:: Further Reading
 
+   C. Christensen. `The Innovator's Dilemma
+   <https://dl.acm.org/doi/book/10.5555/268729>`__.
+   Harvard Business School Press,  June 1997.
+
    National Academies of Sciences, Engineering, and Medicine.
    `Looking Over the Fence at Networks: A Neighbor's View of
    Networking Research. <https://doi.org/10.17226/10183>`__.
    The National Academies Press, 2001.
 
-While some functions do move into the core over time, that's not
-always the case. This leads to a second question overlays force us to
-address: what is the optimal *function placement?* That is, a does a
-particular function (capability) belong inside the network or is it
-best delivered over the top? In Chapter |Virt| we saw an example of
-VPNs (which you can think of as providing a "nesting" function) being
-supported inside the network, implemented on the same routers that
-provide the base Internet.  VPNs are a kind of overlay, but because
-they reuse the same forwarding mechanism, they are easily incorporated
-into the core. This chapter looks at three other examples, where with
-20/20 hindsight, the right answer seems to be that the function they
-support belongs on hosts connected to the edge of the network.
+While some functions do move into the core over time, replacing the
+original technology, that's not always the case. This leads to a
+second question overlays force us to address: what is the optimal
+*function placement?* That is, a does a particular function
+(capability) belong inside the network or is it best delivered over
+the top? In Chapter |Virt| we saw an example of VPNs (which you can
+think of as providing a "nesting" function) being supported inside the
+network, implemented on the same routers that provide the base
+Internet.  VPNs are a kind of overlay, but because they reuse the same
+forwarding mechanism, they are easily incorporated into the core. This
+chapter looks at other examples, where with 20/20 hindsight, the right
+answer seems to be that the function they support belongs on hosts
+connected to the edge of the network. This outcome is predicted by
+the end-to-end argument we discussed in Chapter |Intro|.
 
-The first, Content Distribution Networks (CDNs), support a *caching*
+.. TODO -- We need to introduce e2e somewhere in Chapter 1.
+
+This chapter looks at two examples, both of which have settled the
+function placement question in favor of an overlay.  The first,
+Content Distribution Networks (CDNs), support a *caching*
 function. The idea is to add a storage capability to the network, and
-unless we're going to connect disks to routers, this seems like a good
-candidate function to implement as an overlay. This doesn't make CDNs
+unless we're going to connect disks to routers, this seems like a
+obvious function to implement as an overlay. This doesn't make CDNs
 any less part of the Internet's "critical infrastructure"—it's proven
 to be an absolute requirement for scaling content delivery—but there
-is little appetite for augmenting routers with storage. (As we will
-see in Section |Overlay|.2, CDNs include a "request routing" function,
-which has been proposed as a "content-based addressing" extension to
-the Internet's forwarding mechanism, but the success of CDNs in
-providing the same service as an overlay renders this issue mute.)
+is little appetite for augmenting routers with storage. As we will see
+in Section |Overlay|.2, however, CDNs do include a "request routing"
+function, which has been proposed as a "content-based addressing"
+extension to the Internet's forwarding mechanism. But the success of
+CDNs in providing the same service as an overlay renders this issue
+mute.
 
-The second, video conferencing, supports a *multicast* function,
-whereby packets are delivered to multiple end-points instead of a
-single destination. Multicast is a good example of a function that has
-tried to find a home at multiple layers of the protocol stack.
-Originally, the MBone (multicast backbone) was an overlay that enabled
-experimentation with IP multicast routing and forwarding. The goal was
-to eventually add multicast support to the Internet's routers (IPv4
-addresses in the range ``224.0.0.0`` to ``239.255.255.255`` were
+The second example, video conferencing, supports a *multicast*
+function, whereby packets are delivered to multiple end-points instead
+of a single destination. Multicast is a good example of a function
+that has tried to find a home at multiple layers of the protocol
+stack.  Originally, the MBone (multicast backbone) was an overlay that
+enabled experimentation with IP multicast routing and forwarding. The
+goal was to eventually add multicast support to the Internet's routers
+(IPv4 addresses in the range ``224.0.0.0`` to ``239.255.255.255`` were
 treated as multicast addresses), and while the function was
 implemented in commercial routers, it never enjoyed widespread
 deployment. Today, an over-the-top variant of multicast supports
 familiar video conferencing apps, such as Zoom.
 
-The third is *onion routing*, which is a function that mimics IP
-forwarding, with the added feature that it is impossible to trace
-where a packet comes from. This allows the sender to remain anonymous.
-Onion routing is not in enough demand to incentivize making it a
-general part of the core. This is a common situation, meaning that
-overlays can server niche markets. In the case of onion routing,
-specifically, there is also the issue of trusting commercial providers
-to honor the expected anonymity.
+These two examples draw attention to yet another design question,
+which the extent to which a given overlay is general-purpose—that is,
+provides shared infrastructure used by multiple applications—or is
+tightly bundled with a particular application. CDNs can serve as
+general infrastructure, able to serve content on behalf of any web
+site or application. (Note, however, that there are examples of
+applications building their own private CDNs, with Netflix being one
+well-known example.)  In contrast, video conferencing applications
+typically instantiate a multicast overlay in support of a single
+conference call; another call involving a different set of
+participants gets its own overlay.  In practice, though, services such
+as Zoom do maintain distributed infrastructure on which those per-call
+overlays are created; one could view that infrastructure as another
+kind of overlay.
 
-.. TODO -- This storyline lost the IPv6 angle. Not sure whether it
+A final question is where overlays find the distributed set of servers
+to install their overlay nodes on. Today there is a ready answer:
+clouds and hosting centers provide the means to acquire computing and
+storage resources at hundreds of locations across the globe. But there
+is an alternative, which is to depend on computing resources that you
+(and many other volunteers like you) provide. These so called
+*peer-to-peer networks* originally gained notoriety for their use
+distributing content, but today they serve other purposes. *Onion
+routing* is perhaps the most noteworthy, with Tor being a well-known
+example. An onion routing overlay mimics IP forwarding, but with the
+added feature that it is impossible to trace where a packet comes
+from. This allows the sender to remain anonymous. Technically, any IPS
+could offer onion routing, but of course, that would depend on users
+trusting commercial providers to honor the expected anonymity. Hence,
+the dependency on peer-provided resources.
+
+.. TODO -- This story line lost the IPv6 angle. Not sure whether it
    belongs in the VPN paragraph or the the onion routing paragraph.
 
 .. TODO -- With respect to video conferencing, three is a second

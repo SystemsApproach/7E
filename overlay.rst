@@ -18,9 +18,10 @@ foundational network on top of which new overlays could be built.
 :numref:`Figure %s <fig-overlay-net>` depicts an overlay implemented
 on top of an underlying network. Each node in the overlay also exists
 in the underlying network; it processes and forwards packets in an
-application-specific way. The links that connect the overlay nodes are
-implemented as logical links (e.g., tunnels) through the underlying
-network.
+application-specific way. Because they run arbitrary code, overlay
+nodes are typically servers rather than switches. The links that
+connect the overlay nodes are implemented as logical links (e.g.,
+tunnels) through the underlying network.
 
 .. _fig-overlay-net:
 .. figure:: overlay/figures/f09-19-9780123850591.png
@@ -29,16 +30,29 @@ network.
 
    Overlay network layered on top of a physical network.
 
-We explored one common use of overlay networks in Chapter |Virt|,
-using tunnels to build virtual networks. In this chapter we move our
-focus to overlays that implement application-specific
-behavior. Content distribution networks have had a substantial impact
-on the way the Internet scales and performs. They can now be viewed as
-an indispensible part of the Internet's infrastructure, even though
-they are technically implemented as overlays. Similarly, the ubiquity
-of video conferencing applications such as Zoom has been possible only
-because of the investments in overlays made by the developers of
-conferencing systems.
+Overlays can be viewed as forming a network with some topology. The
+example in :numref:`Figure %s <fig-overlay-net>` is a subgraph of the
+underlying network, but another common configuration is for the
+overlay to form a fully-connected graph. This is easy to do when the
+underlying network is the Internet, since the Internet supports a
+logical connection between every pair of hosts. We raise this point
+because while some overlays do include routing as part of their
+"application logic", in other cases, the whole purpose of the overlay
+is to give the application multiple points-of-presence, thereby
+improving client-experienced latency (the application is likely to be
+accessible at a nearby site) and aggregate application throughput
+(many application sites can be accessed in parallel).
+
+Overlays are an integral part of the software ecosystem running a the
+edge of the Internet. Like transport protocols that run on individual
+hosts in support of application programs, overlays run on a
+distributed collection of edge hosts, also in support of applications.
+They are a critical part of the Internet's approach to scaling
+applications. This chapter looks at two widely-used examples: Content
+Distribution Networks (CDNs) and the multicast overlays at the heart
+of video conferencing applications such as Zoom. These two examples
+serve as case studies, helping to illustrate the range of strategies
+available to applications.
 
 .. include:: overlay/design.rst
 .. include:: overlay/CDN.rst
