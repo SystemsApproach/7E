@@ -136,7 +136,7 @@ server first points to a regional-level DNS server, which replies with
 the actual server address. In order to respond to changes quickly, the
 DNS servers tweak the TTL of the resource records they return to a very
 short period, such as 20 seconds. This is necessary so clients don’t
-cache results and thus fail to go back to the DNS server for the most
+cache results; instead they go back to the DNS server for the most
 recent URL-to-server mapping.
 
 Another possibility is to use the HTTP redirect feature: The client
@@ -153,22 +153,28 @@ requests leaving the site pass through it, or the client would have to
 cooperate by explicitly addressing the proxy (as with a classical,
 rather than transparent, proxy).
 
-At this point you may be wondering what CDNs have to do with overlay
-networks, since they don't precisely conform to the defition we gave
-at the start of this chapter. We would argue that they have enough in
-common with other types of overlay to qualify. Like an overlay node,
-a proxy-based redirector makes an application-level routing decision.
-Rather than forward a packet based on an address and its knowledge of
-the network topology, it forwards HTTP requests based on a URL and its
-knowledge of the location and load of a set of servers. And the
-complete collection of redirectors and surrogate servers that make up
-a CDN are effectively an application-specific network that leverages
-the underlying connectivity of the Internet to do their job: efficient
-delivery of content to clients.
+.. sidebar:: Are CDNs Overlays?
 
-.. TODO -- since we no longer cover DHTs or Gnutella like overlays,
-   it's arugably easier to refine our definition of overlay to include
-   CDNs from the get-go, suggesting a rewrite of the above para
+   Many of the early overlays built on top of the Internet use some
+   sort of tunneling to create virtual point-to-point links, and
+   created a virtual topology between the overlay nodes to offer some
+   function not yet implemented in the Internet, such as multicast of
+   IPv6 support. CDNs don't quite conform to this model, since they
+   don't generally build tunnels between the CDN nodes. We would
+   argue, however, that they have enough in common with other types of
+   overlay to qualify. They offer functionality not natively provided
+   by the Internet—caching—while using the Internet to interconnect
+   the nodes in the CDN. A redirector makes an application-level
+   routing decision, much like other types of overlay nodes.  Rather
+   than forward a packet based on an address and its knowledge of the
+   network topology, it forwards HTTP requests based on a URL and its
+   knowledge of the location and load of a set of servers.  The
+   complete collection of redirectors and surrogate servers that make
+   up a CDN are effectively an application-specific network that
+   leverages the underlying connectivity of the Internet bring
+   additional functionality to the Internet: efficient delivery of
+   content to clients.
+
 
 |Overlay|.2.2 Policies
 ~~~~~~~~~~~~~~~~~~~~~~~
