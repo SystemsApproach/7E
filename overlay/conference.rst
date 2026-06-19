@@ -90,3 +90,11 @@ the overlay. This is how most video conferencing solutions on today's
 Internet work, using overlays to scale the performance of the
 application without any assistance beyond basic packet transport from
 the core of the Internet.
+
+.. sidebar:: IP Multicast: A Case Study
+
+    There's an opportunity to say a bit more about IP multicast,
+    including what made it hard: the routing protocol, which provided
+    a means to join a multicast group. Then link 6E section for more
+    info. Also note where it is used today: last mile into the home
+    (for live streams).
