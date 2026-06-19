@@ -36,14 +36,14 @@ underlying network, but another common configuration is for the
 overlay to form a fully-connected graph. This is easy to do when the
 underlying network is the Internet, since the Internet supports a
 logical connection between every pair of hosts. We raise this point
-because while some overlays do include routing as part of their
+because, while some overlays do include routing as part of their
 "application logic", in other cases, the whole purpose of the overlay
-is to give the application multiple points-of-presence, thereby
-improving client-experienced latency (the application is likely to be
+is to give the application multiple points-of-presence. This
+improves client-experienced latency (the application is likely to be
 accessible at a nearby site) and aggregate application throughput
 (many application sites can be accessed in parallel).
 
-Overlays are an integral part of the software ecosystem running a the
+Overlays are an integral part of the software ecosystem running at the
 edge of the Internet. Like transport protocols that run on individual
 hosts in support of application programs, overlays run on a
 distributed collection of edge hosts, also in support of applications.

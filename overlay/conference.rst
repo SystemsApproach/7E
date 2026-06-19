@@ -63,7 +63,7 @@ than modifying them.
 There is an alternative approach, in which a *Multipoint Control Unit*
 (MCU) combines the incoming streams into a single outgoing stream,
 such as by tiling four videos into a 2x2 grid. This is more
-CPU-intensive since it involves decoding and re-encoding the videos.
+resource-intensive since it involves decoding and re-encoding the videos.
 
 Of course, a single replication device is both a bottleneck from the
 perspective of scaling, and a potential single point of failure. So
@@ -80,7 +80,7 @@ SFUs in a tree structure is shown in :numref:`Figure %s
    :width: 600px
    :align: center
 
-   A mesh of SFUs provide scale and resilience
+   A mesh of SFUs provide scale and resilience.
 
 As you can see, what we now have is an application-specific
 overlay of SFUs. These devices create a virtual topology on top of the

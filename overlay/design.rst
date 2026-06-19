@@ -3,7 +3,7 @@
 
 If an overlay is a new network implemented on top of an existing
 network—presumably to provide some new functionality or
-capability—then an obvious question to ask is why didn't we just add
+capability—then an obvious question to ask is: why didn't we just add
 the new feature to the existing network? There are as many answers as
 there are overlays, but they all boil down to one pragmatic
 consideration: it is difficult to add new functionality to an
@@ -18,10 +18,10 @@ Overlays are how networks evolve, as the Internet itself perfectly
 illustrates. Decades ago, trying to augment the existing
 circuit-switched network with a packet-switching capability would have
 been an untenable technical problem, not to mention a significant
-disruption of the business models of the incumbent Telcos. The same is
+disruption of the business models of the incumbent telcos. The same is
 true today, except now, Internet ISPs are the incumbents. History
 teaches us that incumbents are cautious and change is slow, so much
-so, that entrenched technology tends to ossify over time. This results
+so that entrenched technology tends to ossify over time. This results
 in a phenomenon that Clayton Christensen famously called the
 *Innovator's Dilemma*. Fortunately, networking gives us a workaround,
 with overlays being the widely accepted as a way to introduce
@@ -49,20 +49,25 @@ observation about the state of the Internet over two decades ago:
    Networking Research. <https://doi.org/10.17226/10183>`__.
    The National Academies Press, 2001.
 
-While some functions do move into the core over time, replacing the
-original technology, that's not always the case. This leads to a
-second question overlays force us to address: what is the optimal
-*function placement?* That is, a does a particular function
+Sometimes an overlay provides a path to incremental deployment of a
+new capability. A famous example of this is IPv6, which started off
+its deployment as an overlay on the IPv4 Internet but is now widely
+implemented in the same core routers that provide IPv4 service.
+
+While some functions do move into the core over time, supplementing or
+replacing the original technology, that's not always the case. This
+leads to a second question overlays force us to address: what is the
+optimal *function placement?* That is, a does a particular function
 (capability) belong inside the network or is it best delivered over
 the top? In Chapter |Virt| we saw an example of VPNs (which you can
-think of as providing a "nesting" function) being supported inside the
-network, implemented on the same routers that provide the base
-Internet.  VPNs are a kind of overlay, but because they reuse the same
-forwarding mechanism, they are easily incorporated into the core. This
-chapter looks at other examples, where with 20/20 hindsight, the right
-answer seems to be that the function they support belongs on hosts
-connected to the edge of the network. This outcome is predicted by
-the end-to-end argument we discussed in Chapter |Intro|.
+think of as providing a "nesting" function) which are, in some cases,
+implemented on the same routers that provide the base Internet
+service. In other cases, VPNs are implemented as an overlay using
+encrypted tunnels as the logical links. This chapter looks at other
+examples where experience has led us to conclude that the function
+they support belongs on hosts connected to the edge of the
+network. This outcome is predicted by the end-to-end argument we
+discussed in Chapter |Intro|.
 
 .. TODO -- We need to introduce e2e somewhere in Chapter 1.
 
@@ -79,7 +84,10 @@ in Section |Overlay|.2, however, CDNs do include a "request routing"
 function, which has been proposed as a "content-based addressing"
 extension to the Internet's forwarding mechanism. But the success of
 CDNs in providing the same service as an overlay renders this issue
-mute.
+moot.
+
+.. TODO -- some might see this as dismissive of content networking
+   research, we could consider a sidebar (or not)
 
 The second example, video conferencing, supports a *multicast*
 function, whereby packets are delivered to multiple end-points instead
@@ -89,7 +97,7 @@ stack.  Originally, the MBone (multicast backbone) was an overlay that
 enabled experimentation with IP multicast routing and forwarding. The
 goal was to eventually add multicast support to the Internet's routers
 (IPv4 addresses in the range ``224.0.0.0`` to ``239.255.255.255`` were
-treated as multicast addresses), and while the function was
+defined as multicast addresses), and while the function was
 implemented in commercial routers, it never enjoyed widespread
 deployment. Today, an over-the-top variant of multicast supports
 familiar video conferencing apps, such as Zoom.
