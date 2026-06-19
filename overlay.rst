@@ -56,3 +56,4 @@ available to applications.
 .. include:: overlay/design.rst
 .. include:: overlay/cdn.rst
 .. include:: overlay/conference.rst
+.. include:: overlay/p2p.rst
