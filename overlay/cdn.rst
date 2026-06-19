@@ -14,11 +14,11 @@ spite of these bottlenecks. Even though everything from server
 hardware to internet access links is dramatically faster today, CDNs
 have become an essential feature of the Internet.
 
-When it comes to downloading Web pages there
+When it comes to downloading web pages there
 are four potential bottlenecks in the system:
 
 -  *The first mile.* The Internet may have high-capacity links in it,
-   but that doesn’t help you download a Web page any faster when you’re
+   but that doesn’t help you download a web page any faster when you’re
    connected over a low-speed (or poorly performing) access link.
 
 -  *The last mile.* The link that connects the server to the Internet
@@ -121,7 +121,7 @@ come and go.
 First, redirection could be implemented by augmenting DNS to return
 different server addresses to clients. For example, when a client asks
 to resolve the name ``www.cnn.com``, the DNS server could return the
-IP address of a server hosting CNN’s Web pages that is known to have
+IP address of a server hosting CNN’s web pages that is known to have
 the lightest load.  Alternatively, for a given set of servers, it
 might just return addresses in a round-robin fashion. Note that the
 granularity of DNS-based redirection is usually at the level of a site
@@ -145,7 +145,7 @@ server that the client should contact for the page. Unfortunately,
 server-based redirection incurs an additional round-trip time across the
 Internet, and, even worse, servers can be vulnerable to being overloaded
 by the redirection task itself. Instead, if there is a node close to the
-client (e.g., a local Web proxy) that is aware of the available servers,
+client (e.g., a local web proxy) that is aware of the available servers,
 then it can intercept the request message and instruct the client to
 instead request the page from an appropriate server. In this case,
 either the redirector would need to be on a choke point so that all
