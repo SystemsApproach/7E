@@ -1,5 +1,4 @@
-.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
-.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
 .. SPDX-License-Identifier: CC-BY-4.0
 
 About The Authors

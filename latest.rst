@@ -1,5 +1,4 @@
-.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
-.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
 .. SPDX-License-Identifier: CC-BY-4.0
 
 .. role:: pop
@@ -16,6 +15,11 @@ the Internet today.
 
 `Book Series: <https://systemsapproach.org/books/>`__ Also check out
 our companion books that cover emerging topics in more depth.
+
+
+
+* `Network Security: A Systems Approach
+  <https://systemsapproach.org/books/#securitybook>`__
 
 * `What We Talk About When We Talk About Systems <https://systemsapproach.org/books/#essaybook>`__
 

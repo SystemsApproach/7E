@@ -1,5 +1,4 @@
-.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
-.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
 .. SPDX-License-Identifier: CC-BY-4.0
 
 
@@ -25,7 +24,7 @@ following information:
 
 |  Title: *Computer Networks: A Systems Approach*
 |  Authors: Larry Peterson and Bruce Davie
-|  Copyright: Larry Peterson and Bruce Davie, 2026
+|  Copyright: Larry L. Peterson and Bruce S. Davie, 2026
 |  Source: https://github.com/SystemsApproach/7E
 |  License: `CC BY  4.0 <https://creativecommons.org/licenses/by/4.0>`__
 
@@ -44,8 +43,8 @@ Read the Book
 -------------
 
 This book is part of the `Systems Approach Series
-<https://www.systemsapproach.org>`__, with an online version published
-at https://book.systemsapproach.org.
+<https://www.systemsapproach.org/books>`__, with an online version published
+at https://7e.systemsapproach.org.
 
 To track progress and receive notices about new versions, you can
 follow the project on `Mastodon

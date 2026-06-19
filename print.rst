@@ -1,5 +1,4 @@
-.. SPDX-FileCopyrightText: 2019 Systems Approach LLC
-.. SPDX-FileCopyrightText: 2025 Systems Approach LLC
+.. SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
 .. SPDX-License-Identifier: CC-BY-4.0
 
 .. role:: pop
@@ -8,12 +7,15 @@
 ===========================
 
 We make all books in the *Systems Approach* series available as both
-print and e-books. This book is available via Amazon: `Computer Networks: A Systems Approach <https://amzn.to/3CtG81U>`__
+print and e-books. This book is available via bookstores including Amazon: `Computer Networks: A Systems Approach <https://amzn.to/3CtG81U>`__
 
 `Book Series: <https://systemsapproach.org/books/>`__ Also check out
 our companion books that cover emerging topics in more depth.
 
 
+* `Network Security: A Systems Approach
+  <https://systemsapproach.org/books/#securitybook>`__
+  
 * `What We Talk About When We Talk About Systems: Essays on the
   Systems Approach <https://systemsapproach.org/books/#essaybook>`__
 
