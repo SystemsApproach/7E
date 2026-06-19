@@ -8,8 +8,8 @@ the new feature to the existing network? There are as many answers as
 there are overlays, but they all boil down to one pragmatic
 consideration: it is difficult to add new functionality to an
 operational network. The challenge of getting everyone to agree to
-such an upgrade, let alone dealing with the logistics of deploying the
-upgrade across thousand of switches, is an extremely high barrier.
+such a change, let alone dealing with the logistics of deploying the
+upgrade across thousands of switches, is an extremely high barrier.
 Demonstrating the value of a new feature is easier if you can run the
 new network *over the top*, without having to modify any of the
 existing network infrastructure.
@@ -26,7 +26,7 @@ in a phenomenon that Clayton Christensen famously called the
 *Innovator's Dilemma*. Fortunately, networking gives us a workaround,
 with overlays being the widely accepted as a way to introduce
 disruptive technology. A National Academies report made this
-observation about the state of the Internet over two decades ago:
+observation about the Internet over two decades ago:
 
   *The existing core IP network could be used simply as a data
   transport service, and disruptive technology could be implemented as
@@ -83,11 +83,16 @@ is little appetite for augmenting routers with storage. As we will see
 in Section |Overlay|.2, however, CDNs do include a "request routing"
 function, which has been proposed as a "content-based addressing"
 extension to the Internet's forwarding mechanism. But the success of
-CDNs in providing the same service as an overlay renders this issue
-moot.
+CDNs in providing the same service as an overlay has made this a tough
+sell. The ease of deploying any new feature in an overlay means you
+need a compelling argument for instead adding that feature to the
+core.
 
 .. TODO -- some might see this as dismissive of content networking
-   research, we could consider a sidebar (or not)
+   research, we could consider a sidebar (or not).
+
+   I softened the language, and added a bit more about the bar being
+   raised. --llp
 
 The second example, video conferencing, supports a *multicast*
 function, whereby packets are delivered to multiple end-points instead
