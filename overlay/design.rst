@@ -128,7 +128,7 @@ distributing content, but today they serve other purposes. *Onion
 routing* is perhaps the most noteworthy, with Tor being a well-known
 example. An onion routing overlay mimics IP forwarding, but with the
 added feature that it is impossible to trace where a packet comes
-from. This allows the sender to remain anonymous. Technically, any IPS
+from. This allows the sender to remain anonymous. Technically, any ISP
 could offer onion routing, but of course, that would depend on users
 trusting commercial providers to honor the expected anonymity. Hence,
 the dependency on peer-provided resources.

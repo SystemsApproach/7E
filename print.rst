@@ -15,7 +15,7 @@ our companion books that cover emerging topics in more depth.
 
 * `Network Security: A Systems Approach
   <https://systemsapproach.org/books/#securitybook>`__
-  
+
 * `What We Talk About When We Talk About Systems: Essays on the
   Systems Approach <https://systemsapproach.org/books/#essaybook>`__
 

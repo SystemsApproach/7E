@@ -59,7 +59,6 @@ BY 4.0 for the main content of the book). We welcome contributions from the
 community as we have done for prior editions.
 
 
-
 Fitting It All In Your Head
 ------------------------------
 
@@ -73,7 +72,7 @@ Postel:
   on. What’s been happening over the last few years is that the IETF
   is filling the rest of the space with every alternative approach,
   not necessarily any better.*
-  
+
 Certainly we can’t hope to teach the next generation of
 students about the details of every RFC published in the last 30
 years. It would be unhelpful to try. This is what we mean by
@@ -103,7 +102,7 @@ The focus on building leads us to teach system design and
 architectural principles rather than trying to be an encyclopedia of
 networking technologies. We are not just trying to help students
 understand the artifacts that exists today: we are trying to equip
-them to shape the networks of the future. 
+them to shape the networks of the future.
 
 One important change noted above is that the set of building blocks
 has solidified. Ethernet should be taken as a given as the underlying
@@ -151,7 +150,7 @@ that's likely to be familiar) and network hardware (helping the student
 ground the concepts in something tangible). The second pass
 (corresponding to Parts II and III of the book) then show how these
 general concepts apply to specific subsystems, both *inside the
-network* (Part II) and *at the edge of the network* (Part III). 
+network* (Part II) and *at the edge of the network* (Part III).
 This latter split helps to separate concerns, with IP's best-effort
 packet delivery service defining the boundary between the two.
 
@@ -191,8 +190,8 @@ encyclopedic coverage of specific technologies; we anchor the
 discussion around three central artifacts (Ethernet, IP, and HTTP);
 and we tackle topics that are central to the problem of building a
 network in a non-layerist manner. This has led to the following
-organization
-  
+organization:
+
 **Part I: Foundation**
   
 Provides a big picture view of networking, explaining the key
@@ -204,7 +203,7 @@ and statistical multiplexing with a focus on Ethernet as the canonical
 example of modern packet-switched networks.
 
 **Part II: Inside The Network**
-  
+
 Each chapter tackles one of the problems that needs to be solved to
 build a global network of packet switches, starting with how to calculate and
 distribute routes. Other chapters include: mediating shared access
@@ -212,14 +211,13 @@ distribute routes. Other chapters include: mediating shared access
 allocating resources; virtual networks; and network operations.
 
 **Part III: The Edge of the Network**
-  
+
 We move our focus out to the systems, applications and protocols
 running at the edges of the network. We start with a discussion of
 naming, including both DNS and application level names. We cover
 reliable delivery (TCP and QUIC); remote procedure call; congestion
 control; secure channels (TLS); overlays and CDNs; and real-time
 applications.
-
 
 There are some recurring themes that show up repeatedly throughout the
 book rather than forming their own chapter. Security is a notable
@@ -273,8 +271,6 @@ done in the past. Our job is to give them the understanding of system
 design principles and the intellectual framework to manage complexity
 that will set them up for the future of networking, whatever it may be.
 
-
-        
 For some more insight into our
 thinking as we worked on 7E, you might find the following posts
 informative:

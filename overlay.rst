@@ -54,5 +54,5 @@ serve as case studies, helping to illustrate the range of strategies
 available to applications.
 
 .. include:: overlay/design.rst
-.. include:: overlay/CDN.rst
+.. include:: overlay/cdn.rst
 .. include:: overlay/conference.rst
