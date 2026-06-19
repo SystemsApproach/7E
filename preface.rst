@@ -193,7 +193,7 @@ network in a non-layerist manner. This has led to the following
 organization:
 
 **Part I: Foundation**
-  
+
 Provides a big picture view of networking, explaining the key
 challenges such as scale and performance. Introduces fundamental
 concepts of networking such as protocols and encapsulation. Examines
