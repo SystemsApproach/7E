@@ -215,13 +215,12 @@ also used by a peer to limit the number of its active BitTorrent
 connections, to maintain good TCP performance. There are many possible
 choking algorithms, and devising a good one is an art.
 
-We conclude by noting that despite the explosion of centrally managed
-content delivery services, for everything from music to video to
-gaming updates to software distribution, BitTorrent remains in wide
-use. This has to partly be attributed to is decentralized design,
-which is elegantly self-sustsaining: more demand is naturally coupled
-with more resources. That this also makes it difficult to shut-down
-doesn't hurt.
+We conclude by noting that while centrally managed (commercial) music
+streaming services are now commonplace, BitTorrent remains in wide use,
+delivering everything from music to video, game updates, and software
+releases. This is, at least in part, due to its decentralized design,
+which is both self-sustaining (more demand naturally results in
+more resources) and difficult to shut down.
 
 .. admonition:: Further Reading
 
