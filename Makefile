@@ -1,7 +1,9 @@
-.. SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
-.. SPDX-License-Identifier: CC-BY-4.0
+# SPDX-FileCopyrightText: 2018 Open Networking Foundation
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
+# SPDX-License-Identifier: CC-BY-4.0
 
-# Makefile for ONF documentation created with Sphinx
+# Makefile building book with Sphinx
 
 # use bash for pushd/popd, and to fail quickly. virtualenv's activate
 # has undefined variables, so no -u
