@@ -221,7 +221,7 @@ for work on congestion control algorithms that are less
 aggressive than those of TCP, yielding to competing traffic when delay
 increases. This led to an experimental RFC on "Low Extra Delay
 Background Transport (LEDBAT)" and ongoing research on similar
-algorithms. 
+algorithms.
 
 We conclude by noting that while centrally managed (commercial) music
 streaming services are now commonplace, BitTorrent remains in wide use,

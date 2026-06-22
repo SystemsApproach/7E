@@ -20,7 +20,7 @@ application-specific overlay.
     *We have mentioned IP Multicast and the MBone multiple times in
     this chapter. That they are primarily of historical interest makes
     for an an interesting case study of how the Internet has evolved.
-    IP Multicast is the core feature, and as explained in 
+    IP Multicast is the core feature, and as explained in
     Section |Overlay|.1, a block of the IPv4 address space was set aside for
     multicast addresses. The idea was that you could assign one of
     these address to a multicast group, users could request to join
