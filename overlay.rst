@@ -15,12 +15,13 @@ connecting the backbone routers. The Internet itself became the
 foundational network on top of which new overlays could be built.
 
 :numref:`Figure %s <fig-overlay-net>` depicts an overlay implemented
-on top of an underlying network. Each node in the overlay also exists
-in the underlying network; it processes and forwards packets in an
-application-specific way. Because they run arbitrary code, overlay
-nodes are typically servers rather than switches. The links that
-connect the overlay nodes are implemented as logical links (e.g.,
-tunnels) through the underlying network.
+on top of an underlying network. Each node in the overlay processes
+and forwards packets in an application-specific way. Because they run
+arbitrary code, these overlay nodes are usually servers rather than
+switches; these server are often co-located with a switch in the
+underlying network. The links that connect the overlay nodes are
+implemented as logical links (e.g., tunnels) through the underlying
+network.
 
 .. _fig-overlay-net:
 .. figure:: overlay/figures/f09-19-9780123850591.png
@@ -46,12 +47,13 @@ Overlays are an integral part of the software ecosystem running at the
 edge of the Internet. Like transport protocols that run on individual
 hosts in support of application programs, overlays run on a
 distributed collection of edge hosts, also in support of applications.
-They are a critical part of the Internet's approach to scaling
-applications. This chapter looks at two widely-used examples: Content
-Distribution Networks (CDNs) and the multicast overlays at the heart
-of video conferencing applications such as Zoom. These two examples
-serve as case studies, helping to illustrate the range of strategies
-available to applications.
+They are a critical part of the Internet's approach to both scaling
+applications and making them more resilient. This chapter looks at
+three widely-used examples: Content Distribution Networks (CDNs), the
+multicast overlays at the heart of video conferencing applications
+such as Zoom, and peer-to-peer file sharing networks such as
+BitTorrent. These three examples serve as case studies, helping to
+illustrate a range of strategies available to applications.
 
 .. include:: overlay/design.rst
 .. include:: overlay/cdn.rst

@@ -20,8 +20,8 @@ application-specific overlay.
     *We have mentioned IP Multicast and the MBone multiple times in
     this chapter. That they are primarily of historical interest makes
     for an an interesting case study of how the Internet has evolved.
-    IP Multicast is the core feature, and as explained in
-    Section |Overlay|.1, a block of the IPv4 address space was set aside for
+    IP Multicast is the core feature, and as explained in Section
+    16.1, a block of the IPv4 address space was set aside for
     multicast addresses. The idea was that you could assign one of
     these address to a multicast group, users could request to join
     that group (technically, they added their host to the group), and
@@ -29,16 +29,16 @@ application-specific overlay.
     delivered to every host in the group.*
 
     *The data plane part of multicast IP is easily solved: switch
-    forwarding pipelines are able to send an incoming packets to multiple
-    outgoing queues.  What proved hard is the control plane part of
-    the problem, that is, propagating "join requests" to those routers
-    that needed to know about any particular multicast address. This
-    is a effectively a routing problem, and when you take both scale
-    and AS autonomy into account, the resulting protocol turned out to
-    be as complex as BGP, if not more so.*
+    forwarding pipelines are able to send an incoming packet to
+    multiple outgoing queues.  What proved hard is the control plane,
+    that is, propagating "join requests" to those routers that need to
+    know about any particular multicast address. This is a effectively
+    a routing problem, and when you take both scale and AS autonomy
+    into account, the resulting protocol turned out to be as complex
+    as BGP, if not more so.*
 
     *The MBone was an overlay used to gain experience with multicast,
-    with the goal of eventually pushing the solution down into
+    with the goal of incrementally pushing the solution down into
     commercial routers so it could be widely deployed. IP Multicast
     was never widely deployed in the Internet (with one main
     exception), but this wasn't a problem that could be overcome, even
@@ -50,8 +50,6 @@ application-specific overlay.
     cable set-top boxes (or Smart TVs) in homes. Last-hop multicast
     easily beats N-way unicast, and the control overhead is
     manageable.*
-
-.. TODO -- Could say more, but maybe this is enough of a summary.
 
 An overlay is an optimization in the sense that you can run a video
 conferencing application without one. Indeed, if there are only two

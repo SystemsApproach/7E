@@ -224,11 +224,13 @@ Background Transport (LEDBAT)" and ongoing research on similar
 algorithms.
 
 We conclude by noting that while centrally managed (commercial) music
-streaming services are now commonplace, BitTorrent remains in wide use,
-delivering everything from music to video, game updates, and software
-releases. This is, at least in part, due to its decentralized design,
-which is both self-sustaining (more demand naturally results in
-more resources) and difficult to shut down.
+streaming services are now commonplace, BitTorrent remains in wide
+use, with over 170M active users each month. It is used to deliver
+everything from music to video, game updates, and software
+releases. Popularity is, at least in part, due to its decentralized
+design, which is both self-sustaining (more demand naturally results
+in more resources) and difficult to shut down (there is no central
+authority in charge).
 
 .. admonition:: Further Reading
 

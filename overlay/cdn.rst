@@ -155,30 +155,6 @@ requests leaving the site pass through it, or the client would have to
 cooperate by explicitly addressing the proxy (as with a classical,
 rather than transparent, proxy).
 
-.. sidebar:: Are CDNs Overlays?
-
-   *Many of the early overlays built on top of the Internet use some
-   sort of tunneling to create virtual point-to-point links, and
-   created a virtual topology between the overlay nodes to offer some
-   function not yet implemented in the Internet, such as multicast of
-   IPv6 support. CDNs don't quite conform to this model, since they
-   don't generally build tunnels between the CDN nodes.*
-
-   *We would argue, however, that they have enough in common with
-   other types of overlay to qualify. They offer functionality not
-   natively provided by the Internet—caching—while using the Internet
-   to interconnect the nodes in the CDN. A redirector makes an
-   application-level routing decision, much like other types of
-   overlay nodes.  Rather than forward a packet based on an address
-   and its knowledge of the network topology, it forwards HTTP
-   requests based on a URL and its knowledge of the location and load
-   of a set of servers.  The complete collection of redirectors and
-   surrogate servers that make up a CDN are effectively an
-   application-specific network that leverages the underlying
-   connectivity of the Internet bring additional functionality to the
-   Internet: efficient delivery of content to clients.*
-
-
 |Overlay|.2.2 Policies
 ~~~~~~~~~~~~~~~~~~~~~~~
 

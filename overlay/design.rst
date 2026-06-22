@@ -14,19 +14,19 @@ Demonstrating the value of a new feature is easier if you can run the
 new network *over the top*, without having to modify any of the
 existing network infrastructure.
 
-Overlays are how networks evolve, as the Internet itself perfectly
-illustrates. Decades ago, trying to augment the existing
+Overlays are a key way that networks evolve, as the Internet itself
+perfectly illustrates. Decades ago, trying to augment the existing
 circuit-switched network with a packet-switching capability would have
 been an untenable technical problem, not to mention a significant
 disruption of the business models of the incumbent telcos. The same is
 true today, except now, Internet ISPs are the incumbents. History
-teaches us that incumbents are cautious and change is slow, so much
-so that entrenched technology tends to ossify over time. This results
-in a phenomenon that Clayton Christensen famously called the
-*Innovator's Dilemma*. Fortunately, networking gives us a workaround,
-with overlays being the widely accepted as a way to introduce
-disruptive technology. A National Academies report made this
-observation about the Internet over two decades ago:
+teaches us that incumbents are cautious and change is slow, so much so
+that entrenched technology tends to ossify over time. This results in
+a phenomenon that Clayton Christensen famously called the *Innovator's
+Dilemma*. Fortunately, networking gives us a workaround, with overlays
+being the widely accepted as a way to introduce disruptive
+technology. A National Academies report made this observation about
+the Internet over two decades ago:
 
   *The existing core IP network could be used simply as a data
   transport service, and disruptive technology could be implemented as
@@ -49,31 +49,39 @@ observation about the Internet over two decades ago:
    Networking Research. <https://doi.org/10.17226/10183>`__.
    The National Academies Press, 2001.
 
-Sometimes an overlay provides a path to incremental deployment of a
-new capability. A famous example of this is IPv6, which started off
-its deployment as an overlay on the IPv4 Internet but is now widely
+In some cases, an overlay is expected to be a temporary solution,
+providing a path to incremental deployment of a new capability into
+the network. A famous example of this is IPv6, which started off its
+deployment as an overlay on the IPv4 Internet but is now widely
 implemented in the same core routers that provide IPv4 service.
 
-While some functions do move into the core over time, supplementing or
-replacing the original technology, that's not always the case. This
-leads to a second question overlays force us to address: what is the
-optimal *function placement?* That is, a does a particular function
-(capability) belong inside the network or is it best delivered over
-the top? In Chapter |Virt| we saw an example of VPNs (which you can
-think of as providing a "nesting" function) which are, in some cases,
-implemented on the same routers that provide the base Internet
-service. In other cases, VPNs are implemented as an overlay using
-encrypted tunnels as the logical links. This chapter looks at other
-examples where experience has led us to conclude that the function
-they support belongs on hosts connected to the edge of the
+In other cases, an overlay is where certain functionality is best
+provided. This raises a second question overlays force us to address:
+what is the optimal *function placement?* That is, a does a particular
+function (capability) belong inside the network or is it best
+delivered over the top? In Chapter |Virt| we saw an example of VPNs
+(which you can think of as providing a "nesting" function) which are,
+in some cases, implemented on the same routers that provide the base
+Internet service. In other cases, VPNs are implemented as an overlay
+using encrypted tunnels as the logical links. This chapter looks at
+other examples where experience has led us to conclude that the
+function they support belongs on hosts connected to the edge of the
 network. This outcome is predicted by the end-to-end argument we
 discussed in Chapter |Intro|.
 
-.. TODO -- We need to introduce e2e somewhere in Chapter 1.
+At the time the National Academies report was written, overlays were
+the only viable way to introduce new capabilities into the Internet,
+but starting in the late 2000s, various activities under the umbrella
+of Software-Defined Networking (SDN)—including programmable forwarding
+pipelines (Section |Tech|.2) and programmable control planes (Section
+|Routing|.5)—made it easier to inject new features into the network
+itself. That capability has not led to a wholesale reinvention of the
+network's internals, but instead, has served to emphasize the
+importance of this second question: deciding where functionality
+belongs.  This chapter looks at three examples that have settled the
+function placement question in favor of an overlay.
 
-This chapter looks at two examples, both of which have settled the
-function placement question in favor of an overlay.  The first,
-Content Distribution Networks (CDNs), support a *caching*
+The first, Content Distribution Networks (CDNs), support a *caching*
 function. The idea is to add a storage capability to the network, and
 unless we're going to connect disks to routers, this seems like a
 obvious function to implement as an overlay. This doesn't make CDNs
@@ -88,12 +96,6 @@ sell. The ease of deploying any new feature in an overlay means you
 need a compelling argument for instead adding that feature to the
 core.
 
-.. TODO -- some might see this as dismissive of content networking
-   research, we could consider a sidebar (or not).
-
-   I softened the language, and added a bit more about the bar being
-   raised. --llp
-
 The second example, video conferencing, supports a *multicast*
 function, whereby packets are delivered to multiple end-points instead
 of a single destination. Multicast is a good example of a function
@@ -107,47 +109,34 @@ implemented in commercial routers, it never enjoyed widespread
 deployment. Today, an over-the-top variant of multicast supports
 familiar video conferencing apps, such as Zoom.
 
-These two examples draw attention to yet another design question,
-which the extent to which a given overlay is general-purpose—that is,
-provides shared infrastructure used by multiple applications—or is
-tightly bundled with a particular application. CDNs can serve as
-general infrastructure, able to serve content on behalf of any web
-site or application. (Note, however, that there are examples of
-applications building their own private CDNs, with Netflix being one
-well-known example.)  In contrast, video conferencing applications
-typically instantiate a multicast overlay in support of a single
-conference call; another call involving a different set of
-participants gets its own overlay.  In practice, though, services such
-as Zoom do maintain distributed infrastructure on which those per-call
-overlays are created; one could view that infrastructure as another
-kind of overlay.
+Note that these two examples draw attention to yet another design
+question, which is the extent to which a given overlay is
+general-purpose—that is, provides shared infrastructure used by
+multiple applications—or is tightly bundled with a particular
+application. CDNs can serve as general infrastructure, able to serve
+content on behalf of any web site or application. (Note, however, that
+there are examples of applications building their own private CDNs,
+with Netflix being one well-known example.)  In contrast, video
+conferencing applications typically instantiate a multicast overlay in
+support of a single conference call.; another call involving a
+different set of participants gets its own overlay. But these overlays
+are always in the service of the conferencing app; they are not
+available for other purposes.
 
-A final question is where overlays find the distributed set of servers
-to install their overlay nodes on. Today there is a ready answer:
-clouds and hosting centers provide the means to acquire computing and
-storage resources at hundreds of locations across the globe. But there
-is an alternative, which is to depend on computing resources that you
-(and many other volunteers like you) provide. These so called
-*peer-to-peer networks* originally gained notoriety for their use
-distributing content, but today they serve other purposes. *Onion
-routing* is perhaps the most noteworthy, with Tor being a well-known
-example. An onion routing overlay mimics IP forwarding, but with the
-added feature that it is impossible to trace where a packet comes
-from. This allows the sender to remain anonymous. Technically, any ISP
-could offer onion routing, but of course, that would depend on users
-trusting commercial providers to honor the expected anonymity. Hence,
-the dependency on peer-provided resources.
+Our third example is *peer-to-peer networks*, originally developed by
+file-sharing applications, such as BitTorrent.  This example brings
+another design question to the forefront, which is how overlays find
+the distributed set of servers they need to deploy their overlay on.
+Today there is a ready answer: clouds and hosting centers provide the
+means to acquire computing and storage resources at hundreds of
+locations across the globe. But there is an alternative, which is to
+depend on computing resources that you (and many other volunteers like
+you) provide. Known as peer-to-peer networks, they originally gained
+notoriety for their use sharing music, but today they serve a broader
+role. For our purposes, they also illustrate how to design a
+decentralized application that does not depend on a central authority,
+that then has control over the service's users and their data.
 
-.. TODO -- This story line lost the IPv6 angle. Not sure whether it
-   belongs in the VPN paragraph or the the onion routing paragraph.
-
-.. TODO -- With respect to video conferencing, three is a second
-   function: timeliness. It would be good to include a forward
-   reference to the next chapter.
-
-.. TODO -- Could talk about other ways we can introduce functionality,
-   such as programmable networks (and generally, SDN). Active Nets
-   could fit here too. Maybe as a sidebar.
 
 
 

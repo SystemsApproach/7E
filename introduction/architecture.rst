@@ -354,7 +354,7 @@ referred to as the *end-to-end argument*, which was articulated by
 Saltzer, Reed, and Clark. The seminal paper refers to *arguments*
 (plural) but it is commonly referred to as a single
 argument. There are some subtle points in the paper, which is well
-worth reading in its entirety. 
+worth reading in its entirety.
 
 
 .. _reading_e2e:
@@ -393,7 +393,7 @@ all users of the network, whether or not they needed reliability.
 
 It's not hard to see how this argument led to the connectionless,
 best-effort packet delivery service model of the
-Internet Protocol (IP) and implemented by its switches and routers. 
+Internet Protocol (IP) and implemented by its switches and routers.
 If something goes wrong and a packet gets
 lost, corrupted, or misdelivered while en route, the network does
 nothing to recover from the failure; recovering from such errors is
@@ -404,7 +404,7 @@ At the same time, the paper does allow for some functions to be placed in the
 network:
 
    *Sometimes an incomplete version of the function provided by the
-    communication system may be useful as a performance enhancement.*
+   communication system may be useful as a performance enhancement.*
 
 This is why we highlight the fact that there is more to the end-to-end
 argument than the popular one-line summary. As we walk through the
