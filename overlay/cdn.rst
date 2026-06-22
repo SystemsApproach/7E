@@ -55,7 +55,7 @@ spread across all the backbone ISPs, then it should be possible to
 reach one without having to cross a peering point. Clearly,
 maintaining thousands of surrogate servers all over the Internet is
 too expensive for most sites that wants to provide better access to
-its web pages. Commercial CDNs provide this service for many sites,
+their web pages. Commercial CDNs provide this service for many sites,
 thereby amortizing the cost across many customers.
 
 Although we call them surrogate servers, in fact, they can just as
@@ -69,7 +69,7 @@ server for any content that either changes frequently (e.g., sports
 scores and stock quotes) or is produced as the result of some
 computation (e.g., a database query).\ [#]_
 
-.. [#] CDN operators sometimes offer a complementory service that
+.. [#] CDN operators sometimes offer a complementary service that
        allows their customers to dynamically generate certain content
        at the surrogates, but that raises its own set of technical issues.
        We focus here on static content.
@@ -212,7 +212,7 @@ diminishing fraction of the pages keeping their same server
 assignments. While we do not expect frequent changes in the set of
 servers, the fact that the addition of new servers into the set will
 cause massive reassignment is undesirable. An alternative is to use
-the a *consistent hashing* algorithm.
+a *consistent hashing* algorithm.
 
 
 .. _fig-unitcircle:

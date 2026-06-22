@@ -20,8 +20,8 @@ application-specific overlay.
     *We have mentioned IP Multicast and the MBone multiple times in
     this chapter. That they are primarily of historical interest makes
     for an an interesting case study of how the Internet has evolved.
-    IP Multicast is the core feature, and as explained in an earlier
-    section, a block of the IPv4 address space was set aside for
+    IP Multicast is the core feature, and as explained in 
+    Section |Overlay|.1, a block of the IPv4 address space was set aside for
     multicast addresses. The idea was that you could assign one of
     these address to a multicast group, users could request to join
     that group (technically, they added their host to the group), and
@@ -29,7 +29,7 @@ application-specific overlay.
     delivered to every host in the group.*
 
     *The data plane part of multicast IP is easily solved: switch
-    forwarding pipelines are able send an incoming packets to multiple
+    forwarding pipelines are able to send an incoming packets to multiple
     outgoing queues.  What proved hard is the control plane part of
     the problem, that is, propagating "join requests" to those routers
     that needed to know about any particular multicast address. This
@@ -40,15 +40,16 @@ application-specific overlay.
     *The MBone was an overlay used to gain experience with multicast,
     with the goal of eventually pushing the solution down into
     commercial routers so it could be widely deployed. IP Multicast
-    was never widely deployed (with one main exception), but this
-    wasn't a problem that could be overcome, even by limiting the
-    solution to an overlay.  A general-purpose multicast mechanism
-    just does not return enough value to offset the corresponding
-    complexity (at least for video conferencing). One exception where
-    IP Multicast pays off is when delivering live TV over the last hop,
-    from the "video head" to cable set-top boxes (or Smart TVs) in
-    homes. Last-hop multicast easily beats N-way unicast, and the
-    control overhead is manageable.*
+    was never widely deployed in the Internet (with one main
+    exception), but this wasn't a problem that could be overcome, even
+    by limiting the solution to an overlay.  A general-purpose
+    multicast mechanism just does not return enough value to offset
+    the corresponding complexity (at least for video
+    conferencing). One exception where IP Multicast pays off is when
+    delivering live TV over the last hop, from the "video head" to
+    cable set-top boxes (or Smart TVs) in homes. Last-hop multicast
+    easily beats N-way unicast, and the control overhead is
+    manageable.*
 
 .. TODO -- Could say more, but maybe this is enough of a summary.
 
@@ -107,7 +108,7 @@ perspective of scaling, and a potential single point of failure. So
 what we typically see in practice is a complete overlay network of
 SFUs, with some SFUs capable of picking up the load from others in the
 event of a failure. The SFUs are arranged in a mesh so that replication
-can be distributed amoung the nodes in the mesh rather than all the
+can be distributed among the nodes in the mesh rather than all the
 work falling on a single node. A simple example of this using three
 SFUs in a tree structure is shown in :numref:`Figure %s
 <fig-sfu-mesh>`.

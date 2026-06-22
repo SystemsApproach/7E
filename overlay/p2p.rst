@@ -4,7 +4,7 @@
 Music-sharing applications like Napster and KaZaA introduced the term
 “peer-to-peer” into the popular vernacular. But what exactly does it
 mean for a system to be “peer-to-peer”? Certainly in the context of
-sharing MP3 files it means not having to download music from a central
+sharing files it means not having to download music from a central
 site, but instead being able to access music files directly from whoever
 in the Internet happens to have a copy stored on their computer. More
 generally then, we could say that a peer-to-peer network allows a
@@ -17,14 +17,14 @@ Quite often, attributes like *decentralized* and *self-organizing* are
 mentioned when discussing peer-to-peer networks, meaning that individual
 nodes organize themselves into a network without any centralized
 coordination. If you think about it, terms like these could be used to
-describe the Internet itself. Ironically, however, Napster was not a
+describe the Internet itself. Ironically, Napster was not a
 true peer-to-peer system by this definition since it depended on a
 central registry of known files, and users had to search this directory
 to find what machine offered a particular file. It was only the last
 step—actually downloading the file—that took place between machines that
 belong to two users, but this is little more than a traditional
 client/server transaction. The only difference is that the server is
-owned by someone just like you rather than a large corporation.
+owned by some other Internet user rather than a large corporation.
 
 So we are back to the original question: What’s interesting about
 peer-to-peer networks? One answer is that both the process of locating
@@ -39,7 +39,7 @@ these nodes represent the sequence of machines that you have to visit to
 track down the object you want. This description will become clearer
 after we look at a popular example: BitTorrent.
 
-BitTorrent is a file sharing protocol devised by Bram Cohen. It is
+BitTorrent is a file-sharing protocol devised by Bram Cohen. It is
 based on replicating the file or, rather, replicating segments of the
 file, which are called *pieces*. Any particular piece can usually be
 downloaded from multiple peers, even if only one peer has the entire
@@ -49,7 +49,7 @@ useful when you consider that any given computer has a limited speed
 at which it can serve files over its uplink to the Internet, often
 quite a low limit due to the asymmetric nature of most broadband
 networks. The beauty of BitTorrent is that replication is a natural
-side effect of the downloading process: As soon as a peer downloads a
+side effect of the downloading process: as soon as a peer downloads a
 particular piece, it becomes another source for that piece. The more
 peers downloading pieces of the file, the more piece replication
 occurs, distributing the load proportionately, and the more total
@@ -148,10 +148,10 @@ potentially be a performance bottleneck. Also, providing a tracker can
 be a nuisance for someone who would like to make a file available via
 BitTorrent. Newer versions of BitTorrent additionally support
 “trackerless” swarms that use consistent hashing, as described in
-Section |Overlay|.2. BitTorrent client software that is trackerless
-capable implements not just a BitTorrent peer but also what we’ll call
-a *peer finder* (the BitTorrent terminology is simply *node*), which
-the peer uses to find peers.
+Section |Overlay|.2. BitTorrent client software that is
+trackerless-capable implements not just a BitTorrent peer but also
+what we’ll call a *peer finder* (the BitTorrent terminology is simply
+*node*), which the peer uses to find peers.
 
 Peer finders form their own overlay network, using their own protocol
 over UDP to implement the consistent hash. Furthermore, a peer finder
@@ -214,6 +214,14 @@ telling a peer that it has been unchoked. The choking mechanism is
 also used by a peer to limit the number of its active BitTorrent
 connections, to maintain good TCP performance. There are many possible
 choking algorithms, and devising a good one is an art.
+
+Because BitTorrent traffic can consume a lot of the uplink bandwidth
+on a typical residential Internet connection, it provided inspiration
+for work on congestion control algorithms that are less
+aggressive than those of TCP, yielding to competing traffic when delay
+increases. This led to an experimental RFC on "Low Extra Delay
+Background Transport (LEDBAT)" and ongoing research on similar
+algorithms. 
 
 We conclude by noting that while centrally managed (commercial) music
 streaming services are now commonplace, BitTorrent remains in wide use,
