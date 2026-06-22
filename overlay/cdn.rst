@@ -40,8 +40,7 @@ There’s not a lot anyone except you or your local service provider can
 do about the first-mile problem, but it is possible to use content
 replication to address the remaining problems.  Content distribution
 networks are the systems that manage the process of replicating
-content and delivering it to clients, which has a few more moving
-parts than first meet the eye. Akamai was one of the first operators
+content and delivering it to clients. Akamai was one of the first operators
 of a CDN and today there are a number of large CDN operators with
 global footprints.
 
@@ -51,12 +50,12 @@ of *backend servers*. Thus, rather than having millions of users wait
 forever to contact when a big news story breaks—such a situation is
 known as a *flash crowd*—it is possible to spread this load across
 many servers. Moreover, rather than having to traverse multiple ISPs
-to reach ``www.cnn.com``, if these surrogate servers happen to be
+to reach a popular site, if these surrogate servers happen to be
 spread across all the backbone ISPs, then it should be possible to
 reach one without having to cross a peering point. Clearly,
 maintaining thousands of surrogate servers all over the Internet is
-too expensive for any one site that wants to provide better access to
-its web pages. Commercial CDNs provide this service for many sites,
+too expensive for most sites that wants to provide better access to
+their web pages. Commercial CDNs provide this service for many sites,
 thereby amortizing the cost across many customers.
 
 Although we call them surrogate servers, in fact, they can just as
@@ -68,9 +67,12 @@ also the case that only static pages, as opposed to dynamic content, are
 distributed across the surrogates. Clients have to go to the backend
 server for any content that either changes frequently (e.g., sports
 scores and stock quotes) or is produced as the result of some
-computation (e.g., a database query).
+computation (e.g., a database query).\ [#]_
 
-.. TODO -- need to check - can't code run in modern CDN nodes?
+.. [#] CDN operators sometimes offer a complementary service that
+       allows their customers to dynamically generate certain content
+       at the surrogates, but that raises its own set of technical issues.
+       We focus here on static content.
 
 .. _fig-cdn:
 .. figure:: overlay/figures/f09-30-9780123850591.png
@@ -155,25 +157,26 @@ rather than transparent, proxy).
 
 .. sidebar:: Are CDNs Overlays?
 
-   Many of the early overlays built on top of the Internet use some
+   *Many of the early overlays built on top of the Internet use some
    sort of tunneling to create virtual point-to-point links, and
    created a virtual topology between the overlay nodes to offer some
    function not yet implemented in the Internet, such as multicast of
    IPv6 support. CDNs don't quite conform to this model, since they
-   don't generally build tunnels between the CDN nodes. We would
-   argue, however, that they have enough in common with other types of
-   overlay to qualify. They offer functionality not natively provided
-   by the Internet—caching—while using the Internet to interconnect
-   the nodes in the CDN. A redirector makes an application-level
-   routing decision, much like other types of overlay nodes.  Rather
-   than forward a packet based on an address and its knowledge of the
-   network topology, it forwards HTTP requests based on a URL and its
-   knowledge of the location and load of a set of servers.  The
-   complete collection of redirectors and surrogate servers that make
-   up a CDN are effectively an application-specific network that
-   leverages the underlying connectivity of the Internet bring
-   additional functionality to the Internet: efficient delivery of
-   content to clients.
+   don't generally build tunnels between the CDN nodes.*
+
+   *We would argue, however, that they have enough in common with
+   other types of overlay to qualify. They offer functionality not
+   natively provided by the Internet—caching—while using the Internet
+   to interconnect the nodes in the CDN. A redirector makes an
+   application-level routing decision, much like other types of
+   overlay nodes.  Rather than forward a packet based on an address
+   and its knowledge of the network topology, it forwards HTTP
+   requests based on a URL and its knowledge of the location and load
+   of a set of servers.  The complete collection of redirectors and
+   surrogate servers that make up a CDN are effectively an
+   application-specific network that leverages the underlying
+   connectivity of the Internet bring additional functionality to the
+   Internet: efficient delivery of content to clients.*
 
 
 |Overlay|.2.2 Policies
@@ -203,13 +206,13 @@ output.
 
 So what makes for a good hashing scheme? The classic *modulo* hashing
 scheme—which hashes each URL modulo the number of servers—is not
-suitable for this environment. This is because should the number of
-servers change, the modulo calculation will result in a diminishing
-fraction of the pages keeping their same server assignments. While we do
-not expect frequent changes in the set of servers, the fact that the
-addition of new servers into the set will cause massive reassignment is
-undesirable. An alternative is to use the a *consistent hashing*
-algorithm.
+suitable for this environment. This is for a simple reason: should the
+number of servers change, the modulo calculation will result in a
+diminishing fraction of the pages keeping their same server
+assignments. While we do not expect frequent changes in the set of
+servers, the fact that the addition of new servers into the set will
+cause massive reassignment is undesirable. An alternative is to use
+a *consistent hashing* algorithm.
 
 
 .. _fig-unitcircle:
@@ -301,13 +304,14 @@ measurement as the “server load” parameter in the preceding
 algorithm. This strategy tends to prefer nearby/lightly loaded servers
 over distant/heavily loaded servers. A second approach is to factor
 proximity into the decision at an earlier stage by limiting the
-candidate set of servers considered by the above algorithms (*S*) to
-only those that are nearby. The harder problem is deciding which of
-the potentially many servers are suitably close. One approach would be
-to select only those servers that are available on the same ISP as the
-client. A slightly more sophisticated approach would be to look at the
-map of autonomous systems produced by BGP and select only those
-servers within some number of hops from the client as candidate
-servers.  Finding the right balance between network proximity and
-server load has been the subject of considerable research and we
-assume that the CDN operators continue to fine-tune their algorithms.
+candidate set of servers considered by the above algorithms (set *S*
+in the pseudocode) to only those that are nearby. The harder problem
+is deciding which of the potentially many servers are suitably
+close. One approach would be to select only those servers that are
+available on the same ISP as the client. A slightly more sophisticated
+approach would be to look at the map of autonomous systems produced by
+BGP and select only those servers within some number of hops from the
+client as candidate servers.  Finding the right balance between
+network proximity and server load has been the subject of considerable
+research and we assume that the CDN operators continue to fine-tune
+their algorithms.
