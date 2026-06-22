@@ -169,11 +169,11 @@ with "transport protocol" being a universal term.
 
 While it is possible to roughly map the other layers between the two
 architectures, understanding how and why they differ is more
-instructive. At the top-end, the Internet does not partition
+instructive. At the top end, the Internet does not partition
 application protocols into sub-layers, corresponding to the OSI's layers 5, 6,
 and 7.  This is because it treats applications as an orthogonal
 concern, with each app free to adopt whatever modularization makes
-sense. At the bottom-end, the Internet does not prescribe how the
+sense. At the bottom, the Internet does not prescribe how the
 underlying networks are partitioned into sub-layers, corresponding to
 the OSI's layers 1, 2, and 3. As at the application layer, the
 Internet architecture is agnostic as to how underlying network
@@ -344,3 +344,72 @@ challenges that are not easily addressed by this particular framing.
 We call attention to such “exceptions to the rule” when they arise,
 and use them to illustrate that every system design requires judgement
 and makes tradeoffs.
+
+
+|Intro|.2.4  End-to-End Arguments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One of the guiding principles of the Internet's design is often
+referred to as the *end-to-end argument*, which was articulated by
+Saltzer, Reed, and Clark. The seminal paper refers to *arguments*
+(plural) but it is commonly referred to as a single
+argument. There are some subtle points in the paper, which is well
+worth reading in its entirety. 
+
+
+.. _reading_e2e:
+.. admonition:: Further Reading
+
+     J. Saltzer, D. Reed, and D. Clark. `End-to-End Arguments in System Design
+     <https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf>`__.
+     ACM Transactions on Computer Systems, Nov. 1984.
+
+The overly simplified version of the end-to-end arguments says that
+the core of the network should be kept simple, and complex functions
+should be pushed to the edge. But as we suggested in the preceding
+section, making judgements about where to place functions in a system
+usually involves some tradeoffs. The end-to-end arguments provide a
+framework for making those tradeoffs.
+
+The central argument about function placement is stated in the paper
+as follows:
+
+   *The function in question can completely and correctly be
+   implemented only with the knowledge and help of the application
+   standing at the endpoints of the communications system. Therefore,
+   providing that questioned function as a feature of the
+   communications systems itself is not possible.*
+
+An example would be reliable transfer of a file. No matter how much
+reliability is built into the network, there are so many things that
+can go wrong with a file transfer, including a crash or bit error in
+one of the hosts, that the only way to be sure that the file was
+transferred correctly is to perform an end-to-end check, e.g., by
+sending back a hash of the file contents after it has been received.
+So the end-to-end argument tells us that the network cannot deliver
+the necessary reliability for this application. Furthermore, if it were
+to try to deliver every packet reliably, that would impose a cost on
+all users of the network, whether or not they needed reliability.
+
+It's not hard to see how this argument led to the connectionless,
+best-effort packet delivery service model of the
+Internet Protocol (IP) and implemented by its switches and routers. 
+If something goes wrong and a packet gets
+lost, corrupted, or misdelivered while en route, the network does
+nothing to recover from the failure; recovering from such errors is
+the responsibility of higher level protocols running on end
+hosts.
+
+At the same time, the paper does allow for some functions to be placed in the
+network:
+
+   *Sometimes an incomplete version of the function provided by the
+    communication system may be useful as a performance enhancement.*
+
+This is why we highlight the fact that there is more to the end-to-end
+argument than the popular one-line summary. As we walk through the
+system components that deliver the Internet's best-effort service in
+Part II we will see numerous examples of functions that are
+appropriately implemented inside the network. And in Part III we will
+see the rich variety of capabilities implemented in the end-systems to
+meet the needs of applications.

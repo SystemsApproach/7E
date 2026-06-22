@@ -430,7 +430,7 @@ a standardized API for the switch forwarding hardware. You can think
 of this API as providing a broad *Hardware Abstraction Layer (HAL)*,
 of which installing flow rules is just one narrow aspect.
 
-The second detail concerns the NBI. Historically, this interfce took
+The second detail concerns the NBI. Historically, this interface took
 the form of a *CLI (Command Line Interface)*. Operators would
 typically "log into" the switch via a console port, and issue whatever
 commands were needed to get the switch up and running, or to change
