@@ -67,8 +67,8 @@ functions on behalf of callers. We can see how proxies work best
 through an example.
 
 .. _fig-sipproxy:
-.. figure:: stream/figures/f09-08-9780123850591.png
-   :width: 600px
+.. figure:: stream/figures/sipproxy.png
+   :width: 650px
    :align: center
 
    Establishing communication through SIP proxies.
