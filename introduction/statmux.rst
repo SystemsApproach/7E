@@ -165,19 +165,6 @@ Chapter |CC|). It turns out this issue is a consequence of our
 architectural decision to separate in-the-network versus
 edge-of-network concerns.
 
-.. _key-stat-mux:
-.. admonition:: Key Takeaway
-
-  The bottom line is that statistical multiplexing defines a
-  cost-effective way for multiple users (e.g., host-to-host flows of
-  data) to share network resources (links and nodes) in a fine-grained
-  manner. It defines the packet as the granularity with which the
-  links of the network are allocated to different flows, with each
-  switch able to schedule the use of the physical links it is
-  connected to on a per-packet basis. Fairly allocating link capacity
-  to different flows and dealing with congestion when it occurs are
-  the key challenges of statistical multiplexing.
-
 1.4.3  Managing Capacity
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

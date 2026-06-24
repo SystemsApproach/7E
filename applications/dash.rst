@@ -216,17 +216,29 @@ available for playback. The rate at which the queue fills up is
 determined by the rate at which packets are arriving across the
 network.
 
-The client now uses a local algorithm to decide what quality it should request
-for each chunk of video. If the local buffer is being drained faster
-than it is being filled, at some point the video playback would stall,
-which looks bad to the end user. So the client tries to avoid this. If
-the queue is starting to drain and there is a risk that it will become
-empty, the client can request a lower quality of video, in the hope
-that the reduced bandwidth can now be met by the network, and the
-queue will start to fill again. If the queue is getting more full over
-time, that can be a sign that a higher quality can be requested.
+The client now uses a local algorithm to decide what quality it should
+request for each chunk of video. If the local buffer is being drained
+faster than it is being filled, at some point the video playback would
+stall, which looks bad to the end user. So the client tries to avoid
+this. If the queue is starting to drain and there is a risk that it
+will become empty, the client can request a lower quality of video, in
+the hope that the reduced bandwidth can now be met by the network, and
+the queue will start to fill again. If the queue is getting more full
+over time, that can be a sign that a higher quality can be
+requested. We recommend two studies of how to adapt the rate for those
+interested in an in-depth analysis.
 
-.. TODO: say more about adaptive algorithms using buffer depth, refer to the 2 Test of Time papers
+.. admonition:: Further Reading
+
+   T. Huang et al. `A Buffer-based Approach to Rate Adaptation:
+   Evidence from a Large Video Streaming Service
+   <https://dl.acm.org/doi/10.1145/2740070.2626296>`__.  ACM SIGCOMM
+   '14 Symposium, August 2014.
+
+   X. Yin et al. `A Control-Theoretic Approach for Dynamic Adaptive
+   Video Streaming over HTTP
+   <https://dl.acm.org/doi/10.1145/2785956.2787486>`__.  ACM SIGCOMM
+   '15 Symposium, August 2015.
 
 There is a lot of work that goes into tuning these algorithms to make
 the appropriate tradeoff between perceived quality and bandwidth. For

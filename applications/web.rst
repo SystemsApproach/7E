@@ -555,9 +555,15 @@ for an object, and the set of HTTP operations are just a slight
 variation of a well-known set of object-oriented operations referred
 to as *CRUD*: *Create*, *Read*, *Update*, *Delete*.
 
-.. TODO: show an example resource and operations on it. Point to
-   tooling that helps you build a REST API. This could be a source
-   of programming exercises (in addition to Socket programming).
+For example, ``https://api.github.com`` is the URL for the REST API by
+which you can programmatically interact with GitHub. If you access it
+from a browser you will see a list of resources. Many of those
+resources require you you first authenticate yourself in order to
+access, but some resources correspond to publicly visible
+information. For example, if you do a GET on
+``https://api.github.com/orgs/systemsapproach`` you will see the set
+of resources associated with the Systems Approach organization. From
+there, you can continue to explore the resource hierarchy.
 
 In the context of web services, the REST architecture is based on the
 assumption that the best way to integrate applications across networks
