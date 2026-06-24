@@ -89,11 +89,11 @@ in the stream would arrive too late to be useful.  MoQ objects have an
 associated *priority* that can be used to make decisions about which
 streams to transmit and which to terminate.
 
-The lightweight streams of QUIC allow QUIC to function at
+The lightweight streams of QUIC operate at
 an intermediate point in the design space between TCP and
 UDP. Reliable delivery can be applied selectively to individual
 streams, and congestion control can limit the total amount of traffic
-in a QUIC connection when required, but lower priority streams can be
+in a QUIC connection when required. Lower priority streams can be
 sacrificed to ensure that latency remains within bounds and more important
 packets are not stuck waiting for less important ones to arrive.
 
@@ -116,7 +116,7 @@ Relays form an overlay of nodes that can store, forward, and replicate
 objects, as shown in :numref:`Figure %s <fig-relays>`. They don't need
 to have any understanding of the content; objects are self-contained
 pieces of data that carry enough metadata, which is visible to relays,
-to enable them to be handled appropriates.  The metadata includes the
+to enable them to be handled appropriately.  The metadata includes the
 priority mentioned above, which allows the relay nodes to make
 decisions about how to prioritize transmission of objects in the event
 of congestion or other resource shortage. Metadata also enables
