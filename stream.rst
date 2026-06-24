@@ -70,9 +70,9 @@ fewer resources, is necessarily part of the story.
    1990s, resulting in the* **Integrated Services (Int-Serv)**
    *architecture, so called because it supported both best-effort
    traffic and reservations (see RFC 1633). As an architecture,
-   IntServ included several moving parts. Fair Queuing packet
+   Int-Serv included several moving parts. Fair Queuing packet
    schedulers (see Section 8.2) was one necessary component. A way to
-   specify the reservation you wanted—codified in RSVP , the Resource
+   specify the reservation you wanted—codified in RSVP, the Resource
    ReSerVation Protocol—was another component.*
 
    *The chief reason RSVP and Int-Serv never took off is because the
