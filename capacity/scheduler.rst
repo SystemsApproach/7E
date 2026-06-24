@@ -97,17 +97,66 @@ starve low-priority flows, and within a single priority, a greedy flow
 can starve out other flows at the same priority.
 
 Fair queuing (FQ) is an algorithm that has been designed to address
-this problem. FQ is designed to isolate flows, which it does by
-maintaining a separate queue for each flow currently being handled by
-the router. The definition of a "flow" can be quite varied; it could
-be a single application's traffic, or it could be an entire class of
-traffic. The router then services these queues in round-robin
-order, as illustrated in :numref:`Figure %s <fig-fq>`.  When a flow
-sends packets too quickly, then its queue fills up. When a queue
-reaches a particular length, additional packets belonging to that
-flow’s queue are discarded. In this way, a given flow cannot
-arbitrarily increase its share of the network’s capacity at the
-expense of other flows.
+this problem. FQ is designed to isolate flows, so that the performance
+of one flow is not impacted by the traffic sent on a different
+flow. We'll say more about the definition of a "flow" in a moment.
+
+One way to conceptualize fair queuing is to use a *fluid
+model*. We imagine that the outgoing link is a pipe and the flows
+passing through it are fluids, so we can divide the available capacity
+among the flows in whatever granularity suits us. While it's obviously
+not possible to implement the fluid model perfectly when we are
+dealing with packets rather than fluids, all implementations try to
+approximate the fluid model in some way.
+
+In the simplest version of fair queueing, each flow gets an equal
+share of the outgoing link's capacity. If there is an outgoing link of
+capacity *C*, and there are *n* active flows, then each flow will get
+to send *C/n* bits per second at a minimum when all flows are active.
+
+There is also a variant of fair queuing called *weighted* fair queuing
+(WFQ) in which we allocate unequal shares of the link to each flow. In
+this case, each flow has a weight
+:math:`W_i` and it will receive a share of the outgoing link of at least
+
+.. math::
+
+   W_i/\sum (W_k) \times C
+
+So we can think of WFQ as letting us allocate a share of the link
+bandwidth to a flow.  We can be confident that, on average, the
+flow will get that share in spite of what other flows do.
+
+Almost all modern queuing algorithms are *work
+conserving*. That means that as long as there is something in the
+queue, it will be sent, even if the flow with data in the queue has
+been getting more than its allocated share. The outgoing link never
+goes idle unless there is no traffic at all to send.
+One effect of work conserving queues is that a flow that shares
+a link with flows that are not sending any data can use
+the full link capacity. As soon as the other flows start
+sending, however, they will start to use their share and the capacity
+available to this flow will drop towards its allocated share.
+
+The definition of a "flow" can be anything we choose. In the
+Differentiated Services model, a flow is identified as the set of
+packets with the same marking in the Differentiated Services Code
+Point (DSCP), a field in the IP header. Another valid definition of a
+flow would be all the packets flowing between a pair of endpoints for
+a single application. For now, all we need to know is that there are
+some number of flows and we have some way to tell them apart by
+looking at their packets. It usually a matter of configuring a router
+to specify how we want it to identify flows.
+
+Let's turn our attention to the challenge of implementing a fair
+queuing scheme, starting with a simple round-robin approach. We create
+one queue per flow, and the router services these queues in
+round-robin order, as illustrated in :numref:`Figure %s <fig-fq>`.
+When a flow sends packets too quickly (faster than its allocated
+share), then its queue fills up. That will increase the delay for that
+flow, and possibly even cause packets to be dropped if the queue gets
+long enough, but it has no effect on the other flows, which keep on
+getting served once every cycle by the round-robin algorithm.
 
 .. _fig-fq:
 .. figure:: capacity/figures/f06-06-9780123850591.png
@@ -116,13 +165,8 @@ expense of other flows.
 
    Round-robin service of four flows at a router.
 
-Note that FQ does not involve the router telling the traffic sources
-anything about the state of the router or in any way limiting how
-quickly a given source sends packets. How edge hosts do or do not
-react to packet loss is an orthogonal issue.
 
-As simple as the basic idea is, there are still a number of
-details to get right. The main complication is that the
+The first complication is that the
 packets being processed at a router are not necessarily the same
 length.  To truly allocate the bandwidth of the outgoing link in a
 fair manner, it is necessary to take packet length into consideration.
@@ -132,19 +176,17 @@ servicing of packets from each flow’s queue will give the first flow
 two-thirds of the link’s bandwidth and the second flow only one-third
 of its bandwidth.
 
-.. TODO -- Need toupdate the algorithm to DWRR rather FQ/WFQ.
-   Keep the bit-by-bit story as motivation, mention that there
-   are multiple algorithms, but then present DWRR's approximation.
 
 What we really want is bit-by-bit round-robin, where the router
-transmits a bit from flow 1, then a bit from flow 2, and so on. Clearly,
-it is not feasible to interleave the bits from different packets. The FQ
-mechanism therefore simulates this behavior by first determining when a
+transmits a bit from flow 1, then a bit from flow 2, and so on. That
+would get us pretty close to the ideal fluid model. Clearly,
+it is not feasible to interleave the bits from different packets. The
+original FQ algorithm therefore simulates this behavior by first determining when a
 given packet would finish being transmitted if it were being sent using
 bit-by-bit round-robin and then using this finishing time to sequence
 the packets for transmission.
 
-To understand the algorithm for approximating bit-by-bit round-robin,
+To see how we might approximate bit-by-bit round-robin,
 consider the behavior of a single flow and imagine a clock that ticks
 once each time one bit is transmitted from all of the active flows. (A
 flow is active when it has data in the queue.) For this flow, let :math:`P_i`
@@ -188,88 +230,89 @@ and the next packet to transmit is always the packet
 that has the lowest timestamp—the packet that, based on the above
 reasoning, should finish transmission before all others.
 
-Note that this means that a packet can arrive on a flow, and, because it
-is shorter than a packet from some other flow that is already in the
-queue waiting to be transmitted, it can be inserted into the queue in
-front of that longer packet. However, this does not mean that a newly
-arriving packet can preempt a packet that is currently being
-transmitted. It is this lack of preemption that keeps the implementation
-of FQ just described from exactly simulating the bit-by-bit round-robin
-scheme that we are attempting to approximate.
 
-.. _fig-fair-queuing:
-.. figure:: capacity/figures/f06-07-9780123850591.png
-   :width: 600px
+Without going into further detail, you can start to see the problems
+of implementing FQ accurately. We have to do a sorting operation on
+the timestamps of all packets that could be candidates for the next
+transmission every time we want to send a packet, and this sorting
+operation grows in cost with the number of active flows. Impementing
+FQ at high speed proved challenging enough to inspire a lot of work on
+creating good approximate implementations of fair queueing that don't
+have the same computational complexity.
+
+One well known and widely implemented approximation to WFQ is *deficit
+round robin* (DRR). DRR takes care of the problem of variable packet
+sizes that affects simple round robin using a *deficit counter* for
+each queue. Initially this counter is set to zero for each queue. Then
+in each round of the algorithm, a *quantum* is added to the counter
+for each queue. The quantum is a configurable number of bytes that
+should be in the range of an average packet size. It can be the same
+for all queues for fair queuing, or it can be set to different values
+per queue to implement weighted fair queuing. For simplicity here we
+use the same quantum of 500 bytes for all queues.
+
+We illustrate the process in :numref:`Figure %s
+<fig-drr1>` and :numref:`Figure %s
+<fig-drr2>`. There are four queues each holding some number of packets
+of different sizes. There is a pointer indicating which queue is next
+due for service in the rotation. As the pointer reaches a queue, we
+add the quantum to the deficit counter, which in this case was zero,
+so it goes up to 500. The interpretation of this counter is that the
+queue may send up to that many bytes but no more. So the 300-byte
+packet is sent, but there is not enough "credit" to send the next
+500-byte packet. So the deficit counter is set to 500-300 = 200,
+representing the difference between what the flow was entitled to send
+and what it actually sent. The pointer moves on to the next queue, and
+the 400-byte packet is sent and its deficit will be set to 500-400 = 100.
+
+
+
+.. _fig-drr1:
+.. figure:: capacity/figures/DRR1.png
+   :width: 550px
    :align: center
 
-   Example of fair queuing in action: (a) Packets with
-   earlier finishing times are sent first; (b) sending of a packet
-   already in progress is completed.
+   Serving the first queue in deficit round robin.
 
-To better see how this implementation of fair queuing works, consider
-the example given in :numref:`Figure %s <fig-fair-queuing>`. Part (a)
-shows the queues for two flows; the algorithm selects both packets
-from flow 1 to be transmitted before the packet in the flow 2 queue,
-because of their earlier finishing times. In (b), the router has
-already begun to send a packet from flow 2 when the packet from flow 1
-arrives. Though the packet arriving on flow 1 would have finished
-before flow 2 if we had been using perfect bit-by-bit fair queuing,
-the implementation does not preempt the flow 2 packet.
 
-There are two things to notice about fair queuing. First, the link is
-never left idle as long as there is at least one packet in the queue.
-Any queuing scheme with this characteristic is said to be *work
-conserving*. One effect of being work conserving is that if I am sharing
-a link with a lot of flows that are not sending any data, then I can use
-the full link capacity for my flow. As soon as the other flows start
-sending, however, they will start to use their share and the capacity
-available to my flow will drop.
+.. _fig-drr2:
+.. figure:: capacity/figures/DRR2.png
+   :width: 550px
+   :align: center
 
-The second thing to notice is that if the link is fully loaded and there
-are *n* flows sending data, I cannot use more than 1/n\ :sup:`th`
-of the link bandwidth. If I try to send more than that, my packets
-will be assigned increasingly large timestamps, causing them to sit in
-the queue longer awaiting transmission. Eventually, the queue will
-overflow—although whether it is my packets or someone else’s that are
-dropped is a decision that is not determined by the fact that we are
-using fair queuing. This is determined by the drop policy; FQ is a
-scheduling algorithm, which, like FIFO, may be combined with various
-drop policies.
+   Serving the second queue in deficit round robin.
 
-Because FQ is work conserving, any bandwidth that is not used by one
-flow is automatically available to other flows. For example, if we have
-four flows passing through a router, and all of them are sending
-packets, then each one will receive one-quarter of the bandwidth. But,
-if one of them is idle long enough that all its packets drain out of the
-router’s queue, then the available bandwidth will be shared among the
-remaining three flows, which will each now receive one-third of the
-bandwidth. Thus, we can think of FQ as providing a guaranteed minimum
-share of bandwidth to each flow, with the possibility that it can get
-more than its guarantee if other flows are not using their shares.
+Finally, after all four queues have been serviced, the pointer comes
+back to the first queue again, and its counter is again incremented by
+the quantum of 500, bringing it to 700. This means that the next *two*
+packets can be sent, since their total size is only 600 bytes. If
+there are more packets in the queue, its deficit would now be set
+to 100. If the queue has now become empty, the deficit counter is set
+to zero again. It is important that a queue with no packets
+in it does not keep accumulating credit; otherwise an idle flow could
+build up an unlimited amount of credit and then starve out the other
+flows at some point in the future.
 
-It is possible to implement a variation of FQ, called *weighted fair
-queuing* (WFQ), that allows a weight to be assigned to each flow
-(queue). This weight logically specifies how many bits to transmit
-each time the router services that queue, which effectively controls
-the percentage of the link’s bandwidth that flow will get. Simple FQ
-gives each queue a weight of 1, which means that logically only 1 bit
-is transmitted from each queue each time around. This results in each
-flow getting :math:`1/n^{th}` of the bandwidth when there are *n*
-flows. With WFQ, however, one queue might have a weight of 2, a second
-queue might have a weight of 1, and a third queue might have a weight
-of 3. Assuming that each queue always contains a packet waiting to be
-transmitted, the first flow will get one-third of the available
-bandwidth, the second will get one-sixth of the available bandwidth,
-and the third will get one-half of the available bandwidth.
+Note that the effect of the deficit scheme is to even out the impact
+of variable-sized packets. On average, every flow is getting to send
+500 bytes per round as long as it has packets to send, so fairness is
+enforced among flows on average. Further details of the algorithm and
+proofs of its fairness are included in the paper by Shreedhar and Varghese.
 
-While we have described WFQ in terms of flows, we noted above that a
-"flow" can be defined in many different ways. In particular we could
-replace flows with *classes* of traffic, where classes are defined in some
-other way than the simple host-to-host or process-to-process flows.
-One practical example of this is to use some bits in the IP header to identify
-classes and allocate a queue and a weight to each class. This is
-exactly what is defined as part of the Differentiated Services
-mechanism described later in this Chapter.
+.. _reading_drr:
+.. admonition:: Further Reading
+
+     M. Shreedhar and G. Varghese. `Efficient fair queueing using deficit
+     round robin <https://dl.acm.org/doi/10.1145/217391.217453>`__.
+     ACM SIGCOMM '95 Symposium, August 1995.
+
+It is possible to combine DRR with a priority queuing scheme of the
+sort described above. You can have one queue that always gets served
+as long as it has packets in it, and then a set of DRR queues that are
+served using the DRR algorithm whenever they have packets and the
+priority queue is empty. This approach has been implemented in some
+commercial routers to provide one low-latency queue and a set of DRR
+queues that share the remaining bandwidth in a weighted fair manner.
 
 Finally, we observe that this whole discussion of queue management
 illustrates an important system design principle known as *separating

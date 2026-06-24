@@ -403,8 +403,8 @@ hosts.
 At the same time, the paper does allow for some functions to be placed in the
 network:
 
-   *Sometimes an incomplete version of the function provided by the
-   communication system may be useful as a performance enhancement.*
+   *Sometimes an incomplete version of the function provided
+   by the communication system may be useful as a performance enhancement.*
 
 This is why we highlight the fact that there is more to the end-to-end
 argument than the popular one-line summary. As we walk through the
