@@ -94,7 +94,7 @@ an intermediate point in the design space between TCP and
 UDP. Reliable delivery can be applied selectively to individual
 streams, and congestion control can limit the total amount of traffic
 in a QUIC connection when required, but lower priority streams can be
-sacrificed to ensure that latency remains withing bounds and more important
+sacrificed to ensure that latency remains within bounds and more important
 packets are not stuck waiting for less important ones to arrive.
 
 The key to scalability in MoQ is the use of *relays*, a form of
