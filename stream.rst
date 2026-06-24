@@ -67,7 +67,7 @@ fewer resources, is necessarily part of the story.
    *This is not for a lack of trying. Introducing reservations and QoS
    guarantees into the Internet was a significant focus of both
    academic research and protocol standardization throughout the
-   1990s, resulting in the* **Integrated Services (IntServ)**
+   1990s, resulting in the* **Integrated Services (Int-Serv)**
    *architecture, so called because it supported both best-effort
    traffic and reservations (see RFC 1633). As an architecture,
    IntServ included several moving parts. Fair Queuing packet
@@ -75,12 +75,14 @@ fewer resources, is necessarily part of the story.
    specify the reservation you wanted—codified in RSVP , the Resource
    ReSerVation Protocol—was another component.*
 
-   *The reason RSVP and IntServ never took off is because it never
-   became necessary to support the applications people cared
-   about. Being able to make hard guarantees is a requirement only
-   when (a) resources are scare, and (b) people are willing to pay a
-   premium to guarantee a certain allocation. So far, bandwidth
-   improvements have kept both requirements at bay.*
+   *The chief reason RSVP and Int-Serv never took off is because the
+   applications people cared about worked adequately without
+   them. Hard QoS guarantees turned out to be unnecessary for many
+   streaming applications thanks to innovations like DASH, and
+   interactive applications like video conferencing work sufficiently
+   well thanks to increases in network bandwidth. So while some QoS
+   mechanisms such as fair queuing live on, hard QoS guarantees have
+   not been widely deployed.*
 
 .. include:: stream/design.rst
 .. include:: stream/coding.rst
