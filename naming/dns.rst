@@ -277,13 +277,21 @@ resolve the query has been reached. A final query to the server at
 corresponding IP address is ``128.112.155.166``.
 
 This example still leaves a couple of questions about the resolution
-process unanswered. The first question is how did the client locate the
-root server in the first place, or, put another way, how do you resolve
-the name of the server that knows how to resolve names? This is a
-fundamental problem in any naming system, and the answer is that the
-system has to be bootstrapped in some way. In this case, the
-name-to-address mapping for one or more root servers is well known; that
-is, it is published through some means outside the naming system itself.
+process unanswered. The first question is how did the client locate
+the root server in the first place, or, put another way, how do you
+resolve the name of the server that knows how to resolve names? This
+is a fundamental problem in any naming system, and the answer is that
+the system has to be bootstrapped in some way. In this case, the
+name-to-address mapping for one or more root servers is well known;
+that is, it is published by the Internet Assigned Numbers Authority
+(IANA). Note that the IANA does not have operational responsibility
+for the root servers, each of which is operated by an independent
+company, university, government agency, or international organization.
+
+.. admonition:: Further Reading
+
+   IANA. `Root Name Servers
+   <https://www.iana.org/domains/root/servers>`__.
 
 In practice, however, not all clients know about the root servers.
 Instead, the client program running on each Internet host is initialized
@@ -328,9 +336,6 @@ names before sending out a query.
    Name resolution in practice, where the numbers 1 to 10 show the sequence
    of steps in the process.
 
-
-.. TODO -- Somewhere in this section we should mention where the root
-   servers are, and how they are governed.
 
 .. TODO -- We might want to mention DNS over HTTP, plus other
    security-related challenges.

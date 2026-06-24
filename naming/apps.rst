@@ -132,10 +132,10 @@ case, one for URI schemes and one for URN name spaces.
 
 .. admonition:: Further Reading
 
-   `Uniform Resource Identifier (URI) Schemes.
+   IANA. `Uniform Resource Identifier (URI) Schemes.
    <https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml>`__
 
-   `Uniform Resource Names (URN) Namespaces.
+   IANA. `Uniform Resource Names (URN) Namespaces.
    <https://www.iana.org/assignments/urn-namespaces/urn-namespaces.xhtml>`__
 
 Finally, in the same way URNs name objects at the application level,
