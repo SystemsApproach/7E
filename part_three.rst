@@ -17,28 +17,3 @@ supports applications.  The chapters in this part address the key
 challenges that arise when you try to “fill the gap” between what
 applications need and what the underlying packet delivery service
 described in Part II provides.
-
-The chapters in Part III are organized around the main challeges
-addressed by the edge network stack, but in exploring those
-challenges, we incude descriptions of the following artifacts:
-
-.. table::
-   :align: center
-   :widths: auto
-
-   ===========   ===========
-   Protocol                  Coverage
-   ===========   ===========
-   DCTCP                       :ref:`Section 13.4.1 <artifact-dctcp>`
-   DNS                         :ref:`Section 11.2 <artifact-dns>`
-   gRPC                        :ref:`Section 15.2 <artifact-grpc>`
-   JPEG                        :ref:`Section 17.2 <artifact-jpeg>`
-   MPEG                        :ref:`Section 17.2 <artifact-mpeg>`
-   QUIC                        :ref:`Section 15.3 <artifact-quic>`
-   RDMA                        :ref:`Section 15.4 <artifact-rdma>`
-   RoCE                        :ref:`Section 15.5 <artifact-roce>`
-   RTP                        :ref:`Section 17.3 <artifact-rtp>`
-   SIP                        :ref:`Section 17.4 <artifact-sip>`
-   TCP                         :ref:`Chapter 12 <artifact-tcp>`
-   TLS                         :ref:`Chapter 14 <artifact-tls>`
-   ===========   ===========

@@ -42,6 +42,7 @@ Larry Peterson and Bruce Davie
    message.rst
    overlay.rst
    stream.rst
+   appendix.rst
    README.rst
    authors.rst
    latest.rst
