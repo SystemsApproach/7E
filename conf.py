@@ -254,11 +254,11 @@ GA_INVOKE_JS = """
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-S63RFCB9N4');
+  gtag('config', 'G-BVSPK6D6PM');
 """
 
 def setup(app):
 
 
-    app.add_js_file('https://www.googletagmanager.com/gtag/js?id=G-S63RFCB9N4', loading_method="async")
+    app.add_js_file('https://www.googletagmanager.com/gtag/js?id=G-BVSPK6D6PM', loading_method="async")
     app.add_js_file(None, body=GA_INVOKE_JS)
