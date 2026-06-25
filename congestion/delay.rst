@@ -380,12 +380,6 @@ and in the broader Internet, experience is being gathered to further
 refine the design. The IETF's Congestion Control Working Group is
 hosting discussions on the ongoing design and experimentation.
 
-.. TODO -- Previous paragraph has been updated to reflect v3, and
-   while continued improvement is generally about fairness and
-   fine-tuning the model of available bw, at the level of detail we're
-   describing the mechanism, I think we're ok.
-
-
 .. _reading_bbr:
 .. admonition:: Further Reading
 

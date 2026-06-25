@@ -24,10 +24,6 @@ described in a companion book.
 |CC|.4.1 Datacenter Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. TODO -- I believe the DCTCP description is up-to-date.
-   I have added a citation for the NSDI paper on operational
-   experinece. Bramko was a co-author on that paper.
-
 There have been several efforts to optimize TCP for cloud datacenters,
 where *Data Center TCP* was one of the first. There are several
 aspects of the datacenter environment that warrant an approach that

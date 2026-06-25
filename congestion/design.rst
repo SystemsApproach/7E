@@ -8,19 +8,26 @@ explicit congestion notifications.  There are other questions that
 only the sources of those packets can answer. We start by identifying
 what those questions are, and exploring the options available to TCP
 (and other transport protocols running on edge hosts) to address
-them.\ [#]_ Until we get to domain-specific use cases in Section
+them. Until we get to domain-specific use cases in Section
 |CC|.4, you can assume the routers implement FIFO queues with
 tail-drop.
 
-.. [#] Although the concepts underlying congestion control algorithms
-       are protocol-independent, the history of congestion control in
-       the Internet is strongly tied to TCP. This includes several
-       implementation details that leverage existing TCP header
-       fields. This chapter uses this TCP-centric terminology, but as
-       we will see in Chapter |Message|, other transport
-       protocols—most notably QUIC—adapt these algorithms to their
-       particular circumstances.
+Note while the concepts underlying congestion control algorithms are
+protocol-independent, the history of congestion control in the
+Internet is strongly tied to TCP.\ [#]_ This includes several
+implementation details that leverage existing TCP header fields. This
+chapter uses this TCP-centric terminology, but as we will see in
+Chapter |Message|, other transport protocols—most notably QUIC—adapt
+these algorithms to their particular circumstances.
 
+.. [#] Not only is congestion control historically tied to TCP, it's
+   actually tied to a specific implementation of TCP. Originally, the
+   *Berkeley Software Distribution (BSD)* implementation of Unix was
+   considered the *reference implementation* of TCP congestion
+   control. In fact, the initial algorithm proposed by Jacobson and
+   Karels was a noteworthy feature of the Tahoe release of BSD 4.3
+   in 1988.  Today, Linux is has replaced BSD as the *de facto*
+   reference implementation of TCP.
 
 |CC|.1.1 Load Control
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -328,6 +335,3 @@ mechanisms described in this chapter.
    <https://dl.acm.org/doi/10.1145/3365609.3365855>`__.
    ACM SIGCOMM HotNets, November 2019.
 
-
-.. TODO -- Possibly include a sidebar on BSD/Linux as the reference
-   implementation.
