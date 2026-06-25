@@ -5,7 +5,7 @@
 About This Book
 ===============
 
-.. image:: https://github.com/SystemsApproach/book/actions/workflows/publish-docs.yml/badge.svg
+.. image:: https://github.com/SystemsApproach/7E/actions/workflows/publish-docs.yml/badge.svg
   :align: left
   :alt: deployment status button
   :target: https://github.com/SystemsApproach/7E/actions/
