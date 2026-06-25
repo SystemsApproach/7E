@@ -41,7 +41,7 @@ artifacts.
    PON                                                :ref:`Section 5.5 <artifact-pon>`
    POP3                                              :ref:`Section 2.3.3 <artifact-pop3>`
    QUIC                                              :ref:`Section 15.3 <artifact-quic>`
-   RDMA                                            :ref:`Section 15.4 <artifact-rdma>`
+   RDMA (libibverbs)                          :ref:`Section 15.4 <artifact-rdma>`
    RIP                                                 :ref:`Section 4.4 <artifact-rip>`
    RoCE                                              :ref:`Section 15.5 <artifact-roce>`
    RTP                                                :ref:`Section 17.3 <artifact-rtp>`

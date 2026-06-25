@@ -190,21 +190,20 @@ ISPs often thwart them. In response to this problem, and so as to
 collect data about a broad swath of the Internet, there are
 collaborative efforts to deploy servers that are explicitly programmed
 to respond to active measurement probes. One of these is
-MeasurementLab (M-Lab), which in cooperation with ISPs around the
-world, has installed servers at important Internet exchange points.
-M-Lab deploys its own active measurement tools (as opposed to expecting
-users to know about ``iperf``), and it goes a step further by
-archiving the results of any active probe requested by any user. The
-resulting dataset is then available to be queried by anyone. This is
-useful for understanding the quality of broadband connectivity
-worldwide (in addition to testing the quality of your own connection).
+MeasurementLab (M-Lab), which has installed servers at richly
+connected Internet exchange points and datacenters around the world.
+M-Lab deploys its own active measurement tool—called the *Network
+Diagnostic Tool (NDT)*\—which not only measures both uplink and
+downlink performance, but also diagnoses the factors impacting the
+results. M-Lab archives the results of any active probe requested by
+any user, and the resulting dataset is then available to be queried by
+anyone. This is useful for understanding the quality of broadband
+connectivity worldwide (in addition to testing the quality of your own
+connection).
 
 .. admonition:: Further Reading
 
     `Measurement Lab <https://www.measurementlab.net/>`__.
-
-.. TODO -- A bit thin. Probably should give a quick overview of NDT.
-   Anything else?
 
 |Ops|.3.4 In-Band Network Telemetry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
