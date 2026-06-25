@@ -1,7 +1,9 @@
 name: Publish Docs Workflow
 run-name: ${{ github.actor }} is publishing document artifacts 🚀
-on: 
-   workflow_dispatch:
+on:
+  push:
+    branches:
+      - main
 
 
 
@@ -26,19 +28,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
       - name: Build html
         run: make html
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           # Upload build repository
           path: './_build/html'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
 
 
