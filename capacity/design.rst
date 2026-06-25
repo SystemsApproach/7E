@@ -13,14 +13,13 @@ where offered load exceeds link capacity, is the very definition of
 congestion.
 
 .. _fig-congestion:
-.. figure:: capacity/figures/Slide7.png
+.. figure:: capacity/figures/queue.png
    :width: 400px
    :align: center
 
    Congestion at a bottleneck router.
 
 
-.. TODO change bottleneck to something realistic like 100 Mbps
 
 Note that avoiding congestion is not a problem that can be fully
 addressed by routing.  While it is true that a congested link could be
