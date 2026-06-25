@@ -34,7 +34,9 @@ the network delivers and what applications require. TCP provides a
 this gap. The byte-stream abstraction is easy to conceptualize: the
 sender opens a pipe to the receiver, the sender writes a sequence of
 bytes to the pipe, and the receiver reads that exact sequence of bytes
-from the pipe.
+from the pipe. The decision to implement reliable delivery in the
+end-systems rather than inside the network is a notable application of
+the end-to-end argument described in Chapter |Intro|.
 
 Later chapters describe other approaches—offering different
 inter-process communication abstractions—but supporting a reliable
