@@ -7,8 +7,8 @@ in this chapter), a remote login service called Telnet (which was not
 secure and has been replaced by SSH), and the FTP file transfer
 protocol (which still exists but has largely been supplanted by the
 web). Dramatic improvements in available bandwidth have enabled whole
-new classes of applications, such as streaming and video conferencing,
-but there has also been a significant upgrade in the software tools
+new classes of applications, such as streaming and video conferencing;
+there has also been a significant upgrade in the software tools
 available to developers, most notably those provided by the
 cloud. Before getting into specific examples, we first look at the
 basic structure that is common to nearly all applications, including a
@@ -37,7 +37,7 @@ The *socket interface* was originally provided by the Berkeley
 distribution of Unix, and is now supported in virtually all popular
 operating systems. It is also the foundation of language-specific
 interfaces, such as the Java or Python socket library. We use Linux
-and C for all code examples in this book, Linux because it is open
+and C for all code examples in this book; Linux because it is open
 source and C because it remains the language of choice for network
 internals. (C also has the advantage of exposing all the low-level
 details, which is helpful in understanding the underlying ideas.)
