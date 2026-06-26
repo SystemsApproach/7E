@@ -1,3 +1,4 @@
+.. index:: DCTCP: Data Center TCP
 |CC|.4  Domain-Specific Variants
 -------------------------------------------
 
@@ -18,8 +19,6 @@ described in a companion book.
    L. Peterson, L. Brakmo, B. Davie. `TCP Congestion Control: A
    Systems Approach <https://tcpcc.systemsapproach.org>`__.
    May 2022.
-
-.. _artifact-dctcp:
 
 |CC|.4.1 Datacenter Networks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

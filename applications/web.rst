@@ -1,3 +1,7 @@
+.. index:: HTTP/HTTPS: Hypertext Transfer Protocol
+.. index:: REST/RESTful: Representational State Transfer
+.. index:: ISP: Internet Service Provider
+
 2.2 World Wide Web
 -----------------------------
 
@@ -11,7 +15,6 @@ protocol—HTTP—underpinning it. In this section we dig into the details
 of that protocol, and in doing so, tease out the reasons the web has
 become such a ubiquitous framework for building new applications.
 
-.. _artifact-http:
 
 2.2.1 Application Protocols
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,3 +1,5 @@
+.. index:: CI/CD: Continuous Integration / Continuous Deployment
+
 |Ops|.4 Feature Velocity
 --------------------------------------
 

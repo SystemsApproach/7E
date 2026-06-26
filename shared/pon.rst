@@ -1,4 +1,7 @@
-.. _artifact-pon:
+.. index:: PON: Passive Optical Network
+.. index:: OLT: Optical Line Terminal
+.. index:: ONU: Optical Network Unit
+.. index:: BNG: Broadband Network Gateway
 
 |Shared|.5 Passive Optical Network
 -----------------------------------------

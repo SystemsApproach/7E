@@ -1,4 +1,4 @@
-.. _artifact-rip:
+.. index:: RIP: Routing Information Protocol
 
 |Routing|.4 Distance Vector Routing
 ---------------------------------------------

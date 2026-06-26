@@ -14,6 +14,9 @@ Computer Networks: A Systems Approach
 Larry Peterson and Bruce Davie
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+|version|
++++++++++++++++++
+
 |
 
 
@@ -42,7 +45,6 @@ Larry Peterson and Bruce Davie
    message.rst
    overlay.rst
    stream.rst
-   appendix.rst
    README.rst
    authors.rst
    latest.rst

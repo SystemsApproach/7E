@@ -1,3 +1,5 @@
+.. index:: MSS: Maximum Segment Size
+
 |TCP|.5 Triggering Transmission
 --------------------------------
 

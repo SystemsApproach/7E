@@ -1,3 +1,7 @@
+.. index:: UDP: User Datagram Protocol
+.. index:: TCP: Transmission Control Protocol
+.. index:: RFC: Request for Comments
+
 |Intro|.3  Network Protocols
 ------------------------------------------
 

@@ -1,3 +1,8 @@
+.. index:: DSCP: DiffServ Code Point
+.. index:: FIFO: First-In First-Out
+.. index:: FQ/WFQ: Fair Queuing / Weighted Fair Queuing
+.. index:: DRR: Deficit Round Robin
+
 |Capacity|.2 Packet Schedulers
 --------------------------------
 

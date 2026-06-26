@@ -1,3 +1,6 @@
+.. index:: NV: Network Video
+.. index:: SFU: Selective Forwarding Unit
+
 |Overlay|.3 Teleconferencing
 -----------------------------------------------
 

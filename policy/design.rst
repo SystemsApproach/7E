@@ -1,3 +1,5 @@
+.. index:: AS: Autonomous System
+
 |BGP|.1 Design Issues
 ------------------------------------
 

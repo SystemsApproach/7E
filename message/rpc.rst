@@ -1,4 +1,6 @@
-.. _artifact-grpc:
+.. index:: RPC: Remote Procedure Call
+.. index:: gRPC: Google Remote Procedure Call
+.. index:: NFS: Network File System
 
 |Message|.2 Remote Procedure Call
 ---------------------------------

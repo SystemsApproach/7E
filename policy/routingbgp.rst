@@ -1,3 +1,6 @@
+.. index:: IGP: Interior Gateway Protocol
+.. index:: EGP: Exterior Gateway Protocol
+
 |BGP|.2 Sharing Routes and Routing Policy
 ------------------------------------------
 

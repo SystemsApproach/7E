@@ -1,3 +1,6 @@
+.. index:: VL2: Virtual Layer 2
+.. index:: VXLAN: Virtual Extensible LAN
+
 |Virt|.4 Virtual Networks for Datacenters
 -----------------------------------------------
 

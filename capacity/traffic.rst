@@ -1,3 +1,5 @@
+.. index:: TE: Traffic Engineering
+
 |Capacity|.5  Traffic Engineering
 -----------------------------------------
 

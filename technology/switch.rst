@@ -1,3 +1,14 @@
+.. index:: OCP: Open Compute Project
+.. index:: PISA: Protocol Independent Switching Architecture
+.. index:: CLI: Command Line Interface
+.. index:: NBI: Northbound Interface
+.. index:: SDN: Software-Defined Networking
+.. index:: FIB: Forwarding Information Base
+.. index:: RIB: Routing Information Base
+.. index:: L2/L3: Layer 2/Layer 3 Switching
+.. index:: NPU: Network Processing Unit
+.. index:: P4: Programming Protocol-Independent Packet Processors
+
 |Tech|.2 Packet Switches
 ---------------------------------
 

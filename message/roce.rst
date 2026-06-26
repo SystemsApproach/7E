@@ -1,4 +1,6 @@
-.. _artifact-roce:
+.. index:: RoCE: RDMA over Converged Ethernet
+.. index:: ECN: Explicit Congestion Notification
+.. index:: IPU: Infrastructure Processing Unit
 
 |Message|.5 Optimizing Ethernet for RDMA
 ------------------------------------------

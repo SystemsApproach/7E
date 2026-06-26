@@ -1,4 +1,4 @@
-.. _artifact_ecmp:
+.. index:: ECMP: Equal-Cost Multipath
 
 |Routing|.5 Routing in Datacenters
 ------------------------------------

@@ -1,4 +1,6 @@
-.. _artifact-ipv4:
+.. index:: TTL: Time to Live
+.. index:: MTU: Maximum Transmission Unit
+.. index:: ARP: Address Resolution Protocol
 
 |Fed|.2 Heterogeneity
 ---------------------
@@ -515,8 +517,6 @@ by no means the last) in achieving scalability.
    right network; the information that a router needs to deliver a
    packet to any node on a given network is represented by a single
    aggregated piece of information.
-
-.. _artifact-arp:
 
 |Fed|.2.4 Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,9 @@
+{% extends "!layout.html" %}
+{% block navigation %}
+{{ super() }}
+<div class="wy-menu wy-menu-vertical" role="navigation">
+  <ul>
+    <li class="toctree-l1"><a class="reference internal" href="{{ pathto('genindex') }}">Acronym Glossary</a></li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,3 +1,5 @@
+.. index:: RTT: Round-Trip Time
+
 |TCP|.1  Design Issues
 ------------------------------
 

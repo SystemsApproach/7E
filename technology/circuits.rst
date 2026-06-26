@@ -1,3 +1,7 @@
+.. index:: DWDM: Dense Wavelength Division Multiplexing
+.. index:: ROADM: Reconfigurable Optical Add/Drop Multiplexer
+.. index:: SONET: Synchronous Optical Network
+
 |Tech|.3 Circuit Switching
 ------------------------------------
 
@@ -78,8 +82,6 @@ two packet switches. This scenario is shown in :numref:`Figure %s
 possible to change these underlying end-to-end paths, effectively
 creating a new topology when viewed from the perspective of the
 packet-switching layer.
-
-.. _artifact-sonet:
 
 |Tech|.3.2 SONET
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

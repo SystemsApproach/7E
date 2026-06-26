@@ -1,3 +1,6 @@
+.. index:: P2P: Peer-to-Peer
+.. index:: DHT: Distributed Hash Table
+
 |Overlay|.4 Peer-to-Peer Networks
 ----------------------------------------
 

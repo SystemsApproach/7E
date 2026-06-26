@@ -1,4 +1,4 @@
-.. _artifact-dns:
+.. index:: DNS: Domain Name System
 
 |Naming|.2 Domain Naming System
 -------------------------------------------

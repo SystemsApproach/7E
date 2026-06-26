@@ -3,7 +3,7 @@
 
 .. include:: chapters.rst
 
-.. _artifact-bpg:
+.. index:: BGP: Border Gateway Protocol
 
 Chapter |BGP|: Interdomain Routing
 ========================================

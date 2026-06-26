@@ -1,4 +1,4 @@
-.. _artifact-sip:
+.. index:: SIP: Session Initiation Protocol
 
 |Stream|.4 Session Control
 --------------------------

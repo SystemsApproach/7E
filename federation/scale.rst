@@ -1,3 +1,6 @@
+.. index:: NAT: Network Address Translation
+.. index:: IPv6: Internet Protocol version 6
+
 |Fed|.3 Scale
 -------------
 
@@ -319,8 +322,6 @@ frequently used forwarding entries; a fallback lookup algorithm is
 still needed.
 
 
-.. _artifact-nat:
-
 |Fed|.3.2 Network Address Translation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -441,8 +442,6 @@ adopted in 2015.
    P. Francis. `Network Address Translation (NAT)
    <https://dl.acm.org/doi/10.1145/2766330.2766340>`__. ACM SIGCOMM
    CCR, April 2015.
-
-.. _artifact-ipv6:
 
 |Fed|.3.3 IP Version 6
 ~~~~~~~~~~~~~~~~~~~~~~
