@@ -137,6 +137,20 @@ Relay B, Relay B can immediately start sending data to Subscriber 2
 without any additional flow of messages or content across the
 backbone.
 
+MoQ also embodies the idea of Application Layer Framing (ALF) that we
+noted in Section |Stream|.3. Only the application knows what data it
+needs to do its job, but it can frame the data in such a way that the
+network can help the application function. MoQ lets the application
+define objects that represent units of video that can be independently
+decoded, and prioritize those objects based on their importance (e.g.,
+lower priority for high frequency components of the video). The relay
+nodes don’t have to understand the application at all—they just use
+the metadata to relay objects in a way that benefits the
+application. This makes MoQ relays more useful to the application than
+a simple packet replication service such as IP multicast or the SFU
+overlays we saw in Section |Overlay|.3.
+
+
 The preceding discussion captures MoQ at a particular point in time,
 since the specifications are still evolving and implementations are
 trying to track the specifications. Nevertheless, this approach draws
