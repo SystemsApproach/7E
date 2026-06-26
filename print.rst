@@ -7,7 +7,8 @@
 ===========================
 
 We make all books in the *Systems Approach* series available as both
-print and e-books. This book is available via bookstores including Amazon: `Computer Networks: A Systems Approach <https://amzn.to/3CtG81U>`__
+print and e-books. This book is not yet in print; the 6th edition is
+available via `bookstores  <https://systemsapproach.org/books/>`__ including Amazon: `Computer Networks: A Systems Approach <https://amzn.to/3CtG81U>`__
 
 `Book Series: <https://systemsapproach.org/books/>`__ Also check out
 our companion books that cover emerging topics in more depth.

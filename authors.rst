@@ -7,7 +7,7 @@ About The Authors
 Larry Peterson and Bruce Davie have been collaborating on systems
 projects and writing networking textbooks since the 1990s. Their
 book *Computer Networks: A Systems Approach*, a staple of networking
-curricula for the last 30 years, is now in its sixth edition. That
+curricula for the last 30 years, is now in its seventh edition. That
 introductory textbook, along with several new books focused on
 emerging topics in network and cloud systems, are available as open
 source at https://systemsapproach.org.
