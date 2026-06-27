@@ -1,4 +1,4 @@
-.. _artifact-dash:
+.. index:: DASH: Dynamic Adaptive Streaming over HTTP
 
 2.4 Adaptive Streaming
 -------------------------------

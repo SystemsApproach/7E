@@ -1,4 +1,13 @@
-.. _artifact-5g:
+.. index:: 5G: Fifth Generation Wireless
+.. index:: CUPS: Control and User Plane Separation
+.. index:: QCI: QoS Class Identifier
+.. index:: RAN: Radio Access Network
+.. index:: 3GPP: 3rd Generation Partnership Project
+.. index:: UE: User Equipment
+.. index:: IMSI: International Mobile Subscriber Identity
+.. index:: MNO: Mobile Network Operator
+.. index:: PLMN: Public Land Mobile Network
+.. index:: GBR: Guaranteed Bit Rate
 
 |Shared|.4 Mobile Cellular Network
 --------------------------------------------

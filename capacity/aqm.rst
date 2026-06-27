@@ -1,3 +1,6 @@
+.. index:: RED: Random Early Detection
+.. index:: AQM: Active Queue Management
+
 |Capacity|.3  Active Queue Management
 -------------------------------------------
 

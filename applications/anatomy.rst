@@ -1,3 +1,5 @@
+.. index:: IXP: Internet Exchange Point
+
 2.1 Anatomy of an Application
 ---------------------------------------
 

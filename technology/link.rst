@@ -1,4 +1,12 @@
-.. _artifact-8023:
+.. index:: 802.3: IEEE Ethernet Standard
+.. index:: QAM: Quadrature Amplitude Modulation
+.. index:: LAN: Local Area Network
+.. index:: WAN: Wide Area Network
+.. index:: NIC: Network Interface Card
+.. index:: CSMA/CD: Carrier Sense Multiple Access with Collision Detection
+.. index:: NRZ/NRZI: Non-Return to Zero / Inverted
+.. index:: 4B/5B: 4-Bit/5-Bit Encoding
+.. index:: CRC: Cyclic Redundancy Check
 
 |Tech|.1 Communication Links
 -------------------------------------------

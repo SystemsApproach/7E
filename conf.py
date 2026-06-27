@@ -135,7 +135,7 @@ html_css_files = [
 html_favicon = '_static/bridge.ico'
 
 # HTML Index
-html_use_index = False
+html_use_index = True
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.

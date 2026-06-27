@@ -1,3 +1,10 @@
+.. index:: URI: Uniform Resource Identifier
+.. index:: URL: Uniform Resource Locator
+.. index:: URN: Uniform Resource Name
+.. index:: DOI: Digital Object Identifier
+.. index:: IANA: Internet Assigned Numbers Authority
+.. index:: LDAP: Lightweight Directory Access Protocol
+
 |Naming|.3 Application Naming Schemes
 --------------------------------------------
 

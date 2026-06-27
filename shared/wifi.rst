@@ -1,4 +1,4 @@
-.. _artifact-80211:
+.. index:: 802.11: IEEE Wireless LAN Standard
 
 |Shared|.3 Wi-Fi
 ------------------------------

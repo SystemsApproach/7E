@@ -1,3 +1,6 @@
+.. index:: CDN: Content Distribution Network
+.. index:: DDoS: Distributed Denial of Service
+
 |Overlay|.2 Content Distribution Networks
 -----------------------------------------------
 

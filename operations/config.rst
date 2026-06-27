@@ -1,3 +1,12 @@
+.. index:: SNMP: Simple Network Management Protocol
+.. index:: MIB: Management Information Base
+.. index:: XML: Extensible Markup Language
+.. index:: YAML: YAML Ain't Markup Language
+.. index:: gNMI: gRPC Network Management Interface
+.. index:: gNOI: gRPC Network Operations Interface
+.. index:: DHCP: Dynamic Host Configuration Protocol
+.. index:: YANG: Yet Another Next Generation
+
 |Ops|.2 Configuration Management
 --------------------------------------
 
@@ -12,8 +21,6 @@ operators might choose a different set of tools. We aim here to
 illustrate the set of problems that need to be tackled and show some
 of the tools in widespread use, but this is necessarily a partial view
 of a broad landscape of operational tooling.
-
-.. _artifact-dhcp:
 
 |Ops|.2.1 Host Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,8 +134,6 @@ time. Once the lease expires, the server is free to return that
 address to its pool. A host with a leased address needs to renew the
 lease periodically if in fact it is still connected to the network and
 functioning correctly.
-
-.. _artifact-yang:
 
 |Ops|.2.2 Configuration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

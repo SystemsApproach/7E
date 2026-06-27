@@ -1,4 +1,4 @@
-.. _artifact-stp:
+.. index:: 802.1: IEEE Spanning Tree Protocol
 
 |Routing|.2 Spanning Tree Protocol
 ---------------------------------------

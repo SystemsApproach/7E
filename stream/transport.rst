@@ -1,4 +1,5 @@
-.. _artifact-rtp:
+.. index:: RTP: Real-time Transport Protocol
+.. index:: RTCP: Real-time Transport Control Protocol
 
 |Stream|.3 Transport Protocol
 ------------------------------

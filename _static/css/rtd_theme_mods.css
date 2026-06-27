@@ -72,6 +72,12 @@ h3 {
     font-style: italic;
     font-weight: bold;
 }
+/* Single-column index */
+.genindextable td {
+  width: 100% !important;
+  display: block;
+}
+
 aside.sidebar {
     margin: 0 0 0.5em 1em;
     border: 1px solid #ddb;

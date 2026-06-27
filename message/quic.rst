@@ -1,4 +1,4 @@
-.. _artifact-quic:
+
 
 |Message|.3 Optimizing RPC
 --------------------------

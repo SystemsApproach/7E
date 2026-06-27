@@ -1,4 +1,6 @@
-.. _artifact-grpc:
+.. index:: RPC: Remote Procedure Call
+.. index:: gRPC: gRPC Remote Procedure Call
+.. index:: NFS: Network File System
 
 |Message|.2 Remote Procedure Call
 ---------------------------------
@@ -87,6 +89,7 @@ cloud services in their datacenters.
 .. sidebar:: RPC vs REST
 
    A false dichotomy...
+.. TODO finish this sidebar
 
 Despite its origins in Google, gRPC does not stand for Google RPC. The
 “g” stands for something different in each release. For version 1.10

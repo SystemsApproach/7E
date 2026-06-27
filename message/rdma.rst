@@ -1,4 +1,8 @@
-.. _artifact-rdma:
+.. index:: RDMA: Remote Direct Memory Access
+.. index:: MPI: Message Passing Interface
+.. index:: NCCL: NVIDIA Collective Communications Library
+.. index:: GPI: Global Address Space Programming Interface
+.. index:: OFI: Open Fabrics Interface
 
 |Message|.4 Remote DMA
 ----------------------------

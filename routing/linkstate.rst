@@ -1,4 +1,4 @@
-.. _artifact-ospf:
+.. index:: OSPF: Open Shortest Path First
 
 |Routing|.3 Link-State Routing
 -------------------------------------

@@ -1,3 +1,6 @@
+.. index:: INT: Inband Network Telemetry
+.. index:: NDT: Network Diagnostic Tool
+
 |Ops|.3 Monitoring and Telemetry
 --------------------------------------
 

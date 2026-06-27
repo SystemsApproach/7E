@@ -1,3 +1,6 @@
+.. index:: VPN: Virtual Private Network
+.. index:: MPLS: Multiprotocol Label Switching
+
 |Virt|.3 Virtual Private Networks (VPNs)
 -----------------------------------------------
 
@@ -284,8 +287,6 @@ allowed connections among specific devices are possible.
    A. Pennarun. `How Tailscale Works
    <https://tailscale.com/blog/how-tailscale-works>`__.  Tailscale
    blog, 2020.
-
-.. _artifact-mpls:
 
 |Virt|.3.4 MPLS/BGP VPNs
 ~~~~~~~~~~~~~~~~~~~~~~~~~

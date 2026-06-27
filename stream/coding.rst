@@ -1,5 +1,9 @@
-.. _artifact-mpeg:
-.. _artifact-jpeg:
+.. index:: MPEG: Moving Picture Experts Group
+.. index:: RGB: Red/Green/Blue
+.. index:: YUV: Luminance/Chrominance Color Space
+.. index:: DCT: Discrete Cosine Transform
+.. index:: H.261/H.263: ITU Video Coding Standards
+.. index:: JPEG: Joint Photographic Experts Group
 
 |Stream|.2 Coding and Compression
 ----------------------------------

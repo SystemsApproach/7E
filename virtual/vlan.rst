@@ -1,4 +1,4 @@
-.. _artifact-vlan:
+.. index:: 802.1Q: IEEE VLAN Standard
 
 |Virt|.2 Virtual LANs (VLANs)
 -----------------------------------------------

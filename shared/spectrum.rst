@@ -1,3 +1,6 @@
+.. index:: OFDM: Orthogonal Frequency Division Multiplexing
+.. index:: OFDMA: Orthogonal Frequency Division Multiple Access
+
 |Shared|.2 Managing Spectrum
 ----------------------------------
 

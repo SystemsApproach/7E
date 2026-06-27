@@ -1,3 +1,10 @@
+.. index:: IRR: Internet Routing Registry
+.. index:: RIR: Regional Internet Registry
+.. index:: ROA: Route Origin Authorization
+.. index:: ROV: Route Origin Validation
+.. index:: RPKI: Resource Public Key Infrastructure
+.. index:: NIST: National Institute of Standards and Technology
+
 |BGP|.3 Securing Route Information
 --------------------------------------
 

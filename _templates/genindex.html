@@ -1,0 +1,32 @@
+{%- extends "layout.html" %}
+{% set title = 'Acronym Glossary' %}
+
+{% block body %}
+
+<h1 id="index">Acronym Glossary</h1>
+
+This glossary expands the network-related acronyms used throughout the
+book, and links the section that gives the best introduction to the
+term. Use the "Search" facility for an exhaustive index of all uses.
+<p>
+
+<div class="genindex-jumpbox">
+ {% for key, dummy in genindexentries -%}
+ <a href="#{{ key }}"><strong>{{ key }}</strong></a>
+ {% if not loop.last %}| {% endif %}
+ {%- endfor %}
+</div>
+
+{%- for key, entries in genindexentries %}
+<h2 id="{{ key }}">{{ key }}</h2>
+<ul>
+  {%- for entryname, (links, subitems, _) in entries %}
+  <li>
+    {%- if links %}<a href="{{ links[0][1] }}">{{ entryname|e }}</a>
+    {%- else %}{{ entryname|e }}{% endif %}
+  </li>
+  {%- endfor %}
+</ul>
+{% endfor %}
+
+{% endblock %}

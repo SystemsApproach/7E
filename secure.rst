@@ -3,7 +3,8 @@
 
 .. include:: chapters.rst
 
-.. _artifact-tls:
+.. index:: TLS: Transport Layer Security
+.. index:: SSL: Secure Sockets Layer
 
 Chapter |TLS|:  Secure Channels
 ====================================

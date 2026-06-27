@@ -3,6 +3,9 @@
 
 .. include:: chapters.rst
 
+.. index:: QoS: Quality of Service
+.. index:: RSVP: Resource Reservation Protocol
+
 Chapter |Stream|: Real-Time Streaming
 =====================================
 

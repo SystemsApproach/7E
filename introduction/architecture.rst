@@ -1,3 +1,7 @@
+.. index:: IETF: Internet Engineering Task Force
+.. index:: OSI: Open Systems Interconnection
+.. index:: IP/IPv4: Internet Protocol (version 4)
+
 |Intro|.2  Network Architecture
 -------------------------------
 
