@@ -1,4 +1,4 @@
-.. index:: QUIC: Quick UDP Internet Connections
+
 
 |Message|.3 Optimizing RPC
 --------------------------

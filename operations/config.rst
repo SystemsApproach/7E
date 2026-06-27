@@ -1,7 +1,7 @@
 .. index:: SNMP: Simple Network Management Protocol
 .. index:: MIB: Management Information Base
 .. index:: XML: Extensible Markup Language
-.. index:: YAML: Yet Another Markup Language
+.. index:: YAML: YAML Ain't Markup Language
 .. index:: gNMI: gRPC Network Management Interface
 .. index:: gNOI: gRPC Network Operations Interface
 .. index:: DHCP: Dynamic Host Configuration Protocol
