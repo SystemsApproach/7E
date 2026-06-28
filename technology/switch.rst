@@ -115,6 +115,34 @@ control. The exact nature of this interface is related to the FIB data
 structure, so we cover it in subsection |Tech|.2.4, after seeing how switches
 are implemented in both software and hardware.
 
+.. sidebar:: Software-Defined Networking
+
+   *This is the first of many references to SDN you'll find in this
+   book.  This is because SDN is an approach to networking, rather
+   than a specific technology. Defining an open interface that the
+   control plane can use to program the data plane was one of the
+   original contributions, but more generally, anything that opens the
+   network to being more programmable—by more people—can be viewed as
+   part of the SDN movement. Marc Andreessen famously coined the
+   phrase "Software is Eating the World" to describe how software is
+   transforming even physical-world industries. From that vantage
+   point, SDN is about software "eating" the network, which has
+   historically been defined by its physical infrastructure (and the
+   companies that operated it).*
+
+   *You can read the SDN book cited later in this section for a
+   comprehensive look at SDN, but we cover several examples throughout
+   the book. Section 3.2.4 introduces the idea of programming the data
+   plane; Section 4.5 gives an example of how distributed routing
+   algorithms can be replaced by a centralized SDN control plane;
+   Chapter 9 gives several examples of how SDN is used to instantiate
+   virtual networks; and Chapter 10 shows how SDN provides the
+   foundation for managing and operating networks. You'll notice all
+   of these use cases for SDN are in Part II. The edge of the network
+   has always been software-defined, at least during the Internet
+   era.*
+
+
 |Tech|.2.2 Software Switch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -225,24 +253,22 @@ instruction set that has been optimized for processing packet headers
 (i.e., for implementing the data plane). NPUs are similar in spirit to
 GPUs that have an architecture optimized for rendering computer
 graphics, but in this case, the NPU is optimized for parsing packet
-headers and making a forwarding decision. NPUs are able to process
+headers and making a forwarding decision.\ [#]_ NPUs are able to process
 packets (input, make a forwarding decision, and output) at rates
 measured in Terabits per second (Tbps), easily fast enough to keep up
 with 32x100-Gbps ports, or the 48x40-Gbps ports shown in the diagram.
 
-.. sidebar:: Network Processing Units
-
-          Our use of the term NPU is a bit non-standard. Historically,
-          NPU was the name given more narrowly-defined network
-          processing chips used, for example, to implement intelligent
-          firewalls or deep packet inspection. They were not as
-          general-purpose as the NPUs we’re discussing here; nor were
-          they as high-performance. It seems likely that the current
-          approach will make purpose-built network processors
-          obsolete, but in any case, we prefer the NPU nomenclature
-          because it is consistent with the trend to build
-          programmable domain-specific processors, including GPUs for
-          graphics and TPUs (Tensor Processing Units) for AI.
+.. [#] Our use of the term NPU is a bit non-standard. Historically,
+        NPU was the name given more narrowly-defined network
+        processing chips used, for example, to implement intelligent
+        firewalls or deep packet inspection. They were not as
+        general-purpose as the NPUs we’re discussing here; nor were
+        they as high-performance. It seems likely that the current
+        approach will make purpose-built network processors obsolete,
+        but in any case, we prefer the NPU nomenclature because it is
+        consistent with the trend to build programmable
+        domain-specific processors, including GPUs for graphics and
+        TPUs (Tensor Processing Units) for AI.
 
 The beauty of this design is that a given bare-metal switch can now be
 programmed to be an L2 switch, an L3 router, or a combination of both,
