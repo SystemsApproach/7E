@@ -12,7 +12,7 @@ refactoring of our networking textbook that aims to give readers the
 necessary perspective to form a big-picture view of networking and the
 skills to deal with the complexity of modern networks.
 
-As with prior editions, We treat
+As with prior editions, we treat
 networking as a set of system design problems and draw on existing
 artifacts such as Ethernet, HTTP and IP to illustrate how these
 challenges have been solved in the past. Our aim it not just to teach
