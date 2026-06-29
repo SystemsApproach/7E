@@ -15,17 +15,34 @@ best to split the traffic among those paths in a way that avoids
 overloading any one of them. That simple idea has proven challenging
 to implement.
 
-IP has a source routing option, but it is not widely used for several
-reasons, including the fact that only a limited number of hops can be
-specified and because it is usual processed outside the “fast path” on
-most routers. MPLS provides a convenient way to add capabilities similar to
-source-routing to IP networks, although the capability is more often
-referred to as *explicit routing* rather than *source routing*. One
-reason for the distinction is that it usually isn’t the real source of
-the packet that picks the route. More often it is one of the routers
-inside a service provider’s network. :numref:`Figure %s <fig-fish>`
-shows an example of how the explicit routing capability of MPLS might
-be applied.  This sort of network is often called a *fish* network
+Step zero of traffic engineering is to provision links between the
+various points-of-presence (PoPs) or data centers that make up the
+network. That operation usually happens at relatively long timescales,
+since it might involve pulling fiber through conduits, or activating
+wavelengths on a WDM (wavelength division multiplexing)
+system. These links also need to be connected to switches and routers
+of suitable capacities. The traffic engineering process, from the
+perspective of those operating an IP network, takes an underlying
+topology of links of various capacities as a given, and tries to map
+the offered traffic onto that topology.
+
+One of the key challenges for traffic engineering is
+that the offered traffic load varies at every timescale down to the
+nanosecond, while changes to the underlying link capacities and
+topology can be made only at much longer timescales. Traffic loads
+often display daily patterns with peak hours separated by quieter
+periods, but there can also be sudden shifts in load caused by the
+behavior of applications and end users. Further complicating the
+problem is the fact that links or routers may fail, removing some
+capacity from the system.
+
+MPLS provides a convenient way to control the path of traffic through
+the network that goes some way to address the challenges of traffic
+engineering. The capability is often referred to as
+*explicit routing* although it has some similarities to a feature in
+IP known as *source routing*.\ [#]_  :numref:`Figure %s <fig-fish>` shows an
+example of how the explicit routing capability of MPLS might be
+applied.  This sort of network is often called a *fish* network
 because of its shape (the routers R1 and R2 form the tail; R7 is at
 the head).
 
@@ -35,6 +52,10 @@ the head).
    :align: center
 
    A network requiring explicit routing.
+
+.. [#] IP source routing is not widely used for several reasons, including the fact that
+       only a limited number of hops can be specified and because it is
+       processed outside the “fast path”, if it is handled at all, on most routers.
 
 Suppose that the operator of the network in :numref:`Figure %s
 <fig-fish>` has determined that any traffic flowing from R1 to R7

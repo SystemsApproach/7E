@@ -96,24 +96,24 @@ cloud services in their datacenters.
 
 .. sidebar:: RPC vs REST
 
-   Recall that we introduced the idea of REST and RESTful APIs in
+   *Recall that we introduced the idea of REST and RESTful APIs in
    Chapter 2. Now that we're focused on RPC, you may be asking how
    REST and RPC are related. You will sometimes hear people talk about
    RPC versus REST, as though it's an either-or choice, but that's a
    false dichotomy. Both are based on an underlying message
    transaction protocol, whether it's HTTP, gRPC, or QUIC. The main
-   distinction is the style of API you are trying to support.
+   distinction is the style of API you are trying to support.*
 
-   If it is RESTful, then you have only four remote procedures to
-   worry about: ``GET``, ``POST``, ``PUT``, and ``DELETE``. The
+   *If it is RESTful, then you have only four remote procedures to
+   worry about:* ``GET``, ``POST``, ``PUT``, *and* ``DELETE``. *The
    interesting part of the API is identifying the set of resources
    (objects) you want to operate on. An RPC-based API is not limited
    to four operations, which often means you end up supporting many
    more methods. This may be necessary so the program can support more
-   complex actions, such as ``SendEmail()``, ``ProcessPayment()``,
-   or ``LaunchJob()``.
+   complex actions, such as* ``SendEmail()``, ``ProcessPayment()``,
+   *or* ``LaunchJob()``.
 
-   But even this distinction is a bit misleading. This is for two
+   *But even this distinction is a bit misleading. This is for two
    reasons.  One is obvious: you can always use a general RPC mechanism
    to implement a RESTful API; just limit yourself to four remote
    procedures. The other reason is that the claim that your API is
@@ -121,8 +121,8 @@ cloud services in their datacenters.
    imagination. The two approaches are duals of each other, and you
    can always find a way to represent an "action-based" API as a
    "resource-based" API instead. API design is often a matter of
-   convenience and taste, but it should be done knowing that 
-   both design patterns can be made to work.
+   convenience and taste, but it should be done knowing that
+   both design patterns can be made to work.*
 
 Despite its origins in Google, gRPC does not stand for Google RPC. The
 “g” stands for something different in each release. For version 1.10
