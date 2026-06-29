@@ -176,18 +176,9 @@ all of this work is based on an approach that pre-dates the
 availability of modern modeling languages, of which YANG has become
 the widely-accepted solution. YANG—which stands for *Yet Another Next
 Generation*, a name chosen to poke fun at how often a do-over proves
-necessary—can be viewed as a restricted version of XSD, which is a
-language for defining a schema for XML.  YANG defines the structure of
-the data, but unlike XSD, it is not XML-specific. Instead, YANG can be
-used in conjunction with different over-the-wire message formats,
-including XML, but also YAML, protobufs, and JSON. If these acronyms
-are unfamiliar, or the distinction between a markup language and a
-schema for a markup language is fuzzy, a gentle introduction is
-available online.
-
-.. TODO -- Another example of where a stand-alone "piece" of 6E might
-   be useful. Maybe a "Markup Language" sidebar is a better approach;
-   just survey all the related acronyms with a dose of taxonomy.
+necessary. YANG defines the structure of the data, and is general
+enough to be used in conjunction with different over-the-wire message
+formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
 
 .. admonition:: Further Reading
 
@@ -196,8 +187,41 @@ available online.
    <https://www.rfc-editor.org/info/rfc6020>`__. RFC 6020,
    October 2010.
 
-   `Markup Languages (XML) <https://book.systemsapproach.org/data/presentation.html#markup-languages-xml>`__.
-   *Computer Networks: A Systems Approach*, 2020.
+   `YAML Ain't Markup Language (YAML) <https://yaml.org>`__.
+
+.. sidebar:: Markup Languages
+
+   *Because of HTML, markup languages are now part of the vernacular
+   in networking, but that doesn't mean they are understood. The term
+   originates in the practice of "marking up" a typed manuscript with
+   annotations in the margins. From there, it's easy to see the
+   connection to HTML, which is used to annotate data so that a web
+   browser knows how to render it on a display. The next
+   generalization was to markup (annotate) data for purposes other
+   than to display it, for example, so that two programs could
+   exchange data over HTTP as part of a e-commerce transaction. XML
+   (Extensible Markup Language) serves that purpose.  For example, XML
+   supports tagged data such as*
+   **<product_num>1234567</product_num>**
+   *in addition to the familiar HTML tags.*
+
+   *The complaint about XML was that it proved hard for humans to use
+   directly, for example, when they are trying to "describe" some
+   collection of data. No one wants to repeatedly type "<element_name>
+   ... </element_name>" for every data item they enter. They do want
+   the structured organization of data, and that's what YAML provides.
+   Technically, this means YAML is not a markup language; hence it's
+   name: YAML Ain't a Markup Language. YAML is actually closer to JSON
+   (JavaScript Object Notation) than XML.*
+
+   *Another piece of the puzzle is that all these markup languages
+   need a companion language that is used to define the schema, or
+   data model, for the information being represented. For XML, that
+   companion language was XSD (XML Schema Definition). For YAML, YANG
+   is commonly used (although YANG can also be used for other markup
+   languages, including XML). There are technical differences between
+   XSD and YANG—and what each is able to model—but those details are
+   beyond the scope of this discussion.*
 
 What’s important about this direction is that the data model, which
 defines the semantics of the variables available to be read and
@@ -363,15 +387,11 @@ opportunity to make a mistake.
 The solution, which has its origins in cloud operations, is to treat
 parameter settings as code; the practice is known as
 *Configuration-as-Code*. Typically, this means parameters are
-specified in YAML\ [#]_, and the set of YAML
+specified in YAML, and the set of YAML
 files corresponding to a network's aggregate configuration is managed
 in a code repository just like any other collection of C, Java, or
 GoLang programs. This is not as big of stretch as it might sound: you
 can think of YAML as a declarative programming language.
-
-.. [#] YAML at one time stood for "Yet Another Markup Language" but
-       now expands to "YAML Ain't Markup Language" to indicate its use
-       in configuration specification rather than document markup.
 
 The following snippet of YAML code shows how one might configure an
 Ethernet interface. This file corresponds to the YANG shown in the
