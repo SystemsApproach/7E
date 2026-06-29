@@ -138,7 +138,7 @@ are implemented in both software and hardware.
    foundation for managing and operating networks. You'll notice all
    of these use cases for SDN are in Part II, because of SDN's impact
    on core. The edge of the network (Part III) has been
-   software-defined since at least the earliest days of the Internet.
+   software-defined since at least the earliest days of the Internet.*
 
 
 |Tech|.2.2 Software Switch
