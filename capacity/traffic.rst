@@ -42,10 +42,11 @@ should follow the path R1-R3-R6-R7 and that any traffic going from R2
 to R7 should follow the path R2-R3-R4-R5-R7. One reason for such a
 choice would be to make good use of the capacity available along the
 two distinct paths from R3 to R7. We can think of the R1-to-R7 traffic
-as constituting one forwarding equivalence class, and the R2-to-R7
+as constituting one forwarding equivalence class (FEC), and the R2-to-R7
 traffic constitutes a second FEC.  Forwarding traffic in these two
 classes along different paths is difficult with normal IP routing,
-because R3 doesn’t normally look at where traffic came from in making
+because they might both contain traffic destined for the same IP
+addresses. R3 doesn’t normally look at where traffic came *from* in making
 its forwarding decisions.
 
 Unlike IP, MPLS uses label swapping to forward packets. Rather than
@@ -55,8 +56,9 @@ of that label. Importantly, labels are swapped at every hop (usually)
 and have local scope, unlike IP addresses. So the packets from R1 to
 R7 might have label *L1* in the header when they arrive at R3, while those from R2 to R7 have
 label *L2* in the header, even though both sets of packets have the
-same destination. We have created two distinct FECs, and R3 forwards
-them differently.
+same destination. We have created two distinct FECs, associating a
+different label with each FEC, and this allows R3 to forward the
+traffic in the two classes differently.
 
 The question that then arises is how do all the routers in the network
 agree on what labels to use and how to forward packets with particular

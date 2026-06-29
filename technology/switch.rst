@@ -133,12 +133,13 @@ are implemented in both software and hardware.
    the book. Section 3.2.4 introduces the idea of programming the data
    plane; Section 4.5 gives an example of how distributed routing
    algorithms can be replaced by a centralized SDN control plane;
+   Section 8.5 discusses the use of SDN in traffic engineering;
    Chapter 9 gives several examples of how SDN is used to instantiate
    virtual networks; and Chapter 10 shows how SDN provides the
    foundation for managing and operating networks. You'll notice all
    of these use cases for SDN are in Part II, because of SDN's impact
-   on core. The edge of the network (Part III) has been
-   software-defined since at least the earliest days of the Internet.*
+   on the network core. The edge of the network (Part III) has been
+   software-defined since the earliest days of the Internet.*
 
 
 |Tech|.2.2 Software Switch
