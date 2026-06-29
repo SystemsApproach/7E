@@ -67,14 +67,16 @@ ubiquity of Internet connectivity.
 
 .. sidebar:: The Third Transport
 
-   There are two well-known transport protocols in the Internet, TCP
+   *There are two well-known transport protocols in the Internet, TCP
    and UDP. The first provides a reliable byte stream, the second a
    simple multiplexing layer on top of IP. In this chapter we present
    a third transport abstraction, the request/response message
    paradigm. Whereas TCP and UDP are each defined by an RFC and are
    the standard textbook material for transport protocols, our view
    that the request/response paradigm is a third class of transport may
-   be a bit unconventional. Further complicating the picture is the
+   be a bit unconventional.*
+
+   *Further complicating the picture is the
    fact that RPC protocols are often layered on top of an existing
    transport, either TCP or UDP, which would lead one to think that
    RPC is some higher layer altogether. QUIC is an interesting example
@@ -82,8 +84,14 @@ ubiquity of Internet connectivity.
    transport protocol, even as it runs over UDP for practical deployment
    reasons. It very much matches the request/response paradigm, even
    though the stated motivation was largely about improving the performance
-   of web traffic in particular.
+   of web traffic in particular.*
 
+   *As an historical footnote, there was an effort to add a general
+   request/reply transport protocol to the Internet in the late 1980s.
+   The rationale and design for the protocol—known as VMTP (Versatile
+   Message Transaction Protocol) and defined in RFC 1045—still holds
+   up well today, but it never achieved wide-spread support. Sometimes,
+   good ideas are just ahead of their time.*
 
 That said, the first advantage should not be overlooked.  Making the
 developer's job easier often requires auxiliary components, above and

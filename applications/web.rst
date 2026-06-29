@@ -1,6 +1,7 @@
 .. index:: HTTP/HTTPS: Hypertext Transfer Protocol
 .. index:: REST/RESTful: Representational State Transfer
 .. index:: ISP: Internet Service Provider
+.. index:: CRUD: Create/Read/Update/Delete
 
 2.2 World Wide Web
 -----------------------------

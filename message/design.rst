@@ -15,10 +15,6 @@ cases. It's conceivable there could be, but it turns out each has
 adopted a different design. In this section, we look generally at the
 issues that require attention.
 
-.. sidebar:: Story of VMTP
-
-   Tell the story of VMTP (and using UDP as a counter argument).
-
 A key motivation for using a message transaction protocol is often to support
 latency-sensitive applications. In these cases, the design needs to aggressively
 look for opportunities to optimize performance. Eliminating network
@@ -27,7 +23,6 @@ with throughout this chapter, there are other opportunities to reduce
 delay. As with TCP, performance is an important design goal, but the
 emphasis is on the latency to complete transactions rather than the
 filling of the transport pipe.
-
 
 The next problem is how to identify the target procedure/address. An
 RPC mechanism needs a unique identifier for the remote procedure being

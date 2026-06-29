@@ -63,17 +63,25 @@ The first RPC mechanism is due to Andrew Birrell and Bruce Nelson at
 Xerox PARC, as described in their 1984 paper. Many other RPC
 mechanisms followed their lead, often implemented as the communication
 substrate for early distributed systems built around personal
-workstations and Ethernet-based local-area networks. During this era,
-SunRPC became the *de facto* standard thanks to its wide distribution
-with Sun workstations and the central role it played in Sun’s popular
-Network File System (NFS). The IETF subsequently adopted it as a
-standard Internet protocol under the name ONC RPC.
+workstations and Ethernet-based local-area networks. For example, the
+VMTP protocol mentioned in a sidebar earlier in this chapter followed
+from David Cheriton's experience implementing the Distributed V
+Kernel. Also during this era, SunRPC became the *de facto* standard
+thanks to its wide distribution with Sun workstations and the central
+role it played in Sun’s popular Network File System (NFS). The IETF
+subsequently adopted it as a standard Internet protocol under the name
+ONC RPC.
 
 .. admonition:: Further Reading
 
     A. Birrell and B. Nelson. `Implementing Remote Procedure Calls
     <https://dl.acm.org/doi/10.1145/2080.357392>`__. ACM
     Transactions on Computer Systems, February 1984.
+
+    D. Cheriton. `VMTP: Versatile Message Transaction Protocol:
+    Protocol Specification
+    <https://www.rfc-editor.org/info/rfc1045/>`__. RFC 1045,
+    February 1988.
 
     R. Thurlow. `RPC: Remote Procedure Call Protocol Specification
     Version 2 <https://www.rfc-editor.org/info/rfc5531>`__. RFC 5531,
@@ -88,8 +96,33 @@ cloud services in their datacenters.
 
 .. sidebar:: RPC vs REST
 
-   A false dichotomy...
-.. TODO finish this sidebar
+   Recall that we introduced the idea of REST and RESTful APIs in
+   Chapter 2. Now that we're focused on RPC, you may be asking how
+   REST and RPC are related. You will sometimes hear people talk about
+   RPC versus REST, as though it's an either-or choice, but that's a
+   false dichotomy. Both are based on an underlying message
+   transaction protocol, whether it's HTTP, gRPC, or QUIC. The main
+   distinction is the style of API you are trying to support.
+
+   If it is RESTful, then you have only four remote procedures to
+   worry about: ``GET``, ``POST``, ``PUT``, and ``DELETE``. The
+   interesting part of the API is identifying the set of resources
+   (objects) you want to operate on. An RPC-based API is not limited
+   to four operations, which often means you end up supporting many
+   more methods. This may be necessary so the program can support more
+   complex actions, such as ``SendEmail()``, ``ProcessPayment()``,
+   or ``LaunchJob()``.
+
+   But even this distinction is a bit misleading. This is for two
+   reasons.  One is obvious: you can always use a general RPC mechanism
+   to implement a RESTful API; just limit yourself to four remote
+   procedures. The other reason is that the claim that your API is
+   "too complex" for a simple RESTful API is actually a failure of
+   imagination. The two approaches are duals of each other, and you
+   can always find a way to represent an "action-based" API as a
+   "resource-based" API instead. API design is often a matter of
+   convenience and taste, but it should be done knowing that 
+   both design patterns can be made to work.
 
 Despite its origins in Google, gRPC does not stand for Google RPC. The
 “g” stands for something different in each release. For version 1.10
