@@ -121,14 +121,12 @@ are implemented in both software and hardware.
    book.  This is because SDN is an approach to networking, rather
    than a specific technology. Defining an open interface that the
    control plane can use to program the data plane was one of the
-   original contributions, but more generally, anything that opens the
+   original contributions; more generally, anything that opens the
    network to being more programmable—by more people—can be viewed as
-   part of the SDN movement. Marc Andreessen famously coined the
-   phrase "Software is Eating the World" to describe how software is
-   transforming even physical-world industries. From that vantage
-   point, SDN is about software "eating" the network, which has
-   historically been defined by its physical infrastructure (and the
-   companies that operated it).*
+   part of the SDN movement. Networks have always involved large
+   amounts of software; a key contribution of SDN was to expand the
+   set of people who could program networks and networking equipment
+   beyond the set of vendors building networking hardware.*
 
    *You can read the SDN book cited later in this section for a
    comprehensive look at SDN, but we cover several examples throughout
@@ -138,9 +136,9 @@ are implemented in both software and hardware.
    Chapter 9 gives several examples of how SDN is used to instantiate
    virtual networks; and Chapter 10 shows how SDN provides the
    foundation for managing and operating networks. You'll notice all
-   of these use cases for SDN are in Part II. The edge of the network
-   has always been software-defined, at least during the Internet
-   era.*
+   of these use cases for SDN are in Part II, because of SDN's impact
+   on core. The edge of the network (Part III) has been
+   software-defined since at least the earliest days of the Internet.
 
 
 |Tech|.2.2 Software Switch
