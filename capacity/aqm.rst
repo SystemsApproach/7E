@@ -30,7 +30,7 @@ detects that congestion is imminent, to notify the source of that
 fact.  RED was invented by Sally Floyd and Van Jacobson in the early
 1990s. It was inspired by a similar mechanism invented by
 K.K. Ramakrishnan and Raj Jain, which ran on the Digital Network
-yArchitecture (an early peer of the TCP/IP Internet).
+Architecture (an early peer of the TCP/IP Internet).
 
 .. _reading_red:
 .. admonition:: Further Reading
