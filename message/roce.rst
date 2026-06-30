@@ -128,7 +128,7 @@ at which it sends ``CNP`` notices back to the sender. Instead of
 sending a ``CNP`` for every ``CE`` nonfiction that arrives, it sends
 no more than one ``CNP`` every 50 μs.\ [#]_ This setting is an
 engineering choice designed to reduce overhead, where the important
-point is that the sender knows adjusts its sending rate in proportion
+point is that the sender knows to adjust its sending rate in proportion
 to the rate at which ``CNP`` notices arrive (or don't arrive).
 
 .. [#] That the DCQCN receiver thins out the feedback information
