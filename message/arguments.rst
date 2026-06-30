@@ -67,11 +67,6 @@ same architecture and the program was written in the same language,
 because the compiler on the destination machine might align the fields
 in the structure differently.
 
-.. sidebar:: XML
-
-   Talk about XML as an text-based format for exchanging data.
-   Also mention xml-rpc.
-
 Although argument marshalling is not rocket science—it is a small
 matter of bit twiddling—there are a surprising number of design
 choices to address. This section gives a simple taxonomy for argument

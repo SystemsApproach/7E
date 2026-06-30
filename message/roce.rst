@@ -1,6 +1,7 @@
 .. index:: RoCE: RDMA over Converged Ethernet
-.. index:: ECN: Explicit Congestion Notification
 .. index:: IPU: Infrastructure Processing Unit
+.. index:: DCQCN: Datacenter Quantized Congestion Notification
+.. index:: CNP: Congestion Notification Packet
 
 |Message|.5 Optimizing Ethernet for RDMA
 ------------------------------------------
@@ -89,8 +90,6 @@ transport header, plus the message payload, needs to be encapsulated.
    The InfiniBand transport header and payload are encapsulated in a
    UDP datagram.
 
-.. TODO -- Revisit once Queueing and CC chapters are done.
-
 The approach to augmenting Ethernet so it better emulates InfiniBand
 has two main parts. The first is to replicate InfiniBand's flow
 control mechanism by adding support for Priority Flow Control to
@@ -100,19 +99,46 @@ Notification (ECN) mechanism described in Chapter |Capacity|. This is
 appealing for cloud providers because their datacenters already
 leverage ECN in support of TCP congestion control.  The two mechanisms
 work in concert, with ECN pacing the source host as a first response
-to congestion, and PFC serving as a fall-back. Note that this is all
-still an active area of research, with the following papers giving
-some insight into the issues being studied. One complicating factor
-worth highlighting is that ECN was originally designed under the
-assumption that the end points were running independent TCP flows. For
-AI workloads running in datacenters, the one-to-many and many-to-one
-communication pattern means that multiple "flows" are now part of a
-larger collective of communicating nodes.
+to congestion, and PFC serving as a fall-back.
 
-.. TODO -- Is the added "complication" helpful? Should we say more,
-   or maybe less?
+Note that this is all still an active area of research, with the
+following papers giving some insight into the issues being studied.
+We draw particular attention to the first paper, by Zhu and
+colleagues, which spells out an approach that is in wide use today.
+The algorithm, known as *DCQCN (Datacenter Quantized Congestion
+Notification)*, is similar to the DCTCP algorithm described in Section
+|CC|.4.1, but adapted to be rate-based rather than window-based.
+(Recall that TCP is window-based, so all congestion-induced
+adjustments are to the congestion window, which then indirectly
+impacts the sending rate.) DCQCN still uses the same
+additive-increase, multiplicative-decrease heuristic as TCP, so that
+part of the algorithm is the same. The main difference is in the
+details of how the receiver notifies the sender that it needs to slow
+down. (Recall that the actual ``CE`` notice is in the IP packet that
+arrives at the receiver; we need a transport protocol mechanism to
+relay that information back to the sender.)
+
+For DCTCP, the TCP receiver "echos" every notification back to the
+sender by setting the ``ECE`` bit in the TCP header. The sender adapts
+the window size for each ``ECE`` it sees, and tells the receiver it
+has done so by sending a ``CWR`` notice back. For DCQCN, RoCE.v2
+defines an analogous transport-level notice, denoted ``CNP``
+*(Congestion Notice Packet)*, but the DCQCN receiver limits the rate
+at which it sends ``CNP`` notices back to the sender. Instead of
+sending a ``CNP`` for every ``CE`` nonfiction that arrives, it sends
+no more than one ``CNP`` every 50 μs.\ [#]_ This setting is an
+engineering choice designed to reduce overhead, where the important
+point is that the sender knows adjusts its sending rate in proportion
+to the rate at which ``CNP`` notices arrive (or don't arrive).
+
+.. [#] That the DCQCN receiver thins out the feedback information
+         explains the "Quantized" qualifier in the name.
 
 .. admonition:: Further Reading
+
+   Y. Zhu et al. `Congestion Control for Large-Scale RDMA
+   Deployments <https://dl.acm.org/doi/10.1145/2829988.2787484>`__.
+   ACM SIGCOMM '15 Symposium, August 2015.
 
    C. Gao et al. `RDMA over Commodity Ethernet at Scale
    <https://dl.acm.org/doi/10.1145/2934872.2934908>`__.
@@ -137,32 +163,15 @@ larger collective of communicating nodes.
 
 Finally, there is the question of where the RDMA transport function is
 implemented for RoCE: (1) in hardware on the NIC, or (2) in software
-running on the host. While hardware offloading is possible (see the
-sidebar on IPUs), a software implementation is a standard part of the
-Linux kernel. The latter consumes host resources—leaving fewer cycles
-for application-level computations—but that does not necessarily
-translate to worse message latency. This configuration is shown in
-:numref:`Figure %s <fig-soft-roce>`.
-
-
-..  Inband (role of fabric)
-    https://network.nvidia.com/pdf/whitepapers/IB_Intro_WP_190.pdf
-        https://cloudswit.ch/blogs/roce-or-infiniband-technical-comparison/#1-6-transport-layer
-
-    RDMA over Heterogeneous NICS
-    https://www.usenix.org/system/files/osdi23-li-qiang.pdf
-
-    RoCEv2 Header Encapsulation https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet#/media/File:RoCE_Header_format.png
-
-    A good overview of RoCE
-    https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
-
-    For a good overview of RoCE, see
-    https://www.fs.com/blog/rdma-over-converged-ethernet-roce-guide-2208.html
+running on the host. There are multiple commercial NICs that support
+RoCE, with the RDMA functionalilty implemented there. We note,
+however, that a software implementation is a standard part of the
+Linux kernel, so that is an option for experimenting with RDMA. This
+configuration is shown in :numref:`Figure %s <fig-soft-roce>`.
 
 .. sidebar:: Information Processing Units
 
    Tell the IPU/DPU story. Focus on datacenters wanting to separate
    "sellable" cycles from "infrastructure" cycles. Explain how that is
    not the same as e2e message latency, as cycles are still required
-   in both cases.
+   in both cases. Relate to larger history of SmartNICs.

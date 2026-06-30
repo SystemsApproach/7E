@@ -8,7 +8,7 @@ sections have proven useful in narrow settings. Datacenter networks
 are a noteworthy example, and so we use them to illustrate how these
 mechanisms are used in practice.
 
-.. TODO Suggest reworking this section to make Datacenter one example
+.. TODO -- Could rework this section to make Datacenter one example
    out of 2 or 3, including VOIP and perhaps access networks.
 
 Datacenter networks have two properties that make them an ideal
@@ -98,26 +98,26 @@ While in principle the RED algorithm for calculating the average queue
 length could be used in both cases, typically the instantaneous queue
 length is used instead to trigger ECN marking. This works because (1)
 the RTTs are uniform (meaning there is no need to account for drastic
-variations), (2) the RTTs are short (meaning feedback happens quickly),
-and (3) the switching fabric's capacity is calibrated to require short
-queues (meaning any burst of queueing is enough to signal congestion).
+variations), (2) the RTTs are short (meaning feedback happens
+quickly), and (3) the switching fabric's capacity is calibrated to
+require short queues (meaning any burst of queuing is enough to signal
+congestion).  As it turns out, configuring RED to use the
+instantaneous queue length is just a special case of the more general
+algorithm: we set parameters ``MinThreshold`` and ``MaxThreshold``
+equal to each other, and we set ``Weight=1`` for the average queue
+length calculation.
 
 Finally, the in-network mechanisms make assumptions about the edge
-hosts being well-behaved, and while cloud servers run arbitrary
-workloads, there are several opportunities to enforce that behavior.
-This includes applying the appropriate DSCP setting to each packet,
-and policing the send rate so it stays within acceptable bounds.
-Specifically, the cloud can "police behavior" in the hypervisor that
-sits between the server and the tenant VM; in the IPU (NIC) that
-connects the server to the datacenter fabric; and in the Top-of-Rack
-switch that is the first switch on that fabric. As for what that
-proper behavior is, we will see examples in Chapter |CC| (where we
-look at congestion control) and Chapter |Message| (where we look at
-RDMA).
-
-.. TODO -- The policing behavior comment might be too subtle. If we're
-   talking TCP congestion control, that's left to the variant of TCP
-   running in the VM. If we're talking RDMA, that could be 1st-hop
-   flow control. In either case, the last paragraph sort of punts.
-
+hosts being well-behaved, which includes applying the right DSCP
+labels and limiting their sending rate). One general approach is for
+the cloud to "police" senders; this acknowledges that a cloud hosts
+VMs that are able to run arbitrary code. This policing action can be
+implemented in the hypervisor that sits between the server and the
+tenant VM; in the NIC that connects the server to the datacenter
+fabric; and in the Top-of-Rack switch that is the first switch on that
+fabric. The other general approach is to trust senders to behave
+correctly; this is more likely to happen when the you are paying for
+resource usage. As for exactly what constitutes good sender behavior,
+we describe two examples in Part III: Chapter |CC| looks at TCP
+congestion control, and Chapter |Message| looks at RDMA.
 

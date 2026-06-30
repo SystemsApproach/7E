@@ -1,5 +1,11 @@
 .. index:: RED: Random Early Detection
 .. index:: AQM: Active Queue Management
+.. index:: ECN: Explicit Congestion Notification
+.. index:: ECE: ECN Echo
+.. index:: ECT: ECN Capable Transport
+.. index:: CE: Congestion Encountered
+.. index:: CWR: Congestion Window Reduced
+
 
 |Capacity|.3  Active Queue Management
 -------------------------------------------
@@ -24,7 +30,7 @@ detects that congestion is imminent, to notify the source of that
 fact.  RED was invented by Sally Floyd and Van Jacobson in the early
 1990s. It was inspired by a similar mechanism invented by
 K.K. Ramakrishnan and Raj Jain, which ran on the Digital Network
-Architecture (an early peer of the TCP/IP Internet).
+yArchitecture (an early peer of the TCP/IP Internet).
 
 .. _reading_red:
 .. admonition:: Further Reading
