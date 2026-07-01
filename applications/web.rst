@@ -8,12 +8,12 @@
 
 We begin our discussion of applications by focusing on the one that is
 so ubiquitous, it is often mixed up with the Internet itself: the
-World Wide Web. The web is so widely used today that it is hard to
+World Wide Web. The Web is so widely used today that it is hard to
 call it an application; it might be better thought of as a framework
 for building and delivering applications. But it did in fact start out
 as a single application, with a single application layer
 protocol—HTTP—underpinning it. In this section we dig into the details
-of that protocol, and in doing so, tease out the reasons the web has
+of that protocol, and in doing so, tease out the reasons the Web has
 become such a ubiquitous framework for building new applications.
 
 
@@ -81,7 +81,7 @@ documents or objects, there needs to be a way to identify documents so
 you can link to them. Uniform Resource Locators (URLs)
 are so familiar to most of us by now that it’s easy to forget that they
 haven’t been around forever. They provide information that allows
-objects on the web to be located, and they look like the following:
+objects on the Web to be located, and they look like the following:
 
 .. code-block:: html
 
@@ -130,27 +130,27 @@ request or response. There are zero or more of these ``MESSAGE_HEADER``
 lines—the set is terminated by a blank line—each of which looks like a
 header line in an email message. HTTP defines many possible header
 types, some of which pertain to request messages, some to response
-messages, and some to the data carried in the message body. Instead of
-giving the full set of possible header types, though, we just give a
-handful of representative examples. Finally, after the blank line comes
+messages, and some to the data carried in the message body. We
+describe a
+handful of representative examples below. Finally, after the blank line comes
 the contents of the message (``MESSAGE_BODY``); this part of
 the message is where a server would place the requested page when
 responding to a request, and it is typically empty for request messages.
 
 Why was HTTP designed to run over TCP? The designers didn’t have to do
-it that way, but TCP provides multiple features that HTTP needs,
-most notably, reliable data delivery (no-one wants a web page with
-missing data). Using TCP (as opposed to either IP or
-UDP) meant that the designers of HTTP didn't need to worry about
-reliability. However, as we’ll see below, a few issues arose from
-building a request/response protocol on top of TCP. These issues
-become more apparent as you consider the details of the interactions
-between the application and transport layer protocols, and were
-exacerbated by the addition of security to the transport layer. This
-has led to new versions of HTTP, which has in turn inspired new
-transport protocols. The interplay between HTTP and the transport layer is a great
-example of how modularity boundaries shift over time as systems
-mature and evolve.
+it that way, but TCP provides multiple features that HTTP needs, most
+notably, reliable data delivery (no-one wants a web page with missing
+data). Using TCP (as opposed to either IP or UDP) meant that the
+designers of HTTP didn't need to worry about reliability. However, as
+we’ll see below, a few issues arose from building a request/response
+protocol on top of TCP. These issues become more apparent as you
+consider the details of the interactions between the application and
+transport layer protocols, and were exacerbated by the addition of
+security to the transport layer. This has led to new versions of HTTP,
+which has in turn inspired new transport protocols, which we discuss
+later in this book. The interplay between HTTP and the transport layer
+is a great example of how modularity boundaries shift over time as
+systems mature and evolve.
 
 
 Request Messages
@@ -295,7 +295,7 @@ Connection Overhead
 
 The original version of HTTP (1.0) established a separate TCP
 connection for each data item retrieved from the server. It’s not too
-hard to see how this was a very inefficient mechanism: a TCP
+hard to see why this was inefficient: a TCP
 connection requires setup and teardown messages to be exchanged
 between the client and server even if all the client wanted to do was
 verify that it had the most recent copy of a page. Thus, retrieving a
@@ -467,7 +467,7 @@ at naming systems.
 2.2.3 Caching
 ~~~~~~~~~~~~~~
 
-An important implementation strategy that makes the web more usable is
+An important implementation strategy that makes the Web more usable is
 to cache web pages. Caching has many benefits. From the client’s
 perspective, a page that can be retrieved from a nearby cache can be
 displayed much more quickly than if it has to be fetched from across the
@@ -505,7 +505,8 @@ specialized networks of servers known as Content Distribution Networks
 Internet to serve popular content from caches that are widely
 distributed and closer to the users than the origin servers. They not
 only improve performance but also make it harder for a popular site to
-be brought down by a *denial-of-service* attack.
+be brought down by a *denial-of-service* attack. We discuss CDNs in
+detail in Chapter |Overlay|.
 
 No matter where pages are cached, the ability to cache web pages is
 important enough that HTTP has been designed to make the job easier. The
@@ -536,25 +537,25 @@ happens every time you initiate a commercial transaction in a browser
 or by using a cell phone app: a retail service talks to a payment
 service, a shipping service, an inventory service, an upstream
 supplier, and so on. We conclude this section by looking at how HTTP
-and the web have played a central role in supporting such
+and the Web have played a central role in supporting such
 transactions, which are collectively known as *Web Services*. In
 short, HTTP helps by defining an API for web services, and that API is
 often characterized as *RESTful*.
 
 REST is an acronym—\ *REpresentational State Transfer*\ —used to
-explain the software architecture that underlies the web. It was
+explain the software architecture that underlies the Web. It was
 articulated in a PhD thesis by Roy Fielding in 2000, a few years after
-the web started to become mainstream. A RESTful API, in turn, is an
+the Web started to become mainstream. A RESTful API, in turn, is an
 API that is consistent with the REST architecture. If you understand
-the basic ideas of the web we've just covered, you understand the
+the basic ideas of the Web we've just covered, you understand the
 essence of REST: everything is a *resource*, resources are identified
 by a URI, and the operations you can perform on resources include
 ``GET``, ``POST``, ``PUT``, and ``DELETE`` (see :numref:`Table %s
 <tab-ops>`).
 
 While this sounds like a circular definition, it really boils down to
-an observation that the web, whether by design or accident, reinvented
-an object-oriented software architecture—resource is just another name
+an observation that the Web, either by design or accident, reinvented
+an object-oriented software architecture. Resource is just another name
 for an object, and the set of HTTP operations are just a slight
 variation of a well-known set of object-oriented operations referred
 to as *CRUD*: *Create*, *Read*, *Update*, *Delete*.
@@ -562,19 +563,19 @@ to as *CRUD*: *Create*, *Read*, *Update*, *Delete*.
 For example, ``https://api.github.com`` is the URL for the REST API by
 which you can programmatically interact with GitHub. If you access it
 from a browser you will see a list of resources. Many of those
-resources require you you first authenticate yourself in order to
-access, but some resources correspond to publicly visible
+resources require that you first authenticate yourself in order to
+access them, but some resources correspond to publicly visible
 information. For example, if you do a GET on
 ``https://api.github.com/orgs/systemsapproach`` you will see the set
 of resources associated with the Systems Approach organization. From
 there, you can continue to explore the resource hierarchy.
 
-In the context of web services, the REST architecture is based on the
+The REST architecture is based on the
 assumption that the best way to integrate applications across networks
 is by re-applying the model underlying the World Wide Web
-architecture.  Since the only operations REST supports are the HTTP
-methods, such as ``GET`` and ``POST`` to provide an interface to a Web
-Service. In the REST model, any complexity in this interface is
+architecture.   The only operations REST supports are the HTTP
+methods, such as ``GET`` and ``POST``, to provide an interface to a web
+service. Since these methods are reasonably simple, any complexity in this interface is
 shifted from the protocol to the payload. The payload is a
 representation of the abstract state of a resource. For example, a
 ``GET`` could return a representation of the current state of the
@@ -586,9 +587,9 @@ how the resource is actually implemented by a particular backend
 service. It is not necessary to transmit a complete resource state in
 each message. The size of messages can be reduced by transmitting just
 the parts of a state that are of interest (e.g., just the parts that are
-being modified). And, because Web Services share a single protocol and
+being modified). And, because web services share a single protocol and
 address space with other web resources, parts of states can be passed by
-reference—by URI—even when they are other Web Services.
+reference—by URI—even when they are other web services.
 
 This approach is best summarized as a data-oriented or document-passing
 style, as opposed to a procedural style. Defining an application
@@ -596,11 +597,11 @@ protocol in this architecture consists of defining the document
 structure (i.e., the state representation). XML and the lighter-weight
 JavaScript Object Notation (JSON) are the most frequently used
 presentation languages for this state. Interoperability depends on
-agreement, between a Web Service and its clients, on the state
+agreement, between a web service and its clients, on the state
 representation.
 
 One of the selling features of REST is that it leverages the
-infrastructure that has been deployed to support the web. For example,
+infrastructure that has been deployed to support the Web. For example,
 web proxies can enforce security or cache information. Existing content
 distribution networks (CDNs) can be used to support RESTful
 applications.
@@ -608,7 +609,7 @@ applications.
 .. sidebar:: Alternative Design
 
      The Internet did not settle on REST overnight. An alternative
-     approach to Web Services, called *SOAP (Simple Object Access
+     approach to web services, called *SOAP (Simple Object Access
      Protocol)* also gained traction.  The SOAP architecture’s
      approach to the problem was to make it feasible, at least in
      theory, to generate protocols that are customized to each network
@@ -620,7 +621,7 @@ applications.
      while REST supports a data-centric style.
 
      The online retailer Amazon, not surprisingly, was an early
-     adopter (2002) of Web Services. Interestingly, Amazon made its
+     adopter (2002) of web services. Interestingly, Amazon made its
      systems publicly accessible via *both* SOAP and REST approaches,
      and according to some reports a substantial majority of
      developers use the REST interface. Of course, this is just one
@@ -628,7 +629,7 @@ applications.
      for this book, we view REST as the more elegant approach to web
      services, and so elect to focus on it.
 
-As a final note, if Web Services is what we call it when the web
+As a final note, if web services is what we call it when the web
 server that implements my application sends a request to the web
 server that implements your application, then what do we call it when
 we both put our applications in the cloud so that they can support
@@ -639,10 +640,10 @@ Moving a server process from a physical machine running in my machine
 room into a virtual machine running in a cloud provider’s datacenter
 shifts responsibility for keeping the machine running from my system
 admin to the cloud provider’s operations team, but the application is
-still designed according to the Web Services architecture. On the
+still designed according to the web services architecture. On the
 other hand, if the application is designed from scratch to run on a
 scalable cloud platform, for example by adhering to the
 *micro-services architecture*, then we say the application is *cloud
 native*. So the important distinction is cloud native versus legacy
-Web Services deployed in the cloud. Either approach can export
+web services deployed in the cloud. Either approach can export
 a RESTful API.

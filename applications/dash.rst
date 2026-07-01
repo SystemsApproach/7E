@@ -16,15 +16,15 @@ encoded, and video coding is another field with a long history. To
 make efficient use of bandwidth and storage, video is usually
 compressed, and organizations such as MPEG (the
 Moving Picture Expert Group) produce standards that allow for
-interoperability among devices that encode, store, and play video content.
+interoperability among devices that encode, store, and play video
+content. We cover this topic in detail in Chapter |Stream|.
 
-.. We might package our MPEG section as a standalone supplement.
 
-Most video coding schemes allow for a trade-off between the bandwidth
-consumed and the quality of the images. Since the bandwidth that is
-available on a network path typically varies over time, it is
+Video coding usually entails a trade-off between the bandwidth
+consumed and the quality of the images. It is
 desirable to pick a set of coding parameters that provides sufficient
-quality without exceeding the available network bandwidth. There is
+quality without exceeding the available network bandwidth, bearing in
+mind that bandwidth is likely to vary over time. There is
 also no point delivering higher quality than an end system can
 support. This tradeoff applies whether we are talking about real-time
 video (e.g., video conferencing) or streaming of recorded content as
@@ -226,7 +226,12 @@ the hope that the reduced bandwidth can now be met by the network, and
 the queue will start to fill again. If the queue is getting more full
 over time, that can be a sign that a higher quality can be
 requested. We recommend two studies of how to adapt the rate for those
-interested in an in-depth analysis.
+interested in an in-depth analysis. The first paper showed that an
+algorithm aiming to keep the buffer from underflowing, with buffer
+occupancy being the key control variable, is effective. The second
+shows the benefits of using recent bandwidth measurements as a guide
+to the expected future bandwidth as an additional input to the
+system. 
 
 .. admonition:: Further Reading
 
