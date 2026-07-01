@@ -284,23 +284,23 @@ hops (server-leaf-spine-leaf-server in the inter-rack case).
    The cloud has had a transformative impact on how we implement
    network applications, but building the networks that underlie the
    cloud—for example, a datacenter fabric like the one depicted in
-   :numref:`Figure %s <fig-leaf-spine>`\ —raises an interesting set
-   of networking challenges. We address those challenges throughout
-   the book, but note that they are not unique; datacenter networks
-   face the same set of problems as any network faces. What's unique
-   is the specific circumstances (e.g., scale, workloads, round-trip
-   times) of datacenter networks, which influences design choices we
-   end up making.
+   :numref:`Figure %s <fig-leaf-spine>`\ —raises an interesting set of
+   networking challenges. We address those challenges throughout the
+   book, but note that they are not unique; datacenter networks face
+   the same set of problems as any network faces. What's unique is the
+   specific circumstances (e.g., traffic patterns, round-trip times,
+   topology, scale) of datacenter networks, which influences design
+   choices we end up making.
 
    We address each of those datacenter-specific challenges in the
    context of the general networking problems. Section 4.5 describes
-   how to support routing in datacenter fabrics; Sections 8.4 looks at
+   how to support routing in datacenter fabrics; Section 8.4 looks at
    queue management in fabric switches; Section 9.4 explains how
    virtual networks are deployed in datacenters; and Sections 15.4 and
    15.5 show how datacenter networks are being optimized for AI
    workloads. In addition, Chapter 10 describes how best practices in
    operating datacenter networks is now influencing how networks
-   everywhere are starting to be managed.
+   everywhere are being managed.
 
 
 2.1.3 Distributed Services
