@@ -231,7 +231,7 @@ algorithm aiming to keep the buffer from underflowing, with buffer
 occupancy being the key control variable, is effective. The second
 shows the benefits of using recent bandwidth measurements as a guide
 to the expected future bandwidth as an additional input to the
-system. 
+system.
 
 .. admonition:: Further Reading
 

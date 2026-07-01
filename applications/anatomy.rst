@@ -1,4 +1,8 @@
 .. index:: IXP: Internet Exchange Point
+.. index:: BSD: Berkeley Software Distribution
+.. index:: API: Application Programming Interface
+.. index:: ToR: Top-of-Rack
+.. index:: VM: Virtual Machine
 
 2.1 Anatomy of an Application
 ---------------------------------------
@@ -36,13 +40,14 @@ system, and exposed to applications through a standard API
 API for client-server applications has been the socket API.
 
 The *socket interface* was originally provided by the Berkeley
-distribution of Unix, and is now supported in virtually all popular
-operating systems. It is also the foundation of language-specific
-interfaces, such as the Java or Python socket library. We use Linux
-and C for all code examples in this book; Linux because it is open
-source and C because it remains the language of choice for network
-internals. (C also has the advantage of exposing all the low-level
-details, which is helpful in understanding the underlying ideas.)
+Software Distribution (BSD) of Unix, and is now supported in virtually
+all popular operating systems. It is also the foundation of
+language-specific interfaces, such as the Java or Python socket
+library. We use Linux and C for all code examples in this book; Linux
+because it is open source and C because it remains the language of
+choice for network internals. (C also has the advantage of exposing
+all the low-level details, which is helpful in understanding the
+underlying ideas.)
 
 It is hard to overstate the importance of the Socket API. It defines
 the demarcation point between the applications running on top of the
@@ -180,7 +185,7 @@ instant messaging applications.
 .. admonition:: Further Reading
 
    `Supplemental Resources for Computer Networks: A Systems Approach
-      <https://github.com/SystemsApproach/7E/tree/main/resources/>`__. 
+   <https://github.com/SystemsApproach/7E/tree/main/resources/>`__.
 
 
 
