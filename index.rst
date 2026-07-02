@@ -1,7 +1,7 @@
 .. SPDX-FileCopyrightText: 2026 Larry L. Peterson and Bruce S. Davie
 .. SPDX-License-Identifier: CC-BY-4.0
 
-.. image:: _static/SystemsApproachLogoURL.png
+.. image:: _static/SALogoBlue.png
    :width: 300px
    :align: center
    :target: https://systemsapproach.org
