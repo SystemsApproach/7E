@@ -24,7 +24,7 @@ Before we go any further, it is important to distinguish between
 application *programs* and application *protocols*. For example, the
 HyperText Transport Protocol (HTTP) is an application protocol that is
 used to retrieve web pages from remote servers. Many different
-application programs—that is, web clients like Internet Explorer,
+application programs—that is, web clients such as
 Chrome, Firefox, and Safari—provide users with a different look and
 feel, but all of them use the same HTTP protocol to communicate with
 web servers over the Internet. Indeed, it is the fact that the
@@ -65,16 +65,16 @@ designed to meet that goal.
 One way to think of the Web is as a set of cooperating clients
 and servers, all of whom speak the same language: HTTP. Most people are
 exposed to the Web through a graphical client program or web browser
-such as Safari, Chrome, Firefox, or Internet Explorer. :numref:`Figure %s
-<fig-netscape>` shows the Safari browser in use, displaying a page of
-information from Princeton University.
+such as Safari, Chrome, or Firefox. :numref:`Figure %s
+<fig-netscape>` shows the Firefox browser in use, displaying a page of
+information from the web site where we publish this book.
 
 .. _fig-netscape:
-.. figure:: applications/figures/browser-screenshot.png
+.. figure:: applications/figures/firefox.png
    :width: 600px
    :align: center
 
-   The Safari web browser.
+   A web browser displays a page.
 
 If you want to organize information into a system of linked
 documents or objects, there needs to be a way to identify documents so
@@ -85,11 +85,11 @@ objects on the Web to be located, and they look like the following:
 
 .. code-block:: html
 
-   http://www.cs.princeton.edu/index.html
+   https://book.systemsapproach.org/index.html
 
 If you opened that particular URL, your web browser would open a TCP
 connection to the web server at a machine called
-``www.cs.princeton.edu`` and immediately retrieve and display the file
+``book.systemsapproach.org`` and immediately retrieve and display the file
 called ``index.html``. Most files on the Web contain images and text,
 and many have other objects such as audio and video clips, pieces of
 code, etc. They also frequently include URLs that point to other files
@@ -149,7 +149,9 @@ transport layer protocols, and were exacerbated by the addition of
 security to the transport layer. This has led to new versions of HTTP,
 which has in turn inspired new transport protocols, which we discuss
 later in this book. The interplay between HTTP and the transport layer
-is a great example of how modularity boundaries shift over time as
+is a classic systems tradeoff: where should reliability sit in the
+system? The evolution of HTTP and the transport protocols underneath
+it also provides a great case study of how modularity boundaries shift over time as
 systems mature and evolve.
 
 
@@ -200,9 +202,9 @@ For example, the ``START_LINE``
 
 ::
 
-   GET http://www.cs.princeton.edu/index.html HTTP/1.1
+   GET http://book.systemsapproach.org/index.html HTTP/1.1
 
-says that the client wants the server on host ``www.cs.princeton.edu``
+says that the client wants the server on host ``book.systemsapproach.org``
 to return the page named
 ``index.html``.  This particular example uses an absolute URL. It is
 also possible to request a path in the ``START_LINE`` and specify the host name
@@ -211,7 +213,7 @@ in one of the ``MESSAGE_HEADER`` lines; for example,
 .. code-block:: http
 
    GET /index.html HTTP/1.1
-   Host: www.cs.princeton.edu
+   Host: book.systemsapproach.org
 
 Here, ``Host`` is one of the possible ``MESSAGE_HEADER`` fields. One
 of the more interesting of these is ``If-Modified-Since``, which gives
@@ -272,15 +274,15 @@ Also similar to request messages, response messages can contain one or
 more ``MESSAGE_HEADER`` lines. These lines relay additional
 information back to the client. For example, the ``Location`` header
 line specifies that the requested URL is available at another
-location. Thus, if the Princeton CS Department web page had moved from
-``http://www.cs.princeton.edu/index.html`` to
-``http://www.princeton.edu/cs/index.html``, for example, then the
+location. Thus, if our book's web page had moved from
+``http://book.systemsapproach.org/index.html`` to
+``http://www.systemsapproach.org/book/index.html``, for example, then the
 server at the original address might respond with
 
 .. code-block:: http
 
    HTTP/1.1 301 Moved Permanently
-   Location: http://www.princeton.edu/cs/index.html
+   Location: http://www.systemsapproach.org/book/index.html
 
 In the common case, the response message will also carry the requested
 page. This page is an HTML document, but since it may carry nontextual
@@ -303,19 +305,20 @@ page that included some text and a dozen icons or other small graphics
 would result in 13 separate TCP connections being established and
 closed.
 
-To make matters worse, securely accessing an HTTPS page results in
-even more round trips for the two sides to exchange and verify security
-credentials. In this case, HTTPS runs over TLS, which in turn runs
-over TCP. :numref:`Figure %s <fig-oldhttp>` shows the sequence of
-events for fetching a page that has just a single embedded object.
-Blue lines indicate TCP and TLS messages, while black lines indicate
-the HTTP requests and responses. The figure is purposely vague about
-the exact TCP/TLS messages being exchanged (we'll fill in the details
-in Chapters |TCP| and |TLS|), but the key takeaway is clear: multiple round
-trips are required to download even the simplest web page.  This is a
-striking example of how passing off functionality to be implemented in
-another layer without looking at the details can have negative
-consequences.
+To make matters worse, securely accessing a page using HTTPS (the
+secured version of HTTP) results in even more round trips for the two
+sides to exchange and verify security credentials. In this case, HTTP
+runs over TLS (transport layer security), which in turn runs over
+TCP. :numref:`Figure %s <fig-oldhttp>` shows the sequence of events
+for fetching a page that has just a single embedded object.  Blue
+lines indicate TCP and TLS messages, while black lines indicate the
+HTTP requests and responses. The figure is purposely vague about the
+exact TCP/TLS messages being exchanged (we'll fill in the details in
+Chapters |TCP| and |TLS|), but the key takeaway is clear: multiple
+round trips are required to download even the simplest web page.  This
+is a striking example of how passing off functionality to be
+implemented in another layer without looking at the details can have
+negative consequences.
 
 .. _fig-oldhttp:
 .. figure:: applications/figures/rtt-overhead.png
@@ -409,6 +412,8 @@ communication—we postpone it until Chapter |Message|. For the purposes of
 this discussion, the big takeaway is that it is sometimes necessary to
 look across protocol layer boundaries, in this case, across the
 transport/application boundary.
+
+.. TODO this could be one of our "systems thinking" design elements
 
 Stated another way, layering decisions can have a profound impact
 on system behavior and performance. Running HTTP version 1 on top of
