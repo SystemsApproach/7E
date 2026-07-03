@@ -98,17 +98,53 @@ for the sake of troubleshooting a problem; continually collecting a
 packet trace will eventually overflow the available backing store. The
 most common tool for doing this is a program called ``tcpdump``,
 although it can be configured to capture more than just TCP packets.
-The output is a format known as ``pcap`` (for packet capture), where
-various graphical tools, most notably *Wireshark*, can then be used to
-parse the packet headers and display their fields.
+For example, the following command captures and displays all packets
+exchanged with any remote web server at port ``443``:
+
+.. code-block:: shell
+
+   $ sudo tcpdump -i en0 -n tcp port 443
+
+The command captures packets at the network interface (``en0`` in this
+example), which means it needs to be executed with superuser
+priviledge (hence the ``sudo``). If you try this on your laptop you
+will see a surprising amount of traffic, even if you are not actively
+using your web brower. This points to how much background network
+activity is always running. An alternative is to specify a particular
+web server, and then refresh a page for that site in your browser; for
+example:
+
+.. code-block:: shell
+
+   $ sudo tcpdump -i en0 -n host book.systemsapproach.org
+
+In this case, you will see TCP and TLS packets, but not the HTTP
+payloads they carry. This is because the end-to-end traffic is
+encrypted by TLS, which points to a major limit in analyzing network
+traffic: much of the packet payloads are not visible.
+
+As a final step in this exploration, note that there are tools to help
+capture and filter packets. *Wireshark* is a notable example, with
+:numref:`Figure %s <fig-wireshark>` showing an example display.  In
+this case, we have configured Wireshark to watch for traffic to and
+from host ``example.com``, a web server that can be accessed using
+HTTP rather than HTTPS. (This server is maintained by IANA for exactly
+this purpose.)
+
+.. _fig-wireshark:
+.. figure:: operations/figures/wireshark.png
+    :width: 700px
+    :align: center
+
+    Example packet trace using Wireshark. Because web site example.com
+    is accessible using HTTP, the GET request and OK response are
+    visible. The GET packet has been selected in the upper panel, with
+    its contents summarized in the lower left panel.
+
 
 .. admonition:: Further Reading
 
     `Wireshark <https://www.wireshark.org/>`__.
-
-.. TODO -- Seems like we should say more about Wireshark and/or
-   pcap. Maybe include an example or two. An alternative is to include
-   examples in the "resources" repo, and just reference them here.
 
 Beyond troubleshooting, packet capture is not a practical approach to
 analyzing traffic. Simply deciding what flows are currently active,
@@ -153,6 +189,8 @@ displays of the collected data.
 .. TODO -- What more to say about this? Could give some attack
    examples (e.g., spike in traffic to UDP port 53), or capacity
    planning.
+
+.. TODO -- Candidate "System Thinking" paragraph
 
 One takeaway from this discussion is that packet tracing in intrusive,
 and can easily impact the performance of the network data plane. Care
@@ -270,7 +308,7 @@ to determine which flows shared buffer capacity at each switch.
 .. _reading_int:
 .. admonition:: Further Reading
 
-   X. Chen, et. al. `Fine-grained queue measurement in the data plane
+   X. Chen et al. `Fine-grained queue measurement in the data plane
    <https://p4.org/p4/conquest>`__. ACM CoNEXT'19, December 2019.
 
 Similarly, packets can report the decision making process that
