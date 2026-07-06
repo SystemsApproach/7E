@@ -84,15 +84,13 @@ data. This data is still represented as ASCII text, but because it may
 be an encoded version of, say, a JPEG image, it’s not necessarily
 readable by human users. More on MIME in a moment.
 
-The message header is a series of ``<CRLF>``-terminated lines.
-(``<CRLF>`` stands for carriage-return plus line-feed, which are a
-pair of ASCII control characters often used to indicate the end of a
-line of text.) The header is separated from the message body by a
-blank line.  Each header line contains a type and value separated by a
-colon. Many of these header lines are familiar to users, since they
-are asked to fill them out when they compose an email message; for
-example, the ``To:`` header identifies the message recipient, and the
-``Subject:`` header says something about the purpose of the
+The message header is a series of ``<CRLF>``-terminated lines, just as
+we saw in HTTP message. The header is separated from the message body
+by a blank line.  Each header line contains a type and value separated
+by a colon. Many of these header lines are familiar to users, since
+they are asked to fill them out when they compose an email message;
+for example, the ``To:`` header identifies the message recipient, and
+the ``Subject:`` header says something about the purpose of the
 message. Other headers are filled in by the underlying mail delivery
 system. Examples include ``Date:`` (when the message was transmitted),
 ``From:`` (what user sent the message), and ``Received:`` (each mail
