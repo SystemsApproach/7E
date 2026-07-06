@@ -415,17 +415,20 @@ this discussion, the big takeaway is that it is sometimes necessary to
 look across protocol layer boundaries, in this case, across the
 transport/application boundary.
 
-.. TODO this could be one of our "systems thinking" design elements
+.. The following is an example of the new design element. Exact name TBD
 
-Stated another way, layering decisions can have a profound impact
-on system behavior and performance. Running HTTP version 1 on top of
-TCP was a completely understandable decision that enabled the Web to
-get off the ground, but we have now gone through 3 major revisions of
-this layered approach, culminating in a totally new design for the
-transport layer underpinning HTTP. This is partly a testament to the
-ability of the Internet to support incremental evolution but also a
-reminder that we need to think carefully about the entire system, not
-just the behavior of a single layer, when designing protocols.
+.. admonition:: Systems Thinking Takeaway
+
+   An important lesson from this discussions is that layering
+   decisions can have a profound impact on system behavior and
+   performance. Running HTTP version 1 on top of TCP was a completely
+   understandable decision that enabled the Web to get off the ground,
+   but we have now gone through 3 major revisions of this layered
+   approach, culminating in a totally new design for the transport
+   layer underpinning HTTP. This is partly a testament to the ability
+   of the Internet to support incremental evolution but also a
+   reminder that we need to think carefully about the entire system,
+   not just the behavior of a single layer, when designing protocols.
 
 2.2.2 Uniform Resource Identifiers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
