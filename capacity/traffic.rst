@@ -1,50 +1,55 @@
 .. index:: TE: Traffic Engineering
+.. index:: MPLS: Multiprotocol Label Switching
+
 
 |Capacity|.5  Traffic Engineering
 -----------------------------------------
 
+Traffic engineering for packet-switched networks is almost as old as
+packet switching itself. But the term has taken on a range of meanings
+over time, the only constant being that decisions about traffic flows
+across a network are made based on observed traffic patterns. One
+interpretation is that traffic engineering is about provisioning
+capacity. For example, when you see persistently high utilization of a
+link between two sites, you might either provision a higher speed
+link, or alternatively, add additional sites (and hence, paths) to
+your overall network topology.
 
-The idea of traffic engineering for packet-switched networks is almost
-as old as packet switching itself, with some ideas of traffic-aware
-routing having been tried in the ARPANET. However, traffic engineering
-only became mainstream for the Internet backbone with the
-advent of MPLS, which provides a set of tools to steer traffic to
-balance load across different paths. The key idea is that when there
-is more than one path between two points in the network, it would be
-best to split the traffic among those paths in a way that avoids
-overloading any one of them. That simple idea has proven challenging
-to implement.
+Where definitions and interpretations get murky is when those kinds of
+activities can be carried out in a matter of seconds or minutes due to
+automation, for example, by activating a new circuit or optical
+wavelength, as describe in Section |Tech|.3. As another example,
+techniques that balance load across two or more equally viable
+paths—as we saw in Section |Routing|.5, with the use of ECMP—is
+sometimes described as a kind of traffic engineering. In contrast,
+routing algorithms are viewed as distinct from traffic engineering,
+even though they make decisions about how individual packets should be
+forwarded.
 
-Step zero of traffic engineering is to provision links between the
-various points-of-presence (PoPs) or data centers that make up the
-network. That operation usually happens at relatively long timescales,
-since it might involve pulling fiber through conduits, or activating
-wavelengths on a WDM (wavelength division multiplexing)
-system. These links also need to be connected to switches and routers
-of suitable capacities. The traffic engineering process, from the
-perspective of those operating an IP network, takes an underlying
-topology of links of various capacities as a given, and tries to map
-the offered traffic onto that topology.
+The ambiguity notwithstanding, today there is a widely accepted
+interpretation of traffic engineering, focused on steering traffic
+across different paths in an attempt to balance load. The key idea is
+that when there is more than one path between two points in the
+network, it would be best to split the traffic among those paths in a
+way that avoids overloading any one of them. That simple idea has
+proven challenging to implement for an equally simple reason: the
+offered traffic load varies at every timescale down to the nanosecond,
+while changes to the underlying link capacities and topology can be
+made only at much longer timescales. Traffic loads often display daily
+patterns with peak hours separated by quieter periods, but there can
+also be sudden shifts in load caused by the behavior of applications
+and end users. Further complicating the problem is the fact that links
+or routers may fail, removing some capacity from the system.
 
-One of the key challenges for traffic engineering is
-that the offered traffic load varies at every timescale down to the
-nanosecond, while changes to the underlying link capacities and
-topology can be made only at much longer timescales. Traffic loads
-often display daily patterns with peak hours separated by quieter
-periods, but there can also be sudden shifts in load caused by the
-behavior of applications and end users. Further complicating the
-problem is the fact that links or routers may fail, removing some
-capacity from the system.
-
-MPLS provides a convenient way to control the path of traffic through
-the network that goes some way to address the challenges of traffic
-engineering. The capability is often referred to as
-*explicit routing* although it has some similarities to a feature in
-IP known as *source routing*.\ [#]_  :numref:`Figure %s <fig-fish>` shows an
-example of how the explicit routing capability of MPLS might be
-applied.  This sort of network is often called a *fish* network
-because of its shape (the routers R1 and R2 form the tail; R7 is at
-the head).
+MPLS (Multiprotocol Label Switching) is a technology that provides a
+convenient way to control the path of traffic through the network that
+goes some way to address the challenges of traffic engineering. The
+capability is often referred to as *explicit routing* although it has
+some similarities to a feature in IP known as *source routing*.\ [#]_
+:numref:`Figure %s <fig-fish>` shows an example of how the explicit
+routing capability of MPLS might be applied.  This sort of network is
+often called a *fish* network because of its shape (the routers R1 and
+R2 form the tail; R7 is at the head).
 
 .. _fig-fish:
 .. figure:: capacity/figures/f04-22-9780123850591.png
@@ -75,11 +80,11 @@ looking at the destination address, an MPLS router looks at a label in
 the packet header and makes a forwarding decision based on the value
 of that label. Importantly, labels are swapped at every hop (usually)
 and have local scope, unlike IP addresses. So the packets from R1 to
-R7 might have label *L1* in the header when they arrive at R3, while those from R2 to R7 have
-label *L2* in the header, even though both sets of packets have the
-same destination. We have created two distinct FECs, associating a
-different label with each FEC, and this allows R3 to forward the
-traffic in the two classes differently.
+R7 might have label *L1* in the header when they arrive at R3, while
+those from R2 to R7 have label *L2* in the header, even though both
+sets of packets have the same destination. We have created two
+distinct FECs, associating a different label with each FEC, and this
+allows R3 to forward the traffic in the two classes differently.
 
 The question that then arises is how do all the routers in the network
 agree on what labels to use and how to forward packets with particular
@@ -101,7 +106,6 @@ capacity. CSPF addresses this sort of problem. It works just like the
 SPF algorithm described in Section |Routing|.3 except that links which
 don't meet the constraints, e.g., because they lack sufficient
 capacity for the demand, are excluded from the calculation.
-
 
 CSPF can work well, but as a distributed algorithm, it has some
 weaknesses. Central planning tools are commonly used to supplement
