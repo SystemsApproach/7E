@@ -88,10 +88,12 @@ allows R3 to forward the traffic in the two classes differently.
 
 One question that then arises is how do all the routers in the network
 agree on what labels to use and how to forward packets with particular
-labels? The protocol that was adopted and extended for this task is
-the Resource Reservation Protocol (RSVP). For now it suffices to say
-that it is possible to send an RSVP message along an explicitly
-specified path (e.g., R1-R3-R6-R7) and use it to set up label
+labels? The short answer is that some control plane protocol handles
+the task. There have actually been a few different protocols used,
+included RSVP (the Resource Reservation Protocol) and extensions to
+existing routing protocols. For now it suffices to say
+that it is possible to distribute label mappings to nodes on an explicitly
+specified path (e.g., R1-R3-R6-R7) and thus set up label
 forwarding table entries all along that path.  This is very similar to
 the process of establishing a virtual circuit.
 
@@ -102,7 +104,7 @@ algorithm, but which also takes various *constraints* into
 account. For example, if it was required to find a path from R1 to R7
 that could carry an offered load of 100 Mbps, we could say that the
 constraint is that each link must have at least 100 Mbps of available
-capacity. CSPF addresses this sort of problem. It works just like the
+capacity. CSPF addresses this sort of problem. It works like the
 SPF algorithm described in Section |Routing|.3 except that links which
 don't meet the constraints, e.g., because they lack sufficient
 capacity for the demand, are excluded from the calculation.
