@@ -1,5 +1,4 @@
 .. index:: VPN: Virtual Private Network
-.. index:: MPLS: Multiprotocol Label Switching
 
 |Virt|.3 Virtual Private Networks (VPNs)
 -----------------------------------------------
