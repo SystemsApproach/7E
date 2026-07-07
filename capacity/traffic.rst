@@ -5,26 +5,25 @@
 |Capacity|.5  Traffic Engineering
 -----------------------------------------
 
-Traffic engineering for packet-switched networks is almost as old as
-packet switching itself. But the term has taken on a range of meanings
-over time, the only constant being that decisions about traffic flows
-across a network are made based on observed traffic patterns. One
-interpretation is that traffic engineering is about provisioning
-capacity. For example, when you see persistently high utilization of a
-link between two sites, you might either provision a higher speed
-link, or alternatively, add additional sites (and hence, paths) to
-your overall network topology.
+Traffic engineering (TE) for packet-switched networks is almost as old
+as packet switching itself. But the term has taken on a range of
+meanings over time, the only constant being that decisions about
+traffic flows across a network are made based on observed traffic
+patterns. One aspect of traffic engineering is about capacity planning
+and provisioning. For example, when you see persistently high
+utilization of a link between two sites, you might either provision a
+higher speed link, or alternatively, add additional sites (and hence,
+paths) to your overall network topology.
 
-Where definitions and interpretations get murky is when those kinds of
-activities can be carried out in a matter of seconds or minutes due to
-automation, for example, by activating a new circuit or optical
-wavelength, as describe in Section |Tech|.3. As another example,
-techniques that balance load across two or more equally viable
-paths—as we saw in Section |Routing|.5, with the use of ECMP—is
-sometimes described as a kind of traffic engineering. In contrast,
-routing algorithms are viewed as distinct from traffic engineering,
-even though they make decisions about how individual packets should be
-forwarded.
+Where definitions get murky is when those kinds of activities can be
+carried out in a matter of seconds or minutes due to automation, for
+example, by activating a new circuit or optical wavelength, as
+describe in Section |Tech|.3. As another example, techniques that
+balance load across two or more equally viable paths—as we saw in
+Section |Routing|.5, with the use of ECMP—is sometimes described as a
+kind of traffic engineering. Routing algorithms are viewed as distinct
+from traffic engineering, although deciding how to set the link
+metrics used by the algorithm is usually considered an aspect of TE.
 
 The ambiguity notwithstanding, today there is a widely accepted
 interpretation of traffic engineering, focused on steering traffic
@@ -58,9 +57,10 @@ R2 form the tail; R7 is at the head).
 
    A network requiring explicit routing.
 
-.. [#] IP source routing is not widely used for several reasons, including the fact that
-       only a limited number of hops can be specified and because it is
-       processed outside the “fast path”, if it is handled at all, on most routers.
+.. [#] IP source routing is not widely used for several reasons,
+       including the fact that only a limited number of hops can be
+       specified and because it is processed outside the “fast path”,
+       if it is handled at all, on most routers.
 
 Suppose that the operator of the network in :numref:`Figure %s
 <fig-fish>` has determined that any traffic flowing from R1 to R7
@@ -68,12 +68,12 @@ should follow the path R1-R3-R6-R7 and that any traffic going from R2
 to R7 should follow the path R2-R3-R4-R5-R7. One reason for such a
 choice would be to make good use of the capacity available along the
 two distinct paths from R3 to R7. We can think of the R1-to-R7 traffic
-as constituting one forwarding equivalence class (FEC), and the R2-to-R7
-traffic constitutes a second FEC.  Forwarding traffic in these two
-classes along different paths is difficult with normal IP routing,
-because they might both contain traffic destined for the same IP
-addresses. R3 doesn’t normally look at where traffic came *from* in making
-its forwarding decisions.
+as constituting one forwarding equivalence class (FEC), and the
+R2-to-R7 traffic constitutes a second FEC.  Forwarding traffic in
+these two classes along different paths is difficult with normal IP
+routing, because they might both contain traffic destined for the same
+IP addresses. R3 doesn’t normally look at where traffic came *from* in
+making its forwarding decisions.
 
 Unlike IP, MPLS uses label swapping to forward packets. Rather than
 looking at the destination address, an MPLS router looks at a label in
@@ -86,14 +86,14 @@ sets of packets have the same destination. We have created two
 distinct FECs, associating a different label with each FEC, and this
 allows R3 to forward the traffic in the two classes differently.
 
-The question that then arises is how do all the routers in the network
+One question that then arises is how do all the routers in the network
 agree on what labels to use and how to forward packets with particular
-labels? The protocol that was adopted and extended for
-this task is the Resource Reservation Protocol (RSVP). For now it
-suffices to say that it is possible to send an RSVP message along an
-explicitly specified path (e.g., R1-R3-R6-R7) and use it to set up
-label forwarding table entries all along that path.  This is very
-similar to the process of establishing a virtual circuit.
+labels? The protocol that was adopted and extended for this task is
+the Resource Reservation Protocol (RSVP). For now it suffices to say
+that it is possible to send an RSVP message along an explicitly
+specified path (e.g., R1-R3-R6-R7) and use it to set up label
+forwarding table entries all along that path.  This is very similar to
+the process of establishing a virtual circuit.
 
 Once we have the mechanism of explicit routing, we can apply it to the
 task of traffic engineering. The most common approaches is
