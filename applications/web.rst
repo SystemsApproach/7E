@@ -422,13 +422,15 @@ transport/application boundary.
    An important lesson from this discussions is that layering
    decisions can have a profound impact on system behavior and
    performance. Running HTTP version 1 on top of TCP was a completely
-   understandable decision that enabled the Web to get off the ground,
-   but we have now gone through 3 major revisions of this layered
-   approach, culminating in a totally new design for the transport
-   layer underpinning HTTP. This is partly a testament to the ability
-   of the Internet to support incremental evolution but also a
-   reminder that we need to think carefully about the entire system,
-   not just the behavior of a single layer, when designing protocols.
+   understandable decision, enabling the Web to get off the ground,
+   and was an application of the "separation of concerns" principle we
+   introduced in Chapter 1. That said, we have now gone through three
+   major revisions of this layered approach, culminating in a totally
+   new design for the transport layer underpinning HTTP. This is
+   partly a testament to the ability of the Internet to support
+   incremental evolution, but also a reminder that we should consider
+   interactions among the layers, not just the behavior of a
+   single layer, when designing protocols.
 
 2.2.2 Uniform Resource Identifiers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

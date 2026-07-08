@@ -505,7 +505,7 @@ only need those same four entries. This is a good first step (although
 by no means the last) in achieving scalability.
 
 .. _key-aggregation:
-.. admonition:: Key Takeaway
+.. admonition:: Systems Thinking Takeaway
 
    This illustrates one of the most important principles of building
    scalable networks: To achieve scalability, you need to reduce the

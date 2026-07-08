@@ -375,15 +375,17 @@ networks—those with no paths longer than 15 hops.
 
 
 .. _key-routing-alg:
-.. admonition:: Key Takeaway
+.. admonition:: Systems Thinking Takeaway
 
-   Distance-vector and link-state are both distributed routing
-   algorithms, but they adopt different strategies. In
-   distance-vector, each node talks only to its directly connected
-   neighbors, but it tells them everything it has learned (i.e.,
-   distance to all nodes). In link-state, each node talks to all other
-   nodes, but it tells them only what it knows for sure (i.e., only
-   the state of its directly connected links). There is a third
-   option, which moves the calculation to a central controller, which
-   we discuss below.
+   One of the most important tradeoffs to be made in networking systems
+   is between distributed versus centralized control. Distance-vector
+   and link-state routing are both examples of distributed routing
+   algorithms, adopting different strategies to achieve a consistent
+   outcome. In distance-vector, each node talks only to its directly
+   connected neighbors, but it tells them everything it has learned
+   (i.e., distance to all nodes). In link-state, each node talks to
+   all other nodes, via flooding, but it tells them only what it knows for sure
+   (i.e., only the state of its directly connected links). In recent
+   years there has been a resurgence of interest in centralized
+   approaches to routing, which we discuss in the following section. 
 

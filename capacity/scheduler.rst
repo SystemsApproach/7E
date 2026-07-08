@@ -319,14 +319,18 @@ priority queue is empty. This approach has been implemented in some
 commercial routers to provide one low-latency queue and a set of DRR
 queues that share the remaining bandwidth in a weighted fair manner.
 
-Finally, we observe that this whole discussion of queue management
-illustrates an important system design principle known as *separating
-policy and mechanism*. The idea is to view each mechanism as an opaque
-box that provides a multifaceted service that can be controlled by a
-set of knobs. A policy specifies a particular setting of those knobs
-but does not know (or care) about how the policy is implemented.  In
-this case, the mechanism in question is the queuing discipline, and
-the policy is a particular setting of which flow gets what level of
-service (e.g., priority or weight). We discuss some policies that can
-be used with the WFQ mechanism in later chapters.
+.. admonition:: Systems Thinking Takeaway
 
+   The preceding discussion of queue management illustrates an
+   important system design principle known as *separating policy and
+   mechanism*. The idea is to view each mechanism as an opaque box
+   that provides a multifaceted service that can be controlled by a
+   set of knobs. A policy specifies a particular setting of those
+   knobs but does not know (or care) about how the policy is
+   implemented.  In this case, the mechanism in question is the
+   queuing discipline, and the policy is a particular 
+   set of scheduler settings (such as weights and priorities) to be
+   applied to traffic classes. Similarly, there are various mechanims
+   to classify packets in to classes, such as flow-based or
+   DSCP-based, and it a matter of policy to set the classifiers to
+   divide traffic into particular classes to be scheduled.

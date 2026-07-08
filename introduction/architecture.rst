@@ -287,28 +287,33 @@ T-shirts commonly worn at IETF meetings:
 System design principles—the collective wisdom that comes from years
 of experience building systems—are often applied to architectural
 decisions, and ultimately shape the resulting blueprint. We highlight
-several design principles throughout the book, but we have already
-seen one—the *separation of concerns*\ —applied to the Internet
-architecture.  As discussed in the previous subsection, the Internet
-is purposely agnostic about the application layer and the network
-layer, focusing instead on how to assemble a collection of networks
-into an internet (the IP layer), and how to deliver useful
-process-to-process communication abstractions to applications (the
-transport layer).
+several design principles throughout the book, using a highlighted
+design element like the one below.
+
+We have already seen one system design principle—the *separation of
+concerns*\ —applied to the Internet architecture.  As discussed in the
+previous subsection, the Internet is purposely agnostic about the
+application layer and the network layer, focusing instead on how to
+assemble a collection of networks into an internet (the IP layer), and
+how to deliver useful process-to-process communication abstractions to
+applications (the transport layer).
 
 This isn't to say that applications and network technologies are
 unimportant, but rather, that (1) it is best to not be overly
 prescriptive since we can't know what applications and technologies
 will emerge over time, and (2) it makes the job of architecting the
-system easier if we keep our focus narrow. In general, the
-separation of concerns principle can be summarized as follows: When
-faced with the design of a complex system, carve out independent
-challenges and address them in isolation, without being overly
-concerned about how you’re going to address the other issues.
-Conflating too many issues and trying to address them all at once is
-often tempting (it’s easy to convince yourself that doing so yields a
-more optimized solution), but most of the time it’s a recipe for
-failure.
+system easier if we keep our focus narrow.
+
+.. admonition:: Systems Thinking Takeaway
+
+   The separation of concerns principle can be summarized
+   as follows: When faced with the design of a complex system, carve
+   out independent challenges and address them in isolation, without
+   being overly concerned about how you’re going to address the other
+   issues.  Conflating too many issues and trying to address them all
+   at once is often tempting—it’s easy to convince yourself that
+   doing so yields a more optimized solution—but most of the time
+   it’s a recipe for failure.
 
 This approach to dealing with complexity is so fundamental that we
 leverage it as an organizing principle for the rest of this book,
@@ -411,7 +416,22 @@ network:
    by the communication system may be useful as a performance enhancement.*
 
 This is why we highlight the fact that there is more to the end-to-end
-argument than the popular one-line summary. As we walk through the
+argument than the popular one-line summary.
+
+.. admonition:: Systems Thinking Takeaway
+
+   The end-to-end argument is one of the key principles in networking
+   that helps a system designer decide where to place a function. It
+   often but not always leads towards placing functionality in the end
+   system rather than inside the network, especially when that is the
+   only way to ensure correct behavior. It also admits the
+   possiblity of placing functionality inside the network when that
+   capability will provide a performance advantage over implementing
+   it only in the end systems. It is a tool for reasoning about tradeoffs, not
+   a hard-and-fast rule.
+
+
+As we walk through the
 system components that deliver the Internet's best-effort service in
 Part II we will see numerous examples of functions that are
 appropriately implemented inside the network. And in Part III we will

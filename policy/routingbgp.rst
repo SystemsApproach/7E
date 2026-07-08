@@ -168,9 +168,10 @@ have no-one higher up to depend on, so they must carry all the
 Internet's  routable prefixes in their routing tables.
 
 .. _key-scaling:
-.. admonition:: Key Takeaway
+.. admonition:: Systems Thinking Takeaway
 
-   How does all this help us to build scalable networks? First, the
+   The design of BGP illustrates again the principle of hierarchical
+   aggregation of information to achieve scalability. First, the
    number of nodes participating in BGP is on the order of the number
    of autonomous systems, which is much smaller than the number of
    networks. Second, finding a good interdomain route is only a matter
