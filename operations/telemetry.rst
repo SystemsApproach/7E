@@ -107,9 +107,9 @@ exchanged with any remote web server at port ``443``:
 
 The command captures packets at the network interface (``en0`` in this
 example), which means it needs to be executed with superuser
-priviledge (hence the ``sudo``). If you try this on your laptop you
+privilege (hence the ``sudo``). If you try this on your laptop you
 will see a surprising amount of traffic, even if you are not actively
-using your web brower. This points to how much background network
+using your web browser. This points to how much background network
 activity is always running. An alternative is to specify a particular
 web server, and then refresh a page for that site in your browser; for
 example:
@@ -190,15 +190,21 @@ displays of the collected data.
    examples (e.g., spike in traffic to UDP port 53), or capacity
    planning.
 
-.. TODO -- Candidate "System Thinking" paragraph
 
-One takeaway from this discussion is that packet tracing in intrusive,
-and can easily impact the performance of the network data plane. Care
-must be taken to limit its duration (it's only activated to
-troubleshoot a problem) and the volume it captures (it's often
-sufficient to only sample traffic on an ongoing basis). It also has
-serious implications for privacy, but that's why we have encryption,
-as we discuss in Chapter |TLS|.
+.. admonition:: Systems Thinking Takeaway
+
+   This discussion illustrates one of the key tradeoffs in monitoring
+   a system: our attempts to monitor can themselves have an impact on
+   the performance of the system we are monitoring. The "observer
+   effect"—changing a system by the act of observing it—is well known
+   in physics, and we see something similar in networks. Packet
+   tracing is intrusive, and can easily impact the performance of the
+   network data plane. Care must be taken to limit its duration (it
+   should only activated to troubleshoot a problem) and the volume it
+   captures (it may be sufficient to only sample traffic). Packet
+   tracing also has serious implications for privacy, providing a
+   motive for end-to-end encryption, which we discuss in Chapter
+   |TLS|.
 
 
 |Ops|.3.3 Active Monitoring
