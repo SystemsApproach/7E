@@ -326,12 +326,12 @@ byte-boundaries—it simply views the frame as a collection of bits.
 These bits might come from some character set, such as ASCII; they
 might be pixel values in an image; or they could be instructions and
 operands from an executable file. Specifically, it appends a special
-bit pattern to demarc the beginning of a frame: a 64-bit preamble
+bit pattern to demarcate the beginning of a frame: a 64-bit preamble
 consisting of a sequence of alternating 0s and 1s.  Other than that
 preamble, the rest of the frame format is exactly as shown in Section
 |Intro|.3.3; it includes a 48-bit source address, a 48-bit destination
 address, and a 16-bit type field; followed by the payload; followed by
-a 32-bit CRC code; and finally the end-of-frame code. The sending and
+a 32-bit CRC (error detection) code; and finally the end-of-frame code. The sending and
 receiving host do not see the preamble, CRC code, or any of the
 control codes; they are attached (and stripped) by the network
 adaptor.
@@ -359,7 +359,26 @@ long. The theoretical foundation of the cyclic redundancy check is
 rooted in a branch of mathematics called *finite fields*. While this
 may sound daunting, the basic idea is easy to understand.
 
-To start, think of an (n+1)-bit message as being represented by an :math:`n`
+To start, think of a message containing :math:`n` bits. A simple way
+to detect errors would be to attach one extra bit, called a parity bit, on the end of the
+message. That bit is set to either zero or one to make the total number of
+1s in the message, now :math:`n +1` bits long, even. (That would be
+even parity; the other option is odd parity.) With this simple
+addition of one bit, we can detect a single bit error. If any bit is
+corrupted, the parity bit will have the wrong value, and we know that
+an error has occurred. Unfortunately, *two* bit errors, or indeed any
+even number of bit errors, would go undetected. CRCs are designed to
+be robust against a broad class of bit errors, not just single bit
+errors, and they do so with relatively few extra bits in the message.
+
+We will sketch out the mathematics behind CRCs, but in general it's
+sufficient to understand that CRCs are just an efficient way to detect
+the common errors that occur in transmission. CRCs are invariably
+calculated in hardware and very few of us will have to design the
+hardware ourselves, so understanding the high-level ideas will
+suffice.
+
+To calculate a CRC, an (n+1)-bit message is represented by an :math:`n`
 degree polynomial, that is, a polynomial whose highest-order term is
 :math:`x^{n}`. The message is represented by a polynomial by using the
 value of each bit in the message as the coefficient for each term in
@@ -381,15 +400,8 @@ exchanging polynomials with each other.
 
 For the purposes of calculating a CRC, a sender and receiver have to
 agree on a *divisor* polynomial :math:`C(x)`; a polynomial of degree
-:math:`k`. For example, suppose :math:`C(x) = x^3 + x^2 + 1`.  In this
-case, :math:`k=3`. The answer to the question “Where did :math:`C(x)`
-come from?” is, in most practical cases, “You look it up in a book.”
-In fact, the choice of :math:`C(x)` has a significant impact on what
-types of errors can be reliably detected, as we discuss below. There
-are a handful of divisor polynomials that are very good choices for
-various environments, and the exact choice is normally made as part of
-the protocol design. For example, the Ethernet standard uses a
-well-known polynomial of degree 32.
+:math:`k`. These polynomials are defined in standards such as the
+Ethernet standard that defines a degree 32 polynomial.
 
 When a sender wishes to transmit a message :math:`M(x)` that is
 n+1 bits long, what is actually sent is the (n+1)-bit message plus
@@ -405,41 +417,11 @@ transmission, then in all likelihood the received polynomial will no
 longer be exactly divisible by :math:`C(x)`, and thus the receiver
 will obtain a nonzero remainder implying that an error has occurred.
 
-It will help to understand the following if you know a little about
-polynomial arithmetic; it is just slightly different from normal
-integer arithmetic. We are dealing with a special class of polynomial
-arithmetic here, where coefficients may be only one or zero, and
-operations on the coefficients are performed using modulo 2
-arithmetic. This is referred to as “polynomial arithmetic modulo 2.”
-Since this is a networking book, not a mathematics text, let’s focus
-on the key properties of this type of arithmetic for our purposes
-(which we ask you to accept on faith):
 
-- Any polynomial :math:`B(x)` can be divided by a divisor polynomial
-  :math:`C(x)` if :math:`B(x)` is of higher degree than :math:`C(x)`.
-
-- Any polynomial :math:`B(x)` can be divided once by a divisor
-  polynomial :math:`C(x)` if :math:`B(x)` is of the same degree as :math:`C(x)`.
-
-- The remainder obtained when :math:`B(x)` is divided by :math:`C(x)` is
-  obtained by performing the exclusive OR (XOR) operation on each pair
-  of matching coefficients.
-
-For example, the polynomial :math:`x^3 + 1` can be divided by
-:math:`x^3 + x^2 + 1` (because they are both of degree 3) and the
-remainder would be :math:`0 \times x^3 + 1 \times x^2 + 0 \times x^1 +
-0 \times x^0 = x^2` (obtained by XORing the coefficients of each
-term). In terms of messages, we could say that 1001 can be divided by
-1101 and leaves a remainder of 0100. You should be able to see that
-the remainder is just the bitwise exclusive OR of the two messages.
-And now that we know the basic rules for dividing polynomials, we are
-able to do long division, which is necessary to deal with longer
-messages. An example appears below.
-
-Recall that we wanted to create a polynomial for transmission that is
+To create a polynomial for transmission that is
 derived from the original message :math:`M(x)`, is :math:`k` bits
-longer than :math:`M(x)`, and is exactly divisible by :math:`C(x)`. We
-can do this in the following way:
+longer than :math:`M(x)`, and is exactly divisible by :math:`C(x)`, we
+do the following:
 
 1. Multiply :math:`M(x)` by :math:`x^{k}`; that is, add :math:`k`
    zeros at the end of the message. Call this zero-extended message
@@ -449,72 +431,18 @@ can do this in the following way:
 
 3. Subtract the remainder from :math:`T(x)`.
 
-It should be obvious that what is left at this point is a message that
+What is left at this point is a message that
 is exactly divisible by :math:`C(x)`. We may also note that the
 resulting message consists of :math:`M(x)` followed by the remainder
 obtained in step 2, because when we subtracted the remainder (which
 can be no more than :math:`k` bits long), we were just XORing it with
-the :math:`k` zeros added in step 1. This part will become clearer
-with an example.
+the :math:`k` zeros added in step 1.
 
-Consider the message :math:`x^7 + x^4 + x^3 + x^1`, or 10011010.  We
-begin by multiplying by :math:`x^3`, since our divisor polynomial is
-of degree 3. This gives 10011010000.  We divide this by :math:`C(x)`,
-which corresponds to 1101 in this case.  :numref:`Figure %s
-<fig-crcalc>` shows the polynomial long-division operation.  Given the
-rules of polynomial arithmetic described above, the long-division
-operation proceeds much as it would if we were dividing
-integers. Thus, in the first step of our example, we see that the
-divisor 1101 divides once into the first four bits of the message
-(1001), since they are of the same degree, and leaves a remainder of
-100 (1101 XOR 1001). The next step is to bring down a digit from the
-message polynomial until we get another polynomial with the same
-degree as :math:`C(x)`, in this case 1001. We calculate the remainder
-again (100) and continue until the calculation is complete. Note that
-the “result” of the long division, which appears at the top of the
-calculation, is not really of much interest—it is the remainder at the
-end that matters.
-
-You can see from the very bottom of :numref:`Figure %s <fig-crcalc>` that the
-remainder of the example calculation is 101. So we know that 10011010000
-minus 101 would be exactly divisible by :math:`C(x)`, and this is what we
-send. The minus operation in polynomial arithmetic is the logical XOR
-operation, so we actually send 10011010101. As noted above, this turns
-out to be just the original message with the remainder from the long
-division calculation appended to it. The recipient divides the received
-polynomial by :math:`C(x)` and, if the result is 0, concludes that there were
-no errors. If the result is nonzero, it may be necessary to discard the
-corrupted message; with some codes, it may be possible to *correct* a
-small error (e.g., if the error affected only one bit). A code that
-enables error correction is called an *error-correcting code* (ECC).
-
-.. _fig-crcalc:
-.. figure:: technology/figures/f02-15-9780123850591.png
-   :width: 400px
-   :align: center
-
-   CRC calculation using polynomial long division.
 
 We now return to the question of where the polynomial :math:`C(x)`
-comes from. Intuitively, the idea is to select this polynomial so that
-it is very unlikely to divide evenly into a message that has errors
-introduced into it. If the transmitted message is :math:`P(x)`, we may
-think of the introduction of errors as the addition of another
-polynomial :math:`E(x)`, so the recipient sees :math:`P(x) +
-E(x)`. The only way that an error could slip by undetected would be if
-the received message could be evenly divided by :math:`C(x)`, and
-since we know that :math:`P(x)` can be evenly divided by :math:`C(x)`,
-this could only happen if :math:`E(x)` can be divided evenly by
-:math:`C(x)`. The trick is to pick :math:`C(x)` so that this is very
-unlikely for common types of errors.
-
-One common type of error is a single-bit error, which can be expressed
-as :math:`E(x) = x^i` when it affects bit position *i*. If we select
-:math:`C(x)` such that the first and the last term (that is, the
-:math:`x^k` and :math:`x^0` terms) are nonzero, then we already have a
-two-term polynomial that cannot divide evenly into the one term
-:math:`E(x)`. Such a :math:`C(x)` can, therefore, detect all
-single-bit errors. In general, it is possible to prove that the
+comes from. In short, they are set by standards committees as a result
+of tradeoffs (like most standards) with the aim of protecting against
+common errors. It is possible to prove that the
 following types of errors can be detected by a :math:`C(x)` with the
 stated properties:
 
@@ -532,19 +460,22 @@ stated properties:
   burst errors of length greater than :math:`k` bits can also be
   detected.)
 
-Six versions of :math:`C(x)` are widely used in link-level
-protocols. For example, Ethernet uses CRC-32, which is defined as
-follows:
+For example, Ethernet uses CRC-32, which meets the above properties
+and is defined as follows:
 
 -  CRC-32 = :math:`x^{32} + x^{26} + x^{23} + x^{22} + x^{16} +
    x^{12} + x^{11} + x^{10} + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1`
+
+Ethernet is not the only technology to use this CRC; it is also used
+for Wi-Fi and many applications outside of networking such as
+the PCI Express computer bus standard.
 
 Finally, we note that the CRC algorithm, while seemingly complex, is
 easily implemented in hardware using a :math:`k`\ -bit shift register
 and XOR gates. The number of bits in the shift register equals the
 degree of the generator polynomial (:math:`k`). :numref:`Figure %s
 <fig-crc-hard>` shows the hardware that would be used for the
-generator :math:`x^3 + x^2 + 1` from our previous example. The message
+generator :math:`x^3 + x^2 + 1`. The message
 is shifted in from the left, beginning with the most significant bit
 and ending with the string of :math:`k` zeros that is attached to the
 message, just as in the long division example. When all the bits have
