@@ -328,9 +328,9 @@ queues that share the remaining bandwidth in a weighted fair manner.
    set of knobs. A policy specifies a particular setting of those
    knobs but does not know (or care) about how the policy is
    implemented.  In this case, the mechanism in question is the
-   queuing discipline, and the policy is a particular 
-   set of scheduler settings (such as weights and priorities) to be
-   applied to traffic classes. Similarly, there are various mechanims
-   to classify packets in to classes, such as flow-based or
-   DSCP-based, and it a matter of policy to set the classifiers to
-   divide traffic into particular classes to be scheduled.
+   queuing discipline, and the policy is a particular set of scheduler
+   settings (such as weights and priorities) to be applied to traffic
+   classes. Similarly, there are various mechanims to classify packets
+   in to classes, such as flow-based or DSCP-based, and it a matter of
+   policy to set the classifiers to divide traffic into particular
+   classes to be scheduled.

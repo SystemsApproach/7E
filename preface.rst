@@ -255,7 +255,7 @@ networking functionality lived in proprietary routers operated by
 ISPs.
 
 Given our focus on systems design principles,  we have added a
-new design element to the book. These highlighted paragraphs 
+new design element to the book. These highlighted paragraphs
 serve to draw attention to important principles of system design that
 generalize beyond the specific artifact under discussion. For example,
 the separation of policy and mechanism is a well-known systems

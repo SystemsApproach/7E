@@ -387,5 +387,5 @@ networks—those with no paths longer than 15 hops.
    all other nodes, via flooding, but it tells them only what it knows for sure
    (i.e., only the state of its directly connected links). In recent
    years there has been a resurgence of interest in centralized
-   approaches to routing, which we discuss in the following section. 
+   approaches to routing, which we discuss in the following section.
 
