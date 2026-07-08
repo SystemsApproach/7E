@@ -254,6 +254,18 @@ with new networking concepts that it was in an era where most
 networking functionality lived in proprietary routers operated by
 ISPs.
 
+Given our focus on systems design principles,  we have added a
+new design element to the book. These highlighted paragraphs 
+serve to draw attention to important principles of system design that
+generalize beyond the specific artifact under discussion. For example,
+the separation of policy and mechanism is a well-known systems
+principle that happens to show up when we discuss queuing
+algorithms. We take the opportunity to talk more broadly about this
+principle at that point in the book and use a visual design element to
+draw attention to it.
+
+.. TODO finalize the design and show example here?
+
 Textbooks are just one part of a networking course, but they can
 provide a coherent perspective on the subject, helping readers to connect the
 dots. A big picture view helps the student make sense of all the
