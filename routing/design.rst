@@ -2,8 +2,8 @@
 ----------------------------
 
 Since this chapter is about routing, we need to be clear about what we
-mean by that term. As pointed out in Chapter |Tech|, *routing* refers to
-the process of finding a suitable path through a network. Routing is
+mean by that term. *Routing* refers to
+the process of finding a suitable path through a network, and is
 distinct from *forwarding*, which consists of receiving a packet,
 looking up its destination address in a table, and sending the packet
 in a direction determined by that table. Forwarding is considered part
@@ -28,8 +28,8 @@ those of a router, so it's harder to make a strong distinction.
 One question we need to ask anytime we try to build a mechanism for
 the Internet is how well it scales. The answer for the algorithms and
 protocols described in this chapter is “moderately.”  They are
-designed for networks of fairly modest size—up to a few thousand
-switches. That's not nearly enough if our ambition is to have a single
+designed for networks of modest size—up to a few thousand
+switches. That would not be nearly enough if our ambition were to have a single
 routing mechanism work across the millions of switches in today's
 Internet, but that's not actually our goal. This is because the
 Internet has for decades been organized into a set of *routing
@@ -56,8 +56,8 @@ Routing is, in essence, a problem of graph theory. :numref:`Figure %s
 the graph, labeled A through F, may be hosts, switches, routers, or
 networks. The edges of the graph correspond to the network links. Each
 edge has an associated *cost*, which gives some indication of the
-desirability of sending traffic over that link. A discussion of how
-edge costs are assigned is given in a later section.
+desirability of sending traffic over that link. We discuss how
+edge costs are assigned in a later section.
 
 That we model switches and routers as vertices in a graph is no
 surprise, but why hosts and networks? Including hosts in a network
