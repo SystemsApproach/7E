@@ -268,13 +268,21 @@ annoying. So this demands a different approach that doesn't rely on
 TCP for congestion control and reliable delivery. We will
 examine this problem space in Chapter |Stream|.
 
-Finally, it is worth noting that video streaming involves a complex
-interplay between the application protocol and the underlying
-transport protocol. They are, in effect, trying to co-manage the rate
-at which packets are delivered. As an application developer, you would
-undoubtedly prefer that the socket API for TCP told you everything you
-need to know about TCP's behavior, but that's just not the case. The
-API says nothing about timeliness, which in the Internet can be highly
-variable, largely due to congestion. This leaves the application
-developer with only one option: you need to first develop an
-understanding of how the underlying network behaves.
+.. admonition:: Systems Thinking Takeaway
+
+   The development of video streaming over HTTP and TCP illustrates
+   the importance of looking at the interplay between protocol
+   layers. While layering helps us modularize the problem, systems
+   thinking requires that we periodically re-evaluate the interactions
+   between layers. DASH involves interplay between the application
+   protocol and the underlying transport protocol. These two layers
+   are, in effect, trying to co-manage the rate at which packets are
+   delivered. As an application developer, you would undoubtedly
+   prefer that the socket API for TCP told you everything you need to
+   know about TCP's behavior, but that's just not the case. The API
+   says nothing about timeliness, which in the Internet can be highly
+   variable, largely due to congestion. This leaves the application
+   developer with only one option: you need to first develop an
+   understanding of how the underlying network behaves. DASH has been
+   successful because the application layer adapts to the variations
+   in performance delivered by the transport layer.

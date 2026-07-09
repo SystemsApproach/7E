@@ -349,22 +349,29 @@ questions.
     Cloud datacenters are distributed throughout the globe, with a
     site often in close proximity to users.
 
-The big takeaway is that arbitrary computation can take place
-throughout the network, and not just at two endpoints. From one
-perspective, application software still runs on computers connected to
-the edge of the network, no different than in our simple client/server
-scenario. The network itself just delivers packets. But from another
-perspective, the application seemingly runs “inside” the network, with
-computations happening at multiple points along the end-to-end path
-from the ultimate source to the ultimate destination. The key is that
-such computations are not happening in the switches that implement the
-packet delivery service. We have come to this overall design after
-years of trying to inject additional functionality into switches, and
-eventually learning it is best to give them just one task—forwarding
-packets. The existence of millions of servers at thousands of
-locations around the world (i.e., the cloud) is what makes this a
-viable approach. Said another way, the Internet and the cloud have a
-symbiotic relationship: the Internet provides the communication
-substrate that the cloud runs on, and the cloud provides the computing
-substrate that enables ever more powerful applications to be
-distributed across the Internet.
+
+.. admonition:: Systems Thinking Takeaway
+
+   An important takeaway from this discussion is that arbitrary
+   computation can take place throughout the network, and not just at
+   two endpoints. From one perspective, application software still
+   runs on computers connected to the edge of the network, no
+   different than in our simple client/server scenario. The network
+   itself just delivers packets. But from another perspective, the
+   application seemingly runs “inside” the network, with computations
+   happening at multiple points along the end-to-end path from the
+   ultimate source to the ultimate destination. This is an effective
+   application of the end-to-end argument: putting functions into the
+   network makes sense when it delivers a performance
+   optimization. Notably, such computations are not happening in the
+   switches that implement the packet delivery service. After many
+   years of trying to inject additional functionality into switches,
+   the networking community reached the conclusion that it is best to
+   give switches just one task—forwarding packets. The existence of
+   millions of servers at thousands of locations around the world
+   (i.e., the cloud) has made this a viable approach. Said another
+   way, the Internet and the cloud have a symbiotic relationship: the
+   Internet provides the communication substrate that the cloud runs
+   on, and the cloud provides the computing substrate that enables
+   ever more powerful applications to be distributed across the
+   Internet.
