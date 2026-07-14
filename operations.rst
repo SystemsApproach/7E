@@ -18,23 +18,23 @@ account. This chapter looks at those requirements, and describes
 mechanisms commonly built into networks to address them.
 
 One of the biggest challenges in understanding network operations is
-wading through the plethora of terminology that has been invented to
-talk about it. Telcos—some of the earliest
-organizations to operate data networks—have nearly a century of
-know-how (and associated terminology) in operating networks. Many of
-those practices have been adapted from earlier voice networks.
-Today's cloud providers operate both massive datacenter networks that
-connect tens of thousands of servers, and global backbone networks
-that interconnect hundreds of datacenters. Their focus on feature
+making sense of the breadth of practices that have been invented to
+manage networks. This includes both terminology and tools. Telcos—some
+of the earliest organizations to operate data networks—have nearly a
+century of know-how in operating networks, with many of those
+practices adapted from earlier voice networks.  Today's cloud
+providers operate both massive datacenter networks that connect tens
+of thousands of servers, and global backbone networks that
+interconnect hundreds of datacenters. Their focus on feature
 velocity—which takes advantage of agile software practices and
-commodity hardware—has led to an entirely different approach (and
-associated terminology) for operations. Yet another class of operator
-is the system administrator responsible for buying, configuring, and
-maintaining hardware that serves an enterprise or department. Their
-approach to operations is heavily influenced by the vendors that sell
-them servers, routers, and other network appliances. And finally there
-is you, either managing your home network, or, like many people,
-outsourcing that responsibility to their ISP.
+commodity hardware—has led to an entirely different approach for
+operations. Yet another class of operator is the system administrator
+responsible for buying, configuring, and maintaining hardware that
+serves an enterprise or department. Their approach to operations is
+heavily influenced by the vendors that sell them servers, routers, and
+other network appliances. And finally there is you, either managing
+your home network, or, like many people, outsourcing that
+responsibility to their ISP.
 
 In this chapter, we avoid the use of arcane terminology, and focus
 instead on the fundamental issues all of these operators face. They

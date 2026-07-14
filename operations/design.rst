@@ -88,9 +88,17 @@ network devices. We consider each, in turn.
 On the configuration side, automation require a programmatic approach;
 expecting a human to manually enter configuration parameters into a
 web form or command line interface simply does not scale. Manually
-entering configuration settings is also notoriously error-prone. What
-we need is a programmatic interface that supports ``GET`` and ``SET``
-operations, but that implies knowing what set of parameters
+entering configuration settings is also notoriously error-prone, not
+only because human make typing mistakes, but more fundamentally,
+because it requires they know and remember the right settings.
+Ensuring you have an *authoritative source* for all parameter settings
+is a more tractable problem when the system is automated. You still
+need to know which file (or combination of files) has codified the
+right values, but that's better the depending on notes jotted in
+someone's notebook.
+
+What we need is a programmatic interface that supports ``GET`` and
+``SET`` operations, but that implies knowing what set of parameters
 (variables) each device supports.  Defining a schema for the set of
 configurable variables supported by network elements is the central
 problem of configuration management. To complicate matters, the schema
