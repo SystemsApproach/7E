@@ -219,7 +219,7 @@ formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
    *Another piece of the puzzle is that all these markup languages
    need a companion language that is used to define the schema, or
    data model, for the information being represented. For XML, that
-   companion language was XSD (XML Schema Definition). For YAML, YANG
+   companion language is XSD (XML Schema Definition). For YAML, YANG
    is commonly used (although YANG can also be used for other markup
    languages, including XML). There are technical differences between
    XSD and YANG—and what each is able to model—but those details are
@@ -276,7 +276,7 @@ aggregation, IP address assignment, VLAN tags, and so on.
 
 Each model in the OpenConfig hierarchy defines a combination of a
 configuration state that can be both read and written by the client
-(denoted ``rw`` in the examples) and an operational state that reports
+(denoted ``rw`` in the examples) and feedback state that reports
 device status (denoted ``ro`` in the examples, indicating it is
 read-only from the client-side). This distinction between declarative
 configuration state and runtime feedback state is a fundamental aspect
@@ -393,7 +393,8 @@ specified in YAML, and the set of YAML
 files corresponding to a network's aggregate configuration is managed
 in a code repository just like any other collection of C, Java, or
 GoLang programs. This is not as big of stretch as it might sound: you
-can think of YAML as a declarative programming language.
+can think of YAML as a declarative programming language. These YAML
+files then serve as the authoritative source of all parameter settings.
 
 The following snippet of YAML code shows how one might configure an
 Ethernet interface. This file corresponds to the YANG shown in the
@@ -458,14 +459,14 @@ for networks that also build their own software in Section |Ops|.4.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This chapter describes how to design a management system as a top-down
-exercise, and while it is true cloud operators have taken a
+exercise, and while it is true that cloud operators have taken a
 clean-slate approach to operations, many practices in use today look
 the way they do because of how the operator did things yesterday.
 (This is true of many systems: they evolve incrementally, as a result
-of changing acircumstances.) With respect to network operations, the
+of changing circumstances.) With respect to network operations, the
 fact that many devices were originally managed via a device-specific
 CLI means that a set of tools have evolved to take advantage of that
-capability. The challenge, given that starting point, is how to
+capability. Given this starting point, the challenge is how to
 improve automation using a mechanism that was originally designed for
 manual control.
 
@@ -496,14 +497,16 @@ vendor-specific CLI, the vendor may define their own set of
 variables. This raises the complication of dealing with multiple
 vendors, no different than cloud operators faced when they pressed for
 a vendor-neutral definition.  For this reason, OpenConfig remains an
-option for those operators that care about vender-neutrality, but we
+option for those operators that care about vendor-neutrality, but we
 need a way to map these vendor-neutral variables onto their
 device-specific counterparts. *Napalm*, which stands for "Network
 Automation and Programmability Abstraction Layer with Multivendor
 support" is an open source tool that helps address this issue. It's a
 library that can be installed on the device to provide a
 vendor-neutral NBI. Ansible then interacts with this library rather
-the native CLI.
+the native CLI. At this point, we've established rough equivalency
+with the system described earlier in this section, although it ends up
+being more bespoke than off-the-shelf.
 
 .. This last paragraph is a candidate Takeaway
 
