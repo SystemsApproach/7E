@@ -1,6 +1,9 @@
 .. index:: IGP: Interior Gateway Protocol
 .. index:: EGP: Exterior Gateway Protocol
 
+.. TODO -- We need to include a sidebar on using BGP for
+   datacenter fabrics to satisfy a forward reference from Ch 4.
+
 |BGP|.2 Sharing Routes and Routing Policy
 ------------------------------------------
 

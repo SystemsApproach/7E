@@ -43,7 +43,11 @@ standard interface between the data and control planes, but it also
 advanced the idea of using a centralized control plane to push
 forwarding rules to many devices implementing the data plane. A
 conceptual picture of an SDN system is shown in :numref:`Figure %s
-<fig-sdn>`.
+<fig-sdn>`. Note that while the main component depicted in the figure
+is often called a *Network Operating System (NOS)* since it serves as
+a platform for a set of applications, it is more accurate to view it
+as a collection of shared libraries. (It is typically not a true
+multi-tenant OS.)
 
 .. _fig-sdn:
 .. figure:: routing/figures/sdn.png
@@ -53,10 +57,6 @@ conceptual picture of an SDN system is shown in :numref:`Figure %s
     Network Operating System (NOS) hosting a set of control
     applications and providing a logically centralized point of
     control for an underlying network data plane.
-
-.. TODO -- We may want to drop the NOS angle, and just focus
-   on a single "Control Program". Or at least equate NOS with
-   "library"  and note that it's not multi-tenant.
 
 Centralized control opens up the possibility of rethinking how routing
 works in a network.  Rather than a fully distributed algorithm of the
@@ -84,7 +84,8 @@ traffic.  This problem of mapping a traffic matrix onto a set of links
 is hard to solve efficiently in a fully distributed manner;
 centralizing it makes the problem much easier. Thus, one of the early
 successes of SDN was to solve these *traffic engineering* problems in
-the large backbones interconnecting hyperscale datacenters.
+the large backbones interconnecting hyperscale datacenters. We
+cover this idea more thoroughly in Section |Capacity|.5.
 
 In this section we look at a related example—how to route *within* a
 single datacenter—and the specific method we describe is called *segment
@@ -161,10 +162,6 @@ ports in each group without additional control plane involvement.
 |Routing|.5.3 Segment Routing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. TODO -- We need to mention other possibilities, including BGP.
-   This would require a forward reference to the interdomain
-   routing chapter. (A sidebar in that chapter might make sense.)
-
 Independent of link aggregation, we still need to discover routes
 between all the servers. One approach is a routing algorithm called
 *Segment Routing (SR)*. The term comes from the idea that the
@@ -239,7 +236,11 @@ implement its forwarding decision.
 
 For a useful overview of one hyperscale data center design that
 leverages SDN, we recommend the paper on Google's Jupiter
-architecture.
+architecture. One thing to note about Jupiter is that it does not use
+Segment Routing, but instead adapts BGP to the problem. It does this
+not because a datacenter fabric spans multiple autonomous systems, but
+because BGP's ability to aggregate routes maps nicely onto the
+hierarchical fabric topology. We'll revisit this idea in Chapter |BGP|.
 
 .. admonition:: Further Reading
 
@@ -248,7 +249,3 @@ architecture.
    Software-Defined Networking
    <https://doi.org/10.1145/3544216.3544265>`__. ACM SIGCOMM '22 Symposium,
    August 2022.
-
-.. TODO -- Could use Jupiter citation as an excuse to mention some
-   of the more advanced ideas in datacenter backbones; e.g., the use of
-   passive optical switches.

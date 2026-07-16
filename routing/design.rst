@@ -12,18 +12,20 @@ forwarding tables are built. Routing often depends on a complex
 distributed algorithm, and is considered part of the network's
 *control plane*.
 
-.. TODO -- Consider whether any of this discussion needs to be
-   tweaked in light of the Switch vs Router blog post. (Probably not.)
-
 Recall also that there isn't a lot of difference between switches and
-routers (no matter how much the vendors of these devices might argue
-otherwise). They have a data plane and a control plane, and the
-control plane is in charge of putting entries in the forwarding table
-so it can be used by the data plane. Historically, switches had a
-simpler control plane (based on the spanning tree protocol) and they
-only forwarded based on the Ethernet header, but today
-there are Ethernet switches that combine traditional switching functions with
-those of a router, so it's harder to make a strong distinction.
+routers. They both have a data plane and a control plane, with the
+control plane in charge of putting entries in the forwarding table so
+the data plane can do its job forwarding packets. Historically,
+switches and routers were completely distinct: switches forwarded
+Ethernet packets based on the destination Ethernet address, routers
+forwarded IP packets based on the destination IP address, and each ran
+the corresponding control plane algorithm. Today, however, there are
+Ethernet switches that combine traditional switching functions with
+those of a router, so it's harder to make a strong distinction; it's a
+matter of exactly what combination of features the network operator
+enables.  For the purposes of this chapter, we consider the range of
+control plane algorithms used by both switches (spanning tree) and
+routers (link-state and distance-vector).
 
 One question we need to ask anytime we try to build a mechanism for
 the Internet is how well it scales. The answer for the algorithms and
