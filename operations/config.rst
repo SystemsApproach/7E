@@ -480,23 +480,22 @@ identifies a sequence of objectives that need to be satisfied, and
 Ansible executes them in an attempt to bring the actual state of the
 device into alignment with the specified state for the device.
 
-You can think of Ansible as a rough alternative to gNMI and gNOI,
-which is to say it is a necessary component, but not the whole
-solution. The full set of issues introduced in Section |Ops|.1 still
-have to be resolved. For example, we need to identify the
-authoritative source of all variable settings. Ansible value files
-typically provide software configuration parameters, but many
-operators were already using inventory databases for hardware
-configuration state; *NetBox* is a popular open source example.  Not
-wanting to discard a working tool, operators instead have to be clear
-about which source is authoritative for each variable.
+Ansible is one piece of the puzzle, but not the whole solution. The
+full set of issues introduced in Section |Ops|.1 still have to be
+resolved. For example, we need to identify the authoritative source of
+all variable settings. Ansible value files typically provide software
+configuration parameters, but many operators already use an inventory
+database for hardware configuration state; *NetBox* is a popular open
+source example.  There is often overlap between the two, so operators
+have to be consistent about which source is authoritative for each
+variable.
 
 As another example, we still need to establish what variables are
 available to control, and since we're interacting with a
 vendor-specific CLI, the vendor may define their own set of
 variables. This raises the complication of dealing with multiple
 vendors, no different than cloud operators faced when they pressed for
-a vendor-neutral definition.  For this reason, OpenConfig remains an
+a vendor-neutral schema.  For this reason, OpenConfig remains an
 option for those operators that care about vendor-neutrality, but we
 need a way to map these vendor-neutral variables onto their
 device-specific counterparts. *Napalm*, which stands for "Network
@@ -506,7 +505,8 @@ library that can be installed on the device to provide a
 vendor-neutral NBI. Ansible then interacts with this library rather
 the native CLI. At this point, we've established rough equivalency
 with the system described earlier in this section, although it ends up
-being more bespoke than off-the-shelf.
+being more bespoke than off-the-shelf. This makes it more cumbersome
+to maintain and evolve.
 
 .. This last paragraph is a candidate Takeaway
 
@@ -515,13 +515,17 @@ set of tools for any problem space. Instead, you typically start with
 an initial set—likely influenced by previous experience with a similar
 problem—evolve the tools to address the next most troublesome issue
 you encounter, add new tools to the mix when you discover a gap in
-your solution, and then iterate as new requirements—such as the need
-to scale or become more agile—come into focus.
+your solution, and then iterate as new requirements come into focus.
+Needing to scale the network and making the network more agile are
+two requirements that often force operators to rethink their practices.
 
 .. admonition:: Further Reading
 
-   `Ansible <https://docs.ansible.com/>`__.
+   `Ansible <https://docs.ansible.com/>`__. A Radically Simple IT
+   Automation System.
 
-   `Netbox <https://netboxlabs.com/>`__.
+   `Netbox <https://netboxlabs.com/>`__. Network and Infrastructure
+   Management Platform.
 
-   `Napalm <https://napalm.readthedocs.io>`__.
+   `Napalm <https://napalm.readthedocs.io>`__. Network Automation and
+   Programmability Abstraction Layer.
