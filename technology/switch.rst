@@ -25,7 +25,14 @@ commercial mid- to low-end network devices.  Implementations that
 deliver high-end performance typically take advantage of additional
 hardware acceleration. We refer to these as *hardware switches*,
 although both approaches obviously include a combination of hardware
-and software.
+and software.\ [#]_
+
+.. [#] There is actually a third flavor of switch, called a *virtual
+       switch*, that runs entirely in software, interconnecting virtual
+       machines rather than physical machines. We explore this
+       possibility in Chapter |Virt|, when we cover virtual networks.
+       This chapter focuses on physical boxes (running software) that
+       you can plug a physical cable into.
 
 This section gives an overview of both software-centric and
 hardware-centric designs. It also describes fundamental concepts that

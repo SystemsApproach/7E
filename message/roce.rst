@@ -30,6 +30,39 @@ perfectly legitimate to argue that TCP is not the right abstraction
 for RDMA (similar to the argument that QUIC is better suited to RPC
 traffic than TCP).
 
+.. sidebar:: SmartNICs and IPUs
+
+   *Infiniband has long claimed the advantage of avoiding software
+   overheads by pushing functionality into the NIC (aka HCA), but the
+   question of what functionality belongs on the host and what belongs
+   in the NIC is longstanding, dating back to the late 1980s. There
+   have been different answers (and different rationales for those
+   answers) over time, but one common thread is that these NICs have
+   been programmable rather than fixed-function; this capability has
+   come to be known as SmartNICs.*
+
+   *For example, there were efforts to move TCP/IP onto the NIC in the
+   1990s, but the value of offloading TCP/IP was not sufficient to
+   change practices in the Internet at large; it was limited to special use
+   cases, and eventually fell by the wayside as general-purpose
+   processors continued to get faster. Another thread of work focused
+   on optimizing the data path in a protocol-neutral way, for example,
+   by directly copying packets into and out of application memory
+   (avoiding a copy into and out of kernel memory). This technique has
+   proven especially powerful as servers now host multiple VMs, each
+   of which now interacts with a "virtual NIC" running on the NIC.*
+
+   *Today, Infrastructure Processing Units (IPUs) are common in
+   datacenters, where there is an economic argument in favor of
+   offloading functions needed to connect to a server to the
+   datacenter fabric, leaving all server cycles available for paying
+   customers (i.e., tenant VMs). It is also common for IPUs to support
+   "virtual switching" functionality, since they effectively implement
+   the last hop a packet takes on its way to a destination VM. In
+   fact, there are now more virtual machines to forward packets to
+   than there are physical machines, making virtual switches an
+   important part of the Internet's end-to-end story.*
+
 The main advantage InfiniBand continues to enjoy is its ability to
 avoid the performance hit of congestion in an Ethernet-based
 packet-switched network. It does this with two mechanisms.  First, it
@@ -164,14 +197,9 @@ to the rate at which ``CNP`` notices arrive (or don't arrive).
 Finally, there is the question of where the RDMA transport function is
 implemented for RoCE: (1) in hardware on the NIC, or (2) in software
 running on the host. There are multiple commercial NICs that support
-RoCE, with the RDMA functionalilty implemented there. We note,
+RoCE, with the RDMA functionality implemented there. We note,
 however, that a software implementation is a standard part of the
 Linux kernel, so that is an option for experimenting with RDMA. This
 configuration is shown in :numref:`Figure %s <fig-soft-roce>`.
 
-.. sidebar:: Information Processing Units
 
-   Tell the IPU/DPU story. Focus on datacenters wanting to separate
-   "sellable" cycles from "infrastructure" cycles. Explain how that is
-   not the same as e2e message latency, as cycles are still required
-   in both cases. Relate to larger history of SmartNICs.
