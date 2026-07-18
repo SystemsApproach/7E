@@ -14,13 +14,15 @@ This section looks at the configuration side of the operations
 problem, with a focus on the protocols, interfaces, data models, and
 open source tools commonly used to build a network management system.
 Every network adopts its own operational practices, so there is no
-single "solution" that we can point to. There are some broad trends
-among the large cloud operators that we use to illustrate the
-approaches to configuration management, while more traditional network
-operators might choose a different set of tools. We aim here to
-illustrate the set of problems that need to be tackled and show some
-of the tools in widespread use, but this is necessarily a partial view
-of a broad landscape of operational tooling.
+single solution we can point to. There are some broad trends among the
+large cloud operators that we use to illustrate the approaches to
+configuration management. We use cloud operators as our exemplar
+because they are pushing the boundaries of automation, which we expect
+to become more widely adopted over time.  Keeping in mind this is a
+partial view of the full landscape of operational practices, we
+conclude this section with a brief introduction to another example
+toolset.
+
 
 |Ops|.2.1 Host Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -202,7 +204,7 @@ formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
    exchange data over HTTP as part of a e-commerce transaction. XML
    (Extensible Markup Language) serves that purpose.  For example, XML
    supports tagged data such as*
-   **<product_num>1234567</product_num>**
+   ``<product_num>1234567</product_num>``
    *in addition to the familiar HTML tags.*
 
    *The complaint about XML was that it proved hard for humans to use
@@ -217,7 +219,7 @@ formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
    *Another piece of the puzzle is that all these markup languages
    need a companion language that is used to define the schema, or
    data model, for the information being represented. For XML, that
-   companion language was XSD (XML Schema Definition). For YAML, YANG
+   companion language is XSD (XML Schema Definition). For YAML, YANG
    is commonly used (although YANG can also be used for other markup
    languages, including XML). There are technical differences between
    XSD and YANG—and what each is able to model—but those details are
@@ -274,7 +276,7 @@ aggregation, IP address assignment, VLAN tags, and so on.
 
 Each model in the OpenConfig hierarchy defines a combination of a
 configuration state that can be both read and written by the client
-(denoted ``rw`` in the examples) and an operational state that reports
+(denoted ``rw`` in the examples) and feedback state that reports
 device status (denoted ``ro`` in the examples, indicating it is
 read-only from the client-side). This distinction between declarative
 configuration state and runtime feedback state is a fundamental aspect
@@ -391,7 +393,8 @@ specified in YAML, and the set of YAML
 files corresponding to a network's aggregate configuration is managed
 in a code repository just like any other collection of C, Java, or
 GoLang programs. This is not as big of stretch as it might sound: you
-can think of YAML as a declarative programming language.
+can think of YAML as a declarative programming language. These YAML
+files then serve as the authoritative source of all parameter settings.
 
 The following snippet of YAML code shows how one might configure an
 Ethernet interface. This file corresponds to the YANG shown in the
@@ -451,3 +454,78 @@ for networks that also build their own software in Section |Ops|.4.
    and inventory specifications stored in their respective repositories,
    and executable images supplied by an upstream vendor.
 
+
+|Ops|.2.4 Other Toolsets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This chapter describes how to design a management system as a top-down
+exercise, and while it is true that cloud operators have taken a
+clean-slate approach to operations, many practices in use today look
+the way they do because of how the operator did things yesterday.
+(This is true of many systems: they evolve incrementally, as a result
+of changing circumstances.) With respect to network operations, the
+fact that many devices were originally managed via a device-specific
+CLI means that a set of tools have evolved to take advantage of that
+capability. Given this starting point, the challenge is how to
+improve automation using a mechanism that was originally designed for
+manual control.
+
+One popular tool that helps address this problem is *Ansible*. It runs
+over SSH, which unlike gRPC, is ubiquitously available on all devices.
+The operator provides a set of *playbooks*, which are similar to
+scripts, but are written as declarative statements in YAML.  The
+operator also defines a set of *values* files (also YAML) to give the
+parameter settings to be used by the playbooks. Each playbook
+identifies a sequence of objectives that need to be satisfied, and
+Ansible executes them in an attempt to bring the actual state of the
+device into alignment with the specified state for the device.
+
+Ansible is one piece of the puzzle, but not the whole solution. The
+full set of issues introduced in Section |Ops|.1 still have to be
+resolved. For example, we need to identify the authoritative source of
+all variable settings. Ansible value files typically provide software
+configuration parameters, but many operators already use an inventory
+database for hardware configuration state; *NetBox* is a popular open
+source example.  There is often overlap between the two, so operators
+have to be consistent about which source is authoritative for each
+variable.
+
+As another example, we still need to establish what variables are
+available to control, and since we're interacting with a
+vendor-specific CLI, the vendor may define their own set of
+variables. This raises the complication of dealing with multiple
+vendors, no different than cloud operators faced when they pressed for
+a vendor-neutral schema.  For this reason, OpenConfig remains an
+option for those operators that care about vendor-neutrality, but we
+need a way to map these vendor-neutral variables onto their
+device-specific counterparts. *Napalm*, which stands for "Network
+Automation and Programmability Abstraction Layer with Multivendor
+support" is an open source tool that helps address this issue. It's a
+library that can be installed on the device to provide a
+vendor-neutral NBI. Ansible then interacts with this library rather
+the native CLI. At this point, we've established rough equivalency
+with the system described earlier in this section, although it ends up
+being more bespoke than off-the-shelf. This makes it more cumbersome
+to maintain and evolve.
+
+.. This last paragraph is a candidate Takeaway
+
+A lesson illustrated by this example is that there is no single right
+set of tools for any problem space. Instead, you typically start with
+an initial set—likely influenced by previous experience with a similar
+problem—evolve the tools to address the next most troublesome issue
+you encounter, add new tools to the mix when you discover a gap in
+your solution, and then iterate as new requirements come into focus.
+Needing to scale the network and making the network more agile are
+two requirements that often force operators to rethink their practices.
+
+.. admonition:: Further Reading
+
+   `Ansible <https://docs.ansible.com/>`__. A Radically Simple IT
+   Automation System.
+
+   `Netbox <https://netboxlabs.com/>`__. Network and Infrastructure
+   Management Platform.
+
+   `Napalm <https://napalm.readthedocs.io>`__. Network Automation and
+   Programmability Abstraction Layer.
