@@ -1,4 +1,5 @@
 .. index:: ECMP: Equal-Cost Multipath
+.. index:: SRv6: Segment Routing (IPv6)
 
 |Routing|.5 Routing in Datacenters
 ------------------------------------
@@ -225,14 +226,20 @@ Label Switching (MPLS)*. We refer you to Chapter |Capacity| for more
 information about MPLS. The second, called SRv6, is an SR-specific
 extension to IPv6. We discuss IPv6 in Chapter |Fed|, but for the
 purposes of this discussion, SRv6 attaches a list of 128-bit *Segment
-IDs* to the end of the IPv6 header, plus a *Segments Left* field that
-points to (is an index for) the current active segment. Our example
-pushes only one label onto the list (by Leaf 1), and once that label
-is popped off the list (by one of the spine switches), Leaf 2 is left
-to match the original destination address in the IPv6 header to
-implement its forwarding decision.
+IDs* to the end of the IPv6 header, plus a ``Segments Left`` field
+that points to (is an index for) the current active segment.
+:numref:`Figure %s <fig-srv6>` shows the general fomat of the SRv6
+extension, but our example pushes only one label onto the list (by
+Leaf 1). Once that label is popped off the list (by one of the spine
+switches), Leaf 2 is left to match the original destination address in
+the IPv6 header to implement its forwarding decision.
 
-.. TODO -- Probably ought to include a packet format diagram.
+.. _fig-srv6:
+.. figure:: routing/figures/srv6.png
+    :width: 350px
+    :align: center
+
+    SRv6 header formet, as a routing extension to IPv6.
 
 For a useful overview of one hyperscale data center design that
 leverages SDN, we recommend the paper on Google's Jupiter
