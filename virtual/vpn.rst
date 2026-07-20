@@ -41,6 +41,10 @@ destination address of the "outer" IP header is the address of the
 router at the far end of the tunnel, while the source address is that
 of the encapsulating router.
 
+.. TODO -- We'd need change the figure and table too, but it would be
+   good to use real private addresses (192.168.0.0/16) rather than
+   network 1 and 2 for the example.
+
 .. _fig-tunnel:
 .. figure:: virtual/figures/f03-27-9780123850591.png
    :width: 600px
@@ -309,8 +313,8 @@ the public Internet.
    :width: 600px
    :align: center
 
-   Example of a layer 3 VPN. Four sites from an organization receive a virtually private IP service from a
-   provider.
+   Example of a layer 3 VPN. Four sites from an organization receive a
+   virtually private IP service from a provider.
 
 
 MPLS/BGP VPNs are reasonably complex, but the abstraction that they
@@ -361,6 +365,15 @@ correctly encapsulate it for its trip across the backbone.
 
    A customer IP packet is encapsulated with two MPLS labels to allow
    it to be forwarded correctly across the provider's backbone.
+
+.. TODO -- We refer to MPLS in multiple places. Ch4 is only in
+   passing, but Ch8 is where the index currently points and here is
+   where we come the closest to showing the MPLS header format.
+   Neither reads as definitive, leaving the reader to wonder if "MPLS
+   is magic... just add a tag". Is there something more grounded we
+   can do here or in Ch8, and then make that set the index
+   accordingly. Maybe a sidebar explaining that "just add a tag" is
+   a useful feature, so the idea has been standardized.
 
 In order to send the packet across the provider's backbone, the packet
 is encapsulated with an MPLS header as shown in :numref:`Figure %s

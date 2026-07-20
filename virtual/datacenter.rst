@@ -1,5 +1,6 @@
 .. index:: VL2: Virtual Layer 2
 .. index:: VXLAN: Virtual Extensible LAN
+.. index:: GENEVE: Generic Network Virtualization Encapsulation
 
 |Virt|.4 Virtual Networks for Datacenters
 -----------------------------------------------
@@ -127,7 +128,7 @@ addresses need to be independent of the physical network topology
 don’t want any given VM to be restricted in its location by the subnet
 addressing of the underlying physical network. For this reason,
 network virtualization systems invariably make use of an overlay
-encapsulation such as VXLAN, NVGRE, or GENEVE. Encapsulation is a
+encapsulation such as VXLAN or GENEVE. Encapsulation is a
 low-level mechanism that solves an important problem: decoupling the
 address space of the virtual network from that of the physical
 network. However, it is worth noting that they are just a building
@@ -624,7 +625,8 @@ to be a container management system, such as Kubernetes.
 .. TODO -- It might make sense to end the datacenter section here
    (with the capstone example) and then elevate Microsegmentation to
    top-level section 9.5. The lead paragraph would need to be modified
-   a bit, but this seems like a "stand-alone" nugget worth highlighting.
+   a bit, but this seems like a "stand-alone" nugget worth  highlighting.
+   Perhaps a nod to use cases outside the datacenter could be added.
 
 |Virt|.4.4 Microsegmentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
