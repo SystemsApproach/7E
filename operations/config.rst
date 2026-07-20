@@ -4,148 +4,30 @@
 .. index:: YAML: YAML Ain't Markup Language
 .. index:: gNMI: gRPC Network Management Interface
 .. index:: gNOI: gRPC Network Operations Interface
-.. index:: DHCP: Dynamic Host Configuration Protocol
 .. index:: YANG: Yet Another Next Generation
 
-|Ops|.2 Configuration Management
---------------------------------------
+|Ops|.3 Network Configuration
+-----------------------------------
 
-This section looks at the configuration side of the operations
-problem, with a focus on the protocols, interfaces, data models, and
-open source tools commonly used to build a network management system.
-Every network adopts its own operational practices, so there is no
-single solution we can point to. There are some broad trends among the
-large cloud operators that we use to illustrate the approaches to
-configuration management. We use cloud operators as our exemplar
-because they are pushing the boundaries of automation, which we expect
-to become more widely adopted over time.  Keeping in mind this is a
-partial view of the full landscape of operational practices, we
-conclude this section with a brief introduction to another example
-toolset.
+We now turn our attention to the more general problem of configuring
+all the switches and routers—plus the software they run—inside the
+network. Our focus is on the protocols, interfaces, data models, and
+open source tools that are commonly used.  Every network adopts its
+own operational practices, so there is no single solution we can point
+to. But there are some broad trends among the large cloud operators
+that we use to illustrate the approaches to configuration
+management. We use cloud operators as our exemplar because they are
+pushing the boundaries of automation, which we expect to become more
+widely adopted over time.  Keeping in mind this is a partial view of
+the full landscape of operational practices, we conclude this section
+with a brief introduction to another example toolset.
 
 
-|Ops|.2.1 Host Configuration
+|Ops|.3.1 Configuration Interface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We start with a bootstrapping step that happens any time you open your
-laptop and hope to connect to Wi-Fi:
-acquiring an IP address. While this might seem like a problem to be
-addressed in Part III, where we take up issues at the edge of the
-network, assigning IP addresses is the responsibility of the network.
-It is also an operational problem in that sense that IP addresses are
-a kind of resource that needs to be managed. Either we find a way to
-automate the solution, or an operator (system admin) has to do it
-manually, on a case-by-case basis.
-
-We have already seen one example of the network assigning IP address
-to connected devices, and that was in Section |Shared|.4.3, where we
-described how Mobile Cellular network authenticates UEs. For the rest
-of the Internet, the Dynamic Host Configuration Protocol (DHCP), is
-the mechanism that implements address assignment. DHCP is actually
-more general, in that it is used to configure other parameters hosts
-need to successfully send and receive packets; for example, their
-subnet mask, default router, and DNS server. (Remember that a
-machine's Ethernet address is typically burned into the NIC, but its
-IP address depends on what network it tries to connect to.)
-
-It's worth noting that DHCP wasn't part of the original Internet's
-design. IP address configuration was a manual step in the early years,
-and it was only as the Internet started to spread to home networks and
-small offices without IT staff
-that the need for autoconfiguration became sufficiently pressing to
-lead to the development of DHCP.
-
-DHCP relies on the existence of a DHCP server to provide configuration
-information to hosts. There is at least one DHCP server for an
-administrative domain. At the simplest level, this server implements a
-centralized repository for host configuration information, so in
-principle, a network administrator could maintain a static list of
-address assignments on this server. Each host could then contact the
-server when it boots up, and retrieve its configuration.  In this
-model, the configuration information for each host is stored in a
-table that is indexed by some form of unique client identifier,
-typically the hardware address (e.g., the Ethernet address of its
-network adaptor).
-
-A more sophisticated use of DHCP saves the network administrator from
-even having to assign addresses to individual hosts. In this model, the
-DHCP server maintains a pool of available addresses that it hands out to
-hosts on demand. This considerably reduces the amount of configuration
-an administrator must do, since now it is only necessary to allocate a
-range of IP addresses (all with the same network number) to each
-network.
-
-Since the goal of DHCP is to minimize the amount of manual
-configuration required for a host to function, it would rather defeat
-the purpose if each host had to be configured with the address of a
-DHCP server. Thus, the first problem faced by DHCP is that of server
-discovery.
-
-To contact a DHCP server, a newly booted or attached host sends a
-``DHCPDISCOVER`` message to a special IP address (255.255.255.255)
-that is an IP broadcast address. This means it will be received by all
-hosts and routers on that network. (Routers do not forward such
-packets onto other networks, preventing broadcast to the entire
-Internet.) In the simplest case, one of these nodes is the DHCP server
-for the network.  The server would then reply to the host that
-generated the discovery message (all the other nodes would ignore
-it). However, it is not really desirable to require one DHCP server on
-every network, because this still creates a potentially large number
-of servers that need to be correctly and consistently configured.
-Thus, DHCP uses the concept of a *relay agent*. There is at least one
-relay agent on each network, and it is configured with just one piece
-of information: the IP address of the DHCP server. When a relay agent
-receives a ``DHCPDISCOVER`` message, it unicasts it to the DHCP server
-and awaits the response, which it will then send back to the
-requesting client. The process of relaying a message from a host to a
-remote DHCP server is shown in :numref:`Figure %s <fig-dhcp-relay>`.
-
-.. _fig-dhcp-relay:
-.. figure:: operations/figures/f03-24-9780123850591.png
-   :width: 500px
-   :align: center
-
-   A DHCP relay agent receives a broadcast DHCPDISCOVER
-   message from a host and sends a unicast DHCPDISCOVER to the DHCP
-   server.
-
-:numref:`Figure %s <fig-dhcp>` below shows the format of a DHCP
-message, which is sent using UDP. Note that DHCP was derived from an
-earlier protocol called BOOTP, and some of the packet fields are thus
-not strictly relevant to host configuration. When trying to obtain
-configuration information, the client puts its hardware address (e.g.,
-its Ethernet address) in the ``chaddr`` field. The DHCP server replies
-by filling in the ``yiaddr`` (“your” IP address) field and sending it
-to the client. Other information such as the default router to be used
-by this client can be included in the ``options`` field.
-
-.. _fig-dhcp:
-.. figure:: operations/figures/f03-25-9780123850591.png
-   :width: 400px
-   :align: center
-
-   DHCP packet format.
-
-In the case where DHCP dynamically assigns IP addresses to hosts, it
-is clear that hosts cannot keep addresses indefinitely, as this would
-eventually cause the server to exhaust its address pool. At the same
-time, a host cannot be depended upon to give back its address, since
-it might have crashed, been unplugged from the network, or been turned
-off.  Thus, DHCP allows addresses to be leased for some period of
-time. Once the lease expires, the server is free to return that
-address to its pool. A host with a leased address needs to renew the
-lease periodically if in fact it is still connected to the network and
-functioning correctly.
-
-|Ops|.2.2 Configuration Interface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-DHCP targets the configuration problem at the boundary between the
-network and the hosts that connect to the network. We now turn our
-attention to the more general problem of configuring all the switches
-and routers—plus the software they run—inside the network. As outlined
-in the previous section, the core problem is to define the set of
-variables available for operators to ``GET`` and ``SET`` on these
+As outlined in Section |Ops|.1, the core problem is to define the set
+of variables available for operators to ``GET`` and ``SET`` on these
 devices, with the additional requirement that this dictionary of
 variables should be uniform across devices (i.e., be vendor-agnostic).
 We also need an over-the-wire protocol to remotely invoke these
@@ -372,7 +254,7 @@ upgrade the device, for example, by installing the latest version of BGP.
 .. literalinclude:: operations/code/system.proto
 
 
-|Ops|.2.3 Configuration-as-Code
+|Ops|.3.2 Configuration-as-Code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As soon as you scale the network—for example, to the size of a
@@ -443,7 +325,7 @@ repo holds the latest executable images for the software stack running
 on each device (e.g., the latest release of OSPF or BGP). For now, we
 assume an upstream provider, for example a vendor, populates the image
 repo.  We'll look at how the pipeline extends to the left to account
-for networks that also build their own software in Section |Ops|.4.
+for networks that also build their own software in Section |Ops|.5.
 
 .. _fig-config-pipeline:
 .. figure:: operations/figures/config-pipeline.png
@@ -455,8 +337,8 @@ for networks that also build their own software in Section |Ops|.4.
    and executable images supplied by an upstream vendor.
 
 
-|Ops|.2.4 Other Toolsets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Ops|.3.3 Other Tools
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This chapter describes how to design a management system as a top-down
 exercise, and while it is true that cloud operators have taken a
@@ -508,7 +390,7 @@ with the system described earlier in this section, although it ends up
 being more bespoke than off-the-shelf. This makes it more cumbersome
 to maintain and evolve.
 
-.. This last paragraph is a candidate Takeaway
+.. TODO -- This last paragraph is a candidate Takeaway
 
 A lesson illustrated by this example is that there is no single right
 set of tools for any problem space. Instead, you typically start with

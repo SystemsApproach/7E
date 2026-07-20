@@ -1,7 +1,7 @@
 .. index:: INT: Inband Network Telemetry
 .. index:: NDT: Network Diagnostic Tool
 
-|Ops|.3 Monitoring and Telemetry
+|Ops|.4 Monitoring and Telemetry
 --------------------------------------
 
 There are many potential sources of telemetry data. This section looks
@@ -15,10 +15,10 @@ logs to ensure that their implementations of OSPF, BGP, and so on, are
 correct, but once in the hands of a network operator, metrics and
 traces are the most common way to monitor whether or not the network
 is operating properly and to diagnose problems. We revisit this
-assumption in Section |Ops|.4, when we look at more rapidly evolving
+assumption in Section |Ops|.5, when we look at more rapidly evolving
 network functionality.
 
-|Ops|.3.1 OpenConfig Metrics
+|Ops|.4.1 OpenConfig Metrics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A good place to start is the OpenConfig models described in the
@@ -27,7 +27,7 @@ variables (those with ``rw`` permissions) and variables that devices
 use to report local metrics back to the central management system
 (those with ``ro`` permissions). For example, the following code
 snippet expands on the ``counter`` variable for Ethernet interfaces
-shown in Section |Ops|.2.2:
+shown in Section |Ops|.3.2:
 
 .. literalinclude:: operations/code/counters.yang
 
@@ -75,7 +75,7 @@ you (a) what information is worth collecting, and (b) what values or
 changes in values are worth acting on.
 
 
-|Ops|.3.2 Traffic Analysis
+|Ops|.4.2 Traffic Analysis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Counting the number of packets sent/received by a given interface is a
@@ -207,7 +207,7 @@ displays of the collected data.
    |TLS|.
 
 
-|Ops|.3.3 Active Monitoring
+|Ops|.4.3 Active Monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The preceding examples of telemetry data are all based on *passive
@@ -252,7 +252,7 @@ connection).
 
     `Measurement Lab <https://www.measurementlab.net/>`__.
 
-|Ops|.3.4 In-Band Network Telemetry
+|Ops|.4.4 In-Band Network Telemetry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We conclude this discussion of telemetry by returning to the weakest
@@ -292,7 +292,7 @@ packet, and records the corresponding data for each switch.
 
 .. _fig-int:
 .. figure:: operations/figures/int.png
-    :width: 700px
+    :width: 650px
     :align: center
 
     Illustration of Inband Network Telemetry (INT), with each packet

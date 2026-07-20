@@ -1,6 +1,6 @@
 .. index:: CI/CD: Continuous Integration / Continuous Deployment
 
-|Ops|.4 Feature Velocity
+|Ops|.5 Feature Velocity
 --------------------------------------
 
 We have seen many examples in this chapter of how cloud operations
