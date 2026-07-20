@@ -32,14 +32,15 @@ traffic than TCP).
 
 .. sidebar:: SmartNICs and IPUs
 
-   *Infiniband has long claimed the advantage of avoiding software
-   overheads by pushing functionality into the NIC (aka HCA), but the
-   question of what functionality belongs on the host and what belongs
-   in the NIC is longstanding, dating back to the late 1980s. There
-   have been different answers (and different rationales for those
-   answers) over time, but one common thread is that these NICs have
-   been programmable rather than fixed-function; this capability has
-   come to be known as SmartNICs.*
+   *InfiniBand has long claimed the advantage of avoiding software
+   overheads by pushing functionality into the NIC (the HCA in the
+   terminology of InfiniBand), but the question of what functionality
+   belongs on the host and what belongs in the NIC is longstanding,
+   dating back to the late 1980s. There have been different answers
+   (and different rationales for those answers) over time, but one
+   common thread is that these NICs have been programmable rather than
+   fixed-function. Highly programmable NICs came to be known as
+   SmartNICs.*
 
    *For example, there were efforts to move TCP/IP onto the NIC in the
    1990s, but the value of offloading TCP/IP was not sufficient to
@@ -52,16 +53,18 @@ traffic than TCP).
    proven especially powerful as servers now host multiple VMs, each
    of which now interacts with a "virtual NIC" running on the NIC.*
 
-   *Today, Infrastructure Processing Units (IPUs) are common in
-   datacenters, where there is an economic argument in favor of
-   offloading functions needed to connect to a server to the
-   datacenter fabric, leaving all server cycles available for paying
-   customers (i.e., tenant VMs). It is also common for IPUs to support
-   "virtual switching" functionality, since they effectively implement
-   the last hop a packet takes on its way to a destination VM. In
-   fact, there are now more virtual machines to forward packets to
-   than there are physical machines, making virtual switches an
-   important part of the Internet's end-to-end story.*
+   *Today, Infrastructure Processing Units (IPUs) is a term applied to
+   programmable engines that are commonly found on the NICs in
+   datacenters. There is an economic argument in favor of offloading
+   "infrastructure" functions from the server to the NIC, leaving all
+   server cycles available for paying customers (i.e., tenant
+   workloads). Such infrastructure functions include virtual
+   switching, so that the NIC can provide isolation among tenant networks
+   as described in Section |Virtual|.4. Today's multi-tenant cloud
+   datacenters depend on virtual switches to support the networking
+   needs of applications running in the cloud, making virtual
+   switches, and IPUs, an important part of the
+   Internet's end-to-end story.*
 
 The main advantage InfiniBand continues to enjoy is its ability to
 avoid the performance hit of congestion in an Ethernet-based
