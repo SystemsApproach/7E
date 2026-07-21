@@ -336,6 +336,31 @@ names before sending out a query.
    Name resolution in practice, where the numbers 1 to 10 show the sequence
    of steps in the process.
 
+The final question is exactly what form DNS queries and responses
+take. If DNS were being designed today, it would almost certainly run
+over either HTTPS or QUIC, both of which already support the
+request/reply paradigm and have built-in security thanks to TLS.
+There are, in fact, proposals to do exactly that. They are known as
+"DNS over HTTP" (DoH) and "DNS over QUIC" (DoQ), respectively, as
+defined in RFCs 8484 and 9250. Instead, like all applications that
+pre-date HTTP, DNS has a bespoke request/reply protocol and it runs
+over UDP (see RFC 1035). This approach has several security risks,
+some of which DoH and DoQ address. We discuss those risks, and
+introduce other defenses, in a companion book.
 
-.. TODO -- We might want to mention DNS over HTTP, plus other
-   security-related challenges.
+.. admonition:: Further Reading
+
+   P. Mockapetris. `Domain Names - Implementation and Specification
+   <https://www.rfc-editor.org/info/rfc1035>`__. RFC 1035,
+   November 1987.
+
+   P. Hoffman and P. McManus. `DNS Queries over HTTPS (DoH)
+   <https://www.rfc-editor.org/info/rfc8484>`__. RFC 8484,
+   October 2018.
+
+   C. Huitama, S. Dickinson and A. Mankin. `DNS Over Dedicated QUIC
+   Connections (DoQ) <https://www.rfc-editor.org/info/rfc9250>`__. RFC
+   9250, May 2022.
+
+   L. Peterson and B. Davie. `Network Security: A Systems Approach
+   <https://security.systemsapproach.org>`__. 2025.

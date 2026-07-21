@@ -1,10 +1,6 @@
 |Naming|.1 Design Issues
 ---------------------------------
 
-.. TODO -- As currently written, this section introduces a set of
-   concepts, but only weakly links them to "requirements". It probably
-   could be rewritten to be more requirement-centric.
-
 A naming system maintains a collection of *bindings* of names to
 values. The value can be anything we want the naming system to return
 when presented with a name; it might be an address, or another
@@ -14,7 +10,8 @@ These rules—often included as part of a protocol spec—establish the
 syntax for names, what types of value(s) each name may be bound to,
 how new name/value pairs are added to the set of bindings, various
 properties those bindings should preserve, and the process by which
-names are resolved and the corresponding value returned.
+names are resolved and the corresponding value returned. These are all
+design questions that any given naming system needs to answer.
 
 The best way to understand the "rules" that define a name or address
 space is by example. Fortunately, we have seen several examples
@@ -118,7 +115,7 @@ name.
    other words, everything is a naming problem and context (scope) is
    important.*
 
-Looking more closely at uniqueness, we have to be careful about how we
+Looking more closely at uniqueness, we have to decide how we want
 interpret "get back the same value". A name is considered unique if it
 always resolves in the same way, independent of who asks, but the
 returned value may be multi-faceted. One common example is that a name
@@ -134,7 +131,7 @@ example, files (``/user/llp/file.txt``), directories
 name (``/proc/sys/kernel/hostname``). The next section describes how
 domain names achieve a similar goal.
 
-Another question to ask about a naming scheme is whether name-to-value
+Another design consideration is whether name-to-value
 bindings are permanent, or if they are allowed to change over time.
 It's not uncommon to buy a new server and reassign an old (previously
 used) name or address to it, but that can be problematic for some
