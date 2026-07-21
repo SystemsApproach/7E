@@ -169,8 +169,8 @@ practice is sometimes described in exactly those terms:
   including parameters that allow the device to take advantage of
   other services (e.g., NTP, Syslog, SMTP, NFS), as well as setting
   the parameters this device needs to perform whatever service it
-  provides. At the end of Day-1 operationalization, the device is
-  considered up-and-running, and able to support user traffic.
+  provides. At the end of Day 1 operationalization, the device is
+  considered up and running, and able to support user traffic.
 
 * **Day 2..N:** On-going management in support of day-to-day
   operations, coupled with monitoring the network to detect failures

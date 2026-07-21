@@ -47,6 +47,7 @@ when something goes wrong, troubleshoot the cause of that failure, and
 then take corrective action.
 
 .. include:: operations/design.rst
+.. include:: operations/dhcp.rst
 .. include:: operations/config.rst
 .. include:: operations/telemetry.rst
 .. include:: operations/velocity.rst
