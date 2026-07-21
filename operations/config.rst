@@ -58,7 +58,7 @@ and 1213, respectively, and if you want to follow the history of
 incremental refinements, there is a long list of follow-on RFCs. But
 all of this work is based on an approach that pre-dates the
 availability of modern modeling languages, of which YANG has become
-the widely-accepted solution. YANG—which stands for *Yet Another Next
+the widely-accepted solution. YANG stands for *Yet Another Next
 Generation*, a name chosen to poke fun at how often a do-over proves
 necessary. YANG defines the structure of the data, and is general
 enough to be used in conjunction with different over-the-wire message
@@ -102,7 +102,7 @@ formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
    need a companion language that is used to define the schema, or
    data model, for the information being represented. For XML, that
    companion language is XSD (XML Schema Definition). For YAML, YANG
-   is commonly used (although YANG can also be used for other markup
+   is commonly used (although YANG can also be used for other
    languages, including XML). There are technical differences between
    XSD and YANG—and what each is able to model—but those details are
    beyond the scope of this discussion.*
@@ -112,13 +112,13 @@ defines the semantics of the variables available to be read and
 written, is available in a programmatic form; it’s not just text in a
 standards document. But a modeling language is no better than the
 models it defines, and this has proven problematic due to conflicting
-incentives. Network operators that buy network hardware have a strong
+incentives. Network operators who buy network hardware have a strong
 incentive to drive the models for similar devices towards convergence,
 so they are not locked into products from a single vendor.  Vendors,
 on the other hand, have an equally strong incentive to emphasize the
 uniqueness of their products. This results in a fragmented set of
 models.  YANG makes the process of creating, using, and modifying
-models programmable and hence, adaptable to an iterative process. The
+models programmable and hence adaptable to an iterative process. The
 only question is whether the industry can successfully iterate towards
 convergence.
 
