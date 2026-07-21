@@ -83,7 +83,7 @@ the aim is to pick paths through their respective backbone networks
 that provide sufficient capacity for the expected matrix of network
 traffic.  This problem of mapping a traffic matrix onto a set of links
 is hard to solve efficiently in a fully distributed manner;
-centralizing it makes the problem much easier. Thus, one of the early
+centralizing it makes the problem easier. Thus, one of the early
 successes of SDN was to solve these *traffic engineering* problems in
 the large backbones interconnecting hyperscale datacenters. We
 cover this idea more thoroughly in Section |Capacity|.5.
@@ -245,10 +245,7 @@ For a useful overview of one hyperscale data center design that
 leverages SDN, we recommend the paper on Google's Jupiter
 architecture. One thing to note about Jupiter is that it does not use
 Segment Routing, but uses a mixture of centralized route computation
-and local mechanisms to quickly recover from link failures. BGP, the
-interdomain routing protocol discussed in Chapter |BGP|, is used to
-exchange routing information between datacenters and among large
-clusters within a datacenter.
+and local mechanisms to quickly recover from link failures.
 
 .. admonition:: Further Reading
 
