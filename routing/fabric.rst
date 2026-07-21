@@ -244,15 +244,15 @@ the IPv6 header to implement its forwarding decision.
 For a useful overview of one hyperscale data center design that
 leverages SDN, we recommend the paper on Google's Jupiter
 architecture. One thing to note about Jupiter is that it does not use
-Segment Routing, but instead adapts BGP to the problem. It does this
-not because a datacenter fabric spans multiple autonomous systems, but
-because BGP's ability to aggregate routes maps nicely onto the
-hierarchical fabric topology. We'll revisit this idea in Chapter |BGP|.
+Segment Routing, but uses a mixture of centralized route computation
+and local mechanisms to quickly recover from link failures. BGP, the
+interdomain routing protocol discussed in Chapter |BGP|, is used to
+exchange routing information between datacenters and among large
+clusters within a datacenter.
 
 .. admonition:: Further Reading
 
-   L. Poutievski et al. `Jupiter Evolving: Transforming Google's
-   Datacenter Network via Optical Circuit Switches and
-   Software-Defined Networking
-   <https://doi.org/10.1145/3544216.3544265>`__. ACM SIGCOMM '22 Symposium,
-   August 2022.
+   A. Singh et al. `Jupiter Rising: A Decade of Clos Topologies and
+   Centralized Control in Google's Datacenter Network
+   <https://doi.org/10.1145/2785956.2787508>`__. ACM SIGCOMM '15 Symposium,
+   August 2015.
