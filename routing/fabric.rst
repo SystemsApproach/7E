@@ -1,5 +1,7 @@
 .. index:: ECMP: Equal-Cost Multipath
 .. index:: SRv6: Segment Routing (IPv6)
+.. index:: MPLS: Multiprotocol Label Switching
+
 
 |Routing|.5 Routing in Datacenters
 ------------------------------------
@@ -222,13 +224,41 @@ which is similarly unaware of any end-to-end paths.
 Finally, we answer the question about how labels are added to packets.
 There are two standardized approaches. One, called SR-MPLS, takes
 advantage of labels already being an integral part of *Multi-Protocol
-Label Switching (MPLS)*. We refer you to Chapter |Capacity| for more
-information about MPLS. The second, called SRv6, is an SR-specific
+Label Switching (MPLS)*. MPLS labels can be used for all sort of
+purposes, some of which we will see in Chapter |Capacity| (traffic
+engineering) and Chapter |Virt| (virtual private networks). MPLS
+labels are 20-bit tags that have a locally defined meaning, and it is
+up to the control plane to determine what that meaning is. Labels may
+be stacked one on top of the other and the forwarding operations
+performed on a label include push (add another label), pop (remove a
+label), and swap (replace the top label).
+
+In the segment routing case, the MPLS label stack is used to represent
+one or more *Segment IDs*. In the example we just used, Leaf 1 would
+push on a single MPLS label corresponding to the segment ID, and Spine
+1 would pop off the label. The MPLS header is illustrated in
+:numref:`Figure %s <fig-mpls>` and shows the case where a single label
+has been pushed onto the IP packet. The remaining fields in the MPLS
+header are the ``EXP`` bits (typically used to represent
+class-of-service information), a *stack bit* ``S`` which is set to
+indicate the last label in a stack of labels, and a ``TTL`` field
+which works just like the equivalent field in IP for loop prevention.
+
+
+.. _fig-mpls:
+.. figure:: routing/figures/mpls.png
+    :width: 350px
+    :align: center
+
+    MPLS label stack header on an IP packet.
+
+
+The second header encoding, called SRv6, is an SR-specific
 extension to IPv6. We discuss IPv6 in Chapter |Fed|, but for the
 purposes of this discussion, SRv6 attaches a list of 128-bit *Segment
 IDs* to the end of the IPv6 header, plus a ``Segments Left`` field
 that points to (is an index for) the current active segment.
-:numref:`Figure %s <fig-srv6>` shows the general fomat of the SRv6
+:numref:`Figure %s <fig-srv6>` shows the general format of the SRv6
 extension, but our example pushes only one label onto the list (by
 Leaf 1). Once that label is popped off the list (by one of the spine
 switches), Leaf 2 is left to match the original destination address in
@@ -239,7 +269,7 @@ the IPv6 header to implement its forwarding decision.
     :width: 350px
     :align: center
 
-    SRv6 header formet, as a routing extension to IPv6.
+    SRv6 header format, as a routing extension to IPv6.
 
 For a useful overview of one hyperscale data center design that
 leverages SDN, we recommend the paper on Google's Jupiter

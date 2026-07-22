@@ -1,4 +1,5 @@
 .. index:: VPN: Virtual Private Network
+.. index:: MPLS/BGP VPNs
 
 |Virt|.3 Virtual Private Networks (VPNs)
 -----------------------------------------------
@@ -364,26 +365,19 @@ correctly encapsulate it for its trip across the backbone.
    A customer IP packet is encapsulated with two MPLS labels to allow
    it to be forwarded correctly across the provider's backbone.
 
-.. TODO -- We refer to MPLS in multiple places. Ch4 is only in
-   passing, but Ch8 is where the index currently points and here is
-   where we come the closest to showing the MPLS header format.
-   Neither reads as definitive, leaving the reader to wonder if "MPLS
-   is magic... just add a tag". Is there something more grounded we
-   can do here or in Ch8, and then make that set the index
-   accordingly. Maybe a sidebar explaining that "just add a tag" is
-   a useful feature, so the idea has been standardized.
 
 In order to send the packet across the provider's backbone, the packet
 is encapsulated with an MPLS header as shown in :numref:`Figure %s
 <fig-mpls-hdr>`.  This header functions much like a tunnel
 encapsulation, and is removed as the packet leaves the provider
-network on its way to the destination VPN site. Usually, a pair of
-MPLS labels are used. The outer label, which we have indicated as the
+network on its way to the destination VPN site. Here we see the label
+stack feature of MPLS being used to apply two labels, inner and
+outer. The outer label, which we have indicated as the
 Provider Path Label, is associated with a path across the provider's
-network to a particular egress provider router. The second label maps
+network to a particular egress provider router. The second (inner) label maps
 to the customer route that was passed around in BGP. So the outer
 label serves to tunnel the packet across the provider backbone, and
-the ``VPN label`` allows it to be forwarded to the current customer
+the ``VPN label`` allows it to be forwarded to the correct customer
 site upon egress. Both labels are removed before the packet is passed
 off to the customer, so they only see IP packets passing between
 sites.
@@ -408,7 +402,7 @@ book on MPLS listed below.
    February 2006.
 
    B. Davie and Y. Rekhter. MPLS: Technology and Applications. Morgan
-      Kaufmann Publishers, 2000.
+   Kaufmann Publishers, 2000.
 
 
 |Virt|.3.5 Software-Defined WANs
