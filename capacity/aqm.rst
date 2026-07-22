@@ -5,6 +5,7 @@
 .. index:: ECT: ECN Capable Transport
 .. index:: CE: Congestion Encountered
 .. index:: CWR: Congestion Window Reduced
+.. index:: CoDel (FQ_CoDel): Controlled Delay (Fair Queuing)
 
 
 |Capacity|.3  Active Queue Management
@@ -49,7 +50,7 @@ As originally designed, RED did not explicitly send a congestion
 notification message to the source, but instead *implicitly* notified
 the source of congestion by dropping one of its packets. The source
 effectively learns about the dropped packet when a subsequent timeout
-happens. As the “early” part of the RED acronym suggests, the router
+happens.\ [#]_ As the “early” part of the RED acronym suggests, the router
 drops the packet earlier than it would have to—before it is completely
 out of buffer space—so as to notify the
 source that it should decrease its sending rate before tail drop sets
@@ -58,7 +59,14 @@ it has exhausted its buffer space completely, the router causes the
 source(s) to slow down, with the hope that this will mean it does not
 have to drop lots of packets later on.
 
-.. TODO -- Is it ok to assume the reader understands the timeout reference?
+.. [#] Timeouts are a mechanism commonly used by transport protocols
+       to determine that a packet has not been successfully delivered.
+       Every time a sender transmits a packet it sets a timer, and
+       should the timer expire before an acknowledgment is received,
+       it assumes the packet was dropped. Timeouts are used to
+       implement reliable delivery (as described in Chapter 12) and as
+       a signal that the network is congested (as described in Chapter
+       13).
 
 The main contribution of RED is how it decides when to drop a packet
 and what packet it decides to drop. To understand the basic idea,
@@ -264,7 +272,7 @@ slow down, you might wonder what would happen if those signals are
 ignored.  This is often called the *unresponsive flow* problem.
 Unresponsive flows use more than their fair share of network resources
 and could cause congestive collapse if there were enough of them.
-Other queueing techniques, such as weighted fair queueing, could help
+Other queuing techniques, such as weighted fair queuing, could help
 with this problem by isolating certain classes of traffic from
 others. There was also discussion of creating a variant of RED that
 could drop more heavily from flows that are unresponsive to the
@@ -380,12 +388,16 @@ target.
 
 There are more details to CoDel presented in the Nichols and Jacobson
 paper, including extensive simulations to indicate its effectiveness
-across a wide range of scenarios. The algorithm has been standardized
-as \"experimental\" by the IETF in RFC 8289. It is also implemented in
-the Linux kernel, which has aided in its deployment. In particular,
-CoDel provides value in home routers (which are often Linux-based), a
-point along the end-to-end path (see :numref:`Figure %s <fig-codel>`)
-that commonly experiences bufferbloat.
+across a wide range of scenarios. The algorithm was originally
+standardized as \"experimental\" by the IETF in RFC 8289, with a
+companion specification (RFC 8290) adding fair queuing to the base
+algorithm. The latter, commonly known as ``fq_codel``, assigns
+distinct flows to separate queues, with the CoDel algorithm applied to
+each queue independently. The ``fq_codel`` variant is the default
+queuing discipline implemented in the Linux kernel. This is important
+because home routers (which are often Linux-based) are a point along
+the end-to-end path (see :numref:`Figure %s <fig-codel>`) that
+commonly experience bufferbloat.
 
 .. admonition:: Further Reading
 
@@ -394,8 +406,11 @@ that commonly experiences bufferbloat.
    <https://www.rfc-editor.org/info/rfc8289>`__. RFC 8289,
    January 2018.
 
-.. TODO: Need to update this to cover fq_codel and RFC 8290
-   https://blog.cerowrt.org/post/state_of_fq_codel/
+   T. Hoeiland-Joergensen, P. McKenney, D. Taht, J. Gettys, and E. Dumaze.
+   `The Flow Queue CoDel Packet Scheduler and Active Queue Management
+   Algorithm <https://www.rfc-editor.org/info/rfc8290>`__. RFC 8290,
+   January 2018.
+
 
 |Capacity|.3.3 Explicit Congestion Notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,8 +441,6 @@ congestion notification. This is called the ``ECT`` bit (ECN-Capable
 Transport).  The other bit is set by routers along the end-to-end path
 when congestion is encountered, as computed by whatever AQM algorithm
 it is running. This is called the ``CE`` bit (Congestion Encountered).
-
-.. Well, this breaks our split, but maybe it's simple enough to be ok.
 
 In addition to these two bits in the IP header (which are
 transport-agnostic), ECN also includes the addition of two optional

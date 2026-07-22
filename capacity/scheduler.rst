@@ -96,7 +96,7 @@ that it does not discriminate between different traffic sources, or,
 in the language introduced in the previous section, it does not
 separate packets according to the flow to which they belong. This
 means it is possible for a greedy flow to starve all the other
-flows. While priority queueing can serve some flows in preference to
+flows. While priority queuing can serve some flows in preference to
 others, it still doesn't prevent starvation; high-priority flows can
 starve low-priority flows, and within a single priority, a greedy flow
 can starve out other flows at the same priority.
@@ -114,7 +114,7 @@ not possible to implement the fluid model perfectly when we are
 dealing with packets rather than fluids, all implementations try to
 approximate the fluid model in some way.
 
-In the simplest version of fair queueing, each flow gets an equal
+In the simplest version of fair queuing, each flow gets an equal
 share of the outgoing link's capacity. If there is an outgoing link of
 capacity *C*, and there are *n* active flows, then each flow will get
 to send *C/n* bits per second at a minimum when all flows are active.
@@ -242,7 +242,7 @@ the timestamps of all packets that could be candidates for the next
 transmission every time we want to send a packet, and this sorting
 operation grows in cost with the number of active flows. Impementing
 FQ at high speed proved challenging enough to inspire a lot of work on
-creating good approximate implementations of fair queueing that don't
+creating good approximate implementations of fair queuing that don't
 have the same computational complexity.
 
 One well known and widely implemented approximation to WFQ is *deficit
@@ -307,7 +307,7 @@ proofs of its fairness are included in the paper by Shreedhar and Varghese.
 .. _reading_drr:
 .. admonition:: Further Reading
 
-     M. Shreedhar and G. Varghese. `Efficient fair queueing using deficit
+     M. Shreedhar and G. Varghese. `Efficient fair queuing using deficit
      round robin <https://dl.acm.org/doi/10.1145/217391.217453>`__.
      ACM SIGCOMM '95 Symposium, August 1995.
 
