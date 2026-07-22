@@ -294,11 +294,11 @@ the operational system. Most importantly, if there is a problem, it's
 possible to roll back to an earlier, known-working version of the
 configuration state. Testing that a configuration is correct is
 clearly an important step in this process, and there are a variety of
-tools available to help. Batfish and Minesweeper (described in a
-2017 SIGCOMM paper) are popular examples.
-
-.. TODO -- This is a good opportunity to cite some of the most
-   notorious configuration failures. Maybe in a sidebar.
+tools available to help. Batfish and Minesweeper (described in a 2017
+SIGCOMM paper) are popular examples. And if you need to be convinced
+that configuration errors are a serious concern, we encourage you to
+search for *"major network outages due to configuration errors over
+the last decade."*
 
 .. admonition:: Further Reading
 
@@ -390,16 +390,17 @@ with the system described earlier in this section, although it ends up
 being more bespoke than off-the-shelf. This makes it more cumbersome
 to maintain and evolve.
 
-.. TODO -- This last paragraph is a candidate Takeaway
+.. admonition:: Systems Thinking Takeaway
 
-A lesson illustrated by this example is that there is no single right
-set of tools for any problem space. Instead, you typically start with
-an initial set—likely influenced by previous experience with a similar
-problem—evolve the tools to address the next most troublesome issue
-you encounter, add new tools to the mix when you discover a gap in
-your solution, and then iterate as new requirements come into focus.
-Needing to scale the network and making the network more agile are
-two requirements that often force operators to rethink their practices.
+   A lesson illustrated by this example is that there is no single
+   right set of tools for any problem space. Instead, you typically
+   start with an initial set—likely influenced by previous experience
+   with a similar problem—evolve the tools to address the next most
+   troublesome issue you encounter, add new tools to the mix when you
+   discover a gap in your solution, and then iterate as new
+   requirements come into focus.  Needing to scale the network and
+   making the network more agile are two requirements that often force
+   operators to rethink their practices.
 
 .. admonition:: Further Reading
 
