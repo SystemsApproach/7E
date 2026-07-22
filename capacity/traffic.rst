@@ -1,5 +1,4 @@
 .. index:: TE: Traffic Engineering
-.. index:: MPLS: Multiprotocol Label Switching
 
 
 |Capacity|.5  Traffic Engineering
@@ -91,14 +90,16 @@ agree on what labels to use and how to forward packets with particular
 labels? The short answer is that some control plane protocol handles
 the task. There have actually been a few different protocols used,
 included RSVP (the Resource Reservation Protocol) and extensions to
-existing routing protocols. For now it suffices to say
-that it is possible to distribute label mappings to nodes on an explicitly
-specified path (e.g., R1-R3-R6-R7) and thus set up label
-forwarding table entries all along that path.  This is very similar to
-the process of establishing a virtual circuit.
+existing routing protocols. MPLS-SR (segment routing), which we saw in
+the datacenter context in Chapter |Routing|, provides another set of
+control plane options. For our purposes here it suffices to say that
+label mappings are distributed to nodes on an explicitly specified
+path (e.g., R1-R3-R6-R7) and thus set up label forwarding table
+entries all along that path.  This is very similar to the process of
+establishing a virtual circuit.
 
 Once we have the mechanism of explicit routing, we can apply it to the
-task of traffic engineering. The most common approaches is
+task of traffic engineering. The most common approach is
 *constrained shortest path first* (CSPF), which is a link-state
 algorithm, but which also takes various *constraints* into
 account. For example, if it was required to find a path from R1 to R7
