@@ -41,12 +41,8 @@ destination address of the "outer" IP header is the address of the
 router at the far end of the tunnel, while the source address is that
 of the encapsulating router.
 
-.. TODO -- We'd need change the figure and table too, but it would be
-   good to use real private addresses (192.168.0.0/16) rather than
-   network 1 and 2 for the example.
-
 .. _fig-tunnel:
-.. figure:: virtual/figures/f03-27-9780123850591.png
+.. figure:: virtual/figures/tunnel.png
    :width: 600px
    :align: center
 
@@ -66,28 +62,30 @@ of 0. The forwarding table in R1 might therefore look like
    :align: center
    :widths: auto
 
-   +------------+---------------------+
-   | NetworkNum | NextHop             |
-   +============+=====================+
-   | 1          | Interface 0         |
-   +------------+---------------------+
-   | 2          | Virtual interface 0 |
-   +------------+---------------------+
-   | Default    | Interface 1         |
-   +------------+---------------------+
+   +----------------+----------------------+
+   | NetworkNum     | NextHop              |
+   +================+======================+
+   | 192.168.1/24   | Interface 0          |
+   +----------------+----------------------+
+   | 192.168.2/24   | Virtual interface 0  |
+   +----------------+----------------------+
+   | Default        | Interface 1          |
+   +----------------+----------------------+
 
-R1 has two physical interfaces. Interface 0 connects to network 1;
-interface 1 connects to a large internetwork and is thus the default for
-all traffic that does not match something more specific in the
-forwarding table. In addition, R1 has a virtual interface, which is the
-interface to the tunnel. Suppose R1 receives a packet from network 1
-that contains an address in network 2. The forwarding table says this
-packet should be sent out virtual interface 0. In order to send a packet
-out this interface, the router takes the packet, adds an IP header
-addressed to R2, and then proceeds to forward the packet as if it had
-just been received. R2’s address is 18.5.0.1; since the network number
-of this address is 18, not 1 or 2, a packet destined for R2 will be
-forwarded out the default interface into the internetwork.
+
+R1 has two physical interfaces. Interface 0 connects to one network
+(``192.168.1/24``); interface 1 connects to a large internetwork and
+is thus the default for all traffic that does not match something more
+specific in the forwarding table. In addition, R1 has a virtual
+interface, which is the interface to the tunnel. Suppose R1 receives a
+packet from a host on ``192.168.1/24`` that contains an address in the
+second network (``192.168.2/24``).  The forwarding table says this
+packet should be sent out virtual interface 0. In order to send a
+packet out this interface, the router adds an IP header addressed to
+R2, and then proceeds to forward the packet as if it had just been
+received. R2’s address is ``18.5.0.1``; since the network number of
+this address is unknown, the packet destined for R2 will be forwarded
+out the default interface into the internetwork.
 
 Once the packet leaves R1, it looks to the rest of the world like a
 normal IP packet destined to R2, and it is forwarded accordingly. All
@@ -95,11 +93,11 @@ the routers in the internetwork forward it using normal means, until
 it arrives at R2. When R2 receives the packet, it finds that it
 carries its own address, so it removes the IP header and looks at the
 payload of the packet. What it finds is an inner IP packet whose
-destination address is in network 2. R2 now processes this packet like
-any other IP packet it receives. Since R2 is directly connected to
-network 2, it forwards the packet on to that network. :numref:`Figure
-%s <fig-tunnel>` shows the change in encapsulation of the packet as it
-moves across the network.
+destination address is in network ``192.168.2/24``. R2 now processes
+this packet like any other IP packet it receives. Since R2 is directly
+connected to ``192.168.2/24`` it forwards the packet on to that
+network. :numref:`Figure %s <fig-tunnel>` shows the change in
+encapsulation of the packet as it moves across the network.
 
 While R2 is acting as the endpoint of the tunnel, there is nothing to
 prevent it from performing the normal functions of a router. For
