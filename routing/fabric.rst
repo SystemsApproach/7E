@@ -224,7 +224,7 @@ which is similarly unaware of any end-to-end paths.
 Finally, we answer the question about how labels are added to packets.
 There are two standardized approaches. One, called SR-MPLS, takes
 advantage of labels already being an integral part of *Multi-Protocol
-Label Switching (MPLS)*. MPLS labels can be used for all sort of
+Label Switching (MPLS)*. MPLS labels can be used for all sorts of
 purposes, some of which we will see in Chapter |Capacity| (traffic
 engineering) and Chapter |Virt| (virtual private networks). MPLS
 labels are 20-bit tags that have a locally defined meaning, and it is
@@ -235,8 +235,8 @@ label), and swap (replace the top label).
 
 In the segment routing case, the MPLS label stack is used to represent
 one or more *Segment IDs*. In the example we just used, Leaf 1 would
-push on a single MPLS label corresponding to the segment ID, and Spine
-1 would pop off the label. The MPLS header is illustrated in
+push on a single MPLS label corresponding to the segment ID, and the spine
+switch would pop off the label. The MPLS header is illustrated in
 :numref:`Figure %s <fig-mpls>` and shows the case where a single label
 has been pushed onto the IP packet. The remaining fields in the MPLS
 header are the ``EXP`` bits (typically used to represent
