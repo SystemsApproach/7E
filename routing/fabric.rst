@@ -2,7 +2,7 @@
 .. index:: SRv6: Segment Routing (IPv6)
 .. index:: MPLS: Multiprotocol Label Switching
 
-           
+
 |Routing|.5 Routing in Datacenters
 ------------------------------------
 
@@ -250,7 +250,7 @@ which works just like the equivalent field in IP for loop prevention.
     :width: 350px
     :align: center
 
-    MPLS label stack header on an IP packet. 
+    MPLS label stack header on an IP packet.
 
 
 The second header encoding, called SRv6, is an SR-specific
