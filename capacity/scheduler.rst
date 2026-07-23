@@ -240,7 +240,7 @@ Without going into further detail, you can start to see the problems
 of implementing FQ accurately. We have to do a sorting operation on
 the timestamps of all packets that could be candidates for the next
 transmission every time we want to send a packet, and this sorting
-operation grows in cost with the number of active flows. Impementing
+operation grows in cost with the number of active flows. Implementing
 FQ at high speed proved challenging enough to inspire a lot of work on
 creating good approximate implementations of fair queuing that don't
 have the same computational complexity.
@@ -330,7 +330,7 @@ queues that share the remaining bandwidth in a weighted fair manner.
    implemented.  In this case, the mechanism in question is the
    queuing discipline, and the policy is a particular set of scheduler
    settings (such as weights and priorities) to be applied to traffic
-   classes. Similarly, there are various mechanims to classify packets
+   classes. Similarly, there are various mechanisms to classify packets
    in to classes, such as flow-based or DSCP-based, and it a matter of
    policy to set the classifiers to divide traffic into particular
    classes to be scheduled.

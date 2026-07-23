@@ -53,7 +53,7 @@ These node-level mechanisms have to make local decisions in real time,
 but there are also network-wide actions that dictate how to place that
 traffic onto links and nodes in the first place. This network-wide
 decision making process is known as *Traffic Engineering (TE)*, and it
-comes into play when per-node capacity is chronically underprovisioned
+comes into play when per-node capacity is chronically under-provisioned
 due to long-term changes in the volume of traffic flowing between
 various nodes. TE was originally an off-line process, requiring
 administrator intervention, but it is increasingly being done as an
