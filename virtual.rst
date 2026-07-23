@@ -65,3 +65,4 @@ computing systems.
 .. include:: virtual/vlan.rst
 .. include:: virtual/vpn.rst
 .. include:: virtual/datacenter.rst
+.. include:: virtual/microseg.rst
