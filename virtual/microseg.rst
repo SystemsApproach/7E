@@ -48,9 +48,9 @@ Historically, a firewall has been implemented as an “appliance”: a
 dedicated system with one job, filtering packets. Firewalls have also
 been provided as a set of features available on a router, and a
 “personal firewall” may be implemented on an end-user
-machine. Firewalls are usually configured to allow or disallow traffic based on IP
-addresses, port numbers, and sometimes other information such as the
-URL of an HTTP request. 
+machine. Firewalls are usually configured to allow or disallow traffic
+based on IP addresses, port numbers, and sometimes other information
+such as the URL of an HTTP request.
 
 Firewalls are used not just at the perimeter of a network as in
 :numref:`Figure %s <fig-firewall>` but are also placed between zones
