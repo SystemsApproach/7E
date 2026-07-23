@@ -74,4 +74,14 @@ discuss in Section |Virt|.4. Automating configuration tasks to reduce
 or remove operational complexity is a recurring theme in the evolution
 of network virtualization.
 
+Finally, because one of the motivations for virtual networks of
+various types is to isolate traffic, there are often security
+implications.  Those implications come up throughout the chapter,
+often in contrast to another common security mechanism—firewalls.
+Section |VIrt|.5 addresses the issue of security in full, and
+describes how network virtualization is now being used in place of
+firewalls.
+
+
+
 

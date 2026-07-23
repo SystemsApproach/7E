@@ -64,7 +64,7 @@ of 0. The forwarding table in R1 might therefore look like
    :widths: auto
 
    +----------------+----------------------+
-   | NetworkNum     | NextHop              |
+   | Prefix         | NextHop              |
    +================+======================+
    | 192.168.1/24   | Interface 0          |
    +----------------+----------------------+
@@ -210,12 +210,7 @@ the corporate firewall. There is a significant weakness to this
 approach: once inside the firewall, there are few internal controls on
 what the VPN user can access. So the VPN represents a weak point that
 is often exploited by attackers. Some ways to address this issue are
-discussed below.
-
-.. TODO -- Don't really have firewall coverage anywhere yet. This also
-   comes up in the datacenter section. Maybe a Firewall sidebar in the
-   design section makes sense. The relationship between virtual nets
-   and firewalls is interesting in its own right.
+discussed in Section |Virtual|.5.
 
 Site-to-site VPNs differ from remote access VPNs in that they aim to connect
 entire networks together, not just the devices of single remote
