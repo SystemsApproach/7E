@@ -60,7 +60,7 @@ traffic than TCP).
    server cycles available for paying customers (i.e., tenant
    workloads). Such infrastructure functions include virtual
    switching, so that the NIC can provide isolation among tenant networks
-   as described in Section |Virtual|.4. Today's multi-tenant cloud
+   as described in Section 9.4. Today's multi-tenant cloud
    datacenters depend on virtual switches to support the networking
    needs of applications running in the cloud, making virtual
    switches, and IPUs, an important part of the

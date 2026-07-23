@@ -181,7 +181,7 @@ align on 32 bit boundaries.
 
 .. _fig-quic-header:
 .. figure:: message/figures/QUIC-headers.png
-   :width: 500px
+   :width: 400px
    :align: center
 
    QUIC packet headers. Long header (top) is used at connection establishment
@@ -238,7 +238,7 @@ packet with a new Stream ID. A stream frame takes the form shown in :numref:`Fig
 
 .. _fig-quic-frame:
 .. figure:: message/figures/QUIC-frame.png
-   :width: 500px
+   :width: 400px
    :align: center
 
 

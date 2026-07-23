@@ -138,7 +138,7 @@ source.
    can be implemented; it's how fast the slowest communication
    completes. Being able to achieve low latency in the face of traffic
    bursts—a natural consequence of one-to-many and many-to-one
-   exhanges—is the central performance challenge for the network. We
+   exchanges—is the central performance challenge for the network. We
    return to this topic in the next section when we look at possible
    optimizations.*
 
@@ -287,7 +287,7 @@ message is ready to be sent.
    single continuous buffer.) This is similar to the scatter/gather
    operations mentioned in the earlier sidebar about AI workloads, but
    in that case work is "scattered" across multiple nodes, and in this
-   case a message is "scattered" across multiple buffers.
+   case a message is "scattered" across multiple buffers on a single node.
 
 What might be equally surprising about this example is what little we
 know when the ``ibv_wr_complete`` returns, which is only that the

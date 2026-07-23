@@ -19,10 +19,10 @@ A key motivation for using a message transaction protocol is often to support
 latency-sensitive applications. In these cases, the design needs to aggressively
 look for opportunities to optimize performance. Eliminating network
 round-trips is an important part of that exercise, but as we will see
-with throughout this chapter, there are other opportunities to reduce
+throughout this chapter, there are other opportunities to reduce
 delay. As with TCP, performance is an important design goal, but the
-emphasis is on the latency to complete transactions rather than the
-filling of the transport pipe.
+emphasis is on the latency to complete transactions rather than
+filling the end-to-end transport pipe.
 
 The next problem is how to identify the target procedure/address. An
 RPC mechanism needs a unique identifier for the remote procedure being
@@ -37,7 +37,7 @@ fields played this role for TCP—with the server being assigned a
 well-known port—but this is just how TCP identifies communication end
 points. Every end-to-end protocol needs to define an analogous
 mechanism, tailored for the abstraction it provides; for example,
-calling procedures and accessing memory.
+calling procedures or accessing memory.
 
 A third problem is how to support reliable message delivery, and as
 with TCP, we assume an imperfect network substrate. One option is to
@@ -100,7 +100,7 @@ it is possible that more than one thread will initiate its own message
 transaction, meaning that multiple request/response transactions may
 happen in parallel. The protocol would need to accommodate such
 parallelism. The *stream id* in HTTP/2 (as described in Chapter |Apps|)
-supports exactly such a situation. Another design option is that
+supports exactly this situation. Another design option is that
 request messages do not block waiting for a reply, but instead, the
 caller is allowed to proceed and will be notified when the reply
 arrives. As with the multi-threaded design, the caller may eventually
