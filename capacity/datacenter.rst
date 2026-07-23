@@ -9,7 +9,8 @@ are a noteworthy example, and so we use them to illustrate how these
 mechanisms are used in practice.
 
 .. TODO -- Could rework this section to make Datacenter one example
-   out of 2 or 3, including VOIP and perhaps access networks.
+   out of 2 or 3, including VOIP and perhaps access networksy. Or, we
+   could add a sidebar talking about one of these use cases.
 
 Datacenter networks have two properties that make them an ideal
 candidate for enhanced resource management. One is that they are
@@ -75,10 +76,6 @@ control class and default best-effort class.
    Headers <https://www.rfc-editor.org/info/rfc2474>`__. RFC 2474,
    December 1998.
 
-.. TODO -- Verify that the above paragraph is correct. It suggests a
-   thread that is of minimal value (except perhaps as a negative
-   example). The Google Cloud docs suggest a larger number of AF classes.
-
 Second, instead of probabilistically dropping packets, datacenters use
 ECN to provide direct feedback. Given the low round-trip times, ECN
 allows traffic sources to react quickly to queue buildup. But since we
@@ -109,12 +106,12 @@ length calculation.
 
 Finally, the in-network mechanisms make assumptions about the edge
 hosts being well-behaved, which includes applying the right DSCP
-labels and limiting their sending rate). One general approach is for
+labels and limiting their sending rate. One general approach is for
 the cloud to "police" senders; this acknowledges that a cloud hosts
 VMs that are able to run arbitrary code. This policing action can be
 implemented in the hypervisor that sits between the server and the
 tenant VM; in the NIC that connects the server to the datacenter
-fabric; and in the Top-of-Rack switch that is the first switch on that
+fabric; and/or in the Top-of-Rack switch that is the first switch on that
 fabric. The other general approach is to trust senders to behave
 correctly; this is more likely to happen when the you are paying for
 resource usage. As for exactly what constitutes good sender behavior,
