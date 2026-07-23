@@ -64,7 +64,11 @@ determine both which machines can communicate with each other and how
 they can do so. The idea is that a microsegment is a lightweight
 construct created in software.  An operator can define the precise
 communication policy to be applied to a small number of virtual
-machines or containers, and the SDN system implements that policy.
+machines or containers, and the SDN system implements that policy. A
+microsegment can be isolated from all other microsegments, and the
+rules for communication among machines connected to that microsegment
+can be precisely defined and implemented using distributed
+firewalling, described in Section |Virt|.4.
 
 For example, a three-tier application is a common structure in which
 one tier of VMs face the Internet, a second tier implements some
