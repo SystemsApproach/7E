@@ -210,7 +210,7 @@ the corporate firewall. There is a significant weakness to this
 approach: once inside the firewall, there are few internal controls on
 what the VPN user can access. So the VPN represents a weak point that
 is often exploited by attackers. Some ways to address this issue are
-discussed in Section |Virtual|.5.
+discussed in Section |Virt|.5.
 
 Site-to-site VPNs differ from remote access VPNs in that they aim to connect
 entire networks together, not just the devices of single remote

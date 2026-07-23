@@ -78,9 +78,11 @@ Finally, because one of the motivations for virtual networks of
 various types is to isolate traffic, there are often security
 implications.  Those implications come up throughout the chapter,
 often in contrast to another common security mechanism—firewalls.
-Section |VIrt|.5 addresses the issue of security in full, and
-describes how network virtualization is now being used in place of
-firewalls.
+Section |Virt|.5 addresses the issue of isolation in full, and
+describes how network virtualization is now being used to provide
+fine-grained isolation among network segments, a technique known as
+microsegmentation.
+
 
 
 
