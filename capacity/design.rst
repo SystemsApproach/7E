@@ -228,49 +228,35 @@ but when a packet happens to belong to a flow for which the router is
 currently maintaining soft state, then the router is better able to
 handle the packet.
 
-|Capacity|.1.5 Differentiated Service
+|Capacity|.1.5 Service Differentiation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The final design question is one the original IP specification raised,
 but didn't fully address: Should routers treat all traffic the same,
 or should it be possible to offer different levels of service to
 different classes of traffic? The original spec, RFC 791, defines an
-8-bit *Type of Service* field (``ToS``), along with abstract settings
-that can be summarized as a 3-bit "Priority" subfield and a 3-bit "
-"Quality-of-Service" subfield. The former is used to identify
-important packets, such as routing updates, and the latter supports a
-three-way tradeoff between low-delay, high-reliability, and
-high-throughput.  The other two bits were saved for future use.
+8-bit *Type of Service* field (``ToS``), that could be used to identify
+important packets, such as routing updates, or to request low delay,
+high reliability, or high throughput.  The existence of the ``ToS``
+field indicates a recognition that there may be good reasons to treat
+packets differently, but in practice this was rarely done and there
+was no consistency in usage.
 
-The existence of the ``ToS`` field indicates a recognition that there
-are good reasons to treat packets differently, but the actual purpose
-of the field was to provide routers the information they might need to
-properly set parameters on the underlying physical networks they
-forwarded packets over. It was assumed those physical networks offered
-different levels of service to different types of traffic; it was not
-intended that the router itself would change its own packet forwarding
-based on the setting. Routers remained purely best-effort, without
-favoring one class of traffic over another. To further complicate
-things, different vendors ended up using the ``ToS`` bit for different
-purposes, and so there wasn't universal agreement on what the bits
-meant.
-
-All of that changed many years after IP became ubiquitous, in ways
-that we explore in this chapter. The general approach is often
-referred to as *differentiated services*, indicating that not all
-packets are treated exactly the same. We are still squarely in the
-best-effort domain in that no promises are made, but short of
-guaranteeing a throughput rate or an upper bound on jitter, there are
-steps the network can take to differentiate the level of service various
-classes of traffic receive.
-
-The following sections show how this is done by repurposing the
-``ToS`` field already included in the IP headers. But finding the
-header bits to denote how packets are to be treated is the easy
-part. The challenge is that, once you decide to differentiate among
-different classes of traffic, you need to decide (a) what classes to
-support, and (b) how to modify packet forwarding so each class
-receives the desired performance. This is a multi-faceted problem,
-involving coordination among multiple mechanisms. We address it in the
-context of a specific use case—datacenter networks—in Section
-|Capacity|.4.
+Interest in service differentiation started to grow in the 1990s as
+several factors arose almost simultaneously. The telcos started to
+become very interested in packet-switched networks that could offer
+quality-of-service guarantees suitable for high-quality voice and
+video communications. The Internet became increasingly ubiquitous, and
+link bandwidths increased rapidly to the point where it became much
+more realistic to send large volumes of latency-sensitive traffic over
+the Internet. Such traffic, it seemed, would not meet the application
+needs if it received standard, best-effort service. All of this led to
+a great deal of research on how to support service differentiation in
+the Internet, and more broadly on packet-switched networks. A lot of
+that research ended up being overtaken by events, as well-provisioned,
+high-bandwidth networks proliferated, but some of it had a lasting
+impact. This is particularly true for environments where one entity
+controls the end-points and the bottleneck links, such as enterprise
+networks and cloud datacenters. In this chapter we cover the
+mechanisms that have actually succeeded in providing different classes
+of service in real-world deployments.

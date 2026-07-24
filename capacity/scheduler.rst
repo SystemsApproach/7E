@@ -88,43 +88,6 @@ policing is managed in a later section, but for now, the key is to
 recognize the potential value of priority queues, and the
 complications in using them.
 
-.. sidebar:: Latency-sensitive Traffic and Differentiated Services
-
-   *The possibility of sending latency-sensitive traffic over packet-switched
-   networks was known from at least the 1980s, but increases in
-   bandwidth in the 1990s drove greater interest in sending voice and then video
-   traffic over the Internet. Voice over IP (VOIP) started to emerge
-   as a real possibility and exposed the need to control the latency
-   experienced by a subset of the traffic passing through routers and
-   across networks. This interest in controlling the latency of
-   selected traffic led to a set of activities at the IETF to
-   standardize quality of service mechanisms. The most successful of
-   these was the Differentiated Services architecture, also known as
-   DiffServ.*
-
-   *One major contribution of DiffServ was to redefine the* ``TOS`` *field
-   of the IP header to allow common behaviors, such as low-latency
-   queuing, to be requested by setting the* Differentiated Services Code Point
-   *(DSCP) to a well-known value. In addition, it standardized a
-   handful of* per-hop behaviors *(PHBs) that could be implemented
-   using common queuing mechanisms such as those described in this
-   section. With these two features in place, it became reasonably
-   straightforward to configure networks to support applications such
-   as VOIP. A device sending VOIP traffic marks the voice packets with
-   the well-known DSCP value; routers are configured to recognize that
-   value and place the corresponding packets into a queue that will
-   deliver low latency, such as a priority queue. There are remaining
-   challenges, such as making sure that this capability is not abused
-   by endpoints that don't require low latency, since an excessive
-   amount of traffic in a priority queue still won't receive low
-   latency. But these challenges are manageable, especially in the
-   enterprise networks where this technology was particularly
-   popular. While ever increasing backbone speeds limited the utility
-   of DiffServ in the core of the Internet, the capabilities remain
-   available for managing bottleneck links in enterprises and in the
-   last mile of residential networks. They have also found use if
-   modern datacenters, as discussed in Section |Capacity|.4.*
-
 |Capacity|.2.3 Fair Queuing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
