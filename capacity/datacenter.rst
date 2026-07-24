@@ -60,7 +60,7 @@ streaming, VOIP, and so on.
 
 The definition of the Differentiated Services field, defining six
 bits of the old ``ToS`` byte, is in RFC 2474, while the companion RFC
-2575 spells out the larger architectural picture for DiffServ. 
+2575 spells out the larger architectural picture for DiffServ.
 
 .. admonition:: Further Reading
 

@@ -240,7 +240,7 @@ important packets, such as routing updates, or to request low delay,
 high reliability, or high throughput.  The existence of the ``ToS``
 field indicates a recognition that there may be good reasons to treat
 packets differently, but in practice this was rarely done and there
-was no consistency in usage. 
+was no consistency in usage.
 
 Interest in service differentiation started to grow in the 1990s as
 several factors arose almost simultaneously. The telcos started to
