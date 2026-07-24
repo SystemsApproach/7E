@@ -84,6 +84,36 @@ h3 {
   display: block;
 }
 
+.admonition-further-reading .admonition-title::before {
+    display: none;
+}
+
+div.takeaway {
+    position: relative;
+    background-color: #e7f2fa;
+    padding: 12px 16px 12px 3.236em;
+    margin: 12px 0 12px -3.236em;
+    border-radius: 0 4px 4px 0;
+}
+
+div.takeaway p:last-child {
+    margin-bottom: 0;
+}
+
+div.takeaway::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    background-image: url('../scale.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 aside.sidebar {
     margin: 0 0 0.5em 1em;
     border: 1px solid #ddb;

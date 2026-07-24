@@ -304,7 +304,7 @@ prescriptive since we can't know what applications and technologies
 will emerge over time, and (2) it makes the job of architecting the
 system easier if we keep our focus narrow.
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    The separation of concerns principle can be summarized
    as follows: When faced with the design of a complex system, carve
@@ -418,7 +418,7 @@ network:
 This is why we highlight the fact that there is more to the end-to-end
 argument than the popular one-line summary.
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    The end-to-end argument is one of the key principles in networking
    that helps a system designer decide where to place a function. It
@@ -429,7 +429,6 @@ argument than the popular one-line summary.
    capability will provide a performance advantage over implementing
    it only in the end systems. It is a tool for reasoning about tradeoffs, not
    a hard-and-fast rule.
-
 
 As we walk through the
 system components that deliver the Internet's best-effort service in
