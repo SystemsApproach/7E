@@ -44,7 +44,7 @@ routers inside the network (they detect the onset of congestion) and
 edge hosts (they adjust their sending rates in response to
 congestion).  This chapter focuses on the router side of this
 interaction, and we cover the edge host side of this interaction
-in Chapter |CC|. For the purpose of this chapter, all we need to know
+in multiple chapters in Part III. For the purpose of this chapter, all we need to know
 about edge hosts is that they react to whatever signal the routers
 send them by adapting the rate at which they inject packets into the
 network.

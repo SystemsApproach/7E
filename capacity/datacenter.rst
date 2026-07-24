@@ -7,14 +7,8 @@ While RED and ECN have not enjoyed wide-spread adoption in the
 Internet at large, and FIFO with tail drop continues to be the default
 queuing discipline, the mechanisms described in the previous two
 sections have proven useful in several specific settings. This section
-describes two examples, both of which offer different levels of
-service.
-
-.. TODO -- May want to reframe slightly. (1) Change the title to "Use
-   Cases" or something similar. (2) Modify the last sentence to read
-   "This section describes two examples, both of which show how
-   advanced resource management techniques are used in practice."
-
+describes two examples, both of which use a different combination of
+those mechanisms to differentiate the service they offer to their users.
 
 |Capacity|.4.1 Voice Over IP (VOIP)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
