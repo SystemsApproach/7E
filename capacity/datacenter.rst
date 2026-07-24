@@ -1,44 +1,39 @@
-|Capacity|.4 Datacenter Networks
+|Capacity|.4 Service Differentiation
 --------------------------------------
 
 While RED and ECN have not enjoyed wide-spread adoption in the
 Internet at large, and FIFO with tail drop continues to be the default
 queuing discipline, the mechanisms described in the previous two
-sections have proven useful in narrow settings. Datacenter networks
-are a noteworthy example, and so we use them to illustrate how these
-mechanisms are used in practice.
+sections have proven useful in several specific settings. We describe
+here some of the scenarios where offering different levels of service
+to different classes of traffic has proven both tractable and useful.
 
-Datacenter networks have two properties that make them an ideal
-candidate for enhanced resource management. One is that they are
-self-contained, under the control of a single organization. Cloud
-administrators can unilaterally decide that all routers implement a
-particular queuing discipline, set the ECN bit when early signs of
-congestion are detected, and enforce good behavior among all edge
-hosts (the datacenter servers). The second reason is that datacenters
-typically have sub-millisecond RTTs, so there is no worry that some
-hosts will require 100ms, or longer, to react to an ECN.
+The possibility of sending latency-sensitive traffic over
+packet-switched networks was known from at least the 1980s, but
+increases in bandwidth in the 1990s drove greater interest in sending
+voice and then video traffic over the Internet. Voice over IP (VOIP)
+started to emerge as a real possibility and exposed the need to
+control the latency experienced by a subset of the traffic passing
+through routers and across networks. This interest in controlling the
+latency of selected traffic led to a flurry of related research, and
+to a set of activities at the IETF to standardize quality of service
+mechanisms. The most successful of these was the Differentiated
+Services architecture, also known as DiffServ.
 
-If anything, datacenters have proven to be such fertile ground for the
-mechanisms described in this chapter that there is no single correct
-answer; different combinations are packaged in products by vendors and
-deployed in datacenter fabrics by clouds providers. It is also an
-active area of research, so there is not yet any consensus about
-exactly what combination works best. But datacenters do illustrate how
-multiple mechanisms described in this chapter are used in concert to
-build a complete solution; that coordination is the focus of this
-section.
+One major contribution of DiffServ was to redefine the ``ToS`` field
+of the IP header to allow common behaviors, such as low-latency
+queuing, to be requested by setting the *Differentiated Services Code
+Point (DSCP)* to a well-known value. In addition, it standardized a
+handful of *per-hop behaviors (PHBs)* that could be implemented using
+common queuing mechanisms such as those described in Section
+|Capacity|.2. With these two features in place, it became reasonably
+straightforward to configure networks to support applications such as
+VOIP. A device sending VOIP traffic marks the voice packets with the
+well-known DSCP value; routers are configured to recognize that value
+and place the corresponding packets into a queue that will deliver low
+latency, such as a priority queue.
 
-First, we need a way for edge hosts and routers to exchange
-information with each other. As noted in Section
-|Capacity|.2, the
-*Differentiated Services Code Point (DSCP)* plays this role. DSCP is
-defined in RFC 2474, which was written in 1998, and predates modern
-datacenters. But it prescribes a general mechanism that works across
-many use cases, including datacenters.  Specifically, DSCP allows
-networks to distinguish between different *classes* of traffic, where
-each class corresponds to packets that should be treated the
-same. Each class, in turn, is assigned a *per-hop behavior* (PHB), where the
-recommended set of behaviors include:
+The commonly used set of per-hop behaviors include:
 
 * **Default Forwarding (DF):** Regular best-effort traffic.
 
@@ -56,14 +51,16 @@ backward compatibility with the priority (precedence) specified in the
 first three bits of the original ``ToS`` field, which continues to be
 used for high-value network control traffic, such as BGP and OSPF.
 All told, there are 2\ :sup:`6` = 64 possible DSCP settings, using the
-first six bits of the ``ToS`` field; the other two bits are used by
-ECN. The details of how a specific network might use these DSCP
-settings are spelled out in multiple RFCs, each targeted at a
-different use case—e.g., multimedia conferencing, multimedia
-streaming, telephony, and so on—but it turns out that datacenter
-networks have largely converged on a minimal subset that includes just
-one or two AF classes, in addition to the high-priority network
-control class and default best-effort class.
+first six bits of the ``ToS`` field; the other two bits are available
+to be used by ECN. The details of how a specific network might use
+these DSCP settings are spelled out in multiple RFCs, each targeted at
+a different use case—e.g., multimedia conferencing, multimedia
+streaming, VOIP, and so on.
+
+
+The definition of the Differentiated Services field, defining six
+bits of the old ``ToS`` byte, is in RFC 2474, while the companion RFC
+2575 spells out the larger architectural picture for DiffServ. 
 
 .. admonition:: Further Reading
 
@@ -76,7 +73,50 @@ control class and default best-effort class.
    <https://www.rfc-editor.org/info/rfc2475>`__. RFC 2475,
    December 1998.
 
-Second, instead of probabilistically dropping packets, datacenters use
+There are some remaining challenges, such as making sure that this
+capability is not abused by endpoints that don't require low latency,
+since an excessive amount of traffic in a priority queue still won't
+receive low latency. There may be certain trusted endpoints, such as
+the dedicated IP phones that started appearing in the early days of
+VOIP. There are also ways to "police" traffic so that packets marked
+with certain DSCP values are either limited in total bandwidth or
+completely disallowed on some interfaces. These challenges are
+manageable, especially in the enterprise networks where this
+technology was particularly popular. While ever-increasing backbone
+speeds limited the utility of DiffServ in the core of the Internet,
+the capabilities remain available for managing bottleneck links in
+enterprises and in the last mile of residential networks. They also
+find application in modern datacenters.
+
+Two properties make datacenter networks ideal candidates for enhanced
+resource management. One is that they are self-contained, under the
+control of a single organization. Cloud administrators can, for
+example, unilaterally decide on a single set of DSCP values and PHBs
+to be used. They can arrange that all routers implement a particular
+queuing discipline, set the ECN bit when early signs of congestion are
+detected, and enforce good behavior among all edge hosts (the
+datacenter servers). The second simplifying factor in datacenters is
+that they typically have sub-millisecond RTTs, so there reason to
+expect that most hosts will react in a timely manner to a
+congestion markings.
+
+If anything, datacenters have proven to be such fertile ground for the
+mechanisms described in this chapter that there is no single correct
+answer; different combinations are packaged in products by vendors and
+deployed in datacenter fabrics by cloud providers. It is also an
+active area of research, so there is not yet any consensus about
+exactly what combination works best. But datacenters do illustrate how
+multiple mechanisms described in this chapter are used in concert to
+build a complete solution; that coordination is the focus of this
+section. It appears that datacenter networks have largely converged on
+a minimal subset that includes just one or two AF classes, in addition
+to the high-priority network control class and default best-effort
+class.
+
+
+In addition to DiffServ traffic differentiation, datacenters use ECN
+in a manner that is slightly different than that described in the
+previous section. Instead of probabilistically dropping packets, datacenters use
 ECN to provide direct feedback. Given the low round-trip times, ECN
 allows traffic sources to react quickly to queue buildup. But since we
 have more than one class of service, we need a different way to decide
@@ -107,7 +147,7 @@ length calculation.
 Finally, the in-network mechanisms make assumptions about the edge
 hosts being well-behaved, which includes applying the right DSCP
 labels and limiting their sending rate. One general approach is for
-the cloud to "police" senders; this acknowledges that a cloud hosts
+the cloud to police senders; this acknowledges that a cloud hosts
 VMs that are able to run arbitrary code. This policing action can be
 implemented in the hypervisor that sits between the server and the
 tenant VM; in the NIC that connects the server to the datacenter
