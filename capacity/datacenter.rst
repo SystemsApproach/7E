@@ -1,12 +1,23 @@
+.. index:: VOIP: Voice Over IP
+
 |Capacity|.4 Service Differentiation
 --------------------------------------
 
 While RED and ECN have not enjoyed wide-spread adoption in the
 Internet at large, and FIFO with tail drop continues to be the default
 queuing discipline, the mechanisms described in the previous two
-sections have proven useful in several specific settings. We describe
-here some of the scenarios where offering different levels of service
-to different classes of traffic has proven both tractable and useful.
+sections have proven useful in several specific settings. This section
+describes two examples, both of which offer different levels of
+service.
+
+.. TODO -- May want to reframe slightly. (1) Change the title to "Use
+   Cases" or something similar. (2) Modify the last sentence to read
+   "This section describes two examples, both of which show how
+   advanced resource management techniques are used in practice."
+
+
+|Capacity|.4.1 Voice Over IP (VOIP)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The possibility of sending latency-sensitive traffic over
 packet-switched networks was known from at least the 1980s, but
@@ -17,8 +28,11 @@ control the latency experienced by a subset of the traffic passing
 through routers and across networks. This interest in controlling the
 latency of selected traffic led to a flurry of related research, and
 to a set of activities at the IETF to standardize quality of service
-mechanisms. The most successful of these was the Differentiated
-Services architecture, also known as DiffServ.
+mechanisms. Some of those mechanisms are described in Chapter
+|Stream|, where we focus on end hosts (where VOIP calls originate). As
+for managing resources inside the network, the most successful of
+these was the Differentiated Services architecture, also known as
+DiffServ.
 
 One major contribution of DiffServ was to redefine the ``ToS`` field
 of the IP header to allow common behaviors, such as low-latency
@@ -57,7 +71,6 @@ these DSCP settings are spelled out in multiple RFCs, each targeted at
 a different use case—e.g., multimedia conferencing, multimedia
 streaming, VOIP, and so on.
 
-
 The definition of the Differentiated Services field, defining six
 bits of the old ``ToS`` byte, is in RFC 2474, while the companion RFC
 2575 spells out the larger architectural picture for DiffServ.
@@ -78,27 +91,30 @@ capability is not abused by endpoints that don't require low latency,
 since an excessive amount of traffic in a priority queue still won't
 receive low latency. There may be certain trusted endpoints, such as
 the dedicated IP phones that started appearing in the early days of
-VOIP. There are also ways to "police" traffic so that packets marked
-with certain DSCP values are either limited in total bandwidth or
-completely disallowed on some interfaces. These challenges are
-manageable, especially in the enterprise networks where this
-technology was particularly popular. While ever-increasing backbone
-speeds limited the utility of DiffServ in the core of the Internet,
-the capabilities remain available for managing bottleneck links in
-enterprises and in the last mile of residential networks. They also
-find application in modern datacenters.
+VOIP. (These phones are trusted to implement the transport protocol
+defined in Chapter |Stream|.) There are also ways to "police" traffic
+so that packets marked with certain DSCP values are either limited in
+total bandwidth or completely disallowed on some interfaces. These
+challenges are manageable, especially in the enterprise networks where
+this technology was particularly popular. While ever-increasing
+backbone speeds limited the utility of DiffServ in the core of the
+Internet, the capabilities remain available for managing bottleneck
+links in enterprises and in the last mile of residential networks.
 
-Two properties make datacenter networks ideal candidates for enhanced
-resource management. One is that they are self-contained, under the
-control of a single organization. Cloud administrators can, for
-example, unilaterally decide on a single set of DSCP values and PHBs
-to be used. They can arrange that all routers implement a particular
-queuing discipline, set the ECN bit when early signs of congestion are
-detected, and enforce good behavior among all edge hosts (the
-datacenter servers). The second simplifying factor in datacenters is
-that they typically have sub-millisecond RTTs, so there reason to
-expect that most hosts will react in a timely manner to a
-congestion markings.
+|Capacity|.4.2 Datacenter Networks
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Datacenters are our second example use case, where two properties make
+them ideal candidates for enhanced resource management. One is that
+they are self-contained, under the control of a single organization.
+Cloud administrators can, for example, unilaterally decide on a single
+set of DSCP values and PHBs to be used. They can arrange that all
+routers implement a particular queuing discipline, set the ECN bit
+when early signs of congestion are detected, and enforce good behavior
+among all edge hosts (the datacenter servers). The second simplifying
+factor in datacenters is that they typically have sub-millisecond
+RTTs, so there reason to expect that most hosts will react in a timely
+manner to a congestion markings.
 
 If anything, datacenters have proven to be such fertile ground for the
 mechanisms described in this chapter that there is no single correct
@@ -112,7 +128,6 @@ section. It appears that datacenter networks have largely converged on
 a minimal subset that includes just one or two AF classes, in addition
 to the high-priority network control class and default best-effort
 class.
-
 
 In addition to DiffServ traffic differentiation, datacenters use ECN
 in a manner that is slightly different than that described in the
