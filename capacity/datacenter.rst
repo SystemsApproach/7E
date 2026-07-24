@@ -8,10 +8,6 @@ sections have proven useful in narrow settings. Datacenter networks
 are a noteworthy example, and so we use them to illustrate how these
 mechanisms are used in practice.
 
-.. TODO -- Could rework this section to make Datacenter one example
-   out of 2 or 3, including VOIP and perhaps access networksy. Or, we
-   could add a sidebar talking about one of these use cases.
-
 Datacenter networks have two properties that make them an ideal
 candidate for enhanced resource management. One is that they are
 self-contained, under the control of a single organization. Cloud
@@ -33,15 +29,15 @@ build a complete solution; that coordination is the focus of this
 section.
 
 First, we need a way for edge hosts and routers to exchange
-information with each other. The ``ToS`` bits introduced in Section
-|Capacity|.1.5, which has been replaced by an interpretation known as
-*Differentiated Services Code Point (DSCP)*, plays this role. DSCP is
+information with each other. As noted in Section
+|Capacity|.2, the
+*Differentiated Services Code Point (DSCP)* plays this role. DSCP is
 defined in RFC 2474, which was written in 1998, and predates modern
 datacenters. But it prescribes a general mechanism that works across
 many use cases, including datacenters.  Specifically, DSCP allows
 networks to distinguish between different *classes* of traffic, where
 each class corresponds to packets that should be treated the
-same. Each class, in turn, is assigned a *behavior*, where the
+same. Each class, in turn, is assigned a *per-hop behavior* (PHB), where the
 recommended set of behaviors include:
 
 * **Default Forwarding (DF):** Regular best-effort traffic.
@@ -74,6 +70,10 @@ control class and default best-effort class.
    K. Nichols, S. Blake, F. Baker, and D. Black. `Definition of the
    Differentiated Services Field (DS Field) in the IPv4 and IPv6
    Headers <https://www.rfc-editor.org/info/rfc2474>`__. RFC 2474,
+   December 1998.
+
+   S. Blake et al. `An Architecture for Differentiated Services
+   <https://www.rfc-editor.org/info/rfc2475>`__. RFC 2475,
    December 1998.
 
 Second, instead of probabilistically dropping packets, datacenters use
