@@ -350,7 +350,7 @@ questions.
     site often in close proximity to users.
 
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    An important takeaway from this discussion is that arbitrary
    computation can take place throughout the network, and not just at

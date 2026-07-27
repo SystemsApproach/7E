@@ -88,6 +88,10 @@ h3 {
     display: none;
 }
 
+.admonition .admonition-title {
+    background-color: #6a99d0;
+}
+
 div.takeaway {
     position: relative;
     background-color: #e7f2fa;
@@ -104,11 +108,10 @@ div.takeaway::before {
     content: '';
     position: absolute;
     left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 12px;
     width: 28px;
     height: 28px;
-    background-image: url('../scale.png');
+    background-image: url('../bridge.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

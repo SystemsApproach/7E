@@ -417,7 +417,7 @@ transport/application boundary.
 
 .. The following is an example of the new design element. Exact name TBD
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    An important lesson from this discussions is that layering
    decisions can have a profound impact on system behavior and

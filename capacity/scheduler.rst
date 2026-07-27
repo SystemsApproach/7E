@@ -319,7 +319,7 @@ priority queue is empty. This approach has been implemented in some
 commercial routers to provide one low-latency queue and a set of DRR
 queues that share the remaining bandwidth in a weighted fair manner.
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    The preceding discussion of queue management illustrates an
    important system design principle known as *separating policy and
