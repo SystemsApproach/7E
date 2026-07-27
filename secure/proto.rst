@@ -59,7 +59,10 @@ encrypted. This additional data is the header for the record layer,
 indicating the type of data being encrypted (e.g., application data or
 handshake data) and its length. The nonce is calculated by computing
 the XOR of the IV and a sequence number that increments with every
-block. The AEAD cipher then computes the ciphertext that will follow
+block. Note that the inclusion of the sequence number as input to the
+encryption algorithm prevents an
+attacker from sending a previously seen record as an attempted
+replay attack. The AEAD cipher then computes the ciphertext that will follow
 the record header, and the resulting block is passed to the transport
 layer (normally TCP) for transmission.
 

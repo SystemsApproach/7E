@@ -13,7 +13,7 @@ are connected to the web site of a particular company. How can we
 reliably learn the public key of that company as a first step to validating signatures
 produced with its private key?
 
-Similarly, we are going to need session keys—short-lived, symmetrtic keys to protect the
+Similarly, we are going to need session keys—short-lived, symmetric keys to protect the
 confidentiality of data sent over a connection. Establishing a
 short-lived session key is a different
 problem from the distribution of long-lived public keys. We will
@@ -229,7 +229,7 @@ revocation but no comprehensive solution.
 |TLS|.3.2 Distribution of Secret Keys
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As discsused above, we want a short-lived, symmetric session key to
+As discussed above, we want a short-lived, symmetric session key to
 provide confidentiality and integrity protection for the traffic on a
 connection between client and server. They must be short-lived to
 limit the amount of information available to attackers and to limit

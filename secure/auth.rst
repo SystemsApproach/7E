@@ -30,11 +30,8 @@ protocol. The TLS Handshake Protocol is such a protocol. There is,
 however, one opportunity for replay attacks in TLS, when data is sent
 before the handshake is complete. This is known as 0-RTT data because
 it avoids the round-trip time associated with connection
-establishement before sending data. It is an optional performance
-enhancement that we cover in the next section.
-
-
-.. TODO need to explain how these issues are addressed in TLS
+establishment before sending data. It is an optional performance
+enhancement that we cover in Section |TLS|.6.
 
 When establishing a secure connection on the Web, it is typical to
 authenticate the server, while client authentication is
@@ -79,7 +76,7 @@ ephemeral Diffie-Hellman key exchange as described in the preceding
 section. Pre-shared keys are also supported and have a role in restarting a
 session quickly, as discussed below.
 
-When we described Diffie-Hellman in chapter 4 we explained the original
+When we described Diffie-Hellman in Section |TLS|.3.2, we explained the original
 algorithm that operates on groups of integers using modular
 arithmetic. This is now known as Finite Field Diffie-Hellman. It is
 also possible to use elliptic curves rather than modular arithmetic
