@@ -167,7 +167,7 @@ or approximately 280 KB of data. In other words, this example channel
 early 1980s could hold.
 
 .. _fig-pipe:
-.. figure:: introduction/figures/f01-18-9780123850591.png
+.. figure:: introduction/figures/pipe.png
    :width: 400px
    :align: center
 
@@ -233,16 +233,16 @@ In contrast, the same 1-MB file doesn’t even come close to filling
 1 RTT’s worth of the 1-Gbps link, which has a delay × bandwidth product
 of 12.5 MB.
 
-:numref:`Figure %s <fig-bw-lat>` illustrates the difference between the two
+:numref:`Figure %s <fig-pipe-full>` illustrates the difference between the two
 networks. In effect, the 1-MB file looks like a stream of data that
 needs to be transmitted across a 1-Mbps network, while it looks like a
 single packet on a 1-Gbps network. To help drive this point home,
 consider that a 1-MB file is to a 1-Gbps network what a 1-KB *packet* is
 to a 1-Mbps network.
 
-.. _fig-bw-lat:
-.. figure:: introduction/figures/f01-19-9780123850591.png
-   :width: 500px
+.. _fig-pipe-full:
+.. figure:: introduction/figures/pipe-full.png
+   :width: 550px
    :align: center
 
    Relationship between bandwidth and latency. A 1-MB
@@ -369,7 +369,7 @@ component of latency defined earlier in this section, which varies
 with time.
 
 .. _fig-jitter:
-.. figure:: introduction/figures/f01-20-9780123850591.png
+.. figure:: introduction/figures/jitter.png
    :width: 600px
    :align: center
 
