@@ -191,7 +191,7 @@ displays of the collected data.
    planning.
 
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    This discussion illustrates one of the key tradeoffs in monitoring
    a system: our attempts to monitor can themselves have an impact on

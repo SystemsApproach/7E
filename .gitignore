@@ -9,4 +9,6 @@ local/
 scripts/
 _build/
 *~
+__pycache__/
+
 

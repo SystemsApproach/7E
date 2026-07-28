@@ -268,7 +268,7 @@ annoying. So this demands a different approach that doesn't rely on
 TCP for congestion control and reliable delivery. We will
 examine this problem space in Chapter |Stream|.
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    The development of video streaming over HTTP and TCP illustrates
    the importance of looking at the interplay between protocol

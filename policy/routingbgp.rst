@@ -168,7 +168,7 @@ have no-one higher up to depend on, so they must carry all the
 Internet's  routable prefixes in their routing tables.
 
 .. _key-scaling:
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    The design of BGP illustrates again the principle of hierarchical
    aggregation of information to achieve scalability. First, the

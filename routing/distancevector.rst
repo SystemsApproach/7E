@@ -375,7 +375,7 @@ networks—those with no paths longer than 15 hops.
 
 
 .. _key-routing-alg:
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    One of the most important tradeoffs to be made in networking systems
    is between distributed versus centralized control. Distance-vector

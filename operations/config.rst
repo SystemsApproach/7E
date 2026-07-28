@@ -390,7 +390,7 @@ with the system described earlier in this section, although it ends up
 being more bespoke than off-the-shelf. This makes it more cumbersome
 to maintain and evolve.
 
-.. admonition:: Systems Thinking Takeaway
+.. takeaway::
 
    A lesson illustrated by this example is that there is no single
    right set of tools for any problem space. Instead, you typically
