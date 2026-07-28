@@ -59,12 +59,14 @@ encrypted. This additional data is the header for the record layer,
 indicating the type of data being encrypted (e.g., application data or
 handshake data) and its length. The nonce is calculated by computing
 the XOR of the IV and a sequence number that increments with every
-block. Note that the inclusion of the sequence number as input to the
-encryption algorithm prevents an
-attacker from sending a previously seen record as an attempted
-replay attack. The AEAD cipher then computes the ciphertext that will follow
-the record header, and the resulting block is passed to the transport
-layer (normally TCP) for transmission.
+block.  The inclusion of the sequence number as input to the
+encryption algorithm is a form of *counter mode* as discussed in
+Section |TLS|.2.1. Because every block uses a different nonce, an
+attacker who sends a previously seen record in an attempted replay
+attack will fail; it will be detected as a duplicate rather than
+appearing as the same data sent twice. The AEAD cipher computes the
+ciphertext that will follow the record header, and the resulting block
+is passed to the transport layer (normally TCP) for transmission.
 
 On the receiving side, the process runs in the other direction, with
 the appropriate key, nonce, ciphertext and additional data (headers)
