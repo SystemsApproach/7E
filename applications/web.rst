@@ -40,8 +40,8 @@ relatively simple: much of the complexity is managed in this companion
 standard.  HTTP is a protocol for fetching web pages, but HyperText
 Markup Language (HTML) is a companion specification that defines the
 basic form of those pages. This separation between the data transfer
-protocol and the data format shows up again repeatedly, as we will see
-in the next section.
+protocol and the data format shows up again repeatedly; we'll see
+a second example in the next section.
 
 The World Wide Web has been so successful and has been the primary way
 many people interact with the Internet for so long that sometimes, in
@@ -270,7 +270,9 @@ As with the unexpected consequences of the ``POST`` request message, it
 is sometimes surprising how various response messages are used in
 practice. For example, request redirection (specifically code 302) turns
 out to be a powerful mechanism that plays a big role in Content
-Distribution Networks (CDNs) by redirecting requests to a nearby cache.
+Distribution Networks (CDNs) by redirecting requests to a nearby
+cache. We look more closely at CDNs in Section |Overlay|.2.
+
 
 Also similar to request messages, response messages can contain one or
 more ``MESSAGE_HEADER`` lines. These lines relay additional
@@ -304,7 +306,7 @@ connection requires setup and teardown messages to be exchanged
 between the client and server even if all the client wanted to do was
 verify that it had the most recent copy of a page. Thus, retrieving a
 page that included some text and a dozen icons or other small graphics
-would result in 13 separate TCP connections being established and
+would result in a dozen separate TCP connections being established and
 closed.
 
 To make matters worse, securely accessing a page using HTTPS (the
@@ -324,7 +326,7 @@ negative consequences.
 
 .. _fig-oldhttp:
 .. figure:: applications/figures/rtt-overhead.png
-   :width: 500px
+   :width: 450px
    :align: center
 
    HTTP 1.0 results in multiple round trips for a single
@@ -492,7 +494,7 @@ cached copy if the user visits the same page again. As another example,
 a site can support a single site-wide cache. This allows users to take
 advantage of pages previously downloaded by other users. Closer to the
 middle of the Internet, Internet Service Providers (ISPs) can cache
-pages.\ [#]_ Note that, in the second case, the users within the site most
+pages.\ [#]_ For the second case, the users within the site most
 likely know what machine is caching pages on behalf of the site, and
 they configure their browsers to connect directly to the caching host.
 This node is sometimes called a *proxy*. In contrast, the sites that
@@ -534,8 +536,7 @@ to verify that it has the most recent copy of the page. More generally,
 there are a set of *cache directives* that must be obeyed by all caching
 mechanisms along the request/response chain. These directives specify
 whether or not a document can be cached, how long it can be cached, how
-fresh a document must be, and so on. We’ll return to the subject of
-CDNs in Chapter |Overlay|.
+fresh a document must be, and so on.
 
 2.2.4 RESTful API
 ~~~~~~~~~~~~~~~~~~~~~

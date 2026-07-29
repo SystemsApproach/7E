@@ -13,8 +13,8 @@ in this chapter), a remote login service called Telnet (which was not
 secure and has been replaced by SSH), and the FTP file transfer
 protocol (which still exists but has largely been supplanted by the
 web). Dramatic improvements in available bandwidth have enabled whole
-new classes of applications, such as streaming and video conferencing;
-there has also been a significant upgrade in the software tools
+new classes of applications, such as streaming and video conferencing.
+There has also been a significant upgrade in the software tools
 available to developers, most notably those provided by the
 cloud. Before getting into specific examples, we first look at the
 basic structure that is common to nearly all applications, including a
@@ -34,14 +34,14 @@ application, such as SMTP in the case of email. Sitting underneath the
 application layer protocol are standard, general-purpose protocols
 such as TCP and IP.  Because these protocols are common across many
 applications, there is no reason (today) for application developers to
-implement them; instead, they are provided as part of the operating
+implement them. Instead, they are provided as part of the operating
 system, and exposed to applications through a standard API
-(application programming interface). For several decades the standard
-API for client-server applications has been the socket API.
+(application programming interface).
 
-The *socket interface* was originally provided by the Berkeley
-Software Distribution (BSD) of Unix, and is now supported in virtually
-all popular operating systems. It is also the foundation of
+For several decades, *sockets* have provided the standard interface
+for client-server applications. Originally implemented in the Berkeley
+Software Distribution (BSD) of Unix, the Socket API is now supported
+in virtually all operating systems. It is also the foundation of
 language-specific interfaces, such as the Java or Python socket
 library. We use Linux and C for all code examples in this book; Linux
 because it is open source and C because it remains the language of
@@ -66,24 +66,14 @@ of the Socket API. This layer includes a plethora of cloud-based tools
 that lower the barrier for implementing scalable applications as we
 discuss below.
 
-Before describing the socket interface, it is important to keep two
-concerns separate in your mind. Each protocol provides a certain set of
-*services*, and the API provides a *syntax* by which those services can
-be invoked on a particular computer system. The implementation is then
-responsible for mapping the tangible set of operations and objects
-defined by the API onto the abstract set of services defined by the
-protocol. If you have done a good job of defining the interface, then it
-will be possible to use the syntax of the interface to invoke the
-services of many different protocols. Such generality was certainly a
-goal of the socket interface, although it’s far from perfect.
-
 The main abstraction of the socket interface, not surprisingly, is the
 *socket*. A good way to think of a socket is as the point where a local
 application process attaches to the network. The interface defines
 operations for creating a socket, attaching the socket to the network,
 sending/receiving messages through the socket, and closing the socket.
 To simplify the discussion, we will limit ourselves to showing how
-sockets are used with TCP.
+sockets are used with TCP. (The API can also be used to send and
+receive messages via UDP and IP.)
 
 The first step is to create a socket, which is done with the following
 operation:
@@ -250,6 +240,12 @@ architecture* is what we call the best practices in building services
 in this cloud native manner. Both are interesting topics, but beyond
 the scope of this book. We recommend an excellent tutorial if you
 want to learn how to use Kubernetes.
+
+.. _reading_k8s:
+.. admonition:: Further Reading
+
+   `Kubernetes Tutorial
+   <https://kubernetes.io/docs/tutorials/kubernetes-basics/>`__.
 
 Keep in mind that the thousands of servers hosted in every cloud
 datacenter are interconnected using Internet technology. So the cloud
