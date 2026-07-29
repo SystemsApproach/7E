@@ -221,10 +221,12 @@ in all headers, which we describe in the next subsection.
 
    Ethernet header specification.
 
-Of course another way to document protocol headers is the source code
-that implements the protocol.  For example, the following code snippet
-for the UDP header is taken from the Linux kernel, where ``__be16``
-and ``__sum16`` are kernel-defined types for 16-bit unsigned integers.
+Another way to document protocol headers is the source code that
+implements the protocol.  For example, the following code snippet for
+the UDP header is taken from the Linux kernel, where ``__be16`` and
+``__sum16`` are kernel-defined types for 16-bit unsigned integers.  A
+header structure like this essentially defines the set of parameters that
+protocol modules pass to each other over their peer-to-peer interface.
 
 .. code-block:: c
 

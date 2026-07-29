@@ -425,7 +425,7 @@ argument than the popular one-line summary.
    often but not always leads towards placing functionality in the end
    system rather than inside the network, especially when that is the
    only way to ensure correct behavior. It also admits the
-   possiblity of placing functionality inside the network when that
+   possibility of placing functionality inside the network when that
    capability will provide a performance advantage over implementing
    it only in the end systems. It is a tool for reasoning about tradeoffs, not
    a hard-and-fast rule.

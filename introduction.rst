@@ -44,16 +44,19 @@ identifying the fundamental challenges that have to be addressed, and
 exploring the design space of possible solutions. That is the goal of
 this book.
 
-It's also important to keep in mind that the path from conception to
-today’s reality is not a straight line, nor is today’s Internet the
-end of the process. There have been many false starts and stop-gap
-solutions, followed by years of iterative improvement. This evolution
-culminates in today’s software and hardware artifacts—many of which
-are worth looking at in detail—but always keeping in mind that those
-too will likely change over time. Our goal is not just to explain how
-the Internet of today works, but to teach the principles that will
-enable the designers of future networks to build systems that expand
-on the capabilities available today.
+.. takeaway::
+
+  It's also important to keep in mind that the path from conception to
+  today’s reality is not a straight line, nor is today’s Internet the
+  end of the process. There have been many false starts and stop-gap
+  solutions, followed by years of iterative improvement. This
+  evolution culminates in today’s software and hardware artifacts—many
+  of which are worth looking at in detail—but always keeping in mind
+  that those too will likely change over time. Our goal is explain why
+  the Internet works the way it does today, including how we got here,
+  so as to teach the principles that will guide the design of future
+  networks.
+
 
 .. include:: introduction/requirements.rst
 .. include:: introduction/architecture.rst
