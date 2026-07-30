@@ -7,6 +7,7 @@
 .. index:: NRZ/NRZI: Non-Return to Zero / Inverted
 .. index:: 4B/5B: 4-Bit/5-Bit Encoding
 .. index:: CRC: Cyclic Redundancy Check
+.. index:: MAC: Media Access Control
 
 |Tech|.1 Communication Links
 -------------------------------------------
@@ -116,7 +117,7 @@ NRZ-encoded signal (bottom) that corresponds to the transmission of a
 particular sequence of bits (top).
 
 .. _fig-nrz:
-.. figure:: technology/figures/f02-04-9780123850591.png
+.. figure:: technology/figures/f02-04.png
    :width: 400px
    :align: center
 
@@ -172,7 +173,7 @@ to the signal, the clock can be effectively recovered at the
 receiver.
 
 .. _fig-encode-all:
-.. figure:: technology/figures/f02-05-9780123850591.png
+.. figure:: technology/figures/f02-05.png
    :width: 400px
    :align: center
 
