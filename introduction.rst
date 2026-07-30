@@ -53,8 +53,9 @@ this book.
   evolution culminates in today’s software and hardware artifacts—many
   of which are worth looking at in detail—but always keeping in mind
   that those too will likely change over time. Our goal is explain why
-  the Internet works the way it does today, including how we got here,
-  so as to teach the principles that will guide the design of future
+  the Internet works the way it does today, including how we got
+  here. By highlighting the principles that have shaped the
+  development of the Internet, we aim to guide the designers of future
   networks.
 
 
