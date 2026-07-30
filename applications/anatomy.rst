@@ -168,7 +168,7 @@ uses the socket interface to send messages over a TCP connection. The
 program also uses other Linux networking utilities, which we introduce as
 we go. The application allows a user on one machine to type in and send
 text to a user on another machine. It is a simplified version of the
-Linux ``talk`` program, which is functionally similar the core of
+Linux ``talk`` program, which is functionally similar to the core of
 instant messaging applications.
 
 
@@ -228,18 +228,18 @@ more physical servers.
 the load balancer can be implemented in different ways, including a
 hardware device, but it is typically implemented by a proxy process
 that runs in a VM (also hosted in the cloud) rather than as a physical
-appliance. The individual Servers in the diagram can be physical
+appliance. The individual servers in the diagram can be physical
 machines, but in commercial clouds, they are more likely to be VMs.
 
 There is a set of best practices for implementing the server code that
 eventually responds to that request, and some additional cloud
 machinery to create/destroy containers and load balance requests
-across those containers. Kubernetes is today’s canonical example of
-such a container management system, and the *microservices
-architecture* is what we call the best practices in building services
-in this cloud native manner. Both are interesting topics, but beyond
-the scope of this book. We recommend an excellent tutorial if you
-want to learn how to use Kubernetes.
+across those containers. Kubernetes is today’s most widely used
+container management system, and the *microservices architecture* is
+what we call the best practices in building services in this cloud
+native manner. Both are interesting topics, but beyond the scope of
+this book. We recommend an excellent tutorial if you want to learn how
+to use Kubernetes.
 
 .. _reading_k8s:
 .. admonition:: Further Reading
@@ -303,7 +303,7 @@ hops (server-leaf-spine-leaf-server in the inter-rack case).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 While the previous subsection describes how applications have evolved
-from a process running on a single server, to a scalable service
+from a process running on a single server to a scalable service
 running on a cluster of servers, there is a second way to scale a
 service: distribute a set of clusters across multiple
 points-of-presence throughout the Internet. Doing so provides more

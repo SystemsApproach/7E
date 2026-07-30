@@ -43,16 +43,15 @@ basic form of those pages. This separation between the data transfer
 protocol and the data format shows up again repeatedly; we'll see
 a second example in the next section.
 
-The World Wide Web has been so successful and has been the primary way
-many people interact with the Internet for so long that sometimes, in
-the popular consciousness, the Web *is* the Internet. (Of course, many
-people now interact with the Internet mainly using their phones,
-unaware that the Web underpins most mobile apps as well.)  In fact,
-the design of the system that became the World Wide Web started around 1989, long
-after the Internet had become a widely deployed system and numerous
-other methods to retrieve information over the Internet already
-existed. The original goal of the Web was to offer a new way to organize
-and retrieve information, drawing on ideas about hypertext—interlinked
+The World Wide Web has been the primary way many people interact with
+the Internet now for decades. Of course, many people now interact with
+the Internet mainly using their phones, unaware that the Web underpins
+most mobile apps as well. In fact, the design of the system that
+became the World Wide Web started around 1989, long after the Internet
+had become a widely deployed system and numerous other methods to
+retrieve information over the Internet already existed. The original
+goal of the Web was to offer a new way to organize and retrieve
+information, drawing on ideas about hypertext—interlinked
 documents—that had been around since at least the 1960s.\ [#]_ The
 core idea of hypertext is that one document can link to another
 document, and the protocol (HTTP) and document language (HTML) were
@@ -107,7 +106,7 @@ allow a user to follow that link to get another document, you have the
 basis of a hypertext system.
 
 When you ask your browser to view a page, your browser (the client)
-fetches the page from the server using HTTP, which traditionally runs
+fetches the page from the server using HTTP, which usually runs
 over TCP. (If you looked at the source for a web browser, you would
 find the client-side socket calls shown in Section 2.1.1.)  At its
 core, HTTP is a text-based request/response protocol, where every
@@ -290,11 +289,12 @@ server at the original address might respond with
 
 In the common case, the response message will also carry the requested
 page. This page is an HTML document, but since it may carry nontextual
-data (e.g., a GIF image), it is encoded using MIME (see the section on
-email). Certain of the ``MESSAGE_HEADER`` lines give attributes of the
-page contents, including ``Content-Length`` (number of bytes in the contents),
-``Expires`` (time at which the contents are considered stale), and
-``Last-Modified`` (time at which the contents were last modified at the server).
+data (e.g., a GIF image), it is encoded using MIME (see Section
+|Apps|.3). Certain of the ``MESSAGE_HEADER`` lines give attributes of
+the page contents, including ``Content-Length`` (number of bytes in
+the contents), ``Expires`` (time at which the contents are considered
+stale), and ``Last-Modified`` (time at which the contents were last
+modified at the server).
 
 Connection Overhead
 ++++++++++++++++++++++
@@ -566,12 +566,11 @@ by a URI, and the operations you can perform on resources include
 ``GET``, ``POST``, ``PUT``, and ``DELETE`` (see :numref:`Table %s
 <tab-ops>`).
 
-While this sounds like a circular definition, it really boils down to
-an observation that the Web, either by design or accident, reinvented
-an object-oriented software architecture. Resource is just another name
+One way to look at this is that REST treats the Web as an
+object-oriented software architecture. Resource is just another name
 for an object, and the set of HTTP operations are just a slight
 variation of a well-known set of object-oriented operations referred
-to as *CRUD*: *Create*, *Read*, *Update*, *Delete*.
+to as CRUD: Create, Read, Update, Delete.
 
 For example, ``https://api.github.com`` is the URL for the REST API by
 which you can programmatically interact with GitHub. If you access it
