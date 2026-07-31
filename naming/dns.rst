@@ -57,7 +57,7 @@ addresses; we will come back to this issue later in this section.
        to left.
 
 .. _fig-domains:
-.. figure:: naming/figures/f09-15-9780123850591.png
+.. figure:: naming/figures/hierarchy.png
    :width: 700px
    :align: center
 
@@ -107,7 +107,7 @@ university-level zone), while others, like the Department of Computer
 Science, manage their own department-level zone.
 
 .. _fig-zones:
-.. figure:: naming/figures/f09-16.png
+.. figure:: naming/figures/zones.png
    :width: 700px
    :align: center
 
@@ -126,7 +126,7 @@ as being represented by a hierarchy of name servers rather than by a
 hierarchy of domains, as illustrated in :numref:`Figure %s <fig-servers>`.
 
 .. _fig-servers:
-.. figure:: naming/figures/f09-17.png
+.. figure:: naming/figures/servers.png
    :width: 500px
    :align: center
 
