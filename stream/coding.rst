@@ -175,7 +175,7 @@ vertical directions (and which goes by the identification 4:2:0),
 happens to match the most commonly used approach.
 
 .. _fig-jpeg:
-.. figure:: stream/figures/f07-12-9780123850591.png
+.. figure:: stream/figures/compress.png
    :width: 550px
    :align: center
 
