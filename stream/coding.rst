@@ -140,7 +140,7 @@ in this case would be zero. That is, a fully white pixel is
 (255,255,255) in RGB space and (255,0,0) in YUV space.
 
 .. _fig-yuvsub:
-.. figure:: stream/figures/f07-11-9780123850591.png
+.. figure:: stream/figures/YUV.png
    :width: 500px
    :align: center
 
