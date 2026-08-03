@@ -58,10 +58,11 @@ to communicate. Furthermore, the complexity of firewall rules tends to
 grow over time as more and more rules would need to be added to
 describe the traffic allowed to pass from one zone to another.
 
+
 The key insight is that network virtualization allows for the creation
 of microsegments, which are narrowly defined virtual networks that
 determine both which machines can communicate with each other and how
-they can do so. The idea is that a microsegment is a lightweight
+they can do so. A microsegment is a lightweight
 construct created in software.  An operator can define the precise
 communication policy to be applied to a small number of virtual
 machines or containers, and the SDN system implements that policy. A
@@ -81,12 +82,13 @@ machines may not talk to each other. This is a policy that was
 difficult to implement in the past, because all the Internet-facing
 machines would sit on the same network segment.
 
-Prior to microsegmentation, the complexity of configuring segments was
-such that machines from many applications would likely sit on the same
-segment, creating opportunities for an attack to spread from one
-application to another. The lateral movement of attacks within
-datacenters has been well documented as a key strategy of successful
-cyberattacks over many years.
+Prior to microsegmentation, the complexity of configuring segments or
+zones was such that machines from many applications would likely sit
+on the same segment, creating opportunities for an attack to spread
+from one application to another. The lateral movement of attacks
+within datacenters, often between machines that had no need to
+communicate normally, has been well documented as a strategy of
+successful cyberattacks over many years.
 
 Consider the arrangement of VMs and the conventional firewall in
 :numref:`Figure %s <fig-standard-firewall>` from the previous
@@ -108,3 +110,22 @@ Microsegmentation has become an accepted best practice for datacenter
 networking, providing a starting point for "zero-trust"
 networking. This illustrates the far-reaching impact of network
 virtualization, one of the key use cases of SDN.
+
+.. takeaway::
+   Zero-trust networking is often cited as an application of the
+   *principle of least privilege*, which was one of a number of
+   principles of computer security proposed by Saltzer and Schroeder
+   in 1975. The principle states: “Every program and every user of the
+   system should operate using the least set of privileges necessary
+   to complete the job.” A common example of this principle in
+   practice is to avoid running any process as root on Unix-like
+   systems unless absolutely necessary. In the context of networking,
+   it implies that applications which access the network should only
+   have access to the set of resources needed to do their jobs.
+
+.. admonition:: Further Reading
+
+  J. Saltzer and M. Schroeder. `The Protection of Information
+  in Computer Systems
+  <http://web.mit.edu/Saltzer/www/publications/protection/index.html>`__. In
+  Proceedings of the IEEE, 1975.

@@ -277,7 +277,8 @@ existence of trusted network zones, such as the network behind the
 firewall to which a remote access or site-to-site VPN would give
 access. In this respect, they embrace the idea of *zero trust
 networking*, in that there is no "trusted" zone; only explicitly
-allowed connections among specific devices are possible.
+allowed connections among specific devices are possible. We return to
+the issue of zero trust in the Section |Virt|.5.
 
 .. admonition:: Further Reading
 
