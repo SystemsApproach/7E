@@ -90,7 +90,7 @@ to the application. This arrangement of protocol layers is depicted in
 :numref:`Figure %s <fig-tls-stack>`.
 
 .. _fig-tls-stack:
-.. figure:: secure/figures/f08-15-9780123850591.png
+.. figure:: secure/figures/TLS-stack.png
    :width: 300px
    :align: center
 
