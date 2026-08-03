@@ -46,9 +46,9 @@ wish to communicate? Or how does a banking system know that the person
 behind a particular HTTP request is actually the account holder?
 
 
-Integrity also requires messages be *fresh* and *timely*, which is
+Integrity also requires that messages be *fresh* and *timely*, which is
 threatened by the possibility data is captured and then retransmitted
-at some later time. This is known as a replay attack, where for
+at some later time. This is known as a replay attack; for
 example, we want to protect against an attacker repeatedly adding an
 item to a shopping cart. Thus, it is a common requirement to have some
 form of replay prevention.
@@ -107,9 +107,11 @@ standalone implementations of SSL/TLS are available, it is more common
 for an implementation to be bundled with applications that need it,
 primarily web browsers and servers.
 
-The layered approach, inserting TLS between the application protocol
-and the transport protocol, is not without drawbacks, particularly
-when performance is considered. This eventually led to a rethinking
-of the layering and a new transport protocol, QUIC, was developed with
-the benefit of decades of experience with TLS and HTTP. We return to
-this development later in this chapter and in Chapter |Message|.
+Just as running HTTP over TCP introduced some performance issues,
+inserting TLS between the application protocol and the transport
+protocol further impacts performance, especially latency. This
+eventually led to a rethinking of the layering of HTTP, TLS, and
+TCP. As a result, a new transport protocol, QUIC, was developed,
+drawing on the lessons learned from experience with TLS and
+HTTP. We return to this development later in this chapter and in
+Chapter |Message|.
