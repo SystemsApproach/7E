@@ -451,6 +451,7 @@ stated properties:
   :math:`x^{0}` terms have nonzero coefficients
 
 - All double-bit errors that are :math:`j` bits apart, as long as
+  the :math:`x^{0}` term is nonzero and
   :math:`C(x)` does not divide evenly into :math:`x^{j} + 1`
 
 - Any odd number of errors, as long as :math:`C(x)` contains the
