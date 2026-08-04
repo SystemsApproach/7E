@@ -124,7 +124,7 @@ and record layer provided by QUIC.*
 
 .. _fig-quic-tls:
 .. figure:: message/figures/QUIC-TLS.png
-   :width: 500px
+   :width: 600px
    :align: center
 
    Protocol stacks compared. (a) HTTP over TLS over TCP. (b) HTTP and
