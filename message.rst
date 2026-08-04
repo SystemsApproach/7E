@@ -90,7 +90,7 @@ ubiquity of Internet connectivity.
    request/reply transport protocol to the Internet in the late 1980s.
    The rationale and design for the protocol—known as VMTP (Versatile
    Message Transaction Protocol) and defined in RFC 1045—still holds
-   up well today, but it never achieved wide-spread support. Sometimes,
+   up well today, but it never achieved widespread support. Sometimes,
    good ideas are just ahead of their time.*
 
 That said, the first advantage should not be overlooked.  Making the
@@ -102,13 +102,13 @@ the network edge is a robust software ecosystem, and not just one more
 layer on the protocol stack.
 
 As we will see, RPC and RDMA make different assumptions, and took
-different paths to the wide-spread adoption they enjoy today.  Because
+different paths to the widespread adoption they enjoy today.  Because
 they represent such different approaches, they make for an interesting
 comparative case study. But just as importantly, they both have the
 potential to become the dominant transport protocol for their target
 application workloads.
 
-.. Make a bigger deal about datacenter use cases, especially wrt
+.. TODO Make a bigger deal about datacenter use cases, especially wrt
    supporting AI.
 
    Case study: RPC is "Useful -> Fast" & RDMA is "Narrow -> General".

@@ -124,11 +124,11 @@ cloud services in their datacenters.
    convenience and taste, but it should be done knowing that
    both design patterns can be made to work.*
 
-Despite its origins in Google, gRPC does not stand for Google RPC. The
+Although it was developed in Google, gRPC does not stand for Google RPC. The
 “g” stands for something different in each release. For version 1.10
 it stood for “glamorous” and for 1.18 it stood for “goose”. According
 to the official gRPC FAQ, it is now a recursive acronym: gRPC means
-“gRPC Remote Procedure Call”. Nonetheless, gRPC is popular because it
+“gRPC Remote Procedure Call”. gRPC has become broadly popular because it
 makes available to everyone—as open source—a decade’s worth of
 experience within Google using RPC to build scalable cloud services.
 
@@ -149,7 +149,7 @@ different server (or VM).  A *load balancer* then directs that
 invocation to one of the many available server processes (containers)
 that implement that service.
 
-What we are interested in here is transport protocol at the core of
+What we are interested in here is the transport protocol at the core of
 gRPC. Here again, there is a major departure from earlier RPC
 mechanisms, not in terms of fundamental problems that need to be
 addressed, but in terms of gRPC’s approach to addressing them. In
@@ -157,27 +157,28 @@ short, gRPC “outsources” many of the problems to other protocols,
 leaving gRPC to essentially package those capabilities in an
 easy-to-use form. Let’s look at the details.
 
-First, gRPC runs on top of TCP instead of UDP, as was the case with
-SunRPC and many of its peers. This means gRPC outsources the problem
-of reliably transmitting request and reply messages of arbitrary
-size. Second, gRPC actually runs on top of *Transport Layer Security*
-(TLS)—a thin layer that secures and end-to-end TCP connection—which
-means it also outsources responsibility for securing the communication
-channel so adversaries can’t eavesdrop or hijack the message
-exchange. Third, gRPC actually, actually runs on top of HTTP/2 (which
-is itself layered on top of TCP and TLS), meaning gRPC outsources
-two further problems: (1) efficiently encoding/compressing binary data
-into a message, (2) multiplexing multiple concurrent remote procedure
-calls onto a single TCP connection.
+gRPC runs on top of a protocol stack as shown in :numref:`Figure %s
+<fig-grpc-stack>`. Working our way up from the bottom, we can see that
+gRPC runs on top of TCP, unlike many other RPC protocols, so that it
+can outsource the problems of reliably transmitting request and reply
+messages of arbitrary size. Second, gRPC relies on *Transport Layer
+Security* (TLS), the layer that secures end-to-end TCP connections,
+described in Chapter |Secure|, which means it also outsources
+responsibility for securing the communication channel so adversaries
+can’t eavesdrop on or modify the message exchange. Finally, gRPC
+runs on top of HTTP/2, meaning gRPC outsources two further problems: (1)
+efficiently encoding/compressing binary data into a message, (2)
+multiplexing multiple concurrent remote procedure calls onto a single
+TCP connection.
 
-In other words, gRPC encodes the identifier for the remote method as a
-URI, the request parameters to the remote method as content in the
-HTTP message, and the return value from the remote method in the HTTP
-response. The full gRPC stack is depicted in :numref:`Figure %s
-<fig-grpc-stack>`, which also includes the language-specific elements.
-(One strength of gRPC is the wide set of programming languages it
-supports, with only a small subset shown in :numref:`Figure %s
-<fig-grpc-stack>`.)
+Putting all this together, gRPC encodes the identifier for the remote
+method as a URI, places the request parameters to the remote method as
+content in the HTTP message, and retrieves the return value from the
+remote method in the HTTP response. The full gRPC stack depicted in
+:numref:`Figure %s <fig-grpc-stack>` also includes the
+language-specific elements that enable developers to invoke gRPC
+requests.  One strength of gRPC is the wide set of programming
+languages it supports, with only a small subset shown in the figure.
 
 .. _fig-grpc-stack:
 .. figure:: message/figures/grpc.png
@@ -196,7 +197,7 @@ than the other way around.
 It's not that uncommon to see layering produce this sort of convoluted
 result.  Layering provides a convenient way for
 humans to wrap their heads around complex systems, and outsourcing
-problems to an existing layer can be see and an efficient want to
+problems to an existing layer can be an efficient want to
 avoid duplication of effort. However, what we’re
 really trying to do is solve a set of problems (e.g., reliably transfer
 messages of arbitrary size, identify senders and recipients, match
@@ -217,17 +218,19 @@ the Internet’s killer app, which meant that its application protocol
 infrastructure: Firewalls, Load Balancers, Encryption, Authentication,
 Compression, and so on. Because all of these network elements have
 been designed to work well with HTTP, HTTP has effectively become the
-Internet’s universal request/reply transport protocol.\ [#]_
+Internet’s universal request/reply transport protocol.
 
-.. [#] If you are
-   wondering why we would describe an application protocol as a transport
-   protocol, just remember that layering is an abstraction to help
+.. takeaway:: This discussion effectively illustrates an important
+   point about layering. It is important to remember that layering is an abstraction to help
    us understand and modularize networks, not a set of precise rules about what
-   happens in any given module.
+   happens in any given module. Thus there is nothing wrong with
+   finding that an application protocol such as HTTP has effectively
+   become the transport layer for another application protocol running
+   above it. 
 
-There is, however, a possibility of a different set of layers
+There is also a possibility of a different set of layers
 replacing or at least coexisting with gRPC/HTTP/TCP. As we discuss
-below, QUIC has been developed to be a more suitable transport for
+in Section |Message|.3, QUIC has been developed to be a more suitable transport for
 HTTP, and part of what it offers is a better match to the
 request/reply semantics of both HTTP and RPC.
 
@@ -339,7 +342,7 @@ a monolithic bundle of software (as with SunRPC), are nowadays built by
 assembling an assortment of smaller pieces, each of which solves a
 narrow problem. gRPC is both an example of that approach, and a tool
 that enables further adoption of the approach.  The microservices
-architecture mentioned Chapter |Apps| applies the “built from small parts”
+architecture mentioned in Chapter |Apps| applies the “built from small parts”
 strategy to entire cloud applications (e.g., the services provided by Uber, Lyft, Netflix,
 Yelp, Spotify, etc.), where gRPC is often the communication mechanism used
 by those small pieces to exchange messages with each other.
