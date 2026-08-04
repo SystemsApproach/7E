@@ -221,12 +221,15 @@ been designed to work well with HTTP, HTTP has effectively become the
 Internet’s universal request/reply transport protocol.
 
 .. takeaway:: This discussion effectively illustrates an important
-   point about layering. It is important to remember that layering is an abstraction to help
-   us understand and modularize networks, not a set of precise rules about what
-   happens in any given module. Thus there is nothing wrong with
-   finding that an application protocol such as HTTP has effectively
-   become the transport layer for another application protocol running
-   above it. 
+   point about layering. It is important to remember that layering is
+   an abstraction to help us understand and modularize networks, not a
+   fixed rule about what happens in any given module. Thus there is
+   nothing wrong with finding that an application protocol such as
+   HTTP has effectively become the transport layer for another
+   application protocol running above it. More generally, every
+   complex system is eventually refactored (modularized differently)
+   if it's around long enough. Networks are no exception.
+
 
 There is also a possibility of a different set of layers
 replacing or at least coexisting with gRPC/HTTP/TCP. As we discuss
