@@ -14,34 +14,35 @@ building the World Wide Web and RESTful applications directly on top of HTTP, le
 insights about how both HTTP and the the underlying transport protocol
 could be improved.  These insights, in turn, led to the development of
 new version of HTTP, known as HTTP/3, and a new transport protocol,
-called QUIC.  The two protocols are co-designed to better support the
+called QUIC.\ [#]_  The two protocols are co-designed to better support the
 Web and REST-based or RPC-based distributed systems. This section
 describes the resulting design.
 
-.. Cut-and-pasted from TCP chapter in 6E
+.. [#] QUIC was originally an acronym but it is now just the name of
+       the protocol.
 
 QUIC originated at Google in 2012 and was subsequently developed as a
-proposed standard at the IETF. Unlike many other efforts to add to the
-set of transport protocols in the Internet, QUIC has achieved
-widespread deployment. QUIC was motivated in large part by the
-challenges of matching the request/response semantics of HTTP to the
-stream-oriented nature of TCP.  These issues have become more
-noticeable over time, due to factors such as the rise of high-latency
-wireless networks, the availability of multiple networks for a single
-device (e.g., Wi-Fi and cellular), and the increasing use of
-encrypted, authenticated connections on the Web (as discussed in
-Chapter |TLS|).
+proposed standard at the IETF. Unlike many other efforts to introduce
+new transport protocols in the Internet, QUIC has achieved widespread
+deployment, thanks to some pragmatic choices made in its design. QUIC
+was motivated in large part by the challenges of matching the
+request/response semantics of HTTP to the stream-oriented nature of
+TCP.  These issues have become more noticeable over time, due to
+factors such as the rise of high-latency wireless networks, the
+availability of multiple networks for a single device (e.g., Wi-Fi and
+cellular), and the increasing use of encrypted, authenticated
+connections on the Web (as discussed in Chapter |TLS|).
 
 If network latency is high—say 100 milliseconds or more—then a few
 RTTs can quickly add up to a visible annoyance for an end user. It's
 also a performance issue for applications using gRPC. Establishing an
 HTTP session over TCP with Transport Layer Security would typically
 take at least three round trips (one for TCP session establishment and
-two for setting up the encryption parameters) before the first HTTP
+two for setting up the TLS encryption parameters) before the first HTTP
 message could be sent. The designers of QUIC recognized that this
 delay—the direct result of a layered approach to protocol design—could
 be dramatically reduced if connection setup and the required security
-handshakes were combined and optimized for minimal round trips.
+handshakes were combined and optimized to incur minimal round trips.
 
 The presence of multiple network interfaces also motivates a
 different approach. If your mobile phone loses its Wi-Fi connection and needs
@@ -50,12 +51,11 @@ a TCP timeout on one connection and a new series of handshakes on the
 other. Making the connection something that can persist over different
 network layer connections was another design goal for QUIC.
 
-Finally, the reliable byte stream model for TCP is a
-poor match to a web page request, when many objects need to be fetched
-and page rendering could begin before they have all arrived. Similar
-arguments apply for RPC, where requests that can be handled quickly
-should not be delayed waiting for
-the responses to prior requests. While one
+Finally, the reliable byte-stream model for TCP is a poor match to a
+web page request, when many objects need to be fetched and page
+rendering could begin before they have all arrived. Similar arguments
+apply for RPC, where requests that can be handled quickly should not
+be delayed waiting for the responses to prior requests. While one
 workaround for this would be to open multiple TCP connections in
 parallel, this approach (which was used in the early days of the web)
 has its own set of drawbacks, notably on congestion
@@ -64,13 +64,12 @@ loop, so the experience of congestion on one connection is not
 apparent to the other connections, and each connection tries to figure
 out the appropriate amount of bandwidth to consume on its own.
 
-
 By the time QUIC emerged, deployment of new
 transport protocols had been tried many times with limited success due
-to the changing nature of the Internet. Notably,  "middleboxes'' such as NATs and
+to the changing nature of the Internet. Notably,  "middleboxes" such as NATs and
 firewalls are widely deployed, and because their operation depends on
 looking past IP into the TCP and UDP headers,they can't be relied
-upon to pass a new transport protocol. As a result, QUIC actually
+upon to pass a new transport protocol. To get around this, QUIC actually
 rides on top of UDP. In other words, it is a transport protocol
 running on top of a transport protocol. As we noted in the previous
 section, such "violations" of strict layering are both a fact of life
@@ -80,16 +79,17 @@ first appeared to be.
 QUIC implements fast connection establishment with encryption and
 authentication in the first RTT. It provides a connection identifier
 that persists across changes in the underlying network, so a
-connection can migrate from from one network to another. It supports
+connection can migrate from one network to another. It supports
 the multiplexing of several streams onto a single transport
 connection, to avoid the head-of-line blocking that may arise when a
 single packet is dropped while other useful data continues to
 arrive. And it preserves (and in some ways improves on) the congestion
 avoidance properties of TCP.
 
-HTTP went through a number of versions in an effort to map its requirements more cleanly onto
-the capabilities of TCP as we noted in Chapter |Apps|. With the arrival of QUIC, HTTP/3 is now able
-to leverage a transport layer that was explicitly designed to meet the
+HTTP went through a number of versions in an effort to map its
+requirements more cleanly onto the capabilities of TCP as we noted in
+Chapter |Apps|. With the arrival of QUIC, HTTP/3 is now able to
+leverage a transport layer that was explicitly designed to meet the
 application requirements of the Web. And in meeting the requirements
 for web traffic, QUIC provides a better match for RPC as well.
 
@@ -339,7 +339,7 @@ lost is as follows:
    max(kTimeThreshold x max(smoothed_rtt, latest_rtt), kGranularity)
 
 ``kGranularity`` is the local timer granularity, recommended to be
-1ms; this sets a lower bound for the threshold. kTimeThreshold is an
+1ms; this sets a lower bound for the threshold. ``kTimeThreshold`` is an
 empirically determined constant, recommended to be 9/8. This means
 that a sender will wait slightly more than the estimated RTT before
 declaring a packet lost, or 1ms if the RTT is less than that. The idea
@@ -417,13 +417,15 @@ connection migration.
 The way QUIC protects against these migration attacks is to require
 *path validation* when connections are migrated. The client does
 simply start using a new source address with the old
-connection ID. The server then sends a
-PATH_CHALLENGE frame to the new address. The frame contains a chunk of
-random data. The recipient of the challenge responds with the same
-set of data. This proves that the new path works in both directions
-and that the responding client has the cryptographic material
-necessary to communicate with the server, thus ruling out the
-possibility of the spoofing attacks above.
+connection ID. The server then sends a PATH_CHALLENGE frame to the new
+address. The frame contains a chunk of random data. The recipient of
+the challenge responds with the same set of data. Given that these
+packets are encrypted, the ability to extract and insert the same
+random data in the response proves that the responding client has the
+cryptographic material necessary to communicate with the server, thus
+ruling out the possibility of the spoofing attacks above. This
+response also proves that a viable network path exists in both
+directions between the server and the new client address.
 
 
 This overview of QUIC necessarily leaves out a fair number of
