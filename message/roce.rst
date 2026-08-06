@@ -161,7 +161,7 @@ has done so by sending a ``CWR`` notice back. For DCQCN, RoCE.v2
 defines an analogous transport-level notice, denoted ``CNP``
 *(Congestion Notice Packet)*, but the DCQCN receiver limits the rate
 at which it sends ``CNP`` notices back to the sender. Instead of
-sending a ``CNP`` for every ``CE`` nonfiction that arrives, it sends
+sending a ``CNP`` for every ``CE`` notification that arrives, it sends
 no more than one ``CNP`` every 50 μs.\ [#]_ This setting is an
 engineering choice designed to reduce overhead, where the important
 point is that the sender knows to adjust its sending rate in proportion
