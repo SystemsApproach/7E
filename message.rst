@@ -16,7 +16,16 @@ than a coincidence. In both cases, the name implies an abstraction
 that is already well-understood on a single machine—a procedure call
 and direct memory access—has been extended to work over the network.
 
-Less obviously, both depend on a *message transaction* to implement
+RPC and RDMA provide the underpinnings for much of the distributed
+computation that goes on in modern datacenters. Training of AI models,
+or indexing large bodies of text, to cite just two well-known
+examples, depend on large distributed computations spread across
+hundreds or thousands of machines. RPC and RDMA are abstractions that
+enable these distributed applications to be implemented efficiently
+while insulating the developers from some of the underlying complexity
+of the network.
+
+Both RPC and RDMA depend on a *message transaction* to implement
 their respective remote activity. That is, both implement a
 request/response message exchange between a pair of processes: one
 sends a request message, and the other replies with a response
@@ -108,10 +117,6 @@ comparative case study. But just as importantly, they both have the
 potential to become the dominant transport protocol for their target
 application workloads.
 
-.. TODO Make a bigger deal about datacenter use cases, especially wrt
-   supporting AI.
-
-   Case study: RPC is "Useful -> Fast" & RDMA is "Narrow -> General".
 
 
 .. include:: message/design.rst
