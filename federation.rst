@@ -24,8 +24,8 @@ operators using widely varying underlying technologies and connecting
 them together to provide a useful, global packet delivery service.
 
 Federating autonomous networks helps scale the approach to operations,
-since each organization that manages a network can make its own
-independent decisions about how to manage that network. It also gives
+since each organization can make its own
+independent decisions about how to manage its networks. It also gives
 us a handle on how to scale routing to calculate paths across a global
 network by breaking routing into two parts: routing among networks and
 routing within individual networks. At the same time we need to find a
