@@ -8,6 +8,8 @@
 .. index:: 4B/5B: 4-Bit/5-Bit Encoding
 .. index:: CRC: Cyclic Redundancy Check
 .. index:: MAC: Media Access Control
+.. index:: PPP: Point-to-Point Protocol
+
 
 |Tech|.1 Communication Links
 -------------------------------------------
@@ -286,16 +288,15 @@ recently, 10GE and above uses a 64B/66B encoding.
 |Tech|.1.2 Framing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Now that we have seen how to transmit a sequence of bits over a
-point-to-point link, the next challenge is to subdivide that
-bit-stream into a sequence of *frames*, each of which is a
-self-contained block of data being sent through a packet-switched
-network to some destination host. While purely bit-oriented networks
-exist, the goal of efficiently sharing network infrastructure, as
-described in Section |Intro|.4, is best met through statistical
+Once we're able to transmit a sequence of bits over a physical link,
+the next challenge is to subdivide that bit-stream into a sequence of
+*frames*, each of which is a self-contained block of data being sent
+through a packet-switched network to some destination host. As
+described in Section |Intro|.4, the goal of efficiently sharing
+network infrastructure is best met through statistical
 multiplexing. Packets define the unit of data that allows statistical
-multiplexing. A frame is just a name for a packet at the link layer, and
-*framing* is the problem of determining exactly what set of bits
+multiplexing. A frame is just a name for a packet at the link layer,
+and *framing* is the problem of determining exactly what set of bits
 constitutes a frame—that is, determining where the frame begins and
 ends.
 
@@ -533,7 +534,7 @@ Another big change is that today Ethernet often runs at speeds of 1,
 10, or 100 Gbps, rather than the original 10 Mbps standard. As we saw
 earlier in this section, this was done in part by upgrading the
 encoding algorithm. The rest of the Ethernet standard—the part that's
-visible to anyone using Ethernet—remained backward compatible with the
+visible to anyone using Ethernet—remains backward compatible with the
 original standard. This adaptability was key to Ethernet's longevity,
 but there were two other factors that contributed to its success.
 

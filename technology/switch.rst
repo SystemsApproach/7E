@@ -12,7 +12,7 @@
 |Tech|.2 Packet Switches
 ---------------------------------
 
-Packet switches are devices that interconnect point-to-point links,
+Packet switches are devices that interconnect two or more links,
 making it possible to assemble networks that connect hundreds or
 thousands of hosts (rather than just two).  There is a straightforward
 way to build a switch: buy a general-purpose processor and equip it
@@ -185,7 +185,7 @@ can transmit data at a peak rate of a little over 100 Gbps—enough to
 build a switch with a handful of 10-Gbps Ethernet ports, but hardly
 enough for a high-end switch in the core of the Internet.
 
-Moreover, this upper bound assumes that moving data is the only problem.
+This upper bound assumes that moving data is the only problem.
 This is a fair approximation for long packets but a bad one when packets
 are short, which is the worst-case situation switch designers have to
 plan for. With minimum-sized packets, the cost of processing each

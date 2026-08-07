@@ -43,10 +43,13 @@ for AI.
 This chapter gives an overview of these building block technologies,
 which then serve as the basis for Part II. While this chapter focuses
 on Ethernet, we caution that other technologies do exist. We discuss
-some of them in the last section, but Ethernet is the example
-technology that we describe in detail. If you understand Ethernet in
-depth—both its links and switches—you can more easily digest any other
-technology you encounter.
+some of them in the last section, and of course, today most of us
+connect to the Internet via wireless technology (which we discuss in
+depth in Chapter |Shared|). We choose to start with Ethernet for two
+reasons. The first is that if you understand Ethernet in detail, then
+you can more easily digest any other technology you encounter.  The
+second is that Ethernet is a switched technology, and packet switches
+are *the* building block at the heart of the Internet.
 
 .. include:: technology/link.rst
 .. include:: technology/switch.rst
