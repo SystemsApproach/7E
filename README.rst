@@ -28,6 +28,7 @@ following information:
 |  Source: https://github.com/SystemsApproach/7E
 |  License: `CC BY  4.0 <https://creativecommons.org/licenses/by/4.0>`__
 
+
 This book includes content from earlier editions, for which we include
 the following attribution:
 
@@ -57,10 +58,9 @@ Releases and Editions
 ---------------------
 
 We release ever-changing open source content rather than publish fixed
-books, although you can roughly equate v7.0 with a 7th Edition. Read
-the :ref:`preface` to find out what’s new in this version. Note that
-Morgan Kaufmann (Elsevier) plans to publish the 7th edition of the
-textbook based on a fork of v7.0, but going forward, open source
+books, although you can roughly equate v7.0 with a 7th Edition. Note
+that Morgan Kaufmann (Elsevier) plans to publish the 7th edition of
+the textbook based on a fork of v7.0, but going forward, open source
 releases found here will not necessarily stay in sync with any future
 published editions.
 
@@ -68,7 +68,7 @@ In general, ``main`` contains a coherent and internally consistent
 version of the material. (If it were code, the book would build and
 run.) New content under development is checked into branches until it
 can be merged into ``main`` without breaking self-consistency. The web
-version of the book available at https://book.systemsapproach.org is then
+version of the book available at https://7E.systemsapproach.org is then
 continuously generated from ``main``, corresponding to a typical
 maintenance release (although we do not bother to tag it as such).
 
