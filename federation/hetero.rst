@@ -313,7 +313,7 @@ classes allowed for different divisions of the address space into
 networks and many more small networks.
 
 .. _fig-class:
-.. figure:: federation/figures/f03-19-9780123850591.png
+.. figure:: federation/figures/f03-19.png
    :width: 350px
    :align: center
 
@@ -581,7 +581,7 @@ this host will ever need the source’s link-level address; there is no
 need to clutter its ARP table with this information.
 
 .. _fig-arp:
-.. figure:: federation/figures/f03-23-9780123850591.png
+.. figure:: federation/figures/f03-23.png
    :width: 500px
    :align: center
 

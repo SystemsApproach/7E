@@ -79,7 +79,7 @@ physical networks but share a single network number. This concept is
 illustrated in :numref:`Figure %s <fig-subaddr>`.
 
 .. _fig-subaddr:
-.. figure:: federation/figures/f03-20-9780123850591.png
+.. figure:: federation/figures/f03-20.png
    :width: 350px
    :align: center
 
@@ -265,7 +265,7 @@ bits starting from the most significant bit (which in practice is almost
 always the case).
 
 .. _fig-cidreg:
-.. figure:: federation/figures/f03-22-9780123850591.png
+.. figure:: federation/figures/f03-22.png
    :width: 500px
    :align: center
 
@@ -680,7 +680,7 @@ customers moving to new providers, independent of the growth of
 Internet.
 
 .. _fig-v6addr:
-.. figure:: federation/figures/f04-11-9780123850591.png
+.. figure:: federation/figures/f04-11.png
    :width: 500px
    :align: center
 
