@@ -16,7 +16,7 @@ the following information:
 |  Copyright: Larry L. Peterson and Bruce S. Davie, 2026
 |  Source: https://github.com/SystemsApproach/7E
 |  License: `CC BY  4.0 <https://creativecommons.org/licenses/by/4.0>`__
-
+|
 
 The lecture slides mirror the outline of the book, with a deck for
 each chapter. They currrently incorporate the ``.png`` version of the
