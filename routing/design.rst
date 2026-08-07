@@ -86,7 +86,7 @@ between each node—one flowing in each direction, and each with its
 own edge cost.
 
 .. _fig-graph-route:
-.. figure:: routing/figures/f03-28-9780123850591.png
+.. figure:: routing/figures/f03-28.png
    :width: 400px
    :align: center
 

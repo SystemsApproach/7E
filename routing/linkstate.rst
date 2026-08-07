@@ -416,7 +416,7 @@ basic link-state algorithm described above, including the following:
    network capacity.
 
 .. _fig-ospf:
-.. figure:: routing/figures/f03-34-9780123850591.png
+.. figure:: routing/figures/f03-34.png
    :width: 400px
    :align: center
 
@@ -463,7 +463,7 @@ specification refers to nodes as "routers", we do the same in this
 section.
 
 .. _fig-ospf-lsa:
-.. figure:: routing/figures/f03-35-9780123850591.png
+.. figure:: routing/figures/f03-35.png
    :width: 450px
    :align: center
 

@@ -15,7 +15,7 @@ the node is configured by a network manager. A link that is down is
 assigned an infinite cost.
 
 .. _fig-dvroute:
-.. figure:: routing/figures/f03-29-9780123850591.png
+.. figure:: routing/figures/f03-29.png
    :width: 400px
    :align: center
 
@@ -343,7 +343,7 @@ routers advertise the cost of reaching networks, which are identified by
 prefixes.
 
 .. _fig-rip:
-.. figure:: routing/figures/f03-31-9780123850591.png
+.. figure:: routing/figures/f03-31.png
    :width: 300px
    :align: center
 
