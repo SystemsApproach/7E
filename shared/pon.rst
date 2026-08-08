@@ -12,12 +12,11 @@ point-to-multipoint design, which means the network is structured as a
 tree, with a single point starting in the ISP’s network and then
 fanning out to reach on the order of a thousand homes. PON gets its
 name from the fact that the splitters are passive: they forward
-optical signals downstream and upstream without actively
-storing and forwarding frames. In this way, they are the optical
-equivalent of repeaters used in the classic Ethernet. Framing then
-happens at the source in the ISP’s premises, in a device called an
-*Optical Line Terminal* (OLT), and at the end-points in individual
-homes, in a device called an *Optical Network Unit* (ONU).
+optical signals downstream and upstream without actively storing and
+forwarding frames. Framing then happens at the source in the ISP’s
+premises, in a device called an *Optical Line Terminal* (OLT), and at
+the end-points in individual homes, in a device called an *Optical
+Network Unit* (ONU).
 
 :numref:`Figure %s <fig-pon>` shows an example PON, simplified to
 depict just one ONU and one OLT. In practice, a Central Office would

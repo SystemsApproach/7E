@@ -148,10 +148,15 @@ Differentiated Services model, a flow is identified as the set of
 packets with the same marking in the Differentiated Services Code
 Point (DSCP), a field in the IP header. Another valid definition of a
 flow would be all the packets flowing between a pair of endpoints for
-a single application. For now, all we need to know is that there are
-some number of flows and we have some way to tell them apart by
-looking at their packets. It usually a matter of configuring a router
-to specify how we want it to identify flows.
+a single application. In another common use case, flows
+correspond to subscribers, as in users connecting to an access network
+like the ones described in Chapter |shared|. WFQ is then used
+to pace the rate at which each subscriber can send data into the
+network, matching the level of service they are paying for. All we
+need to know for the purpose of this section is that there are some
+number of flows and we can tell them apart by looking at their
+packets.  It is just a matter of configuring a router to specify how
+we want it to identify flows.
 
 Let's turn our attention to the challenge of implementing a fair
 queuing scheme, starting with a simple round-robin approach. We create
@@ -327,10 +332,9 @@ queues that share the remaining bandwidth in a weighted fair manner.
    that provides a multifaceted service that can be controlled by a
    set of knobs. A policy specifies a particular setting of those
    knobs but does not know (or care) about how the policy is
-   implemented.  In this case, the mechanism in question is the
-   queuing discipline, and the policy is a particular set of scheduler
-   settings (such as weights and priorities) to be applied to traffic
-   classes. Similarly, there are various mechanisms to classify packets
-   in to classes, such as flow-based or DSCP-based, and it a matter of
-   policy to set the classifiers to divide traffic into particular
-   classes to be scheduled.
+   implemented.  In this case, one mechanism is the queuing
+   discipline, and the policy is a particular set of scheduling
+   parameters (such as weights and priorities) to be applied to
+   traffic classes. A second mechanism is needed to classify packets,
+   and it a matter of policy to configure the classifier to divide
+   traffic into the set of flows that are to be scheduled.
