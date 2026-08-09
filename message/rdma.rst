@@ -67,7 +67,7 @@ The case essentially boiled down to two arguments. One is that TCP/IP
 is implemented in the OS kernel, which means the OS has to get
 involved in sending and receiving every packet. With RDMA, the NIC
 directly writes packets into and reads packets out of application
-memory buffers. This avoids hundreds of instructions and the
+memory buffers. This avoids hundreds of CPU instructions and the
 throughput penalty of copying packets from one buffer to another. The
 second argument is that Ethernet-based networks are best effort,
 meaning that the potential for congestion can lead to both queuing
