@@ -151,7 +151,7 @@ absorb bursts. This is sometimes referred to this as \"good queue\",
 as illustrated in :numref:`Figure %s <fig-good-bad>` (a).
 
 .. _fig-good-bad:
-.. figure:: capacity/figures/Slide14.png
+.. figure:: capacity/figures/good-bad.png
    :width: 400px
    :align: center
 
@@ -207,7 +207,7 @@ pairs). :numref:`Figure %s <fig-flow>` illustrates several flows
 passing through a series of routers.
 
 .. _fig-flow:
-.. figure:: capacity/figures/Slide8.png
+.. figure:: capacity/figures/flow.png
    :width: 450px
    :align: center
 

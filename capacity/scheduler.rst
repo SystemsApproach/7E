@@ -30,7 +30,7 @@ is. This is sometimes called *tail drop*, since packets that arrive at
 the tail end of the FIFO are dropped.
 
 .. _fig-fifo:
-.. figure:: capacity/figures/f06-05-9780123850591.png
+.. figure:: capacity/figures/f06-05.png
    :width: 400px
    :align: center
 
@@ -169,7 +169,7 @@ long enough, but it has no effect on the other flows, which keep on
 getting served once every cycle by the round-robin algorithm.
 
 .. _fig-fq:
-.. figure:: capacity/figures/f06-06-9780123850591.png
+.. figure:: capacity/figures/f06-06.png
    :width: 350px
    :align: center
 

@@ -111,7 +111,7 @@ filter. The question of how we pick this time constant is discussed
 below.
 
 .. _fig-red-avg:
-.. figure:: capacity/figures/f06-15-9780123850591.png
+.. figure:: capacity/figures/f06-15.png
    :width: 500px
    :align: center
 
@@ -150,14 +150,14 @@ to complete dropping, rather than the discontinuous approach shown
 here, may be appropriate.
 
 .. _fig-red:
-.. figure:: capacity/figures/f06-16-9780123850591.png
+.. figure:: capacity/figures/f06-16.png
    :width: 300px
    :align: center
 
    RED thresholds on a FIFO queue.
 
 .. _fig-red-prob:
-.. figure:: capacity/figures/f06-17-9780123850591.png
+.. figure:: capacity/figures/f06-17.png
    :width: 400px
    :align: center
 
@@ -379,7 +379,7 @@ to allow the queue to drain, bringing the sojourn time back below the
 target.
 
 .. _fig-codel:
-.. figure:: capacity/figures/Slide16.png
+.. figure:: capacity/figures/codel.png
    :width: 500px
    :align: center
 

@@ -50,7 +50,7 @@ often called a *fish* network because of its shape (the routers R1 and
 R2 form the tail; R7 is at the head).
 
 .. _fig-fish:
-.. figure:: capacity/figures/f04-22-9780123850591.png
+.. figure:: capacity/figures/fish.png
    :width: 450px
    :align: center
 
@@ -132,24 +132,24 @@ according to the needs of various classes of applications.
 
 Consider the example in :numref:`Figure %s <fig-te-example>`. Assume
 that all links are of unit capacity and we are trying to find paths
-for three unit flows of traffic. In the figure on the left, Flow A is
+for three unit flows of traffic. In the figure on the top, Flow A is
 placed first and picks one of the two shortest paths available. Flow B
 is placed next and takes the shortest remaining path, as the
 single-hop path is already filled by Flow A. When placing Flow C last,
 there is no choice but the long path. But a central algorithm that
 looked at all three flows at once and tried to place them optimally
 would end up with the much less wasteful set of paths shown on the
-right hand side of the figure. While this is a contrived example,
-sub-optimal outcomes as shown on the left are unavoidable when there
+bottom in the figure. While this is a contrived example,
+sub-optimal outcomes are unavoidable when there
 is no central view of traffic.
 
 .. _fig-te-example:
-.. figure:: capacity/figures/Slide53.png
-    :width: 600px
+.. figure:: capacity/figures/te-example.png
+    :width: 400px
     :align: center
 
-    Example of non-optimal traffic engineering (left) and optimal
-    placement (right).
+    Example of non-optimal traffic engineering (top) and optimal
+    placement (bottom).
 
 B4 and SWAN recognize this shortcoming and move the path calculation to a
 logically centralized SDN controller. When a link fails, for example,
