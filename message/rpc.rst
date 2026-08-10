@@ -163,7 +163,7 @@ gRPC runs on top of TCP, unlike many other RPC protocols, so that it
 can outsource the problems of reliably transmitting request and reply
 messages of arbitrary size. Second, gRPC relies on *Transport Layer
 Security* (TLS), the layer that secures end-to-end TCP connections,
-described in Chapter |Secure|, which means it also outsources
+described in Chapter |TLS|, which means it also outsources
 responsibility for securing the communication channel so adversaries
 can’t eavesdrop on or modify the message exchange. Finally, gRPC
 runs on top of HTTP/2, meaning gRPC outsources two further problems: (1)
