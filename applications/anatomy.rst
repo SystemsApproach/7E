@@ -372,7 +372,7 @@ powerful applications to be distributed across the Internet.
 2.1.4  Other Programming Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-So far we have looked at how scale a network applications, all the
+So far we have looked at how to scale network applications,
 while remaining consistent with the client-server paradigm and using
 the Socket API. There have been extensions to the API, for example to
 avoid copying messages into and out of user space, but the programming
@@ -383,21 +383,21 @@ the receive operation blocks waiting for a message to arrive.
 This programming model matches the needs of so-called "network
 applications" (which we now sometimes call "cloud apps" or simply
 "apps"), but that doesn't preclude other types of computations that
-need to communicate over a network. The most notable example are
+need to communicate over a network. The most notable examples are
 parallel programs that once ran on purpose-built supercomputers, but
-today run in datacenters.  And of these parallel programs, AI training
-programs have become the dominant use case.  These programs do not use
+today run in datacenters.  And of these parallel programs, training AI
+models is probably the dominant use case.  These programs do not use
 the Socket API and they are not best described as client-server.
 
-The full complexity of AI workloads is beyond the scope of this book,
+The full complexity of parallel workloads is beyond the scope of this book,
 but to appreciate the networking implications it's enough to
 understand two key points about the high-level communication pattern.
-First, AI training proceeds in a sequence of iterations. For each
+First, a large parallel computation usually proceeds in a sequence of iterations. For each
 iteration, data is first "scattered" across multiple nodes, the nodes
 then compute on the subset of data sent to each of them, and finally
 the results are "gathered" back in a central node. To support this
 (and similar patterns), the API supports *Scatter* and *Gather*
-operations among a collective of nodes, the first implies a
+operations among a collective of nodes. The first implies a
 one-to-many communication, and the second implies a many-to-one
 communication.
 
@@ -426,5 +426,5 @@ applications, not just those that immediately come to mind when you
 think of email, web surfing, or video. The API is the demarcation
 point between these applications and the network, and while
 understanding the Socket API takes us a long way, there are other
-models. We return the API that AI training programs use in Chapter
-|Message|.
+models. We return to the API that AI training and other highly
+parallel programs use in Chapter |Message|.
