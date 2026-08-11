@@ -102,11 +102,11 @@ failure modes and deal with them.
 Packet Format
 +++++++++++++++++
 
-Clearly, a key part of the IP service model is the type of packets
+A key part of the IP service model is the type of packets
 that can be carried. The IP packet consists of a
 header followed by a number of bytes of data. The format of the header
 (for IP version 4)
-is shown in :numref:`Figure %s <fig-iphead>`. As we saw in Chapter |Routing|,
+is shown in :numref:`Figure %s <fig-iphead>`. As we saw in Chapter |Intro|,
 packet headers at the
 internetworking layer and above are almost always designed to
 align on 32-bit boundaries to simplify the task of processing them in
@@ -139,19 +139,21 @@ the header in 32-bit words. When there are no options, which is most of
 the time, the header is 5 words (20 bytes) long. The 8-bit ``TOS`` (type
 of service) field has had a number of different definitions over the
 years, but its basic function is to allow packets to be treated
-differently based on application needs. For example, the ``TOS`` value
-might determine whether or not a packet should be placed in a special
-queue that receives low delay.
+differently based on application needs. We look at how the ``TOS`` field
+is interpreted today in Chapter |Capacity|.
 
 The next 16 bits of the header contain the ``Length`` of the packet,
 including the header. Unlike the ``HLen`` field, the ``Length`` field
 counts bytes rather than words. Thus, the maximum size of an IP packet
-is 65,535 bytes. The physical network over which IP is running, however,
-typically does not support such long packets. For this reason, IP supports a
-fragmentation and reassembly process. The second word of the header
-contains information about fragmentation, and the details of its use are
-presented in the following section entitled “Fragmentation and
-Reassembly.”
+is 65,535 bytes. The physical network over which IP is running,
+however, typically does not support such long packets. For this
+reason, IP supports a fragmentation and reassembly process. The second
+word of the header contains information about
+fragmentation/reassembly. IP still supports fragmentation and
+reassembly, but today every effort is made to avoid using it for
+reasons explained in the sidebar. We refer you to the original IP
+specification in RFC 791 for a description of how IP fragmentation
+works.
 
 Moving on to the third word of the header, the next byte is the ``TTL``
 (time to live) field. Its name reflects its historical meaning rather
@@ -189,18 +191,18 @@ easier to calculate in software.
 
 The last two required fields in the header are the ``SourceAddr`` and
 the ``DestinationAddr`` for the packet. The latter is the key to
-datagram delivery: every packet contains a full address for its intended
-destination so that forwarding decisions can be made at each router. The
-source address is required to allow recipients to decide if they want to
-accept the packet and to enable them to reply. IP addresses are
-discussed in a later section—for now, the important thing to know is
-that IP defines its own global address space, independent of whatever
-physical networks it runs over. This is one of the keys
-to supporting heterogeneity.
+datagram delivery: every packet contains a full address for its
+intended destination so that forwarding decisions can be made at each
+router. The source address is required to allow recipients to decide
+if they want to accept the packet and to enable them to reply. IP
+addresses are discussed next, but the important thing to know is that
+IP defines its own global address space, independent of whatever
+physical networks it runs over. This is one of the keys to supporting
+heterogeneity.
 
 Finally, there may be a number of options at the end of the header. The
 presence or absence of options may be determined by examining the header
-length (``HLen``) field. While options are used fairly rarely, a
+length (``HLen``) field. While options are used fairly rare, a
 complete IP implementation must handle them all. It is commonly the
 case that routers process options as an exception less
 efficiently than normal "fast path" processing.
@@ -348,11 +350,12 @@ forwarding decisions.
 We are now ready to look at the basic mechanism by which IP routers
 forward packets in an internetwork. Recall that *forwarding* is the
 process of taking a packet from an input and sending it out on the
-appropriate output (we looked at this in depth in Chapter |Tech|), while
-*routing* is the process of building up the tables that allow the
-correct output for a packet to be determined (we saw several examples
-of this in Chapter |Routing|). The discussion here focuses on forwarding; we
-return to routing at the end of this chapter.
+appropriate output (we looked at this in depth in Chapter |Tech|),
+while *routing* is the process of building up the tables that allow
+the correct output for a packet to be determined. We saw several
+examples of *intra*\-network routing in Chapter |Routing|. The discussion
+here focuses on forwarding, and we return to *inter*\-network
+route calculation in Chapter |BGP|.
 
 The main points to bear in mind as we discuss the forwarding of IP
 packets are the following:
@@ -391,9 +394,8 @@ needs to pick the best one, or at least one that has a reasonable chance
 of getting the packet closer to its destination. The router that it
 chooses is known as the *next hop* router. The router finds the correct
 next hop by consulting its forwarding table. The forwarding table is
-conceptually just a list of ``(NetworkNum, NextHop)``\ pairs. (As we
-will see below, forwarding tables in practice often contain some
-additional information related to the next hop.) Normally, there is also
+conceptually just a list of ``(NetworkNum, NextHop)``\ pairs.
+Normally, there is also
 a default router that is used if none of the entries in the table
 matches the destination’s network number. For a host, it is more
 common to simply have a default router and nothing else—this means that all
@@ -488,10 +490,10 @@ or the network is reachable via some next hop router that R2 can reach
 over a network to which it is connected.
 
 The forwarding table used by R2 is simple enough that it could be
-manually configured. Usually, however, these tables are more complex and
-would be built up by running a routing protocol such as one of those
-described in Chapter |Routing|. Also note that, in practice, the network
-numbers are usually longer (e.g., 128.96).
+manually configured. Usually, however, these tables are more complex
+and would be built up by running one of the routing protocols
+described elsewhere. Also note that, in practice, the network numbers
+are usually longer (e.g., 128.96).
 
 We can now see how hierarchical addressing—splitting the address into
 network and host parts—has taken the first step to addressing scale in

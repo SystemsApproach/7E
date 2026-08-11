@@ -183,7 +183,7 @@ arguably not much better today.
 Interestingly, there is no mention of scale in these requirements. A
 likely explanation for this is that computers were still a scarce
 resource in the 1970s and local area networks were yet to take off. So
-while the Internet was designed to accommodate networks in a very
+while the Internet was designed to accommodate networks in a
 general way, scaling to billions of devices didn't make the
 requirements list. Fortunately the decentralized approach to the
 Internet did foster scalable growth from the start. The problems

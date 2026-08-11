@@ -180,7 +180,7 @@ outside the campus see the collection of networks in :numref:`Figure
 their forwarding tables to tell them how to reach it. Routers within the
 campus, however, need to be able to route packets to the right subnet.
 Thus, not all parts of the internet see exactly the same routing
-information. This is an example of an *aggregation* of routing
+information. This is another example application of *aggregation* to routing
 information, which is fundamental to scaling of the routing system. The
 next section shows how aggregation can be taken to another level.
 
@@ -563,9 +563,11 @@ point, with over 99% of the total IPv6 address space available to this
 important form of address.
 
 The multicast address space is (obviously) for multicast, thereby
-serving the same role as class D addresses in IPv4. Note that multicast
-addresses are easy to distinguish—they start with a byte of all 1s. We
-will see how these addresses are used in a later section.
+serving the same role as class D addresses in IPv4. Note that
+multicast addresses are easy to distinguish—they start with a byte of
+all 1s. We postpone a discussion of multicast until Chapter |Overlay|,
+where we learn that multicast is more commonly provided above IP
+rather than by IP.
 
 The idea behind link-local use addresses is to enable a host to
 construct an address that will work on the network to which it is
@@ -582,8 +584,8 @@ zero-extending a 32-bit IPv4 address to 128 bits. A node that is only
 capable of understanding IPv4 can be assigned an IPv4-mapped IPv6
 address by prefixing the 32-bit IPv4 address with 2 bytes of all 1s and
 then zero-extending the result to 128 bits. These two special address
-types have uses in the IPv4-to-IPv6 transition (see the sidebar on this
-topic).
+types have uses in the IPv4-to-IPv6 transition.
+
 
 Address Notation
 +++++++++++++++++++
