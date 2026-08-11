@@ -28,9 +28,10 @@ network-connected machines, as shown in :numref:`Figure %s
 application processes to access (read and write) blocks of data from
 each others' memory. Functionally, RDMA can be viewed as a special
 case of an RPC, where only two "remote procedures" are supported:
-*Read( )* and *Write( )*. That perspective glosses over a lot of
-details, but it is helpful to see the similarities between the two
-abstractions.
+*Read( )* and *Write( )*. But that observation doesn't do justice to
+how RDMA fundamentally changes the way applications interact with the
+network. Section |Apps|.1.4 introduced this alternative programming
+model; this section takes a closer look at the details.
 
 .. _fig-rdma:
 .. figure:: message/figures/rdma.png
@@ -114,33 +115,6 @@ running on GPUs. NCCL was created by NVIDIA (it is an acronym for
 "NVIDIA Collective Communications Library"), but its implementation as
 software package running on top of the Verbs API is available as open
 source.
-
-.. sidebar:: Understanding AI Workloads
-
-   *Our focus is on the network's role supporting AI workloads, and
-   not on the broader programming models, nor the role of GPUs in
-   executing those programs. In this context, the high-level
-   communication pattern for AI training models is to proceed in a
-   sequence of iterations. For each iteration, data is first
-   "scattered" across multiple nodes, the nodes then compute on the
-   subset of data sent to each of them, and finally the results are
-   "gathered" back in a central node. To support this (and similar
-   patterns), the NCCL API supports* **Scatter** and **Gather**
-   *operations among a collective of nodes, the first implies a
-   one-to-many communication, and the second implies a many-to-one
-   communication.*
-
-   *Importantly, there is often a synchronization barrier between each
-   iteration, such that one iteration has to complete before the next
-   iteration can begin. This means that the last flow to complete
-   during each transfer limits how fast the overall computation
-   runs. In other words, it's not how fast the fastest communication
-   can be implemented; it's how fast the slowest communication
-   completes. Being able to achieve low latency in the face of traffic
-   bursts—a natural consequence of one-to-many and many-to-one
-   exchanges—is the central performance challenge for the network. We
-   return to this topic in the next section when we look at possible
-   optimizations.*
 
 Second, Ethernet continues to evolve, and in this particular
 circumstance, offers an alternative to InfiniBand's "native" switches.
@@ -285,9 +259,9 @@ message is ready to be sent.
    might be scattered across multiple non-continuous memory
    buffers. (Our particular "Hello World" message is located in a
    single continuous buffer.) This is similar to the scatter/gather
-   operations mentioned in the earlier sidebar about AI workloads, but
-   in that case work is "scattered" across multiple nodes, and in this
-   case a message is "scattered" across multiple buffers on a single node.
+   operations mentioned in Section |Apps|.1.4, but in that
+   case work is "scattered" across multiple nodes, and in this case a
+   message is "scattered" across multiple buffers on a single node.
 
 What might be equally surprising about this example is what little we
 know when the ``ibv_wr_complete`` returns, which is only that the
@@ -296,7 +270,7 @@ the message has arrived at the remote server, or that it's been
 successfully written into the remote buffer. Moreover, since this is a
 one-way operation, the application on the remote server is not
 explicitly notified when the write does in fact complete. The
-application would need to either iteratively poll the target memory
+application needs to either iteratively poll the target memory
 location to see if it changes, or fall back to some other out-of-band
 signal (of which RDMA provides several alternatives). The point is
 that "message transfer" and "process synchronization" are separable

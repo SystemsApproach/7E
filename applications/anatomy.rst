@@ -368,3 +368,63 @@ Today, the Internet and the cloud have a symbiotic relationship. The
 Internet provides the communication substrate that the cloud runs on,
 while the cloud provides the computing substrate that enables ever more
 powerful applications to be distributed across the Internet.
+
+2.1.4  Other Programming Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+So far we have looked at how to scale network applications,
+while remaining consistent with the client-server paradigm and using
+the Socket API. There have been extensions to the API, for example to
+avoid copying messages into and out of user space, but the programming
+model has remained remarkably stable: one side does a passive open, the
+other does an active open, both sides send and receive messages, and
+the receive operation blocks waiting for a message to arrive.
+
+This programming model matches the needs of so-called "network
+applications" (which we now sometimes call "cloud apps" or simply
+"apps"), but that doesn't preclude other types of computations that
+need to communicate over a network. The most notable examples are
+parallel programs that once ran on purpose-built supercomputers, but
+today run in datacenters.  And of these parallel programs, training AI
+models is probably the dominant use case.  These programs do not use
+the Socket API and they are not best described as client-server.
+
+The full complexity of parallel workloads is beyond the scope of this book,
+but to appreciate the networking implications it's enough to
+understand two key points about the high-level communication pattern.
+First, a large parallel computation usually proceeds in a sequence of iterations. For each
+iteration, data is first "scattered" across multiple nodes, the nodes
+then compute on the subset of data sent to each of them, and finally
+the results are "gathered" back in a central node. To support this
+(and similar patterns), the API supports *Scatter* and *Gather*
+operations among a collective of nodes. The first implies a
+one-to-many communication, and the second implies a many-to-one
+communication.
+
+Importantly, there is often a synchronization barrier between each
+iteration, such that one iteration has to complete before the next
+iteration can begin. This means that the last transfer to complete
+during each transfer limits how fast the overall computation runs. In
+other words, it's not how fast the fastest communication can be
+implemented; it's how fast the slowest communication completes. Being
+able to achieve low latency in the face of traffic bursts—a natural
+consequence of one-to-many and many-to-one exchanges—is the central
+performance challenge for this communication pattern.
+
+The second point is that parallel programs are typically structured to
+maximize parallelism (the number of threads running concurrently) and
+minimize blocking (waiting for a message to arrive or another thread
+to complete a task). To this end, communication is typically organized
+around *work queues* and *completion queues*. The idea is that threads
+asynchronously insert tasks (messages) into a work queue and are later
+asynchronously informed that the work is complete. Threads that must
+know that work has completed before they can safely proceed typically
+*poll* the completion queue rather than invoke a blocking operation.
+
+All of this is to say that networks enable a wide range of
+applications, not just those that immediately come to mind when you
+think of email, web surfing, or video. The API is the demarcation
+point between these applications and the network, and while
+understanding the Socket API takes us a long way, there are other
+models. We return to the API that AI training and other highly
+parallel programs use in Chapter |Message|.
