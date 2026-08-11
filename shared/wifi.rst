@@ -50,7 +50,7 @@ away or blocked by an obstacle. This situation is a bit more complex
 than it first appears, as the following discussion illustrates.
 
 .. _fig-wifiHiddenNode:
-.. figure:: shared/figures/f02-30-9780123850591.png
+.. figure:: shared/figures/f02-30.png
    :width: 400px
    :align: center
 
@@ -67,7 +67,7 @@ neither A nor C is aware of this collision. A and C are said to be
 *hidden nodes* with respect to each other.
 
 .. _fig-wifiExposedNode:
-.. figure:: shared/figures/f02-31-9780123850591.png
+.. figure:: shared/figures/f02-31.png
    :width: 325px
    :align: center
 
@@ -154,7 +154,7 @@ range (e.g., a 20-MHz frequency band as introduced in Section |Shared|.2),
 with each AP typically on a different channel from its neighbors.
 
 .. _fig-wireless2:
-.. figure:: shared/figures/f02-32-9780123850591.png
+.. figure:: shared/figures/wireless2.png
    :width: 500px
    :align: center
 
@@ -199,7 +199,7 @@ notifies the old AP of the change (this happens in step 4) via the
 distribution system.
 
 .. _fig-wireless3:
-.. figure:: shared/figures/f02-33-9780123850591.png
+.. figure:: shared/figures/wireless3.png
    :width: 500px
    :align: center
 
@@ -234,7 +234,7 @@ pair of 1-bit fields—called ``ToDS`` and ``FromDS``—that are described
 below.
 
 .. _fig-802.11-format:
-.. figure:: shared/figures/f02-34-9780123850591.png
+.. figure:: shared/figures/f02-34.png
    :width: 550px
    :align: center
 
