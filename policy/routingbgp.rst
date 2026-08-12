@@ -29,8 +29,8 @@ metric, particularly if there is more than one policy-compliant path
 to choose from.
 
 .. _fig-bgpeg:
-.. figure:: policy/figures/f04-05-9780123850591.png
-   :width: 500px
+.. figure:: policy/figures/bgpeg.png
+   :width: 600px
    :align: center
 
    Example of a network running BGP.
@@ -47,8 +47,8 @@ network, on receiving this advertisement, can advertise, *“Networks
 192.4.54, and 192.4.23 can be reached along the path (AS 1, AS 3).”*
 
 .. _fig-aspath:
-.. figure:: policy/figures/f04-06-9780123850591.png
-   :width: 500px
+.. figure:: policy/figures/aspath.png
+   :width: 600px
    :align: center
 
    Example of loop among autonomous systems.
@@ -97,15 +97,15 @@ message, the format of which is shown in :numref:`Figure %s
 16 bits, unlike other packet formats in this chapter.)
 
 .. _fig-bgpup:
-.. figure:: policy/figures/f04-07-9780123850591.png
+.. figure:: policy/figures/f04-07.png
    :width: 200px
    :align: center
 
    BGP-4 update packet format.
 
-Unlike the routing protocols described in the previous chapter, BGP is
+Unlike the routing protocols described in Chapter |Routing|, BGP is
 defined to run on top of TCP, the reliable transport protocol. Because
-BGP speakers can count on TCP to be reliable, this means that any
+BGP speakers can count on TCP to be reliable, any
 information that has been sent from one speaker to another does not need
 to be sent again. Thus, as long as nothing has changed, a BGP speaker
 can simply send an occasional *keepalive* message that says, in effect,
@@ -120,8 +120,7 @@ assume that those routes were no longer valid.
 Having said that policies may be arbitrarily complex, there turn out
 to be a few common ones, reflecting common relationships between
 autonomous systems. The most common relationships are illustrated in
-:numref:`Figure %s <fig-as-rels>`. The three common relationships and
-the policies that go with them are as follows:
+:numref:`Figure %s <fig-as-rels>`; they are as follows:
 
 .. _fig-as-rels:
 .. figure:: policy/figures/f04-08-9780123850591.png
@@ -133,14 +132,14 @@ the policies that go with them are as follows:
 -  *Provider-Customer—*\ Providers are in the business of connecting
    their customers to the rest of the Internet. A customer might be
    a corporation, or it might be a smaller ISP (which may have customers
-   of its own). So the common policy is to advertise all the routes I
+   of its own). The typical policy is to advertise all the routes I
    know about to my customer, and advertise routes I learn from my
    customer to everyone.
 
 -  *Customer-Provider—*\ In the other direction, the customer wants to
    get traffic directed to them (and their customers, if they have them) by
    their provider, and wants to be able to send traffic to the rest of
-   the Internet through the provider. So the common policy in this case
+   the Internet through the provider. The most common policy in this case
    is to advertise my own prefixes and routes learned from my customers
    to my provider, advertise routes learned from my provider to my
    customers, but don’t advertise routes learned from one provider to
@@ -293,7 +292,7 @@ the AS can build up a complete routing table for any prefix that is
 reachable via some border router of the AS.
 
 .. _fig-ibgptab:
-.. figure:: policy/figures/f04-10-9780123850591.png
+.. figure:: policy/figures/f04-10.png
    :width: 500px
    :align: center
 

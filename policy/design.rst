@@ -64,7 +64,7 @@ to connect my AS to the rest of the Internet, and AS X is my preferred
 provider of connectivity, with AS Y being the fallback. Because I view
 both AS X and AS Y as providers (and presumably I paid them to play
 this role), I don’t expect to help them out by carrying traffic
-between them across my network (this is called *transit* traffic). The
+between them across my network. This is called *transit* traffic. The
 more autonomous systems an AS connects to, the more complex policies
 it might have, especially when you consider "backbone" providers
 (those closest to the core of the Internet), who may
@@ -73,7 +73,7 @@ and have different economic arrangements (which affect routing
 policies) with each one.
 
 A key design goal of interdomain routing is that policies like the
-example above, and much more complex ones, should be supported by the
+example above, as well as much more complex ones, should be supported by the
 interdomain routing system. To make the problem harder, each AS needs to be
 able to implement such a policy without any help from other autonomous
 systems, and in the face of possible misconfiguration or malicious
@@ -95,12 +95,12 @@ BGP makes virtually no assumptions about how autonomous systems are
 interconnected—they form an arbitrary graph. This model is clearly
 general enough to accommodate non-tree-structured internetworks, like
 the simplified picture of a multi-provider Internet shown in
-:numref:`Figure %s <fig-inet-1995>`. There is some structure to the
+:numref:`Figure %s <fig-inet2>`. There is some structure to the
 Internet, but it’s nothing like as simple as a tree, and BGP makes no
 assumptions about such structure.
 
-.. _fig-inet-1995:
-.. figure:: policy/figures/f04-04-9780123850591.png
+.. _fig-inet2:
+.. figure:: policy/figures/inet2.png
    :width: 600px
    :align: center
 
@@ -144,9 +144,9 @@ essentially impossible.
 The autonomous nature of interdomain routing raises the issue of trust. Provider A
 might be unwilling to believe certain advertisements from provider B for
 fear that provider B will advertise erroneous routing information. For
-example, trusting provider B when he advertises a great route to
+example, trusting provider B when it advertises a great route to
 anywhere in the Internet can be a disastrous choice if provider B turns
-out to have made a mistake configuring his routers or to have
+out to have made a mistake configuring its routers or to have
 insufficient capacity to carry the traffic.
 
 The issue of trust is also related to the need to support complex
