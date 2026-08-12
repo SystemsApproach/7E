@@ -369,7 +369,7 @@ Internet provides the communication substrate that the cloud runs on,
 while the cloud provides the computing substrate that enables ever more
 powerful applications to be distributed across the Internet.
 
-2.1.4  Other Programming Models
+2.1.4  Distributed Computation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 So far we have looked at how to scale network applications,
@@ -382,12 +382,14 @@ the receive operation blocks waiting for a message to arrive.
 
 This programming model matches the needs of so-called "network
 applications" (which we now sometimes call "cloud apps" or simply
-"apps"), but that doesn't preclude other types of computations that
-need to communicate over a network. The most notable examples are
-parallel programs that once ran on purpose-built supercomputers, but
-today run in datacenters.  And of these parallel programs, training AI
-models is probably the dominant use case.  These programs do not use
-the Socket API and they are not best described as client-server.
+"apps"), but there are other types of computations that need to
+communicate over a network. Such highly distributed computations are
+parallel programs that might once have run on purpose-built
+supercomputers, sometimes referred to as HPC (high performance
+computing) workloads. Today, such distributed computations mostly run
+in datacenters.  Among these parallel programs, training AI models is
+probably the dominant use case.  These programs do not use the Socket
+API and they are not best described as client-server.
 
 The full complexity of parallel workloads is beyond the scope of this book,
 but to appreciate the networking implications it's enough to
@@ -399,7 +401,19 @@ the results are "gathered" back in a central node. To support this
 (and similar patterns), the API supports *Scatter* and *Gather*
 operations among a collective of nodes. The first implies a
 one-to-many communication, and the second implies a many-to-one
-communication.
+communication. 
+
+An example framework for these types of applications is MapReduce,
+which was developed inside Google for managing such large distributed
+computations as indexing the contents of millions of web pages. An
+open source implementation of MapReduce was developed as part of the
+Apache Hadoop project. The "Map" part of MapReduce entails farming out
+(scattering) parallelizable tasks to many different servers. When
+these tasks complete, they send outputs to a set of servers using a
+*shuffle* operation, which is many-to-many communication. Those
+servers then perform the "reduce" operation. Finally, the output of
+the reduce step is gathered to produce the final result (e.g. a file
+representing the index).
 
 Importantly, there is often a synchronization barrier between each
 iteration, such that one iteration has to complete before the next
