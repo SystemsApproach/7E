@@ -316,12 +316,11 @@ reassembled (because they are part of the same large message) will
 become clear in a moment.
 
 The transport header also includes a 24-bit *Queue Pair (QP)* to
-identify the communication channel.  This is similar to the TCP port
-number in that it represents the destination of an RDMA connection,
-but unlike TCP, the QP identifies both the Send and Receive queues
-with a single number. In other words, this identifier could have been
-called a "channel id", which is then mapped to the corresponding queue
-on each side.
+identify the local end-point.  This is similar to the TCP port number
+in that it represents the destination of an RDMA connection, but
+unlike TCP, which supports "well-known" ports, the QP is a purely
+local identifier used to access the Send and Receive queues. In this
+way, a QP is more like a socket than a port.
 
 The biggest difference from TCP is in the information specifically
 related to the DMA aspect of the protocol. An "RDMA Extension Header"
