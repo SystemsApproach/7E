@@ -248,7 +248,7 @@ from the root to the leaves.
 
 .. _fig-rpki:
 .. figure:: policy/figures/rpki.png
-   :width: 600px
+   :width: 550px
    :align: center
 
    Chain of trust for RPKI
@@ -298,7 +298,7 @@ sub-prefix (as in the YouTube example above).
 
 .. _fig-roa:
 .. figure:: policy/figures/ROA-trust.png
-   :width: 600px
+   :width: 650px
    :align: center
 
    An ROA has a chain of trust back to the RPKI root
@@ -336,7 +336,7 @@ such an advertisement, not just the neighbors of the offending ISP.
 
 .. _fig-rpki-sys:
 .. figure:: policy/figures/RPKI-system.png
-   :width: 600px
+   :width: 650px
    :align: center
 
    Each AS maintains a local cache of the RPKI repository, and BGP
@@ -561,7 +561,7 @@ relationships gives us the ability to detect such anomalies.
 
 .. _fig-valleyfree:
 .. figure:: policy/figures/valleyfree.png
-   :width: 300px
+   :width: 350px
    :align: center
 
    Valley-free topology of Autonomous Systems
