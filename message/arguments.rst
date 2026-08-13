@@ -25,7 +25,7 @@ these arguments are then “brought together and ordered in an
 appropriate and effective way” to form a network message.
 
 .. _fig-marshal1:
-.. figure:: message/figures/f07-01-9780123850591.png
+.. figure:: message/figures/present.png
    :width: 400px
    :align: center
 
@@ -50,7 +50,7 @@ of the integer 34,677,374 are given in :numref:`Figure %s
 <fig-endian>`.
 
 .. _fig-endian:
-.. figure:: message/figures/f07-02-9780123850591.png
+.. figure:: message/figures/endian.png
    :width: 500px
    :align: center
 

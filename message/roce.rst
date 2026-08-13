@@ -23,12 +23,13 @@ support per-application transmit/receive packet queues, making it
 possible to get messages into and out of user space without any OS
 involvement. There have also been many "SmartNIC" products over the
 years that offload various aspects of TCP/IP to the NIC, with today's
-*Infrastructure Processing Units (IPUs)* replacing traditional NICs as the
-preferred technology for connecting servers to datacenter networks.
-The first InfiniBand advantage no longer holds, although it is
-perfectly legitimate to argue that TCP is not the right abstraction
-for RDMA (similar to the argument that QUIC is better suited to RPC
-traffic than TCP).
+*Infrastructure Processing Units (IPUs)* replacing traditional NICs as
+the preferred technology for connecting servers to datacenter
+networks.  The first InfiniBand advantage no longer holds, although it
+is perfectly legitimate to argue that TCP's reliable byte-stream is
+not the right abstraction for RDMA. This bears some similarity to the
+argument we made above that QUIC is better suited to RPC traffic than
+TCP.
 
 .. sidebar:: SmartNICs and IPUs
 
@@ -167,7 +168,7 @@ engineering choice designed to reduce overhead, where the important
 point is that the sender knows to adjust its sending rate in proportion
 to the rate at which ``CNP`` notices arrive (or don't arrive).
 
-.. [#] That the DCQCN receiver thins out the feedback information
+.. [#] The fact that the DCQCN receiver thins out the feedback information
          explains the "Quantized" qualifier in the name.
 
 .. admonition:: Further Reading

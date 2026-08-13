@@ -69,7 +69,10 @@ is implemented in the OS kernel, which means the OS has to get
 involved in sending and receiving every packet. With RDMA, the NIC
 directly writes packets into and reads packets out of application
 memory buffers. This avoids hundreds of CPU instructions and the
-throughput penalty of copying packets from one buffer to another. The
+throughput penalty of copying packets from one buffer to
+another. However, this is really an implementation choice rather than
+a fundamental feature of TCP/IP; it is certainly possible to offload
+TCP to the NIC and move packets using DMA. The
 second argument is that Ethernet-based networks are best effort,
 meaning that the potential for congestion can lead to both queuing
 delays and packet loss. We take up the case for whether this remains a
@@ -113,7 +116,7 @@ the last decade's pivot towards AI workloads. More recently, *NCCL*
 (pronounced "nickel") has become the dominant API for AI software
 running on GPUs. NCCL was created by NVIDIA (it is an acronym for
 "NVIDIA Collective Communications Library"), but its implementation as
-software package running on top of the Verbs API is available as open
+a software package running on top of the Verbs API is available as open
 source.
 
 Second, Ethernet continues to evolve, and in this particular
@@ -263,7 +266,7 @@ message is ready to be sent.
    case work is "scattered" across multiple nodes, and in this case a
    message is "scattered" across multiple buffers on a single node.
 
-What might be equally surprising about this example is what little we
+What might be equally surprising about this example is how little we
 know when the ``ibv_wr_complete`` returns, which is only that the
 local NIC has accepted the message for transfer. We don't know that
 the message has arrived at the remote server, or that it's been
@@ -281,9 +284,9 @@ reply arrives—but this not an absolute requirement.
 Clearly, the Verbs API provides a collection of low-level primitives,
 upon which MPI, NCCL, and the other libraries implement more powerful
 read/write and send/receive operations. One could even implement RPC
-on top of such a primitive. The point is that just such a primitive
+on top of such a primitive. The point is that such a primitive
 mechanism—assuming the underlying NICs do their job—is the foundation
-for much of today's AI workloads. We're now ready to look at the NIC
+for many of today's AI workloads. We're now ready to look at the NIC
 in more detail.
 
 .. admonition:: Further Reading

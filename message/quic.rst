@@ -444,5 +444,4 @@ as the interactions with TLS and congestion control.
    ACM SIGCOMM '17 Symposium, August 2017.
 
    J. Iyengar and M. Thomson (Eds.). `QUIC: A UDP-Based Multiplexed and
-      Secure Transport
-      <https://www.rfc-editor.org/info/rfc9000>`__. RFC 9000, May 2021.
+   Secure Transport <https://www.rfc-editor.org/info/rfc9000>`__. RFC 9000, May 2021.
