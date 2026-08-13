@@ -272,22 +272,85 @@ local NIC has accepted the message for transfer. We don't know that
 the message has arrived at the remote server, or that it's been
 successfully written into the remote buffer. Moreover, since this is a
 one-way operation, the application on the remote server is not
-explicitly notified when the write does in fact complete. The
-application needs to either iteratively poll the target memory
-location to see if it changes, or fall back to some other out-of-band
-signal (of which RDMA provides several alternatives). The point is
-that "message transfer" and "process synchronization" are separable
-concerns. We often find it convenient to couple them—so, for example,
-a "receive" blocks until a request arrives, or a "send" blocks until a
-reply arrives—but this not an absolute requirement.
+explicitly notified when the write does in fact complete.
 
-Clearly, the Verbs API provides a collection of low-level primitives,
-upon which MPI, NCCL, and the other libraries implement more powerful
-read/write and send/receive operations. One could even implement RPC
-on top of such a primitive. The point is that such a primitive
-mechanism—assuming the underlying NICs do their job—is the foundation
-for many of today's AI workloads. We're now ready to look at the NIC
-in more detail.
+As a consequence of this design choice, the Verbs API provides other
+mechanisms that application threads can use to synchronize.  On the
+sender, for example, adding the following line to our *"Hello
+World"* code fragment configures RDMA to deliver a signal to the
+queue pair (``qpx``) when the write successfully completes.  In this
+case, "completes" means that the message has been delivered over the
+network and written into the destination buffer; it does not say
+anything about whether the application has actually read it.
+
+.. code-block:: c
+
+   ibv_wr_set_flags(qpx, IBV_SEND_SIGNALED);
+
+To see this completion signal (and others like it) senders typically
+execute the following non-blocking "polling" operation:
+
+.. code-block:: c
+
+   ibv_poll_cq(cq, count, &wc)
+
+This is where the *completion queue* mentioned earlier in this
+section comes into play. That queue, denoted by variable ``cq`` in
+this example, is where all send/receive completion events are
+posted. It's created at the same time as the QP, and then linked to
+the QP. It is not uncommon for a thread that needs to know that an
+earlier send/receive has completed to execute a "spin loop" to watch
+for such a notification:
+
+.. code-block:: c
+
+   struct ibv_wc wc;
+   int n;
+   do {
+       n = ibv_poll_cq(cq, 1, &wc);
+   } while (n == 0);
+
+``ibv_poll_cq`` returns zero until an event arrives, at which point
+the loop terminates. The thread would typically look at the ``wc``
+(work completion) structure for more information about the event's
+status (not shown in the example), but the important point is that
+parallel programs that use this general approach to communication
+prefer having a thread spin on a completion event to invoking a
+blocking send operation.
+
+The receiver has similar options. Briefly, the ``ibv_wr_rdma_write``
+operation in the original example does not notify the destination when
+the message has been written to a buffer. The receiver can, however,
+execute a spin loop on the actual target memory buffer watching for
+specific data values it might be expecting. A more likely
+scenario—should the receiver need a completion signal to know that
+it's safe to proceed—is for the sender to instead execute a
+``ibv_wr_rdma_write_imm`` (write with immediate) operation. Doing so
+causes a completion event to be delivered to the receiver's completion
+queue when the message has been written to the destination buffer. The
+receiver executes a spin loop using ``ibv_poll_cq``, just as we saw on
+the sender.
+
+.. takeaway::
+
+   This simple one-way write example, and the subsequent variants, is
+   just a small peek at the Verbs API, but it is enough of a peek to
+   appreciate a fundamental insight about communication abstractions
+   (and their APIs).  The insight is that "message transfer" and
+   "process synchronization" are separable concerns. We often find it
+   convenient to couple them—so, for example, a "receive" blocks until
+   a request arrives (as is the case with Sockets), or a "send" blocks
+   until a reply arrives (as is the case with RPC)—but this coupling
+   is not a requirement. API design is about finding the right match
+   between what the underlying communication mechanism is able to
+   provide, and what the applications require to get their work done
+   efficiently.
+
+It is also worth noting that the Verbs API provides a collection of
+low-level primitives, upon which MPI, NCCL, and the other libraries
+implement more powerful read/write and send/receive operations.
+Support for the Scatter/Gather communication pattern mentioned in
+Section |Apps|.1.4 is one example.
 
 .. admonition:: Further Reading
 
