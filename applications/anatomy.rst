@@ -401,7 +401,7 @@ the results are "gathered" back in a central node. To support this
 (and similar patterns), the API supports *Scatter* and *Gather*
 operations among a collective of nodes. The first implies a
 one-to-many communication, and the second implies a many-to-one
-communication. 
+communication.
 
 An example framework for these types of applications is MapReduce,
 which was developed inside Google for managing such large distributed
