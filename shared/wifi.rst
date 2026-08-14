@@ -303,7 +303,7 @@ the Pairwise Master Key is cryptographically derived.
 802.11i’s stronger authentication mode is based on the IEEE 802.1X
 framework for controlling access to a LAN, which uses an
 Authentication Server (AS) as in :numref:`Figure %s
-<fig-AuthenServer>`. The AS and AP must be connected by a secure
+<fig-auth-server>`. The AS and AP must be connected by a secure
 channel and could even be implemented as a single box, but they are
 logically separate. The AP forwards authentication messages between
 the wireless device and the AS. The protocol used for authentication
@@ -316,8 +316,8 @@ EAP-compliant protocols, of which there are many, are called *EAP
 methods*. For example, EAP-TLS is an EAP method based on TLS
 (Transport Layer Security) authentication.
 
-.. _fig-AuthenServer:
-.. figure:: shared/figures/f08-19-9780123850591.png
+.. _fig-auth-server:
+.. figure:: shared/figures/auth-server.png
    :width: 500px
    :align: center
 
