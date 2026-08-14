@@ -114,7 +114,7 @@ all to form a contiguous message that can be transmitted over the
 network. :numref:`Figure %s <fig-marshal2>` illustrates this task.
 
 .. _fig-marshal2:
-.. figure:: message/figures/f07-03-9780123850591.png
+.. figure:: message/figures/flatten.png
    :width: 400px
    :align: center
 
@@ -197,7 +197,7 @@ data contained in the message was generated. :numref:`Figure %s
 tagged message.
 
 .. _fig-tags:
-.. figure:: message/figures/f07-04-9780123850591.png
+.. figure:: message/figures/tag-int.png
    :width: 400px
    :align: center
 
@@ -244,7 +244,7 @@ interpreted stubs have the advantage of being flexible. Compiled stubs
 are more common in practice.
 
 .. _fig-stubs:
-.. figure:: message/figures/f07-05-9780123850591.png
+.. figure:: message/figures/stubs.png
    :width: 500px
    :align: center
 
