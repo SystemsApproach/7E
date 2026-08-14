@@ -151,8 +151,8 @@ loads two libraries: ``libibverbs`` and ``librdmacm``.  The
 first—which you can read as "lib-ib-verbs", with the "ib" standing for
 InfiniBand—is effectively a low-level interface to an RDMA-capable
 device. The second—which you can read as "lib-rdma-cm", with the "cm"
-standing for "Communication Manager"—defines high-level wrapper
-functions that make the Verbs API easier to use. The other thing to
+standing for "Communication Manager"—defines optional wrapper
+functions that make the Verbs API easier to use.  The other thing to
 note about the diagram is that ``libibverbs`` directly interacts with
 the NIC, bypassing the OS. (Technically, the OS still polices access
 to the NIC, but is not on the data path once access is granted to a
@@ -395,7 +395,7 @@ The biggest difference from TCP is in the information specifically
 related to the DMA aspect of the protocol. An "RDMA Extension Header"
 contains information about the remote memory address that is to be
 read or written. This information includes a 64-bit memory address, a
-32-bit remote key (see the ``remote_key`` field in the code example),
+32-bit remote key (see the ``remote_rkey`` field in the code example),
 and a 32-bit field indicating the length of the DMA transfer. (This is
 how the receiver knows when a sequence of fragments needs to be
 reassembled.)
