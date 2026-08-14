@@ -28,7 +28,7 @@ network-connected machines, as shown in :numref:`Figure %s
 application processes to access (read and write) blocks of data from
 each others' memory. Functionally, RDMA can be viewed as a special
 case of an RPC, where only two "remote procedures" are supported:
-*Read( )* and *Write( )*. But that observation doesn't do justice to
+*Read( )* and *Write( )*. But that characterization doesn't do justice to
 how RDMA fundamentally changes the way applications interact with the
 network. Section |Apps|.1.4 introduced this alternative programming
 model; this section takes a closer look at the details.
@@ -87,7 +87,7 @@ parallel to the Internet architecture. It includes physical and link
 layer technologies, a network layer based on packet switching, and a
 transport layer that implements the RDMA abstractions (plus other
 optional behaviors). We're not going to describe that architecture in
-any detail, but it is instructive to understand the touchpoints it
+full detail, but it is instructive to understand the touchpoints it
 shares with the Internet architecture. For the purpose of this
 section, the main takeaway is that the transport layer—think of it as
 InfiniBand's equivalent of TCP—runs in a network adaptor, or NIC,
@@ -169,13 +169,16 @@ transaction protocol at the core of RDMA is in the NIC.
 
 Much of the complexity in using RDMA is in setting up (managing) the
 shared state that the application processes need to communicate. This
-involves two general steps. The first is to register the set of memory
-buffers that may be remotely accessed on each host. The second is to
-create *completion queues* that the RDMA subsystem uses to deliver
-notifications that a transaction has taken place. This is best
-understood in terms of its familiar DMA counterpart: a device
-driver registers with a device so it can receive interrupts signaling
-a transaction completing.
+involves three general steps. One is to create a *queue pair (QP)*,
+which is a local handle for the communication end-point. The QP is
+roughly analogous to a socket in that it is used to access the local
+send and receive queues. A second is to create a *completion queue*
+that the RDMA subsystem uses to deliver notifications that a send or
+receive task has taken place. This is best understood in terms of its
+familiar DMA counterpart: a device driver registers with a device so
+it can receive interrupts signaling a transaction completing.  The
+third step is to register the set of memory buffers that may be
+remotely accessed on each host.
 
 All of this "communication management" overhead is conceptually
 simple, but tediously detailed. We refer you to the respective manual
@@ -246,16 +249,15 @@ register a region of application memory with the NIC; the buffer
 holding the string ``"Hello World"`` in our case. In general, this
 buffer can be reused for multiple sends once it's registered. The
 actual write then spans four operations. The ``ibv_wr_start``
-operation sets the context; ``qpx`` denotes the local "Queue Pair",
-which is a handle, roughly analogous to a socket. (See the next
-subsection for more information.)  The ``ibv_wr_rdma_write`` operation
-specifies the target of the write, which includes both the
-``remote_addr`` and the ``remote_key`` needed to write to that
-address. (Both parameters are established during the Communication
-Management phase.) The third operation, ``ibv_wr_set_sge``, provides
-the local buffer that is the source of data for the write.\ [#]_
-Finally, the ``ibv_wr_complete`` operation signals to the NIC that the
-message is ready to be sent.
+operation sets the context. In our example, we are assuming the QP has
+already been created, corresponding to variable ``qpx``.  The
+``ibv_wr_rdma_write`` operation specifies the target of the write,
+which includes both the ``remote_addr`` and the ``remote_key`` needed
+to write to that address. (Both parameters are established during the
+Communication Management phase.) The third operation,
+``ibv_wr_set_sge``, provides the local buffer that is the source of
+data for the write.\ [#]_ Finally, the ``ibv_wr_complete`` operation
+signals to the NIC that the message is ready to be sent.
 
 .. [#] The "sge" in ``ibv_wr_set_sge`` operation denotes the concept
    of "Scatter-Gather", indicating that the message to be written
@@ -276,8 +278,8 @@ explicitly notified when the write does in fact complete.
 
 As a consequence of this design choice, the Verbs API provides other
 mechanisms that application threads can use to synchronize.  On the
-sender, for example, adding the following line to our *"Hello
-World"* code fragment configures RDMA to deliver a signal to the
+sender, for example, adding the following line to our "Hello
+World" code fragment configures RDMA to deliver a signal to the
 queue pair (``qpx``) when the write successfully completes.  In this
 case, "completes" means that the message has been delivered over the
 network and written into the destination buffer; it does not say
@@ -381,12 +383,13 @@ sequence number. How we know that a sequence of packets needs to be
 reassembled (because they are part of the same large message) will
 become clear in a moment.
 
-The transport header also includes a 24-bit *Queue Pair (QP)* to
-identify the local end-point.  This is similar to the TCP port number
-in that it represents the destination of an RDMA connection, but
-unlike TCP, which supports "well-known" ports, the QP is a purely
-local identifier used to access the Send and Receive queues. In this
-way, a QP is more like a socket than a port.
+The transport header also includes a 24-bit QP to identify the local
+end-point.  From a packet-format perspective, this field is similar to
+the TCP port number in that it represents the destination of an RDMA
+connection. But unlike TCP, which supports "well-known" ports, the QP
+is a purely local identifier used to access the send and receive
+queues (and other connnection state). In this way, a QP is more like a
+socket identifier than a port.
 
 The biggest difference from TCP is in the information specifically
 related to the DMA aspect of the protocol. An "RDMA Extension Header"
