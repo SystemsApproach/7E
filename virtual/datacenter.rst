@@ -74,7 +74,8 @@ have a host of features that need to be configured, including VLANs
 (or some equivalent construct to segment the network), firewall rules,
 network address translation (NAT) rules, and so on. It is the
 complexity of these tasks that made network configuration the barrier
-to agility in datacenter configuration.
+to agility in datacenter configuration. As with VPNs, the operational
+costs are sufficiently high to require a new approach. 
 
 The solution that emerged to tackle these issues of configuration and
 provisioning was based on SDN. The key insight is that a central API
@@ -159,13 +160,27 @@ VXLAN and specified in RFC 7348, is overlaid on top of UDP.
    <https://www.rfc-editor.org/info/rfc7348>`__. RFC 7348,
    August 2014.
 
-This simple example also shows one of the tasks that must be
-implemented by the network virtualization controller. When a VM wants
-to communicate with one of its peers in a virtual network, it needs to
-apply the appropriate outer header, which is a function of the current
-server location of the VM. Providing the mapping from target VM to
-outer header is a natural task for the centralized controller. In VL2
-this is referred to as a *directory service.*
+An important consequence of overlay networks is that they not only
+decouple the addresses of the virtual networks from those of the
+physical network, they also provide *operational* decoupling. That is,
+any time a virtual network needs to be created, modified, or deleted,
+it has absolutely no impact on the physical network (except, perhaps,
+a change in the amount of traffic traversing it). Thus, physical
+networks can be operated with a focus on stability, reliability,
+throughput, etc., rather than needing constant changes to
+configuration to accommodate new applications. All the frequent changes
+to configuration take place at the virtual network layer. The two
+layers require different tools and may well be operated by different
+teams. 
+
+In order for overlay networks to meet the needs of dynamically
+changing virtual networks, we need some help from the network
+virtualization controller. When a VM wants to communicate with one of
+its peers in a virtual network, it needs to apply the appropriate
+outer header, which is a function of the current server location of
+the destination VM. Providing the mapping from target VM to outer
+header is a natural task for the centralized controller. In VL2 this
+is referred to as a *directory service.*
 
 To better understand the functions of the network virtualization
 controller, we need to look a bit more closely at the definition of a

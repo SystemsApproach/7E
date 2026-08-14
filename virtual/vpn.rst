@@ -323,8 +323,9 @@ customers connected to the same provider can similarly send traffic to
 each other, but no traffic can flow from sites of one customer to the
 other.
 
-The enforcement of isolation between different customers starts by
-configuring the interfaces on the routers at the provider edge that
+The enforcement of isolation between different customers depends on
+both control plane and data plane mechanisms. An operator must first
+configure the interfaces on the routers at the provider edge that
 connect to customer VPN sites. An interface is associated with a
 particular *virtual routing and forwarding table* (VRF). So in the
 case where two customers connect to a single provider edge router,
@@ -387,6 +388,15 @@ non-unique customer addresses. The data plane is based on MPLS and is
 just another form of tunneling that decouples the virtual networks
 offered to the customers from the shared infrastructure of the
 provider.
+
+One observation to make about MPLS/BGP VPNs is that it is
+fundamentally a solution to an *operational* problem. Configuring 
+VPNs for many customers using traditional techniques such as virtual circuits
+or tunnels proved to be operationally complex. MPLS/BGP VPNs managed
+to reduce the configuration complexity substantially, which led to
+widespread adoption. We will see another example of how virtual
+networks can reduce operational complexity in the next section. We
+also tackle operational issues more thoroughly in Chapter |Ops|.
 
 To learn more about MPLS/BGP VPNs you can refer to the main RFC or the
 book on MPLS listed below.
