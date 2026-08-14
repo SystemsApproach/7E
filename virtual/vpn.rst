@@ -390,7 +390,7 @@ offered to the customers from the shared infrastructure of the
 provider.
 
 One observation to make about MPLS/BGP VPNs is that it is
-fundamentally a solution to an *operational* problem. Configuring 
+fundamentally a solution to an *operational* problem. Configuring
 VPNs for many customers using traditional techniques such as virtual circuits
 or tunnels proved to be operationally complex. MPLS/BGP VPNs managed
 to reduce the configuration complexity substantially, which led to

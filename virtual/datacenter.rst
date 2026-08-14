@@ -75,7 +75,7 @@ have a host of features that need to be configured, including VLANs
 network address translation (NAT) rules, and so on. It is the
 complexity of these tasks that made network configuration the barrier
 to agility in datacenter configuration. As with VPNs, the operational
-costs are sufficiently high to require a new approach. 
+costs are sufficiently high to require a new approach.
 
 The solution that emerged to tackle these issues of configuration and
 provisioning was based on SDN. The key insight is that a central API
@@ -171,7 +171,7 @@ throughput, etc., rather than needing constant changes to
 configuration to accommodate new applications. All the frequent changes
 to configuration take place at the virtual network layer. The two
 layers require different tools and may well be operated by different
-teams. 
+teams.
 
 In order for overlay networks to meet the needs of dynamically
 changing virtual networks, we need some help from the network

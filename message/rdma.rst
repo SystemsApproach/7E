@@ -178,7 +178,8 @@ receive task has taken place. This is best understood in terms of its
 familiar DMA counterpart: a device driver registers with a device so
 it can receive interrupts signaling a transaction completing.  The
 third step is to register the set of memory buffers that may be
-remotely accessed on each host.
+remotely accessed on each host. Sharing information about these
+buffers with your peers is typically part of the setup process.
 
 All of this "communication management" overhead is conceptually
 simple, but tediously detailed. We refer you to the respective manual
