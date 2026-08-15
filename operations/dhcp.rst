@@ -78,7 +78,7 @@ requesting client. The process of relaying a message from a host to a
 remote DHCP server is shown in :numref:`Figure %s <fig-dhcp-relay>`.
 
 .. _fig-dhcp-relay:
-.. figure:: operations/figures/f03-24-9780123850591.png
+.. figure:: operations/figures/dhcp-relay.png
    :width: 500px
    :align: center
 
@@ -97,8 +97,8 @@ to the client. Other information such as the default router to be used
 by this client can be included in the ``options`` field.
 
 .. _fig-dhcp:
-.. figure:: operations/figures/f03-25-9780123850591.png
-   :width: 400px
+.. figure:: operations/figures/f03-25.png
+   :width: 350px
    :align: center
 
    DHCP packet format.
