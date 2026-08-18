@@ -5,15 +5,14 @@
 
 To appreciate the design challenge, we need to first refine our
 definition of the abstraction, beyond the reliable, in-order delivery
-of a stream of bytes. It is a full-duplex protocol, meaning that each
-TCP connection supports a pair of byte streams, one flowing in each
-direction. It also includes a flow-control mechanism for each of these
-byte streams that allows the receiver to pace how much data the sender
-is allowed to transmit at a given time. This mechanism blocks the
-sender if it gets too far ahead of the receiver.  Finally, TCP
-supports a demultiplexing mechanism that allows multiple application
-processes on any given host to simultaneously carry on a conversation
-with their peers.
+of a stream of bytes. If we want a full-duplex protocol, the
+connection needs to support a pair of byte streams, one flowing in
+each direction. It also requires a flow-control mechanism that
+allows the receiver to pace how much data the sender is allowed to
+transmit at a given time. This mechanism blocks the sender if it gets
+too far ahead of the receiver.  Finally, it needs a demultiplexing
+mechanism that allows multiple application processes on any given host
+to simultaneously carry on a conversation with their peers.
 
 With that background, we might ask why a byte stream is the right
 abstraction for building applications (the reliable part is pretty
@@ -132,20 +131,21 @@ Section |TCP|.4.
    https://book.systemsapproach.org/direct/reliable.html#sliding-window
 
 Unlike this simplified example, one of the more severe complications
-TCP has to address is that it doesn't have a perfect knowledge of the
-network RTT, and hence, it does not know how many packets should be in
-flight (unacknowledged) in order to keep the pipe full.  For example, a
-TCP connection between a host in San Francisco and a host in Boston,
-which are separated by several thousand kilometers, might have an RTT
-of 100 ms, while a TCP connection between two hosts in the same room,
-only a few meters apart, might have an RTT of only 1 ms. The same TCP
-protocol must be able to support both of these connections. To make
-matters worse, the TCP connection between hosts in San Francisco and
-Boston might have an RTT of 100 ms at 3 a.m., but an RTT of 500 ms at
-3 p.m. Variations in the RTT are even possible during a single TCP
-connection that lasts only a few minutes. What this means to the
-sliding window algorithm is that the timeout mechanism that triggers
-retransmissions must be adaptive.
+an Internet-scale byte-stream protocol has to address is not having
+perfect knowledge of the network RTT, and hence, the protocol does not
+know how many packets should be in flight (unacknowledged) in order to
+keep the pipe full.  For example, a connection between a host in
+San Francisco and a host in Boston, which are separated by several
+thousand kilometers, might have an RTT of 100 ms, while a
+connection between two hosts in the same room, only a few meters
+apart, might have an RTT of only 1 ms. We would like for the protocol
+to support both of these connections. To make matters worse, the
+connection between hosts in San Francisco and Boston might have an
+RTT of 100 ms at 3 a.m., but an RTT of 500 ms at 3 p.m. Variations in
+the RTT are even possible during a single connection that lasts
+only a few minutes. What this means to the sliding window algorithm is
+that the timeout mechanism that triggers retransmissions must be
+adaptive.
 
 A second complication is
 that packets may be reordered as they cross the Internet. Packets that
@@ -157,20 +157,20 @@ the worst case, a packet can be delayed in the Internet until the IP
 time to live (``TTL``) field expires, at which time the packet is
 discarded (and hence there is no danger of it arriving late). Of
 course, TTL is a misnomer; it has for many years simply been number
-decremented at every router hop. TCP, however, assumes
-that each packet has a maximum lifetime. The exact lifetime, known as
+decremented at every router hop. The approach TCP takes is to assume
+each packet has a maximum lifetime. The exact lifetime, known as
 the *maximum segment lifetime* (MSL), is an engineering choice. The
 current recommended setting in the TCP RFC is 120 seconds (although
 many modern implementations use a lower value). IP does
 not directly enforce this 120-second value; it is simply a
-conservative estimate that TCP makes of how long a packet might live
+conservative estimate of how long a packet might live
 in the Internet. The implication is significant—TCP has to be prepared
 for very old packets to suddenly show up at the receiver, potentially
 confusing the sliding window algorithm.
 
 There are other complications, but they are subtle, and come to light
-only after you see TCP operating under real world conditions.  This is
-exactly what happened: the original version of TCP addressed the
+only after you see the protocol operating under real world conditions.
+This is exactly what happened: the original version of TCP addressed the
 reliable-but-fast issue outlined above, but did not anticipate some of
 the other issues we discuss below. In other words, you can read the
 rest of this chapter as a case study of how protocols incrementally

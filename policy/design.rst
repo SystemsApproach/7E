@@ -3,15 +3,17 @@
 |BGP|.1 Design Issues
 ------------------------------------
 
-Although we have been using the term "autonomous system" somewhat
-informally, the Internet defines it as a first-class abstraction. That
-is, the Internet is organized as a collection of *autonomous systems
-(ASes)*, each of which is assigned a unique AS number. An AS
-represents a single administrative entity that controls some set of
-networks. A corporation’s complex internal network might be a single
-AS, as may the national or regional network of any single Internet
-Service Provider (ISP). :numref:`Figure %s <fig-autonomous>` shows a
-simple internet with two autonomous systems.
+To understand interdomain routing, it is important to recognize that
+the Internet is organized as a collection of *autonomous systems
+(ASes)*, each of which represents a single administrative entity that
+controls some set of networks.  A corporation’s complex internal
+network might be a single AS, as may the national or regional network
+of any single Internet Service Provider (ISP). :numref:`Figure %s
+<fig-autonomous>` shows a simple internet with two autonomous
+systems. Each AS is assigned a unique number, called an ASN, by the
+Internet Assigned Numbers Authority (IANA). While our simple example
+shows just two ASes, today over 120,000 ASNs have been assigned.
+
 
 .. _fig-autonomous:
 .. figure:: policy/figures/autonomous.png
@@ -92,7 +94,7 @@ through four versions (we're now on BGP-4). BGP is often regarded as
 one of the more complex technologies of the Internet.
 
 BGP makes virtually no assumptions about how autonomous systems are
-interconnected—they form an arbitrary graph. This model is clearly
+interconnected—they form an arbitrary graph. This model is
 general enough to accommodate non-tree-structured internetworks, like
 the simplified picture of a multi-provider Internet shown in
 :numref:`Figure %s <fig-inet2>`. There is some structure to the

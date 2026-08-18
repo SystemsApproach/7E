@@ -3,7 +3,7 @@
 
 .. include:: chapters.rst
 
-Chapter |Shared|:  Mediating Shared Access
+Chapter |Shared|:  Mediating Access
 ==============================================
 
 Chapter |Intro| highlights the challenge of multiplexing multiple users on a

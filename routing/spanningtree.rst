@@ -7,11 +7,11 @@ The history of Ethernet switching goes back a long way, with the
 earliest switches being referred to as "bridges" because they
 connected two or more Ethernet segments. In its simplest
 form, a bridge receives packets on one port and copies them out to
-its other port(s), effectively broadcasting packets from one
+all of its other port(s), effectively broadcasting packets from one
 segment to another. Over time, a bridge could "learn" which hosts were
 reachable on which port by watching the source addresses of
 received packets, so a "learning bridge" would not waste resources
-forwarding a packet onto a port that didn't lead to the destination.
+forwarding a packet onto a port that does not lead to the destination.
 
 Learning bridges are fine until the network has a loop in it, in which
 case they fail badly—frames potentially get forwarded forever. The
