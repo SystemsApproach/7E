@@ -6,8 +6,8 @@ control, focusing on what routers may (or may not) do to help manage
 congestion; e.g., isolate flows, perform active queue management, send
 explicit congestion notifications.  There are other questions that
 only the sources of those packets can answer. We start by identifying
-what those questions are, and exploring the options available to TCP
-(and other transport protocols running on edge hosts) to address
+what those questions are, and exploring the options available to
+transport protocols running on edge hosts to address
 them. Until we get to domain-specific use cases in Section
 |CC|.4, you can assume the routers implement FIFO queues with
 tail-drop.
@@ -108,10 +108,9 @@ control. Flow control involves keeping a fast sender from overrunning
 a slow receiver. Congestion control, by contrast, is intended to keep
 a set of senders from sending too much data *into the network* because
 of lack of resources at some location. These two concepts are often
-confused; as we will see, they also share some mechanisms. (Note that
-in principle congestion control algorithms are protocol independent,
-but in practice, they have been integrated into TCP, and so we present
-them in that context.)
+confused, a problem that is exacerbated by the fact that they
+sometimes share low-level mechanisms (e.g., an ACK may trigger both a
+flow control response and a congestion control response).
 
 
 |CC|.1.2 Signals from the Network
@@ -126,10 +125,10 @@ exited the network, meaning there should now be capacity for another
 packet. By using ACKs to pace the transmission of packets, TCP is said
 to be *self-clocking*.  In contrast, a timeout signals that a packet
 was lost, potentially implying that the network is congested, and that
-TCP needs to reduce its sending rate. Because using packet loss as a
-signal means congestion has already occurred and we are reacting after
-the fact, we sometimes refer to this approach as *control-based*, or
-alternatively, *loss-based*.
+the sender needs to reduce the transmission rate. Because using packet
+loss as a signal means congestion has already occurred and we are
+reacting after the fact, we sometimes refer to this approach as
+*control-based*, or alternatively, *loss-based*.
 
 Waiting for packet loss to signal the onset of congestion, and then
 reacting to that loss, is not the only option. It is possible adopt a
@@ -156,9 +155,7 @@ is congested, it's going to be necessary for some users or flows to
 send less. It is clearly worth asking: which flows should send less?
 Should all flows share the pain equally? And what happens if some
 flows pay more attention to congestion signals than others? These
-questions are at the heart of the fairness issue. Jain's *fairness
-index* is one widely accepted way to measure how
-fair a network is.
+questions are at the heart of the fairness issue.
 
 When several flows share a particular link, we would like for each
 flow to receive an equal share of the bandwidth. This definition
