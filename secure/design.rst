@@ -66,28 +66,29 @@ security, designers of secure protocols need to keep an eye on ways in
 which their protocol might fall victim to a DoS attack or serve as a
 vector for amplifying DoS attacks.
 
-In this chapter we examine how the Transport Layer Security protocols
-have been developed to meet the requirements just outlined. While
-cryptography provides us with some building blocks to meet these
+While cryptography provides us with some building blocks to meet these
 requirements, which we discuss in the next section, there is more to
 building a secure system than just adding some cryptographic
-operations.
+operations. In general there needs to be a set of protocol machinery
+to handle tasks such as authentication and the distribution of
+cryptographic keys. We will see examples of such machinery at work in
+the design of TLS. 
 
-The designers of SSL and TLS recognized that a requirement for secure
-communication was not
-specific to web transactions (i.e., those using HTTP) and thus they built
-a general-purpose protocol that sits between an application protocol
-such as HTTP and a transport protocol such as TCP. The reason for
-calling this “transport layer security” is that, from the application’s
-perspective, this protocol layer looks just like a normal transport
-protocol except for the fact that it is secure. That is, the sender can
-open connections and deliver bytes for transmission, and the secure
+A requirement for secure communication is certainly not limited to web
+transactions (i.e., those using HTTP).  A general-purpose protocol
+that sits between an application protocol (with HTTP being just one
+example) and a transport protocol such as TCP can meet the security
+needs of many applications. From the application’s perspective, this
+protocol layer looks just like a normal transport protocol except for
+the fact that it is secure (i.e., provides integrity, confidentiality,
+authentication and so on). With such a protocol, the sender can open
+connections and deliver bytes for transmission, and the secure
 transport layer will get them to the receiver with the necessary
-confidentiality, integrity, and authentication. By running the secure
-transport layer on top of TCP, all of the normal features of TCP
-(reliability, flow control, congestion control, etc.) are also provided
-to the application. This arrangement of protocol layers is depicted in
-:numref:`Figure %s <fig-tls-stack>`.
+security properties. By running the secure transport layer on top of
+TCP, all of the normal features of TCP (reliability, flow control,
+congestion control, etc.) are also provided to the application. This
+arrangement of protocol layers is depicted in :numref:`Figure %s
+<fig-tls-stack>`.
 
 .. _fig-tls-stack:
 .. figure:: secure/figures/TLS-stack.png
@@ -107,8 +108,9 @@ standalone implementations of SSL/TLS are available, it is more common
 for an implementation to be bundled with applications that need it,
 primarily web browsers and servers.
 
-Just as running HTTP over TCP introduced some performance issues,
-inserting TLS between the application protocol and the transport
+Finally, it is important not to lose sight of performance in the quest
+for security. Just as running HTTP over TCP introduced some performance issues,
+inserting a security layer between the application protocol and the transport
 protocol further impacts performance, especially latency. This
 eventually led to a rethinking of the layering of HTTP, TLS, and
 TCP. As a result, a new transport protocol, QUIC, was developed,
