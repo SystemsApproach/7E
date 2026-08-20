@@ -72,7 +72,7 @@ building a secure system than just adding some cryptographic
 operations. In general there needs to be a set of protocol machinery
 to handle tasks such as authentication and the distribution of
 cryptographic keys. We will see examples of such machinery at work in
-the design of TLS. 
+the design of TLS.
 
 A requirement for secure communication is certainly not limited to web
 transactions (i.e., those using HTTP).  A general-purpose protocol
