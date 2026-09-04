@@ -463,8 +463,7 @@ stated properties:
   burst errors of length greater than :math:`k` bits can also be
   detected.)
 
-For example, Ethernet uses CRC-32, which meets the above properties
-and is defined as follows:
+For example, Ethernet uses CRC-32 which is defined as follows:
 
 -  CRC-32 = :math:`x^{32} + x^{26} + x^{23} + x^{22} + x^{16} +
    x^{12} + x^{11} + x^{10} + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1`
