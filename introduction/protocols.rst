@@ -352,24 +352,24 @@ in the IP and UDP headers); how long the header is (e.g., IP and TCP's
 possibly correct bit errors (e.g., IP, TCP, and UDP's ``Checksum`` and
 ETH's ``CRC``).
 
-The host addresses in the IP and ETH headers are also noteworthy.
-The field names are the same—\ ``SourceAddr`` and
-``DestinationAddr``\ —and both protocols use their respective addresses
-to uniquely identify the sender and receiver of every message. But the
-addressing schemes the Internet and Ethernet use are completely
-different. We'll describe those schemes in later chapters, but for
-now, we briefly introduce the standard way we make them
-human-readable.  Ethernet's 48-bit addresses are usually written as
-six hexadecimal numbers, one for each 8-bit byte in the address. For
-example, ``6e:86:88:18:7d:39``. A 32-bit IP address is typically
-written as four decimal numbers, one for each 8-bit byte in the
-address. For example, ``128.112.155.172``.  This is called "dot
-notation" for the obvious reason. Note that there are situations where
-we only care about some prefix of an IP address, say the first 16 or
-24 bits, in which case we'll write ``128.112.0.0/16`` or
-``128.112.155.0/24``. We do this because the prefix identifies the
-network that a host is connected to, and that's the bit of
-information we want to know.
+The host addresses in the IP and ETH headers are also noteworthy.  The
+field names are the same—\ ``SourceAddr`` and ``DestinationAddr``\
+—and both protocols use their respective addresses to uniquely
+identify the sender and receiver of every message. But the addressing
+schemes the Internet and Ethernet use are completely different. We'll
+describe those schemes in later chapters, but for now, we briefly
+introduce the standard way we make them human-readable.  Ethernet's
+48-bit addresses are usually written as six hexadecimal numbers, one
+for each 8-bit byte in the address. For example,
+``6e:86:88:18:7d:39``. A 32-bit IP address is typically written as
+four decimal numbers, one for each 8-bit byte in the address. For
+example, ``128.112.155.172``.  This is called "dot notation" for the
+obvious reason. Note that there are situations where we only care
+about some prefix of an IP address, say the first 16 or 24 bits, in
+which case we'll write ``128.112.0.0/16`` or ``128.112.155.0/24``. We
+do this because the prefix identifies the network that a host is
+connected to, and that's the bit of information we care about (e.g.,
+a switch looks at that prefix to decide how to forward a packet).
 
 Finally, you may have noticed that the definition of UDP in RFC 768 is
 only three pages long. This is because UDP's sole purpose is to layer

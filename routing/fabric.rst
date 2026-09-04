@@ -188,11 +188,13 @@ as needed.
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
 subnet 10.0.1/24 and the servers connected to Leaf 2 are on subnet
-10.0.2/24. We also assign labels 101 and 102 to Leaf 1 and Leaf 2,
-respectively. You can think of these identifiers as labeling either
-the segment or the target pair of leaf switches, but it also works to
-think of each label as being assigned to the rack served by the leaf
-pair.
+10.0.2/24. (Recall from Section |Intro|.3.4 that the ``/24`` notation
+implies we care about matching just the 24-bit prefix of the IP
+address; we'll see why just the prefix matters in Chapter |Fed|.) We
+also assign labels 101 and 102 to Leaf 1 and Leaf 2, respectively. You
+can think of these identifiers as labeling either the segment or the
+target pair of leaf switches, but it also works to think of each label
+as being assigned to the rack served by the leaf pair.
 
 .. _fig-sr:
 .. figure:: routing/figures/sr.png

@@ -355,9 +355,9 @@ port *i*. The original OpenFlow spec allowed the header fields shown
 in :numref:`Figure %s <fig-headers>` to be included in the Match half
 of the rule. So for example, a Match might specify a packet's ETH
 header ``Type`` field equals ``0x800`` (indicating the frame carries
-an IP packet) and its IP header ``DstAddr`` field be contained in
-some subnet (e.g., ``192.12.69/24``). It is also possible to write
-flow rules that match specific UDP or TCP port numbers.
+an IP packet) and its IP header ``DstAddr`` field be contained in some
+network (e.g., match the prefix ``192.12.69/24``). It is also possible
+to write flow rules that match specific UDP or TCP port numbers.
 
 .. _fig-headers:
 .. figure:: technology/figures/headers.png
