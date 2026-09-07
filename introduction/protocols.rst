@@ -182,7 +182,7 @@ data being transmitted on behalf of the application—is called the
 message’s *body* or *payload*. We say that the application’s data is
 *encapsulated* in the new message created by UDP.
 
-To make the discussion a more concrete, :numref:`Figures %s
+To make the discussion more concrete, :numref:`Figures %s
 <fig-udphdr>`, :numref:`%s <fig-tcphdr>`, :numref:`%s
 <fig-iphdr>`, and :numref:`%s <fig-ethhdr>` depict the header for four
 protocols we use as examples in this section: TCP, UDP, IP, and
@@ -331,7 +331,7 @@ to identify the high-level protocol (or application program) to which
 the message is to be delivered.
 
 Looking back at the example headers given in :numref:`Figures %s
-<fig-tcphdr>`, :numref:`%s <fig-udphdr>`, :numref:`%s <fig-iphdr>`,
+<fig-udphdr>`, :numref:`%s <fig-tcphdr>`, :numref:`%s <fig-iphdr>`,
 and :numref:`%s <fig-ethhdr>`, IP uses the 8-bit ``Protocol`` field as
 its demux key, with ``0x11`` (decimal 17) indicating the message
 belongs to UDP and ``0x06`` (decimal 6) indicating the message belongs
