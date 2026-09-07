@@ -144,20 +144,15 @@ workloads).
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :numref:`Figure %s <fig-verbs>` highlights the centrality of the RDMA
-abstraction, but it is conceptual. To understand how RDMA works in
-practice, it is helpful to redraw it with the additional detail shown
-in :numref:`Figure %s <fig-libibverbs>`. Here, we see the application
+abstraction, but to understand how RDMA is used in practice, it is
+helpful to redraw it with the additional detail shown in
+:numref:`Figure %s <fig-libibverbs>`. Here, we see the application
 loads two libraries: ``libibverbs`` and ``librdmacm``.  The
 first—which you can read as "lib-ib-verbs", with the "ib" standing for
 InfiniBand—is effectively a low-level interface to an RDMA-capable
-device. The second—which you can read as "lib-rdma-cm", with the "cm"
-standing for "Communication Manager"—defines optional wrapper
-functions that make the Verbs API easier to use.  The other thing to
-note about the diagram is that ``libibverbs`` directly interacts with
-the NIC, bypassing the OS. (Technically, the OS still polices access
-to the NIC, but is not on the data path once access is granted to a
-particular application.) The actual implementation of the message
-transaction protocol at the core of RDMA is in the NIC.
+device.  Note that ``libibverbs`` directly interacts with the NIC,
+bypassing the OS. The OS still polices access to the NIC, but is not
+on the data path once access is granted to a particular application.
 
 .. _fig-libibverbs:
 .. figure:: message/figures/libibverbs.png
@@ -167,28 +162,34 @@ transaction protocol at the core of RDMA is in the NIC.
    Software components that implement RDMA, including user-level
    libraries that directly interact with the HCA (InfiniBand NIC).
 
-Much of the complexity in using RDMA is in setting up (managing) the
-shared state that the application processes need to communicate. This
-involves three general steps. One is to create a *queue pair (QP)*,
-which is a local handle for the communication end-point. The QP is
-roughly analogous to a socket in that it is used to access the local
-send and receive queues. A second is to create a *completion queue*
-that the RDMA subsystem uses to deliver notifications that a send or
-receive task has taken place. This is best understood in terms of its
-familiar DMA counterpart: a device driver registers with a device so
-it can receive interrupts signaling a transaction completing.  The
-third step is to register the set of memory buffers that may be
-remotely accessed on each host. Sharing information about these
-buffers with your peers is typically part of the setup process.
+The second library—which you can read as "lib-rdma-cm", with the "cm"
+standing for "Communication Manager"—defines optional wrapper
+functions that make the Verbs API easier to use. This second library
+could have instead been one of the libraries shown in :numref:`Figure
+%s <fig-verbs>`, but we use ``librdmacm`` as our example to draw
+attention to the connection management aspect of RDMA. In short, much
+of the complexity in using RDMA is in setting up (managing) the shared
+state that the application processes need to communicate.
 
-All of this "communication management" overhead is conceptually
-simple, but tediously detailed. We refer you to the respective manual
-pages for the two libraries for more information. Also note that this
-connection setup phase happens once for a long-running parallel
-program, involving a relatively static set of peers. This means we are
-not overly concerned about the overhead. A client browser would
-definitely *not* want to go to this trouble for every web server it
-connects to, so RDMA is not a candidate replacement for, say QUIC.
+This setup involves three general steps. One is to create a *queue
+pair (QP)*, which is a local handle for the communication
+end-point. The QP is roughly analogous to a socket in that it is used
+to access the local send and receive queues. A second is to create a
+*completion queue* that the RDMA subsystem uses to deliver
+notifications that a send or receive task has taken place. This is
+best understood in terms of its familiar DMA counterpart: a device
+driver registers with a device so it can receive interrupts signaling
+a transaction completing.  The third step is to register the set of
+memory buffers that may be remotely accessed on each host. Sharing
+information about these buffers with your peers is typically part of
+the setup process.
+
+The important thing to keep in mind is that this connection setup
+phase happens once for a long-running parallel program, involving a
+relatively static set of peers. This means we are not overly concerned
+about the overhead. A client browser would definitely *not* want to go
+to this trouble for every web server it connects to, so RDMA is not a
+candidate replacement for, say QUIC.
 
 Once everything is set up, there are two usage patterns for RDMA,
 which we broadly characterize as either *shared memory* or
@@ -349,12 +350,6 @@ the sender.
    provide, and what the applications require to get their work done
    efficiently.
 
-It is also worth noting that the Verbs API provides a collection of
-low-level primitives, upon which MPI, NCCL, and the other libraries
-implement more powerful read/write and send/receive operations.
-Support for the Scatter/Gather communication pattern mentioned in
-Section |Apps|.1.4 is one example.
-
 .. admonition:: Further Reading
 
    `RDMA Core Userspace Libraries and Daemons
@@ -363,6 +358,20 @@ Section |Apps|.1.4 is one example.
    H. Lauer and R. Needham. `On the Duality of Operating System
    Structures <https://dl.acm.org/doi/10.1145/850657.850658>`__.  7th
    ACM Symposium on Operating Systems Principles (SOSP), December 1979.
+
+Finally, it is important to remember that the Verbs API provides a
+collection of low-level primitives, upon which MPI, NCCL, and the
+other libraries implement more powerful operations.  Support for the
+Scatter/Gather/Shuffle communication pattern mentioned in Section
+|Apps|.1.4 is one example. If your goal is to learn how to write
+parallel programs, those libraries would be the right place to start,
+but our goal is to understanding the underlying message transactions
+upon which those libraries are built. So for example, every time you
+invoke a Scatter operation to spray partitions of a large data set
+across a group of processes, a sequence of point-to-point RDMA message
+transactions is executed, one for each member of the group.
+
+
 
 
 |Message|.4.3 Protocol Details

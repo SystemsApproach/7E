@@ -391,17 +391,23 @@ in datacenters.  Among these parallel programs, training AI models is
 probably the dominant use case.  These programs do not use the Socket
 API and they are not best described as client-server.
 
-The full complexity of parallel workloads is beyond the scope of this book,
-but to appreciate the networking implications it's enough to
-understand two key points about the high-level communication pattern.
-First, a large parallel computation usually proceeds in a sequence of iterations. For each
-iteration, data is first "scattered" across multiple nodes, the nodes
-then compute on the subset of data sent to each of them, and finally
-the results are "gathered" back in a central node. To support this
-(and similar patterns), the API supports *Scatter* and *Gather*
-operations among a collective of nodes. The first implies a
-one-to-many communication, and the second implies a many-to-one
-communication.
+The full complexity of parallel workloads is beyond the scope of this
+book, but to appreciate the networking implications it's enough to
+understand four key points about the high-level communication pattern.
+First, they involve a set of process, not just a client and a server.
+This group is sometimes called a *collective*, where the goal is to
+increase parallelism (and hence, reduce runtime) by scaling the size
+of the collective.
+
+Second, this parallel computation usually proceeds in a sequence
+of iterations. For each iteration, data is first "scattered" across
+multiple nodes, the nodes then compute on the subset of data sent to
+each of them, and finally the results are "gathered" back in a central
+node. To support this (and similar patterns), the API supports
+*Scatter* and *Gather* operations among a collective of nodes. The
+first implies a one-to-many communication, and the second implies a
+many-to-one communication. There is also sometimes a *Shuffle*
+operation that requires a many-to-many message exchange.
 
 An example framework for these types of applications is MapReduce,
 which was developed inside Google for managing such large distributed
@@ -409,13 +415,12 @@ computations as indexing the contents of millions of web pages. An
 open source implementation of MapReduce was developed as part of the
 Apache Hadoop project. The "Map" part of MapReduce entails farming out
 (scattering) parallelizable tasks to many different servers. When
-these tasks complete, they send outputs to a set of servers using a
-*shuffle* operation, which is many-to-many communication. Those
-servers then perform the "reduce" operation. Finally, the output of
-the reduce step is gathered to produce the final result (e.g. a file
-representing the index).
+these tasks complete, the servers shuffle the outputs to each other as
+part of a "Reduce" step. Finally, the output of the reduce step is
+gathered to produce the final result (e.g. a file representing the
+index).
 
-Importantly, there is often a synchronization barrier between each
+Third, there is often a synchronization barrier between each
 iteration, such that one iteration has to complete before the next
 iteration can begin. This means that the last transfer to complete
 during each transfer limits how fast the overall computation runs. In
@@ -425,7 +430,7 @@ able to achieve low latency in the face of traffic bursts—a natural
 consequence of one-to-many and many-to-one exchanges—is the central
 performance challenge for this communication pattern.
 
-The second point is that parallel programs are typically structured to
+The fourth point is that parallel programs are typically structured to
 maximize parallelism (the number of threads running concurrently) and
 minimize blocking (waiting for a message to arrive or another thread
 to complete a task). To this end, communication is typically organized
