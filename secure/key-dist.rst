@@ -146,7 +146,7 @@ participant and know that it will be sufficient to build a chain of
 trust for that participant.
 
 .. _fig-pem-tree:
-.. figure:: secure/figures/f08-06-9780123850591.png
+.. figure:: secure/figures/f08-06.png
    :width: 600px
    :align: center
 
@@ -379,7 +379,7 @@ sends her own public values, as in :numref:`Figure %s
 unknowingly sharing a key with Mallory instead of each other.
 
 .. _fig-manInTheMIddle:
-.. figure:: secure/figures/f08-12-9780123850591.png
+.. figure:: secure/figures/f08-12.png
    :width: 300px
    :align: center
 

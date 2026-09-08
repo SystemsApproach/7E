@@ -168,7 +168,7 @@ mode*, in which successive values of a counter (e.g., 1, 2, 3,
 blocks of plaintext.
 
 .. _fig-cbc:
-.. figure:: secure/figures/f08-02-9780123850591.png
+.. figure:: secure/figures/f08-02.png
    :width: 500px
    :align: center
 
