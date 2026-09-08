@@ -55,7 +55,7 @@ transmitting and receiving technology, the narrower each bit can
 become and, thus, the higher the bandwidth.
 
 .. _fig-bit-width:
-.. figure:: introduction/figures/f01-16-9780123850591.png
+.. figure:: introduction/figures/f01-16.png
    :width: 400px
    :align: center
 
