@@ -64,7 +64,7 @@ capacity to handle the load, the service degrades in an ungraceful
 manner.
 
 .. _fig-collapse:
-.. figure:: congestion/figures/Slide1.png
+.. figure:: congestion/figures/collapse.png
    :width: 400px
    :align: center
 
@@ -166,7 +166,7 @@ illustrated in :numref:`Figure %s <fig-path-len>`, what is fair when
 one four-hop flow is competing with three one-hop flows?
 
 .. _fig-path-len:
-.. figure:: congestion/figures/Slide10.png
+.. figure:: congestion/figures/path-len.png
    :width: 550px
    :align: center
 

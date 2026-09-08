@@ -49,7 +49,7 @@ window size only results in packets taking up buffer space at the
 bottleneck router (bottom graph).
 
 .. _fig-trace3:
-.. figure:: congestion/figures/f06-18-9780123850591.png
+.. figure:: congestion/figures/f06-18.png
    :width: 600px
    :align: center
 
@@ -126,7 +126,7 @@ connection is in danger of not utilizing the available bandwidth. The
 between :math:`\alpha` and :math:`\beta` extra bytes in the network.
 
 .. _fig-vegas:
-.. figure:: congestion/figures/f06-19-9780123850591.png
+.. figure:: congestion/figures/f06-19.png
    :width: 600px
    :align: center
 
@@ -241,7 +241,7 @@ than points) for values of ``CongestionWindow`` due to transient
 congestion or noise in the measurements.
 
 .. _fig-nv:
-.. figure:: congestion/figures/Slide4.png
+.. figure:: congestion/figures/nv.png
    :width: 500px
    :align: center
 
@@ -280,7 +280,7 @@ observed bottleneck bandwidth, as calculated over some time interval,
 as their main control signals.
 
 .. _fig-bbr:
-.. figure:: congestion/figures/Slide5.png
+.. figure:: congestion/figures/bbr.png
    :width: 500px
    :align: center
 
@@ -342,7 +342,7 @@ bandwidth. If necessary, the estimates are updated, and the sending
 rate and ``CongestionWindow`` are updated accordingly.
 
 .. _fig-bbrstate:
-.. figure:: congestion/figures/Slide6.png
+.. figure:: congestion/figures/bbrstate.png
    :width: 150px
    :align: center
 

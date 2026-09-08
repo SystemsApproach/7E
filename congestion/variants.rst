@@ -162,7 +162,7 @@ the algorithm should forget its previous state so that it can rapidly
 find a new equilibrium.
 
 .. _fig-onramp:
-.. figure:: congestion/figures/Slide13.png
+.. figure:: congestion/figures/onramp.png
    :width: 350px
    :align: center
 
@@ -236,7 +236,7 @@ interference; and (3) the number of devices being served by a given
 base station fluctuates as devices move from one cell to another.
 
 .. _fig-mobile:
-.. figure:: congestion/figures/Slide12.png
+.. figure:: congestion/figures/mobile.png
    :width: 500px
    :align: center
 

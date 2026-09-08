@@ -106,7 +106,7 @@ to be reduced to 4, then 2, and finally to 1 packet.
 packet, which we know from Chapter |TCP| to be the ``MSS``.
 
 .. _fig-linear:
-.. figure:: congestion/figures/f06-08-9780123850591.png
+.. figure:: congestion/figures/f06-08.png
    :width: 200px
    :align: center
 
@@ -139,7 +139,7 @@ time an ACK is received. Assuming that each ACK acknowledges the receipt
 of ``MSS`` bytes, then that fraction is ``MSS/CongestionWindow``.
 
 .. _fig-sawtooth:
-.. figure:: congestion/figures/f06-09-9780123850591.png
+.. figure:: congestion/figures/f06-09.png
    :width: 600px
    :align: center
 
@@ -197,7 +197,7 @@ growth of additive increase illustrated in :numref:`Figure %s
 <fig-linear>`.
 
 .. _fig-exponential:
-.. figure:: congestion/figures/f06-10-9780123850591.png
+.. figure:: congestion/figures/f06-10.png
    :width: 200px
    :align: center
 
@@ -288,7 +288,7 @@ decrease. This trace was taken from an actual TCP connection and shows
 the current value of ``CongestionWindow``\ —the colored line—over time.
 
 .. _fig-trace1:
-.. figure:: congestion/figures/f06-11-9780123850591.png
+.. figure:: congestion/figures/f06-11.png
    :width: 600px
    :align: center
 
@@ -424,7 +424,7 @@ assumption here, which is well tested in practice, is that
 out-of-order packets are less common by far than lost packets.\ [#]_
 
 .. _fig-tcp-fast:
-.. figure:: congestion/figures/f06-12-9780123850591.png
+.. figure:: congestion/figures/f06-12.png
    :width: 300px
    :align: center
 
@@ -452,7 +452,7 @@ receiver then sends a cumulative ACK for everything up to and
 including packet 6 back to the source.
 
 .. _fig-trace2:
-.. figure:: congestion/figures/f06-13-9780123850591.png
+.. figure:: congestion/figures/f06-13.png
    :width: 600px
    :align: center
 
@@ -668,7 +668,7 @@ TCP, in which a flow with a short RTT holds a definite advantage in
 terms of the share of a bottleneck link it will obtain.
 
 .. _fig-cubic:
-.. figure:: congestion/figures/Slide9.png
+.. figure:: congestion/figures/cubic.png
    :width: 500px
    :align: center
 
@@ -707,9 +707,9 @@ function to being convex (whereas standard TCP’s additive function is
 only convex).
 
 Interestingly, CUBIC is either more aggressive or less aggressive than
-earlier variants of TCP, depending on the conditions. Short RTT TCP
-Reno flows tend to be effective in acquiring bottleneck bandwidth, so
-CUBIC includes a "TCP-friendly" mode where it aims to be just as
+earlier variants of TCP, depending on the conditions. Short RTT
+TCPReno flows tend to be effective in acquiring bottleneck bandwidth,
+so CUBIC includes a "TCP-friendly" mode where it aims to be just as
 aggressive as TCP Reno. But in other circumstances—notably high
 bandwidth-delay networks—CUBIC will be able to obtain a bigger share
 of the bottleneck bandwidth because CUBIC is increasing its window
