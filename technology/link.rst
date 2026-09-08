@@ -490,7 +490,7 @@ put an XOR gate in front of bit :math:`n` if there is a term
 front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
 
 .. _fig-crc-hard:
-.. figure:: technology/figures/f02-16-9780123850591.png
+.. figure:: technology/figures/f02-16.png
    :width: 350px
    :align: center
 
