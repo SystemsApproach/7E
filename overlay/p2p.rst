@@ -75,7 +75,7 @@ begin downloading pieces from multiple peers, not just the original
 peer. See :numref:`Figure %s <fig-bitTorrentSwarm>`.
 
 .. _fig-bitTorrentSwarm:
-.. figure:: overlay/figures/f09-29-9780123850591.png
+.. figure:: overlay/figures/f09-29.png
    :width: 500px
    :align: center
 

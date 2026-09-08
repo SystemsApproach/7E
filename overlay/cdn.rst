@@ -78,7 +78,7 @@ computation (e.g., a database query).\ [#]_
        We focus here on static content.
 
 .. _fig-cdn:
-.. figure:: overlay/figures/f09-30-9780123850591.png
+.. figure:: overlay/figures/f09-30.png
    :width: 600px
    :align: center
 
@@ -195,7 +195,7 @@ a *consistent hashing* algorithm.
 
 
 .. _fig-unitcircle:
-.. figure:: overlay/figures/f09-25-9780123850591.png
+.. figure:: overlay/figures/f09-25.png
    :width: 300px
    :align: center
 

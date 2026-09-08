@@ -24,7 +24,7 @@ implemented as logical links (e.g., tunnels) through the underlying
 network.
 
 .. _fig-overlay-net:
-.. figure:: overlay/figures/f09-19-9780123850591.png
+.. figure:: overlay/figures/f09-19.png
    :width: 300px
    :align: center
 
