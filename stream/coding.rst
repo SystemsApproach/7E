@@ -355,7 +355,7 @@ using a Huffman code. (RLE and Huffman codes are two examples of
 *lossless* compression algorithms; see the sidebar for a summary.)
 
 .. _fig-zigzag:
-.. figure:: stream/figures/f07-13-9780123850591.png
+.. figure:: stream/figures/f07-13.png
    :width: 300px
    :align: center
 
@@ -443,7 +443,7 @@ previous I frame, while a B frame gives an interpolation between the
 previous and subsequent I or P frames.
 
 .. _fig-mpeg:
-.. figure:: stream/figures/f07-14-9780123850591.png
+.. figure:: stream/figures/f07-14.png
    :width: 500px
    :align: center
 
@@ -491,7 +491,7 @@ relationship between a frame and the corresponding macroblocks is given
 in :numref:`Figure %s <fig-macroblock>`.
 
 .. _fig-macroblock:
-.. figure:: stream/figures/f07-15-9780123850591.png
+.. figure:: stream/figures/f07-15.png
    :width: 500px
    :align: center
 

@@ -32,7 +32,7 @@ than recreate port numbers in RTP, RTP outsources the demultiplexing
 function to UDP.
 
 .. _fig-vat-stack:
-.. figure:: stream/figures/f05-22-9780123850591.png
+.. figure:: stream/figures/f05-22.png
    :width: 300px
    :align: center
 
@@ -223,7 +223,7 @@ to a single application would be more efficiently carried in the RTP
 payload for that application only.
 
 .. _fig-rtp-hdr:
-.. figure:: stream/figures/f05-23-9780123850591.png
+.. figure:: stream/figures/f05-23.png
    :width: 500px
    :align: center
 
@@ -256,7 +256,7 @@ the header short); in the common case of no padding, the length is
 deduced from the lower-layer protocol.
 
 .. _fig-rtp-pad:
-.. figure:: stream/figures/f05-24-9780123850591.png
+.. figure:: stream/figures/f05-24.png
    :width: 600px
    :align: center
 

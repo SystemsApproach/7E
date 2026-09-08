@@ -138,7 +138,7 @@ organization of codes is similar to that for HTTP. In :numref:`Figure %s
 <fig-sipeg>` we can see a sequence of SIP messages and responses.
 
 .. _fig-sipeg:
-.. figure:: stream/figures/f09-09-9780123850591.png
+.. figure:: stream/figures/f09-09.png
    :width: 650px
    :align: center
 
