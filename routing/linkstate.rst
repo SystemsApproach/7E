@@ -94,7 +94,7 @@ then turn around and do the same thing, the most recent copy of the LSP
 eventually reaches all nodes.
 
 .. _fig-flood:
-.. figure:: routing/figures/f03-32-9780123850591.png
+.. figure:: routing/figures/f03-32.png
    :width: 500px
    :align: center
 
@@ -236,7 +236,7 @@ The algorithm works as follows:
    ``Confirmed`` list, and return to step 2.
 
 .. _fig-lsroute:
-.. figure:: routing/figures/f03-33-9780123850591.png
+.. figure:: routing/figures/f03-33.png
    :width: 350px
    :align: center
 
