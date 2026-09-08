@@ -34,7 +34,7 @@ order (i.e., there are no missing bytes earlier in the stream) but
 that the application process has not yet had the chance to read.
 
 .. _fig-tcp-fc:
-.. figure:: reliable/figures/f05-08-9780123850591.png
+.. figure:: reliable/figures/f05-08.png
    :width: 500px
    :align: center
 

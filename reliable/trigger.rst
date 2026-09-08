@@ -66,7 +66,7 @@ implementations of TCP regularly found themselves filling the network
 with tiny segments.
 
 .. _fig-sillywindow:
-.. figure:: reliable/figures/f05-09-9780123850591.png
+.. figure:: reliable/figures/f05-09.png
    :width: 500px
    :align: center
 

@@ -18,7 +18,7 @@ in general, a single TCP connection supports byte streams flowing in
 both directions.
 
 .. _fig-tcp-stream:
-.. figure:: reliable/figures/f05-03-9780123850591.png
+.. figure:: reliable/figures/f05-03.png
    :width: 500px
    :align: center
 
@@ -69,7 +69,7 @@ opposite direction, as illustrated in :numref:`Figure %s
 later in this chapter.
 
 .. _fig-tcp-flow:
-.. figure:: reliable/figures/f05-05-9780123850591.png
+.. figure:: reliable/figures/f05-05.png
    :width: 500px
    :align: center
 

@@ -33,7 +33,7 @@ the exchange of three messages between the client and the server, as
 illustrated by the timeline given in :numref:`Figure %s <fig-twh-timeline>`.
 
 .. _fig-twh-timeline:
-.. figure:: reliable/figures/f05-06-9780123850591.png
+.. figure:: reliable/figures/f05-06.png
    :width: 400px
    :align: center
 
@@ -83,7 +83,7 @@ open—that is, the operation of the sliding window algorithm—is hidden in
 the ESTABLISHED state.
 
 .. _fig-tcp-std:
-.. figure:: reliable/figures/f05-07-9780123850591.png
+.. figure:: reliable/figures/f05-07.png
    :width: 600px
    :align: center
 

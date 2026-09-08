@@ -81,7 +81,7 @@ second transmission but it was actually for the first, then the
 ``SampleRTT`` is too small (b).
 
 .. _fig-tcp-karn:
-.. figure:: reliable/figures/f05-10-9780123850591.png
+.. figure:: reliable/figures/f05-10.png
    :width: 500px
    :align: center
 

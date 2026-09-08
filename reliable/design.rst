@@ -36,7 +36,7 @@ retransmits the original packet. This strategy is commonly known as
 the *stop-and-wait* algorithm.
 
 .. _fig-ack-timeout:
-.. figure:: reliable/figures/f02-17-9780123850591.png
+.. figure:: reliable/figures/f02-17.png
    :width: 500px
    :align: center
 
