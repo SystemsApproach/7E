@@ -366,7 +366,7 @@ have permission to perform that operation) and ``BAD`` (command is ill
 formed).
 
 .. _fig-imap:
-.. figure:: applications/figures/f09-02-9780123850591.png
+.. figure:: applications/figures/f09-02.png
    :width: 400px
    :align: center
 

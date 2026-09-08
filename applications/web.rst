@@ -349,7 +349,7 @@ in the case where the connection is already open (presumably due to
 some prior access of the same server).
 
 .. _fig-persist:
-.. figure:: applications/figures/f09-05-9780123850591.png
+.. figure:: applications/figures/f09-05.png
    :width: 500px
    :align: center
 
