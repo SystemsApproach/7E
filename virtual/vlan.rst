@@ -19,7 +19,7 @@ they can be used to provide isolation between different departments or
 different types of application in a datacenter.
 
 .. _fig-vlan:
-.. figure:: virtual/figures/Slide7.png
+.. figure:: virtual/figures/vlan.png
    :width: 350px
    :align: center
 
@@ -80,7 +80,7 @@ frames. With 12 bits of VLAN ID, it is possible to map :math:`2^{12} = 4096` vir
 networks onto a single physical LAN.
 
 .. _fig-vlan-tag:
-.. figure:: virtual/figures/Slide4.png
+.. figure:: virtual/figures/vlan-hdr.png
    :width: 500px
    :align: center
 
@@ -89,7 +89,7 @@ networks onto a single physical LAN.
 
 VLANs are, in a sense, the precursor to a more fully fledged form of
 network virtualization that we return to in Section |Virt|.4. The use
-of a *tag* to identify which particular virtual network a packet
+of a *tag* to identify the particular virtual network to which a packet
 belongs is a fundamental building block of a network virtualization
 solution, which we will see used in several different settings in the
 coming sections.
