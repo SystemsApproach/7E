@@ -123,8 +123,8 @@ autonomous systems. The most common relationships are illustrated in
 :numref:`Figure %s <fig-as-rels>`; they are as follows:
 
 .. _fig-as-rels:
-.. figure:: policy/figures/f04-08-9780123850591.png
-   :width: 500px
+.. figure:: policy/figures/as-rels.png
+   :width: 450px
    :align: center
 
    Common AS relationships.
@@ -255,7 +255,7 @@ information. By combining these two sets of information, each router in
 the AS is able to determine the appropriate next hop for all prefixes.
 
 .. _fig-ibgp:
-.. figure:: policy/figures/f04-09-9780123850591.png
+.. figure:: policy/figures/ibgp.png
    :width: 500px
    :align: center
 
