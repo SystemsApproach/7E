@@ -18,7 +18,7 @@ and computations, and so on than any one user could afford individually.
 
 Quite often, attributes like *decentralized* and *self-organizing* are
 mentioned when discussing peer-to-peer networks, meaning that individual
-nodes organize themselves into a network without any centralized
+nodes organize themselves into a network without any central
 coordination. If you think about it, terms like these could be used to
 describe the Internet itself. Ironically, Napster was not a
 true peer-to-peer system by this definition since it depended on a
@@ -26,13 +26,13 @@ central registry of known files, and users had to search this directory
 to find what machine offered a particular file. It was only the last
 step—actually downloading the file—that took place between machines that
 belong to two users, but this is little more than a traditional
-client/server transaction. The only difference is that the server is
+client-server transaction. The only difference is that the server is
 owned by some other Internet user rather than a large corporation.
 
 So we are back to the original question: What’s interesting about
 peer-to-peer networks? One answer is that both the process of locating
 an object of interest and the process of downloading that object onto
-your local machine happen without your having to contact a centralized
+your local machine happen without your having to contact a central
 authority, and at the same time the system is able to scale to millions
 of nodes. A peer-to-peer system that can accomplish these two tasks in a
 decentralized manner turns out to be an overlay network, where the nodes
@@ -46,7 +46,7 @@ BitTorrent is a file-sharing protocol devised by Bram Cohen. It is
 based on replicating the file or, rather, replicating segments of the
 file, which are called *pieces*. Any particular piece can usually be
 downloaded from multiple peers, even if only one peer has the entire
-file. The primary benefit of BitTorrent’s replication is avoiding the
+file. The primary benefit of BitTorrent’s replication is to avoid the
 bottleneck of having only one source for a file. This is particularly
 useful when you consider that any given computer has a limited speed
 at which it can serve files over its uplink to the Internet, often

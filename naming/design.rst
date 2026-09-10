@@ -94,10 +94,10 @@ name.
 
    *The Shoch paper cited in the introduction to this chapter motivates
    the naming problem with a story from Lewis Carroll's novel "Through
-   the Looking Glass", in which the White Knight explains the
+   the Looking-Glass", in which the White Knight explains the
    important differences between what a song* **is**, *what it* **is
    called**, *what it* **is named**, *and what* **the name is called**.
-   *Carroll was a pen name for Oxford Mathematician Charles Dodgson,
+   *Carroll was a pen name for Oxford mathematician Charles Dodgson,
    and so he surely understood the nuances of that statement. For our
    purposes, looking at protocols and layers of abstraction through the
    "naming lens" is a lesson in being precise about the language that
@@ -116,7 +116,7 @@ name.
    important.*
 
 Looking more closely at uniqueness, we have to decide how we want
-interpret "get back the same value". A name is considered unique if it
+to interpret "get back the same value". A name is considered unique if it
 always resolves in the same way, independent of who asks, but the
 returned value may be multi-faceted. One common example is that a name
 resolves to an equivalent set of values; that is, the name space
@@ -151,7 +151,7 @@ Section |Fed|.2.5. The resolution process for domain names is
 described in the next section, where, as we'll see, the name resolver
 is a network application, just like those described in Chapter |Apps|.
 The domain name resolver is used by all other applications, and those
-applications in turn, have their own naming systems. For example, URLs
+applications in turn have their own naming systems. For example, URLs
 and Email addresses listed at the beginning of this section are
 application-level names.
 

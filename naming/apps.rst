@@ -127,7 +127,7 @@ abstraction: a set of name/value bindings.
 
 One might ask then, how is the root context established? For URIs, the
 top-level schemes ``https`` and ``urn`` (along with ``http``, ``ftp``,
-and ``mailto``, ``doi``, among others) are approved by the IANA, the
+``mailto``, ``doi``, among others) are approved by the IANA, the
 *Internet Assigned Numbers Authority*. This is the same organization
 that assigns well-known ports (e.g., ``53`` for DNS), IP protocol
 numbers (e.g., ``6`` for TCP), top-level domains (e.g., ``.com`` and
@@ -177,7 +177,7 @@ every published book. The number provides commercial value (you know
 exactly what you're buying and selling), legal value (you know exactly
 what content has been copyrighted), and consumer value (you can have a
 conversation with another user and know you are talking about the
-content.).
+content).
 
 When it became clear that the Internet had the potential to support
 arbitrary digital objects, it followed that the Internet also needed
@@ -212,8 +212,8 @@ is the document's publication date, which is likely fixed, but the
 handle-to-URL binding has to be kept up-to-date should the object move.
 
 All of this results in the following being legitimate URIs for the
-example digital object we've been using as a running example in
-this section: RFC 3986:
+example digital object we've been using throughout this section,
+RFC 3986:
 
  * ``urn:doi:10.17487/RFC3986`` — a URN, with ``urn`` as scheme and ``doi`` namespace
  * ``doi:10.17487/RFC3986`` — a URN, with ``doi`` as an IANA-sanctioned scheme
@@ -267,7 +267,7 @@ name/value pair for each object, the naming system maintains a set of
 *attributes* for each object. Each attribute is a *type/value* pair,
 where any of the attributes in the set can be used as a lookup key to
 discover the other attributes. When one of the attributes is
-guaranteed to be unique, as with the case with the object's handle,
+guaranteed to be unique, as is the case with the object's handle,
 you can learn the rest of the attributes by referencing the object
 with its handle. But you can also use other attributes—or a set of
 them—to learn an object's handle. In such cases, the naming system
@@ -279,17 +279,17 @@ may know that you need one that supports color and prints in
 full-duplex mode. You might also prefer that it be in your building,
 but you are willing to walk across campus if necessary. In many
 enterprises, you would use LDAP (Lightweight Directory Access
-Protocol), to learn your options. LDAP is a popular attribute-based
+Protocol) to learn your options. LDAP is a popular attribute-based
 naming system used to learn information about both computing resources
 (e.g., servers, printers), and people (e.g., their office, phone number,
 email address, department).
 
 LDAP is best understood by example, so we'll use our hypothetical
-search for a printer as the basis for concrete query using
+search for a printer as the basis for a concrete query using
 ``ldapsearch``, a client command available on Linux. The following
 gives an example invocation, where the first line gives three command
 options: ``-h`` says which server to contact, ``-x`` says to use
-simple authentication and ``-b`` gives the base *distinguished name*
+simple authentication, and ``-b`` gives the base *distinguished name*
 for the search (an important concept we explain below). The second
 line gives the actual query; the ``&`` indicates that we want printers
 that match the intersection of the three attributes; note the ``*``
@@ -367,7 +367,7 @@ id, home page URL, and so on.
 
 Finally, in describing LDAP by example, we have glossed over a lot of
 detail, most notably the full range of standardized attribute types
-(beyond ``dc``, ``dn`` and ``ou``) and the over-the-wire protocol
+(beyond ``dc``, ``dn``, and ``ou``) and the over-the-wire protocol
 specification. These details far exceed the conceptual model, which is
 quite simple. The details are defined in a suite of ten RFCs, of which we
 recommend RFC 4510 as the starting point.
