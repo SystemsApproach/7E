@@ -37,7 +37,7 @@ function. The transformation represented by an encryption function and
 its corresponding decryption function is called a *cipher*.
 
 .. _fig-genericCrypto:
-.. figure:: secure/figures/f08-01-9780123850591.png
+.. figure:: secure/figures/genericCrypto.png
    :width: 500px
    :align: center
 
@@ -286,7 +286,7 @@ private key necessary to decrypt such a message. This scenario is depicted in
 :numref:`Figure %s <fig-public>`.
 
 .. _fig-public:
-.. figure:: secure/figures/f08-03-9780123850591.png
+.. figure:: secure/figures/public.png
    :width: 500px
    :align: center
 
@@ -338,7 +338,7 @@ ciphers, and the need for reasonably frequent changing of encryption
 keys as described above.
 
 .. _fig-pksign:
-.. figure:: secure/figures/f08-04-9780123850591.png
+.. figure:: secure/figures/pksign.png
    :width: 500px
    :align: center
 
