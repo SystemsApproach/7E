@@ -3,10 +3,10 @@
 
 .. include:: chapters.rst
 
-Chapter |Naming|:  Naming Systems
+Chapter |Naming|:  Naming
 ========================================
 
-Naming systems are an essential component of any computer system,
+Naming is an essential function of any computer system,
 since being able to name an object is a requirement for being able to
 access or share it. The Internet provides multiple naming schemes—host
 names of the form ``cicada.cs.princeton.edu`` and resource locators
