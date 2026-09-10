@@ -32,7 +32,7 @@ a network firewall is really a sort of packet filter that makes
 decisions about exactly what traffic is allowed to pass through it.
 
 .. _fig-firewall:
-.. figure:: virtual/figures/f08-20-9780123850591.png
+.. figure:: virtual/figures/corp-fw.png
    :width: 500px
    :align: center
 

@@ -117,7 +117,7 @@ appropriate virtual switches to create the virtual network abstraction
 that is required. Let’s look more closely at that abstraction.
 
 .. _fig-basic-virt:
-.. figure:: virtual/figures/Slide44.png
+.. figure:: virtual/figures/nv-control.png
     :width: 600px
     :align: center
 
@@ -138,7 +138,7 @@ more closely at network virtualization overlay encapsulations in
 Section |Virt|.4.2.
 
 .. _fig-encaps-nv:
-.. figure:: virtual/figures/Slide45.png
+.. figure:: virtual/figures/vxlan.png
     :width: 600px
     :align: center
 
@@ -233,7 +233,7 @@ receives API requests and stores them in a desired state database as
 the management plane.
 
 .. _fig-three-planes:
-.. figure:: virtual/figures/Slide46.png
+.. figure:: virtual/figures/nv-system.png
     :width: 450px
     :align: center
 
@@ -315,7 +315,7 @@ the network is set up in such a way that traffic must pass through the
 firewall to get from one part of the network to another.
 
 .. _fig-standard-firewall:
-.. figure:: virtual/figures/Slide47.png
+.. figure:: virtual/figures/fw-central.png
     :width: 600px
     :align: center
 
@@ -336,7 +336,7 @@ potential to become a bottleneck, as all traffic requiring treatment
 must pass up to that centralized device.
 
 .. _fig-dist-firewall:
-.. figure:: virtual/figures/Slide48.png
+.. figure:: virtual/figures/fw-dist.png
     :width: 600px
     :align: center
 
@@ -416,7 +416,7 @@ GENEVE included an options scheme that could be efficiently processed
 extensibility.
 
 .. _fig-geneve:
-.. figure:: virtual/figures/Slide49.png
+.. figure:: virtual/figures/geneve.png
     :width: 550px
     :align: center
 
@@ -463,7 +463,7 @@ requirements of network virtualization while also providing high
 performance.
 
 .. _fig-ovs-blocks:
-.. figure:: virtual/figures/Slide50.png
+.. figure:: virtual/figures/ovsdb.png
     :width: 500px
     :align: center
 
@@ -518,7 +518,7 @@ management planes. The high level architecture of OVN is shown in
 :numref:`Figure %s <fig-ovn-arch>`.
 
 .. _fig-ovn-arch:
-.. figure:: virtual/figures/Slide51.png
+.. figure:: virtual/figures/ovsdb-detail.png
     :width: 350px
     :align: center
 
@@ -566,7 +566,7 @@ Database*. We can see how logical flows work with an example shown in
 
 
 .. _fig-ovn-tables:
-.. figure:: virtual/figures/Slide52.png
+.. figure:: virtual/figures/ovn-tables.png
     :width: 700px
     :align: center
 
