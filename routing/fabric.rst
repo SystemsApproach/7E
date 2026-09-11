@@ -187,7 +187,8 @@ as needed.
 :numref:`Figure %s <fig-sr>` illustrates how SR works using a simple
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
-subnet 10.0.1/24 and the servers connected to Leaf 2 are on subnet
+are on a network with the prefix 10.0.1/24 and the servers connected
+to Leaf 2 are on a network with the prefix
 10.0.2/24. (Recall from Section |Intro|.3.4 that the ``/24`` notation
 implies we care about matching just the 24-bit prefix of the IP
 address; we'll see why just the prefix matters in Chapter |Fed|.) We
@@ -207,7 +208,7 @@ as being assigned to the rack served by the leaf pair.
 When Host 1 sends a packet with destination address 10.0.2.1, it is by
 default forwarded to the server’s ToR/leaf switch. Leaf 1 matches the
 destination IP address, learns this packet needs to cross the fabric
-and emerge at Leaf 2 to reach subnet 10.0.2/24, and so pushes the
+and emerge at Leaf 2 to reach network 10.0.2/24, and so pushes the
 label 102 onto the packet. Because of ECMP, Leaf 1 can forward the
 resulting packet to either spine, at which point that switch matches
 the label 102, pops the label off the header, and forwards it to
