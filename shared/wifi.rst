@@ -160,13 +160,13 @@ with each AP typically on a different channel from its neighbors.
 
    Access points connected to a distribution system.
 
-The details of the distribution system are not important to this
-discussion—it could be a switched Ethernet, for example. The only
-expectation is that the distribution network operates at the link
-layer (L2), which is the same as the wireless component. This makes it
-possible to forward packets across the distribution network without
-depending on any higher-level protocols, such as IP; the learning
-bridge mechanism described in Section 4.2 is sufficient.
+In practice, the distribution system is Ethernet, the main requirement
+being that it operates at the link layer (L2); i.e., the same as the
+wireless component. This makes it possible to forward packets across
+the distribution network without depending on any higher-level
+protocols, such as IP. The learning bridge mechanism described in
+Section 4.2 is sufficient, and in fact, the access points run the same
+learning algorithm as Ethernet swiches.
 
 Although two nodes can directly communicate if they are within range
 of each other, the idea behind this configuration is that each node
