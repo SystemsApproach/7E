@@ -5,9 +5,7 @@
 
 # Makefile building book with Sphinx
 
-# use bash for pushd/popd, and to fail quickly. virtualenv's activate
-# has undefined variables, so no -u
-SHELL = bash -eu -o pipefail
+SHELL = bash -euo pipefail
 
 # You can set these variables from the command line.
 SPHINXOPTS   ?= 
