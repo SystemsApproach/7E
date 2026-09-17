@@ -35,7 +35,7 @@ test: lint spelling
 # lint all .rst files
 lint: $(VIRTUALENV)
 	source ./$</bin/activate ;\
-  doc8 --ignore-path $< --ignore-path _build --max-line-length 120 .
+	doc8 --ignore-path $< --ignore-path "$(BUILDDIR)" --max-line-length 120 .
 
 # clean up
 clean:
