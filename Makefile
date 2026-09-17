@@ -21,7 +21,7 @@ help: $(VIRTUALENV)
 	source ./$(VIRTUALENV)/bin/activate ;\
   $(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help lint reload Makefile test
+.PHONY: help lint Makefile test clean clean-all
 
 # Create the virtualenv with all the tools installed
 $(VIRTUALENV):
