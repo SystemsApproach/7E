@@ -50,7 +50,7 @@ request message.
 
 Certainly, there is nothing keeping a pair of application processes
 from implementing a message transaction on top of a TCP byte stream;
-we saw multiple examples in Chapter 2. But we also saw inefficiencies
+we saw multiple examples in Chapter |Apps|. But we also saw inefficiencies
 in having to first establish a connection before being able to use it
 for even the most trivial request/reply message exchange. Even
 ignoring the RTT overhead, TCP is a complex protocol, and the time it
@@ -65,10 +65,10 @@ and (2) the implementation is simpler, resulting in better
 performance.
 
 The second advantage is the main driver of the approaches described in
-this chapter, both of which focus on reducing latency for datacenter
-workloads. This focus on low-latency transactions is so strong that
-for much or their decades-long history, RPC and RDMA were "niche"
-technologies that would not interoperable with the larger Internet.
+this chapter, both of which focus on reducing latency.
+This focus on low-latency transactions is so strong that
+for much of their decades-long history, RPC and RDMA were "niche"
+technologies that were not interoperable with the larger Internet.
 Today, however, there is a convergence of both RPC and RDMA with the
 Internet, with the goal of supporting both high-performance and the
 ubiquity of Internet connectivity.

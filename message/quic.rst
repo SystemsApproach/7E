@@ -57,7 +57,7 @@ rendering could begin before they have all arrived. Similar arguments
 apply for RPC, where requests that can be handled quickly should not
 be delayed waiting for the responses to prior requests. While one
 workaround for this would be to open multiple TCP connections in
-parallel, this approach (which was used in the early days of the web)
+parallel, this approach (which was used in the early days of the Web)
 has its own set of drawbacks, notably on congestion
 control. Specifically, each connection runs its own congestion control
 loop, so the experience of congestion on one connection is not

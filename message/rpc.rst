@@ -10,7 +10,7 @@ on the semantics of a local procedure call—the application program
 makes a call into a procedure without regard for whether it is local
 or remote and blocks until the call returns. An application developer
 can be largely unaware of whether the procedure is local or remote,
-simplifying his task considerably. This is why RPC is such a
+simplifying their task considerably. This is why RPC is such a
 compelling abstraction.
 
 A complete RPC mechanism actually involves two major components:
@@ -124,7 +124,7 @@ cloud services in their datacenters.
    convenience and taste, but it should be done knowing that
    both design patterns can be made to work.*
 
-Although it was developed in Google, gRPC does not stand for Google RPC. The
+Although it was developed at Google, gRPC does not stand for Google RPC. The
 “g” stands for something different in each release. For version 1.10
 it stood for “glamorous” and for 1.18 it stood for “goose”. According
 to the official gRPC FAQ, it is now a recursive acronym: gRPC means
@@ -135,10 +135,10 @@ experience within Google using RPC to build scalable cloud services.
 Before getting into the details, there is a major difference between
 gRPC and other RPC mechanisms—such as SunRPC—that came before it.
 The difference is that gRPC was explicitly designed for cloud services
-rather than the simpler client/server paradigm that preceded it. As we
+rather than the simpler client-server paradigm that preceded it. As we
 introduced in Chapter |Apps|, this results in an extra level of indirection.
 
-In the client/server world, the client invokes a method on a specific
+In the client-server world, the client invokes a method on a specific
 server process running on a specific server machine. One server
 process is presumed to be enough to serve calls from all the client
 processes that might call it. With cloud services, the client invokes
@@ -212,7 +212,7 @@ Internet had started with an RPC mechanism as ubiquitous as TCP—see
 the sidebar on VTMP in the previous section for an example. HTTP then
 might have been implemented on top of that RPC layer. Google might
 have spent their time improving the RPC protocol rather than inventing
-one of their own in gRPC. What happened instead is that the web became
+one of their own in gRPC. What happened instead is that the Web became
 the Internet’s killer app, which meant that its application protocol
 (HTTP) became universally supported by the rest of the Internet’s
 infrastructure: Firewalls, Load Balancers, Encryption, Authentication,

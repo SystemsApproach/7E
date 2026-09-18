@@ -51,7 +51,7 @@ would implement reliability using acknowledgments and timeouts,
 similar to TCP. It would also likely be optimized to have the response
 message implicitly acknowledge receipt of the request message (rather
 than send a separate ACK). One complication is that the sender does
-not know long it will take the receiver to produce the response; it
+not know how long it will take the receiver to produce the response; it
 may be asking the receiver to execute a time-consuming
 computation. This suggests a "keep alive" mechanism similar to the one
 implemented by TCP may be necessary.
