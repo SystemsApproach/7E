@@ -102,7 +102,7 @@ Recall that a simple Diffie-Hellman key exchange is not secure against
 MITM attacks, and the remaining steps in the handshake protect against
 this. From the first two messages, the server and the client are able
 to agree on a shared secret using one of several Diffie-Hellman
-algorithms. A choice of groups or curves were provided in the client
+algorithms. A choice of groups or curves was provided in the client
 hello, and one of them has been selected by the server. Similarly, one
 of the offered cipher suites has been selected. With Diffie-Hellman
 allowing them to obtain a shared secret, all subsequent messages

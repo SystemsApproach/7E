@@ -74,7 +74,7 @@ deprecated.
 
 One of the best ways to know that a cipher is secure is to use
 it for a long time—the longer it goes unbroken, the better the chance
-that is is secure. As with security in general, proving that a
+that it is secure. As with security in general, proving that a
 cryptographic algorithm cannot be broken is a negative goal,
 and thus hard to do with complete confidence.  Sometimes we may be
 able to prove that breaking a cipher is as hard as solving some
@@ -95,8 +95,8 @@ cipher, for reasons discussed below. It also limits the damage done if
 the code is broken.
 
 When a potential attacker receives a
-piece of ciphertext, he may have more information at his disposal than
-just the ciphertext itself. For example, he may know that the
+piece of ciphertext, they may have more information at their disposal than
+just the ciphertext itself. For example, they may know that the
 plaintext was written in English, which means that the letter *e*
 occurs more often in the plaintext that any other letter; the
 frequency of many other letters and common letter combinations can
@@ -190,7 +190,7 @@ Block ciphers imply the padding of messages up to the next block
 boundary, which wastes some network bandwidth, so there is a cost to
 overly large blocks. For this reason most ciphers today have settled
 on 128-bit blocks. Some details on how the birthday attacks were shown
-to be an issue is available at the "Sweet32" website.
+to be an issue are available at the "Sweet32" website.
 
 .. admonition:: Further Reading
 
@@ -455,7 +455,7 @@ however, obtain the plaintext original message and its encrypted digest
 by eavesdropping. The adversary could then (since the hash function is
 public knowledge) compute the digest of the original message and
 generate alternative messages looking for one with the same message
-digest. If she finds one, she could undetectably send the new message
+digest. If they find one, they could undetectably send the new message
 with the old authentication code. Therefore, security requires that the hash
 function have the *one-way* property: it must be computationally
 infeasible for an adversary to find any plaintext message that has the
@@ -500,10 +500,10 @@ of the sender is called a *digital signature* because it provides
 nonrepudiation similar to that of a written signature. The receiver of
 a message with a digital signature can prove to any third party that
 the sender really sent that message, because the third party can use
-the sender’s public key to check for herself. Secret-key encryption of
+the sender’s public key to check for themselves. Secret-key encryption of
 a digest does not have this property because only the two participants
 know the key; furthermore, since both participants know the key, the
-alleged receiver could have created the message herself. Any
+alleged receiver could have created the message themselves. Any
 public-key cipher can be used for digital signatures. NIST has
 produced a series of *Digital Signature Standards* (DSS). The most
 recent standard at the time of writing allows for the use of three

@@ -3,7 +3,7 @@
 
 At the start of this chapter we presented a picture of how TLS has
 been inserted as a layer between the application protocol—HTTP in most
-cases—and TCP, the underlying transport protocol. It not a great
+cases—and TCP, the underlying transport protocol. It is not a great
 surprise that this layering comes with some performance impact. In
 particular, there are quite a few round trip times required to execute
 a simple request such as "fetch this web page". First we need to set
@@ -71,7 +71,7 @@ authenticates itself to the client.
 
 On its own, session resumption as just described may not seem that
 interesting. It avoids the need for another Diffie-Hellman exchange
-but is still requires a round trip time to establish the session. But
+but still requires a round trip time to establish the session. But
 because the new session keys are known to both sides before the first
 handshake message is sent, session resumption opens up the possibility
 of sending "0-RTT data" along with the handshake. 0-RTT data can be

@@ -194,7 +194,7 @@ your private key thus has everything required to impersonate you: valid
 certificates and your private key. To solve this problem, it would be
 nice to be able to revoke the certificates that bind your old,
 compromised key to your identity, so that the impersonator will no
-longer be able to persuade other people that he is you.
+longer be able to persuade other people that they are you.
 
 The basic solution to the problem is simple enough. Each CA can issue a
 *certificate revocation list* (CRL), which is a digitally signed list of
@@ -274,7 +274,7 @@ system. Parameter *p* must be a prime number. The integers
 since :math:`x \bmod p` is the remainder after *x* is divided by *p*,
 and form what mathematicians call a *group* under
 multiplication. Parameter *g* (usually called a generator) must be a
-*primitive root* of *p*: For every number *n* from 1 through *p-1*
+*primitive root* of *p*: for every number *n* from 1 through *p-1*
 there must be some value *k* such that :math:`n = g^k \bmod p`. For
 example, if *p* were the prime number 5 (a real system would use a
 much larger number), then we might choose 2 to be the generator *g*
@@ -331,7 +331,7 @@ Alice and Bob now have :math:`g^{ab} \bmod p` (which is equal to
 
 Any eavesdropper would know *p, g*, and the two public values
 :math:`g^a \bmod p` and :math:`g^b \bmod p`.
-If only the eavesdropper could determine *a* or *b*, she could easily
+If only the eavesdropper could determine *a* or *b*, they could easily
 compute the resulting key. Determining *a* or *b* from that information
 is, however, computationally infeasible for suitably large *p,a,* and
 *b*; it is known as the *discrete logarithm problem*.

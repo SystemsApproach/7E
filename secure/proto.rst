@@ -29,16 +29,16 @@ appropriate length–and to do so in such a way that an attacker has no
 better way of guessing them than a brute force attack. In other words,
 we want the keys and IVs to be as close to random as possible. This is
 a bit harder than it might first appear, because the shared secret
-that is obtained via Diffie Hellman, which is our starting point, is
+that is obtained via Diffie-Hellman, which is our starting point, is
 not itself completely random. The reason for this may not be obvious,
-but the goal of the various Diffie Hellman algorithms is to generate a
+but the goal of the various Diffie-Hellman algorithms is to generate a
 shared secret, not that such secrets be randomly distributed.
 
 There is some fairly serious mathematics underlying HKDF, but the
 basic idea is called "extract and expand". The first step is to
 "extract" the randomness from the shared secret. This is done by
 calculating a HMAC (hash-based message authentication code, as described
-in Chapter 3) over the shared secret. The resulting pseudorandom key
+in Section |TLS|.2.4) over the shared secret. The resulting pseudorandom key
 is input to the next stage, along with an additional source of
 randomness: the hash of everything contained in the initial
 handshake. Note that the handshake messages include two random
