@@ -92,7 +92,7 @@ a B frame, or a P frame.
 
 Packet loss is also a potential indicator of congestion. Since real-time
 multimedia applications do not run over TCP, they also miss
-out on the congestion avoidance features of TCP. Yet, many multimedia
+out on the congestion-avoidance features of TCP. Yet, many multimedia
 applications are capable of responding to congestion—for example, by
 changing the parameters of the coding algorithm to reduce the bandwidth
 consumed. Clearly, to make this work, the receiver needs to notify the

@@ -70,7 +70,7 @@ This focus on low-latency transactions is so strong that
 for much of their decades-long history, RPC and RDMA were "niche"
 technologies that were not interoperable with the larger Internet.
 Today, however, there is a convergence of both RPC and RDMA with the
-Internet, with the goal of supporting both high-performance and the
+Internet, with the goal of supporting both high performance and the
 ubiquity of Internet connectivity.
 
 

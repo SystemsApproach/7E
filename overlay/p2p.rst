@@ -220,7 +220,7 @@ choking algorithms, and devising a good one is an art.
 
 Because BitTorrent traffic can consume a lot of the uplink bandwidth
 on a typical residential Internet connection, it provided inspiration
-for work on congestion control algorithms that are less
+for work on congestion-control algorithms that are less
 aggressive than those of TCP, yielding to competing traffic when delay
 increases. This led to an experimental RFC on "Low Extra Delay
 Background Transport (LEDBAT)" and ongoing research on similar

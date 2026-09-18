@@ -296,7 +296,7 @@ section.
 
 In many respects, QUIC builds on the best practices learned over
 decades of development of TCP congestion control. The default
-congestion control algorithm is TCP NewReno, which we covered in
+congestion-control algorithm is TCP NewReno, which we covered in
 Chapter |CC|. But there are some important differences in the details
 which provide some incremental performance benefits over TCP.
 
@@ -380,7 +380,7 @@ to the sender, although it will usually prioritize the retransmission
 of data that was lost over sending new data, unless the application
 indicates otherwise.
 
-Packet losses also trigger congestion control actions that are very
+Packet losses also trigger congestion-control actions that are very
 similar to those in TCP and the NewReno variant specifically. A QUIC
 connection begins in slow start, moves into recovery phase upon a
 packet loss, then moves into congestion avoidance when a packet sent
