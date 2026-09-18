@@ -20,7 +20,7 @@ delivered; a sequence of messages should be delivered in the same
 order they are sent; and there should be no limit on the size of
 messages. Less obviously, many applications expect support for some
 form of *end-to-end* synchronization between the sending and the
-receiving processes. This might involve something as simple a blocking
+receiving processes. This might involve something as simple as blocking
 the sender if the receiver is not able to keep up with incoming data,
 or as sophisticated as blocking the sender until the receiver has
 responded with a reply.

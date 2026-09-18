@@ -1,7 +1,7 @@
 |TCP|.8 TCP Extensions
 ---------------------------------
 
-We have mentioned at four different points in this chapter that there
+We have mentioned at several points in this chapter that there
 are now extensions to TCP that help to mitigate some problem that TCP
 faced as the underlying network got faster. These extensions are
 designed to have as small an impact on TCP as possible. In particular,
@@ -44,7 +44,7 @@ used in this setting only to protect against wraparound and sequence
 number reuse; it is not treated as part of the sequence number for the
 purpose of ordering or acknowledging data.
 
-The third extension allows TCP to advertise a larger window, thereby
+The second extension allows TCP to advertise a larger window, thereby
 allowing it to fill larger delay × bandwidth pipes that are made
 possible by high-speed networks. This extension involves an option that
 defines a *scaling factor* for the advertised window. That is, rather
@@ -57,7 +57,7 @@ words, the window scaling option specifies how many bits each side
 should left-shift the ``AdvertisedWindow`` field before using its
 contents to compute an effective window.
 
-The fourth extension allows TCP to augment its cumulative acknowledgment
+The third extension allows TCP to augment its cumulative acknowledgment
 with selective acknowledgments of any additional segments that have been
 received but aren’t contiguous with all previously received segments.
 This is the *selective acknowledgment*, or *SACK*, option. When the SACK
@@ -87,14 +87,11 @@ strategy is available to the sender: retransmit just the segments that
 fill the gaps between the segments that have been selectively
 acknowledged.
 
-These extensions, by the way, are not the full story. We’ll see some
-more extensions in the next chapter when we look at how TCP handles
-congestion. The Internet Assigned Numbers Authority (IANA) keeps track
-of all the options that are defined for TCP (and for many other Internet
-protocols).
-
-The definitive reference for TCP is its RFC, which, after decades of
-experimentation and extensions, was fully updated in 2022.
+Note that the Internet Assigned Numbers Authority (IANA) keeps track
+of all the options and extensions defined for TCP (and for many other
+Internet protocols).The definitive reference for TCP is its RFC,
+which, after decades of experimentation and extensions, was fully
+updated in 2022.
 
 
 .. _reading_TCPSTD:

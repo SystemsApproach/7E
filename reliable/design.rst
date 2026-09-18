@@ -20,7 +20,7 @@ easy to justify). That answer is that a byte stream is a simple
 concept, familiar to any programmer who has written code to read or
 write data from a file. That doesn't rule out other possibilities.
 Just like picking the right software tool or programming language for
-a task, a case can be made other abstractions for various use cases.
+a task, a case can be made for other abstractions for various use cases.
 We'll see examples in later chapters. But once we settle on a byte
 stream as a reasonable abstraction, the next set of design issues
 revolve around how to efficiently implement that abstraction on a

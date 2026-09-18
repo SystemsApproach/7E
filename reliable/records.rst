@@ -53,6 +53,6 @@ boundaries without any assistance from TCP. For example, it can send a
 field that indicates the length of a record that is to follow, or it
 can insert its own record boundary markers into the data stream. The
 fact that both HTTP and SMTP are ASCII text based application
-protocols, and so use ``<CTLF>`` as a line delimintors, is no
+protocols, and so use ``<CTLF>`` as a line delimiter, is no
 accident. It is in part how they adapted to TCP offering a byte-stream
 service.

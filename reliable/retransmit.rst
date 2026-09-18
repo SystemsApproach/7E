@@ -21,10 +21,10 @@ needless retransmissions, wasting network resources and potentially
 leading to congestion. Furthermore, as we discuss in the next chapter,
 a false indication of loss can be interpreted as a signal that
 congestion has *already* occurred, which undermines the effectiveness
-of congestion control algorithms.
+of congestion-control algorithms.
 
 
-Given then importance of getting timeouts right, there has been a
+Given the importance of getting timeouts right, there has been a
 wealth of work to make them accurate. We now describe the timeout mechanism and
 how it has evolved over time as the Internet community has gained more
 experience using TCP.
@@ -127,7 +127,7 @@ retransmit a segment.
 
 As noted above, inaccurate timeouts can both induce congestion through
 needless retransmissions, and interfere with the operation of
-congestion control algorithms of the sort described in the next
+congestion-control algorithms of the sort described in the next
 chapter. Also note that there is nothing about the Jacobson/Karels
 timeout computation that is specific to TCP. It could be used by any
 end-to-end protocol.

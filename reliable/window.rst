@@ -299,7 +299,7 @@ receiver is free to not open the window as large as the
 which the receiver has enough buffer space to handle as much data as the
 largest possible ``AdvertisedWindow`` allows.
 
-In this case, it is not just the network bandwidth but the delay x
+In this case, it is not just the network bandwidth but the delay ×
 bandwidth product that dictates how big the ``AdvertisedWindow`` field
 needs to be—the window needs to be opened far enough to allow a full
 delay × bandwidth product’s worth of data to be transmitted. Assuming an
