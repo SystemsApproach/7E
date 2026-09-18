@@ -22,11 +22,11 @@ application-specific overlay.
 
     *We have mentioned IP Multicast and the MBone multiple times in
     this chapter. That they are primarily of historical interest makes
-    for an an interesting case study of how the Internet has evolved.
+    for an interesting case study of how the Internet has evolved.
     IP Multicast is the core feature, and as explained in Section
     16.1, a block of the IPv4 address space was set aside for
     multicast addresses. The idea was that you could assign one of
-    these address to a multicast group, users could request to join
+    these addresses to a multicast group, users could request to join
     that group (technically, they added their host to the group), and
     then any IP packet set to that multicast address would be
     delivered to every host in the group.*
@@ -35,7 +35,7 @@ application-specific overlay.
     forwarding pipelines are able to send an incoming packet to
     multiple outgoing queues.  What proved hard is the control plane,
     that is, propagating "join requests" to those routers that need to
-    know about any particular multicast address. This is a effectively
+    know about any particular multicast address. This is effectively
     a routing problem, and when you take both scale and AS autonomy
     into account, the resulting protocol turned out to be as complex
     as BGP, if not more so.*
@@ -119,7 +119,7 @@ SFUs in a tree structure is shown in :numref:`Figure %s
    :width: 600px
    :align: center
 
-   A mesh of SFUs provide scale and resilience.
+   A mesh of SFUs provides scale and resilience.
 
 As you can see, what we now have is an application-specific
 overlay of SFUs. These devices create a virtual topology on top of the

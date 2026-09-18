@@ -14,7 +14,7 @@ site would be overwhelmed with requests for content.  The first
 content distribution networks (CDNs) started to appear around this
 time to ensure that web content could be delivered efficiently in
 spite of these bottlenecks. Even though everything from server
-hardware to internet access links is dramatically faster today, CDNs
+hardware to Internet access links is dramatically faster today, CDNs
 have become an essential feature of the Internet.
 
 When it comes to downloading web pages there
@@ -50,14 +50,14 @@ global footprints.
 The idea of a CDN is to geographically distribute a collection of
 *server surrogates* that cache pages normally maintained in some set
 of *backend servers*. Thus, rather than having millions of users wait
-forever to contact when a big news story breaks—such a situation is
+forever when a big news story breaks—such a situation is
 known as a *flash crowd*—it is possible to spread this load across
 many servers. Moreover, rather than having to traverse multiple ISPs
 to reach a popular site, if these surrogate servers happen to be
 spread across all the backbone ISPs, then it should be possible to
 reach one without having to cross a peering point. Clearly,
 maintaining thousands of surrogate servers all over the Internet is
-too expensive for most sites that wants to provide better access to
+too expensive for most sites that want to provide better access to
 their web pages. Commercial CDNs provide this service for many sites,
 thereby amortizing the cost across many customers.
 
@@ -113,7 +113,7 @@ possibilities.
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 As described so far, a redirector is just an abstract function, although
-it sounds like what something a router might be asked to do since it
+it sounds like something a router might be asked to do since it
 logically forwards a request message much like a router forwards
 packets. In fact, there are several mechanisms that can be used to
 implement redirection. Note that for the purpose of this discussion we
@@ -144,7 +144,7 @@ short period, such as 20 seconds. This is necessary so clients don’t
 cache results; instead they go back to the DNS server for the most
 recent URL-to-server mapping.
 
-Another possibility is to use the HTTP redirect feature: The client
+Another possibility is to use the HTTP redirect feature: the client
 sends a request message to a server, which responds with a new (better)
 server that the client should contact for the page. Unfortunately,
 server-based redirection incurs an additional round-trip time across the

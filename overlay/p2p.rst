@@ -122,7 +122,7 @@ ID and swarm ID, and the peer replies with its peer ID and
 swarm ID. If the swarm IDs don’t match, or the reply peer ID is not
 what P expects, the connection is aborted.
 
-The resulting BitTorrent connection is symmetric: Each end can
+The resulting BitTorrent connection is symmetric: each end can
 download from the other. Each end begins by sending the other a bitmap
 reporting which pieces it has, so each peer knows the other’s initial
 state. Whenever a downloader (D) finishes downloading another piece,
@@ -210,7 +210,7 @@ implement a peer that tries to download all the pieces while doing as
 little uploading as possible—this is a bad peer. To discourage bad
 behavior, the BitTorrent protocol includes mechanisms that allow peers
 to reward or punish each other. If a peer is misbehaving by not nicely
-uploading to another peer, the second peer can *choke* the bad peer: It
+uploading to another peer, the second peer can *choke* the bad peer: it
 can decide to stop uploading to the bad peer, at least temporarily,
 and send it a message saying so. There is also a message type for
 telling a peer that it has been unchoked. The choking mechanism is

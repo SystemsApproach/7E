@@ -18,7 +18,7 @@ foundational network on top of which new overlays could be built.
 on top of an underlying network. Each node in the overlay processes
 and forwards packets in an application-specific way. Because they run
 arbitrary code, these overlay nodes are usually servers rather than
-switches; these server are often co-located with a switch in the
+switches; these servers are often co-located with a switch in the
 underlying network. The links that connect the overlay nodes are
 implemented as logical links (e.g., tunnels) through the underlying
 network.

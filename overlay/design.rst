@@ -24,7 +24,7 @@ teaches us that incumbents are cautious and change is slow, so much so
 that entrenched technology tends to ossify over time. This results in
 a phenomenon that Clayton Christensen famously called the *Innovator's
 Dilemma*. Fortunately, networking gives us a workaround, with overlays
-being the widely accepted as a way to introduce disruptive
+being widely accepted as a way to introduce disruptive
 technology. A National Academies report made this observation about
 the Internet over two decades ago:
 
@@ -57,7 +57,7 @@ implemented in the same core routers that provide IPv4 service.
 
 In other cases, an overlay is where certain functionality is best
 provided. This raises a second question overlays force us to address:
-what is the optimal *function placement?* That is, a does a particular
+what is the optimal *function placement?* That is, does a particular
 function (capability) belong inside the network or is it best
 delivered over the top? In Chapter |Virt| we saw an example of VPNs
 (which you can think of as providing a "nesting" function) which are,
@@ -83,7 +83,7 @@ function placement question in favor of an overlay.
 
 The first, Content Distribution Networks (CDNs), support a *caching*
 function. The idea is to add a storage capability to the network, and
-unless we're going to connect disks to routers, this seems like a
+unless we're going to connect disks to routers, this seems like an
 obvious function to implement as an overlay. This doesn't make CDNs
 any less part of the Internet's "critical infrastructure"—it's proven
 to be an absolute requirement for scaling content delivery—but there
@@ -118,7 +118,7 @@ content on behalf of any web site or application. (Note, however, that
 there are examples of applications building their own private CDNs,
 with Netflix being one well-known example.)  In contrast, video
 conferencing applications typically instantiate a multicast overlay in
-support of a single conference call.; another call involving a
+support of a single conference call; another call involving a
 different set of participants gets its own overlay. But these overlays
 are always in the service of the conferencing app; they are not
 available for other purposes.
@@ -132,9 +132,9 @@ means to acquire computing and storage resources at hundreds of
 locations across the globe. But there is an alternative, which is to
 depend on computing resources that you (and many other volunteers like
 you) provide. Known as peer-to-peer networks, they originally gained
-notoriety for their use sharing music, but today they serve a broader
+notoriety for their use in sharing music, but today they serve a broader
 role. For our purposes, they also illustrate how to design a
-decentralized application that does not depend on a central authority,
+decentralized application that does not depend on a central authority
 that then has control over the service's users and their data.
 
 
