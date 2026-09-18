@@ -14,7 +14,7 @@ and video streams.
 Settling on the functionality to be bundled in a *Real-time Transport
 Protocol (RTP)*, as the result came to be called, happened
 iteratively. Early prototypes embedded the functionality in the
-application, the first two of the first were ``vic`` and ``vat``; the
+application, the first two of these were ``vic`` and ``vat``; the
 former supported real-time video and the latter supported real-time
 audio. Both applications originally ran directly over UDP, while the
 designers figured out which features were needed to handle the
@@ -99,7 +99,7 @@ consumed. Clearly, to make this work, the receiver needs to notify the
 sender that losses are occurring so that the sender can adjust its
 coding parameters.
 
-A fourth common function across multimedia applications is mechanism
+A fourth common function across multimedia applications is a mechanism
 that indicates frame boundaries, where a frame is application
 specific. For example, it may be helpful to notify a video application
 that a certain set of packets correspond to a single video frame,
@@ -200,7 +200,7 @@ of structure to represent all the different types of information.
    leaves so many of the protocol details to the profile and format
    documents that are specific to an application.
 
-.. admonition:: Futher Reading
+.. admonition:: Further Reading
 
    D. Clark and D. Tennenhouse. `Architectural Considerations for a
    New Generation of Protocols
@@ -415,7 +415,7 @@ These different RTCP packet types are sent over the lower-layer
 protocol, which, as we have noted, is typically UDP. Several RTCP
 packets can be packed into a single PDU of the lower-level protocol. It
 is required that at least two RTCP packets are sent in every lower-level
-PDU: One of these is a report packet; the other is a source description
+PDU: one of these is a report packet; the other is a source description
 packet. Other packets may be included up to the size limits imposed by
 the lower-layer protocols.
 

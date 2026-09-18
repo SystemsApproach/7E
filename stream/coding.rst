@@ -379,7 +379,7 @@ using a Huffman code. (RLE and Huffman codes are two examples of
    idea of Huffman codes, one of the important early developments in
    data compression.*
 
-   *Run length encoding (RLE) is a another compression technique.  The
+   *Run length encoding (RLE) is another compression technique.  The
    idea is to replace consecutive occurrences of a given symbol with
    only one copy of the symbol, plus a count of how many times that
    symbol occurs—hence, the name run length. For example, the string
@@ -609,7 +609,7 @@ standards. In principle, both H.261 and H.263 look a lot like MPEG:
 They use DCT, quantization, and interframe compression. The
 differences between H.261/H.263 and MPEG are in the details.
 
-A partnership between the ITU-T and the MPEG group lead to the joint
+A partnership between the ITU-T and the MPEG group led to the joint
 H.264/MPEG-4 standard, which is used for both Blu-ray Discs and by
 many popular streaming sources, such as YouTube. The recent upgrade of
 graphical displays to 4k comes with yet another round of

@@ -8,7 +8,7 @@ In Chapter |Apps| we observed that the success of DASH to deliver
 steaming media at scale had a lot to do with its effective use of HTTP
 as the delivery mechanism. The web has developed over the decades to
 make HTTP delivery very efficient, particularly through the use of
-CDNs to fan out popular content to large number of users. So it is
+CDNs to fan out popular content to a large number of users. So it is
 reasonable to wonder if something similar could be made to work for
 real-time communications.
 
@@ -22,7 +22,7 @@ interactive session.
 
 The traditional approach to real-time applications is to run them over
 UDP rather than TCP and deal with packet losses in the application
-rather than by retransmission. As we say in Section |Stream|.3, this
+rather than by retransmission. As we saw in Section |Stream|.3, this
 is how RTP typically operates. However, this doesn't tackle the
 question of scale. How can a video stream be distributed out to
 hundreds of thousands of viewers, as might be required for a live
@@ -45,7 +45,7 @@ address. This technology is probably still running in some enterprise
 networks today, but multicast IP largely failed to launch in the
 broader Internet. The core idea, however, of efficient replication at
 intermediate nodes, lives on in overlay networks such as CDNs. And
-there is an now an effort to standardize an analogous type of overlay
+there is now an effort to standardize an analogous type of overlay
 specifically for real-time streams. That effort is known as "Media
 Over QUIC" (MoQ) but the name doesn't really tell you much about all
 the moving parts. Let's take a look at the main features of MoQ.

@@ -17,7 +17,7 @@ applications. We highlight four major issues.
 
 First, the coding and compression of audio and video content presents
 an interesting study in how humans process information. There is a
-*lot* of information in high-resolution video, for example, but a much
+*lot* of information in high-resolution video, for example, but much
 of it is either redundant or of limited value when perceived by a
 human eye. An example of redundant content is the unchanging
 background of a video. If we can send the background once and then say
@@ -61,7 +61,7 @@ the client-server model of communication, in which the client makes a
 request to a well-known server. The problem of how to bring
 participants together in a *session* and how to communicate all the
 information (such as the chosen coding standards) among participants
-is known as *session control*. Solving these issues has give rise to a
+is known as *session control*. Solving these issues has given rise to a
 set of protocols designed specifically for applications connecting
 sets of participants rather than clients making requests of servers.
 
@@ -79,7 +79,7 @@ non-issue.  For many years it seemed obvious that supporting
 latency-sensitive traffic for applications like VOIP and video
 conferences would require in-network mechanisms to avoid excessive
 queuing delays. Chapter |Capacity| described a number of approaches to
-queuing that have been developed so that some traffic can receiver
+queuing that have been developed so that some traffic can receive
 lower delay even when the overall load is high. However, for much of
 today's Internet, those mechanisms are not deployed; the solution has
 simply been to deploy enough capacity that delay is mostly acceptably

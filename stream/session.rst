@@ -57,7 +57,7 @@ have widely different capabilities (e.g., an alphanumeric pager and a
 PC-based video “phone”).  Ideally, it should be possible for other
 users to be able to locate and communicate with the appropriate device
 at any time. Furthermore, the user must be able to have control over
-when, where, and from whom they receives calls.
+when, where, and from whom they receive calls.
 
 To enable a user to exercise the appropriate level of control over
 their calls, SIP introduces the notion of a proxy. A SIP proxy can be
@@ -86,7 +86,7 @@ are a form of uniform resource identifier which look like this:
    SIP:larry@princeton.edu
 
 A SIP URI provides complete identification of a user, but (unlike a URL)
-does not provide his location, since that may change over time. We will
+does not provide their location, since that may change over time. We will
 see shortly how the location of a user can be determined.
 
 Upon receiving the initial message from Bruce, the proxy looks at the
@@ -187,7 +187,7 @@ in several ways. Manual configuration is one option, but a more
 flexible option is to use the *registration* capabilities of SIP.
 
 A user can register with a location service by sending a SIP
-``register`` message to the “registrar” for his domain. This message
+``register`` message to the “registrar” for their domain. This message
 creates a binding between an “address of record” and a “contact
 address”. An “address of record” is likely to be a SIP URI that is the
 well-known address for the user (e.g., ``sip:larry@princeton.edu``) and
