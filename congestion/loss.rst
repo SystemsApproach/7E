@@ -431,7 +431,7 @@ out-of-order packets are less common by far than lost packets.\ [#]_
    Fast retransmit based on duplicate ACKs.
 
 .. [#] Once TCP's expectation that out-of-order packets indicate loss
-       rather than re-ordering became entrenched, the penalty for
+       rather than reordering became entrenched, the penalty for
        reordering of packets in the network became a noticeable
        reduction in performance. This led to a strong desire not to cause
        reordering under normal operation. This had an impact on the
@@ -652,7 +652,7 @@ in :numref:`Figure %s <fig-cubic>`, asymptoting towards
 then moving beyond it.
 
 BIC eventually evolved into a new variant called *CUBIC*, which today
-is the default congestion control algorithm distributed with
+is the default congestion-control algorithm distributed with
 Linux. CUBIC improved upon BIC in a number of ways, one of which was
 to use a smooth curve described by a cubic function rather than the
 piecewise linear function of BIC. More on this below.
@@ -708,7 +708,7 @@ only convex).
 
 Interestingly, CUBIC is either more aggressive or less aggressive than
 earlier variants of TCP, depending on the conditions. Short RTT
-TCPReno flows tend to be effective in acquiring bottleneck bandwidth,
+TCP Reno flows tend to be effective in acquiring bottleneck bandwidth,
 so CUBIC includes a "TCP-friendly" mode where it aims to be just as
 aggressive as TCP Reno. But in other circumstances—notably high
 bandwidth-delay networks—CUBIC will be able to obtain a bigger share

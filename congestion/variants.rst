@@ -29,14 +29,14 @@ where *Data Center TCP* was one of the first. There are several
 aspects of the datacenter environment that warrant an approach that
 differs from more traditional TCP. These include:
 
-* Round trip time for intra-DC traffic are small;
+* Round trip times for intra-DC traffic are small;
 
 * Buffers in datacenter switches are also typically small;
 
 * All the switches are under common administrative control, and thus
   can be required to meet certain standards;
 
-* A great deal of traffic has low latency requirements;
+* A great deal of traffic has low-latency requirements;
 
 * That traffic competes with high bandwidth flows.
 
@@ -46,7 +46,7 @@ end host response to congestion information received from switches.
 
 The central insight in DCTCP is that using loss as the main signal of
 congestion in the datacenter environment is insufficient. By the time
-a queue has built up enough to overflow, low latency traffic is
+a queue has built up enough to overflow, low-latency traffic is
 already failing to meet its deadlines, negatively impacting
 performance. Thus DCTCP uses a version of ECN to provide an early
 signal of congestion. But whereas the original design of ECN treated
@@ -62,7 +62,7 @@ they run empty and sacrifice throughput.
 
 The key challenge in this approach is to estimate the fraction of bytes
 encountering congestion. Each switch is simple. If a packet arrives and
-the switch sees the queue length (K) is above some threshold; e.g.,
+the switch sees that the queue length (K) is above some threshold; e.g.,
 
 .. math:: \mathsf{K} > \mathsf{(RTT} \times \mathsf{C)\ /\ 7}
 
@@ -104,7 +104,7 @@ Specifically, a new variable called ``DCTCP.Alpha`` is initialized to
 .. math:: \mathsf{DCTCP.Alpha} = \mathsf{DCTCP.Alpha} \times
           \mathsf{(1 - g) + g} \times \mathsf{M}
 
-``M`` is the faction of bytes marked, and ``g`` is the estimation
+``M`` is the fraction of bytes marked, and ``g`` is the estimation
 gain, a constant (set by the implementation) that determines how
 rapidly ``DCTCP.Alpha`` changes in response to marking of
 packets. When there is sustained congestion, ``DCTCP.Alpha``
@@ -144,12 +144,12 @@ sophisticated signals from the network that the sender can use to
 manage congestion. We conclude our discussion of this use case by
 elaborating on one of the most recent efforts, On-Ramp, because it
 focuses instead on the fundamental tension that all congestion control
-algorithms face: The trade-off between reaching equilibrium for
+algorithms face: the trade-off between reaching equilibrium for
 long-lived flows versus dealing with transient bursts. On-Ramp adopts
 a modular design that directly addresses this tension, and does so
 without depending on additional feedback from the network.
 
-The main insight is that when a congestion control algorithm in
+The main insight is that when a congestion-control algorithm in
 equilibrium encounters severe congestion and drastically cuts its
 window (or rate), it must decide whether or not to remember its
 previous equilibrium state. This is a difficult choice because it
@@ -170,19 +170,19 @@ find a new equilibrium.
    bursty traffic, complementing the traditional congestion control
    algorithm's effort to maintain long-term stability and fairness.
 
-The idea is to break the congestion control mechanism into two parts,
+The idea is to break the congestion-control mechanism into two parts,
 with each focused on just one aspect of the equilibrium/transient
 trade-off. Specifically, On-Ramp is implemented as a “shim” that sits
-below a conventional TCP congestion control algorithm, as shown in
+below a conventional TCP congestion-control algorithm, as shown in
 :numref:`Figure %s <fig-onramp>`. The On-Ramp shim deals with bursts
 (which temporarily fill network queues) by trying to quickly reduce
 queuing delays whenever the measured *One-Way Delay (OWD)* grows too
 large. It does this by temporarily holding packets at the sender
 (rather than letting them occupy an in-network buffer) whenever OWD is
 greater than some threshold. The On-Ramp shim is then composed with an
-existing congestion control algorithm, which continues to work towards
+existing congestion-control algorithm, which continues to work towards
 reaching equilibrium for long-term flows.  On-Ramp has been shown to
-work with several existing congestion control algorithms, including
+work with several existing congestion-control algorithms, including
 DCTCP.
 
 The key is that On-Ramp is designed so the two control decisions run
@@ -279,7 +279,7 @@ aggressive enough to queue at least some packets in the buffers of
 wireless links.
 
 Yet another approach, as exemplified by research by Xie, Yi, and
-Jamieson, suggests such that modifying the receiver to provide
+Jamieson, suggests that modifying the receiver to provide
 end-device feedback may be effective. The idea is to have the receiver
 explicitly tell the sender how much bandwidth is available on the last
 hop, with the sender then having to judge whether the last-hop or some
@@ -288,7 +288,7 @@ other point along the Internet segment is the actual bottleneck.
 .. _reading_ran:
 .. admonition::  Further Reading
 
-   S. Mascolo et al..
+   S. Mascolo et al.
    `TCP Westwood: Bandwidth Estimation for Enhanced Transport over Wireless
    Links <https://dl.acm.org/doi/10.1145/381677.381704>`__,
    ACM Mobicom '01 Symposium, July 2001.

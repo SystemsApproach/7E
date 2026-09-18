@@ -12,7 +12,7 @@ them. Until we get to domain-specific use cases in Section
 |CC|.4, you can assume the routers implement FIFO queues with
 tail-drop.
 
-Note while the concepts underlying congestion control algorithms are
+Note while the concepts underlying congestion-control algorithms are
 protocol-independent, the history of congestion control in the
 Internet is strongly tied to TCP.\ [#]_ This includes several
 implementation details that leverage existing TCP header fields. This
@@ -26,7 +26,7 @@ these algorithms to their particular circumstances.
    considered the *reference implementation* of TCP congestion
    control. In fact, the initial algorithm proposed by Jacobson and
    Karels was a noteworthy feature of the Tahoe release of BSD 4.3
-   in 1988.  Today, Linux is has replaced BSD as the *de facto*
+   in 1988.  Today, Linux has replaced BSD as the *de facto*
    reference implementation of TCP.
 
 |CC|.1.1 Load Control
@@ -110,7 +110,7 @@ a set of senders from sending too much data *into the network* because
 of lack of resources at some location. These two concepts are often
 confused, a problem that is exacerbated by the fact that they
 sometimes share low-level mechanisms (e.g., an ACK may trigger both a
-flow control response and a congestion control response).
+flow control response and a congestion-control response).
 
 
 |CC|.1.2 Signals from the Network
@@ -131,7 +131,7 @@ reacting after the fact, we sometimes refer to this approach as
 *control-based*, or alternatively, *loss-based*.
 
 Waiting for packet loss to signal the onset of congestion, and then
-reacting to that loss, is not the only option. It is possible adopt a
+reacting to that loss, is not the only option. It is possible to adopt a
 more proactive strategy, for example, by watching for changes in the
 measured throughput rate, and adjusting the sending rate *before*
 congestion becomes severe enough to cause packet loss.  Such
@@ -140,7 +140,7 @@ algorithms are said to be *avoidance-based*, or alternatively, either
 that the sender records how much data is successfully sent during some
 time interval, such as its current estimate of the RTT. The key is
 whether the observed round-trip delay is shrinking or growing. Note
-that while we sometimes differentiate between the two approaches a
+that while we sometimes differentiate between the two approaches as
 control-based versus avoidance-based, we always refer to the general
 concept as "congestion control". The following two sections
 describe various loss-based and delay-based algorithms, respectively.
@@ -218,7 +218,7 @@ fairness index drops to \ *k/n*.
 
 .. sidebar:: Fairness vs. Deployment
 
-   Over the decades of development of congestion control, algorithms,
+   Over the decades of development of congestion-control algorithms,
    the question has often arisen of whether a given mechanism A is
    fair to flows managed by mechanism B. If mechanism A is able to
    measure improved throughput over B, but it does so by being more
@@ -270,7 +270,7 @@ fairness index drops to \ *k/n*.
    new mechanism B on flows using existing mechanism A is within a
    bound derived from how much harm A-managed flows cause other
    A-managed flows, we can consider B deployable alongside A without
-   harm. Even with a single congestion control algorithm, the amount
+   harm. Even with a single congestion-control algorithm, the amount
    of harm that one flow causes another depends on factors such as its
    RTT, start time, and duration. Thus measures of harm need to take
    into account the range of impacts that different flows have on each

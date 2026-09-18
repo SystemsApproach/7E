@@ -188,7 +188,7 @@ modifications were often driven more by lab studies than extensive
 real-world experience, but they have collectively refined and
 contributed to our understanding of avoidance-based algorithms. We
 summarize some of those insights here, but return to the general topic
-of customizing the congestion control algorithm for specific use cases
+of customizing the congestion-control algorithm for specific use cases
 in Section |CC|.4.
 
 FAST TCP
@@ -209,7 +209,7 @@ there are two other items of note about FAST. First, whereas both TCP
 Reno and TCP Vegas were the result of a little intuition and a lot of
 trial-and-error, FAST was grounded in optimization theory (which was
 subsequently used to explain why Vegas works). Second, unlike all
-other congestion control algorithms of which we are aware, an
+other congestion-control algorithms of which we are aware, an
 implementation of FAST was made available only as a proprietary
 solution.
 
@@ -265,14 +265,14 @@ example shown in :numref:`Figure %s <fig-nv>`, we see similar
 performance with ``CongestionWindow=12``, so we decrease
 ``CongestionWindow``. The decrease is done multiplicatively, rather
 than instantaneously, in case the new measurement is noisy. To filter
-out bad measurements, NV collects many measurements and then use the
+out bad measurements, NV collects many measurements and then uses the
 best one before making a congestion determination.
 
 |CC|.3.3 TCP BBR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 BBR (Bottleneck Bandwidth and Round-trip propagation time) is a TCP
-congestion control algorithm developed by researchers at Google and
+congestion-control algorithm developed by researchers at Google and
 currently undergoing standardization. Like Vegas, BBR is delay-based,
 which means it tries to detect buffer growth so as to avoid congestion
 and packet loss. Both BBR and Vegas use the minimum RTT and the
