@@ -5,9 +5,7 @@
 
 # Makefile building book with Sphinx
 
-# use bash for pushd/popd, and to fail quickly. virtualenv's activate
-# has undefined variables, so no -u
-SHELL = bash -eu -o pipefail
+SHELL = bash -euo pipefail
 
 # You can set these variables from the command line.
 SPHINXOPTS   ?= 
@@ -23,7 +21,7 @@ help: $(VIRTUALENV)
 	source ./$(VIRTUALENV)/bin/activate ;\
   $(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help lint reload Makefile test
+.PHONY: help lint Makefile test clean clean-all
 
 # Create the virtualenv with all the tools installed
 $(VIRTUALENV):
@@ -37,7 +35,7 @@ test: lint spelling
 # lint all .rst files
 lint: $(VIRTUALENV)
 	source ./$</bin/activate ;\
-  doc8 --ignore-path $< --ignore-path _build --max-line-length 120 .
+	doc8 --ignore-path $< --ignore-path "$(BUILDDIR)" --max-line-length 120 .
 
 # clean up
 clean:
