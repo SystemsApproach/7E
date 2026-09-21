@@ -52,7 +52,7 @@ this book.
   solutions, followed by years of iterative improvement. This
   evolution culminates in today’s software and hardware artifacts—many
   of which are worth looking at in detail—but always keeping in mind
-  that those too will likely change over time. Our goal is explain why
+  that those too will likely change over time. Our goal is to explain why
   the Internet works the way it does today, including how we got
   here. By highlighting the principles that have shaped the
   development of the Internet, we aim to guide the designers of future

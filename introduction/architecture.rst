@@ -50,7 +50,7 @@ stage for the rest of the book.
 |Intro|.2.1 OSI Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The International Standards Organization (ISO) was one of the first
+The International Organization for Standardization (ISO) was one of the first
 organizations to formally define a common way to connect computers.
 Their architecture, called the *Open Systems Interconnection* (OSI)
 architecture and illustrated in :numref:`Figure %s <fig-osi>`, defines
@@ -101,8 +101,8 @@ being combined in a teleconferencing application.
 
 The OSI model both defines how to modularize functionality into seven
 layers, and suggests how one might assemble a network from a set of
-*switches*—a special device that receives data on one communication
-port and sends it out on another port. This means a distributed
+*switches*—special devices that receive data on one communication
+port and send it out on another port. This means a distributed
 collection of switches can be interconnected to form a network, as
 shown in :numref:`Figure %s <fig-network>`. This switched network
 expands on the part of :numref:`Figure %s <fig-osi>` contained within
@@ -250,8 +250,8 @@ bottom level, the network is implemented by some physical medium.
    the specification of many of the Internet protocols, such as TCP,
    UDP, IP, DNS, and BGP. The Internet architecture also embraces
    protocols defined by other organizations, including IEEE's 802.3
-   ethernet and 802.11 Wi-Fi standards, W3C's HTTP/HTML web specifications,
-   3GPP's 4G and 5G cellular networks standards, and ITU-T's H.264
+   Ethernet and 802.11 Wi-Fi standards, W3C's HTTP/HTML web specifications,
+   3GPP's 4G and 5G cellular network standards, and ITU-T's H.264
    video encoding standards, to name a few.*
 
    *In addition to defining architectures and specifying protocols,
@@ -387,7 +387,7 @@ as follows:
    implemented only with the knowledge and help of the application
    standing at the endpoints of the communications system. Therefore,
    providing that questioned function as a feature of the
-   communications systems itself is not possible.*
+   communications system itself is not possible.*
 
 An example would be reliable transfer of a file. No matter how much
 reliability is built into the network, there are so many things that
