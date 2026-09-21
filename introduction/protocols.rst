@@ -375,7 +375,7 @@ Finally, you may have noticed that the definition of UDP in RFC 768 is
 only three pages long. This is because UDP's sole purpose is to layer
 a user-level demultiplexing capability—in the form of a
 source/destination port pair—on top of IP's best-effort packet
-delivery service. In doing to, UDP turns IP's host-to-host service
+delivery service. In doing so, UDP turns IP's host-to-host service
 into a process-to-process service.
 
 

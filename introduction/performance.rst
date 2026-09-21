@@ -179,7 +179,7 @@ sender must transmit before the first bit arrives at the receiver. If
 the sender is expecting the receiver to acknowledge that bits are
 starting to arrive, and it takes another channel latency for this
 acknowledgement to propagate back to the sender, then the sender can
-send up one *RTT × bandwidth* worth of data before hearing from the
+send up to one *RTT × bandwidth* worth of data before hearing from the
 receiver that all is well. The bits in the pipe are said to be “in
 flight,” which means that if the receiver tells the sender to stop
 transmitting it might receive up to one RTT × bandwidth’s worth of
@@ -217,7 +217,7 @@ some typical network links.
 
 The seeming continual increase in bandwidth causes network designers
 to start thinking about what happens in the limit. As a thought
-experiment, we need to ask what impact infinite bandwidth means for
+experiment, we need to ask what infinite bandwidth means for
 network design. The key to the answer is what does *not* change as
 bandwidth increases: the speed of light. To quote Scotty from *Star
 Trek,* “Ye cannae change the laws of physics.” In other words, latency
