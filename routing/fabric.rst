@@ -8,7 +8,7 @@
 
 We conclude our discussion of routing by looking at a different
 scenario: how routes are managed in datacenter networks. Recall from
-Chapter |Tech| that datacenters typically interconnect racks of servers
+Chapter |Apps| that datacenters typically interconnect racks of servers
 using a leaf-spine network topology. :ref:`Figure 22 <fig-leaf-spine>`
 shows a simple four-rack example using a two-level switching fabric.
 Hyperscaler datacenters are much larger—and often use three-level
@@ -68,7 +68,7 @@ using centralized algorithms. As a simple example, a controller could
 gather information from all the switches to which it is connected
 regarding the state of their links to other switches. With this
 information in hand, it has all the information needed to run a
-shortest path calculation from the perspective of any switch. Thus it
+shortest path calculation from the perspective of any switch. Thus, it
 could calculate forwarding tables for every switch and push them down
 to the forwarding plane as a set of flow rules.
 
@@ -175,7 +175,7 @@ always two segments involved: leaf-to-spine and spine-to-leaf.
 There are only so many such segments in a leaf-spine fabric, so we can
 simply "label" them; that is, assign a unique identifier to each.
 These identifiers (labels) are then used to uniquely identify each
-segment, packets carry the labels of the sequence of segments then
+segment, packets carry the labels of the sequence of segments they then
 need to traverse, and switches are programmed to use these labels to
 decide how to forward packets. We need a standard header format for
 including labels in packets (which we'll get to in a moment), but
@@ -187,7 +187,7 @@ as needed.
 :numref:`Figure %s <fig-sr>` illustrates how SR works using a simple
 configuration that forwards traffic between a pair of hosts: 10.0.1.1
 and 10.0.2.1. In this example, the servers connected to Leaf 1 are on
-are on a network with the prefix 10.0.1/24 and the servers connected
+a network with the prefix 10.0.1/24 and the servers connected
 to Leaf 2 are on a network with the prefix
 10.0.2/24. (Recall from Section |Intro|.3.4 that the ``/24`` notation
 implies we care about matching just the 24-bit prefix of the IP
@@ -274,7 +274,7 @@ the IPv6 header to implement its forwarding decision.
 
     SRv6 header format, as a routing extension to IPv6.
 
-For a useful overview of one hyperscale data center design that
+For a useful overview of one hyperscale datacenter design that
 leverages SDN, we recommend the paper on Google's Jupiter
 architecture. One thing to note about Jupiter is that it does not use
 Segment Routing, but uses a mixture of centralized route computation

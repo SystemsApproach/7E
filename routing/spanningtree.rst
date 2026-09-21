@@ -120,7 +120,7 @@ for which it is the designated switch.
 
 Note that the algorithm is general enough to account for the
 possibility that an Ethernet segment is multi-access rather than
-point-to-point. In the former case there could be many switches on a
+point-to-point. In the former case, there could be many switches on a
 given link. In the latter case, there can be only one other switch on
 the other end of a point-to-point link, so picking the designated
 switch is equivalent to deciding whether I'm closer to the root or the
@@ -145,7 +145,7 @@ distance from S1.
 
 While it is possible for a human to look at the network given in
 :numref:`Figure %s <fig-loops>` and to compute the spanning tree given
-in the :numref:`Figure %s <fig-tree>` according to the rules given
+in :numref:`Figure %s <fig-tree>` according to the rules given
 above, the switches do not have the luxury of being able to see the
 topology of the entire network, let alone peek inside other switches
 to see their ID. Instead, they have to exchange configuration messages
@@ -181,7 +181,7 @@ the following is true:
 -  It identifies a root with an equal ID but with a shorter distance.
 
 -  The root ID and distance are equal, but the sending switch has a
-   smaller ID
+   smaller ID.
 
 If the new message is better than the currently recorded information,
 the switch discards the old information and saves the new information.

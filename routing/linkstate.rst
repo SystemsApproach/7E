@@ -327,7 +327,7 @@ node in the network) can be quite large. This is one of the fundamental
 problems of routing and is an instance of the more general problem of
 scalability. Some solutions to both the specific problem (the amount of
 storage potentially required at each node) and the general problem
-(scalability) are discussed in Chapter 6.
+(scalability) are discussed in Chapter |Fed|.
 
 .. sidebar:: The History Of Metrics
 
@@ -353,7 +353,7 @@ storage potentially required at each node) and the general problem
    the ARPANET routing metric is full of incidents where traffic swung
    heavily away from a congested link causing other links to be
    congested while the other link was left idle. On top of the problem
-   of dynamic behavior there is the question of how heavily a
+   of dynamic behavior, there is the question of how heavily a
    link should be penalized for high latency versus low bandwidth. Should a
    satellite link that is six times higher in throughput than a
    terrestrial link but also adds hundreds of milliseconds of latency

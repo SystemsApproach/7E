@@ -167,7 +167,7 @@ updates to their neighbors periodically based on a timer (from seconds
 to minutes) but also send them immediately if they detect a change in
 the topology. That change may be the result of a local link failure or
 restoration, or a change in the local routing table due to an update
-received from another node. Thus changes to the state of a link will
+received from another node. Thus, changes to the state of a link will
 ripple through the network until routing converges again.
 
 To understand what happens when a node detects a link failure, consider
@@ -386,6 +386,6 @@ networks—those with no paths longer than 15 hops.
    (i.e., distance to all nodes). In link-state, each node talks to
    all other nodes, via flooding, but it tells them only what it knows for sure
    (i.e., only the state of its directly connected links). In recent
-   years there has been a resurgence of interest in centralized
+   years, there has been a resurgence of interest in centralized
    approaches to routing, which we discuss in the following section.
 
