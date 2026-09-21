@@ -107,7 +107,7 @@ useless. For this reason, 802.11 adds an optional mechanism called
 RTS-CTS (Ready to Send-Clear to Send). This goes some way toward
 addressing the hidden node problem. The sender sends an RTS—a short
 packet—to the intended receiver, and if that packet is received
-successfully the receiver responds with another short packet, the CTS.
+successfully, the receiver responds with another short packet, the CTS.
 Even though the RTS may not have been heard by a hidden node, the CTS
 probably will be. This effectively tells the nodes within range of the
 receiver that they should not send anything for a while—the amount of
@@ -165,8 +165,8 @@ being that it operates at the link layer (L2); i.e., the same as the
 wireless component. This makes it possible to forward packets across
 the distribution network without depending on any higher-level
 protocols, such as IP. The learning bridge mechanism described in
-Section 4.2 is sufficient, and in fact, the access points run the same
-learning algorithm as Ethernet swiches.
+Section |Routing|.2 is sufficient, and in fact, the access points run the same
+learning algorithm as Ethernet switches.
 
 Although two nodes can directly communicate if they are within range
 of each other, the idea behind this configuration is that each node
@@ -348,7 +348,7 @@ that provides 802.11i’s data confidentiality and integrity.
 CCMP stands for CTR (Counter Mode) with CBC-MAC (Cipher-Block Chaining
 with Message Authentication Code) Protocol. CCMP uses AES in counter
 mode to encrypt for confidentiality. Recall that in counter mode
-encryption successive values of a counter are incorporated into the
+encryption, successive values of a counter are incorporated into the
 encryption of successive blocks of plaintext.
 
 CCMP uses a Message Authentication Code (MAC) as an authenticator. The
@@ -356,7 +356,7 @@ MAC algorithm is based on CBC, even though CCMP doesn’t use CBC in the
 confidentiality encryption. In effect, CBC is performed without
 transmitting any of the CBC-encrypted blocks, solely so that the last
 CBC-encrypted block can be used as a MAC (only its first 8 bytes are
-actually used). The role of initialization vector is played by a
+actually used). The role of the initialization vector is played by a
 specially constructed first block that includes a 48-bit packet number—a
 sequence number. (The packet number is also incorporated in the
 confidentiality encryption and serves to expose replay attacks.) The MAC
@@ -417,7 +417,7 @@ multiplexing. :numref:`Figure %s <fig-wifi-grid>` shows a more
 representative example of how bandwidth is allocated for Wi-Fi. It is
 still a simplification, but it does help illustrate an essential
 aspect of Wi-Fi: once a device gains permission to transmit (based on
-a RTS/CTS exchange), and the AP has allocated some subset of
+an RTS/CTS exchange), and the AP has allocated some subset of
 subcarriers to that device, the device is allowed to hold those
 subcarriers for as long as it takes to send a complete packet. The AP
 does enforce an upper limit on how long a sender holds the

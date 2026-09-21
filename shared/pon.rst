@@ -15,7 +15,7 @@ name from the fact that the splitters are passive: they forward
 optical signals downstream and upstream without actively storing and
 forwarding frames. Framing then happens at the source in the ISP’s
 premises, in a device called an *Optical Line Terminal* (OLT), and at
-the end-points in individual homes, in a device called an *Optical
+the endpoints in individual homes, in a device called an *Optical
 Network Unit* (ONU).
 
 :numref:`Figure %s <fig-pon>` shows an example PON, simplified to

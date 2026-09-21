@@ -3,7 +3,7 @@
 
 Mediating access to a shared medium is a resource allocation
 problem.  The communication medium is the resource, and some mechanism
-needs to decide who to allocate it to next. In a network setting it
+needs to decide who to allocate it to next. In a network setting, it
 seems obvious that the decision-making process needs to be
 decentralized; each node has to participate in the decision. While
 literally true, in the sense that each node has to "behave correctly",
@@ -78,7 +78,7 @@ you are trying to maximize the number of nodes that can connect to a
 limited amount of radio spectrum, then you will be more conservative
 in your allocation strategy, and centrally allocate some "share of
 link capacity" to each node. This is what 5G does. PON is more like 5G
-than Wi-Fi, but enough different to warrant its own subsection.
+than Wi-Fi, but is different enough to warrant its own subsection.
 
 There are three other design issues of note. The first is that
 multi-access networks allow all connected nodes to see (receive) every

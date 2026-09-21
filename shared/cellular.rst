@@ -76,7 +76,7 @@ stations, which are cryptically called *gNodeB (gNB)*.
 The Mobile Core is a bundle of functionality that serves several
 purposes:
 
--  Authenticates devices prior to attaching them to the network
+-  Authenticates devices prior to attaching them to the network.
 -  Provides Internet (IP) connectivity for both data and voice services.
 -  Ensures this connectivity fulfills the promised QoS requirements.
 -  Tracks user mobility to ensure uninterrupted service.
@@ -120,7 +120,7 @@ the over-the-air radio transmissions.
 The second concept, also depicted in :numref:`Figure %s <fig-cups>`,
 is to partition the Mobile Core into a *Control Plane* and *User
 Plane*. This is similar to the control/data plane split described in
-Chapter 3. 3GPP has introduced a corresponding acronym—\ *CUPS,
+Chapter |Tech|. 3GPP has introduced a corresponding acronym—\ *CUPS,
 Control and User Plane Separation*—to denote this idea. One motivation
 for CUPS is to enable control plane resources and data plane resources
 to be scaled independently of each other.
@@ -129,13 +129,13 @@ to be scaled independently of each other.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We now describe the RAN by sketching the role each base station plays,
-but keep in mind that the collection of base stations in a RAN are
-cooperating to manage the radio spectrum as a whole. Since their
-coverage overlaps, they need to cooperate with each other to make
+but keep in mind that the base stations cooperate with each other
+to manage the radio spectrum as a whole. Since their
+coverage overlaps, they need to work together to make
 globally optimal decisions.
 
 The end-systems such as mobile phones in cellular networks are usually
-referred to in 3GPP documents as *user equipment (UE)* so we will use
+referred to in 3GPP documents as *user equipment (UE)*, so we will use
 that terminology here. When a UE is powered on or comes in range of a
 new base station while moving, the nearby base station establishes the
 wireless channel for communication with the UE.  This channel is
@@ -270,7 +270,7 @@ trust assumptions. First, each base station trusts that it is
 connected to the Mobile Core by a secure private network, over which
 it establishes the tunnels introduced in :numref:`Figure %s
 <fig-tunnels>`: a GTP/UDP/IP tunnel to the Core's User Plane (Core-UP)
-and a SCTP/IP tunnel to the Core's Control Plane (Core-CP). Second,
+and an SCTP/IP tunnel to the Core's Control Plane (Core-CP). Second,
 each UE has an operator-provided SIM (Subscriber Identity Module) card,
 which contains information that uniquely identifies the subscriber and
 includes a secret key that the UE uses to authenticate itself.
@@ -297,7 +297,7 @@ other structure into the SUB is also an option.
 
 The *MCC/MNC* pair—which is also called the *Public Land Mobile
 Network (PLMN)* identifier—plays a role in roaming: when a UE tries
-to connect to a "foreign network" those fields are used to find the
+to connect to a "foreign network", those fields are used to find the
 "home network", where the rest of the IMSI leads to a subscriber
 profile that says whether or not roaming is enabled for this
 device. The following walks through what happens when a device
@@ -374,7 +374,7 @@ serves the UE (i.e., only the base station changes). This would
 typically be the case for a UE moving within a metropolitan area.
 Moving between metro areas—and hence, between Mobile Cores—is
 indistinguishable from power cycling a UE. The UE is assigned a new IP
-address and no attempt is made to buffer and subsequently deliver
+address, and no attempt is made to buffer and subsequently deliver
 in-flight data. Independent of mobility, but relevant to this
 discussion, any UE that becomes inactive for a period of time also
 loses its session, with a new session established and a new IP address
@@ -453,12 +453,12 @@ spacing and 0.5ms scheduling intervals in the example shown in
 from this abstract perspective. The CQI feedback from the receivers
 and the quality-of-service class selected by the subscriber are the
 two key pieces of input to the scheduler. Rather than a single FIFO
-queue (as would be the case for Wi-Fi) the scheduler serves multiple
+queue (as would be the case for Wi-Fi), the scheduler serves multiple
 queues. This makes it possible for the scheduler to preferentially
-send high-priority traffic from one queue before lower priority traffic
+send high-priority traffic from one queue before lower-priority traffic
 from another queue, so as to meet its QoS promises. The exact
 algorithm used in 5G is proprietary, but we describe a generic QoS
-scheduler in Chapter 8.
+scheduler in Chapter |Capacity|.
 
 Another difference between Wi-Fi and 5G is that the scheduler shown in
 :numref:`Figure %s <fig-scheduler>` does not necessarily transmit full
@@ -470,7 +470,7 @@ being passed up to the device (for downstream traffic) or on to the
 Mobile Core (for upstream traffic). Finally, note that one possible
 decision the scheduler might make is to "hand-off" the user to another
 base station, as outlined in Section |Shared|.4.2. In this way, a collection
-of base stations effectively collaborate to allocate spectrum across a
+of base stations effectively collaborates to allocate spectrum across a
 set of radio cells.
 
 .. See https://www.youtube.com/watch?v=GEQgEDcRcZI 5G for numerology.

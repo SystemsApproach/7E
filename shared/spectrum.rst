@@ -82,8 +82,8 @@ velocity of the receiver (e.g., moving car or train), and :math:`f` is
 the frequency of the carrier signal that is being modulated. This
 says the coherence time is inversely proportional to the frequency of
 the signal and the speed of movement, which makes intuitive sense: The
-higher the frequency (narrower the wave) the shorter the coherence time,
-and likewise, the faster the receiver is moving the shorter the coherence
+higher the frequency (narrower the wave), the shorter the coherence time,
+and likewise, the faster the receiver is moving, the shorter the coherence
 time. Based on the target parameters to this model (selected according
 to the target physical environment), it is possible to calculate
 :math:`T_c`, which in turn bounds the rate at which symbols can be
@@ -117,7 +117,7 @@ mobility).
 |Shared|.2.2  Multiplexing Technique
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We saw an overview of multiplexing strategies in Chapter 1, and both
+We saw an overview of multiplexing strategies in Chapter |Intro|, and both
 Wi-Fi and the Mobile Cellular Network have a long history using
 variants of those approaches. Wi-Fi originally used
 *spread spectrum*, a technique developed by the military to combat
