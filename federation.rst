@@ -16,7 +16,7 @@ ability to interconnect independently built and operated networks.
 This results in a global *internetwork* that has no central point of
 control and yet manages to deliver a reasonably consistent service to
 all those devices and the applications running on them. Now that the
-Internet has been around for more than 50 years it is easy to lose
+Internet has been around for more than 50 years, it is easy to lose
 sight of the challenges that had to be tackled to
 achieve this remarkable feat. In this chapter we examine the problem
 of *federating* networks: taking networks that are run by independent
@@ -28,7 +28,7 @@ since each organization can make its own
 independent decisions about how to manage its networks. It also gives
 us a handle on how to scale routing to calculate paths across a global
 network by breaking routing into two parts: routing among networks and
-routing within networks. At the same time we need to find a
+routing within networks. At the same time, we need to find a
 way to address billions of devices, a problem that turned out to be
 bigger than first envisioned by the Internet's designers.
 

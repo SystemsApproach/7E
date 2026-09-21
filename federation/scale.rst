@@ -112,7 +112,7 @@ the results are not equal, the packet needs to be sent to a router to be
 forwarded to another subnet. For example, if H1 is sending to H2, then
 H1 ANDs its subnet mask (255.255.255.128) with the address for H2
 (128.96.34.139) to obtain 128.96.34.128. This does not match the subnet
-number for H1 (128.96.34.0) so H1 knows that H2 is on a different
+number for H1 (128.96.34.0), so H1 knows that H2 is on a different
 subnet. Since H1 cannot deliver the packet to H2 directly over the
 subnet, it sends the packet to its default router R1.
 
@@ -201,7 +201,7 @@ To see how the issues of address space efficiency and scalability of the
 routing system are coupled, consider the hypothetical case of a company
 whose network has 256 hosts on it. That is slightly too many for a Class
 C address, so you would be tempted to assign a class B. However, using
-up a chunk of address space that could address 65535 to address 256
+up a chunk of address space that could address 65,535 to address 256
 hosts has an efficiency of only 256/65,535 = 0.39%. Even though
 subnetting can help us to assign addresses carefully, it does not get
 around the fact that any organization with more than 255 hosts, or an
@@ -255,7 +255,7 @@ CIDR requires a new type of notation to represent prefixes, because the prefixes
 The convention is to place a ``/X`` after the prefix, where ``X`` is the
 prefix length in bits. So, for the example above, the 20-bit prefix for
 all the networks 192.4.16 through 192.4.31 is represented as
-192.4.16/20. By contrast a 24-bit prefix (a Class C in the old
+192.4.16/20. By contrast, a 24-bit prefix (a Class C in the old
 terminology) is written as 192.4.16/24.
 Today, with CIDR being the norm, it is more common to hear people talk
 about “slash 24” prefixes than class C networks. Note that representing
@@ -307,7 +307,7 @@ based on the principle of “longest match”; that is, the packet matches
 the longest prefix, which would be 171.69.10 in this example. On the
 other hand, a packet destined to 171.69.20.5 would match 171.69 and
 *not* 171.69.10, and in the absence of any other matching entry in the
-routing table 171.69 would be the longest match.
+routing table, 171.69 would be the longest match.
 
 The task of efficiently finding the longest match between an IP
 address and the variable-length prefixes in a forwarding table has
@@ -420,14 +420,14 @@ home network, for example. Establishing direct IP connectivity between
 two devices that are both behind NATs is hard, since neither has a
 public address to get the connection established. Techniques to work
 around these problems have been developed (STUN is an IETF standard
-for NAT traversal, for example) but certainly this is a far cry from the simple,
+for NAT traversal, for example), but certainly this is a far cry from the simple,
 global addressing model of the original Internet.
 
 The path back to globally unique addresses required an expansion of
 the IP address space, which is exactly what IP version 6 provides. You
 can read about the initial design of NAT in the 1993 paper below; Paul
 Francis and Paul Tsuchiya are the same person (he changed his last
-name) and he wrote a short piece looking at why NAT was so widely
+name), and he wrote a short piece looking at why NAT was so widely
 adopted in 2015.
 
 
@@ -468,8 +468,8 @@ about very carefully.
 
 Originally known as IP Next
 Generation, or IPng, once an official IP version
-number was assigned, IPng became IPv6. The existing version which we
-have discussed above is IPv4. The apparent
+number was assigned, IPng became IPv6. The existing version, which we
+have discussed above, is IPv4. The apparent
 discontinuity in numbering is the result of version number 5 being used
 for a discontinued experimental protocol many years ago.
 
@@ -504,8 +504,8 @@ IPv6. With the Internet being so large and having no centralized
 control, it would be completely impossible to have a “flag day” on
 which everyone shut down their hosts and routers and installed a new
 version of IP. The architects expected a long transition period in
-which some hosts and routers would run IPv4 only, some will run IPv4
-and IPv6, and some will run IPv6 only. It is unclear if they
+which some hosts and routers would run IPv4 only, some would run IPv4
+and IPv6, and some would run IPv6 only. It is unclear if they
 anticipated that the transition period would extend beyond 30 years.
 
 IPv6 Addresses and Routing
@@ -518,7 +518,7 @@ IPv6 can address 3.4 × 10\ :sup:`38` nodes, again assuming 100%
 efficiency.  As we have seen, though, 100% efficiency in address
 assignment is impossible. Some analysis of other addressing schemes,
 such as those of the French and U.S. telephone networks, as well as
-that of IPv4, have turned up some empirical numbers for address
+that of IPv4, has turned up some empirical numbers for address
 assignment efficiency. Based on the most pessimistic estimates of
 efficiency drawn from this study, the IPv6 address space is predicted
 to provide over 1500 addresses per square foot of the Earth’s surface,
@@ -679,7 +679,7 @@ themselves providers, generally won't be willing or able to change
 their allocated addresses. Thus, one would expect over time to see
 that more prefixes appear in the global routing tables due to
 customers moving to new providers, independent of the growth of
-Internet.
+the Internet.
 
 .. _fig-v6addr:
 .. figure:: federation/figures/f04-11.png
@@ -703,8 +703,8 @@ assigned to other continents or countries.  Note that prefixes would
 be of different lengths under this scenario.  For example, a provider
 with few customers could have a longer prefix (and thus less total
 address space available) than one with many customers. There are
-regional internet registries for each continent today as well as some
-smaller registries at a national level and they form the basis for hierarchical
+Regional Internet Registries for each continent today as well as some
+smaller registries at a national level, and they form the basis for hierarchical
 address allocation.
 
 
@@ -757,7 +757,7 @@ unordered collection of ‘(type, length, value)’ tuples. In contrast,
 IPv6 treats options as *extension headers* that must, if present, appear
 in a specific order. This means that each router can quickly determine
 if any of the options are relevant to it; in most cases, they will not
-be. Usually this can be determined by just looking at the ``NextHeader``
+be. Usually, this can be determined by just looking at the ``NextHeader``
 field. The end result is that option processing is much more efficient
 in IPv6, which is an important factor in router performance. In
 addition, the new formatting of options as extension headers means that

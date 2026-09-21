@@ -129,7 +129,7 @@ overview of the issues that need to be tackled in an internetwork:
 
  - The resources used in Internet architecture must be accountable.
 
-.. [#] In the original paper the word "gateways" is used here.
+.. [#] In the original paper, the word "gateways" is used here.
 
 Some of these will look familiar from our discussion of requirements
 in Chapter |Intro|. The idea that the Internet keeps working in the face of
@@ -172,7 +172,7 @@ The low level of effort to attach hosts ultimately came down to the fact
 that, as long as your host could attach to *some* physical network,
 you could connect it to the Internet. All that was required was a
 TCP/IP implementation running on the host. As we discussed in Chapter
-2, such implementations with a well-defined API for applications
+|Apps|, such implementations with a well-defined API for applications
 became ubiquitous and enabled the rapid growth of Internet
 applications.
 
@@ -185,7 +185,7 @@ likely explanation for this is that computers were still a scarce
 resource in the 1970s and local area networks were yet to take off. So
 while the Internet was designed to accommodate networks in a
 general way, scaling to billions of devices didn't make the
-requirements list. Fortunately the decentralized approach to the
+requirements list. Fortunately, the decentralized approach to the
 Internet did foster scalable growth from the start. The problems
 of scale that have appeared over the decades include both the need to
 address billions of devices and the need to support routing among over

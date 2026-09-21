@@ -202,7 +202,7 @@ heterogeneity.
 
 Finally, there may be a number of options at the end of the header. The
 presence or absence of options may be determined by examining the header
-length (``HLen``) field. While options are used fairly rare, a
+length (``HLen``) field. While options are rarely used, a
 complete IP implementation must handle them all. It is commonly the
 case that routers process options as an exception less
 efficiently than normal "fast path" processing.
@@ -249,7 +249,7 @@ efficiently than normal "fast path" processing.
    router sends a control message back to the host. That message
    contains the MTU of the outgoing link so the host learns the new
    MTU that it can safely use. This could happen more than once along
-   the path but eventually the host discovers an MTU that works.
+   the path, but eventually the host discovers an MTU that works.
 
 
 |Fed|.2.2 Global Addresses
@@ -524,7 +524,7 @@ by no means the last) in achieving scalability.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have talked about how to get IP packets to the
-right physical network but glossed over the issue of how to get a
+right physical network, but glossed over the issue of how to get a
 packet to a particular host or router on that network. The main issue
 is that IP packets contain IP addresses, but the physical interface
 hardware on the host or router to which you want to send the packet
