@@ -61,7 +61,7 @@ have to drop lots of packets later on.
 
 .. [#] Timeouts are a mechanism commonly used by transport protocols
        to determine that a packet has not been successfully delivered.
-       Every time a sender transmits a packet it sets a timer, and
+       Every time a sender transmits a packet, it sets a timer, and
        should the timer expire before an acknowledgment is received,
        it assumes the packet was dropped. Timeouts are used to
        implement reliable delivery (as described in Chapter 12) and as
@@ -258,12 +258,12 @@ congestion. From the time the router drops a packet until the time
 when the same router starts to see some relief from the affected
 connection in terms of a reduced send rate, at least one round-trip
 time must elapse for that connection. There is probably not much point
-in having the router respond to congestion on time scales much less
+in having the router respond to congestion on timescales much less
 than the round-trip time of the connections passing through it. As
 noted previously, 100 ms is not a bad estimate of average round-trip
 times in the Internet. Thus, ``Weight`` should be chosen such that
-changes in queue length over time scales much less than 100 ms are
-filtered out. Of course this only applied to the larger Internet. When
+changes in queue length over timescales much less than 100 ms are
+filtered out. Of course this only applies to the larger Internet. When
 RED is applied to a datacenter network, for example, we can expect
 much shorter RTTs. We revisit this issue in Section |Capacity|.4.
 
@@ -276,12 +276,12 @@ Other queuing techniques, such as weighted fair queuing, could help
 with this problem by isolating certain classes of traffic from
 others. There was also discussion of creating a variant of RED that
 could drop more heavily from flows that are unresponsive to the
-initial hints that it sends. However this turns out to be challenging
+initial hints that it sends. However, this turns out to be challenging
 because it can be hard to distinguish between non-responsive behavior
-and \"correct\" behavior, especially when flows have a wide variety of
+and "correct" behavior, especially when flows have a wide variety of
 different RTTs and bottleneck bandwidths.
 
-As a footnote, 15 prominent network researchers urged for the
+As a footnote, 15 prominent network researchers made a case for the
 widespread adoption of RED-inspired AQM in 1998. The recommendation
 was largely ignored, primarily having to do with how difficult it is
 to correctly set the parameters (as documented in RFC 7567). AQM
@@ -312,7 +312,7 @@ parameter settings.  This created uncertainty around the merits of
 deploying it.
 
 Over a period of years, Van Jacobson (well known for his work on TCP
-Congestion and a co-author of the original RED paper) collaborated
+Congestion Control and a co-author of the original RED paper) collaborated
 with Kathy Nichols and eventually other researchers to come up with an
 AQM approach that improves upon RED. This work became known as CoDel
 (pronounced *coddle*) for Controlled Delay AQM. CoDel builds on several
@@ -328,11 +328,11 @@ AQM.
    Communications of the ACM, July 2012.
 
 First, the CoDel authors were the ones that articulated the difference
-between \"good queues\" and \"bad queues\" as illustrated in
+between "good queues" and "bad queues" as illustrated in
 :numref:`Figure %s <fig-good-bad>`. In a sense, then, the challenge
-for an AQM algorithm is to distinguish between \"good\" and \"bad\"
+for an AQM algorithm is to distinguish between "good" and "bad"
 queues, and to trigger packet loss only when the queue is determined
-to be \"bad\". Indeed, this is what RED is trying to do with its
+to be "bad". Indeed, this is what RED is trying to do with its
 ``Weight`` parameter (which filters out transient queue length).
 
 One of the innovations of CoDel is to focus on *sojourn time*, the
@@ -346,15 +346,15 @@ congested queue will delay every packet, and the minimum sojourn time
 will never be close to zero, as seen in :numref:`Figure %s
 <fig-good-bad>` (b). CoDel therefore measures the sojourn
 time—something that is easy to do for every packet—and tracks whether
-it is consistently sitting above some small target. \"Consistently\"
-is defined as \"lasting longer than a typical RTT\".
+it is consistently sitting above some small target. "Consistently"
+is defined as "lasting longer than a typical RTT".
 
 Rather than asking operators to determine the parameters to make
 CoDel work well, the algorithm chooses reasonable defaults. A target
 sojourn time of 5ms is used, along with a sliding measurement window
 of 100ms. The intuition, as with RED, is that 100ms is a typical RTT
 for traffic traversing the Internet, and that if congestion is lasting
-longer than 100ms, we may be moving into the \"bad queue\" region. So
+longer than 100ms, we may be moving into the "bad queue" region. So
 CoDel monitors the sojourn time relative to the target of 5ms. If it
 is above target for more than 100ms, it is time to start taking action
 to reduce the queue via drops (or marking if explicit congestion
@@ -389,7 +389,7 @@ target.
 There are more details to CoDel presented in the Nichols and Jacobson
 paper, including extensive simulations to indicate its effectiveness
 across a wide range of scenarios. The algorithm was originally
-standardized as \"experimental\" by the IETF in RFC 8289, with a
+standardized as "experimental" by the IETF in RFC 8289, with a
 companion specification (RFC 8290) adding fair queuing to the base
 algorithm. The latter, commonly known as ``fq_codel``, assigns
 distinct flows to separate queues, with the CoDel algorithm applied to
@@ -446,7 +446,7 @@ In addition to these two bits in the IP header (which are
 transport-agnostic), ECN also includes the addition of two optional
 flags to the TCP header. The first, ``ECE`` (ECN-Echo), communicates
 from the receiver to the sender that it has received a packet with the
-``CE`` bit set. The second, ``CWR`` (Congestion Window Reduced)
+``CE`` bit set. The second, ``CWR`` (Congestion Window Reduced),
 communicates from the sender to the receiver that it has reduced the
 congestion window. The exact meaning of "congestion window reduced"
 will be clear when we get to TCP in Chapter |TCP|, but for now you can

@@ -3,7 +3,7 @@
 |Capacity|.4 Service Differentiation
 --------------------------------------
 
-While RED and ECN have not enjoyed wide-spread adoption in the
+While RED and ECN have not enjoyed widespread adoption in the
 Internet at large, and FIFO with tail drop continues to be the default
 queuing discipline, the mechanisms described in the previous two
 sections have proven useful in several specific settings. This section
@@ -41,7 +41,7 @@ well-known DSCP value; routers are configured to recognize that value
 and place the corresponding packets into a queue that will deliver low
 latency, such as a priority queue.
 
-The commonly used set of per-hop behaviors include:
+The commonly used set of per-hop behaviors includes:
 
 * **Default Forwarding (DF):** Regular best-effort traffic.
 
@@ -67,7 +67,7 @@ streaming, VOIP, and so on.
 
 The definition of the Differentiated Services field, defining six
 bits of the old ``ToS`` byte, is in RFC 2474, while the companion RFC
-2575 spells out the larger architectural picture for DiffServ.
+2475 spells out the larger architectural picture for DiffServ.
 
 .. admonition:: Further Reading
 
@@ -107,8 +107,8 @@ routers implement a particular queuing discipline, set the ECN bit
 when early signs of congestion are detected, and enforce good behavior
 among all edge hosts (the datacenter servers). The second simplifying
 factor in datacenters is that they typically have sub-millisecond
-RTTs, so there reason to expect that most hosts will react in a timely
-manner to a congestion markings.
+RTTs, so there is reason to expect that most hosts will react in a timely
+manner to congestion markings.
 
 If anything, datacenters have proven to be such fertile ground for the
 mechanisms described in this chapter that there is no single correct
@@ -162,7 +162,7 @@ implemented in the hypervisor that sits between the server and the
 tenant VM; in the NIC that connects the server to the datacenter
 fabric; and/or in the Top-of-Rack switch that is the first switch on that
 fabric. The other general approach is to trust senders to behave
-correctly; this is more likely to happen when the you are paying for
+correctly; this is more likely to happen when you are paying for
 resource usage. As for exactly what constitutes good sender behavior,
 we describe two examples in Part III: Chapter |CC| looks at TCP
 congestion control, and Chapter |Message| looks at RDMA.

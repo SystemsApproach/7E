@@ -11,15 +11,15 @@ traffic flows across a network are made based on observed traffic
 patterns. One aspect of traffic engineering is about capacity planning
 and provisioning. For example, when you see persistently high
 utilization of a link between two sites, you might either provision a
-higher speed link, or alternatively, add additional sites (and hence,
+higher-speed link, or alternatively, add additional sites (and hence,
 paths) to your overall network topology.
 
 Where definitions get murky is when those kinds of activities can be
 carried out in a matter of seconds or minutes due to automation, for
 example, by activating a new circuit or optical wavelength, as
-describe in Section |Tech|.3. As another example, techniques that
+described in Section |Tech|.3. As another example, techniques that
 balance load across two or more equally viable paths—as we saw in
-Section |Routing|.5, with the use of ECMP—is sometimes described as a
+Section |Routing|.5, with the use of ECMP—are sometimes described as a
 kind of traffic engineering. Routing algorithms are viewed as distinct
 from traffic engineering, although deciding how to set the link
 metrics used by the algorithm is usually considered an aspect of TE.
@@ -42,7 +42,7 @@ or routers may fail, removing some capacity from the system.
 MPLS (Multiprotocol Label Switching) is a technology that provides a
 convenient way to control the path of traffic through the network that
 goes some way to address the challenges of traffic engineering. The
-capability is often referred to as *explicit routing* although it has
+capability is often referred to as *explicit routing*, although it has
 some similarities to a feature in IP known as *source routing*.\ [#]_
 :numref:`Figure %s <fig-fish>` shows an example of how the explicit
 routing capability of MPLS might be applied.  This sort of network is
@@ -85,11 +85,11 @@ sets of packets have the same destination. We have created two
 distinct FECs, associating a different label with each FEC, and this
 allows R3 to forward the traffic in the two classes differently.
 
-One question that then arises is how do all the routers in the network
+One question that then arises is how all the routers in the network
 agree on what labels to use and how to forward packets with particular
-labels? The short answer is that some control plane protocol handles
+labels. The short answer is that some control plane protocol handles
 the task. There have actually been a few different protocols used,
-included RSVP (the Resource Reservation Protocol) and extensions to
+including RSVP (the Resource Reservation Protocol) and extensions to
 existing routing protocols. MPLS-SR (segment routing), which we saw in
 the datacenter context in Chapter |Routing|, provides another set of
 control plane options. For our purposes here it suffices to say that
@@ -125,9 +125,9 @@ other ways to engineer the traffic traversing the
 wide-area links between their datacenters. For example, Google has publicly
 described their private backbone, called B4, which is built entirely
 using bare-metal switches and SDN. Similarly, Microsoft has described
-an approach to interconnecting their data centers called SWAN. A
+an approach to interconnecting their datacenters called SWAN. A
 central component of both B4 and SWAN is a centralized
-Traffic Engineering control program that provisions the network
+traffic engineering control program that provisions the network
 according to the needs of various classes of applications.
 
 Consider the example in :numref:`Figure %s <fig-te-example>`. Assume

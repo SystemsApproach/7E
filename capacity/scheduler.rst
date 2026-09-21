@@ -8,7 +8,7 @@
 
 Each router implements a packet scheduler that decides the order in
 which queued packets are transmitted. This scheduler is closely
-related to the *queuing discipline*, so much so, that it is not
+related to the *queuing discipline*, so much so that it is not
 uncommon to name the scheduler after the queuing discipline (as is the
 case for the three examples given in this section). Whichever name we
 choose, the mechanism is primarily concerned with deciding which
@@ -67,7 +67,7 @@ front of the line.
 The problem with priority queuing is that the high-priority queue can
 starve out all the other queues; that is, as long as there is at least
 one high-priority packet in the high-priority queue, lower-priority
-queues do not get served. For this to be viable, there needs to be
+queues do not get served. For this to be viable, there need to be
 limits on how much high-priority traffic is inserted in the queue. It
 should be immediately clear that we can’t allow users to set their own
 packets to high priority in an uncontrolled way; we must either
@@ -150,7 +150,7 @@ Point (DSCP), a field in the IP header. Another valid definition of a
 flow would be all the packets flowing between a pair of endpoints for
 a single application. In another common use case, flows
 correspond to subscribers, as in users connecting to an access network
-like the ones described in Chapter |shared|. WFQ is then used
+like the ones described in Chapter |Shared|. WFQ is then used
 to pace the rate at which each subscriber can send data into the
 network, matching the level of service they are paying for. All we
 need to know for the purpose of this section is that there are some
@@ -250,7 +250,7 @@ FQ at high speed proved challenging enough to inspire a lot of work on
 creating good approximate implementations of fair queuing that don't
 have the same computational complexity.
 
-One well known and widely implemented approximation to WFQ is *deficit
+One well-known and widely-implemented approximation to WFQ is *deficit
 round robin* (DRR). DRR takes care of the problem of variable packet
 sizes that affects simple round robin using a *deficit counter* for
 each queue. Initially this counter is set to zero for each queue. Then
@@ -336,5 +336,5 @@ queues that share the remaining bandwidth in a weighted fair manner.
    discipline, and the policy is a particular set of scheduling
    parameters (such as weights and priorities) to be applied to
    traffic classes. A second mechanism is needed to classify packets,
-   and it a matter of policy to configure the classifier to divide
+   and it is a matter of policy to configure the classifier to divide
    traffic into the set of flows that are to be scheduled.

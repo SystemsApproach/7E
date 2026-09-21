@@ -40,7 +40,7 @@ could generate. A phenomenon known as *tragedy of the commons*,
 whereby selfish behavior degrades shared resources, was predictable,
 and did eventually catch up with the Internet. The response is for
 edge hosts to send less traffic (exactly how much less is the essence
-of Congestion Control), but responsibility doesn't fall solely to the
+of congestion control), but responsibility doesn't fall solely to the
 edge hosts. Network nodes have a role to play, as well.  The rest of
 this section explores that part of the design space.
 
@@ -69,7 +69,7 @@ think of them as cooperatively trying to achieve a globally optimal
 solution.  From this perspective, there is a shared objective
 function, and all the elements are implementing a distributed
 algorithm to optimize that function. The various mechanisms described
-in this Chapter—and their edge counterparts in Chapter |CC| in Part
+in this chapter—and their edge counterparts in Chapter |CC| in Part
 III—are simply defining some objective function. A persistent
 challenge has been how to judge competing objective functions when
 multiple mechanisms have been deployed.
@@ -82,10 +82,10 @@ about the state of the network's links and switches, compute a
 globally optimal (or near-optimal) allocation, and then advise end
 hosts as to how much capacity is available to each of them. Such an
 approach would certainly be limited in either the geographic scope or
-the time-scale in which the centralized controller could be responsive
+the timescale in which the centralized controller could be responsive
 to changes in the network. There are examples of centralized
 approaches being successfully applied at
-data center scale and in the longer timescale
+datacenter scale and in the longer timescale
 allocation decisions made by traffic engineering
 mechanisms, such as those described in Section |Capacity|.4. There
 have been enough challenges to the distributed model that dominated
@@ -118,7 +118,7 @@ At the other end of the spectrum is a host-centric approach. The
 router makes no guarantees and offers no explicit feedback about the
 available capacity (i.e., silently drops packets when its buffers are
 full) and it is the host's responsibility to observe the network
-conditions (e.g., how many packets they are successfully getting
+conditions (e.g., how many packets it is successfully getting
 through the network) and adjust its behavior accordingly.
 
 In the middle, routers can take more proactive action to assist the
@@ -147,7 +147,7 @@ requirement that buffers be able to hold at least one bandwidth-delay
 product of packets—a requirement that was probably too large and
 subsequently questioned by further research. But the fact is that
 buffers are necessary, and it is expected that they will be used to
-absorb bursts. This is sometimes referred to this as \"good queue\",
+absorb bursts. This is sometimes referred to as "good queue",
 as illustrated in :numref:`Figure %s <fig-good-bad>` (a).
 
 .. _fig-good-bad:
@@ -166,7 +166,7 @@ buffers and persistent queues within those buffers is a phenomenon
 that Jim Gettys has named *Bufferbloat*. It is clear that persistently
 full queues are what a well-designed AQM mechanism should seek to
 avoid. Queues that stay full for long periods without draining are
-referred to, unsurprisingly, as \"bad queue\", as shown in
+referred to, unsurprisingly, as "bad queue", as shown in
 :numref:`Figure %s <fig-good-bad>` (b).
 
 .. _reading_bloat:
@@ -184,7 +184,7 @@ Because the Internet assumes a connectionless model, any
 connection-oriented service is implemented by an end-to-end transport
 protocol running on the end hosts (such as TCP). There is no
 connection setup phase implemented *within* the network (in contrast
-to circuit based networks), and as a consequence, there is no
+to circuit-based networks), and as a consequence, there is no
 mechanism for individual routers to pre-allocate buffer space or link
 bandwidth to active connections.
 
@@ -235,7 +235,7 @@ The final design question is one the original IP specification raised,
 but didn't fully address: Should routers treat all traffic the same,
 or should it be possible to offer different levels of service to
 different classes of traffic? The original spec, RFC 791, defines an
-8-bit *Type of Service* field (``ToS``), that could be used to identify
+8-bit *Type of Service* field (``ToS``) that could be used to identify
 important packets, such as routing updates, or to request low delay,
 high reliability, or high throughput.  The existence of the ``ToS``
 field indicates a recognition that there may be good reasons to treat
@@ -256,7 +256,7 @@ the Internet, and more broadly on packet-switched networks. A lot of
 that research ended up being overtaken by events, as well-provisioned,
 high-bandwidth networks proliferated, but some of it had a lasting
 impact. This is particularly true for environments where one entity
-controls the end-points and the bottleneck links, such as enterprise
+controls the endpoints and the bottleneck links, such as enterprise
 networks and cloud datacenters. In this chapter we cover the
 mechanisms that have actually succeeded in providing different classes
 of service in real-world deployments.
