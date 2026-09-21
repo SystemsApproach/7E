@@ -338,7 +338,7 @@ storage potentially required at each node) and the general problem
    links. However, there is a long history of dynamic metrics going
    back to the early days of the ARPANET. The ARPANET's links were
    quite varied in terms of latency and throughput, including some
-   very high latency satellite links. Also, with link speeds measured
+   high-latency satellite links. Also, with link speeds measured
    in kilobits per second, it wasn't hard for a link to build up a
    large queue that would take a long time to drain. Early efforts
    tried to use dynamic metrics to steer traffic towards the links
