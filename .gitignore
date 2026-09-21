@@ -1,7 +1,5 @@
 *.pdf
 *.tex
-*.txt
-*.sh
 venv-docs
 .DS_Store
 */.DS_Store

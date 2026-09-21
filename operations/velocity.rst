@@ -9,17 +9,17 @@ still one big difference between managing a network's packet delivery
 service and managing the cloud services that run on top of that packet
 delivery service. Most notably, applications, implemented on hosts at
 the network edge, evolve at a much faster pace than any of the
-protocols we've see so far in Part II. We are getting a little bit
+protocols we've seen so far in Part II. We are getting a little bit
 ahead of ourselves—we discuss the software that runs on edge hosts in
 Part III—but seeing the two operational challenges side-by-side helps
-us to appreciate that there is spectrum of options every operator has
+us to appreciate that there is a spectrum of options every operator has
 to take into account. That spectrum is how much they are willing to
 trade *network stability* for *feature velocity.* Every feature you
 add to a network (supposedly) provides value, but it comes at the risk
 of negatively impacting stability.
 
 One reason we have split the topics covered in this book into "inside
-the network" and "at the network edge" is that is has proven to be a
+the network" and "at the network edge" is that it has proven to be a
 natural dividing line between favoring stability (delivering packets)
 and feature velocity (building applications). But it's a continuum,
 and there is no reason, in principle, why network providers couldn't
@@ -30,7 +30,7 @@ chapter by briefly outlining what those practices involve.
        operators are continually trying to find ways to increase their
        value-add by including a richer set of functionality in what
        they offer their customers. For example, one of the biggest
-       arguments for 5G was that MNOs would be able develop and sell
+       arguments for 5G was that MNOs would be able to develop and sell
        additional services beyond broadband connectivity. But that's
        easier said than done, and the challenge of operating the
        resulting set of services is a big reason why.
@@ -54,9 +54,9 @@ operation and development tasks, a practice known as *DevOps*.
 
 As also depicted in :numref:`Figure %s <fig-cicd-pipeline>`, the
 pipeline includes two major processes, labelled *Continuous
-Integration (CI)* and *Continuous Deployment (CD*). Every time a
-change is checked into the code repo the CI system runs, integrating
-the change into a full a system build, testing the new system under
+Integration (CI)* and *Continuous Deployment (CD)*. Every time a
+change is checked into the code repo, the CI system runs, integrating
+the change into a full system build, testing the new system under
 various scenarios, and if successful, updating the image repo with a
 new executable. Changes in the inventory or configuration repos then
 trigger the CD part of the pipeline, which deploys the changes
@@ -80,14 +80,14 @@ companion book.
 
    L. Peterson, A. Bavier, S. Baker, Z. Williams, and B. Davie.
    `Edge Cloud Operations: A Systems Approach
-   <https:ops.systemsapproach.org>`__.  June 2025.
+   <https://ops.systemsapproach.org>`__.  June 2025.
 
 As a final note, while we have motivated CI/CD and DevOps as enabling
 feature velocity for cloud services and applications, the same
 practices have also been successfully applied to the underlying
 network. This works as long as that network is also software-based
 (i.e., adopts SDN practices), so that its functionality can be
-included in the CI/CD pipeline. A well publicized example of this
+included in the CI/CD pipeline. A well-publicized example of this
 approach is Jupiter, Google's datacenter network. Jupiter has
 accommodated constant evolution and improvement while maintaining high
 (99.999%) availability as a production system. Jupiter fabrics have

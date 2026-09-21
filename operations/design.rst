@@ -22,9 +22,9 @@ system would (a) translate that network-wide intent into a set of
 per-device configuration parameters, and (b) remotely install those
 parameters in each device. The devices would then periodically report
 information about their status—such as how many packets they had
-forwarded, the average queue length each output port, the number of
+forwarded, the average queue length of each output port, the number of
 route updates they had processed, and so on—back to the management
-system, with with the goal of detecting problematic behavior and
+system, with the goal of detecting problematic behavior and
 sending an *alert* to the operator whenever something requires their
 attention.
 
@@ -85,16 +85,16 @@ network devices. We consider each, in turn.
    advancement. The centralized use of that interface has led to a
    clear win for SDN.
 
-On the configuration side, automation require a programmatic approach;
+On the configuration side, automation requires a programmatic approach;
 expecting a human to manually enter configuration parameters into a
 web form or command line interface simply does not scale. Manually
 entering configuration settings is also notoriously error-prone, not
-only because human make typing mistakes, but more fundamentally,
-because it requires they know and remember the right settings.
+only because humans make typing mistakes, but more fundamentally,
+because it requires that they know and remember the right settings.
 Ensuring you have an *authoritative source* for all parameter settings
 is a more tractable problem when the system is automated. You still
 need to know which file (or combination of files) has codified the
-right values, but that's better the depending on notes jotted in
+right values, but that's better than depending on notes jotted in
 someone's notebook.
 
 What we need is a programmatic interface that supports ``GET`` and
@@ -172,14 +172,14 @@ practice is sometimes described in exactly those terms:
   provides. At the end of Day 1 operationalization, the device is
   considered up and running, and able to support user traffic.
 
-* **Day 2..N:** On-going management in support of day-to-day
+* **Day 2..N:** Ongoing management in support of day-to-day
   operations, coupled with monitoring the network to detect failures
   and service degradation, with the goal of sustaining the
   service. This is often referred to simply as “Day 2 Operations”.
 
 We now turn our attention to the building blocks we need to monitor an
 operational network, a process often referred to as *telemetry* since
-is involves "reading meters at a distance." Breaking the problem down
+it involves "reading meters at a distance." Breaking the problem down
 further, the first requirement is that devices themselves need to be
 *instrumented*, which is to say, they need to record their activity
 (such as number of packets sent or received) in local counters.

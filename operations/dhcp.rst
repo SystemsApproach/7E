@@ -9,18 +9,18 @@ laptop and hope to connect to Wi-Fi: acquiring an IP address. While
 this might seem like a problem to be addressed in Part III, where we
 take up issues at the edge of the network, assigning IP addresses is
 the responsibility of the network.  It is also an operational problem
-in that sense that IP addresses are a kind of resource that needs to
+in the sense that IP addresses are a kind of resource that needs to
 be managed. Either we find a way to automate the solution, or an
 operator (system admin) has to do it manually, on a case-by-case
 basis.
 
-We have already seen one example of the network assigning IP address
+We have already seen one example of the network assigning IP addresses
 to connected devices, and that was in Section |Shared|.4.3, where we
-described how Mobile Cellular network authenticates UEs. For the rest
-of the Internet, the Dynamic Host Configuration Protocol (DHCP), is
+described how the Mobile Cellular network authenticates UEs. For the rest
+of the Internet, the Dynamic Host Configuration Protocol (DHCP) is
 the mechanism that implements address assignment. DHCP is actually
 more general, in that it is used to configure other parameters hosts
-need to successfully send and receive packets; for example, their
+need to successfully send and receive packets, for example, their
 subnet mask, default router, and DNS server. (Remember that a
 machine's Ethernet address is typically burned into the NIC, but its
 IP address depends on what network it tries to connect to.)

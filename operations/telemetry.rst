@@ -10,7 +10,7 @@ metrics and traces, but not logs (the second of the three pillars of
 observability cited in Section |Ops|.1). This is because we are
 primarily focused on operating a network that is relatively static
 with respect to functionality: it forwards packets, with infrequent
-changes to the protocols stack. Router and switch vendors make use of
+changes to the protocol stack. Router and switch vendors make use of
 logs to ensure that their implementations of OSPF, BGP, and so on, are
 correct, but once in the hands of a network operator, metrics and
 traces are the most common way to monitor whether or not the network
@@ -40,7 +40,7 @@ In addition to monitoring performance, gNMI and OpenConfig can also be
 used to read variables that provide insight into other aspects of a
 protocol's behavior. This can be especially important for monitoring
 routing protocols, such as BGP.  For example, the following snippet of
-YAML show what might be reported by BGP on a router. (As a reminder,
+YAML shows what might be reported by BGP on a router. (As a reminder,
 YANG is used to define the schema, and YAML is used to pass values
 corresponding to a given schema.)
 
@@ -68,7 +68,7 @@ is critical; it's often changes over time—as opposed to an
 instantaneous reading—that signals worrisome behavior. It's also
 important to recognize that the hard part is knowing what data to
 record, and being able to establish "rules" or "thresholds" that
-indicate when something is potential amiss, or worse, has failed and
+indicate when something is potentially amiss, or worse, has failed and
 requires corrective action. There is no magic formula; only experience
 with the protocols and devices you are responsible for managing tells
 you (a) what information is worth collecting, and (b) what values or
@@ -91,7 +91,7 @@ sign of a Denial-of-Service attack.
 A brute force approach to gaining visibility into the traffic being
 carried by a network is to capture every packet being exchanged on a
 link (typically the packet header and the first few bytes of the
-payload is sufficient), and dump it into a file for analysis. This is
+payload are sufficient), and dump it into a file for analysis. This is
 most often done on an end host rather than in a switch or router—due
 to the volume of traffic being carried—and even then, it is only done
 for the sake of troubleshooting a problem; continually collecting a
@@ -165,7 +165,7 @@ sampling. A switch needs to be instrumented to support sampling, and
 an interface is needed to say what level of sampling to perform (e.g.,
 1-in-10000 on a 100-Gbps link) and where to send the collected
 headers. For the latter problem, OpenConfig defines an ``sFlow``
-model, although it is still more common for vendors to provide CLI
+model, although it is still more common for vendors to provide a CLI
 command to activate and configure sFlow.
 
 The other big issue is how to analyze the collected samples. One
@@ -200,7 +200,7 @@ displays of the collected data.
    in physics, and we see something similar in networks. Packet
    tracing is intrusive, and can easily impact the performance of the
    network data plane. Care must be taken to limit its duration (it
-   should only activated to troubleshoot a problem) and the volume it
+   should only be activated to troubleshoot a problem) and the volume it
    captures (it may be sufficient to only sample traffic). Packet
    tracing also has serious implications for privacy, providing a
    motive for end-to-end encryption, which we discuss in Chapter
@@ -227,7 +227,7 @@ throughput rate to some remote server. As we'll see in Chapter |TCP|,
 packet loss impacts the measured throughput rate, so ``iperf`` does
 not necessarily reflect the maximum achievable rate—a fact your ISP
 will remind you of should you report you are not seeing the bandwidth
-you are paying for—but it is does provide useful data about your
+you are paying for—but it does provide useful data about your
 effective bandwidth.
 
 One of the challenges in using tools like ``iperf`` is that you need a
@@ -264,12 +264,12 @@ to need to wait until the next release of the switching chip. The
 exception is when the forwarding pipeline is programmable, as is the
 case with the Protocol Independent Switching Architecture (PISA)
 mentioned in Section |Tech|.2. It turns out that one of the most
-compelling aspects of programming the dataplane in a language like P4
+compelling aspects of programming the data plane in a language like P4
 is the ability to add instrumentation to the data plane, a technique
 known as *In-band Network Telemetry (INT)*.
 
 The idea of INT is to encode telemetry “instructions” into packet
-header fields, and which then causes network switches to process them
+header fields, which then causes network switches to process them
 as they flow through the forwarding pipeline. These instructions tell
 an INT-capable device what state to collect, and then how to write
 that state into the packet as it transits the network.\ [#]_ INT traffic
@@ -301,7 +301,7 @@ packet, and records the corresponding data for each switch.
 INT is still in an early stage, but it has the potential to provide
 qualitatively deeper insights into traffic patterns and the root
 causes of network failures. For example, INT can be used to measure
-and record queuing delay individual packets experience while
+and record the queuing delay individual packets experience while
 traversing a sequence of switches along an end-to-end path, with a
 packet like the one shown in the figure reporting: *"I visited Switch
 1 @780ns, Switch 2 @1.3µs, Switch 5 @2.4µs."* This information can be
@@ -317,7 +317,7 @@ to determine which flows shared buffer capacity at each switch.
    X. Chen et al. `Fine-grained queue measurement in the data plane
    <https://p4.org/p4/conquest>`__. ACM CoNEXT'19, December 2019.
 
-Similarly, packets can report the decision making process that
+Similarly, packets can report the decision-making process that
 directed their delivery, for example, with something like: *"In Switch
 1, I followed rules 75 and 250; in Switch 2, I followed rules 3 and
 80."* This opens the door to using INT to verify that the data plane

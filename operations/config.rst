@@ -83,7 +83,7 @@ formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
    browser knows how to render it on a display. The next
    generalization was to markup (annotate) data for purposes other
    than to display it, for example, so that two programs could
-   exchange data over HTTP as part of a e-commerce transaction. XML
+   exchange data over HTTP as part of an e-commerce transaction. XML
    (Extensible Markup Language) serves that purpose.  For example, XML
    supports tagged data such as*
    ``<product_num>1234567</product_num>``
@@ -94,7 +94,7 @@ formats, including XML, YAML, JSON, and Protocol Buffers (protobufs).
    collection of data. No one wants to repeatedly type "<element_name>
    ... </element_name>" for every data item they enter. They do want
    the structured organization of data, and that's what YAML provides.
-   Technically, this means YAML is not a markup language; hence it's
+   Technically, this means YAML is not a markup language; hence its
    name: YAML Ain't a Markup Language. YAML is actually closer to JSON
    (JavaScript Object Notation) than XML.*
 
@@ -181,7 +181,7 @@ languages, where the client and server sides of the gRPC need not be
 written in the same language. With respect to the overview of network
 management shown in :numref:`Figure %s <fig-mgmt-system>`, the ``gNMI
 Client`` stub runs as part of the Network Management System and an
-instance of the the ``gNMI Server`` stub runs on each individual
+instance of the ``gNMI Server`` stub runs on each individual
 switch, specifically as part of the Switch OS system running on the
 switch's control processor. (See, for example, :ref:`Figure 40
 <fig-nbi>` in Section |Tech|.2.5, where the server stub in
@@ -264,8 +264,8 @@ generate the configuration interface from a set of YANG models is an
 important part of that, but the configuration settings, themselves,
 still have to be entered.  If an operator has to do that by typing
 individual values into a web form, then you still have a
-problem. Moreover, it's not just that data entry is time
-consuming. Every time a change needs to be made, there is an
+problem. Moreover, it's not just that data entry is
+time-consuming. Every time a change needs to be made, there is an
 opportunity to make a mistake.
 
 The solution, which has its origins in cloud operations, is to treat
@@ -274,7 +274,7 @@ parameter settings as code; the practice is known as
 specified in YAML, and the set of YAML
 files corresponding to a network's aggregate configuration is managed
 in a code repository just like any other collection of C, Java, or
-GoLang programs. This is not as big of stretch as it might sound: you
+GoLang programs. This is not as big of a stretch as it might sound: you
 can think of YAML as a declarative programming language. These YAML
 files then serve as the authoritative source of all parameter settings.
 
@@ -289,7 +289,7 @@ be versioned just like other software modules, with a corresponding
 set of version control and release management tools. There could be a
 stable version that represents the currently deployed
 parameters. Edits can be made, reviewed, and thoroughly tested, and
-when there is confidence in its correctness, the changes rolled out to
+when there is confidence in its correctness, the changes are rolled out to
 the operational system. Most importantly, if there is a problem, it's
 possible to roll back to an earlier, known-working version of the
 configuration state. Testing that a configuration is correct is
@@ -347,7 +347,7 @@ the way they do because of how the operator did things yesterday.
 (This is true of many systems: they evolve incrementally, as a result
 of changing circumstances.) With respect to network operations, the
 fact that many devices were originally managed via a device-specific
-CLI means that a set of tools have evolved to take advantage of that
+CLI means that a set of tools has evolved to take advantage of that
 capability. Given this starting point, the challenge is how to
 improve automation using a mechanism that was originally designed for
 manual control.
@@ -363,7 +363,7 @@ Ansible executes them in an attempt to bring the actual state of the
 device into alignment with the specified state for the device.
 
 Ansible is one piece of the puzzle, but not the whole solution. The
-full set of issues introduced in Section |Ops|.1 still have to be
+full set of issues introduced in Section |Ops|.1 still has to be
 resolved. For example, we need to identify the authoritative source of
 all variable settings. Ansible value files typically provide software
 configuration parameters, but many operators already use an inventory
@@ -382,9 +382,9 @@ option for those operators that care about vendor-neutrality, but we
 need a way to map these vendor-neutral variables onto their
 device-specific counterparts. *Napalm*, which stands for "Network
 Automation and Programmability Abstraction Layer with Multivendor
-support" is an open source tool that helps address this issue. It's a
+support," is an open source tool that helps address this issue. It's a
 library that can be installed on the device to provide a
-vendor-neutral NBI. Ansible then interacts with this library rather
+vendor-neutral NBI. Ansible then interacts with this library rather than
 the native CLI. At this point, we've established rough equivalency
 with the system described earlier in this section, although it ends up
 being more bespoke than off-the-shelf. This makes it more cumbersome

@@ -34,7 +34,7 @@ serves an enterprise or department. Their approach to operations is
 heavily influenced by the vendors that sell them servers, routers, and
 other network appliances. And finally there is you, either managing
 your home network, or, like many people, outsourcing that
-responsibility to their ISP.
+responsibility to your ISP.
 
 In this chapter, we avoid the use of arcane terminology, and focus
 instead on the fundamental issues all of these operators face. They
