@@ -196,6 +196,7 @@ Cadel
 Calcote
 callee
 Candeia
+cannae
 Cantabloggia
 capabilities
 CAPWAP
@@ -778,6 +779,7 @@ jitter
 jpeg
 json
 judgement
+judgements
 Jupyter
 Kahn
 Karaf
@@ -978,6 +980,7 @@ mpls
 MPLS
 Mpps
 MPTCP
+ms
 MSDP
 msg
 msgAddHdr
@@ -1091,6 +1094,7 @@ NR's
 NRF
 NRZ
 NRZI
+ns
 NSBU
 NSDI
 NSFNET
@@ -1164,6 +1168,7 @@ operationalized
 operationalizes
 operationalizing
 OPF
+Opte
 optimality
 optimisation
 optimizations
@@ -1255,6 +1260,7 @@ Pluggable
 png
 PoCs
 PON
+Postel
 postfix
 PostScript
 PPP
@@ -1980,3 +1986,4 @@ Ziv
 ZJUGuoShuai
 zmap
 ztp
+μs
