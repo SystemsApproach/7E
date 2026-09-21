@@ -18,7 +18,7 @@ two keys, one for each direction. It is nevertheless a symmetric key
 cipher, since the same key is used for encryption and decryption. Similarly, two initialization
 vectors are required.  Thus, regardless of the choice of cipher suite,
 a TLS session requires effectively four keys to be agreed upon by the
-end points. TLS derives all of them from a single shared secret that
+endpoints. TLS derives all of them from a single shared secret that
 was obtained during the handshake phase.
 
 The step that derives the keys and initialization vectors from the
