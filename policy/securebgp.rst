@@ -28,7 +28,7 @@ is vulnerable to a wide range of attacks, and as the one routing
 protocol that crosses the boundaries of a single administrative
 domain, deserves our attention when we think about security of routing.
 
-There are multiple levels to the problem of securing inter-domain
+There are multiple levels to the problem of securing interdomain
 routing.  When you make a secure, encrypted connection to your bank,
 you rely on Transport Layer Security (TLS) to keep your data private
 (using encryption) and to authenticate the connection to the bank. We
@@ -37,7 +37,7 @@ are really connected to your bank, you probably trust them to show you
 accurate information about your account (mostly—banks do make mistakes
 on occasions). But a secure connection to a BGP speaker (a router
 running BGP) doesn't imply that every route advertisement provided by
-that speaker is reliable. In fact both honest mistakes and deliberate
+that speaker is reliable. In fact, both honest mistakes and deliberate
 configuration decisions can and have resulted in false advertisements
 being made in BGP.
 
@@ -63,7 +63,7 @@ This comes down to a combination
 of factors including history, inertia, and the different operational
 model of running BGP versus connecting to a remote website. For
 example, BGP sessions often run between directly connected routers at
-a peering point or Internet exchange points (IXPs) which allows for a
+a peering point or Internet exchange points (IXPs), which allows for a
 simple TTL-based method to prevent spoofing. Privacy of BGP updates is
 considerably less important than authenticity. And as we shall see,
 there is a lot more to establishing the authenticity of a BGP
@@ -251,28 +251,28 @@ from the root to the leaves.
    :width: 550px
    :align: center
 
-   Chain of trust for RPKI
+   Chain of trust for RPKI.
 
 :numref:`Figure %s <fig-rpki>` shows how the certificates are arranged
-for a simple example of an ISP *A* with customer *C*. There is a chain
+for a simple example of an ISP A with customer C. There is a chain
 of trust from the root certificate to the customer. The certificate
-that ISP *A* issues, on the far right of the picture, says that some
-address prefix has been allocated to customer *C*, and includes the
-public key of customer C. This certificate is signed by ISP *A* using
-the private key of *A*. So if we can trust *A*, we learn two things
-about *C*: its public key and the set of addresses allocated to the
-holder of that public key. Note that we don't learn who *C* is; we
+that ISP A issues, on the far right of the picture, says that some
+address prefix has been allocated to customer C, and includes the
+public key of customer C. This certificate is signed by ISP A using
+the private key of A. So if we can trust A, we learn two things
+about C: its public key and the set of addresses allocated to the
+holder of that public key. Note that we don't learn who C is; we
 just learn the public key of the entity that is authorized to
 originate routing advertisements for some prefix or prefixes.
 
 One level higher in the chain, the Regional Internet Registry (RIR) has
-issued a certificate that states ISP *A* has authority to allocate
+issued a certificate that states ISP A has authority to allocate
 addresses out of some prefix. The certificate also tells us the
-public key of *A*. The prefix that *A* has allocated to *C*
+public key of A. The prefix that A has allocated to C
 must be a subprefix within the allocation made by the RIR.
 By following the chain back to the root certificate, it is possible to
-establish that *C* is legitimately able to advertise the prefix
-allocated to it by *A*. This chain works as long as we trust the root
+establish that C is legitimately able to advertise the prefix
+allocated to it by A. This chain works as long as we trust the root
 certificate, and so we have to take care to distribute root
 certificates in some secure manner to bootstrap the process.
 
@@ -284,13 +284,13 @@ cryptographically signed object that associates a prefix with an AS
 that is authorized to originate routing advertisements for that
 prefix.
 
-In our example above, *C* creates an ROA which it signs
-with its private key. The ROA contains the AS number of *C* and the
+In our example above, C creates an ROA which it signs
+with its private key. The ROA contains the AS number of C and the
 prefix or prefixes that it wishes to advertise. Anyone who looks at
-the ROA and the resource certificate chain that leads from the root CA to *C*
+the ROA and the resource certificate chain that leads from the root CA to C
 can validate that it has been signed with the private key belonging to
 C; they can also check that C is authorized to advertise the prefixes contained in the
-ROA. Because the ROA also contains the AS number for *C*, we now know
+ROA. Because the ROA also contains the AS number for C, we now know
 that we should trust advertisements of this prefix if they originate
 from the stated AS. Furthermore, an ROA may limit the maximum length of the prefix to
 protect against bogus advertisements of more specific routes to a
@@ -301,7 +301,7 @@ sub-prefix (as in the YouTube example above).
    :width: 650px
    :align: center
 
-   An ROA has a chain of trust back to the RPKI root
+   An ROA has a chain of trust back to the RPKI root.
 
 Rather than being passed around in real time with routing advertisements,
 the RPKI certificates and ROAs are stored in repositories, which are typically
@@ -326,7 +326,7 @@ servers that are external to the routers themselves.  The external validator
 systems answer queries about the validity of BGP advertisements based on information
 they have downloaded from the RPKI repository.
 
-With the RPKI in place it is now possible to perform Route Origin
+With the RPKI in place, it is now possible to perform Route Origin
 Validation (ROV). That is, if a given AS claims to be the originator of a
 certain prefix, that claim can be checked against the information in
 the RPKI. So, for example, if Pakistan Telecom were now to claim to be the
@@ -356,7 +356,7 @@ advertisements that it receives from other ASes.
 
 While there are many forms of attack or misconfiguration that would
 not be caught by ROV (particularly an AS falsely advertising a path that
-doesn't actually exist to a valid originating AS) it does prevent a large number of issues,
+doesn't actually exist to a valid originating AS), it does prevent a large number of issues,
 especially those caused by misconfiguration. To more fully combat the
 advertisement of false information in BGP, it is necessary to adopt
 some sort of path validation, as discussed below.
@@ -368,7 +368,7 @@ NIST RPKI monitor indicates that of the one-million-plus routes
 advertised globally in BGP, about 56% are covered by valid ROAs. Less than 2%
 are detected as invalid (the ROV check fails) while the remaining 42%
 do not contain ROA information.  Looking at the deployment over time
-we can see a steady increase in valid ROA and a corresponding decrease
+we can see a steady increase in valid ROAs and a corresponding decrease
 in the "not found" group—the advertisements with no ROA. While 56% is
 a long way from 100%, this level of penetration is a significant
 accomplishment—especially given the historical difficulty of making
@@ -377,7 +377,7 @@ changes to Internet routing and the "core" of the Internet.
 Finally, note that there needs to be a process to revoke certificates,
 for cases such as the re-allocation of an address prefix from one
 provider to another. Revocation can be handled by the RPKI
-repositories using "certificate revocation lists" (CRLs) which are
+repositories using "certificate revocation lists" (CRLs), which are
 distributed using the same mechanisms as certificates.
 
 
@@ -400,14 +400,14 @@ has a valid path to a certain prefix that traverses five ASes, but
 chooses to falsely advertise that it can reach that prefix in two AS
 hops, it is likely to attract traffic destined for that
 prefix. Whatever the motive for such a step may be (e.g., to increase
-revenue or to censor certain traffic, or even simple misconfiguration)
+revenue or to censor certain traffic, or even simple misconfiguration),
 it clearly undermines the correct operation of Internet routing. The
 solution to such attacks is to validate not just the originator of a
 prefix but the entire path. It turns out this is a considerably harder
 problem to solve than ROV.
 
 There are a few different proposals for how to securely validate
-paths. We focus here on the BGPsec standard from the IETF which
+paths. We focus here on the BGPsec standard from the IETF, which
 illustrates the overall approach and the challenges with achieving
 widespread deployment.
 
@@ -462,7 +462,7 @@ signed announcement that says "the path <AS2,AS1> leads to prefix P"
 and sign this using its private key. It includes the full signed
 message from AS1 as well as the new path. Again, before signing, it
 includes the number of the target AS to which it is sending this
-announcement. This announcement is received by AS3 which can now add
+announcement. This announcement is received by AS3, which can now add
 itself to the path and sign the result, and so on.
 
 Including the target AS in the material that is signed is essential to
@@ -486,7 +486,7 @@ not honor—AS2, for example, might refuse (or be unable) to forward
 traffic from AS3 to AS1 in spite of having advertised the path. A
 particular concern is route leaks, in which misconfiguration causes an
 AS to advertise a route by mistake, with no intention of attracting
-traffic to that prefix. When such traffic arrives it might overwhelm
+traffic to that prefix. When such traffic arrives, it might overwhelm
 the resources of the AS that accidentally advertised the route,
 causing traffic to be dropped.
 
@@ -501,7 +501,7 @@ ROV, where cryptographic operations happen separately from the
 validation of BGP messages). The second is a "collective action
 problem": when a single ISP pays the cost of implementing BGPsec, it
 does little if anything to improve the situation for that ISP. Only
-when a critical mass of ISPs are using BGPsec does it start to provide
+when a critical mass of ISPs is using BGPsec does it start to provide
 significant incremental benefits over ROV. Issuing an ROA, by
 contrast, immediately helps the provider who issues it. The situation
 is captured in the paper "BGP Security in Partial Deployment". An
@@ -564,7 +564,7 @@ relationships gives us the ability to detect such anomalies.
    :width: 350px
    :align: center
 
-   Valley-free topology of Autonomous Systems
+   Valley-free topology of Autonomous Systems.
 
 Suppose that two ASes, X and Y, publish a list of their providers
 using ASPA objects in the RPKI. Let's say that there is an ASPA object
@@ -597,7 +597,7 @@ deployment.
 .. _reading_aspa:
 .. admonition::  Further Reading
 
-   A, Azimov et al. `BGP AS_PATH Verification Based on
+   A. Azimov et al. `BGP AS_PATH Verification Based on
    Autonomous System Provider Authorization (ASPA) Objects
    <https://www.ietf.org/archive/id/draft-ietf-sidrops-aspa-verification-18.html>`__.
    Internet Draft, July 2024.

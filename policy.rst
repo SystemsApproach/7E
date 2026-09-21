@@ -39,7 +39,7 @@ Internet and they span the globe, so it's not clear that the routing
 protocols we have seen to date could scale to that level even if we
 treated each organization as a simple point in a graph. But more
 importantly, the problem definition is not "find the shortest path to
-destination X". "Shortest path" is not even well defined, since each
+destination X". "Shortest path" is not even well-defined, since each
 network can use independent metrics for their internal
 routing. Instead, the problem is "find a path to X that matches the
 policies of the providers who can deliver traffic to X". Ever since

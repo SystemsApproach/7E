@@ -74,7 +74,7 @@ for it to use.
 In order for this loop prevention technique to work, the AS numbers
 carried in BGP clearly need to be unique. For example, AS 2 can only
 recognize itself in the AS path in the above example if no other AS
-identifies itself in the same way. AS numbers are now 32-bits long,
+identifies itself in the same way. AS numbers are now 32 bits long,
 and they are assigned by the same registries that allocate IP
 addresses to assure uniqueness.
 
