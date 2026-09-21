@@ -55,7 +55,7 @@ just a few of them and to divide the network into large zones.  This
 makes for simple network configuration, but it also means that lots of
 machines end up in the same zone even when there is no need for them
 to communicate. Furthermore, the complexity of firewall rules tends to
-grow over time as more and more rules would need to be added to
+grow over time as more and more rules need to be added to
 describe the traffic allowed to pass from one zone to another.
 
 
@@ -72,7 +72,7 @@ can be precisely defined and implemented using distributed
 firewalling, described in Section |Virt|.4.
 
 For example, a three-tier application is a common structure in which
-one tier of VMs face the Internet, a second tier implements some
+one tier of VMs faces the Internet, a second tier implements some
 application logic, and a third tier stores data for the application. A
 single three-tier application can have
 its own microsegmentation policy which says that the machines in the

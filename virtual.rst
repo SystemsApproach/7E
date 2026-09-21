@@ -55,7 +55,7 @@ virtual networks resemble virtual machines in their completeness:
 they allow applications that depend on a rich set
 of capabilities to be deployed onto virtual networks without
 modification, just as an unmodified operating system can be deployed
-into a virtual machine as if it was running on a physical
+into a virtual machine as if it were running on a physical
 machine. Network virtualization lies at the heart of many modern cloud
 computing systems.
 

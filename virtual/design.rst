@@ -27,7 +27,7 @@ are discussed in the remainder of this chapter.
 
 * Network Virtualization in a datacenter provides the abstraction of a
   fully-featured network connecting a set of VMs or containers that
-  persists as the virtual end points move around the datacenter.
+  persists as the virtual endpoints move around the datacenter.
 
 Once we have settled on the abstraction, we need to solve a pair of
 problems:
@@ -43,9 +43,9 @@ additional fields to packets, often using a tunnel header that
 encapsulates the packet and separates the addresses used in the
 virtual network from the shared physical network on which the service
 is delivered. We sometimes refer to *decoupling* the virtual network
-from the physical. For example, when allowing end points of a virtual
+from the physical. For example, when allowing endpoints of a virtual
 network to move within a datacenter, we need to decouple the addresses
-of the virtual end points from the underlying physical addresses.
+of the virtual endpoints from the underlying physical addresses.
 
 Encryption is another common, but not universal, mechanism used to
 implement the data plane. When the abstraction presented is equivalent
@@ -56,7 +56,7 @@ manage the underlying infrastructure.
 As for the control plane, the approaches range from the very basic to
 highly automated. VLANs operate at the basic end: the creation of a
 VLAN and the association of certain network links with particular VLAN
-instances is performed by manual configuration on a switch-by-switch
+instances are performed by manual configuration on a switch-by-switch
 and port-by-port basis. At the other end of the spectrum, VPNs that
 interconnect many sites rely on relatively complex control planes,
 such as VPN-specific additions to BGP or the use of SDN controllers.
@@ -65,7 +65,7 @@ management of virtual networks for cloud datacenters.
 
 As with much of networking, scalability is a common concern for
 virtual networks. This applies not only to whether the control planes
-can handle large numbers of end points and virtual network instances,
+can handle large numbers of endpoints and virtual network instances,
 but also to the operational cost of configuring virtual networks. VLAN
 configuration, for example, is a time-consuming manual process that
 has stood in the way of rapid deployment of new services in

@@ -20,7 +20,7 @@ being dedicated to a group of users, even though the underlying
 infrastructure is shared more widely. In practice, this means that a
 VPN is almost always built as some sort of *overlay* on shared
 infrastructure. This was not always the case; dedicated networks using
-technologies such as frame relay and MPLS have also been used to
+technologies such as Frame Relay and MPLS have also been used to
 deliver VPN services. We return to MPLS later in this section, but
 using some sort of tunnel over IP is most common today, so we start
 our discussion there.
@@ -96,7 +96,7 @@ carries its own address, so it removes the IP header and looks at the
 payload of the packet. What it finds is an inner IP packet whose
 destination address is in network ``192.168.2/24``. R2 now processes
 this packet like any other IP packet it receives. Since R2 is directly
-connected to ``192.168.2/24`` it forwards the packet on to that
+connected to ``192.168.2/24``, it forwards the packet on to that
 network. :numref:`Figure %s <fig-tunnel>` shows the change in
 encapsulation of the packet as it moves across the network.
 
@@ -142,7 +142,7 @@ example for three sites of different sizes.
    A corporate VPN connects a main office, a branch office, and a datacenter.
 
 Viewed at this level of abstraction, there are obvious similarities
-between these two VPN classes. They are not entirely non-overlapping
+between these two VPN classes. They are not entirely non-overlapping,
 but they help us identify the requirements. The differences become
 apparent when we look at the types of devices that terminate tunnels
 and the methods used to establish them.
@@ -174,7 +174,7 @@ OpenVPN leverages TLS (described in Chapter |TLS|) to build the
 encrypted tunnels from client to server. While this mostly follows the
 same protocol as described in Chapter |TLS|, the additional step of
 authenticating the client is almost always required in VPN use cases,
-unlike most Web usages of TLS. Client certificates may be used, but
+unlike most web usages of TLS. Client certificates may be used, but
 this raises the issue of how certificates can be reliably distributed
 to client devices. One option is that they are provisioned by a
 corporate IT department as part of setting up client devices. OpenVPN
@@ -278,7 +278,7 @@ firewall to which a remote access or site-to-site VPN would give
 access. In this respect, they embrace the idea of *zero trust
 networking*, in that there is no "trusted" zone; only explicitly
 allowed connections among specific devices are possible. We return to
-the issue of zero trust in the Section |Virt|.5.
+the issue of zero trust in Section |Virt|.5.
 
 .. admonition:: Further Reading
 
@@ -337,7 +337,7 @@ like the ones we discussed in Chapter |BGP|, but they contain
 additional information to disambiguate between the routing information
 of different customers. This means that even if two customers happened
 to use the same internal IP addresses (which happens often enough when
-using the IP address ranges designated for private use) the provider's
+using the IP address ranges designated for private use), the provider's
 instance of BGP can tell the difference between the routing
 information for customer A and that for customer B. There is further
 information in the BGP messages (known as *route targets*) to ensure
@@ -398,7 +398,7 @@ widespread adoption. We will see another example of how virtual
 networks can reduce operational complexity in the next section. We
 also tackle operational issues more thoroughly in Chapter |Ops|.
 
-To learn more about MPLS/BGP VPNs you can refer to the main RFC or the
+To learn more about MPLS/BGP VPNs, you can refer to the main RFC or the
 book on MPLS listed below.
 
 .. admonition:: Further Reading
@@ -437,7 +437,7 @@ public Internet, which implies encrypted tunnels are required.
 The policies regarding connectivity among the sites of a single VPN
 are input to a central controller, which can then push out all the
 necessary configuration to the edge routers located at each
-office. Rather than manually configuring a router or (multiple
+office. Rather than manually configuring a router (or multiple
 routers) every time a new site is added, or configuring tunnels by
 hand, it is possible to achieve "zero-touch" provisioning: an
 appliance is shipped to the new site with nothing more than a

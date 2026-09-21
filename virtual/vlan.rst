@@ -16,7 +16,7 @@ VLAN, even if physical links are shared with other devices on
 different VLANs. VLANs are often used to provide a basic form of
 traffic isolation in enterprise networks and datacenters; for example,
 they can be used to provide isolation between different departments or
-different types of application in a datacenter.
+different types of applications in a datacenter.
 
 .. _fig-vlan:
 .. figure:: virtual/figures/vlan.png
@@ -71,8 +71,8 @@ VLANs, this is done using a small extension to the
 original 802.3 header specification, inserting a 12-bit VLAN ID
 (``VID``) field between the ``SrcAddr`` and ``Type`` fields, as shown in
 :numref:`Figure %s <fig-vlan-tag>`. (This VID is typically referred to as
-a *VLAN Tag*.) There are actually 32-bits inserted in the middle of
-the header, but the first 16-bits are used to preserve backwards
+a *VLAN Tag*.) There are actually 32 bits inserted in the middle of
+the header, but the first 16 bits are used to preserve backwards
 compatibility with the original specification (they use ``Type =
 0x8100`` to indicate that this frame includes the VLAN extension); the
 other four bits hold control information used to prioritize
@@ -87,7 +87,7 @@ networks onto a single physical LAN.
    802.1Q VLAN tag embedded within an Ethernet (802.3)
    header.
 
-VLANs are, in a sense, the precursor to a more fully fledged form of
+VLANs are, in a sense, the precursor to a more fully-fledged form of
 network virtualization that we return to in Section |Virt|.4. The use
 of a *tag* to identify the particular virtual network to which a packet
 belongs is a fundamental building block of a network virtualization

@@ -50,7 +50,7 @@ depend on layer-2 adjacency between communicating peers, and thus
 depend on some set of VMs staying in a given subnet even as they move
 around within the datacenter.
 
-.. [#] Technically more than one subnet can connect to a given server
+.. [#] Technically, more than one subnet can connect to a given server,
        in which case an IP address for a VM needs to be
        drawn from one of those subnets.
 
@@ -132,7 +132,7 @@ network virtualization systems invariably make use of an overlay
 encapsulation such as VXLAN or GENEVE. Encapsulation is a
 low-level mechanism that solves an important problem: decoupling the
 address space of the virtual network from that of the physical
-network. However, it is worth noting that they are just a building
+network. However, it is worth noting that it is just a building
 block, and not a complete network virtualization solution. We look
 more closely at network virtualization overlay encapsulations in
 Section |Virt|.4.2.
@@ -145,9 +145,9 @@ Section |Virt|.4.2.
     Encapsulation decouples virtual network addresses from physical network.
 
 One thing to notice about virtual network encapsulation, as
-illustrated in :numref:`Figure %s <fig-encaps-nv>`, is that there are a
+illustrated in :numref:`Figure %s <fig-encaps-nv>`, is that there is a
 set of *outer* headers that are used by the physical network to
-deliver the packet to the appropriate end host, and there are a set of
+deliver the packet to the appropriate end host, and there is a set of
 *inner* headers that are meaningful only in the context of a
 particular virtual network. This is how encapsulation decouples the
 virtual network addressing from that of the physical. A second thing
@@ -270,7 +270,7 @@ way, this controller is called a Network OS. At the top-most level is
 a management layer that serves API requests, and understands the abstraction of
 a virtual network. This management layer can be thought of as an
 application that runs on the network OS. In short, the
-architecture presented in this Chapter is purpose-built to support
+architecture presented in this chapter is purpose-built to support
 virtual networks, whereas the one outlined in Chapter |Routing| is intended to
 be general-purpose.
 
@@ -386,7 +386,7 @@ decoupled from that of the physical network. Inventing new ways to
 encapsulate packets seems to be a popular pastime for network
 architects and engineers, and there were a few potential candidates
 available already when network virtualization appeared on the
-scene. None of them quite fit the bill however, and several more have
+scene. None of them quite fit the bill, however, and several more have
 been developed over the last decade.
 
 While VXLAN attracted considerable attention when it was first
@@ -475,7 +475,7 @@ movement. It also receives configuration
 information over a separate channel using the *Open vSwitch Database
 (OVSDB)* protocol.
 
-OVSDB as depicted in the Figure refers to an RPC protocol used to
+OVSDB as depicted in the figure refers to an RPC protocol used to
 access the database (called ``ovsdb-server``), but in general, OVSDB
 can refer to either the protocol or the database. The OVSDB protocol uses
 a JSON-based message format. It
@@ -560,7 +560,7 @@ to significant gains in the scalability of the system.
 A centralized component, ``ovn-northd``,
 translates the logical network configuration, expressed in terms of
 conventional network concepts like switching and routing, into logical
-datapath flows, which it stores in the *OVN Southbound
+data path flows, which it stores in the *OVN Southbound
 Database*. We can see how logical flows work with an example shown in
 :numref:`Figure %s <fig-ovn-tables>`.
 
@@ -593,7 +593,7 @@ controller running on the appropriate hypervisor. This is an example
 of *discovered state*, in the sense that the hypervisors discover the
 location of VMs and report it up to the database. So we see that the
 controller on ``HV1`` (hypervisor 1) has reported into the ``Chassis``
-table that it can be reached using the Geneve encapsulation at IP
+table that it can be reached using the GENEVE encapsulation at IP
 address ``10.0.0.10``. And that same hypervisor has reported into the
 ``Port_Binding`` table that it is hosting the VM with ``LP1``.
 
