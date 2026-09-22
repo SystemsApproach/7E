@@ -111,10 +111,9 @@ handshakes as two distinct layers. Instead, QUIC has built a
 cryptographic handshake based on TLS into the transport. This is
 illustrated by :numref:`Figure %s <fig-quic-tls>`. As RFC 9001 puts it:
 
-
-*Rather than a strict layering, these two protocols cooperate: QUIC
-uses the TLS handshake; TLS uses the reliability, ordered delivery,
-and record layer provided by QUIC.*
+   *Rather than a strict layering, these two protocols cooperate: QUIC
+   uses the TLS handshake; TLS uses the reliability, ordered delivery,
+   and record layer provided by QUIC.*
 
 .. admonition:: Further Reading
 
