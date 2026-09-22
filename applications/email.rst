@@ -17,7 +17,7 @@ Internet’s original killer app.
 
 As with the web, there are some important distinctions to
 make. First, we should distinguish between the user interface (i.e.,
-your mail reader) from the underlying message transfer protocols, such
+your mail reader) and the underlying message transfer protocols, such
 as SMTP (Simple Mail Transfer Protocol) and IMAP (Internet Message
 Access Protocol). Second, these transfer protocols are
 distinct from the companion standards (RFC 822 [#]_ and MIME, the
@@ -85,7 +85,7 @@ be an encoded version of, say, a JPEG image, it’s not necessarily
 readable by human users. More on MIME in a moment.
 
 The message header is a series of ``<CRLF>``-terminated lines, just as
-we saw in HTTP message. The header is separated from the message body
+we saw in the HTTP message. The header is separated from the message body
 by a blank line.  Each header line contains a type and value separated
 by a colon. Many of these header lines are familiar to users, since
 they are asked to fill them out when they compose an email message;
@@ -138,7 +138,7 @@ The third piece is a way to encode the various data types so they can be
 shipped in an ASCII email message. The problem is that, for some data
 types (a JPEG image, for example), any given 8-bit byte in the image
 might contain one of 256 different values. Only a subset of these values
-are valid ASCII characters. It is important that email messages contain
+is valid ASCII characters. It is important that email messages contain
 only ASCII, because they might pass through a number of intermediate
 systems (gateways, as described below) that assume all email is ASCII
 and would corrupt the message if it contained non-ASCII characters. To
@@ -232,7 +232,7 @@ being two widely used open source examples.
 
 While it is possible that the MTA on a sender’s machine could
 establish an SMTP/TCP connection to the MTA on the recipient’s mail
-server, in many cases the mail traverses one or more intermediate MTA
+server, in many cases the mail traverses one or more intermediate MTAs
 (also called a *mail gateway*) on its route from the sender’s host to
 the receiver’s host. The gateway MTA buffers messages on disk, and is
 willing to try retransmitting them to the next machine for several
@@ -241,11 +241,11 @@ the sender to the receiver.
 
 Why are mail gateways necessary? Why can’t the sender’s host send the
 message to the receiver’s host? One reason is that the recipient does
-not want to include the specific host on which he or she reads email
-in his or her address. A second is scale: in large organizations, it’s
+not want to include the specific host on which they read email
+in their address. A second is scale: in large organizations, it’s
 often the case that a number of different machines hold the
 mailboxes for the organization. For example, mail delivered to
-``bob@princeton.edu`` might first be sent to a University gateway (that
+``bob@princeton.edu`` might first be sent to a university gateway (that
 is, to the host named ``princeton.edu``), and then forwarded—involving
 a second connection—to the specific machine on which Bob has a mailbox
 (perhaps on a department server). The forwarding gateway maintains a
@@ -266,7 +266,7 @@ human at a keyboard to pretend to be an SMTP client program.
 
 SMTP is best understood by a simple example. The following is an
 exchange between sending host ``princeton.edu`` and receiving host
-``systemsapproach.org`` . In this case, user Bob at Princeton is
+``systemsapproach.org``. In this case, user Bob at Princeton is
 trying to send mail to users Alice and Tom at Systems Approach. Extra
 blank lines have been added to make the dialog more readable.
 

@@ -52,7 +52,7 @@ underlying ideas.)
 It is hard to overstate the importance of the Socket API. It defines
 the demarcation point between the applications running on top of the
 Internet, and the details of how the Internet is implemented. As a
-consequence of Sockets providing a well-defined and stable interface,
+consequence of sockets providing a well-defined and stable interface,
 writing Internet applications exploded into a multi-billion dollar
 industry. Starting from the humble beginnings of the client-server
 paradigm and a handful of simple application programs such as email, file
@@ -163,7 +163,7 @@ specified ``socket`` into the given ``buffer``. Both operations take a
 set of ``flags`` that control certain details of the operation.
 
 In the supplemental resources site for this book, you can find the code
-for a simple simple client-server program that
+for a simple client-server program that
 uses the socket interface to send messages over a TCP connection. The
 program also uses other Linux networking utilities, which we introduce as
 we go. The application allows a user on one machine to type in and send
@@ -182,7 +182,7 @@ instant messaging applications.
 2.1.2 Scalable Services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The cloud did not exist when the first iteration of network
+The cloud did not exist when the first network
 applications were created. But it does exist today—thanks to the
 Internet providing the necessary communication substrate—and it has
 reshaped how we build the server side of those applications. Today’s
@@ -236,8 +236,8 @@ eventually responds to that request, and some additional cloud
 machinery to create/destroy containers and load balance requests
 across those containers. Kubernetes is today’s most widely used
 container management system, and the *microservices architecture* is
-what we call the best practices in building services in this cloud
-native manner. Both are interesting topics, but beyond the scope of
+what we call the best practices in building services in this cloud-native
+manner. Both are interesting topics, but beyond the scope of
 this book. We recommend an excellent tutorial if you want to learn how
 to use Kubernetes.
 
@@ -261,7 +261,7 @@ fabric. (There are typically two such ToR switches per rack for
 resilience, but the figure shows only one for simplicity.) Each leaf
 switch then connects to a subset of available spine switches, with two
 requirements: (1) that there be multiple paths between any pair of
-racks, and (2) that each rack-to-rack path is two-hops (i.e., via a
+racks, and (2) that each rack-to-rack path is two hops (i.e., via a
 single intermediate spine switch). Note that this means in leaf-spine
 designs like the one shown in the figure, every server-to-server path
 is either two hops (server-leaf-server in the intra-rack case) or four
@@ -285,7 +285,7 @@ hops (server-leaf-spine-leaf-server in the inter-rack case).
    book, but note that they are not unique; datacenter networks face
    the same set of problems as any network faces. What's unique is the
    specific circumstances (e.g., traffic patterns, round-trip times,
-   topology, scale) of datacenter networks, which influences design
+   topology, scale) of datacenter networks, which influence design
    choices we end up making.
 
    We address each of those datacenter-specific challenges in the
@@ -295,7 +295,7 @@ hops (server-leaf-spine-leaf-server in the inter-rack case).
    virtual networks are deployed in datacenters; and Sections 15.4 and
    15.5 show how datacenter networks are being optimized for AI
    workloads. In addition, Chapter 10 describes how best practices in
-   operating datacenter networks is now influencing how networks
+   operating datacenter networks are now influencing how networks
    everywhere are being managed.
 
 
@@ -322,7 +322,7 @@ over 5000 sites throughout the world, including both the hyperscale
 datacenters that companies like Google, Amazon, and Microsoft operate,
 and more modest-sized facilities, often co-located with Internet
 Exchange Points (IXPs) that interconnect operator backbones. Plus,
-increasingly, there are “on premises” clusters embedded within
+increasingly, there are “on-premises” clusters embedded within
 enterprises connected to the edge of the network.
 
 In other words, the cloud is structured as an interleaving of
@@ -352,17 +352,18 @@ questions.
    computation can take place throughout the network, and not just at
    two endpoints. From one perspective, application software still
    runs on computers connected to the edge of the network, no
-   different than in our simple client/server scenario. The network
+   different than in our simple client-server scenario. The network
    itself just delivers packets. But from another perspective, the
    application seemingly runs “inside” the network, with computations
    happening at multiple points along the end-to-end path from the
-   ultimate source to the ultimate destination. Notably, such computations are not happening in the
-   switches that implement the packet delivery service. After many
-   years of trying to inject additional functionality into switches,
-   the networking community reached the conclusion that it is best to
-   give switches just one task—forwarding packets. The existence of
-   millions of servers at thousands of locations around the world
-   (i.e., the cloud) has made this a viable approach.
+   ultimate source to the ultimate destination. Notably, such
+   computations are not happening in the switches that implement the
+   packet delivery service. After many years of trying to inject
+   additional functionality into switches, the networking community
+   reached the conclusion that it is best to give switches just one
+   task—forwarding packets. The existence of millions of servers at
+   thousands of locations around the world (i.e., the cloud) has made
+   this a viable approach.
 
 Today, the Internet and the cloud have a symbiotic relationship. The
 Internet provides the communication substrate that the cloud runs on,
@@ -394,7 +395,7 @@ API and they are not best described as client-server.
 The full complexity of parallel workloads is beyond the scope of this
 book, but to appreciate the networking implications it's enough to
 understand four key points about the high-level communication pattern.
-First, they involve a set of process, not just a client and a server.
+First, they involve a set of processes, not just a client and a server.
 This group is sometimes called a *collective*, where the goal is to
 increase parallelism (and hence, reduce runtime) by scaling the size
 of the collective.
@@ -423,7 +424,7 @@ index).
 Third, there is often a synchronization barrier between each
 iteration, such that one iteration has to complete before the next
 iteration can begin. This means that the last transfer to complete
-during each transfer limits how fast the overall computation runs. In
+during each iteration limits how fast the overall computation runs. In
 other words, it's not how fast the fastest communication can be
 implemented; it's how fast the slowest communication completes. Being
 able to achieve low latency in the face of traffic bursts—a natural

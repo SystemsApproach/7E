@@ -22,7 +22,7 @@ become such a ubiquitous framework for building new applications.
 
 Before we go any further, it is important to distinguish between
 application *programs* and application *protocols*. For example, the
-HyperText Transport Protocol (HTTP) is an application protocol that is
+Hypertext Transfer Protocol (HTTP) is an application protocol that is
 used to retrieve web pages from remote servers. Many different
 application programs—that is, web clients such as
 Chrome, Firefox, and Safari—provide users with a different look and
@@ -37,7 +37,7 @@ Second, we observe that many application layer protocols, including
 HTTP, have a companion protocol that specifies the format of the data
 that can be exchanged. This is one reason why these protocols are
 relatively simple: much of the complexity is managed in this companion
-standard.  HTTP is a protocol for fetching web pages, but HyperText
+standard.  HTTP is a protocol for fetching web pages, but Hypertext
 Markup Language (HTML) is a companion specification that defines the
 basic form of those pages. This separation between the data transfer
 protocol and the data format shows up again repeatedly; we'll see
@@ -58,7 +58,7 @@ document, and the protocol (HTTP) and document language (HTML) were
 designed to meet that goal.
 
 .. [#] A short history of the Web provided by the World Wide Web
-       consortium traces its roots to a 1945 article describing links
+       Consortium traces its roots to a 1945 article describing links
        between microfiche documents.
 
 One way to think of the Web is as a set of cooperating clients
@@ -108,7 +108,7 @@ basis of a hypertext system.
 When you ask your browser to view a page, your browser (the client)
 fetches the page from the server using HTTP, which usually runs
 over TCP. (If you looked at the source for a web browser, you would
-find the client-side socket calls shown in Section 2.1.1.)  At its
+find the client-side socket calls shown in Section |Apps|.1.1.)  At its
 core, HTTP is a text-based request/response protocol, where every
 message has the general form
 
@@ -421,12 +421,12 @@ transport/application boundary.
 
 .. takeaway::
 
-   An important lesson from this discussions is that layering
+   An important lesson from this discussion is that layering
    decisions can have a profound impact on system behavior and
    performance. Running HTTP version 1 on top of TCP was a completely
    understandable decision, enabling the Web to get off the ground,
    and was an application of the "separation of concerns" principle we
-   introduced in Chapter 1. That said, we have now gone through three
+   introduced in Chapter |Intro|. That said, we have now gone through three
    major revisions of this layered approach, culminating in a totally
    new design for the transport layer underpinning HTTP. This is
    partly a testament to the ability of the Internet to support
@@ -455,9 +455,9 @@ part, as in the URIs ``mailto:santa@northpole.org`` and
 For URIs that most people are familiar with—where the scheme is
 ``http``, ``https``, ``mailto`` or ``file``\ —the scheme-specific part
 includes information that can be used to *locate* the resource. The
-domain name for a web server or an email server are common examples.
+domain name for a web server or an email server is a common example.
 This locator information is what qualifies a URI as a URL. Another
-type of URI, known as a *Uniform Resource Name (URN)* , is used to
+type of URI, known as a *Uniform Resource Name (URN)*, is used to
 specify a unique name for a resource, but without giving any hint as
 to its location. For URNs, we can think of the scheme as specifying a
 *name space* and the scheme-specific part as specifying a unique name
@@ -530,10 +530,10 @@ expiration date (the ``Expires`` header field) to each page it sends
 back to the client (or to a cache between the server and client). The
 cache remembers this date and knows that it need not reverify the page
 each time it is requested until after that expiration date has passed.
-After that time (or if that header field is not set) the cache can use
+After that time (or if that header field is not set), the cache can use
 the ``HEAD`` or conditional ``GET`` operation (``GET`` with header line)
 to verify that it has the most recent copy of the page. More generally,
-there are a set of *cache directives* that must be obeyed by all caching
+there is a set of *cache directives* that must be obeyed by all caching
 mechanisms along the request/response chain. These directives specify
 whether or not a document can be cached, how long it can be cached, how
 fresh a document must be, and so on.
@@ -568,7 +568,7 @@ by a URI, and the operations you can perform on resources include
 
 One way to look at this is that REST treats the Web as an
 object-oriented software architecture. Resource is just another name
-for an object, and the set of HTTP operations are just a slight
+for an object, and the set of HTTP operations is just a slight
 variation of a well-known set of object-oriented operations referred
 to as CRUD: Create, Read, Update, Delete.
 
@@ -620,9 +620,9 @@ applications.
 
 .. sidebar:: Alternative Design
 
-     The Internet did not settle on REST overnight. An alternative
-     approach to web services, called *SOAP (Simple Object Access
-     Protocol)* also gained traction.  The SOAP architecture’s
+     *The Internet did not settle on REST overnight. An alternative
+     approach to web services, called SOAP (Simple Object Access
+     Protocol), also gained traction.  The SOAP architecture’s
      approach to the problem was to make it feasible, at least in
      theory, to generate protocols that are customized to each network
      application. The key elements of the approach are a framework for
@@ -630,16 +630,16 @@ applications.
      generating protocol implementations from the specifications, and
      modular partial specifications that can be reused across
      protocols. In other words, SOAP supports a procedural style,
-     while REST supports a data-centric style.
+     while REST supports a data-centric style.*
 
-     The online retailer Amazon, not surprisingly, was an early
+     *The online retailer Amazon, not surprisingly, was an early
      adopter (2002) of web services. Interestingly, Amazon made its
-     systems publicly accessible via *both* SOAP and REST approaches,
+     systems publicly accessible via both SOAP and REST approaches,
      and according to some reports a substantial majority of
      developers use the REST interface. Of course, this is just one
      data point and may well reflect factors specific to Amazon.  As
      for this book, we view REST as the more elegant approach to web
-     services, and so elect to focus on it.
+     services, and so elect to focus on it.*
 
 As a final note, if web services is what we call it when the web
 server that implements my application sends a request to the web
@@ -655,7 +655,7 @@ admin to the cloud provider’s operations team, but the application is
 still designed according to the web services architecture. On the
 other hand, if the application is designed from scratch to run on a
 scalable cloud platform, for example by adhering to the
-*micro-services architecture*, then we say the application is *cloud
+*microservices architecture*, then we say the application is *cloud
 native*. So the important distinction is cloud native versus legacy
 web services deployed in the cloud. Either approach can export
 a RESTful API.

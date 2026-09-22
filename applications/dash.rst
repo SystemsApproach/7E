@@ -15,7 +15,7 @@ Before video can be streamed across the Internet, it needs to be
 encoded, and video coding is another field with a long history. To
 make efficient use of bandwidth and storage, video is usually
 compressed, and organizations such as MPEG (the
-Moving Picture Expert Group) produce standards that allow for
+Moving Picture Experts Group) produce standards that allow for
 interoperability among devices that encode, store, and play video
 content. We cover this topic in detail in Chapter |Stream|.
 
@@ -260,7 +260,7 @@ different display sizes, from phones to large TV screens.
 
 As a reminder, this approach would not make sense for
 real-time video such as video conferencing. A video or audio
-conference depends on quite low latency interaction between
+conference depends on quite low-latency interaction between
 participants: you need to receive the data within a few hundred
 milliseconds of it being sent or you will be unable to have a
 conversation. Even at 300ms the delay becomes noticeable and
@@ -278,7 +278,7 @@ examine this problem space in Chapter |Stream|.
    protocol and the underlying transport protocol. These two layers
    are, in effect, trying to co-manage the rate at which packets are
    delivered. As an application developer, you would undoubtedly
-   prefer that the socket API for TCP told you everything you need to
+   prefer that the Socket API for TCP told you everything you need to
    know about TCP's behavior, but that's just not the case. The API
    says nothing about timeliness, which in the Internet can be highly
    variable, largely due to congestion. This leaves the application
