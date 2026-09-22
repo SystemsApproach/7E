@@ -21,7 +21,7 @@ exceptions to that assumption.
        workloads now run on datacenter-like commodity hardware, the
        hardware is extremely homogeneous. An HPC cluster is typically
        purchased as a single "big iron" system from a single vendor.
-       Hyperscalars are now building similar systems in support of AI
+       Hyperscalers are now building similar systems in support of AI
        workloads, but the requirement that they support more diverse
        workloads—including the possibility of hosting tenant programs
        in VMs—means that they have to accommodate heterogeneous and
