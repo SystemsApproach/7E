@@ -94,7 +94,7 @@ want to maximize the amount of data the network delivers on behalf of its
 users, for a given set of resource capacities.  We expand on this
 requirement in Section |Intro|.4.
 
-The fourth requirement is that the network be *high performance.*
+The fourth requirement is that the network be *high-performance.*
 Everyone wants the network to be fast, but performance is
 multi-faceted.  Some applications care about response time; how long
 it takes to send and receive a message. Others care about throughput;

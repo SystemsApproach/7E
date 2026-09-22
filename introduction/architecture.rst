@@ -29,7 +29,7 @@ components of the system, and hiding the details of how the object is
 implemented from the users of the object.
 
 Architectures are *not* programs. They help people build a mental
-model (typically expressed in words and diagrams), of what actually
+model (typically expressed in words and diagrams) of what actually
 runs in the network.  Their purpose is both to *prescribe* how the
 network should be implemented (with the goal of guiding engineers in
 the actual code that gets written) and to *describe* how the network has
@@ -236,7 +236,7 @@ recursively build arbitrarily large networks by interconnecting clouds
 to form larger clouds.
 
 We take a closer look at how IP achieves this goal in Chapter |Fed|,
-but for now the main take away is that we can define a *network*
+but for now the main takeaway is that we can define a *network*
 recursively as consisting of two or more nodes connected by a physical
 link, or as two or more networks connected by a node. In other words,
 a network can be constructed from a nesting of networks, where at the
@@ -361,7 +361,7 @@ and makes tradeoffs.
 One of the guiding principles of the Internet's design is often
 referred to as the *end-to-end argument*, which was articulated by
 Saltzer, Reed, and Clark. The seminal paper refers to *arguments*
-(plural) but it is commonly referred to as a single
+(plural), but it is commonly referred to as a single
 argument. There are some subtle points in the paper, which is well
 worth reading in its entirety.
 
@@ -402,7 +402,7 @@ all users of the network, whether or not they needed reliability.
 
 It's not hard to see how this argument led to the connectionless,
 best-effort packet delivery service model of the
-Internet Protocol (IP) and implemented by its switches and routers.
+Internet Protocol (IP), implemented by its switches and routers.
 If something goes wrong and a packet gets
 lost, corrupted, or misdelivered while en route, the network does
 nothing to recover from the failure; recovering from such errors is
@@ -432,7 +432,7 @@ argument than the popular one-line summary.
 
 As we walk through the
 system components that deliver the Internet's best-effort service in
-Part II we will see numerous examples of functions that are
-appropriately implemented inside the network. And in Part III we will
+Part II, we will see numerous examples of functions that are
+appropriately implemented inside the network. And in Part III, we will
 see the rich variety of capabilities implemented in the end-systems to
 meet the needs of applications.

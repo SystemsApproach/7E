@@ -254,7 +254,7 @@ host 1; the application does not see any of the headers that have been
 attached to it to implement the lower-level communication services.
 This whole process is illustrated in :numref:`Figure %s
 <fig-encapsulation>`. Note that in a multi-hop network, intermediate
-nodes (e.g., switches and routers) may inspect their header to determine
+nodes (e.g., switches and routers) may inspect their headers to determine
 how to forward the message on towards its destination. They may also
 modify the header before forwarding it.
 

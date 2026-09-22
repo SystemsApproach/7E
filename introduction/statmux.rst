@@ -218,7 +218,7 @@ deliver in the aggregate. Doing so typically involves questions of
 network's topology can be represented by an undirected graph, where
 edges correspond to links and vertices correspond to switches.) As an
 example, a network designer might ask if the graph contains a
-vertex (switch), that if cut (the switch fails), causes the graph to
+vertex (switch) that, if cut (the switch fails), causes the graph to
 become partitioned (it's impossible for nodes in each subgraph to
 exchange messages).
 
