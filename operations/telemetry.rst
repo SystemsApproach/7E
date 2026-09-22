@@ -81,7 +81,7 @@ changes in values are worth acting on.
 Counting the number of packets sent/received by a given interface is a
 useful metric, but it does not provide any insight into what's
 actually in the packets. Seeing the contents of packets being
-exchanged between two end-points is helpful when you are
+exchanged between two endpoints is helpful when you are
 troubleshooting a problem, but more broadly, knowing how a given link
 is being shared among multiple end-to-end flows can also be useful.
 The most obvious use case for the latter is to be able to see when an
@@ -159,7 +159,7 @@ problematic.
 The solution is to instrument the forwarding path to just sample the
 packets it processes. This means capturing and saving the header for
 one out of every N packets. (We need the header to identify the
-end-points, which typically includes TCP or UDP port numbers.) An open
+endpoints, which typically includes TCP or UDP port numbers.) An open
 standard, called *sFlow*, has been developed around the idea of
 sampling. A switch needs to be instrumented to support sampling, and
 an interface is needed to say what level of sampling to perform (e.g.,

@@ -97,7 +97,7 @@ need a compelling argument for instead adding that feature to the
 core.
 
 The second example, video conferencing, supports a *multicast*
-function, whereby packets are delivered to multiple end-points instead
+function, whereby packets are delivered to multiple endpoints instead
 of a single destination. Multicast is a good example of a function
 that has tried to find a home at multiple layers of the protocol
 stack.  Originally, the MBone (multicast backbone) was an overlay that

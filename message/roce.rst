@@ -16,20 +16,18 @@ and (2) augmented packet switches with the queue management logic
 needed to avoid the buffering delays and packet loss associated with
 best-effort forwarding.
 
-But the Internet did not stop evolving in 1999 (even though you will
-still see both arguments in favor of InfiniBand being made even
-today). For example, it is now commonplace for Ethernet adaptors to
-support per-application transmit/receive packet queues, making it
-possible to get messages into and out of user space without any OS
-involvement. There have also been many "SmartNIC" products over the
-years that offload various aspects of TCP/IP to the NIC, with today's
-*Infrastructure Processing Units (IPUs)* replacing traditional NICs as
-the preferred technology for connecting servers to datacenter
-networks.  The first InfiniBand advantage no longer holds, although it
-is perfectly legitimate to argue that TCP's reliable byte-stream is
-not the right abstraction for RDMA. This bears some similarity to the
-argument we made above that QUIC is better suited to RPC traffic than
-TCP.
+But the Internet did not stop evolving in 1999. For example, it is now
+commonplace for Ethernet adaptors to support per-application
+transmit/receive packet queues, making it possible to get messages
+into and out of user space without any OS involvement. There have also
+been many "SmartNIC" products over the years that offload various
+aspects of TCP/IP to the NIC, with today's *Infrastructure Processing
+Units (IPUs)* replacing traditional NICs as the preferred technology
+for connecting servers to datacenter networks.  The first InfiniBand
+advantage no longer holds, although it is perfectly legitimate to
+argue that TCP's reliable byte-stream is not the right abstraction for
+RDMA. This bears some similarity to the argument we made above that
+QUIC is better suited to RPC traffic than TCP.
 
 .. sidebar:: SmartNICs and IPUs
 
@@ -74,9 +72,10 @@ implements per-hop flow control: an upstream node (either an end-host
 or a switch) is not allowed to transmit a packet to a downstream node
 (host or switch) unless the downstream node has issued a "credit"
 saying it has buffer space to hold that packet. Credits are logically
-equivalent to advertising an open flow control window in TCP, the main
-difference being TCP does flow control on an end-to-end basis, whereas
-InfiniBand does it on a per-hop basis.
+equivalent to TCP advertising an open flow control window (see
+Section |TCP|.4.2), the main difference being TCP does flow
+control on an end-to-end basis, whereas InfiniBand does it on a
+per-hop basis.
 
 The second mechanism is support for multiple "virtual lanes", with
 each switch supporting a separate queue for each lane. (You can think

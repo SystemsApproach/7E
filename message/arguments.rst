@@ -4,16 +4,28 @@
 We conclude by looking at the issue of how RPC and RDMA deal with the
 format of the payload carried in request and response messages. The
 short answer is that data formatting is a fundamental aspect of RPC
-(half of the two-part mechanism outlined in Section |Message|.2), and largely
-ignored by RDMA. This is an explicit design choice. RPC makes no
-assumptions about the process on the other end of a message exchange,
-and so has to account for wide variation. The rest of this section
-explains the implications. In contrast, RDMA was originally designed
-for tightly-coupled parallel programs, where the same programming team
-was responsible for both sides of a communication. In that scenario,
-it is typically assumed that a common machine architecture and just
-one compiler are being used throughout the program. The programmer is
-responsible for dealing with any exceptions to that assumption.
+(half of the two-part mechanism outlined in Section |Message|.2), and
+largely ignored by RDMA. This is an explicit design choice. RPC makes
+no assumptions about the process on the other end of a message
+exchange, and so has to account for wide variation. The rest of this
+section explains the implications. In contrast, RDMA was originally
+designed for tightly-coupled parallel programs, where the same
+programming team is responsible for both sides of a communication. In
+that scenario, it is typically assumed that a common machine
+architecture and just one compiler are being used throughout the
+program.\ [#]_ The programmer is responsible for dealing with any
+exceptions to that assumption.
+
+.. [#] This idea of the parallel programs being *tightly-coupled* is
+       an important one in the HPC world. While it is true that HPC
+       workloads now run on datacenter-like commodity hardware, the
+       hardware is extremely homogeneous. An HPC cluster is typically
+       purchased as a single "big iron" system from a single vendor.
+       Hyperscalars are now building similar systems in support of AI
+       workloads, but the requirement that they support more diverse
+       workloads—including the possibility of hosting tenant programs
+       in VMs—means that they have to accommodate heterogeneous and
+       incrementally evolving systems.
 
 Focusing then on RPC, the other half of the mechanism is a toolset
 that transforms data from the representation used by the programs into
@@ -26,7 +38,7 @@ appropriate and effective way” to form a network message.
 
 .. _fig-marshal1:
 .. figure:: message/figures/present.png
-   :width: 400px
+   :width: 450px
    :align: center
 
    Argument marshalling involves serializing and unpacking application

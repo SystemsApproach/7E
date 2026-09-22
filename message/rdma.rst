@@ -368,8 +368,8 @@ parallel programs, those libraries would be the right place to start,
 but our goal is to understanding the underlying message transactions
 upon which those libraries are built. So for example, every time you
 invoke a Scatter operation to spray partitions of a large data set
-across a group of processes, a sequence of point-to-point RDMA message
-transactions is executed, one for each member of the group.
+across a group of remote processes, a sequence of point-to-point RDMA
+message transactions is executed, one for each member of the group.
 
 
 
@@ -394,7 +394,7 @@ reassembled (because they are part of the same large message) will
 become clear in a moment.
 
 The transport header also includes a 24-bit QP to identify the local
-end-point.  From a packet-format perspective, this field is similar to
+endpoint.  From a packet-format perspective, this field is similar to
 the TCP port number in that it represents the destination of an RDMA
 connection. But unlike TCP, which supports "well-known" ports, the QP
 is a purely local identifier used to access the send and receive
