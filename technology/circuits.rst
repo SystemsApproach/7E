@@ -27,7 +27,7 @@ transmitted, without being queued. That's only possible if you are
 positive the output port is ready to transmit data the instant it is
 received, without the possibility of contention. That sort of strict
 guarantee implies circuit resources are first "reserved" before
-used. Indeed, reservations are an essential aspect of circuit
+being used. Indeed, reservations are an essential aspect of circuit
 switching.
 
 Picturing an operator patch panel in a telephone system from the turn
@@ -65,13 +65,13 @@ much as 100 Gbps of data.
    :width: 500px
    :align: center
 
-   Packet switches connected by a logical point-to-point circuit, that
+   Packet switches connected by a logical point-to-point circuit that
    is in turn implemented by a path through a sequence of ROADMs in an
    all-optical network.
 
 Connecting these fibers is an optical device called a ROADM
 (*Reconfigurable Optical Add/Drop Multiplexer*). A collection of
-ROADMs (nodes) and fibers (links) form an optical transport network,
+ROADMs (nodes) and fibers (links) forms an optical transport network,
 where each ROADM is able to forward individual wavelengths along a
 multi-hop path, creating a logical end-to-end circuit. From the
 perspective of a packet-switched network that might be constructed on
@@ -101,7 +101,7 @@ Much of SONET’s complexity—its full specification is substantially
 longer than this book—reflects the fact that phone companies have
 historically been concerned with multiplexing large numbers of 64 Kbps
 channels for voice calls. To this end, SONET defines a hierarchy
-of channels, with multiple "low bandwidth" channels multiplexed over
+of channels, with multiple "low-bandwidth" channels multiplexed over
 one "high-bandwidth" channel; this can be repeated multiple times to
 form a hierarchy of transmission speeds. Finally, all of this is done
 within the framework of an STDM-based approach, in which data at each

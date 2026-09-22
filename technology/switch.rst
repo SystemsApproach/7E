@@ -163,7 +163,7 @@ header to determine which interface the packet should be sent out on,
 and instructs NIC 2 to transmit the packet, again directly out of main
 memory using DMA. (Recall that because there may be contention, the
 packet may be queued in the buffer waiting to be sent.) The important
-take-away is that the packet is buffered in main memory (this is the
+takeaway is that the packet is buffered in main memory (this is the
 “store” half of store-and-forward), with the CPU reading only the
 necessary header fields into its internal registers for processing.
 
@@ -193,7 +193,7 @@ packet—parsing its header and deciding which output link to transmit it
 on—is likely to dominate, and potentially become a bottleneck. Suppose,
 for example, that a processor can perform all the necessary processing
 to switch 40 million packets each second. This is sometimes called the
-packet per second (pps) rate. If the average packet is 64 bytes, this
+packets-per-second (pps) rate. If the average packet is 64 bytes, this
 would imply
 
 .. centered:: Throughput = pps x BitsPerPacket
@@ -253,7 +253,7 @@ historically dominated the industry.
 
 :numref:`Figure %s <fig-baremetal>` is a simplified depiction of a
 bare-metal switch. The key difference from the earlier implementation
-on a general-purpose processor is the addition of a Network Processor
+on a general-purpose processor is the addition of a Network Processing
 Unit (NPU), a domain-specific processor with an architecture and
 instruction set that has been optimized for processing packet headers
 (i.e., for implementing the data plane). NPUs are similar in spirit to
@@ -265,7 +265,7 @@ measured in Terabits per second (Tbps), easily fast enough to keep up
 with 32x100-Gbps ports, or the 48x40-Gbps ports shown in the diagram.
 
 .. [#] Our use of the term NPU is a bit non-standard. Historically,
-        NPU was the name given more narrowly-defined network
+        NPU was the name given to more narrowly-defined network
         processing chips used, for example, to implement intelligent
         firewalls or deep packet inspection. They were not as
         general-purpose as the NPUs we’re discussing here; nor were
@@ -290,13 +290,13 @@ cases, the forwarding pipeline is itself programmable.
 
 Internally, an NPU takes advantage of three technologies. First, a
 fast SRAM-based memory buffers packets while they are being
-processed. SRAM (Static Random Access Memory), is roughly an order of
+processed. SRAM (Static Random Access Memory) is roughly an order of
 magnitude faster than the DRAM (Dynamic Random Access Memory) that is
 used by main memory. Second, a TCAM-based memory stores bit patterns
 to be matched in the packets being processed. The “CAM” in TCAM stands
 for “Content Addressable Memory,” which means that the key you want to
 look up in a table can effectively be used as the address into the
-memory that implements the table. The “T” stands for “Ternary” which
+memory that implements the table. The “T” stands for “Ternary”, which
 is a fancy way to say the key you want to look up can have wildcards
 in it (e.g., key ``10*1`` matches both ``1001`` and ``1011``). Finally,
 the processing involved to forward each packet is implemented by a
@@ -364,7 +364,7 @@ to write flow rules that match specific UDP or TCP port numbers.
     :width: 600px
     :align: center
 
-    Example header Fields Matched in Original OpenFlow Specification.
+    Example header fields matched in original OpenFlow specification.
 
 The Actions originally included *“forward packet to one or more
 ports”* and *“drop packet,”* plus a *“send packet up to the control
@@ -389,7 +389,7 @@ tables, each focused on a subset of the header fields that might be
 involved in a given flow rule (e.g., one table matches the ETH header,
 one matches the IP header, and so on). A given packet is processed by
 multiple flow tables in sequence—i.e., a pipeline—to determine how it
-is ultimately forwarded. A set of actions are accumulated as the
+is ultimately forwarded. A set of actions is accumulated as the
 packet flows through the pipeline, and executed as a set in the last
 stage, resulting in the packet being modified and enqueued for
 transmission.
@@ -399,14 +399,14 @@ transmission.
     :width: 550px
     :align: center
 
-    Simple Schematic of an OpenFlow Forwarding Pipeline.
+    Simple schematic of an OpenFlow forwarding pipeline.
 
 Second, the pipeline shown in :numref:`Figure %s <fig-pipeline>` is
 usually static, in the sense that each stage is hard coded to know
 about exactly one subset of header fields. This means the pipeline as
 a whole is limited to matching a fixed set of fields in the packet
 headers (e.g., the fields shown in :numref:`Figure %s <fig-headers>`)
-and perform a fixed set of actions; they are sometimes called
+and performing a fixed set of actions; they are sometimes called
 *fixed-function pipelines*. Most switching chips are designed this
 way, although the set of flow tables has grown much larger than the
 example shown in :numref:`Figure %s <fig-headers>` suggests.  (We'll
@@ -444,7 +444,7 @@ that competes with the largest vendors in the networking industry.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our overview of packet switches has focused on their internal design,
-with the control/data plane split being the most important take away.
+with the control/data plane split being the most important takeaway.
 But there is one more switch component to highlight: the *Northbound
 Interface (NBI)* used by a network operations team to manage a switch
 once it has been deployed in a network. We address this operational
@@ -456,8 +456,8 @@ challenge in Chapter |Ops|, but with respect to switch design,
     :width: 450px
     :align: center
 
-    A Switch OS running on the switch implements a NBI used by network
-    operators—with the aid of of their management tools—configure and
+    A Switch OS running on the switch implements an NBI used by network
+    operators—with the aid of their management tools—to configure and
     monitor operational switches.
 
 First, the switch control processor runs an operating system, just
@@ -479,10 +479,10 @@ typically "log into" the switch via a console port, and issue whatever
 commands were needed to get the switch up and running, or to change
 some configuration parameter. SONiC does not mandate a particular NBI
 (we describe an example in Chapter |Ops|), but for now, the important
-take away is that this NBI is programmatic. This enables a far richer
-collection of management tools, so much so, that there as been a
+takeaway is that this NBI is programmatic. This enables a far richer
+collection of management tools, so much so that there has been a
 fundamental shift in how we think about the overall problem space.  In
 addition to the control and data planes, which are typically
-implemented within the switch chassis, we also now also include a
+implemented within the switch chassis, we now also include a
 *management plane* running at a higher level. This management plane is
 the focus of Chapter |Ops|.

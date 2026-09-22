@@ -301,7 +301,7 @@ constitutes a frame—that is, determining where the frame begins and
 ends.
 
 There are several ways to address the framing problem, and each of
-them have been used at one time or another by different link
+them has been used at one time or another by different link
 technologies. We briefly introduce two of them here, one of which is
 the strategy used by Ethernet.
 
@@ -340,7 +340,7 @@ adaptor.
 
 Note that Ethernet does not need to "escape" the preamble in the
 middle of a frame because the encoding scheme (see the previous
-subsection) ensures that sequence of bits does not occur in the
+subsection) ensures that the sequence of bits does not occur in the
 message itself.
 
 |Tech|.1.3 Error Detection
@@ -463,7 +463,7 @@ stated properties:
   burst errors of length greater than :math:`k` bits can also be
   detected.)
 
-For example, Ethernet uses CRC-32 which is defined as follows:
+For example, Ethernet uses CRC-32, which is defined as follows:
 
 -  CRC-32 = :math:`x^{32} + x^{26} + x^{23} + x^{22} + x^{16} +
    x^{12} + x^{11} + x^{10} + x^8 + x^7 + x^5 + x^4 + x^2 + x + 1`
@@ -503,7 +503,7 @@ front of positions 0 and 2 for the generator :math:`x^3 + x^2 + x^0`.
 Ethernet has been the dominant link technology for nearly 50 years,
 but a lot has changed since it was first introduced in 1976.
 Originally, Ethernet was a *multi-access* technology (connecting tens
-or hundreds of nodes to a single shared cable) rather than
+or hundreds of nodes to a single shared cable) rather than a
 *point-to-point* link (connecting only two nodes at either end of a
 cable).  This was possible because hosts "tapped" (or were spliced)
 into the coaxial Ethernet cable at a nearby point as it snaked up and
