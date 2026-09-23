@@ -145,7 +145,7 @@ information about work-in-progress can be found in the `wiki
 Join Us
 -------
 
-We hope you’ve gotten value out of *Computer Networks: A Systems
+We hope you've gotten value out of *Computer Networks: A Systems
 Approach* over the years, and we’re eager to have you join us in this
 new venture.
 

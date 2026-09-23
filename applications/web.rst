@@ -138,7 +138,7 @@ the contents of the message (``MESSAGE_BODY``); this part of
 the message is where a server would place the requested page when
 responding to a request, and it is typically empty for request messages.
 
-Why was HTTP designed to run over TCP? The designers didn’t have to do
+Why was HTTP designed to run over TCP? The designers didn't have to do
 it that way, but TCP provides multiple features that HTTP needs, most
 notably, reliable data delivery (no-one wants a web page with missing
 data). Using TCP (as opposed to either IP or UDP) meant that the

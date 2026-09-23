@@ -15,7 +15,7 @@ advances in compression technology. Because multimedia data is consumed
 mostly by humans using their senses—vision and hearing—and processed by
 the human brain, there are unique challenges to compressing it. You want
 to try to keep the information that is most important to a human, while
-getting rid of anything that doesn’t improve the human’s perception of
+getting rid of anything that doesn't improve the human’s perception of
 the visual or auditory experience. Hence, both computer science and the
 study of human perception come into play. In this section, we’ll look at
 some of the major efforts in representing and compressing multimedia

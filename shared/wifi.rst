@@ -352,7 +352,7 @@ encryption, successive values of a counter are incorporated into the
 encryption of successive blocks of plaintext.
 
 CCMP uses a Message Authentication Code (MAC) as an authenticator. The
-MAC algorithm is based on CBC, even though CCMP doesn’t use CBC in the
+MAC algorithm is based on CBC, even though CCMP doesn't use CBC in the
 confidentiality encryption. In effect, CBC is performed without
 transmitting any of the CBC-encrypted blocks, solely so that the last
 CBC-encrypted block can be used as a MAC (only its first 8 bytes are

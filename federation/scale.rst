@@ -25,7 +25,7 @@ With the original addressing scheme, each
 network, no matter how small, needs at least a class C network
 address. Even worse, any network with more than 255 hosts needs
 a class B address. This may not seem like a big deal, and indeed it
-wasn’t when the Internet was first envisioned, but there are only a
+wasn't when the Internet was first envisioned, but there are only a
 finite number of network numbers, and there are far fewer class B
 addresses than class Cs. Class B addresses were in particularly
 high demand because you never know if your network might expand beyond
@@ -190,7 +190,7 @@ Classless Addressing
 Subnetting has a counterpart, sometimes called *supernetting*, but more
 often called *Classless Interdomain Routing* or CIDR, pronounced
 “cider.” CIDR takes the subnetting idea to its logical conclusion by
-essentially doing away with address classes altogether. Why isn’t
+essentially doing away with address classes altogether. Why isn't
 subnetting alone sufficient? In essence, subnetting only allows us to
 split a classful address among multiple subnets, while CIDR allows us to
 coalesce several classful addresses into a single “supernet.” This

@@ -21,7 +21,7 @@ When it comes to downloading web pages there
 are four potential bottlenecks in the system:
 
 -  *The first mile.* The Internet may have high-capacity links in it,
-   but that doesn’t help you download a web page any faster when you’re
+   but that doesn't help you download a web page any faster when you’re
    connected over a low-speed (or poorly performing) access link.
 
 -  *The last mile.* The link that connects the server to the Internet

@@ -317,7 +317,7 @@ be encoded as
    1110 1101 0000 0010
 
 To see this, first drop the most significant bit from each byte, as it
-is there to tell us whether we’ve reached the end of the integer. In
+is there to tell us whether we've reached the end of the integer. In
 this example, the ``1`` in the most significant bit of the first byte
 indicates there is more than one byte in the varint:
 

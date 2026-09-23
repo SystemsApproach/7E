@@ -59,7 +59,7 @@ contents to compute an effective window.
 
 The third extension allows TCP to augment its cumulative acknowledgment
 with selective acknowledgments of any additional segments that have been
-received but aren’t contiguous with all previously received segments.
+received but aren't contiguous with all previously received segments.
 This is the *selective acknowledgment*, or *SACK*, option. When the SACK
 option is used, the receiver continues to acknowledge segments
 normally—the meaning of the ``Acknowledge`` field does not change—but it

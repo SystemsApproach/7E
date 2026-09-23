@@ -97,7 +97,7 @@ devices at which Larry currently wishes to receive messages. The proxy
 can therefore forward the message on to Larry’s chosen device(s).
 Sending the message to more than one device is called *forking* and may
 be done either in parallel or in series (e.g., send it to his mobile
-phone if he doesn’t answer the phone at his desk).
+phone if he doesn't answer the phone at his desk).
 
 The initial message from Bruce to Larry is likely to be a SIP ``invite``
 message, which looks something like the following:

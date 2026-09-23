@@ -32,7 +32,7 @@ function to the original *plaintext* message, resulting in a
 *decryption* function—the inverse of the encryption function—to
 recover the original plaintext. The ciphertext transmitted across the
 network is unintelligible to any eavesdropper, assuming the
-eavesdropper doesn’t have the means to perform the decryption
+eavesdropper doesn't have the means to perform the decryption
 function. The transformation represented by an encryption function and
 its corresponding decryption function is called a *cipher*.
 
@@ -252,7 +252,7 @@ like “Rhine dahl”) based on the names of its inventors, Daemen and
 Rijmen.  AES supports key lengths of 128, 192, or 256 bits, and the
 block length is 128 bits. AES permits fast implementations in both
 software and hardware, being somewhat more efficient than triple
-DES. It doesn’t require much memory, which makes it suitable for small
+DES. It doesn't require much memory, which makes it suitable for small
 mobile devices. AES has some mathematically strong security properties
 and, as of the time of writing, has not suffered from any significant
 practical attacks.
@@ -293,7 +293,7 @@ private key necessary to decrypt such a message. This scenario is depicted in
    Public-key encryption.
 
 Because it is somewhat unintuitive, we emphasize that the public
-encryption key is useless for decrypting a message—you couldn’t even
+encryption key is useless for decrypting a message—you couldn't even
 decrypt a message that you yourself had just encrypted unless you had
 the private decryption key. If we think of keys as defining a
 communication channel between participants, then an important difference
@@ -311,7 +311,7 @@ Public-key ciphers are used not just for encryption, but also for
 authentication. The way this works is that the private key can be used
 with the *encryption* algorithm to encrypt messages so that they can
 then only be decrypted using the public key. This property clearly
-wouldn’t be useful for confidentiality since anyone with the public
+wouldn't be useful for confidentiality since anyone with the public
 key could decrypt such a message. This property is, however, useful
 for authentication since it tells the receiver of such a message that
 it could only have been created by the owner of the keys (subject to
@@ -549,7 +549,7 @@ a string, *opad*, and prepending that to the output of the first keyed hash).
 The two passes of the keyed-hash function are important to the proof
 of security for this HMAC construction.
 
-Up to this point, we have been assuming that the message wasn’t
+Up to this point, we have been assuming that the message wasn't
 confidential, so the original message could be transmitted as plaintext.
 To add confidentiality to a message with an authentication code, it suffices
 to encrypt the concatenation of the entire message including its
