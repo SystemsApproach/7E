@@ -223,9 +223,10 @@ per-packet overhead low. We will return to the question of how QUIC
 uses these numbers to handles packet losses below.
 
 The ``Payload`` is made up of one or more QUIC *frames*. Frames come
-in a variety of different types, indicated by the first byte in the
-frame. The rest of the frame format varies according to its
-type. There may be many frames in a packet, of difference types, allowing for multiple
+in a variety of different types; there are 20 different frame types
+currently defined. The first byte of a frame indicates its type, and
+the rest of the frame format varies according to its type. There may
+be many frames in a packet, of difference types, allowing for multiple
 streams to be multiplexed into the connection and making efficient use
 of bandwidth.
 
@@ -245,12 +246,14 @@ packet with a new Stream ID. A stream frame takes the form shown in :numref:`Fig
    Length and Offset fields is indicated by low order bits in the Type
    field.
 
-The Frame ``Type`` for a STREAM frame can take one of eight values, from
-0x08 to 0x0f. The low order three bits serve as flags to indicate if
-an ``Offset`` is present, if a ``Length`` is present, and if this is the last
-frame in a stream. ``Offset`` is zero for the first frame in a
-stream and can me omitted. If ``Length`` is omitted, then the frame
-extends to the end of the packet containing it.
+Somewhat confusingly, the Frame ``Type`` byte at the beginning of a
+STREAM frame can take one of eight values, from 0x08 to 0x0f. The high
+order five bits are always ``00001`` for a STREAM frame. The low order
+three bits serve as flags.  Flags indicate whether an ``Offset`` is
+present, whether a ``Length`` is present, and if this is the last
+frame in a stream. ``Offset`` is zero for the first frame in a stream
+and can be omitted. If ``Length`` is omitted, then the frame extends
+to the end of the packet containing it.
 
 One detail worth noting is that most of the fields here are variable
 in length. TCP and IP both have a history of using fixed-length
