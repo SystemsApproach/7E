@@ -222,8 +222,8 @@ allows for the non-reuse of packet numbers while keeping the
 per-packet overhead low. We will return to the question of how QUIC
 uses these numbers to handles packet losses below.
 
-The ``Payload`` is made up of one or more QUIC *frames*. Frames come
-in a variety of different types, indicated by the first byte in the
+The ``Payload`` is made up of one or more QUIC *frames*. There
+are currently 20 different frames types, indicated by the first byte in the
 frame. The rest of the frame format varies according to its
 type. There may be many frames in a packet, of different types,
 allowing for multiple streams to be multiplexed into the connection
@@ -256,7 +256,8 @@ The Frame ``Type`` for a STREAM frame can take one of eight values, from
 an ``Offset`` is present, if a ``Length`` is present, and if this is the last
 frame in a stream. ``Offset`` is zero for the first frame in a
 stream and can me omitted. If ``Length`` is omitted, then the frame
-extends to the end of the packet containing it.
+extends to the end of the packet containing it. (The high-order five
+bits of the ``Type`` field are always ``00001`` for a STREAM frame.)
 
 One detail worth noting is that most of the fields here are variable
 in length. TCP and IP both have a history of using fixed-length
