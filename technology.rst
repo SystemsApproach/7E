@@ -12,7 +12,7 @@ system architect must ask:
   *What available technologies will serve as the underlying building blocks?*
 
 When the inventors of the Internet asked that question in the
-mid-1970s, there weren’t many options. The ARPANET was an experimental
+mid-1970s, there weren't many options. The ARPANET was an experimental
 wide-area network, and the Ethernet had just been invented by
 researchers at Xerox. At the time, large mainframe computers were the
 norm, with Digital Equipment Corporation’s PDP-11 (a 16-bit

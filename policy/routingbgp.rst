@@ -143,9 +143,9 @@ autonomous systems. The most common relationships are illustrated in
    is to advertise my own prefixes and routes learned from my customers
    to my provider, advertise routes learned from my provider to my
    customers, but don’t advertise routes learned from one provider to
-   another provider. That last part is to make sure the customer doesn’t
+   another provider. That last part is to make sure the customer doesn't
    find themselves in the business of carrying traffic from one provider to
-   another, which isn’t in their interests since they are paying the providers
+   another, which isn't in their interests since they are paying the providers
    to carry traffic.
 
 -  *Peer—*\ The third option is a symmetrical peering between autonomous

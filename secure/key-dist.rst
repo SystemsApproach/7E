@@ -53,7 +53,7 @@ identification, perhaps involving a photograph or fingerprints. If Alice
 and Bob are computers owned by the same company, then a system
 administrator could configure Bob with Alice’s public key.
 
-Establishing keys out of band doesn’t sound like it would scale well,
+Establishing keys out of band doesn't sound like it would scale well,
 but it suffices to bootstrap a PKI. Bob’s knowledge that Alice’s key is
 *x* can be widely, scalably disseminated using a combination of digital
 signatures and a concept of trust. For example, suppose that you have
@@ -67,7 +67,7 @@ Since you trust Bob to tell the truth, you would now know that Alice’s
 key is *x*, even though you had never met her or exchanged a single
 message with her.
 
-Bob wouldn’t even have to
+Bob wouldn't even have to
 send you a message; he could simply create and publish a digitally
 signed statement that Alice’s key is *x*. Such a digitally signed
 statement of a public key binding is called a *public key certificate*,
@@ -257,7 +257,7 @@ Diffie-Hellman key exchange protocol, which can establish a shared
 secret between two principals without using any predistributed keys.
 
 
-Diffie-Hellman on its own doesn’t authenticate the participants. Since
+Diffie-Hellman on its own doesn't authenticate the participants. Since
 it is rarely useful to communicate securely without being sure whom
 you’re communicating with, Diffie-Hellman is usually augmented in some
 way to provide authentication. Diffie-Hellman is used in both the

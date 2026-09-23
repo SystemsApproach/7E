@@ -8,7 +8,7 @@
 The previous section established a substantial set of requirements for
 network design—a computer network must provide general,
 cost-effective, fair, and robust connectivity among a large number of
-computers. As if this weren’t enough, networks do not remain fixed at
+computers. As if this weren't enough, networks do not remain fixed at
 any single point in time but must evolve to accommodate changes in
 both the underlying technologies upon which they are based as well as
 changes in the demands placed on them by application programs.

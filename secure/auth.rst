@@ -11,9 +11,9 @@ the problem of a *replay attack*: an adversary retransmitting a copy
 of a message that was previously sent. One could imagine, for example,
 that a message in which you place an order for some item on a website
 could be replayed, appearing to the website as though you had ordered
-more of the same. Even though it wasn’t the original incarnation of
+more of the same. Even though it wasn't the original incarnation of
 the message, its authentication code would still be valid; after all,
-the message was created by you, and it wasn’t modified. Clearly, we
+the message was created by you, and it wasn't modified. Clearly, we
 need a solution that ensures *freshness*.
 
 We also need to ensure *timeliness*. An adversary might merely
@@ -22,7 +22,7 @@ it is received at a time when it is no longer appropriate. For
 example, an adversary could delay your order to buy stock from an
 auspicious time to a time when you would not have wanted to
 buy. Although this message would in a sense be fresh (it hasn't been
-sent before), it wouldn’t be timely.
+sent before), it wouldn't be timely.
 
 Freshness and timeliness may be considered aspects of
 integrity. Ensuring them usually requires a nontrivial, back-and-forth

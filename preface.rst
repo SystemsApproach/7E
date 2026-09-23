@@ -137,7 +137,7 @@ to cover don’t naturally align with particular layers. Many of the
 chapters stand on their own, but of course we need some way to
 organize the topics to help the reader develop their mental model of
 networking. We don’t want readers to have to suspend disbelief if a
-chapter depends on material that hasn’t yet been covered in the book.
+chapter depends on material that hasn't yet been covered in the book.
 
 One way we accomplish this is to adopt a "2-pass" strategy. In the
 first pass (corresponding to Part I of the book) we introduce all the

@@ -71,7 +71,7 @@ as constituting one forwarding equivalence class (FEC), and the
 R2-to-R7 traffic constitutes a second FEC.  Forwarding traffic in
 these two classes along different paths is difficult with normal IP
 routing, because they might both contain traffic destined for the same
-IP addresses. R3 doesn’t normally look at where traffic came *from* in
+IP addresses. R3 doesn't normally look at where traffic came *from* in
 making its forwarding decisions.
 
 Unlike IP, MPLS uses label swapping to forward packets. Rather than

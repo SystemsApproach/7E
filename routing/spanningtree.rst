@@ -40,7 +40,7 @@ seen before on this network. So that address is not yet in any
 switch's forwarding table: S4 sends a copy of the packet out its two
 other ports: to switches S1 and S6. Switch S6 forwards the packet onto
 S1 (and meanwhile, S1 forwards the packet onto S6), both of which in
-turn forward their packets back to S4. Switch S4 still doesn’t have this
+turn forward their packets back to S4. Switch S4 still doesn't have this
 destination in its table, so it forwards the packet out its two other
 ports. There is nothing to stop this cycle from repeating endlessly,
 with packets looping in both directions among S1, S4, and S6.

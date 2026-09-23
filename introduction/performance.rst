@@ -229,7 +229,7 @@ of fixed latency, consider what is required to transmit a 1-MB file over
 a 1-Mbps network versus over a 1-Gbps network, both of which have an RTT
 of 100 ms. In the case of the 1-Mbps network, it takes 80 round-trip
 times to transmit the file; during each RTT, 1.25% of the file is sent.
-In contrast, the same 1-MB file doesn’t even come close to filling
+In contrast, the same 1-MB file doesn't even come close to filling
 1 RTT’s worth of the 1-Gbps link, which has a delay × bandwidth product
 of 12.5 MB.
 
@@ -252,7 +252,7 @@ to a 1-Mbps network.
 Another way to think about the situation is that more data can be
 transmitted during each RTT on a high-speed network, so much so that a
 single RTT becomes a significant amount of time. Thus, while you
-wouldn’t think twice about the difference between a file transfer taking
+wouldn't think twice about the difference between a file transfer taking
 101 RTTs rather than 100 RTTs (a relative difference of only 1%),
 suddenly the difference between 1 RTT and 2 RTTs is significant—a 100%
 increase. In other words, latency, rather than throughput, starts to
@@ -348,7 +348,7 @@ burst.
 Analogous to the way an application’s bandwidth needs can be something
 other than “all it can get,” an application’s delay requirements may be
 more complex than simply “as little delay as possible.” In the case of
-delay, it sometimes doesn’t matter so much whether the one-way latency
+delay, it sometimes doesn't matter so much whether the one-way latency
 of the network is 100 ms or 500 ms as how much the latency varies from
 packet to packet. The variation in latency is called *jitter*.
 

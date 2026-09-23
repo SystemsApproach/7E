@@ -25,7 +25,7 @@ process invokes this operation to effectively flush the buffer of unsent
 bytes. The final trigger for transmitting a segment is that a timer
 fires; the resulting segment contains as many bytes as are currently
 buffered for transmission. However, as we will soon see, this “timer”
-isn’t exactly what you expect.
+isn't exactly what you expect.
 
 |TCP|.5.1 Silly Window Syndrome
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
