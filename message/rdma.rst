@@ -173,7 +173,7 @@ state that the application processes need to communicate.
 
 This setup involves three general steps. One is to create a *queue
 pair (QP)*, which is a local handle for the communication
-end-point. The QP is roughly analogous to a socket in that it is used
+endpoint. The QP is roughly analogous to a socket in that it is used
 to access the local send and receive queues. A second is to create a
 *completion queue* that the RDMA subsystem uses to deliver
 notifications that a send or receive task has taken place. This is

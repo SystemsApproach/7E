@@ -25,7 +25,7 @@ exceptions to that assumption.
        workloads, but the requirement that they support more diverse
        workloads—including the possibility of hosting tenant programs
        in VMs—means that they have to accommodate heterogeneous and
-       incrementally evolving systems.
+       incrementally evolving hardware systems.
 
 Focusing then on RPC, the other half of the mechanism is a toolset
 that transforms data from the representation used by the programs into

@@ -8,13 +8,13 @@
 
 The adoption of RDMA as the preferred transport protocol for HPC
 workloads initially happened on InfiniBand, which is a self-contained
-networking technology, developed in parallel with the Internet
-architecture.  InfiniBand achieved the desired performance because
-it (1) off-loaded the transport protocol logic to the NIC (HCA),
-thereby bypassing the overhead of the OS-hosted TCP/IP protocol stack;
-and (2) augmented packet switches with the queue management logic
-needed to avoid the buffering delays and packet loss associated with
-best-effort forwarding.
+networking technology, developed in parallel with (but distinct from)
+the Internet architecture.  InfiniBand achieved the desired
+performance because it (1) off-loaded the transport protocol logic to
+the NIC (HCA), thereby bypassing the overhead of the OS-hosted TCP/IP
+protocol stack; and (2) augmented packet switches with the queue
+management logic needed to avoid the buffering delays and packet loss
+associated with best-effort forwarding.
 
 But the Internet did not stop evolving in 1999. For example, it is now
 commonplace for Ethernet adaptors to support per-application
@@ -78,25 +78,25 @@ control on an end-to-end basis, whereas InfiniBand does it on a
 per-hop basis.
 
 The second mechanism is support for multiple "virtual lanes", with
-each switch supporting a separate queue for each lane. (You can think
-of a lane as similar to a virtual circuit.) Flow control credits are
-issued on a per-lane basis (ensuring each queue avoids having to drop
-a packet), and the set of queues are serviced in priority order.
-InfiniBand defines 16 lanes, and hence, 16 priority queues. Each
-end-to-end connection is assigned to one of the lanes according to the
-QoS parameters associated with that connection.  This is an indirect
-way of making a per-connection reservation (the weighted fair queuing
-algorithm described in Chapter |Capacity| would be more direct), but it does
-provide more isolation between user flows than the single FIFO queue
-in a standard Ethernet switch.
+each switch supporting a separate queue for each lane. Flow control
+credits are issued on a per-lane basis (ensuring each queue avoids
+having to drop a packet), and the set of queues are serviced in
+priority order.  InfiniBand defines 16 lanes, and hence, 16 priority
+queues. Each end-to-end connection is assigned to one of the lanes
+according to the QoS parameters associated with that connection.  This
+is an indirect way of making a per-connection reservation (the
+weighted fair queuing algorithm described in Chapter |Capacity| would
+be more direct), but it does provide more isolation between user flows
+than the single FIFO queue in a standard Ethernet switch.
 
 There are two related limitations to this approach. The first is that
-InfiniBand networks are limited in scale. You cannot make the kinds
-of guarantees InfiniBand makes when you are trying to connect billions
-of edge devices. They do scale to support modest-sized datacenters,
-but at increased cost. Cost is InfiniBand's second limitation, which
-is related to the fact that, unlike Ethernet, InfiniBand is not ubiquitous;
-it is purpose-built for the RDMA use case.
+InfiniBand networks are limited in scale. You cannot make the kinds of
+guarantees InfiniBand makes when you are trying to connect billions of
+edge devices. They do scale to support modest-sized datacenters (e.g.,
+10-20k nodes), but fall short of hyperscaler sizes. Cost is
+InfiniBand's second limitation, which is related to the fact that,
+unlike Ethernet, InfiniBand is not a commodity solution; it is both
+proprietary and purpose-built for the RDMA use case.
 
 This is where the continued evolution of Internet technology again
 provides an answer. It is possible to augment an Ethernet switch with
