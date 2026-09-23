@@ -225,14 +225,20 @@ uses these numbers to handles packet losses below.
 The ``Payload`` is made up of one or more QUIC *frames*. Frames come
 in a variety of different types, indicated by the first byte in the
 frame. The rest of the frame format varies according to its
-type. There may be many frames in a packet, of difference types, allowing for multiple
-streams to be multiplexed into the connection and making efficient use
-of bandwidth.
+type. There may be many frames in a packet, of different types,
+allowing for multiple streams to be multiplexed into the connection
+and making efficient use of bandwidth.
+
+The simplest possible type of QUIC frame is the PING frame. It
+consists of a single byte, the Frame ``Type`` which, in this case,
+takes the value 0x01. There is nothing else in the frame, and its
+function is to check reachability or liveness of a peer. The recipient
+of a PING frame responds with an ACK frame.
 
 Central to the operation of QUIC is the STREAM frame, which is used to
 transmit data associated with a stream. The creation of streams is
-simple: the sender inserts a stream frame into a
-packet with a new Stream ID. A stream frame takes the form shown in :numref:`Figure %s
+simple: the sender inserts a STREAM frame into a packet with a new
+Stream ID. A STREAM frame takes the form shown in :numref:`Figure %s
 <fig-quic-frame>`.
 
 .. _fig-quic-frame:
