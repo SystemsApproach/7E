@@ -148,7 +148,7 @@ abstraction, but to understand how RDMA is used in practice, it is
 helpful to redraw it with the additional detail shown in
 :numref:`Figure %s <fig-libibverbs>`. Here, we see the application
 loads two libraries: ``libibverbs`` and ``librdmacm``.  The
-first—which you can read as "lib-ib-verbs", with the "ib" standing for
+first—which you can read as ":spelling:ignore:`lib-ib-verbs`", with the ":spelling:ignore:`ib`" standing for
 InfiniBand—is effectively a low-level interface to an RDMA-capable
 device.  Note that ``libibverbs`` directly interacts with the NIC,
 bypassing the OS. The OS still polices access to the NIC, but is not
@@ -162,7 +162,7 @@ on the data path once access is granted to a particular application.
    Software components that implement RDMA, including user-level
    libraries that directly interact with the HCA (InfiniBand NIC).
 
-The second library—which you can read as "lib-rdma-cm", with the "cm"
+The second library—which you can read as ":spelling:ignore:`lib-rdma-cm`", with the "cm"
 standing for "Communication Manager"—defines optional wrapper
 functions that make the Verbs API easier to use. This second library
 could have instead been one of the libraries shown in :numref:`Figure
@@ -261,7 +261,7 @@ Communication Management phase.) The third operation,
 data for the write.\ [#]_ Finally, the ``ibv_wr_complete`` operation
 signals to the NIC that the message is ready to be sent.
 
-.. [#] The "sge" in ``ibv_wr_set_sge`` operation denotes the concept
+.. [#] The ":spelling:ignore:`sge`" in ``ibv_wr_set_sge`` operation denotes the concept
    of "Scatter-Gather", indicating that the message to be written
    might be scattered across multiple non-continuous memory
    buffers. (Our particular "Hello World" message is located in a

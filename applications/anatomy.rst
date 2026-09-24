@@ -202,7 +202,7 @@ logical server—which is called a *service*\ —where a *load balancer*
 intercepts the request message and forwards it to one of a scalable
 number of backend processes.
 
-It’s an implementation detail, but rather than a process, per se, each
+It’s an implementation detail, but rather than a process, per :spelling:ignore:`se`, each
 instance is often a container, which is essentially a process
 encapsulated inside a self-contained environment that includes all the
 software packages the process needs to run. Docker is today’s

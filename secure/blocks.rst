@@ -248,7 +248,7 @@ replace DES with newer algorithms.
 3DES is now deprecated in favor of the *Advanced Encryption Standard*
 (AES) issued by NIST. The cipher underlying AES (with a few
 minor modifications) was originally named Rijndael (pronounced roughly
-like “Rhine dahl”) based on the names of its inventors, Daemen and
+like “Rhine :spelling:ignore:`dahl`”) based on the names of its inventors, Daemen and
 Rijmen.  AES supports key lengths of 128, 192, or 256 bits, and the
 block length is 128 bits. AES permits fast implementations in both
 software and hardware, being somewhat more efficient than triple

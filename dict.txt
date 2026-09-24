@@ -360,6 +360,7 @@ decapsulation
 decbit
 DECbit
 DECNET
+decodable
 decrementing
 decrypt
 decrypted
@@ -382,6 +383,7 @@ DES's
 dest
 DestinationAddr
 deterministically
+dev
 devops
 DevOps
 dgram
@@ -420,6 +422,7 @@ DoCoMo
 Doering
 dogfooding
 DoH
+DOI
 Donenfeld
 DoQ
 DoS
@@ -771,6 +774,7 @@ IOV
 ip
 IP
 IP's
+ipad
 IPAM
 IPFIX
 ipfwdtab
@@ -1052,6 +1056,7 @@ multipath
 multiplicatively
 multipoint
 Multiprotocol
+multivendor
 multiword
 mutator
 mux
@@ -1190,6 +1195,7 @@ ONUs
 Ookla
 Oorschot
 OPA
+opad
 OpenAPI
 openconfig
 OpenConfig
@@ -1332,6 +1338,7 @@ Predistribution
 preimage
 prem
 prepended
+prepending
 preprocessing
 priori
 probabilistically
@@ -1491,6 +1498,7 @@ RSA
 RSA's
 RSpec
 RSVP's
+rsync
 RTCP
 RTP
 RTS
@@ -1686,6 +1694,7 @@ Subnetting
 subnetwork
 subnetworks
 suboptimal
+subprefix
 subproblems
 Subramaniam
 subrange
@@ -1696,6 +1705,7 @@ subsampling
 Subsampling
 subsequently
 Substack
+subtables
 subtrees
 subtype
 subtypes
@@ -1902,6 +1912,7 @@ UUIDs
 UX
 Vachuska
 Vahdat
+validator
 Vanderlinden
 Vanstone
 Varghese
