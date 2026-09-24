@@ -132,6 +132,7 @@ basename
 BaseRTT
 basestation
 basestations
+Batfish
 Bavier
 Bayshore
 Bazel
@@ -484,6 +485,7 @@ et
 ETH
 ethernet
 Ethernets
+Etherphone
 Ethertype
 Ettori
 ETX
@@ -1270,6 +1272,7 @@ Pluggable
 png
 PoCs
 PON
+Porkbun
 Postel
 postfix
 PostScript
