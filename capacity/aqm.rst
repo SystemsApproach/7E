@@ -406,7 +406,7 @@ commonly experience bufferbloat.
    <https://www.rfc-editor.org/info/rfc8289>`__. RFC 8289,
    January 2018.
 
-   T. Hoeiland-Joergensen, P. McKenney, D. Taht, J. Gettys, and E. Dumaze.
+   T. Hoeiland-Joergensen, P. McKenney, D. Taht, J. Gettys, and E. Dumazet.
    `The Flow Queue CoDel Packet Scheduler and Active Queue Management
    Algorithm <https://www.rfc-editor.org/info/rfc8290>`__. RFC 8290,
    January 2018.
