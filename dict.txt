@@ -132,6 +132,7 @@ basename
 BaseRTT
 basestation
 basestations
+Batfish
 Bavier
 Bayshore
 Bazel
@@ -246,6 +247,7 @@ Claypool
 CLI
 CLIs
 Clos
+Cloudflare
 cloudification
 Cloudification
 cloudified
@@ -402,7 +404,9 @@ Dockerfile
 DockerHub
 DoCoMo
 dogfooding
+DoH
 Donenfeld
+DoQ
 DoS
 downlink
 Downlink
@@ -481,6 +485,7 @@ et
 ETH
 ethernet
 Ethernets
+Etherphone
 Ethertype
 Ettori
 ETX
@@ -979,6 +984,7 @@ modularized
 modularizing
 Mohammed
 monetization
+MoQ
 MosoLabs
 MPEG's
 mpls
@@ -1266,6 +1272,7 @@ Pluggable
 png
 PoCs
 PON
+Porkbun
 Postel
 postfix
 PostScript

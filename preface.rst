@@ -157,7 +157,7 @@ packet delivery service defining the boundary between the two.
 We've tried to minimize the dependency between Parts II and III—they
 are designed to be read in either order—but it turns out there is a
 rich set of interdependencies within each part. This is because of our
-view that each part describes a multi-faceted ecosystem, with many
+view that each part describes a multifaceted ecosystem, with many
 interrelated ideas with subtle dependencies. We include generous
 cross-references to adjacent topics that readers can follow,
 representing these interweaving threads across the software
