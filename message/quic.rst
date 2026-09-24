@@ -316,8 +316,8 @@ packet has failed to arrive.
 A second source of noise in RTT estimation is the use of delayed ACKs,
 where a recipient waits some time before sending the ACK in response to
 a received packet. To remove this uncertainty, QUIC includes an ``ACK
-Delay`` in the ACK frame indicates how
-much time elapsed between the receipt of the data being ACK'ed and the
+Delay`` in the ACK frame that indicates how
+much time elapsed between the receipt of the data being ACKed and the
 ACK being transmitted.
 
 The ACK frame in
