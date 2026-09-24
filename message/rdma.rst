@@ -398,7 +398,7 @@ endpoint.  From a packet-format perspective, this field is similar to
 the TCP port number in that it represents the destination of an RDMA
 connection. But unlike TCP, which supports "well-known" ports, the QP
 is a purely local identifier used to access the send and receive
-queues (and other connnection state). In this way, a QP is more like a
+queues (and other connection state). In this way, a QP is more like a
 socket identifier than a port.
 
 The biggest difference from TCP is in the information specifically
