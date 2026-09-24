@@ -246,6 +246,7 @@ Claypool
 CLI
 CLIs
 Clos
+Cloudflare
 cloudification
 Cloudification
 cloudified
@@ -402,7 +403,9 @@ Dockerfile
 DockerHub
 DoCoMo
 dogfooding
+DoH
 Donenfeld
+DoQ
 DoS
 downlink
 Downlink
@@ -979,6 +982,7 @@ modularized
 modularizing
 Mohammed
 monetization
+MoQ
 MosoLabs
 MPEG's
 mpls
