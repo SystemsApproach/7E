@@ -47,6 +47,7 @@ AlertManager
 ALF
 algorithmically
 Alizadeh
+Allman
 allocators
 Ameen
 AMF
@@ -103,6 +104,7 @@ attractor
 AUC
 audioconference
 audioconferencing
+Auguste
 AUSF
 AUTH
 AuthenticationData
@@ -114,6 +116,7 @@ AvgLen
 AVP
 aways
 AWS
+Azimov
 backend
 backends
 backhaul
@@ -148,16 +151,19 @@ benchmarked
 benchmarking
 BER
 Berfelde
+Berners
 bessd
 BFD
 BGP
 BGP's
 BIDIR
 BigSwitch
+Birrell
 BISYNC
 bitrate
 BitsPerPacket
 bitwise
+Bjorklund
 blockchain
 Blockchain
 Blockchains
@@ -170,6 +176,7 @@ BNGs
 Bohe
 Boggs
 BOM
+Bonica
 boolean
 Booleans
 BOOTP
@@ -207,6 +214,7 @@ CAs
 Casado
 Cascone
 Casetti
+Casner
 CBRS
 CCN
 CCR
@@ -229,12 +237,14 @@ checksummed
 checksumming
 checksums
 Cheng
+Cheriton
 chipset
 chipsets
 Chiu
 Choi
 Christy
 chrominance
+Chu
 cicd
 CIDR
 cidreg
@@ -292,6 +302,7 @@ CRC
 CRCs
 CRL
 CRLF
+Crocker
 crowdsource
 cryptanalysis
 cryptanalyst
@@ -331,6 +342,7 @@ dataset
 datasets
 datatypes
 Davie
+Davin
 DCCP
 DCE
 DCOM
@@ -386,6 +398,8 @@ Diffserv
 DiffServ
 Diginomica
 dimensionality
+Dimitropoulos
+Dincer
 directionality
 disaggregate
 disaggregated
@@ -403,6 +417,7 @@ DNS
 Dockerfile
 DockerHub
 DoCoMo
+Doering
 dogfooding
 DoH
 Donenfeld
@@ -427,6 +442,8 @@ DstAddr
 DstIPAddr
 DstPort
 DT
+Dumazet
+Durand
 durations
 DUs
 dutt
@@ -451,6 +468,7 @@ edgecloud
 EdgeCloud
 Edmar
 EffectiveWindow
+Eggert
 EGP
 EKS
 ElasticSearch
@@ -500,6 +518,7 @@ extensibility
 Fack
 facto
 failover
+Fairhurst
 fait
 Farber's
 FARs
@@ -512,6 +531,7 @@ FDM
 Feamster
 FEC
 FECs
+Fedor
 femto
 FFT
 fgets
@@ -592,6 +612,7 @@ Gnutella
 gNXI
 Goalposting
 GOAWAY
+Goel
 GoLang
 Goldsworthy
 goodput
@@ -649,6 +670,7 @@ HLS
 HMAC
 HMACs
 hoc
+Hoeiland
 HopLimit
 hostname
 HotNets
@@ -663,6 +685,7 @@ http
 HTTP's
 HTTPS
 Huawei
+Huitema
 HungWei
 HW
 hyperparameter
@@ -784,6 +807,7 @@ Janey
 Javascript
 Jiang
 jitter
+Joergensen
 jpeg
 json
 judgement
@@ -804,6 +828,7 @@ keepalive
 keepalives
 Kerberos
 Kerberos's
+Kerckhoffs
 Keycloak
 Khosravi
 Kibana
@@ -886,6 +911,7 @@ LSRs
 LTE
 LTE's
 luminance
+Lychev
 Lyft
 LZ
 MacAddr
@@ -896,11 +922,13 @@ MacOS
 macroblock
 macroblocks
 MACs
+Mahajan
 mahalingam
 Mahdavi
 mailto
 Makefile
 MakeReservation
+Mankin
 mapBind
 mapCreate
 mapResolve
@@ -910,6 +938,7 @@ Markovian
 Mascolo
 marshaller
 marshalling
+Masinter
 Mastership
 mathsf
 Matteo
@@ -934,6 +963,7 @@ mckusick
 McKusick
 MeasurementLab
 megascale
+Menezes
 MEP
 MEPs
 mergeRoute
@@ -977,6 +1007,7 @@ MNO
 MNO's
 MNOs
 Mobicom
+Mockapetris
 modelling
 modularity
 modularize
@@ -1157,6 +1188,7 @@ ONS
 ONU
 ONUs
 Ookla
+Oorschot
 OPA
 OpenAPI
 openconfig
@@ -1236,6 +1268,7 @@ PDRs
 PDU
 pelr
 Pennarun
+Pepelnjak
 performant
 Perlman
 perror
@@ -1276,6 +1309,7 @@ Porkbun
 Postel
 postfix
 PostScript
+Poutievski
 PPP
 PPP's
 PPPoE
@@ -1396,6 +1430,7 @@ repurposing
 requirements
 REs
 resends
+Resnick
 resolvers
 REST's
 RESTCONF
@@ -1488,11 +1523,15 @@ ScaleBricks
 Scandolo
 scapy
 SCCP
+Schapira
 sched
 schedulable
 scheduleable
 scheduler's
 schemas
+Schneier
+Schoffstall
+Schulzrinne
 scikit
 Scotty
 SCTP
@@ -1543,7 +1582,9 @@ Shamir
 Shapira
 shenker
 Shenker's
+Shoch
 shortcomings
+Shreedhar
 Shroeder's
 Shuberg
 Sigcomm
@@ -1554,6 +1595,7 @@ signalling
 SIGOPS
 siloed
 SIMs
+Singhvi
 sinked
 sizeof
 SLAs
@@ -1687,6 +1729,7 @@ syscall
 syslog
 Syslog
 SystemsApproachLogoURL
+Taht
 Tailscale
 talkspurt
 talkspurts
@@ -1711,6 +1754,7 @@ templating
 TempP
 Tennenhouse
 Terraform
+Testart
 testbed
 TestON
 TestVectors
@@ -1720,6 +1764,7 @@ TGS
 th
 Thakur
 throughputs
+Thurlow
 Tiago
 TimeBetweenPackets
 timeframe
@@ -1858,6 +1903,7 @@ UX
 Vachuska
 Vahdat
 Vanderlinden
+Vanstone
 Varghese
 varint
 varints
@@ -1891,6 +1937,7 @@ VIDs
 Vik
 Villanova
 Vimeo
+Vint
 virtualenv
 virtualization
 virtualization's
@@ -1932,6 +1979,7 @@ VTN
 vxlan
 VXLANs
 waisted
+Waitzman
 WANs
 Warcraft
 waveforms
@@ -1953,6 +2001,7 @@ wifiExposedNode
 wifiHiddenNode
 Wijesinha
 wildcarded
+Wilensky
 WindowSize
 wirelessBaseStation
 wirelessBluetoothPiconet
@@ -1996,7 +2045,9 @@ Yukio
 YUV
 Zack
 Zegura
+Zeilenga
 Zhang
+Zhu
 ZigBee
 Zipf
 Ziv
