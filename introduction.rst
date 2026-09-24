@@ -48,7 +48,7 @@ this book.
 
   It's also important to keep in mind that the path from conception to
   today’s reality is not a straight line, nor is today’s Internet the
-  end of the process. There have been many false starts and stop-gap
+  end of the process. There have been many false starts and stopgap
   solutions, followed by years of iterative improvement. This
   evolution culminates in today’s software and hardware artifacts—many
   of which are worth looking at in detail—but always keeping in mind

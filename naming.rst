@@ -43,7 +43,7 @@ edge of the network. This includes the mechanism that maps names used
 at the edge of the network onto addresses used inside the network, but
 also how other kinds of names, addresses, and routes are used by edge
 hosts, entirely on top of the network. Naming Internet resources
-requires a multi-faceted solution, which in turn provides the
+requires a multifaceted solution, which in turn provides the
 foundation for all other network services and applications. The
 centrality of naming makes it a good topic to begin our exploration of
 the software ecosystem running on hosts at the edge of the network.

@@ -118,7 +118,7 @@ name.
 Looking more closely at uniqueness, we have to decide how we want
 to interpret "get back the same value". A name is considered unique if it
 always resolves in the same way, independent of who asks, but the
-returned value may be multi-faceted. One common example is that a name
+returned value may be multifaceted. One common example is that a name
 resolves to an equivalent set of values; that is, the name space
 supports one-to-many bindings. For example, resolving a domain name
 might return a set of IP addresses, any one of which will work.

@@ -27,7 +27,7 @@ destination information, to determine where to send traffic.
 The second major requirement is *integrity*, which is about having
 confidence that the information we’re receiving is trustworthy, and
 for example, has not been modified by some adversary while in
-transit. Assuring integrity is multi-faceted, involving more than just
+transit. Assuring integrity is multifaceted, involving more than just
 “in transit” adversaries.
 
 For example, we need to be able to verify that an item of data was
