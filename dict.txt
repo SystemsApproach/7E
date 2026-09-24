@@ -276,6 +276,7 @@ CongestionThreshold
 CongestionWindow
 CongestionWindowTotal
 connectionless
+concentrator
 considerably
 contribution
 CORBA
@@ -401,6 +402,7 @@ Dockerfile
 DockerHub
 DoCoMo
 dogfooding
+Donenfeld
 DoS
 downlink
 Downlink
@@ -689,6 +691,7 @@ IMC
 impactful
 impl
 implementations
+implementers
 implementors
 implicitAckTimeline
 imsi
@@ -937,6 +940,7 @@ MIBs
 Micheloni
 microbursts
 microsegmentation
+microsegment
 microsegments
 microservice
 microservices
@@ -971,6 +975,7 @@ Mobicom
 modelling
 modularity
 modularize
+modularized
 modularizing
 Mohammed
 monetization
@@ -1224,6 +1229,7 @@ PDR
 PDRs
 PDU
 pelr
+Pennarun
 performant
 Perlman
 perror
@@ -1421,6 +1427,7 @@ roc
 ROC
 rollout
 RONs
+Rosen
 routable
 RouteBricks
 routerless
@@ -1673,6 +1680,7 @@ syscall
 syslog
 Syslog
 SystemsApproachLogoURL
+Tailscale
 talkspurt
 talkspurts
 tamperproof
@@ -1730,6 +1738,7 @@ ToRs
 TOS
 TOST
 touchpoint
+touchpoints
 Towsley
 Towson
 TPID
@@ -1783,6 +1792,7 @@ uncongested
 uncorrectable
 underfit
 underfitting
+underflowing
 underloaded
 underpowered
 underserved
