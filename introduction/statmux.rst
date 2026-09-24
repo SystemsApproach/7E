@@ -226,7 +226,7 @@ Such theoretical analysis is beyond the scope of this book, but there
 are a few common topologies of note. One is a mesh topology, of which
 :numref:`Figure %s <fig-network>` in Section |Intro|.2 is an example.
 Mesh topologies have no obvious structure, although in practice they
-often mirror geographical maps (as would be the case for a nation-wide
+often mirror geographical maps (as would be the case for a nationwide
 backbone network with switches in major cities). Another common
 example is a *leaf-spine* topology, similar to the one shown in
 Section |Apps|.1.2.  This particular structure is designed to support

@@ -154,7 +154,7 @@ down. (Recall that the actual ``CE`` notice is in the IP packet that
 arrives at the receiver; we need a transport protocol mechanism to
 relay that information back to the sender.)
 
-For DCTCP, the TCP receiver "echos" every notification back to the
+For DCTCP, the TCP receiver "echoes" every notification back to the
 sender by setting the ``ECE`` bit in the TCP header. The sender adapts
 the window size for each ``ECE`` it sees, and tells the receiver it
 has done so by sending a ``CWR`` notice back. For DCQCN, RoCE.v2
