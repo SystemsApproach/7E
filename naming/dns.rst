@@ -362,7 +362,7 @@ introduce other defenses, in a companion book.
    <https://www.rfc-editor.org/info/rfc8484>`__. RFC 8484,
    October 2018.
 
-   C. Huitama, S. Dickinson and A. Mankin. `DNS Over Dedicated QUIC
+   C. Huitema, S. Dickinson and A. Mankin. `DNS Over Dedicated QUIC
    Connections (DoQ) <https://www.rfc-editor.org/info/rfc9250>`__. RFC
    9250, May 2022.
 
