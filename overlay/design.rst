@@ -114,7 +114,7 @@ question, which is the extent to which a given overlay is
 general-purpose—that is, provides shared infrastructure used by
 multiple applications—or is tightly bundled with a particular
 application. CDNs can serve as general infrastructure, able to serve
-content on behalf of any web site or application. (Note, however, that
+content on behalf of any website or application. (Note, however, that
 there are examples of applications building their own private CDNs,
 with Netflix being one well-known example.)  In contrast, video
 conferencing applications typically instantiate a multicast overlay in

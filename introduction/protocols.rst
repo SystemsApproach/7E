@@ -185,10 +185,10 @@ message’s *body* or *payload*. We say that the application’s data is
 To make the discussion more concrete, :numref:`Figures %s
 <fig-udphdr>`, :numref:`%s <fig-tcphdr>`, :numref:`%s
 <fig-iphdr>`, and :numref:`%s <fig-ethhdr>` depict the header for four
-protocols we use as examples in this section: TCP, UDP, IP, and
+protocols we use as examples in this section: UDP, TCP, IP, and
 Ethernet, respectively.  The examples include two different (but
 common) formats for depicting protocol headers: as a sequence of
-fields spread over 32-bit words (TCP, UDP and IP) and as a sequence of
+fields spread over 32-bit words (UDP, TCP, and IP) and as a sequence of
 fields of specified bit lengths (ETH). We'll explain the meaning of
 most of these fields in later chapters, but there is some commonality
 in all headers, which we describe in the next subsection.

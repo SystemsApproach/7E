@@ -122,7 +122,7 @@ The decision as to which packet to send next on a shared link can be
 made in a number of different ways. For example, in a network consisting
 of switches interconnected by links such as the one in :numref:`Figure
 %s <fig-mux>`, the decision would be made by the switch that transmits
-packets onto the shared link. (As we will see later, not all
+packets onto the shared link. (As we will see in Chapter |Shared|, not all
 packet-switched networks actually involve switches, and they may use
 other mechanisms to determine whose packet goes onto the link next.)
 Each switch in a packet-switched network makes this decision

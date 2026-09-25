@@ -58,7 +58,7 @@ collapse*, the general shape of the graph is the same in any system
 with finite resources. A multi-user computer system trying to allocate
 resources to an excessive number of tasks faces a similar
 problem. Perhaps the most familiar example today is trying to purchase
-tickets to a popular concert from a web site, or attempting to
+tickets to a popular concert from a website, or attempting to
 download the latest release of a popular game. If there isn't enough
 capacity to handle the load, the service degrades in an ungraceful
 manner.

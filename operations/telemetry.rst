@@ -136,7 +136,7 @@ this purpose.)
     :width: 700px
     :align: center
 
-    Example packet trace using Wireshark. Because web site example.com
+    Example packet trace using Wireshark. Because website example.com
     is accessible using HTTP, the GET request and OK response are
     visible. The GET packet has been selected in the upper panel, with
     its contents summarized in the lower left panel.
@@ -220,7 +220,7 @@ measure how the network processes it.
 Two widely-used active monitoring tools are ``ping`` and
 ``traceroute``. Even for end-users on their laptops, they provide
 useful information, especially when you are trying to figure out why
-some web site is unreachable. Despite their simplicity, they are also
+some website is unreachable. Despite their simplicity, they are also
 an important part of any network operator's toolkit. Another, less
 familiar tool is ``iperf``, which measures the achievable TCP
 throughput rate to some remote server. As we'll see in Chapter |TCP|,

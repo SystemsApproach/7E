@@ -88,7 +88,7 @@ ONC RPC.
     May 2009.
 
 The emergence of the cloud led to another seismic shift in RPC design,
-in part corresponding to the wide-spread adoption of HTTP as discussed
+in part corresponding to the widespread adoption of HTTP as discussed
 in Chapter |Apps|. This is where we pick up the story by turning our
 attention to gRPC, a popular open source RPC mechanism. gRPC is based
 on an RPC mechanism that Google had been using internally to implement

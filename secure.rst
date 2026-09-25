@@ -55,7 +55,7 @@ the reliable byte-stream abstraction provided by TCP and its
 corresponding socket API. While initially motivated by the need to
 support secure transactions on the World Wide Web, TLS was designed as
 a general-purpose set of mechanisms to provide a secure byte-stream
-abstraction to any higher layer protocol that needed it.
+abstraction to any higher-layer protocol that needed it.
 
 In providing a secure channel, it is commonly required to authenticate
 end-points, to protect the integrity of traffic against modification,
@@ -64,7 +64,7 @@ useful for remote procedure calls (a topic we cover in the next
 chapter) as they are for web traffic.
 
 One measure of the success of TLS is that the overwhelming majority of
-web sites now use HTTPS (i.e., HTTP running over TLS) by default. In
+websites now use HTTPS (i.e., HTTP running over TLS) by default. In
 this chapter we explore the various components that have been
 assembled to deploy a secure byte-stream abstraction that is now the
 default for most web traffic.

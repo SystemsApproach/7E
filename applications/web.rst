@@ -66,7 +66,7 @@ and servers, all of whom speak the same language: HTTP. Most people are
 exposed to the Web through a graphical client program or web browser
 such as Safari, Chrome, or Firefox. :numref:`Figure %s
 <fig-netscape>` shows the Firefox browser in use, displaying a page of
-information from the web site where we publish this book.
+information from the website where we publish this book.
 
 .. _fig-netscape:
 .. figure:: applications/figures/firefox.png
@@ -140,7 +140,7 @@ responding to a request, and it is typically empty for request messages.
 
 Why was HTTP designed to run over TCP? The designers didn't have to do
 it that way, but TCP provides multiple features that HTTP needs, most
-notably, reliable data delivery (no-one wants a web page with missing
+notably, reliable data delivery (no one wants a web page with missing
 data). Using TCP (as opposed to either IP or UDP) meant that the
 designers of HTTP didn't need to worry about reliability. However, as
 we’ll see below, a few issues arose from building a request/response
@@ -470,7 +470,7 @@ Internet. A URN corresponding to the DOI name space would look
 something like this: ``doi:10.17487/RFC0791``. This example happens to
 be a URN for the RFC that specifies the IP protocol. If you want to
 learn more about the DOI effort, and how to interpret names like
-``doi:10.17487/RFC0791``, you can visit the DOI web site using the
+``doi:10.17487/RFC0791``, you can visit the DOI website using the
 following URL: ``https://doi.org``. If you want to read RFC 791, you
 can type the following URL into your browser:
 ``https://doi.org/10.17487/RFC0791``. As this example illustrates,

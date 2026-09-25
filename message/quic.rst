@@ -264,10 +264,10 @@ in length. TCP and IP both have a history of using fixed-length
 fields that turned out to be too small as the network grew or got
 faster. To allow for fields such as ``Stream ID`` and ``Length`` to be
 quite large without forcing excessive per-packet overhead, QUIC has
-adopted a form of variable length integer encoding as follows:
+adopted a form of variable-length integer encoding as follows:
 
 .. _tab-varint:
-.. table:: Variable length integer encoding.
+.. table:: Variable-length integer encoding.
    :align: center
    :widths: auto
 

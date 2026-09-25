@@ -10,8 +10,8 @@ As we saw in Chapter |Tech|, you can build a network from a set of links
 and switches, but once that network gets to any reasonable size, the
 problem that becomes apparent is: how to get packets efficiently to
 their correct destinations? When you try to open up a page on some
-distant web site, how does the first packet find its way from your
-browser to the server that hosts that web site? This is the problem
+distant website, how does the first packet find its way from your
+browser to the server that hosts that website? This is the problem
 that routing sets out to solve.
 
 If you have ever used a mapping application to plot a route from A to

@@ -218,7 +218,7 @@ sometimes makes sense to maintain some state information for each
 flow, which can be used to make resource allocation decisions about
 the packets of that flow. This is called *soft state*, where the main
 difference between soft and hard state is that the former is not
-explicitly created and removed by signalling. Soft state represents a
+explicitly created and removed by signaling. Soft state represents a
 middle ground between a purely connectionless network that maintains
 *no* state at the routers and a purely connection-oriented network
 that maintains hard state at the routers. In general, the correct

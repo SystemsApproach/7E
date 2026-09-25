@@ -127,7 +127,7 @@ circuit being delivered to an end customer. For example, an STS-3
 circuit delivers data at a constant 155.52 Mbps. The maximum rate
 supported by SONET is STS-768, at 39,813.12 Mbps.
 
-Below SONET is an optical signalling layer, called *Optical Carrier
+Below SONET is an optical signaling layer, called *Optical Carrier
 (OC)*, with a corresponding set of transmission rates; e.g., OC-1 at
 51.84 Mbps, OC-3 at 155.52 Mbps, and so on. Those optical signals can,
 in turn, be carried by a single wavelength over a DWDM substrate.

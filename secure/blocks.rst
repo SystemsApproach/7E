@@ -82,7 +82,7 @@ well-studied mathematical problem such as factoring large numbers.
 Even then, there may be problems of implementation that will only get
 discovered by the scrutiny of those looking at and using the
 algorithm. And in many cases, we just have to rely on the fact that
-no-one has yet found a viable way to break the cipher. Fortunately,
+no one has yet found a viable way to break the cipher. Fortunately,
 there are plenty of people who will try to break ciphers and who will
 let it be widely known when they have succeeded.
 

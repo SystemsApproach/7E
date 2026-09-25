@@ -199,7 +199,7 @@ a physical machine.
 
 By analogy, virtual networks must also reproduce the full feature set
 of a physical network. This means that a virtual network includes
-routing, switching, addressing, and often higher layer features such as NAT,
+routing, switching, addressing, and often higher-layer features such as NAT,
 firewalling, and load balancing. Just as an unmodified operating
 system can run on a VM exactly as it would on a physical machine, an
 unmodified distributed application should be able to run on a virtual
@@ -423,7 +423,7 @@ extensibility.
     GENEVE Header Format.
 
 As shown in :numref:`Figure %s <fig-geneve>`, GENEVE includes a
-set of variable length options. The presence of options was a critical
+set of variable-length options. The presence of options was a critical
 feature that built on the experience of earlier systems, where it was
 realized that the limited space in a VXLAN header was insufficient to
 pass metadata related to virtual networks from one end of a tunnel to

@@ -163,7 +163,7 @@ more providers, and as we move up the hierarchy we see providers who
 have other providers as their customers. At the top, we have providers
 who have customers and peers but are not customers of anyone. These
 providers are known as the *Tier-1* providers. The Tier-1 providers
-have no-one higher up to depend on, so they must carry all the
+have no one higher up to depend on, so they must carry all the
 Internet's  routable prefixes in their routing tables.
 
 .. _key-scaling:

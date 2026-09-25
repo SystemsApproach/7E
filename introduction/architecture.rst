@@ -406,7 +406,7 @@ Internet Protocol (IP), implemented by its switches and routers.
 If something goes wrong and a packet gets
 lost, corrupted, or misdelivered while en route, the network does
 nothing to recover from the failure; recovering from such errors is
-the responsibility of higher level protocols running on end
+the responsibility of higher-level protocols running on end
 hosts.
 
 At the same time, the paper does allow for some functions to be placed in the

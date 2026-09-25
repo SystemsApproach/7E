@@ -9,7 +9,7 @@
 Given the central role played by keys in cryptography, we now turn our
 attention to the problem of distributing keys to the
 participants. Suppose, for example, that we want to validate that we
-are connected to the web site of a particular company. How can we
+are connected to the website of a particular company. How can we
 reliably learn the public key of that company as a first step to validating signatures
 produced with its private key?
 
@@ -214,7 +214,7 @@ original expiration date is passed, it can be removed from the CRL.
 In practice, certificate revocation has proven to be challenging. CRLs
 can become very long now that certificates are in widespread use, so
 retrieving them becomes costly. The time to retrieve a CRL may fall in
-the critical path for opening a connection to a web site,
+the critical path for opening a connection to a website,
 substantially increasing the time to load a page. A determined
 attacker who has compromised a private key is motivated to disrupt the
 distribution of the CRL to prolong the amount of time they can use the

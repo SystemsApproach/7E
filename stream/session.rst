@@ -157,7 +157,7 @@ parties. Note that at this point the parties know each others’
 addresses, so the ``ACK`` can be sent directly, bypassing the proxies.
 The proxies are now no longer involved in the call. Note that the media
 will therefore typically take a different path through the network than
-the original signalling messages. Furthermore, even if one or both of
+the original signaling messages. Furthermore, even if one or both of
 the proxies were to crash at this point, the call could continue on
 normally. Finally, when one party wishes to end the session, it sends a
 ``BYE`` message, which elicits a ``200 OK`` response under normal

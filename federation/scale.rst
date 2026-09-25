@@ -353,7 +353,7 @@ communication was among hosts inside such a network, with only a small
 amount of communication taking place with hosts outside the campus
 network. Thus, the hosts in the campus network could mostly get by
 with addresses that were only locally unique. When some host needed to
-communicate with the broader Internet, e.g. to access a web site, it
+communicate with the broader Internet, e.g. to access a website, it
 could be dynamically given a globally unique address from a pool
 reserved for that purpose. Thus, a corporate network with hundreds of
 hosts could use private addresses for its hosts.  A handful of global

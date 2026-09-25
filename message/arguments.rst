@@ -301,7 +301,7 @@ uniqueness should the specification change over time, and each field can
 be annotated as being either ``required`` or ``optional``.
 
 The way Protobufs encode integers is novel. They use a technique called
-*varints* (variable length integers) in which each 8-bit byte uses the
+*varints* (variable-length integers) in which each 8-bit byte uses the
 most significant bit to indicate whether there are more bytes in the
 integer, and the lower seven bits to encode the two’s complement
 representation of the next group of seven bits in the value. The least

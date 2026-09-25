@@ -108,7 +108,7 @@ First, the RDMA programming interface, known as the *Verbs API*, has
 become a *de facto* standard for HPC programs, and most recently, for
 AI workloads that run in cloud datacenters. The Verbs API is
 low-level, and so is typically not directly used by application
-programs. Such applications are generally written to a higher level
+programs. Such applications are generally written to a higher-level
 interface, of which there are several options. They include *Message
 Passing Interface (MPI)* , *Global Address Space Programming Interface
 (GPI)*, and *Open Fabrics Interface (OFI)*, all of which pre-date the
