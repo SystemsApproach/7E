@@ -78,7 +78,7 @@ students about the details of every RFC published in the last 30
 years. It would be unhelpful to try. This is what we mean by
 giving a sense of perspective. Within that massive space of design
 possibilities and protocols, there are certain topics that stand out
-because they have out-sized importance in how networks operate, or that
+because they have outsized importance in how networks operate, or that
 teach a particular design principle.
 
 One way we approach the magnitude of the task is to focus on the

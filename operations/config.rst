@@ -56,7 +56,7 @@ straightforward. In any case, our focus is on the variable dictionary.
 You can learn more about the basics of SNMP and the MIB from RFCs 1157
 and 1213, respectively, and if you want to follow the history of
 incremental refinements, there is a long list of follow-on RFCs. But
-all of this work is based on an approach that pre-dates the
+all of this work is based on an approach that predates the
 availability of modern modeling languages, of which YANG has become
 the widely-accepted solution. YANG stands for *Yet Another Next
 Generation*, a name chosen to poke fun at how often a do-over proves

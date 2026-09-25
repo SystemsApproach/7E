@@ -52,7 +52,7 @@ The commonly used set of per-hop behaviors includes:
   requirements, which will be met as long as the sender is well
   behaved.
 
-AF is further subdivided into four sub-classes, each of which has an
+AF is further subdivided into four subclasses, each of which has an
 associated *drop preference* (low, medium, high), for a total of 12
 possible AF-related values. Finally, there is an attempt to maintain
 backward compatibility with the priority (precedence) specified in the

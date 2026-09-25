@@ -135,7 +135,7 @@ Notification (ECN) mechanism described in Chapter |Capacity|. This is
 appealing for cloud providers because their datacenters already
 leverage ECN in support of TCP congestion control.  The two mechanisms
 work in concert, with ECN pacing the source host as a first response
-to congestion, and PFC serving as a fall-back.
+to congestion, and PFC serving as a fallback.
 
 Note that this is all still an active area of research, with the
 following papers giving some insight into the issues being studied.

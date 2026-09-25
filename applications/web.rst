@@ -119,7 +119,7 @@ message has the general form
    <CRLF>
    MESSAGE_BODY <CRLF>
 
-where ``<CRLF>`` stands for carriage-return+line-feed. This is a
+where ``<CRLF>`` stands for carriage return + line feed. This is a
 pair of ASCII control characters often used to indicate the end of a
 line of text. The
 first line (``START_LINE``) indicates whether this is a request message

@@ -468,7 +468,7 @@ the corresponding queue during each scheduling interval. The fragments
 are reassembled back into complete packets at the receiver, before
 being passed up to the device (for downstream traffic) or on to the
 Mobile Core (for upstream traffic). Finally, note that one possible
-decision the scheduler might make is to "hand-off" the user to another
+decision the scheduler might make is to "hand off" the user to another
 base station, as outlined in Section |Shared|.4.2. In this way, a collection
 of base stations effectively collaborates to allocate spectrum across a
 set of radio cells.

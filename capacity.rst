@@ -55,7 +55,7 @@ traffic onto links and nodes in the first place. This network-wide
 decision-making process is known as *Traffic Engineering (TE)*, and it
 comes into play when per-node capacity is chronically under-provisioned
 due to long-term changes in the volume of traffic flowing between
-various nodes. TE was originally an off-line process, requiring
+various nodes. TE was originally an offline process, requiring
 administrator intervention, but it is increasingly being done as an
 automated (but coarse-grained) part of a network's overall approach to
 capacity management.

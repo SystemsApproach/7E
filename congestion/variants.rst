@@ -57,7 +57,7 @@ rather than making the simple binary decision that congestion is
 present. It then scales the congestion window based on this
 estimate. The standard TCP algorithm still kicks in should a packet
 actually be lost. The approach is designed to keep queues short by
-reacting early to congestion while not over-reacting to the point that
+reacting early to congestion while not overreacting to the point that
 they run empty and sacrifice throughput.
 
 The key challenge in this approach is to estimate the fraction of bytes
@@ -117,7 +117,7 @@ as the congestion window is calculated as follows:
 
 To summarize, CE marking to indicate incipient congestion happens
 early and often, but the reaction to such marking is more measured
-than in standard TCP, to avoid the over-reaction that would lead to
+than in standard TCP, to avoid the overreaction that would lead to
 queues running empty.
 
 The paper that lays out all the arguments for DCTCP including a study
@@ -156,7 +156,7 @@ previous equilibrium state. This is a difficult choice because it
 depends on the duration of congestion, which is hard to predict. If
 the congestion is transient, the algorithm should remember its
 previous state so it can rapidly restore the old equilibrium without
-under-utilizing the network once the burst ends. If the congestion is
+underutilizing the network once the burst ends. If the congestion is
 sustained, for example due to the arrival of one or more new flows,
 the algorithm should forget its previous state so that it can rapidly
 find a new equilibrium.
