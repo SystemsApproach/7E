@@ -129,25 +129,17 @@ You should also familiarize yourself with the `guidelines for contributing
 <https://github.com/SystemsApproach/7E/blob/main/CONTRIBUTING.rst>`__.
 
 If you’d like to contribute and are looking for something that needs
-attention, see the current `Project Board
-<https://github.com/orgs/SystemsApproach/projects/>`__. We’d also like
-to expand the set of topics/chapters beyond the initial set inherited
-from the 5th edition, so if you have ideas, we’d love to hear from
-you. Send email to ``discuss@systemsapproach.org``, or better yet,
-`join the forum
-<https://groups.google.com/a/systemsapproach.org/forum/#!forum/discuss>`__.
+attention, see the current `Issues
+<https://github.com/SystemsApproach/7E/issues/>`__. If you have ideas
+on ways to improve or expand the book, or on the development of
+ancillary material such as slides and exercises, we’d love to hear from
+you by email to ``discuss@systemsapproach.org``.
 
-Finally, in as much as this is an on-going effort, we will try to
-record and track our `progress
-<https://github.com/SystemsApproach/7E/blob/main/status.rst>`__.  For
-now, think of this as a poor-man’s release notes. Additional
-information about work-in-progress can be found in the `wiki
-<https://github.com/SystemsApproach/7E/wiki>`__.
 
 Join Us
 -------
 
-We hope you've gotten value out of *Computer Networks: A Systems
+We hope you've derived some value from *Computer Networks: A Systems
 Approach* over the years, and we’re eager to have you join us in this
 new venture.
 
