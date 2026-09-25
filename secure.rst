@@ -58,7 +58,7 @@ a general-purpose set of mechanisms to provide a secure byte-stream
 abstraction to any higher-layer protocol that needed it.
 
 In providing a secure channel, it is commonly required to authenticate
-end-points, to protect the integrity of traffic against modification,
+endpoints, to protect the integrity of traffic against modification,
 and to ensure traffic confidentiality. These capabilities are as
 useful for remote procedure calls (a topic we cover in the next
 chapter) as they are for web traffic.

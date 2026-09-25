@@ -111,7 +111,7 @@ low-level, and so is typically not directly used by application
 programs. Such applications are generally written to a higher-level
 interface, of which there are several options. They include *Message
 Passing Interface (MPI)* , *Global Address Space Programming Interface
-(GPI)*, and *Open Fabrics Interface (OFI)*, all of which pre-date the
+(GPI)*, and *Open Fabrics Interface (OFI)*, all of which predate the
 last decade's pivot towards AI workloads. More recently, *NCCL*
 (pronounced "nickel") has become the dominant API for AI software
 running on GPUs. NCCL was created by NVIDIA (it is an acronym for

@@ -167,7 +167,7 @@ building block. It is this building block, and the ways it can be
 Before getting into the details, there is one other bit of context to
 set.  At a high level, some range of spectrum bandwidth is set aside
 for wireless communication, whether it's licensed or unlicensed. We
-often use a short-hand to refer to that band; e.g., "Wi-Fi at 5-GHz"
+often use a shorthand to refer to that band; e.g., "Wi-Fi at 5-GHz"
 or "5G at 6-GHz". In actuality, we're talking about a specific range;
 for example, Wi-Fi uses 5.150-GHz to 5.850-GHz. Within such a band, it
 is common to then subdivide the full range into discrete *channels*,

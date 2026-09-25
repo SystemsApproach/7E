@@ -140,7 +140,7 @@ there is no choice but the long path. But a central algorithm that
 looked at all three flows at once and tried to place them optimally
 would end up with the much less wasteful set of paths shown on the
 bottom in the figure. While this is a contrived example,
-sub-optimal outcomes are unavoidable when there
+suboptimal outcomes are unavoidable when there
 is no central view of traffic.
 
 .. _fig-te-example:

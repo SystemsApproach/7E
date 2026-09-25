@@ -65,7 +65,7 @@ to start over with email using today's best practices, what would you
 do differently?  One likely answer is that you would define a RESTful
 API for email, and use HTTPS to both write messages to a mailbox and
 read messages from a mailbox. In fact, the same could be said for many
-applications that pre-date the web—their protocols are just
+applications that predate the web—their protocols are just
 purpose-built Request/Reply protocols. This is a topic we address in
 Chapter |Message|.
 

@@ -174,11 +174,11 @@ with "transport protocol" being a universal term.
 While it is possible to roughly map the other layers between the two
 architectures, understanding how and why they differ is more
 instructive. At the top end, the Internet does not partition
-application protocols into sub-layers, corresponding to the OSI's layers 5, 6,
+application protocols into sublayers, corresponding to the OSI's layers 5, 6,
 and 7.  This is because it treats applications as an orthogonal
 concern, with each app free to adopt whatever modularization makes
 sense. At the bottom, the Internet does not prescribe how the
-underlying networks are partitioned into sub-layers, corresponding to
+underlying networks are partitioned into sublayers, corresponding to
 the OSI's layers 1, 2, and 3. As at the application layer, the
 Internet architecture is agnostic as to how underlying network
 technologies are organized. Deciding what details to specify and what

@@ -347,7 +347,7 @@ request/reply paradigm and have built-in security thanks to TLS.
 There are, in fact, proposals to do exactly that. They are known as
 "DNS over HTTPS" (DoH) and "DNS over QUIC" (DoQ), respectively, as
 defined in RFCs 8484 and 9250. Instead, like all applications that
-pre-date HTTP, DNS has a bespoke request/reply protocol and it runs
+predate HTTP, DNS has a bespoke request/reply protocol and it runs
 over UDP (see RFC 1035). This approach has several security risks,
 some of which DoH and DoQ address. We discuss those risks, and
 introduce other defenses, in a companion book.

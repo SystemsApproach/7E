@@ -9,7 +9,7 @@ This book squarely focuses on packet-switched networks, in which
 complete packets are transmitted from one node to another, and any
 switch along an end-to-end path from source to destination
 stores and forwards packets.  There is another general approach to
-building networks, known as *circuit switching*, that pre-dates packet
+building networks, known as *circuit switching*, that predates packet
 switching. It has always been an integral part of the telephony
 network. In fact, as we pointed out in the introduction to this
 chapter, the original ARPANET was an experiment to demonstrate the

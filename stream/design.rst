@@ -69,7 +69,7 @@ The fourth issue is a familiar one: how to scale the system. While
 most of us have been on large video conferences that seem to work
 well, the solution normally depends on some high-capacity cloud
 service to send the video out to the participants. The problem of how
-to distribute real-time media to large audiences—imagine a world-wide
+to distribute real-time media to large audiences—imagine a worldwide
 audience watching the World Cup—is gaining renewed attention and we
 conclude the chapter by looking at an approach which aims to be as
 scalable as today's delivery of entertainment video using DASH.

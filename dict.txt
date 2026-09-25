@@ -1598,8 +1598,6 @@ Shuberg
 Sigcomm
 SIGCOMM's
 Sigelman
-signalled
-signalling
 SIGOPS
 siloed
 SIMs
