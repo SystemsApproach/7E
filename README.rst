@@ -5,10 +5,12 @@
 About This Book
 ===============
 
+.. no badge when making Latex doc
+   
 .. image:: https://github.com/SystemsApproach/7E/actions/workflows/publish-docs.yml/badge.svg
-  :align: left
-  :alt: deployment status button
-  :target: https://github.com/SystemsApproach/7E/actions/
+   :align: left
+   :alt: deployment status button
+   :target: https://github.com/SystemsApproach/7E/actions/
 
 |
 
