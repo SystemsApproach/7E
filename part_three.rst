@@ -8,7 +8,7 @@
 
 The edge devices connected to a network like the Internet—whether they
 are servers, laptops, mobile phones, or other consumer appliances—are
-not managed as part of the network, per se, but they do play a
+not managed as part of the network, per :spelling:ignore:`se`, but they do play a
 critical role in realizing a global network like today’s Internet. The
 edge is where applications run, along with a networking software stack
 that interacts with (connects the device to) the switches running
