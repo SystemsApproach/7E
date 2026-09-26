@@ -327,6 +327,7 @@ cyber
 cybersecurity
 cyclocross
 Daemen
+dahl
 DARPA
 datacenter
 datacenter's
@@ -1232,6 +1233,7 @@ Ott
 OTT
 Ousterhoust
 Ousterhout
+outsized
 overcommit
 overfit
 overfitting

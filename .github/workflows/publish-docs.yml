@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Validate source
+        run: make test
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Build html
