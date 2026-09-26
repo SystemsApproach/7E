@@ -10,6 +10,11 @@ jobs:
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repo
         uses: actions/checkout@v6
+      - name: Show spelling environment
+        run: |
+          make venv-docs
+          venv-docs/bin/python -c "import enchant; d = enchant.Dict('en_US'); print(d.tag, d.provider.name, d.provider.file)"
+          dpkg-query -W '*aspell*' '*hunspell*' '*enchant*' || true
       - name: Validate source
         run: make test
       - name: Build html
