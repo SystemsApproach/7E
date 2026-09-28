@@ -38,7 +38,7 @@ lint: $(VIRTUALENV)
 	doc8 --ignore-path $< --ignore-path "$(BUILDDIR)" --max-line-length 120 .
 
 # Workaround sphinx-doc/sphinx#4371.
-spelling: SPHINXOPTS += -E
+spelling: SPHINXOPTS += -E -W
 
 # clean up
 clean:

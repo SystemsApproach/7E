@@ -11,7 +11,7 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v6
       - name: Validate source
-        run: make test
+        run: make lint
       - name: Build html
         run: make html
       - name: List built files
