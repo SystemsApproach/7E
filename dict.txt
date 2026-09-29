@@ -848,6 +848,7 @@ KPM
 ksniff
 kubectl
 Kubernetes
+Kuehlewind
 Kulkarni
 Kurose
 KVM
@@ -1674,6 +1675,8 @@ subbands
 subblock
 subcarrier
 subcarriers
+subclass
+subclasses
 subcomponents
 subcontexts
 subfields

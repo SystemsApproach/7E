@@ -237,6 +237,11 @@ authority in charge).
 
 .. admonition:: Further Reading
 
+    S. Shalunov, G. Hazel, J. Iyengar, M. Kuehlewind.  `Low Extra
+    Delay Background Transport
+    <https://www.rfc-editor.org/info/rfc6817>`__. RFC 6817,
+    December 2012.
+
     `BitTorrent Statistics in 2026
     <https://earthweb.com/bittorrent-statistics/>`__.
     EarthWeb, 2026.
