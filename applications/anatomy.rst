@@ -95,8 +95,9 @@ denotes a message-oriented service, such as that provided by UDP. The
 ``protocol`` argument identifies the specific protocol that is going to
 be used. In our case, this argument is ``0``, which selects TCP as the
 default protocol for the ``AF_INET`` and ``SOCK_STREAM`` combination.
-Finally, the return value from ``socket`` is a *handle* for the newly 
-created socket—that is, an identifier by which we can refer to the socket in the future.
+Finally, the return value from ``socket`` is a *handle* for the newly
+created socket—that is, an identifier by which we can refer to the
+socket in the future.
 It is given as an argument to subsequent operations on this socket.
 
 The next step depends on whether you are a client or a server. On a
