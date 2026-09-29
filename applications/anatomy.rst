@@ -85,19 +85,19 @@ operation:
 The reason that this operation takes three arguments is that the socket
 interface was designed to be general enough to support any underlying
 protocol suite. Specifically, the ``domain`` argument specifies the
-protocol *family* that is going to be used: ``PF_INET`` denotes the
-Internet family, ``PF_UNIX`` denotes the Unix pipe facility, and
-``PF_PACKET`` denotes direct access to the network interface (i.e., it
-bypasses the TCP/IP protocol stack). The ``type`` argument indicates the
-semantics of the communication. ``SOCK_STREAM`` is used to denote a byte
-stream. ``SOCK_DGRAM`` is an alternative that denotes a message-oriented
-service, such as that provided by UDP. The ``protocol`` argument
-identifies the specific protocol that is going to be used. In our case,
-this argument is ``UNSPEC`` because the combination of ``PF_INET`` and
-``SOCK_STREAM`` implies TCP. Finally, the return value from ``socket``
-is a *handle* for the newly created socket—that is, an identifier by
-which we can refer to the socket in the future. It is given as an
-argument to subsequent operations on this socket.
+protocol *family* that is going to be used: ``AF_INET`` denotes the
+IPv4 Internet family, ``AF_UNIX`` denotes the Unix-domain socket family
+for communication between local processes, and ``AF_PACKET`` provides
+low-level access to packets at the network-device level. The ``type``
+argument indicates the semantics of the communication. ``SOCK_STREAM``
+is used to denote a byte stream. ``SOCK_DGRAM`` is an alternative that
+denotes a message-oriented service, such as that provided by UDP. The
+``protocol`` argument identifies the specific protocol that is going to
+be used. In our case, this argument is ``0`` because the combination
+of ``AF_INET`` and ``SOCK_STREAM`` selects TCP. Finally, the return
+value from ``socket`` is a *handle* for the newly created socket—that
+is, an identifier by which we can refer to the socket in the future.
+It is given as an argument to subsequent operations on this socket.
 
 The next step depends on whether you are a client or a server. On a
 server machine, the application process performs a *passive* open—the
