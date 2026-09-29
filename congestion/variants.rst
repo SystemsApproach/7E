@@ -98,22 +98,22 @@ window in exactly the same way as the standard algorithm, but it
 reduces the window in proportion to how many bytes encountered
 congestion during the last observation window.
 
-Specifically, a new variable called ``DCTCP.Alpha`` is initialized to
+Specifically, a new variable called *α* is initialized to
 1 and updated at the end of the observation window as follows:
 
-.. math:: \mathsf{DCTCP.Alpha} = \mathsf{DCTCP.Alpha} \times
+.. math:: \alpha = \alpha \times
           \mathsf{(1 - g) + g} \times \mathsf{M}
 
-``M`` is the fraction of bytes marked, and ``g`` is the estimation
-gain, a constant (set by the implementation) that determines how
-rapidly ``DCTCP.Alpha`` changes in response to marking of
-packets. When there is sustained congestion, ``DCTCP.Alpha``
+*M* is the fraction of bytes marked, and *g* is the estimation
+gain, a constant (commonly set to *1/16*) that determines how
+rapidly *α* changes in response to marking of
+packets. When there is sustained congestion, *α*
 approaches 1, and when there is sustained lack of congestion,
-``DCTCP.Alpha`` decays to zero. This causes gentle reaction to newly
+*α* decays to zero. This causes gentle reaction to newly
 arrived congestion and more severe reaction to sustained congestion,
 as the congestion window is calculated as follows:
 
-.. math:: \mathsf{CongestionWindow} = \mathsf{CongestionWindow} \times \mathsf{(1 - DCTCP.Alpha\ /\ 2)}
+.. math:: \mathsf{CongestionWindow} = \mathsf{CongestionWindow} \times \mathsf{(1 - }\alpha\mathsf{\ /\ 2)}
 
 To summarize, CE marking to indicate incipient congestion happens
 early and often, but the reaction to such marking is more measured
