@@ -85,7 +85,7 @@ operation:
 The reason that this operation takes three arguments is that the socket
 interface was designed to be general enough to support any underlying
 protocol suite. Specifically, the ``domain`` argument specifies the
-protocol *family* that is going to be used: ``AF_INET`` denotes the
+address *family* that is going to be used: ``AF_INET`` denotes the
 IPv4 Internet family, ``AF_UNIX`` denotes the Unix-domain socket family
 for communication between local processes, and ``AF_PACKET`` provides
 low-level access to packets at the network-device level. The ``type``
