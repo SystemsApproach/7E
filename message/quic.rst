@@ -302,9 +302,12 @@ section.
 
 In many respects, QUIC builds on the best practices learned over
 decades of development of TCP congestion control. The default
-congestion-control algorithm is TCP NewReno, which we covered in
-Chapter |CC|. But there are some important differences in the details
-which provide some incremental performance benefits over TCP.
+congestion-control algorithm is based on TCP NewReno, which we covered
+in Chapter |CC|. The QUIC specifications allow the use of other
+algorithms such as CUBIC. Whichever algorithm is used, there are some
+important differences in the details of how loss is detected and how
+the congestion control algorithm responds, which provide some
+incremental performance benefits over TCP.
 
 As we noted above, QUIC never reuses a packet number, so a
 retransmission to recover from loss will be clearly distinguished from
@@ -316,7 +319,7 @@ packet has failed to arrive.
 A second source of noise in RTT estimation is the use of delayed ACKs,
 where a recipient waits some time before sending the ACK in response to
 a received packet. To remove this uncertainty, QUIC includes an ``ACK
-Delay`` in the ACK frame that indicates the acknowledgment delay intentionally
+Delay`` in the ACK frame. This field indicates the acknowledgment delay intentionally
 introduced by the receiver between receiving the largest acknowledged
 packet (that is, the acknowledged packet with the largest packet number) and
 transmitting the ACK.
@@ -388,11 +391,11 @@ of data that was lost over sending new data, unless the application
 indicates otherwise.
 
 Packet losses also trigger congestion-control actions that are very
-similar to those in TCP and the NewReno variant specifically. A QUIC
-connection begins in slow start, moves into recovery phase upon a
-packet loss, then moves into congestion avoidance when a packet sent
-in the recovery period is acknowledged. The details are similar to the
-description of NewReno in Chapter |CC|.
+similar to those in TCP. A QUIC connection begins in slow start, moves
+into recovery phase upon a packet loss, then moves into congestion
+avoidance when a packet sent in the recovery period is
+acknowledged. The details of the default QUIC behavior are similar to
+the description of NewReno in Chapter |CC|.
 
 |Message|.3.4 Connection Migration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
