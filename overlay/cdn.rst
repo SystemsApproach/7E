@@ -207,11 +207,15 @@ Consistent hashing hashes a set of objects
 visualizes a 128-bit ID space as a circle, where we use the algorithm to
 place both objects
 
-.. centered:: *hash(ObjectName) → ObjectID*
+.. math::
+
+   \mathsf{hash}(\mathsf{ObjectName}) \rightarrow \mathsf{ObjectID}
 
 and nodes
 
-.. centered:: *hash(IPAddr) → NodeID*
+.. math::
+
+   \mathsf{hash}(\mathsf{IPAddr}) \rightarrow \mathsf{NodeID}
 
 onto this circle. Since a 128-bit ID space is enormous, it is unlikely
 that an object will hash to exactly the same ID as a server’s IP

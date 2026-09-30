@@ -324,9 +324,13 @@ timestamps are relevant. For example, if the sampling interval is
 the first sample in packet n, then the number of sampling instants
 between these two samples is
 
-.. centered:: TimeBetweenPackets / TimePerSample
+.. math::
 
-.. centered:: = (10 × 10\ :sup:`-3`\ ) / (125 × 10\ :sup:`-6`\ ) = 80
+   \begin{aligned}
+   \frac{\mathsf{TimeBetweenPackets}}{\mathsf{TimePerSample}}
+      &= \frac{10 \times 10^{-3}}{125 \times 10^{-6}} \\
+      &= 80
+   \end{aligned}
 
 Assuming the clock granularity is the same as the sampling interval,
 then the timestamp in packet n+1 would be greater than that in packet n
