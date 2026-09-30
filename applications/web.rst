@@ -233,7 +233,7 @@ example, the ``START_LINE``
 
 .. code-block:: http
 
-   HTTP/1.1 202 Accepted
+   HTTP/1.1 200 OK
 
 indicates that the server was able to satisfy the request, while
 
