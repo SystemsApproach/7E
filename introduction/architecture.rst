@@ -312,8 +312,8 @@ system easier if we keep our focus narrow.
    being overly concerned about how you’re going to address the other
    issues.  Conflating too many issues and trying to address them all
    at once is often tempting—it’s easy to convince yourself that
-   doing so yields a more optimized solution—but most of the time
-   it’s a recipe for failure.
+   doing so yields a more optimized solution—but it is often a recipe
+   for failure.
 
 This approach to dealing with complexity is so fundamental that we
 leverage it as an organizing principle for the rest of this book,

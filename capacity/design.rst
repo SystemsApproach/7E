@@ -127,6 +127,20 @@ involves the router sending *feedback* to the end hosts when its
 buffers are full. Section |Capacity|.3 describes how such AQM
 mechanisms work.
 
+.. takeaway::
+
+   As we pointed out in Section |Intro|.2.3, decoupling the challenge
+   of building a global, best-effort packet delivery service from the
+   challenge of building applications on top of that service was a key
+   design decision; it was central to the Internet's success. But
+   that's not to say there are zero dependencies between the two
+   parts. The interplay between how routers manage their queues and
+   end hosts manage their end-to-end traffic flows is a classic
+   example of an indirect dependency between subsystems. They crop up
+   everywhere, and not always in an obvious way. Recognizing and
+   accounting for such interdependencies is part of what makes the
+   design of complex systems so challenging.
+
 |Capacity|.1.3 Persistent Queues
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
