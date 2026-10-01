@@ -37,7 +37,7 @@ end-systems rather than inside the network is a notable application of
 the end-to-end argument described in Chapter |Intro|.
 
 Later chapters describe other approaches—offering different
-inter-process communication abstractions—but supporting a reliable
+interprocess communication abstractions—but supporting a reliable
 byte stream between two communicating processes has proven to be an
 extremely versatile strategy that serves a wide range of applications.
 Email and the web are two examples with similar usage: they both use

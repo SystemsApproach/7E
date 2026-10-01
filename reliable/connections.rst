@@ -27,10 +27,9 @@ connection open and to continue sending data.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The algorithm TCP uses to establish and terminate a connection is
-called a *three-way handshake*. We first describe the basic algorithm
-and then show how it is used by TCP. The three-way handshake involves
-the exchange of three messages between the client and the server, as
-illustrated by the timeline given in :numref:`Figure %s <fig-twh-timeline>`.
+called a *three-way handshake*. It involves the exchange of three
+messages between the client and the server, as illustrated by the
+timeline given in :numref:`Figure %s <fig-twh-timeline>`.
 
 .. _fig-twh-timeline:
 .. figure:: reliable/figures/f05-06.png
@@ -89,7 +88,7 @@ the ESTABLISHED state.
 
    TCP state-transition diagram.
 
-TCP’s state-transition diagram is fairly easy to understand. Each box
+Each box in the diagram
 denotes a state that one end of a TCP connection can find itself in. All
 connections start in the CLOSED state. As the connection progresses, the
 connection moves from state to state according to the arcs. Each arc is

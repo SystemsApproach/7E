@@ -63,7 +63,7 @@ out and retransmits the original packet, but the receiver will think
 that it is the next packet, since it correctly received and
 acknowledged the first packet. This has the potential to cause
 duplicate copies of a packet to be delivered. To address this problem,
-the header for a stop-and-wait protocol usually includes a 1-bit
+the header for a stop-and-wait protocol includes a 1-bit
 sequence number—that is, the sequence number can take on the values 0
 and 1—and the sequence numbers used for each packet alternate, as
 illustrated in :numref:`Figure %s <fig-stop-wait>`. Thus, when the
@@ -156,7 +156,7 @@ said another way, how late a packet can arrive at the destination. In
 the worst case, a packet can be delayed in the Internet until the IP
 time to live (``TTL``) field expires, at which time the packet is
 discarded (and hence there is no danger of it arriving late). Of
-course, TTL is a misnomer; it has for many years simply been number
+course, TTL is a misnomer; it has for many years simply been an integer
 decremented at every router hop. The approach TCP takes is to assume
 each packet has a maximum lifetime. The exact lifetime, known as
 the *maximum segment lifetime* (MSL), is an engineering choice. The

@@ -98,8 +98,7 @@ read by the local application process, and bytes to the right of
 |TCP|.4.2 Flow Control
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Most of the above discussion is similar to that found in the standard
-sliding window algorithm.  In what follows, we focus on the fact that
+We now turn our attention to the fact that
 both buffers are of some finite size, denoted ``MaxSendBuffer`` and
 ``MaxRcvBuffer``, although we don’t worry about the details of how
 they are implemented. In other words, we are only interested in the
@@ -228,7 +227,7 @@ dumb receiver* rule.
 |TCP|.4.3 Protecting Against Wraparound
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This subsection and the next consider the size of the ``SequenceNum``
+This and the next subsections consider the size of the ``SequenceNum``
 and ``AdvertisedWindow`` fields and the implications of their sizes on
 TCP’s correctness and performance. TCP’s ``SequenceNum`` field is
 32 bits long, and its ``AdvertisedWindow`` field is 16 bits long,
@@ -238,7 +237,7 @@ window size: 2\ :sup:`32` >> 2 × 2\ :sup:`16`. However, this
 requirement is not the interesting thing about these two fields.
 Consider each field in turn.
 
-The relevance of the 32-bit sequence number space is that the sequence
+The relevance of the 32-bit sequence number is that the sequence
 number used on a given connection might wrap around—a byte with
 sequence number S could be sent at one time, and then at a later time
 a second byte with the same sequence number S might be sent. Once
@@ -280,7 +279,7 @@ bandwidths.
 .. Should probably update this and the next table with at least one
    40Gbps entries.
 
-As you can see, the 32-bit sequence number space is adequate at modest
+As you can see, the 32-bit sequence number is adequate at modest
 bandwidths, but given that OC-768 (40 Gbps) links are now common in
 the Internet backbone, and that most servers now come with 10Gig
 Ethernet (or 10 Gbps) interfaces, we’re now well-past the point where
