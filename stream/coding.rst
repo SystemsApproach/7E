@@ -221,16 +221,14 @@ during decompression, are defined by the following formulas:
 
 .. math::
 
-   \begin{aligned}
-   DCT(i,j) &=&  \frac{1}{\sqrt{2N}} C(i) C(j) \sum_{x=0}^{N-1}
+   DCT(i,j) &=  \frac{1}{\sqrt{2N}} C(i) C(j) \sum_{x=0}^{N-1}
     \sum_{y=0}^{N-1} pixel(x, y)
     \cos \left[ \frac{(2x+1)i \pi}{2N}\right]
     \cos \left[ \frac{(2y+1)j \pi}{2N}\right]\\
-   \mathit{pixel}(x,y) &=&  \frac{1}{\sqrt{2N}} \sum_{i=0}^{N-1}
+   \mathit{pixel}(x,y) &=  \frac{1}{\sqrt{2N}} \sum_{i=0}^{N-1}
     \sum_{j=0}^{N-1} C(i) C(j) DCT(i, j)
     \cos \left[ \frac{(2x+1)i \pi}{2N}\right]
     \cos \left[ \frac{(2y+1)j \pi}{2N}\right]
-   \end{aligned}
 
 where :math:`C(x) = 1/\sqrt{2}` when :math:`x=0` and :math:`1` when
 :math:`x>0`, and :math:`pixel(x,y)` is the grayscale value of the pixel
