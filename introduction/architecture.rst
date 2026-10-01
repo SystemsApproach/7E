@@ -313,7 +313,8 @@ system easier if we keep our focus narrow.
    issues.  Conflating too many issues and trying to address them all
    at once is often tempting—it’s easy to convince yourself that
    doing so yields a more optimized solution—but it is often a recipe
-   for failure.
+   for failure. An attempt to take on too many problems at once is
+   pejoratively referred to as "boiling the ocean".
 
 This approach to dealing with complexity is so fundamental that we
 leverage it as an organizing principle for the rest of this book,

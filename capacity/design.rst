@@ -135,7 +135,7 @@ mechanisms work.
    design decision; it was central to the Internet's success. But
    that's not to say there are zero dependencies between the two
    parts. The interplay between how routers manage their queues and
-   end hosts manage their end-to-end traffic flows is a classic
+   how end hosts manage their end-to-end traffic flows is a classic
    example of an indirect dependency between subsystems. They crop up
    everywhere, and not always in an obvious way. Recognizing and
    accounting for such interdependencies is part of what makes the
