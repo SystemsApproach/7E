@@ -371,7 +371,7 @@ using a Huffman code. (RLE and Huffman codes are two examples of
    is made up of the 26 symbols A through Z, and if all of these
    symbols have an equal chance of occurring in the data block you are
    encoding, then encoding each symbol in 5 bits is the best you can
-   do (since 25 = 32 is the lowest power of 2 above 26). If, however,
+   do (since* :math:`2^5` *= 32 is the lowest power of 2 above 26). If, however,
    the symbol R occurs 50% of the time, then it would be a good idea
    to use fewer bits to encode the R than any of the other symbols. In
    general, if you know the relative probability that each symbol will
