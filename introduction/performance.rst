@@ -159,8 +159,10 @@ time) you can calculate how many bits fit in the pipe. For example, a
 transcontinental channel with a one-way latency of 50 ms and a bandwidth
 of 45 Mbps is able to hold
 
-.. centered:: 50 × 10\ :sup:`-3` *sec* × 45 × 10\ :sup:`6` *bits/sec* = 2.25
-              × 10\ :sup:`6` *bits*
+.. math::
+
+   50 \times 10^{-3}\ \mathsf{sec} \times 45 \times 10^{6}\ \mathsf{bits/sec}
+   = 2.25 \times 10^{6}\ \mathsf{bits}
 
 or approximately 280 KB of data. In other words, this example channel
 (pipe) holds as many bytes as the memory of a personal computer from the
@@ -262,14 +264,18 @@ Perhaps the best way to understand the relationship between throughput
 and latency is to return to basics. The effective end-to-end throughput
 that can be achieved over a network is given by the simple relationship
 
-.. centered:: Throughput = TransferSize / TransferTime
+.. math::
+
+   \mathsf{Throughput} = \frac{\mathsf{TransferSize}}{\mathsf{TransferTime}}
 
 where TransferTime includes not only the elements of one-way latency
 identified earlier in this section, but also any additional time spent
 requesting or setting up the transfer. Generally, we represent this
 relationship as
 
-.. centered:: TransferTime = RTT + 1/Bandwidth x TransferSize
+.. math::
+
+   \mathsf{TransferTime} = \mathsf{RTT} + \frac{\mathsf{TransferSize}}{\mathsf{Bandwidth}}
 
 We use RTT in this calculation to account for a request message being sent
 across the network and the data being sent back. For example, consider a
@@ -279,7 +285,9 @@ round-trip time of 100 ms. This includes both the transmit time for 1 MB
 (1 / 1 Gbps × 1 MB = 8 ms) and the 100-ms RTT, for a total transfer time
 of 108 ms. This means that the effective throughput will be
 
-.. centered:: 1 MB / 108 ms = 74.1 Mbps
+.. math::
+
+   \frac{1\ \mathsf{MB}}{108\ \mathsf{ms}} = 74.1\ \mathsf{Mbps}
 
 not 1 Gbps. Clearly, transferring a larger amount of data will help
 improve the effective throughput, where in the limit an infinitely

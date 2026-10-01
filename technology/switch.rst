@@ -196,11 +196,12 @@ to switch 40 million packets each second. This is sometimes called the
 packets-per-second (pps) rate. If the average packet is 64 bytes, this
 would imply
 
-.. centered:: Throughput = pps x BitsPerPacket
+.. math::
 
-.. centered:: = 40 × 10\ :sup:`6` × 64 × 8
-
-.. centered:: = 2048 × 10\ :sup:`7`
+   \mathsf{Throughput}
+      &= \mathsf{pps} \times \mathsf{BitsPerPacket} \\
+      &= 40 \times 10^{6} \times 64 \times 8 \\
+      &= 2048 \times 10^{7}
 
 That is, a throughput of about 20 Gbps—fast, but substantially below
 the range users are demanding from their switches today. Bear in mind

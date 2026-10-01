@@ -89,7 +89,11 @@ or approximately 8 KB. Since the sender can send only one packet per
 RTT, if we assume a packet size of 1 KB, this implies a maximum
 sending rate of
 
-.. centered:: Bits-Per-Packet / Time-Per-Packet = 1024 x 8 / 0.045 = 182 kbps
+.. math::
+
+   \frac{\mathsf{BitsPerPacket}}{\mathsf{TimePerPacket}}
+   = \frac{1024 \times 8}{0.045}
+   = 182\ \mathsf{kbps}
 
 or about one-eighth of the network’s capacity. We’d like the sender to
 be able to transmit up to eight packets before having to wait for an

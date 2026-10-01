@@ -43,7 +43,9 @@ networked multimedia, consider the following example. A high-definition
 TV screen has something like 1080 × 1920 pixels, each of which has 24
 bits of color information, so each frame is
 
-.. centered:: 1080 × 1920 × 24 = 50 *Mb*
+.. math::
+
+   1080 \times 1920 \times 24 = 50\ \mathsf{Mb}
 
 If you want to send 24 frames per second, that would be over
 1 Gbps.  That’s more than most Internet users have access to even
