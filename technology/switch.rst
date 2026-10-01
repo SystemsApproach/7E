@@ -198,12 +198,10 @@ would imply
 
 .. math::
 
-   \begin{aligned}
    \mathsf{Throughput}
       &= \mathsf{pps} \times \mathsf{BitsPerPacket} \\
       &= 40 \times 10^{6} \times 64 \times 8 \\
       &= 2048 \times 10^{7}
-   \end{aligned}
 
 That is, a throughput of about 20 Gbps—fast, but substantially below
 the range users are demanding from their switches today. Bear in mind
