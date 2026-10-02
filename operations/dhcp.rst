@@ -1,6 +1,6 @@
 .. index:: DHCP: Dynamic Host Configuration Protocol
 
-|Ops|.2. Host Configuration
+|Ops|.2 Host Configuration
 -----------------------------------
 
 Before getting to the general problem of network configuration, we
