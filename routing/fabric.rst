@@ -9,7 +9,7 @@
 We conclude our discussion of routing by looking at a different
 scenario: how routes are managed in datacenter networks. Recall from
 Chapter |Apps| that datacenters typically interconnect racks of servers
-using a leaf-spine network topology. :ref:`Figure 22 <fig-leaf-spine>`
+using a leaf-spine network topology. :numref:`Figure %s <fig-leaf-spine>`
 shows a simple four-rack example using a two-level switching fabric.
 Hyperscaler datacenters are much larger—and often use three-level
 fabrics—but the same idea applies.

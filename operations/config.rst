@@ -183,7 +183,7 @@ management shown in :numref:`Figure %s <fig-mgmt-system>`, the ``gNMI
 Client`` stub runs as part of the Network Management System and an
 instance of the ``gNMI Server`` stub runs on each individual
 switch, specifically as part of the Switch OS system running on the
-switch's control processor. (See, for example, :ref:`Figure 40
+switch's control processor. (See, for example, :numref:`Figure %s
 <fig-nbi>` in Section |Tech|.2.5, where the server stub in
 :numref:`Figure %s <fig-yang>` implements the switch's NBI.)
 
