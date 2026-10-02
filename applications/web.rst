@@ -467,7 +467,7 @@ For example, the *DOI Foundation* (where DOI stands for *Digital
 Object Identifier*) manages an effort to assign a unique and
 persistent (never changing) identifier to every object in the
 Internet. A URN corresponding to the DOI name space would look
-something like this: ``doi:10.17487/RFC0791``. This example happens to
+something like this: ``urn:doi:10.17487/RFC0791``. This example happens to
 be a URN for the RFC that specifies the IP protocol. If you want to
 learn more about the DOI effort, and how to interpret names like
 ``doi:10.17487/RFC0791``, you can visit the DOI website using the
