@@ -28,7 +28,7 @@ The next problem is how to identify the target procedure/address. An
 RPC mechanism needs a unique identifier for the remote procedure being
 called, and an RDMA mechanism needs to provide the memory address for
 the block of data to be read or written. In both cases, the mechanism
-first establishes a name space (or address space) that both senders
+first establishes a namespace (or address space) that both senders
 and receivers understand, and then the request messages carry the
 specific target identifier as one of their header fields. The reply
 message then needs to include an identifier for the transaction, so
