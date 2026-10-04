@@ -460,13 +460,13 @@ This locator information is what qualifies a URI as a URL. Another
 type of URI, known as a *Uniform Resource Name (URN)*, is used to
 specify a unique name for a resource, but without giving any hint as
 to its location. For URNs, we can think of the scheme as specifying a
-*name space* and the scheme-specific part as specifying a unique name
-within that name space.
+*namespace* and the scheme-specific part as specifying a unique name
+within that namespace.
 
 For example, the *DOI Foundation* (where DOI stands for *Digital
 Object Identifier*) manages an effort to assign a unique and
 persistent (never changing) identifier to every object in the
-Internet. A URN corresponding to the DOI name space would look
+Internet. A URN corresponding to the DOI namespace would look
 something like this: ``doi:10.17487/RFC0791``. This example happens to
 be a URN for the RFC that specifies the IP protocol. If you want to
 learn more about the DOI effort, and how to interpret names like

@@ -113,7 +113,7 @@ key, we should look more closely at what we mean by “identity.” For
 example, a certificate that says, “This public key belongs to John
 Smith,” may not be terribly useful if you can’t tell which of the
 thousands of John Smiths is being identified. Thus, certificates must
-use a well-defined name space for the identities being certified; for
+use a well-defined namespace for the identities being certified; for
 example, certificates are often issued for DNS
 domains.
 

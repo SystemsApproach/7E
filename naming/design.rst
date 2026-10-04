@@ -4,7 +4,7 @@
 A naming system maintains a collection of *bindings* of names to
 values. The value can be anything we want the naming system to return
 when presented with a name; it might be an address, or another
-name. Each name is said to be drawn from a *name space* that
+name. Each name is said to be drawn from a *namespace* that
 establishes the rules for what constitutes a legitimate identifier.
 These rules—often included as part of a protocol spec—establish the
 syntax for names, what types of value(s) each name may be bound to,
@@ -44,7 +44,7 @@ Dealing with scale is an important consideration for any Internet
 naming system, and as we have seen in other situations, a hierarchy
 can be introduced to improve scalability. Consider the specific
 problem of how names and addresses are assigned to objects. Domain
-names come from a *hierarchical* name space, where IANA, the Internet
+names come from a *hierarchical* namespace, where IANA, the Internet
 Assigned Numbers Authority, is responsible for the top-level domains
 (e.g., ``.edu``, ``.com``, ``.uk``) and delegates management of those
 domains to registrars who allocate subdomains, and so on. At the
@@ -119,7 +119,7 @@ Looking more closely at uniqueness, we have to decide how we want
 to interpret "get back the same value". A name is considered unique if it
 always resolves in the same way, independent of who asks, but the
 returned value may be multifaceted. One common example is that a name
-resolves to an equivalent set of values; that is, the name space
+resolves to an equivalent set of values; that is, the namespace
 supports one-to-many bindings. For example, resolving a domain name
 might return a set of IP addresses, any one of which will work.
 Another common scenario is that the values are typed; that is,

@@ -20,12 +20,12 @@ naming systems, with a focus on what value they provide beyond DNS.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In contrast to DNS, which provides a self-contained naming system,
-URIs define a federated name space that encompasses one or more
-existing name spaces. The specification for URIs, defined in RFC 3986,
+URIs define a federated namespace that encompasses one or more
+existing namespaces. The specification for URIs, defined in RFC 3986,
 includes a *syntax* for identifiers and an extensible process for
 resolving those identifiers. The process is extensible in the sense
-that it takes advantage of resolution mechanisms defined by other name
-spaces, including DNS.
+that it takes advantage of resolution mechanisms defined by other
+namespaces, including DNS.
 
 .. admonition:: Further Reading
 
@@ -135,7 +135,7 @@ numbers (e.g., ``6`` for TCP), top-level domains (e.g., ``.com`` and
 also responsible for registering the official NIDs under the ``urn``
 scheme, including ``doi``, ``ietf``, ``uuid``, ``isbn``, and
 ``issn``. The IANA publishes official assignment documents, in this
-case, one for URI schemes and one for URN name spaces.
+case, one for URI schemes and one for URN namespaces.
 
 .. admonition:: Further Reading
 
@@ -196,7 +196,7 @@ given object can be accessed.
    Services <https://dl.acm.org/doi/10.1007/s00799-005-0128-x>`__.
    *International Journal of Digital Libraries*, April 2006.
 
-Since URIs define a federated name space, and the Handle System
+Since URIs define a federated namespace, and the Handle System
 already provided a framework for defining persistent object names, the
 syntax for handles was incorporated into the URN definition. The
 example NSS component ``10.17487/RFC3986`` is a handle for RFC 3986.

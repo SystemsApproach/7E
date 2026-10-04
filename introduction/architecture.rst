@@ -94,7 +94,7 @@ request pages from web servers. Below that, the *presentation* layer
 is concerned with the format of data exchanged between peers—for
 example, whether an integer is 16, 32, or 64 bits long, or how an
 image or video stream is formatted. Finally, the *session* layer
-provides a name space that is used to tie together the potentially
+provides a namespace that is used to tie together the potentially
 different transport streams that are part of a single application. For
 example, it might manage an audio stream and a video stream that are
 being combined in a teleconferencing application.
