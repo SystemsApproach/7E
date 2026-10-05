@@ -314,7 +314,7 @@ much bandwidth they need. Video applications are a prime
 example. Suppose one wants to stream a video to a small screen that
 has a resolution of 352 by 240 pixels. If each pixel is represented by
 24 bits of information, as would be the case for 24-bit color, then
-the size of each frame would be (352 × 240 × 24) / 8 = 253.44 KB. If
+the size of each frame would be (352 × 240 × 24) / (8 × 1024) = 247.5 KB. If
 the application needs to support a frame rate of 30 frames per second,
 then it might request a throughput rate of 60.8 Mbps. The ability of the
 network to provide more bandwidth is of no interest to such an
