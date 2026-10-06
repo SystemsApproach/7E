@@ -96,8 +96,8 @@ requirement in Section |Intro|.4.
 
 The fourth requirement is that the network be *high-performance.*
 Everyone wants the network to be fast, but performance is
-multifaceted.  Some applications care about response time; how long
-it takes to send and receive a message. Others care about throughput;
+multifaceted.  Some applications care about response time: how long
+it takes to send and receive a message. Others care about throughput:
 how long it takes to download a large file. Still others care that
 packet delivery is predictable, so that a video stream plays without
 jarring pauses. All of these metrics depend on physical limitations,
