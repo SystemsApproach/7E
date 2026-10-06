@@ -314,12 +314,17 @@ much bandwidth they need. Video applications are a prime
 example. Suppose one wants to stream a video to a small screen that
 has a resolution of 352 by 240 pixels. If each pixel is represented by
 24 bits of information, as would be the case for 24-bit color, then
-the size of each frame would be (352 × 240 × 24) / (8 × 1024) = 247.5 KB. If
-the application needs to support a frame rate of 30 frames per second,
-then it might request a throughput rate of 60.8 Mbps. The ability of the
-network to provide more bandwidth is of no interest to such an
-application because it has only so much data to transmit in a given
-period of time.
+the size of each frame would be (352 × 240 × 24) / (8 × 1024) = 247.5 KB.\ [#]_
+If the application needs to support a frame rate of 30 frames per
+second, then it might request a throughput rate of 60.8 Mbps. The
+ability of the network to provide more bandwidth is of no interest to
+such an application because it has only so much data to transmit in a
+given period of time.
+
+.. [#] We adopt the convention of measuring messages and memory
+   in KB, MB, and GB as :math:`2^{10}`,  :math:`2^{20}`, and :math:`2^{30}`,
+   respectively, and bandwidth in Kbps, Mbps, and Gbps as
+   :math:`10^3`,  :math:`10^6`, and :math:`10^9`, respectively.
 
 The situation is not as simple as this example suggests.  Because the
 difference between any two adjacent frames in a video stream is often
