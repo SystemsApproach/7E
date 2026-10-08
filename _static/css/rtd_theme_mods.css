@@ -137,8 +137,15 @@ aside.sidebar {
   }
 
   html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle-item {
-    display: inline-block;
-    margin-right: 8px;
+    position: fixed;
+    top: 1.618em;
+    left: 8px;
+    z-index: 201;
+    display: block;
+    padding: 0;
+    /* Keep the control in the content gutter beside RTD's 300px sidebar. */
+    transform: translateX(300px);
+    transition: transform 0.3s ease;
   }
 
   html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle {
@@ -186,7 +193,12 @@ aside.sidebar {
     margin-left: 0;
   }
 
+  html.sidebar-collapsed .desktop-sidebar-toggle-item {
+    transform: translateX(0);
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle-item,
     html.desktop-sidebar-toggle-ready .wy-nav-side,
     html.desktop-sidebar-toggle-ready .wy-nav-content-wrap {
       transition: none;
