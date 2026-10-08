@@ -125,3 +125,83 @@ aside.sidebar {
     width: 40%;
     float: right;
 }
+
+/* Desktop sidebar toggle. RTD switches to its mobile navigation at 768px. */
+.wy-breadcrumbs > .desktop-sidebar-toggle-item {
+  display: none;
+}
+
+@media screen and (min-width: 769px) {
+  html.desktop-sidebar-toggle-ready .wy-breadcrumbs > li {
+    vertical-align: middle;
+  }
+
+  html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle-item {
+    position: fixed;
+    top: 1.618em;
+    left: 8px;
+    z-index: 201;
+    display: block;
+    padding: 0;
+    /* Keep the control in the content gutter beside RTD's 300px sidebar. */
+    transform: translateX(300px);
+    transition: transform 0.3s ease;
+  }
+
+  html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+    color: #646464;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+
+  html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle:hover {
+    background: #eef4f8;
+    color: #2980b9;
+  }
+
+  html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle:focus-visible {
+    outline: 2px solid #2980b9;
+    outline-offset: 2px;
+  }
+
+  html.desktop-sidebar-toggle-ready .wy-nav-side {
+    transition: transform 0.3s ease, visibility 0s linear;
+  }
+
+  html.desktop-sidebar-toggle-ready .wy-nav-content-wrap {
+    transition: margin-left 0.3s ease;
+  }
+
+  html.sidebar-collapsed .wy-nav-side {
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition-delay: 0s, 0.3s;
+  }
+
+  html.sidebar-collapsed .wy-nav-content-wrap {
+    margin-left: 0;
+  }
+
+  html.sidebar-collapsed .desktop-sidebar-toggle-item {
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.desktop-sidebar-toggle-ready .desktop-sidebar-toggle-item,
+    html.desktop-sidebar-toggle-ready .wy-nav-side,
+    html.desktop-sidebar-toggle-ready .wy-nav-content-wrap {
+      transition: none;
+    }
+  }
+}
