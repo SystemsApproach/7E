@@ -261,19 +261,19 @@ for all queues for fair queuing, or it can be set to different values
 per queue to implement weighted fair queuing. For simplicity here we
 use the same quantum of 500 bytes for all queues.
 
-We illustrate the process in :numref:`Figure %s
-<fig-drr1>` and :numref:`Figure %s
-<fig-drr2>`. There are four queues each holding some number of packets
-of different sizes. There is a pointer indicating which queue is next
-due for service in the rotation. As the pointer reaches a queue, we
-add the quantum to the deficit counter, which in this case was zero,
-so it goes up to 500. The interpretation of this counter is that the
-queue may send up to that many bytes but no more. So the 300-byte
-packet is sent, but there is not enough "credit" to send the next
-500-byte packet. So the deficit counter is set to 500-300 = 200,
-representing the difference between what the flow was entitled to send
-and what it actually sent. The pointer moves on to the next queue, and
-the 400-byte packet is sent and its deficit will be set to 500-400 = 100.
+We illustrate the process in :numref:`Figure %s <fig-drr1>` and
+:numref:`Figure %s <fig-drr2>`. There are four queues each holding
+some number of packets of different sizes. There is a pointer
+indicating which queue is next due for service in the rotation. As the
+pointer reaches a queue, we add the quantum to the deficit counter,
+which in this case was zero, so it goes up to 500. The interpretation
+of this counter is that the queue may send up to that many bytes but
+no more. So the 300-byte packet is sent, but there is not enough
+"credit" to send the next 500-byte packet. So the deficit counter is
+set to 500-300 = 200, representing the difference between what the
+flow was entitled to send and what it actually sent. The pointer moves
+on to the next queue, and the 400-byte packet is sent and its deficit
+will be set to 500-400 = 100.
 
 
 
