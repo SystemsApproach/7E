@@ -283,6 +283,56 @@ done in the past. Our job is to give them the understanding of system
 design principles and the intellectual framework to manage complexity
 that will set them up for the future of networking, whatever it may be.
 
+Acknowledgements
+------------------
+
+
+We would like to acknowledge the following people for their help with
+new content and reviewing our early versions:
+
+- John Hartman
+- David Lowenthal
+- Bilal Saleem
+- David Wetherall
+- Brad Karp
+- Motonori Shindo
+- Cecilia Testart
+- Alex Snoeren
+- Muhammad Shahbaz
+- Justine Sherry
+- Tess Despres
+
+Along with the following individuals (GitHub users) for their various
+contributions and bug fixes:
+
+.. hlist::
+   :columns: 3
+
+   -  He Chen (miluchen)
+   -  Takashi Idobe (Takashiidobe)
+   -  Elizabeth Bernhardt (Innominata88)
+   -  Mohit Mayank (mmynk)
+   -  Mark Liffiton (liffiton)
+   -  Junhao Zhang (junhaoim)
+   -  Cooper Vandiver (CooperVandiver)
+   -  Waheed Hafez (WaheedHafez)
+   -  Benjamin Levy (BenjaminLevy)
+   -  Takashi Idobe (Takashiidobe)
+   -  Kirby Linvill (klinvill)
+   -  Osman Karaketir (karaketir16)
+   -  Anderson Adon (Anderson-A)
+   -  Junkang Li (lijunkang12)
+   -  Yihao Wang (y1hao)
+   -  Charles Reiss (charlesreiss)
+   -  Karanveer B. (KaranveerB)
+   -  Meek Msaki (mmsaki)
+   -  Jeroen van der Ham-de Vos (jeroen)
+   -  Ayelet Lotem
+   -  Jonathan Gai (jongai)
+   -  Walentyn Olijnyk (Walentalien)
+
+---------
+
 For some more insight into our
 thinking as we worked on 7E, you might find the following posts
 informative:
