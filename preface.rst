@@ -16,7 +16,7 @@ As with prior editions, we treat
 networking as a set of system design problems and draw on existing
 artifacts such as Ethernet, HTTP and IP to illustrate how these
 challenges have been solved in the past. Our aim it not just to teach
-now networks are built today, but to equip readers
+how networks are built today, but to equip readers
 with the perspective and systems thinking skills required to shape the networks
 of the future.
 
@@ -141,7 +141,7 @@ chapter depends on material that hasn't yet been covered in the book.
 
 One way we accomplish this is to adopt a "2-pass" strategy. In the
 first pass (corresponding to Part I of the book) we introduce all the
-foundational concepts need to understand the problem-specific examples
+foundational concepts needed to understand the problem-specific examples
 described later in the book. These include the basics of network
 architectures, over-the-wire protocols, service interfaces,
 encapsulation, and so on. This first pass also discusses network
@@ -269,7 +269,7 @@ draw attention to it.
 Textbooks are just one part of a networking course, but they can
 provide a coherent perspective on the subject, helping readers to connect the
 dots. A big picture view helps the student make sense of all the
-details and see how various technologies fit to from the whole. It
+details and see how various technologies fit to form the whole. It
 enables them to know what questions to ask, not just telling them how
 some bit of technology works today, but setting them up to shape the
 networks of the future.
