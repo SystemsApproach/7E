@@ -330,6 +330,7 @@ contributions and bug fixes:
    -  Ayelet Lotem
    -  Jonathan Gai (jongai)
    -  Walentyn Olijnyk (Walentalien)
+   -  Abraham Matta (amatta)
 
 ---------
 
