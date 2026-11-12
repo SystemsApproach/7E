@@ -134,6 +134,10 @@ html_css_files = [
     'css/rtd_theme_mods.css',
     ]
 
+html_js_files = [
+    'js/desktop-sidebar.js',
+    ]
+
 # HTML Favicon
 html_favicon = '_static/bridge.ico'
 
