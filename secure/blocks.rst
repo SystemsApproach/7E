@@ -174,6 +174,10 @@ blocks of plaintext.
 .. _fig-cbc:
 .. figure:: secure/figures/f08-02.png
    :width: 500px
+   :alt: A set of plaintext blocks are feeding into an XOR gate. An
+         initialization vector also feeds into the XOR gate. The
+         output of the gate leads to an encryption box which feeds its
+         output back to the input of the XOR gate.
    :align: center
 
    Cipher Block Chaining.
@@ -292,6 +296,10 @@ private key necessary to decrypt such a message. This scenario is depicted in
 .. _fig-public:
 .. figure:: secure/figures/public.png
    :width: 500px
+   :alt: Two boxes connected to a cloud. A plaintext message is
+         encrypted with a public key and the cipher text is then
+         passed into the insecure network and decrypted by the
+         receiver.
    :align: center
 
    Public-key encryption.
@@ -344,6 +352,10 @@ keys as described above.
 .. _fig-pksign:
 .. figure:: secure/figures/pksign.png
    :width: 500px
+   :alt: A message enters an encryption function controlled by a
+         private key. The resulting encrypted message then enters a
+         decryption function controller by a public key. The original
+         message exits the decryption function.
    :align: center
 
    Authentication using public keys.
