@@ -39,6 +39,10 @@ its corresponding decryption function is called a *cipher*.
 .. _fig-genericCrypto:
 .. figure:: secure/figures/genericCrypto.png
    :width: 500px
+   :alt: Two boxes connected by a cloud to show how a message passes
+         from one system to another. The message is encrypted using an
+         encryption key and decrypted using a decryption key to
+         reappear as a message in plaintext.
    :align: center
 
    Secret-key encryption and decryption.
