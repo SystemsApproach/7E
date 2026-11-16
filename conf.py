@@ -114,15 +114,16 @@ numfig_format = {
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'sphinx_book_theme'
+html_logo = "_static/SAlogoBlue.png"
+html_title = "Computer Networks: A Systems Approach"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
 html_theme_options = {
-  'prev_next_buttons_location': 'both'
-}
+  }
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -131,7 +132,7 @@ html_static_path = ['_static']
 
 
 html_css_files = [
-    'css/rtd_theme_mods.css',
+    'css/sb_theme_mods.css',
     ]
 
 # HTML Favicon
