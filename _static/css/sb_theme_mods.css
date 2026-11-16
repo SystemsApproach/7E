@@ -51,3 +51,8 @@ blockquote {
     box-sizing: border-box;
 
 }
+
+.pop {
+    color: var(--pst-color-text-base);
+    font-weight: bold;
+}
