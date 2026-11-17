@@ -9,12 +9,12 @@
 }
 
 .admonition .admonition-title {
-    background-color: #6a99d0;
+    background-color: var(--pst-color-info-bg);
 }
 
 div.takeaway {
     position: relative;
-    background-color: #e7f2fa;
+    background-color: var(--pst-color-info-bg);
     padding: 12px 16px 12px 3.236em;
     margin: 12px 0 12px -3.236em;
     border-radius: 0 4px 4px 0;
@@ -41,7 +41,7 @@ aside.sidebar {
     margin: 0 0 0.5em 1em;
     border: 1px solid #ddb;
     padding: 7px 7px 0 7px;
-    background-color: #ffe;
+    background-color: var(--pst-color-surface);
     width: 40%;
     float: right;
 }
