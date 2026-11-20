@@ -1,0 +1,13 @@
+{#- Sidebar link to the Acronym Glossary (genindex.html) for
+    sphinx_book_theme, listed after the book's TOC in html_sidebars.
+    It mimics the theme's TOC markup, so it looks like one more entry.
+    (Under sphinx_rtd_theme, layout.html adds the link instead.) #}
+<nav class="bd-links bd-docs-nav" aria-label="Glossary">
+    <div class="bd-toc-item navbar-nav">
+        <ul class="nav bd-sidenav">
+            <li class="toctree-l1{% if pagename == 'genindex' %} current active{% endif %}">
+                <a class="reference internal" href="{{ pathto('genindex') }}">Acronym Glossary</a>
+            </li>
+        </ul>
+    </div>
+</nav>
