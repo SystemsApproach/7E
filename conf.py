@@ -150,14 +150,6 @@ html_use_index = True
 # 'searchbox.html']``.
 #
 # html_sidebars = {}
-#
-# sphinx_book_theme's default sidebar, plus a link to the Acronym
-# Glossary (genindex), which _templates/layout.html adds for
-# sphinx_rtd_theme but this theme ignores.
-html_sidebars = {
-    '**': ['navbar-logo.html', 'icon-links.html', 'search-button-field.html',
-           'sbt-sidebar-nav.html', 'acronym-glossary.html'],
-}
 
 #extra HTML files
 html_extra_path = ['_extra']
