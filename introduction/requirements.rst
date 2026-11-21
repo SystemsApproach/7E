@@ -124,6 +124,7 @@ the book, with the most detailed discussion in Chapter |TLS|. For a more
 comprehensive look at network security, we recommend a companion book.
 
 .. admonition:: Further Reading
+   :class: seealso
 
    L. Peterson and B. Davie. `Network Security: A Systems Approach
       <https://security.systemsapproach.org>`__. 2025.
