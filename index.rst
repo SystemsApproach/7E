@@ -2,8 +2,9 @@
 .. SPDX-License-Identifier: CC-BY-4.0
 
 .. image:: _static/SALogoBlue.png
-   :width: 300px
+   :width: 80%
    :align: center
+   :alt: The Systems Approach logo, a stylized bridge
    :target: https://systemsapproach.org
 
 |
