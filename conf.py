@@ -123,7 +123,7 @@ html_title = "Computer Networks: A Systems Approach"
 # documentation.
 #
 html_theme_options = {
-    "use_download_button": False,
+    "use_download_button": True,
     "use_source_button": True,
     "use_repository_button": True,
     "repository_url": "https://github.com/SystemsApproach/7E"
