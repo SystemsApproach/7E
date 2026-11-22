@@ -3,8 +3,8 @@
 
 .. role:: pop
 
-:pop:`Print Copies`
-===========================
+:pop:`Print Copies and Updates`
+===============================
 
 We make all books in the *Systems Approach* series available as both
 print and e-books. This book is not yet in print; the 6th edition is
@@ -28,3 +28,18 @@ our companion books that cover emerging topics in more depth.
   <https://systemsapproach.org/books/#opsbook>`__
 
 * `TCP Congestion Control: A Systems Approach <https://systemsapproach.org/books/#tcpbook>`__
+
+Read The Latest!
+-----------------
+
+`Systems Approach Newsletter: <https://systemsapproach.org/newsletter>`__ Stay
+up to date with the latest developments by subscribing to the
+`Systems Approach Newsletter
+<https://systemsapproach.org/newsletter>`__, where the authors
+connect the concepts and lessons in this book to what's happening in
+the Internet today.
+
+You can also follow us on `Mastodon
+<https://discuss.systems/@SystemsAppr>`__.
+
+As participants in the Amazon Associate program we may earn income from qualifying purchases using the links above.

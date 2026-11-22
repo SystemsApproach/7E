@@ -48,5 +48,4 @@ Larry Peterson and Bruce Davie
    Acronym Glossary <genindex>
    README.rst
    authors.rst
-   latest.rst
    print.rst
