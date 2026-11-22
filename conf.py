@@ -115,7 +115,7 @@ numfig_format = {
 # a list of builtin themes.
 #
 html_theme = 'sphinx_book_theme'
-html_logo = "_static/SAlogoBlue.png"
+html_logo = "_static/SALogoBlue.png"
 html_title = "Computer Networks: A Systems Approach"
 
 # Theme options are theme-specific and customize the look and feel of a theme
