@@ -12,6 +12,13 @@
     background-color: var(--pst-color-info-bg);
 }
 
+
+/* Modify Further Reading admonition to show a
+ * "see also" sign in place of the default bell. */
+div.admonition.admonition-further-reading > .admonition-title::after {
+  content: var(--pst-icon-admonition-seealso);
+}
+
 div.takeaway {
     position: relative;
     background-color: var(--pst-color-info-bg);
