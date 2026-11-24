@@ -119,6 +119,10 @@ that is required. Let’s look more closely at that abstraction.
 .. _fig-basic-virt:
 .. figure:: virtual/figures/nv-control.png
     :width: 600px
+    :alt: Two servers hosting virtual machines are separated by a
+          switched network. A network virtualiztion controller sits
+          above the network, with an API above it and connected to
+          vswitches in the servers.
     :align: center
 
     A Basic Network Virtualization System.
@@ -140,6 +144,10 @@ Section |Virt|.4.2.
 .. _fig-encaps-nv:
 .. figure:: virtual/figures/vxlan.png
     :width: 600px
+    :alt: A packet diagram sits above a network connecting servers
+          that host VMs. The packet header includes outer header
+          fields (MAC, IP and UDP), a VXLAN header, and inner header
+          fields (MAC and IP).
     :align: center
 
     Encapsulation decouples virtual network addresses from physical network.
@@ -235,6 +243,11 @@ the management plane.
 .. _fig-three-planes:
 .. figure:: virtual/figures/nv-system.png
     :width: 450px
+    :alt: A set of boxes depict a network virtualization
+          system. vSwitch boxes implement the data plane; above them
+          sit the SDN controller as the control plane; above that sits
+          the Network Virtualization Application as the management
+          plane, which presents an API to systems above it.
     :align: center
 
     The Three Planes of a Network Virtualization System.
@@ -317,6 +330,9 @@ firewall to get from one part of the network to another.
 .. _fig-standard-firewall:
 .. figure:: virtual/figures/fw-central.png
     :width: 600px
+    :alt: Two servers hosting virtual machines are separated by a
+          switched network. A single firewall sits above the switches,
+          connected to them.
     :align: center
 
     A conventional firewall (not distributed).
@@ -338,6 +354,10 @@ must pass up to that centralized device.
 .. _fig-dist-firewall:
 .. figure:: virtual/figures/fw-dist.png
     :width: 600px
+    :alt: Two servers hosting virtual machines are separated by a
+          switched network. A small firewall sits next to the virtual
+          switch that is connected directly to the virtual machines on
+          each server.
     :align: center
 
     A distributed firewall.
@@ -418,6 +438,9 @@ extensibility.
 .. _fig-geneve:
 .. figure:: virtual/figures/geneve.png
     :width: 550px
+    :alt: A packet header diagram includes outer header
+          fields (MAC, IP and UDP), a GENEVE header, options, and inner header
+          fields (MAC and IP) followed by the payload.
     :align: center
 
     GENEVE Header Format.
@@ -465,6 +488,10 @@ performance.
 .. _fig-ovs-blocks:
 .. figure:: virtual/figures/ovsdb.png
     :width: 500px
+    :alt: Boxes showing the structure of Open vSwitch. The OVS data
+          plane includes ovsdb-server, ovs-vswitchd, and Kernel
+          Datapath. The SDN contol plane sits above and connects to
+          the ovsdb-server using OVSDB and to ovs-vswitchd using OpenFlow.
     :align: center
 
     Open vSwitch Functional Blocks.
@@ -504,6 +531,41 @@ of the same components as one for VMs, and mixed environments (where
 containers and VMs communicate in a single virtual network) are also
 possible.
 
+.. sidebar:: Is Network Virtualization SDN?
+
+  *There is a case to be made that Network Virtualization didn't change
+  the way physical networks are built and thus can't be called
+  "SDN". It simply runs as an overlay on top of a standard L2/L3
+  network, which might run traditional routing protocols and be
+  configured one box at a time. This argument seems to be a less
+  prevalent view now that network virtualization has become so
+  widespread, but it misses the point.*
+
+  *Simply stated, Network Virtualization adheres to the core
+  architectural principles laid out by SDN's inventors (and summarized
+  in Section |Routing|.5). There is a clear separation between control and
+  data planes, with a centralized controller responsible for a
+  distributed set of forwarding elements. It even uses OpenFlow as one
+  possible control interface—admittedly an
+  implementation detail and not fundamental to SDN. Finally, the fact
+  that network virtualization uses a completely programmable
+  forwarding plane, as exemplified by OVS, also places it squarely in
+  the SDN universe.*
+
+  *SDN has always been an approach to building and operating networks,
+  applied to isolated domains where it provides value. There is no
+  requirement of universality. Datacenter underlays, as exemplified
+  by leaf-spine switching fabrics, are one such domain. Virtual
+  networking overlays are another such domain. Both are even deployed
+  simultaneously in the same datacenters, without either being aware
+  that the other exists. Going forward, it is possible these two
+  domains might share some technologies (e.g., a common Network OS, a
+  common language for writing forwarding functions, a common
+  toolchain to generate the control interface). We may see the line
+  separating the two domains begin to blur, if an overlay-aware
+  underlay or underlay-aware overlay is shown to provide value.*
+
+
 |Virt|.4.3 Example System
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -520,6 +582,11 @@ management planes. The high level architecture of OVN is shown in
 .. _fig-ovn-arch:
 .. figure:: virtual/figures/ovsdb-detail.png
     :width: 350px
+    :alt: A diagram of the OVN architecture as a set of
+          boxes. Hypervisors that include OVS sit at the bottom. Above
+          them sits the Southbound DB which is connected to the
+          OVN-northd box above. The Northbound DB is above this, and
+          the OVN/CMS plugin sits above that.
     :align: center
 
     OVN High-level Architecture.
@@ -568,6 +635,9 @@ Database*. We can see how logical flows work with an example shown in
 .. _fig-ovn-tables:
 .. figure:: virtual/figures/ovn-tables.png
     :width: 700px
+    :alt: A set of flow tables for OVN. The tables are: Logical
+          Switches; Logical Ports; Physical Networks; Port Bindings;
+          Logical Flows; and Physical Flows.
     :align: center
 
     Logical and Physical Flows in OVN.
@@ -637,36 +707,3 @@ build virtual networks for the containers they are hosting. In this
 case, the "cloud management system" that OVN integrates with is likely
 to be a container management system, such as Kubernetes.
 
-.. sidebar:: Is Network Virtualization SDN?
-
-  *There is a case to be made that Network Virtualization didn't change
-  the way physical networks are built and thus can't be called
-  "SDN". It simply runs as an overlay on top of a standard L2/L3
-  network, which might run traditional routing protocols and be
-  configured one box at a time. This argument seems to be a less
-  prevalent view now that network virtualization has become so
-  widespread, but it misses the point.*
-
-  *Simply stated, Network Virtualization adheres to the core
-  architectural principles laid out by SDN's inventors (and summarized
-  in Section |Routing|.5). There is a clear separation between control and
-  data planes, with a centralized controller responsible for a
-  distributed set of forwarding elements. It even uses OpenFlow as one
-  possible control interface—admittedly an
-  implementation detail and not fundamental to SDN. Finally, the fact
-  that network virtualization uses a completely programmable
-  forwarding plane, as exemplified by OVS, also places it squarely in
-  the SDN universe.*
-
-  *SDN has always been an approach to building and operating networks,
-  applied to isolated domains where it provides value. There is no
-  requirement of universality. Datacenter underlays, as exemplified
-  by leaf-spine switching fabrics, are one such domain. Virtual
-  networking overlays are another such domain. Both are even deployed
-  simultaneously in the same datacenters, without either being aware
-  that the other exists. Going forward, it is possible these two
-  domains might share some technologies (e.g., a common Network OS, a
-  common language for writing forwarding functions, a common
-  toolchain to generate the control interface). We may see the line
-  separating the two domains begin to blur, if an overlay-aware
-  underlay or underlay-aware overlay is shown to provide value.*

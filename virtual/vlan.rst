@@ -21,6 +21,9 @@ different types of applications in a datacenter.
 .. _fig-vlan:
 .. figure:: virtual/figures/vlan.png
    :width: 350px
+   :alt: Two switches connected to each other. Each switch is
+         connected to two hosts. Two links to hosts are labeled VLAN
+         100 and the other two links are labeled VLAN 200.
    :align: center
 
    Two virtual LANs share a common backbone.
@@ -82,6 +85,10 @@ networks onto a single physical LAN.
 .. _fig-vlan-tag:
 .. figure:: virtual/figures/vlan-hdr.png
    :width: 500px
+   :alt: Two packet header diagrams. The upper diagram shows a
+         standard Ethernet header. The lower diagram shows the 802.1Q
+         header inserted between source address and Type field. The
+         additional header includes a Type, 4 bits of Control, and a Tag.
    :align: center
 
    802.1Q VLAN tag embedded within an Ethernet (802.3)

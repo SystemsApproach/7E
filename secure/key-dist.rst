@@ -148,6 +148,9 @@ trust for that participant.
 .. _fig-pem-tree:
 .. figure:: secure/figures/f08-06.png
    :width: 600px
+   :alt: A set of boxes arranged in a tree structure. The root of the
+         tree is a box labeled IPRA (Internet Policy Registration
+         Authority). Individual users form the leaves of the tree.
    :align: center
 
    Tree-structured certificate authority hierarchy.
@@ -381,6 +384,9 @@ unknowingly sharing a key with Mallory instead of each other.
 .. _fig-manInTheMIddle:
 .. figure:: secure/figures/f08-12.png
    :width: 300px
+   :alt: Three vertical lines represent the systems of Alice, Mallory
+         and Bob. Alice and Bob send messages to Mallory, and Mallory
+         sends messages to Alice and Bob.
    :align: center
 
    A man-in-the-middle attack.
