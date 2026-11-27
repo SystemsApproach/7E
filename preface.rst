@@ -15,7 +15,7 @@ skills to deal with the complexity of modern networks.
 As with prior editions, we treat
 networking as a set of system design problems and draw on existing
 artifacts such as Ethernet, HTTP and IP to illustrate how these
-challenges have been solved in the past. Our aim it not just to teach
+challenges have been solved in the past. Our aim is not just to teach
 how networks are built today, but to equip readers
 with the perspective and systems thinking skills required to shape the networks
 of the future.
@@ -250,7 +250,7 @@ This relates to the earlier point about teaching students how to shape
 the networks of the future, not just how they work today. The ready
 availability of cloud-based resources and their central role in
 networking means it is much more feasible for students to experiment
-with new networking concepts that it was in an era where most
+with new networking concepts than it was in an era where most
 networking functionality lived in proprietary routers operated by
 ISPs.
 
