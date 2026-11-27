@@ -37,6 +37,10 @@ its counterpart on the right.
 .. _fig-mux:
 .. figure:: introduction/figures/mux.png
    :width: 550px
+   :alt: Three hosts (S1-S3) connected by arrows to Switch 1. A funnel
+         indicates the traffic from the three senders being combined
+         to flow on a single link to Switch 2, where a reverse funnel
+         fans out the traffic to three hosts (R1-R3).
    :align: center
 
    Multiplexing multiple logical flows over a single
@@ -104,6 +108,9 @@ reassembling the packets back into the original message.
 .. _fig-statmux:
 .. figure:: introduction/figures/statmux.png
    :width: 500px
+   :alt: Three hosts are connected to a switch. Each sends a stream of
+         packets to the switch. The switch interleaves the packets
+         onto an outgoing link that leads to another host.
    :align: center
 
    A switch multiplexing packets from multiple sources
@@ -235,6 +242,11 @@ low-latency communication between servers in a cloud datacenter.
 .. _fig-topology:
 .. figure:: introduction/figures/topology.png
    :width: 650px
+   :alt: Two networks side by side. On the left, a switch connects by
+         direct links to several hosts, in a star topology. On the
+         right, two switches connect to each other by a direct link,
+         and several hosts connect to each switch. The shape of the
+         network resembles a bar-bell.
    :align: center
 
    Two network topologies commonly used to isolate network behavior.

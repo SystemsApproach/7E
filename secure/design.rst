@@ -93,6 +93,9 @@ arrangement of protocol layers is depicted in :numref:`Figure %s
 .. _fig-tls-stack:
 .. figure:: secure/figures/TLS-stack.png
    :width: 300px
+   :alt: A box contains five layers. The top layer is Application
+         (e.g. HTTP). Below that is Secure Transport, then TCP, IP,
+         and Subnet at the bottom.
    :align: center
 
    Secure transport layer inserted between application and TCP layers.

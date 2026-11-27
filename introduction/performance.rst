@@ -57,6 +57,9 @@ become and, thus, the higher the bandwidth.
 .. _fig-bit-width:
 .. figure:: introduction/figures/f01-16.png
    :width: 400px
+   :alt: Two square waves, one above the other, each 1 second in
+         length. The top waveform has longer periods at high and low
+         levels than the lower waveform.
    :align: center
 
    Bits transmitted at a particular bandwidth can be
@@ -171,6 +174,7 @@ early 1980s could hold.
 .. _fig-pipe:
 .. figure:: introduction/figures/pipe.png
    :width: 400px
+   :alt: A cylinder with length "delay" and diameter "bandwidth".
    :align: center
 
    Network as a pipe.
@@ -245,6 +249,10 @@ to a 1-Mbps network.
 .. _fig-pipe-full:
 .. figure:: introduction/figures/pipe-full.png
    :width: 550px
+   :alt: A collection of long, thin cylinders labeled "1 MB of data =
+         80 pipes full" next to a single cylinder labeled "1-Mbps
+         link". Below this, a short fat cylinder labeled "1 MB of data
+         = 1/12 pipe-full" next to a wide cylinder labled "1-Gbps link".
    :align: center
 
    Relationship between bandwidth and latency. A 1-MB
@@ -384,6 +392,8 @@ with time.
 .. _fig-jitter:
 .. figure:: introduction/figures/jitter.png
    :width: 600px
+   :alt: A set of evenly spaced packets enter a cloud network, and the
+         same packets leave the cloud with uneven spacing.
    :align: center
 
    Network-induced jitter.

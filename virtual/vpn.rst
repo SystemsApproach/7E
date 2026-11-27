@@ -45,6 +45,10 @@ of the encapsulating router.
 .. _fig-tunnel:
 .. figure:: virtual/figures/tunnel.png
    :width: 600px
+   :alt: Three clouds represent three networks. Routers sit between
+         adjacent clouds and a tunnel connects the two routers. A
+         packet flows left to right, with an extra header added when
+         it enters the tunnel.
    :align: center
 
    A tunnel through an internetwork. 18.5.0.1 is the
@@ -125,6 +129,9 @@ corporate office.
 .. _fig-remotevpn:
 .. figure:: virtual/figures/remotevpn.png
    :width: 600px
+   :alt: A remote user represented by a computer is connected by a
+         tunnel passing through a cloud (the Internet) to a Corporate
+         Office.
    :align: center
 
    A remote user connects via a tunnel to a corporate site.
@@ -137,6 +144,9 @@ example for three sites of different sizes.
 .. _fig-sitevpn:
 .. figure:: virtual/figures/sitevpn.png
    :width: 600px
+   :alt: Three buildings labeled “Branch Office”, “Corporate Office”
+         and “Datacenter” are connected by tunnels passing through a
+         cloud (the Internet).
    :align: center
 
    A corporate VPN connects a main office, a branch office, and a datacenter.
@@ -306,6 +316,10 @@ the public Internet.
 .. _fig-mpls-vpn:
 .. figure:: virtual/figures/MPLS-VPN.png
    :width: 600px
+   :alt: Four buildings of different sizes, each connected by a
+         Customer edge router
+         linked to a Provider Backbone, shown as a cloud. Provider
+         edge routers sit at the edge of the backbone.
    :align: center
 
    Example of a layer 3 VPN. Four sites from an organization receive a
@@ -357,6 +371,8 @@ correctly encapsulate it for its trip across the backbone.
 .. _fig-mpls-hdr:
 .. figure:: virtual/figures/mpls-hdr.png
    :width: 600px
+   :alt: A packet header diagram, showing a Provider Path Label, a VPN
+         Label, an IP header, and a Payload.
    :align: center
 
    A customer IP packet is encapsulated with two MPLS labels to allow
@@ -453,6 +469,11 @@ pushed out to all affected sites.  The idea is illustrated in
 .. _fig-sd-wan:
 .. figure:: virtual/figures/sd-wan.png
     :width: 600px
+    :alt: Three buildings labeled “Branch Office”, “Corporate Office”
+          and “Datacenter” are connected by overlay tunnels passing
+          through a cloud (the Internet). Three switches sit at the
+          edge of the cloud. The SD-WAN controller sits above the
+          cloud.
     :align: center
 
     An SD-WAN controller receives policies centrally and pushes them

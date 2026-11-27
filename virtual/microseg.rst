@@ -34,6 +34,8 @@ decisions about exactly what traffic is allowed to pass through it.
 .. _fig-firewall:
 .. figure:: virtual/figures/corp-fw.png
    :width: 500px
+   :alt: A remote user's computer connects over the Internet, shown as
+         a cloud, through a small hole in a firewall, and into a Corporate Office.
    :align: center
 
    A firewall filters packets flowing between a site and the rest of the

@@ -156,6 +156,9 @@ is complete and application data can start to flow.
 .. _fig-tls-hand:
 .. figure:: secure/figures/TLS-handshake.png
    :width: 400px
+   :alt: Two vertical lines represent the Client and Server. Diagonal
+         lines indicate messages sent in each direction. All messages
+         except the first two are encrypted.
    :align: center
 
    Handshake protocol to establish TLS session.
