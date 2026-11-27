@@ -31,6 +31,9 @@ abstract pieces of art than an engineering diagram.
 .. _fig-net-visualization:
 .. figure:: figures/net-visualization.jpg
    :width: 500px
+   :alt: A multicolored representation of a highly connected graph,
+         with highly connected nodes appearing as bright stars on a
+         dark background with colored lines interconnecting them.
    :align: center
 
    Visualization of Internet connectivity, with attribution to

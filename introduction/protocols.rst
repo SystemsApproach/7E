@@ -41,6 +41,9 @@ architecture.)
 .. _fig-layers:
 .. figure:: introduction/figures/layers.png
    :width: 350px
+   :alt: A box divided into four layers. Application Programs are at
+         the top, then Process-to-Process Channels, then Host-to-Host
+         Message Delivery, then Network Hardware at the bottom.
    :align: center
 
    Example of a layered network system.
@@ -106,6 +109,11 @@ service (the peer interface). This situation is illustrated in :numref:`Figure
 .. _fig-interfaces:
 .. figure:: introduction/figures/interfaces.png
    :width: 450px
+   :alt: Two boxes represent hosts. Within each host are two more
+         boxes labeled High-Level Object and Protocol. The two
+         Protocol boxes connect via an arrow labeled "Peer-to-peer
+         interface. The High-Level Objects connect to the Protocols
+         via an arrow labeled Service interface.
    :align: center
 
    Service interfaces and peer interfaces.
@@ -125,6 +133,10 @@ illustrates a protocol graph for our Internet-inspired layered system.
 .. _fig-protograph:
 .. figure:: introduction/figures/protograph.png
    :width: 500px
+   :alt: Two boxes represent hosts. Within each host is a complete
+         protocol graph drawn as interconnected boxes. The lowest
+         layer of each graph is labeled ETH and these two boxes
+         connect by an arrow.
    :align: center
 
    Example of a protocol graph.
@@ -196,6 +208,11 @@ in all headers, which we describe in the next subsection.
 .. _fig-udphdr:
 .. figure:: introduction/figures/udphdr.png
    :width: 350px
+   :alt: A packet header drawn as a series of boxes. The top two boxes
+         are SrcPort and DstPort. Below them are Length and Checksum
+         boxes. Below that is a Payload box. Numbers at the top
+         indicate bit 0 at the left, bit 16 at the middle, and bit 31
+         at the right.
    :align: center
 
    UDP header specification.
@@ -203,6 +220,10 @@ in all headers, which we describe in the next subsection.
 .. _fig-tcphdr:
 .. figure:: introduction/figures/tcphdr.png
    :width: 350px
+   :alt: A packet header drawn as a series of boxes. The top two boxes
+         are SrcPort and DstPort. Below them are Sequence Num and
+         Acknowledgement, then several more boxes and at the bottom is the
+         payload.
    :align: center
 
    TCP header specification.
@@ -210,6 +231,9 @@ in all headers, which we describe in the next subsection.
 .. _fig-iphdr:
 .. figure:: introduction/figures/iphdr.png
    :width: 350px
+   :alt: A packet header drawn as a series of boxes. The first box is
+         Version, then HLen, then TOS, then Length. Several more boxes
+         follow and below the header is the Payload box.
    :align: center
 
    IP header specification.
@@ -217,6 +241,10 @@ in all headers, which we describe in the next subsection.
 .. _fig-ethhdr:
 .. figure:: introduction/figures/ethhdr.png
    :width: 600px
+   :alt: A packet header drawn as a series of boxes running left to
+         right. The first box is the 48-bit SourceAddr, then the
+         48-bit DestinationAddr, then 16-bit Type, then variable
+         length Payload, then 32-bit CRC.
    :align: center
 
    Ethernet header specification.
@@ -261,6 +289,11 @@ modify the header before forwarding it.
 .. _fig-encapsulation:
 .. figure:: introduction/figures/encapsulation.png
    :width: 600px
+   :alt: Two boxes represent hosts. Within each host, a set of boxes
+         represent a protocol stack. A packet moves down the stack on
+         the left, picking up headers at each layer. It is
+         transmitted to the box on the right, then moves up the stack
+         losing a header at each layer.
    :align: center
 
    High-level messages are encapsulated inside of low-level messages.

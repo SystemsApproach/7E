@@ -63,6 +63,11 @@ still widely used.
 .. _fig-osi:
 .. figure:: introduction/figures/osi.png
    :width: 600px
+   :alt: Two vertical boxes represent hosts, each containing seven
+         boxes labeled with the OSI layers. The physical layer boxes
+         connect horizontally to another phyiscal layer box inside a
+         cloud, above which sit a data link box and a network layer
+         box.
    :align: center
 
    The OSI 7-layer model.
@@ -112,6 +117,8 @@ OSI stack.
 .. _fig-network:
 .. figure:: introduction/figures/network.png
    :width: 400px
+   :alt: A set of switches interconnected as a graph and enclosed in a
+         cloud.
    :align: center
 
    Example switched network.
@@ -138,6 +145,10 @@ viewed as a contemporary competitor.
 .. _fig-internet:
 .. figure:: introduction/figures/internet.png
    :width: 350px
+   :alt: A set of interconnected boxes. At the center is the IP
+         box. It connects down to several boxes labeled NET_1, NET_2,
+         etc. TCP and UDP boxes sit above IP, and above them
+         are a set of application boxes.
    :align: center
 
    Abstract depiction of the Internet architecture. Its general shape
@@ -202,6 +213,7 @@ to another.
 .. _fig-internet-cloud:
 .. figure:: introduction/figures/internet-cloud.png
    :width: 500px
+   :alt: Three clouds interconnected by switches and links.
    :align: center
 
    Interconnection of networks, with switches (typically called
